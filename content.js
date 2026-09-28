@@ -653,31 +653,30 @@ window.TRAINING = {
     },
     {
       "id": "practice-start",
-      "title": "2부 · 이제 같이 만들어 봅니다",
+      "title": "2부 · 세 가지 실습",
       "part": "practice",
       "type": "section",
-      "visual": "real-capture",
-      "lead": "이인호 선생님과 함께, 방금 본 순서를 직접 합니다",
+      "visual": "text-only",
+      "lead": "좋아하는 소재로 만들고, 이미지와 AI 기능까지 확장합니다",
       "items": [
         {
-          "heading": "오늘의 완성 기준",
-          "body": "내 웹사이트에 세기·덧셈·뺄셈이 있습니다."
+          "heading": "실습 1 · 좋아하는 아이템 + 활동",
+          "body": "학생이 좋아하는 소재와 연습할 수학 활동을 한 문장으로 정합니다."
         },
         {
-          "heading": "마지막 확인",
-          "body": "공유 링크와 QR로 다른 기기에서도 열어 봅니다."
+          "heading": "실습 2 · 포켓몬 스프라이트 GitHub",
+          "body": "PokeAPI 스프라이트 저장소에서 이미지를 찾아 웹사이트에 사용합니다."
+        },
+        {
+          "heading": "실습 3 · AI 기능 추가하기",
+          "body": "AI 힌트, 음성 설명, 나만의 강아지 그리기 기능을 추가합니다."
         }
       ],
-      "notes": "2부는 1부에서 본 순서를 직접 해 보는 시간입니다. 권장 90분을 접속 10분, 생성 15분, 세 활동 확인 25분, 수정 15분, 공유와 QR 20분, 마무리 5분으로 운영할 수 있습니다. 참가자가 막힌 위치를 말하면 같은 화면을 보며 한 단계씩 이어 갑니다.",
-      "screenshot": {
-        "src": "assets/screenshots/gemini-generated.jpg",
-        "alt": "Gemini Canvas에서 실제로 만들어진 포켓몬 수학 사이트와 미리보기 화면"
-      },
-      "art": []
+      "notes": "2부는 세 가지 실습으로 진행합니다. 먼저 학생이 좋아하는 아이템과 수학 활동을 정하고, PokeAPI 스프라이트 GitHub에서 이미지를 찾아 적용합니다. 기본 앱이 완성되면 AI 힌트, 음성 설명, 나만의 강아지 그리기 중 필요한 기능을 추가합니다. 마지막에는 공유 링크와 QR을 만들고 에이두 커뮤니티에 결과를 나눕니다."
     },
     {
       "id": "practice-login",
-      "title": "실습 1 · Gemini 입력창까지 열기",
+      "title": "준비 1 · Gemini 입력창까지 열기",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -701,7 +700,7 @@ window.TRAINING = {
     },
     {
       "id": "practice-canvas",
-      "title": "실습 2 · Canvas 켜기",
+      "title": "준비 2 · Canvas 켜기",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -725,27 +724,27 @@ window.TRAINING = {
     },
     {
       "id": "practice-topic",
-      "title": "실습 3 · 수업 주제를 고르기",
+      "title": "실습 1 · 좋아하는 아이템 + 활동",
       "part": "practice",
       "type": "steps",
       "visual": "text-only",
-      "lead": "선생님께서 원하시는 수업 주제를 생각해보아요!",
+      "lead": "학생이 좋아하는 소재와 연습할 수학 활동을 함께 정해요",
       "items": [
         {
-          "heading": "수업 주제 떠올리기",
-          "body": "평소 수업에서 학생들과 함께 해 보고 싶었던 활동을 생각합니다."
+          "heading": "좋아하는 아이템 고르기",
+          "body": "포켓몬, 강아지, 자동차처럼 학생이 오래 관심을 보이는 소재를 하나 고릅니다."
         },
         {
-          "heading": "한 문장으로 정리하기",
-          "body": "누가, 무엇을, 어떻게 연습할지 짧은 문장으로 적어 봅니다."
+          "heading": "활동 고르기",
+          "body": "개수 맞추기, 덧셈, 뺄셈 중 연습할 활동을 고르고 한 문장으로 적습니다."
         }
       ],
-      "notes": "아직 Gemini에 입력하지 않고, 먼저 각자 만들고 싶은 수업 주제를 생각합니다. 교과와 단원, 학생의 수준, 원하는 활동을 떠올린 뒤 한 문장으로 정리합니다. 정답이나 정해진 예시는 없으며 선생님의 실제 수업에서 필요한 주제를 고르면 됩니다.",
+      "notes": "아직 Gemini에 입력하지 않고 먼저 학생이 좋아하는 아이템과 필요한 수학 활동을 정합니다. 포켓몬, 강아지, 자동차, 공룡처럼 학생이 관심을 보이는 소재와 개수 맞추기, 덧셈, 뺄셈 중 필요한 활동을 골라 한 문장으로 정리합니다.",
       "art": []
     },
     {
       "id": "practice-request",
-      "title": "실습 3 · 요청문 보내기",
+      "title": "실습 1 · 요청문 보내기",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -767,11 +766,39 @@ window.TRAINING = {
         "alt": "사용자가 지정한 포켓몬 수학 사이트 요청문을 입력한 Gemini 화면"
       },
       "art": [],
-      "promptPreview": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요. 몇개인지 맞추기, 덧셈, 뺄셈\n3가지 주제의 수학 활동이 가능하게 하세요"
+      "promptPreview": "좋아하는 아이템과 활동을 넣고, 큰 버튼과 짧은 안내가 있는 수학 웹사이트를 만들어 주세요."
+    },
+    {
+      "id": "practice-pokemon-sprites",
+      "title": "실습 2 · 포켓몬 스프라이트 GitHub 사용하기",
+      "part": "practice",
+      "type": "intro",
+      "visual": "intro-icons",
+      "lead": "PokeAPI 스프라이트 저장소에서 이미지를 찾고\n출처와 이용 안내를 함께 확인합니다",
+      "items": [
+        {
+          "icon": "spark",
+          "heading": "GitHub 저장소 열기",
+          "body": "PokeAPI/sprites 저장소에서 사용할 수 있는 포켓몬 이미지를 살펴봅니다.",
+          "href": "https://github.com/PokeAPI/sprites"
+        },
+        {
+          "icon": "image",
+          "heading": "official-artwork 찾기",
+          "body": "sprites/pokemon/other/official-artwork 폴더에서 원하는 포켓몬 번호의 PNG를 찾습니다."
+        },
+        {
+          "icon": "heart",
+          "heading": "출처와 권리 확인",
+          "body": "이미지 출처와 권리 안내를 확인하고 수업 목적과 배포 범위에 맞게 사용합니다.",
+          "href": "https://github.com/PokeAPI/sprites/blob/master/LICENCE.txt"
+        }
+      ],
+      "notes": "PokeAPI 스프라이트 GitHub 저장소를 열어 other/official-artwork 폴더의 PNG 이미지를 확인합니다. 원하는 포켓몬의 도감 번호를 알면 파일을 쉽게 찾을 수 있습니다. 이미지 저작권은 The Pokémon Company에 있으며 공식 제휴 자료가 아닙니다. 공개 배포 전 이미지 이용 범위를 확인하고 필요하면 직접 만든 그림으로 교체합니다."
     },
     {
       "id": "practice-count",
-      "title": "실습 4 · 내가 만든 웹 페이지가 잘 작동하나 확인합니다.",
+      "title": "실습 2 확인 · 세기 활동",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -795,7 +822,7 @@ window.TRAINING = {
     },
     {
       "id": "practice-add",
-      "title": "실습 5 · 내가 만든 웹 페이지가 잘 작동하나 확인합니다.",
+      "title": "실습 2 확인 · 덧셈 활동",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -819,7 +846,7 @@ window.TRAINING = {
     },
     {
       "id": "practice-subtract",
-      "title": "실습 6 · 내가 만든 웹 페이지가 잘 작동하나 확인합니다.",
+      "title": "실습 2 확인 · 뺄셈 활동",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -843,33 +870,32 @@ window.TRAINING = {
     },
     {
       "id": "practice-revise",
-      "title": "실습 7 · 내 화면에서 한 가지 고치기",
+      "title": "실습 3 · AI 기능 추가하기",
       "part": "practice",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "불편한 점 하나를 적고, 바뀐 결과를 다시 누릅니다",
+      "type": "prompt",
+      "visual": "text-only",
+      "lead": "필요한 기능을 고르고 한 번에 하나씩 추가합니다",
       "items": [
         {
-          "heading": "수정 요청",
-          "body": "‘글씨와 답 버튼을 더 크게 해 주세요.’"
+          "heading": "AI 힌트",
+          "body": "정답을 바로 말하지 않고 학생 눈높이의 친절한 단서를 줍니다."
         },
         {
-          "heading": "완료 확인",
-          "body": "세 활동이 그대로 있고 수정한 부분도 잘 작동합니다."
+          "heading": "음성 설명 (TTS)",
+          "body": "힌트와 응원 메시지를 실제 목소리로 읽어 줍니다."
+        },
+        {
+          "heading": "나만의 강아지 그리기",
+          "body": "이미지 생성 AI로 만든 캐릭터를 앱에 적용합니다."
         }
       ],
-      "notes": "내 화면에서 고치고 싶은 점 하나를 선택합니다. 글씨, 버튼 크기, 수 범위, 그림 배치처럼 바뀌었는지 확인하기 쉬운 내용을 권합니다. 선택한 수정 문장을 보내고 결과를 다시 눌러 봅니다. 동작이 이상하면 어느 활동에서 무엇을 눌렀고 어떤 결과가 나왔는지 말로 설명합니다. 요청문은 일반 화면 상단의 첫 요청문 또는 마지막 장의 진행자료에서 확인합니다.",
-      "prompt": "revise",
-      "screenshot": {
-        "src": "assets/screenshots/gemini-revision.jpg",
-        "alt": "Gemini에 웹사이트 수정 요청을 입력하는 실제 화면"
-      },
-      "art": [],
-      "promptPreview": "글씨와 답 버튼을 더 크게 해 주세요. 세기, 덧셈, 뺄셈 활동은 모두 유지해 주세요."
+      "notes": "AI 힌트, 음성 설명, 나만의 강아지 그리기 중 필요한 기능을 하나 선택해 먼저 요청합니다. 기능이 잘 작동하는지 확인한 뒤 다음 기능을 추가합니다. API 키나 비밀정보는 코드에 직접 넣지 않도록 요청하고, 현재 환경에서 사용할 수 없는 기능은 대체 방식으로 구현합니다.",
+      "prompt": "aiFeatures",
+      "promptPreview": "AI 힌트, 음성 설명(TTS), 나만의 강아지 그리기 기능을 하나씩 추가해 주세요."
     },
     {
       "id": "practice-share",
-      "title": "실습 8 · 내 공유 링크 만들기",
+      "title": "마무리 1 · 내 공유 링크 만들기",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -893,7 +919,7 @@ window.TRAINING = {
     },
     {
       "id": "practice-qr",
-      "title": "실습 9 · Chrome에서 내 QR 만들기",
+      "title": "마무리 2 · Chrome에서 내 QR 만들기",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -918,7 +944,7 @@ window.TRAINING = {
     },
     {
       "id": "practice-check",
-      "title": "실습 10 · 에이두 커뮤니티에 공유하기",
+      "title": "마무리 3 · 에이두 커뮤니티에 공유하기",
       "part": "practice",
       "type": "capture",
       "visual": "real-capture",
@@ -953,8 +979,9 @@ window.TRAINING = {
     }
   ],
   "prompts": {
-    "starter": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요. 몇개인지 맞추기, 덧셈, 뺄셈\n3가지 주제의 수학 활동이 가능하게 하세요",
+    "starter": "내가 좋아하는 아이템은 [포켓몬 이름]이고, 만들고 싶은 활동은 [개수 맞추기 / 덧셈 / 뺄셈]입니다. 포켓몬 스프라이트 GitHub의 official-artwork 이미지를 사용해 학생용 수학 웹사이트를 만들어 주세요. 큰 버튼과 짧은 문장을 사용하고, 정답과 오답에 즉시 반응해 주세요.",
     "revise": "글씨와 답 버튼을 더 크게 해 주세요. 세기, 덧셈, 뺄셈 활동은 모두 유지해 주세요.",
+    "aiFeatures": "지금 만든 수학 앱에 다음 AI 기능을 한 번에 하나씩 추가해 주세요.\n\n1. AI 힌트 버튼: 정답을 바로 말하지 말고 초등학교 1학년 눈높이의 친절한 단서를 주세요.\n2. AI 음성 설명(TTS): AI 힌트와 응원 메시지를 실제 목소리로 읽어 주세요.\n3. 나만의 강아지 그리기: 학생이 얻은 뼈다귀 보상을 사용해 이미지 생성 AI로 강아지 캐릭터를 만들고 앱에 적용해 주세요.\n\n기존 수학 활동은 그대로 유지하고, 기능을 하나 추가할 때마다 먼저 작동 여부를 확인하게 해 주세요. API 키나 비밀정보는 코드에 직접 넣지 마세요.",
     "repair": "[어느 활동]에서 [무엇을 눌렀는지] 하니 [실제로 나온 결과]가 나타납니다. [원하는 결과]가 되도록 고쳐 주세요. 세기, 덧셈, 뺄셈 활동은 모두 유지해 주세요."
   },
   "sources": [

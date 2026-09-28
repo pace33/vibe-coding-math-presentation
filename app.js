@@ -4,7 +4,7 @@
   const { slides, prompts, sources } = window.TRAINING;
   const $ = id => document.getElementById(id);
   const escape = text => String(text ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const labels = { starter: '처음 만드는 프롬프트', count: '포켓몬 세기 수정', add: '포켓몬 덧셈 수정', subtract: '포켓몬 뺄셈 수정', repair: '문제가 생겼을 때', revise: '우리 반에 맞게 수정' };
+  const labels = { starter: '처음 만드는 프롬프트', count: '포켓몬 세기 수정', add: '포켓몬 덧셈 수정', subtract: '포켓몬 뺄셈 수정', repair: '문제가 생겼을 때', revise: '우리 반에 맞게 수정', aiFeatures: 'AI 기능 추가하기' };
   let current = 0, selectedPrompt = 'starter', toastTimer;
   const worksheet = {};
   const action = (text, href, extra = '') => `<a class="action-link ${extra}" href="${href}" target="_blank" rel="noopener">${text} <span aria-hidden="true">↗</span></a>`;

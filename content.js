@@ -456,6 +456,32 @@ window.TRAINING = {
       "promptPreview": "글씨와 답 버튼을 더 크게 해 주세요. 세기, 덧셈, 뺄셈 활동은 모두 유지해 주세요."
     },
     {
+      "id": "add-ai-features",
+      "title": "AI 기능 추가하기",
+      "part": "theory",
+      "type": "intro",
+      "visual": "intro-icons",
+      "lead": "‘몽몽이의 AI 수 가르기와 모으기’에\n학습 효과와 재미를 높이는 AI 기능을 더합니다.",
+      "items": [
+        {
+          "icon": "spark",
+          "heading": "AI 몽몽이 선생님의 힌트",
+          "body": "힌트 버튼을 누르면 Gemini가 정답 대신 1학년 눈높이의 친절한 힌트를 만듭니다."
+        },
+        {
+          "icon": "music",
+          "heading": "AI 음성 설명 (TTS)",
+          "body": "Gemini TTS가 힌트와 응원 메시지를 실제 목소리로 읽어 주어 읽기가 서툰 학생도 쉽게 참여합니다."
+        },
+        {
+          "icon": "image",
+          "heading": "AI 강아지 화실",
+          "body": "획득한 뼈다귀 보상을 활용해 이미지 생성 AI로 나만의 강아지 캐릭터를 만들고 앱에 적용합니다."
+        }
+      ],
+      "notes": "기본 수학 활동을 만든 뒤 같은 Gemini 대화에서 AI 기능을 추가로 요청하는 예시입니다. AI 힌트는 Gemini 3 Flash 계열 모델로 정답이 아닌 초등학교 1학년 수준의 단서를 만들고, 음성 설명은 Gemini 2.5 Flash Preview TTS 계열로 힌트와 응원을 읽어 줍니다. AI 강아지 화실은 Gemini 3.1 Flash Lite Image 계열 이미지 생성 모델로 학생이 얻은 보상을 나만의 강아지 캐릭터로 바꾸는 확장 아이디어입니다. 모델 이름과 제공 여부는 사용 시점에 따라 달라질 수 있습니다."
+    },
+    {
       "id": "share-open",
       "title": "Canvas의 공유 메뉴를 엽니다",
       "part": "theory",

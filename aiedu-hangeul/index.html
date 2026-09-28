@@ -93,13 +93,6 @@
     .bridge-mini i::after { content: ""; position: absolute; right: -1px; top: -5px; border: 7px solid transparent; border-left-color: var(--orange); }
     .hero-note { margin: 18px 0 0; color: #b9c7dd; font-size: .84rem; }
 
-    .numbers { max-width: var(--max); margin: -56px auto 0; padding: 0 28px; position: relative; z-index: 5; }
-    .numbers-grid { display: grid; grid-template-columns: repeat(3,1fr); background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-    .number { padding: 28px 32px; border-right: 1px solid var(--line); }
-    .number:last-child { border-right: 0; }
-    .number strong { display: block; color: var(--orange); font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.05em; }
-    .number span { display: block; margin-top: 8px; color: var(--muted); font-size: .92rem; }
-
     .section { padding: 120px 28px; }
     .section-inner { max-width: var(--max); margin: auto; }
     .section-label { margin: 0 0 14px; color: var(--orange); font-size: .83rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
@@ -249,10 +242,6 @@
       .bridge-mini { grid-template-columns: 1fr; }
       .bridge-mini i { width: 4px; height: 28px; justify-self: center; }
       .bridge-mini i::after { right: -5px; top: auto; bottom: -10px; transform: rotate(90deg); }
-      .numbers { padding: 0 18px; }
-      .numbers-grid { grid-template-columns: 1fr; }
-      .number { border-right: 0; border-bottom: 1px solid var(--line); }
-      .number:last-child { border-bottom: 0; }
       .section, .bridge-section, .takeaway { padding-left: 20px; padding-right: 20px; }
       .section { padding-top: 88px; padding-bottom: 88px; }
       .need-grid, .stage-grid { grid-template-columns: 1fr; }
@@ -314,14 +303,6 @@
           </div>
           <p class="hero-note">연구보고서의 필요성, 설계, 수업 사례, 결과를 강의용 흐름으로 재구성했습니다.</p>
         </aside>
-      </div>
-    </section>
-
-    <section class="numbers" aria-label="연구 핵심 수치">
-      <div class="numbers-grid">
-        <div class="number"><strong>78 → 93.5</strong><span>한글 해득 평균 점수, 15.5점 상승</span></div>
-        <div class="number"><strong>4명 전원</strong><span>사후 총점 상승 확인</span></div>
-        <div class="number"><strong>3개 교과</strong><span>국어·사회·과학 실제 수업에 적용</span></div>
       </div>
     </section>
 

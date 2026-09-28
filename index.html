@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173b37">
+  <meta name="description" content="2026년 9월 16일 충주 혜성학교 AI 연수. 이진구·이인호 선생님과 Gemini Canvas에서 포켓몬 세기·덧셈·뺄셈 웹사이트를 만들고 공유합니다.">
+  <title>충주 혜성학교 AI 연수 · 2026.09.16</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e65d2f'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,sans-serif' font-size='36' font-weight='700' fill='white'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="capture-layout.css?v=13">
+  <style>
+    #capture-dialog{width:min(1500px,96vw);max-height:96vh;padding:20px}
+    #capture-image{display:block;width:100%;height:auto;max-height:calc(90vh - 140px);object-fit:contain;background:white;margin:16px 0}
+    #capture-caption{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+    #capture-original{display:inline-block;font-size:14px;margin-top:12px;text-underline-offset:3px}
+    @media(max-width:700px){#capture-dialog{padding:16px}#capture-dialog h2{font-size:20px}#capture-dialog .dialog-head{gap:12px}#capture-image{max-height:70vh}}
+  </style>
+  <script src="content.js?v=22" defer></script>
+  <script src="capture-layout.js?v=12" defer></script>
+  <script src="app.js?v=11" defer></script>
+</head>
+<body>
+  <a class="skip" href="#slide">발표 내용으로 건너뛰기</a>
+  <header class="topbar">
+    <a class="brand" href="https://aiedue.ddns.net/landing.html" aria-label="에이두 연수 목록으로">aiedu<span>e</span><small>교실에서 만드는 AI</small></a>
+    <div class="event">충주 혜성학교 <span>2026.09.16</span></div>
+    <div class="top-actions"><button id="open-gallery" class="subtle">첫 요청문</button><button id="open-menu" class="subtle" aria-haspopup="dialog">목차 <span aria-hidden="true">☰</span></button></div>
+  </header>
+  <main id="stage"><article id="slide" class="slide" tabindex="-1" aria-label="발표 슬라이드"></article></main>
+  <footer class="toolbar">
+    <div class="part-switch"><button id="part1" title="1부 첫 장으로 이동">1부 <span>이진구</span></button><button id="part2" title="2부 첫 장으로 이동">2부 <span>이인호</span></button></div>
+    <div class="paging"><button id="prev" aria-label="이전 슬라이드">←</button><span id="counter" aria-live="polite"></span><button id="next" aria-label="다음 슬라이드">→</button></div>
+    <div class="utilities"><button id="notes-toggle" aria-expanded="false">발표 메모</button><button id="print">PDF 저장</button><button id="fullscreen" aria-label="전체 화면">전체 화면</button></div>
+  </footer>
+  <div class="progress-track"><div id="progress"></div></div>
+  <aside id="notes" hidden><div><strong id="notes-speaker"></strong><button id="close-notes" aria-label="발표 메모 닫기">닫기 ×</button></div><p id="notes-text"></p></aside>
+  <dialog id="menu"><div class="dialog-head"><h2>연수 목차</h2><button data-close="menu" aria-label="목차 닫기">닫기 ×</button></div><p>1부 이진구 · 사용법과 시연 / 2부 이인호 · 함께 만드는 실습</p><nav id="toc"></nav></dialog>
+  <dialog id="prompt-dialog"><div class="dialog-head"><h2 id="prompt-title">Gemini Canvas에 보낼 요청문</h2><button data-close="prompt-dialog" aria-label="요청문 닫기">닫기 ×</button></div><p>‘전체 복사’를 누르고 Gemini의 입력창에 붙여 넣으세요.</p><textarea id="prompt-text" aria-label="수정 가능한 Gemini Canvas 요청문" spellcheck="false"></textarea><div class="dialog-actions"><button class="primary" id="copy-prompt">전체 복사</button><button id="save-prompt">텍스트로 받기</button><span id="copy-status" role="status"></span></div></dialog>
+  <dialog id="capture-dialog" aria-labelledby="capture-title"><div class="dialog-head"><h2 id="capture-title">실제 화면 크게 보기</h2><button data-close="capture-dialog" aria-label="캡처 확대 닫기">닫기 ×</button></div><img id="capture-image" alt=""><p id="capture-caption"></p><a id="capture-original" target="_blank" rel="noopener">새 탭에서 원본 보기</a></dialog>
+  <div id="toast" role="status"></div>
+  <div id="print-slides" aria-hidden="true"></div>
+  <noscript>이 발표자료를 보려면 브라우저의 JavaScript를 켜 주세요.</noscript>
+</body>
+</html>
+
+

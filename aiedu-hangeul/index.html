@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="특수교육대상학생의 한글 해득과 통합학급 교과 참여를 잇는 에이두 한글 강의자료">
+  <meta name="theme-color" content="#14213d">
+  <title>에이두 한글 | 교과는 함께, 문해 수준은 맞춤으로</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Ccircle cx='17' cy='32' r='8' fill='white'/%3E%3Ccircle cx='47' cy='32' r='8' fill='white'/%3E%3Cpath d='M25 32h14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #14213d;
+      --ink-2: #263659;
+      --orange: #ff5a36;
+      --orange-soft: #fff0eb;
+      --cyan: #18b6c9;
+      --cyan-soft: #e9fbfd;
+      --lime: #d9f05a;
+      --paper: #f7f9fc;
+      --white: #ffffff;
+      --line: #dfe5ee;
+      --muted: #59657b;
+      --shadow: 0 18px 50px rgba(20, 33, 61, .12);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .skip-link {
+      position: fixed; left: 18px; top: -80px; z-index: 1000;
+      padding: 10px 16px; border-radius: 999px; color: #fff; background: var(--ink);
+    }
+    .skip-link:focus { top: 16px; }
+    .progress { position: fixed; inset: 0 0 auto; z-index: 100; height: 4px; background: transparent; }
+    .progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--orange), var(--cyan)); }
+    .site-header {
+      position: sticky; top: 0; z-index: 90;
+      background: rgba(247, 249, 252, .88); border-bottom: 1px solid rgba(223, 229, 238, .8);
+      backdrop-filter: blur(16px);
+    }
+    .nav-wrap { max-width: var(--max); margin: auto; min-height: 74px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 900; letter-spacing: -.03em; }
+    .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: var(--orange); position: relative; box-shadow: 0 8px 18px rgba(255,90,54,.24); }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: white; }
+    .brand-mark::before { left: 7px; } .brand-mark::after { right: 7px; }
+    .brand-mark i { position: absolute; width: 12px; height: 4px; background: white; left: 13px; top: 17px; }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-links a { padding: 9px 13px; border-radius: 999px; color: var(--muted); font-size: .9rem; font-weight: 750; text-decoration: none; }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); background: #fff; box-shadow: 0 6px 20px rgba(20,33,61,.07); }
+    .nav-toggle { display: none; border: 0; background: #fff; width: 44px; height: 44px; border-radius: 13px; cursor: pointer; }
+
+    main { overflow: hidden; }
+    .hero {
+      position: relative; min-height: 720px; color: #fff; background: var(--ink);
+      display: grid; align-items: center; isolation: isolate;
+    }
+    .hero::before {
+      content: ""; position: absolute; width: 620px; height: 620px; right: -140px; top: -160px; z-index: -1;
+      border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 90px rgba(255,255,255,.035), 0 0 0 180px rgba(255,255,255,.025);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: auto 0 0; height: 100px; z-index: -1;
+      background: linear-gradient(168deg, transparent 48%, var(--paper) 49%);
+    }
+    .hero-inner { max-width: var(--max); width: 100%; margin: auto; padding: 94px 28px 150px; display: grid; grid-template-columns: minmax(0,1.18fr) minmax(320px,.82fr); gap: 64px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 23px; font-size: .9rem; font-weight: 850; letter-spacing: .08em; }
+    .eyebrow::before { content: ""; width: 28px; height: 4px; border-radius: 99px; background: var(--lime); }
+    h1 { margin: 0; max-width: 760px; font-size: clamp(3rem, 6.4vw, 5.8rem); line-height: 1.04; letter-spacing: -.065em; }
+    h1 em { position: relative; z-index: 0; color: var(--lime); font-style: normal; }
+    h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .1em; z-index: -1; background: var(--orange); transform: rotate(-1deg); }
+    .hero-lead { max-width: 690px; margin: 28px 0 0; color: #dce6f7; font-size: clamp(1.08rem, 2vw, 1.28rem); line-height: 1.75; }
+    .hero-lead strong { color: #fff; }
+    .hero-card { padding: 32px; border: 1px solid rgba(255,255,255,.15); border-radius: 28px; background: rgba(255,255,255,.08); backdrop-filter: blur(10px); box-shadow: var(--shadow); }
+    .hero-card small { color: var(--lime); font-weight: 850; letter-spacing: .08em; }
+    .hero-card h2 { margin: 10px 0 18px; font-size: 1.6rem; line-height: 1.35; }
+    .bridge-mini { display: grid; grid-template-columns: 1fr 38px 1fr; gap: 10px; align-items: center; }
+    .bridge-mini div { min-height: 108px; padding: 18px 14px; border-radius: 18px; background: #fff; color: var(--ink); display: flex; flex-direction: column; justify-content: center; }
+    .bridge-mini b { display: block; font-size: .95rem; }
+    .bridge-mini span { color: var(--muted); font-size: .82rem; line-height: 1.45; }
+    .bridge-mini i { height: 4px; background: var(--orange); position: relative; }
+    .bridge-mini i::after { content: ""; position: absolute; right: -1px; top: -5px; border: 7px solid transparent; border-left-color: var(--orange); }
+    .hero-note { margin: 18px 0 0; color: #b9c7dd; font-size: .84rem; }
+
+    .numbers { max-width: var(--max); margin: -56px auto 0; padding: 0 28px; position: relative; z-index: 5; }
+    .numbers-grid { display: grid; grid-template-columns: repeat(3,1fr); background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .number { padding: 28px 32px; border-right: 1px solid var(--line); }
+    .number:last-child { border-right: 0; }
+    .number strong { display: block; color: var(--orange); font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.05em; }
+    .number span { display: block; margin-top: 8px; color: var(--muted); font-size: .92rem; }
+
+    .section { padding: 120px 28px; }
+    .section-inner { max-width: var(--max); margin: auto; }
+    .section-label { margin: 0 0 14px; color: var(--orange); font-size: .83rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .section-title { margin: 0; max-width: 810px; font-size: clamp(2.2rem, 4.6vw, 4.25rem); line-height: 1.13; letter-spacing: -.055em; }
+    .section-intro { max-width: 760px; margin: 24px 0 0; color: var(--muted); font-size: 1.08rem; }
+    .need-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 52px; }
+    .need-card { min-height: 320px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+    .need-card:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
+    .need-card::after { content: attr(data-num); position: absolute; right: 20px; bottom: -28px; color: #f0f3f8; font-size: 8rem; font-weight: 950; line-height: 1; z-index: 0; }
+    .need-card > * { position: relative; z-index: 1; }
+    .need-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; color: #fff; background: var(--ink); font-size: 1.45rem; font-weight: 900; }
+    .need-card:nth-child(2) .need-icon { background: var(--orange); }
+    .need-card:nth-child(3) .need-icon { color: var(--ink); background: var(--lime); }
+    .need-card h3 { margin: 24px 0 13px; font-size: 1.45rem; letter-spacing: -.035em; }
+    .need-card p { margin: 0; color: var(--muted); }
+    .key-message { margin-top: 26px; padding: 30px 34px; border-radius: var(--radius); color: #fff; background: var(--ink); display: flex; gap: 20px; align-items: center; }
+    .key-message b { flex: 0 0 auto; color: var(--lime); font-size: .85rem; letter-spacing: .08em; }
+    .key-message p { margin: 0; font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 800; }
+
+    .bridge-section { padding: 116px 28px; background: #fff; }
+    .bridge-flow { margin-top: 50px; display: grid; grid-template-columns: 1fr 80px 1.18fr 80px 1fr; align-items: stretch; }
+    .bridge-node { padding: 30px; border: 2px solid var(--ink); border-radius: var(--radius); background: #fff; }
+    .bridge-node.center { color: #fff; background: var(--ink); border-color: var(--ink); box-shadow: var(--shadow); }
+    .bridge-node small { color: var(--orange); font-weight: 900; letter-spacing: .08em; }
+    .bridge-node.center small { color: var(--lime); }
+    .bridge-node h3 { margin: 10px 0; font-size: 1.5rem; }
+    .bridge-node p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .bridge-node.center p { color: #cbd7e9; }
+    .bridge-arrow { align-self: center; height: 4px; background: var(--orange); position: relative; }
+    .bridge-arrow::after { content: ""; position: absolute; right: -6px; top: -7px; border: 9px solid transparent; border-left-color: var(--orange); }
+    .bridge-caption { max-width: 880px; margin: 34px auto 0; padding: 20px 24px; text-align: center; border-radius: 18px; background: var(--orange-soft); color: #8f2d18; font-weight: 750; }
+
+    .stages { background: var(--ink); color: #fff; }
+    .stages .section-label { color: var(--lime); }
+    .stages .section-intro { color: #bac8dc; }
+    .stage-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 15px; margin-top: 54px; }
+    .stage { min-height: 340px; padding: 28px 24px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: rgba(255,255,255,.055); }
+    .stage-num { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; color: var(--lime); font-size: .9rem; font-weight: 900; }
+    .stage h3 { margin: 24px 0 8px; font-size: 1.45rem; }
+    .stage > p { margin: 0; min-height: 78px; color: #bdcbe0; font-size: .94rem; }
+    .stage ul { margin: 22px 0 0; padding: 0; list-style: none; }
+    .stage li { display: flex; gap: 9px; align-items: flex-start; margin-top: 8px; color: #eef3fb; font-size: .88rem; }
+    .stage li::before { content: ""; flex: 0 0 7px; height: 7px; margin-top: .62em; border-radius: 50%; background: var(--orange); }
+
+    .cycle-layout { display: grid; grid-template-columns: .86fr 1.14fr; gap: 70px; align-items: center; }
+    .cycle-visual { min-height: 510px; position: relative; display: grid; place-items: center; }
+    .cycle-ring { width: 390px; height: 390px; border: 70px solid #edf1f6; border-radius: 50%; position: relative; }
+    .cycle-ring::before { content: ""; position: absolute; inset: -70px; border-radius: 50%; border: 70px solid transparent; border-top-color: var(--orange); border-right-color: var(--cyan); transform: rotate(-23deg); }
+    .cycle-center { position: absolute; width: 190px; height: 190px; display: grid; place-items: center; text-align: center; border-radius: 50%; color: #fff; background: var(--ink); font-size: 1.35rem; font-weight: 900; line-height: 1.4; }
+    .cycle-tag { position: absolute; min-width: 132px; padding: 15px 18px; border-radius: 18px; background: #fff; box-shadow: var(--shadow); }
+    .cycle-tag b { display: block; color: var(--orange); font-size: 1.15rem; }
+    .cycle-tag span { color: var(--muted); font-size: .8rem; }
+    .cycle-tag.one { top: 22px; left: 15px; }
+    .cycle-tag.two { right: 0; top: 190px; }
+    .cycle-tag.three { bottom: 15px; left: 80px; }
+    .cycle-list { margin-top: 36px; display: grid; gap: 14px; }
+    .cycle-item { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .cycle-item span { display: grid; place-items: center; height: 48px; border-radius: 14px; color: #fff; background: var(--orange); font-weight: 900; }
+    .cycle-item:nth-child(2) span { background: var(--cyan); }
+    .cycle-item:nth-child(3) span { color: var(--ink); background: var(--lime); }
+    .cycle-item h3 { margin: 0; font-size: 1.15rem; }
+    .cycle-item p { margin: 5px 0 0; color: var(--muted); font-size: .9rem; }
+
+    .cases { padding-top: 110px; background: #eef3f8; }
+    .case-tabs { margin-top: 48px; display: grid; grid-template-columns: 240px 1fr; gap: 26px; }
+    .tab-list { display: grid; align-content: start; gap: 10px; }
+    .tab-button { padding: 19px 20px; border: 1px solid var(--line); border-radius: 16px; text-align: left; color: var(--muted); background: #fff; cursor: pointer; transition: .2s ease; }
+    .tab-button b { display: block; color: var(--ink); font-size: 1.05rem; }
+    .tab-button[aria-selected="true"] { border-color: var(--ink); color: #fff; background: var(--ink); box-shadow: var(--shadow); transform: translateX(7px); }
+    .tab-button[aria-selected="true"] b { color: var(--lime); }
+    .tab-panel { min-height: 470px; padding: 38px; border-radius: 26px; background: #fff; box-shadow: var(--shadow); }
+    .tab-panel[hidden] { display: none; }
+    .case-standard { color: var(--orange); font-size: .84rem; font-weight: 900; letter-spacing: .05em; }
+    .tab-panel h3 { margin: 10px 0 18px; max-width: 700px; font-size: clamp(1.6rem, 3vw, 2.35rem); line-height: 1.35; letter-spacing: -.04em; }
+    .case-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 28px; }
+    .case-step { padding: 20px; border-radius: 17px; background: var(--paper); }
+    .case-step small { color: var(--orange); font-weight: 900; }
+    .case-step b { display: block; margin: 5px 0; }
+    .case-step p { margin: 0; color: var(--muted); font-size: .87rem; line-height: 1.58; }
+    .case-outcome { margin: 24px 0 0; padding: 19px 22px; border-left: 5px solid var(--cyan); border-radius: 0 15px 15px 0; background: var(--cyan-soft); color: #176373; font-weight: 750; }
+
+    .results { color: #fff; background: var(--ink); }
+    .results .section-label { color: var(--lime); }
+    .results .section-intro { color: #bdcbe0; }
+    .result-layout { display: grid; grid-template-columns: 1.18fr .82fr; gap: 28px; margin-top: 54px; }
+    .chart-card, .result-card { padding: 32px; border-radius: 24px; background: #fff; color: var(--ink); }
+    .chart-card h3, .result-card h3 { margin: 0 0 6px; font-size: 1.35rem; }
+    .chart-card > p, .result-card > p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .chart { margin-top: 30px; display: grid; gap: 18px; }
+    .bar-row { display: grid; grid-template-columns: 42px 1fr 75px; gap: 14px; align-items: center; }
+    .bar-row b { font-size: .9rem; }
+    .bars { display: grid; gap: 6px; }
+    .bar { height: 12px; width: var(--w); border-radius: 999px; transform-origin: left; animation: grow 1s both paused; }
+    .in-view .bar { animation-play-state: running; }
+    .bar.before { background: #dce2ea; }
+    .bar.after { background: linear-gradient(90deg, var(--orange), #ff8d5d); }
+    .bar-score { color: var(--muted); font-size: .82rem; text-align: right; }
+    @keyframes grow { from { transform: scaleX(0); } }
+    .average-box { margin-top: 24px; padding: 22px; border-radius: 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: var(--orange-soft); }
+    .average-box span { color: #8f2d18; font-weight: 800; }
+    .average-box strong { color: var(--orange); font-size: 2rem; white-space: nowrap; }
+    .result-card { color: #fff; background: var(--orange); }
+    .result-card > p { color: #ffe8e1; }
+    .change-list { margin: 28px 0 0; padding: 0; list-style: none; }
+    .change-list li { padding: 18px 0; border-top: 1px solid rgba(255,255,255,.25); }
+    .change-list b { display: block; color: #fff; }
+    .change-list span { color: #ffe6de; font-size: .9rem; }
+    .sample-note { margin-top: 20px; color: #b9c7dd; font-size: .8rem; }
+
+    .takeaway { padding: 110px 28px 140px; background: var(--lime); }
+    .takeaway-inner { max-width: 1040px; margin: auto; text-align: center; }
+    .takeaway small { font-weight: 900; letter-spacing: .12em; }
+    .takeaway h2 { margin: 20px auto 0; font-size: clamp(2.35rem, 5vw, 4.7rem); line-height: 1.17; letter-spacing: -.06em; }
+    .takeaway h2 em { color: var(--orange); font-style: normal; }
+    .takeaway p { max-width: 800px; margin: 28px auto 0; font-size: 1.12rem; }
+    .takeaway-pill { display: inline-flex; margin-top: 34px; padding: 14px 22px; border-radius: 999px; color: #fff; background: var(--ink); font-weight: 800; }
+
+    footer { padding: 40px 28px; color: #afbdd2; background: #0c162c; }
+    .footer-inner { max-width: var(--max); margin: auto; display: flex; justify-content: space-between; gap: 26px; }
+    footer strong { color: #fff; }
+    footer p { margin: 3px 0 0; max-width: 750px; font-size: .8rem; line-height: 1.6; }
+    .top-link { align-self: center; color: #fff; text-decoration: none; font-weight: 800; }
+
+    @media (max-width: 950px) {
+      .nav-toggle { display: grid; place-items: center; }
+      .nav-links { position: absolute; left: 18px; right: 18px; top: 64px; display: none; padding: 12px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: var(--shadow); }
+      .nav-links.open { display: grid; }
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hero-card { max-width: 620px; }
+      .need-grid, .stage-grid { grid-template-columns: repeat(2,1fr); }
+      .bridge-flow { grid-template-columns: 1fr; gap: 14px; }
+      .bridge-arrow { width: 4px; height: 46px; justify-self: center; }
+      .bridge-arrow::after { right: -7px; top: auto; bottom: -13px; transform: rotate(90deg); }
+      .cycle-layout, .result-layout { grid-template-columns: 1fr; }
+      .case-tabs { grid-template-columns: 1fr; }
+      .tab-list { grid-template-columns: repeat(3,1fr); }
+      .tab-button[aria-selected="true"] { transform: translateY(-4px); }
+    }
+
+    @media (max-width: 650px) {
+      body { font-size: 16px; }
+      .nav-wrap { padding: 0 18px; }
+      .hero { min-height: auto; }
+      .hero-inner { padding: 76px 20px 134px; }
+      h1 { font-size: clamp(2.75rem, 15vw, 4.4rem); }
+      .hero-card { padding: 22px; }
+      .bridge-mini { grid-template-columns: 1fr; }
+      .bridge-mini i { width: 4px; height: 28px; justify-self: center; }
+      .bridge-mini i::after { right: -5px; top: auto; bottom: -10px; transform: rotate(90deg); }
+      .numbers { padding: 0 18px; }
+      .numbers-grid { grid-template-columns: 1fr; }
+      .number { border-right: 0; border-bottom: 1px solid var(--line); }
+      .number:last-child { border-bottom: 0; }
+      .section, .bridge-section, .takeaway { padding-left: 20px; padding-right: 20px; }
+      .section { padding-top: 88px; padding-bottom: 88px; }
+      .need-grid, .stage-grid { grid-template-columns: 1fr; }
+      .need-card { min-height: 270px; }
+      .key-message { align-items: flex-start; flex-direction: column; }
+      .cycle-visual { min-height: 440px; transform: scale(.83); margin: -30px -40px; }
+      .cycle-item { grid-template-columns: 52px 1fr; }
+      .tab-list { grid-template-columns: 1fr; }
+      .tab-button { text-align: center; }
+      .tab-panel { min-height: auto; padding: 25px; }
+      .case-steps { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 34px 1fr; }
+      .bar-score { grid-column: 2; text-align: left; }
+      .average-box { align-items: flex-start; flex-direction: column; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#top" aria-label="에이두 한글 처음으로">
+        <span class="brand-mark" aria-hidden="true"><i></i></span>
+        <span>에이두 한글</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="메뉴 열기">☰</button>
+      <nav class="nav-links" id="mainNav" aria-label="강의자료 목차">
+        <a href="#need">왜 필요한가</a>
+        <a href="#bridge">어떻게 잇는가</a>
+        <a href="#stages">4단계 학습</a>
+        <a href="#cases">수업 사례</a>
+        <a href="#results">연구 결과</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">한글 해득 중심 통합교육 강의자료</p>
+          <h1 id="hero-title">교과는 함께,<br>문해 수준은 <em>맞춤으로</em></h1>
+          <p class="hero-lead">같은 교실에서 같은 교과를 배우더라도, 읽고 이해하는 출발선은 다릅니다. <strong>에이두 한글은 특수학급의 한글 해득과 통합학급의 교과 참여 사이에 학습 경로를 놓습니다.</strong></p>
+        </div>
+        <aside class="hero-card" aria-label="핵심 연결 구조">
+          <small>CORE IDEA</small>
+          <h2>쉬운 교과를 따로 만드는 것이 아니라,<br>같은 교과에 닿는 길을 맞춥니다.</h2>
+          <div class="bridge-mini" aria-hidden="true">
+            <div><b>특수학급</b><span>수준에 맞는<br>한글 해득</span></div>
+            <i></i>
+            <div><b>통합학급</b><span>핵심어·문장으로<br>교과 참여</span></div>
+          </div>
+          <p class="hero-note">연구보고서의 필요성, 설계, 수업 사례, 결과를 강의용 흐름으로 재구성했습니다.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="numbers" aria-label="연구 핵심 수치">
+      <div class="numbers-grid">
+        <div class="number"><strong>78 → 93.5</strong><span>한글 해득 평균 점수, 15.5점 상승</span></div>
+        <div class="number"><strong>4명 전원</strong><span>사후 총점 상승 확인</span></div>
+        <div class="number"><strong>3개 교과</strong><span>국어·사회·과학 실제 수업에 적용</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="need" aria-labelledby="need-title">
+      <div class="section-inner">
+        <p class="section-label">01 · WHY IT MATTERS</p>
+        <h2 class="section-title" id="need-title">필요성은 하나입니다.<br>수업에서 멀어지는 순간을 줄이는 것.</h2>
+        <p class="section-intro">특수교육대상학생은 특수학급에서 익힌 글자와 낱말을 통합학급의 낯선 교과 어휘와 긴 문장에 바로 적용하기 어렵습니다. 차이는 ‘의지’보다 학습 경로의 단절에서 커집니다.</p>
+        <div class="need-grid">
+          <article class="need-card" data-num="1">
+            <div class="need-icon" aria-hidden="true">≠</div>
+            <h3>같은 교실, 다른 출발선</h3>
+            <p>같은 교과서와 활동지를 사용하지만 자모·음절부터 긴 문장 읽기까지 한글 해득 수준의 개인차가 큽니다. 교과 핵심 단어나 문장에 진입하기 전부터 어려움이 시작됩니다.</p>
+          </article>
+          <article class="need-card" data-num="2">
+            <div class="need-icon" aria-hidden="true">↔</div>
+            <h3>한글 수업과 교과의 단절</h3>
+            <p>특수학급의 반복 연습이 통합학급의 실제 교과 학습으로 자연스럽게 이어지지 않으면, 익힌 능력이 수업 참여로 전환되지 않습니다.</p>
+          </article>
+          <article class="need-card" data-num="3">
+            <div class="need-icon" aria-hidden="true">↻</div>
+            <h3>교사의 개별화 부담</h3>
+            <p>매 차시 학생별 자료를 별도로 만들면 교사 부담이 커지고, 내용을 지나치게 단순화하면 원래 교과와의 연결이 약해집니다. 같은 핵심 내용을 수준에 맞게 바꾸는 도구가 필요합니다.</p>
+          </article>
+        </div>
+        <div class="key-message">
+          <b>핵심 관점</b>
+          <p>학생에게 별도의 쉬운 교과를 주는 것이 아니라, 자신의 문해 수준에서 같은 교과의 핵심에 접근하도록 돕습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bridge-section" id="bridge" aria-labelledby="bridge-title">
+      <div class="section-inner">
+        <p class="section-label">02 · THE BRIDGE</p>
+        <h2 class="section-title" id="bridge-title">분리된 두 수업 사이에<br>‘연결 도구’를 놓습니다.</h2>
+        <div class="bridge-flow" role="img" aria-label="특수학급 한글 해득에서 에이두 한글을 거쳐 통합학급 교과 참여로 연결되는 구조">
+          <article class="bridge-node">
+            <small>출발</small><h3>특수학급</h3><p>학생별 한글 수준에 맞춰 글자와 낱말을 배우고 반복합니다.</p>
+          </article>
+          <div class="bridge-arrow" aria-hidden="true"></div>
+          <article class="bridge-node center">
+            <small>연결</small><h3>에이두 한글</h3><p>교과 자료에서 핵심어를 추출하고, 학생 수준에 맞는 읽기·쓰기·이해 활동으로 재구성합니다.</p>
+          </article>
+          <div class="bridge-arrow" aria-hidden="true"></div>
+          <article class="bridge-node">
+            <small>참여</small><h3>통합학급</h3><p>익숙해진 핵심어와 문장으로 실제 교과 활동에 참여합니다.</p>
+          </article>
+        </div>
+        <p class="bridge-caption">교과에서 확인된 어려움은 다시 한글 학습에 반영되고, 익힌 능력은 다음 교과 참여로 이어지는 순환 구조입니다.</p>
+      </div>
+    </section>
+
+    <section class="section stages" id="stages" aria-labelledby="stages-title">
+      <div class="section-inner">
+        <p class="section-label">03 · FOUR LEVELS</p>
+        <h2 class="section-title" id="stages-title">한글 기초부터 교과 문해까지,<br>4단계로 올라갑니다.</h2>
+        <p class="section-intro">학생의 현재 수행 수준과 수업 목표에 따라 필요한 단계에서 시작하고, 어려움이 나타나면 이전 단계로 돌아가 복습합니다.</p>
+        <div class="stage-grid">
+          <article class="stage"><span class="stage-num">01</span><h3>그리기</h3><p>본격적인 한글 학습 전에 기초 움직임과 화면 조작을 익힙니다.</p><ul><li>그림·도형 미션</li><li>시작점과 끝점 인식</li><li>눈-손 협응과 선 긋기</li></ul></article>
+          <article class="stage"><span class="stage-num">02</span><h3>한글 해득</h3><p>모음에서 받침 있는 단어까지 소리와 글자의 관계를 단계적으로 익힙니다.</p><ul><li>모음·자모음 합성</li><li>받침 없는·있는 단어</li><li>복잡한 모음과 소리 내어 읽기</li></ul></article>
+          <article class="stage"><span class="stage-num">03</span><h3>교과 맞춤 쓰기</h3><p>실제 교과 자료에서 핵심어를 뽑아 학생 수준의 읽기·쓰기 활동으로 바꿉니다.</p><ul><li>자료 촬영과 핵심어 추출</li><li>직접 쓰기와 뜻 확인</li><li>단어 카드 저장</li></ul></article>
+          <article class="stage"><span class="stage-num">04</span><h3>문해력</h3><p>교과 지문을 읽고 핵심 내용을 이해하며 자신의 답을 선택하고 씁니다.</p><ul><li>선택형 → 단답형 → 서술형</li><li>수준별 문항 생성</li><li>오답을 다음 학습에 반영</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="cycle-title">
+      <div class="section-inner cycle-layout">
+        <div class="cycle-visual" aria-hidden="true">
+          <div class="cycle-ring"></div>
+          <div class="cycle-center">학생별<br>순환 수업</div>
+          <div class="cycle-tag one"><b>맞춤</b><span>현재 수준 진단</span></div>
+          <div class="cycle-tag two"><b>이음</b><span>교과와 연결</span></div>
+          <div class="cycle-tag three"><b>자람</b><span>오류로 다시 학습</span></div>
+        </div>
+        <div>
+          <p class="section-label">04 · TEACHING CYCLE</p>
+          <h2 class="section-title" id="cycle-title">진단에서 끝나지 않는<br>맞춤-이음-자람</h2>
+          <p class="section-intro">학습 기록이 다음 수업 설계로 돌아오는 순환이 핵심입니다. 프로그램은 교사의 판단을 대신하는 자동화 도구가 아니라, 개별화된 판단과 수업 설계를 돕는 도구로 사용됩니다.</p>
+          <div class="cycle-list">
+            <article class="cycle-item"><span>맞춤</span><div><h3>현재 수준에서 시작</h3><p>읽기·쓰기 오류와 교과 학습 결과로 자모, 음절, 낱말, 문장 중 필요한 영역을 선택합니다.</p></div></article>
+            <article class="cycle-item"><span>이음</span><div><h3>익힌 한글을 교과 핵심어로</h3><p>실제 교과서·활동지에서 핵심 단어와 문장을 뽑아 읽고, 쓰고, 뜻을 확인합니다.</p></div></article>
+            <article class="cycle-item"><span>자람</span><div><h3>오류를 다음 학습으로</h3><p>틀린 글자와 낱말을 다시 연습하고, 교과에서 새로 만난 어휘를 후속 한글 학습에 반영합니다.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cases" id="cases" aria-labelledby="cases-title">
+      <div class="section-inner">
+        <p class="section-label">05 · CLASSROOM CASES</p>
+        <h2 class="section-title" id="cases-title">교과 내용을 바꾸지 않고,<br>접근 경로를 바꿉니다.</h2>
+        <p class="section-intro">보고서의 실제 수업 사례를 교과별로 살펴보세요. 핵심어를 먼저 익힌 뒤 원래 수업의 질문과 활동으로 돌아갑니다.</p>
+        <div class="case-tabs">
+          <div class="tab-list" role="tablist" aria-label="교과 사례 선택">
+            <button class="tab-button" id="tab-korean" role="tab" aria-selected="true" aria-controls="panel-korean"><b>국어</b>자모의 이름과 소릿값</button>
+            <button class="tab-button" id="tab-social" role="tab" aria-selected="false" aria-controls="panel-social"><b>사회</b>최근 사회 변화</button>
+            <button class="tab-button" id="tab-science" role="tab" aria-selected="false" aria-controls="panel-science"><b>과학</b>생태계 구성 요소</button>
+          </div>
+          <div>
+            <article class="tab-panel" id="panel-korean" role="tabpanel" aria-labelledby="tab-korean">
+              <span class="case-standard">[2국04-01]</span><h3>한글 자모의 이름과 소릿값을 알고 정확하게 발음하고 쓴다.</h3>
+              <div class="case-steps"><div class="case-step"><small>맞춤</small><b>혼동 오류 진단</b><p>학생이 자주 혼동하는 ‘ㅓ’와 ‘ㅗ’를 집중 학습 영역으로 설정합니다.</p></div><div class="case-step"><small>이음</small><b>낱말로 연결</b><p>거미·고기·머리·모자처럼 두 모음이 포함된 낱말을 읽고 씁니다.</p></div><div class="case-step"><small>자람</small><b>오답 재학습</b><p>학습 기록에서 틀린 글자와 낱말을 확인해 다음 수업에 반영합니다.</p></div></div>
+              <p class="case-outcome">반복적인 모음 혼동을 개별 연습에만 머물지 않고, 실제 낱말 읽기·쓰기로 확장합니다.</p>
+            </article>
+            <article class="tab-panel" id="panel-social" role="tabpanel" aria-labelledby="tab-social" hidden>
+              <span class="case-standard">[4사03-01]</span><h3>최근 사회 변화의 양상과 특징, 그로 인한 생활 모습의 변화를 탐색한다.</h3>
+              <div class="case-steps"><div class="case-step"><small>맞춤</small><b>핵심어 추출</b><p>교과서에서 ‘사회 변화·저출산·고령화·지능정보화’ 같은 핵심어를 고릅니다.</p></div><div class="case-step"><small>이음</small><b>뜻과 이미지 연결</b><p>쉬운 뜻풀이와 관련 이미지를 확인하고 핵심어를 직접 써 봅니다.</p></div><div class="case-step"><small>자람</small><b>반복과 확인</b><p>AI 채점 결과와 오답을 저장해 틀린 단어를 다시 읽고 씁니다.</p></div></div>
+              <p class="case-outcome">낯선 교과 어휘를 뜻-이미지-쓰기의 경로로 익혀, 교과 활동에 참여할 언어적 기반을 만듭니다.</p>
+            </article>
+            <article class="tab-panel" id="panel-science" role="tabpanel" aria-labelledby="tab-science" hidden>
+              <span class="case-standard">[4과14-01]</span><h3>생태계의 구성 요소를 생물 요소와 비생물 요소로 분류할 수 있다.</h3>
+              <div class="case-steps"><div class="case-step"><small>맞춤</small><b>수준별 핵심어</b><p>생태계·생물 요소·비생물 요소 등 수업 참여에 필요한 어휘를 선정합니다.</p></div><div class="case-step"><small>이음</small><b>문해 문항 생성</b><p>핵심어가 포함된 지문을 읽고 객관식·단답형 문제로 의미를 확인합니다.</p></div><div class="case-step"><small>자람</small><b>모르는 단어 환류</b><p>나무·곤충·햇빛·물·공기처럼 활동 중 새로 확인된 어휘를 다음 학습에 반영합니다.</p></div></div>
+              <p class="case-outcome">긴 교과 어휘를 단순화하지 않고, 학생이 읽고 이해할 수 있는 수준별 문항으로 접근합니다.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section results" id="results" aria-labelledby="results-title">
+      <div class="section-inner">
+        <p class="section-label">06 · WHAT CHANGED</p>
+        <h2 class="section-title" id="results-title">한글 해득도 오르고,<br>교과 참여 방식도 달라졌습니다.</h2>
+        <p class="section-intro">동일한 ‘한글 또박또박’ 진단도구로 사전·사후를 비교한 결과, 연구 참여 학생 4명 모두 총점이 상승했습니다. 변화의 폭은 사전 수준과 오류 유형에 따라 달랐습니다.</p>
+        <div class="result-layout">
+          <article class="chart-card" id="scoreChart">
+            <h3>학생별 사전·사후 점수</h3><p>총점 106점 기준 · 회색 사전 / 주황 사후</p>
+            <div class="chart" aria-label="학생별 사전 사후 점수 막대그래프">
+              <div class="bar-row"><b>S1</b><div class="bars"><span class="bar before" style="--w:72.6%"></span><span class="bar after" style="--w:86.8%"></span></div><span class="bar-score">77 → 92</span></div>
+              <div class="bar-row"><b>S2</b><div class="bars"><span class="bar before" style="--w:35.8%"></span><span class="bar after" style="--w:72.6%"></span></div><span class="bar-score">38 → 77</span></div>
+              <div class="bar-row"><b>S3</b><div class="bars"><span class="bar before" style="--w:89.6%"></span><span class="bar after" style="--w:96.2%"></span></div><span class="bar-score">95 → 102</span></div>
+              <div class="bar-row"><b>S4</b><div class="bars"><span class="bar before" style="--w:96.2%"></span><span class="bar after" style="--w:97.2%"></span></div><span class="bar-score">102 → 103</span></div>
+            </div>
+            <div class="average-box"><span>전체 평균 변화</span><strong>+15.5점</strong></div>
+          </article>
+          <article class="result-card">
+            <h3>참여에서 관찰된 변화</h3><p>학생의 시작 수준에 따라 변화의 모습도 달랐습니다.</p>
+            <ul class="change-list">
+              <li><b>낮은 해득 수준</b><span>과제 시작과 집중 증가, 반복 안내·학습 회피 감소</span></li>
+              <li><b>높은 해득 수준</b><span>자기 점검과 수정, 독립적 과제 수행 증가</span></li>
+              <li><b>공통 변화</b><span>통합학급 학습 참여에 긍정적인 변화 관찰</span></li>
+            </ul>
+          </article>
+        </div>
+        <p class="sample-note">※ 본 수치는 보고서에 제시된 특수교육대상학생 4명의 적용 결과입니다. 소규모 사례 연구이므로 효과를 일반화하기보다, 학생별 출발점에 따른 변화 가능성을 보여주는 근거로 이해해야 합니다.</p>
+      </div>
+    </section>
+
+    <section class="takeaway" aria-labelledby="takeaway-title">
+      <div class="takeaway-inner">
+        <small>강의 핵심 한 문장</small>
+        <h2 id="takeaway-title">같은 교과를 <em>포기하지 않도록</em>,<br>도달하는 길을 학생에게 맞춘다.</h2>
+        <p>에이두 한글의 가치는 별도 학습을 하나 더 만드는 데 있지 않습니다. 특수학급에서 익힌 한글이 통합학급의 읽기·쓰기·이해로 이어지고, 교과에서 발견한 어려움이 다시 개별 한글 지도에 반영되는 연결 구조에 있습니다.</p>
+        <span class="takeaway-pill">교과는 함께 · 문해 수준은 맞춤으로</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><strong>에이두 한글 강의자료</strong><p>「교과는 함께, 문해 수준은 맞춤으로 - 장애학생의 통합 교육을 돕는 한글 해득 중심 교육 소프트웨어 ‘에이두 한글’ 개발」 연구보고서의 내용을 바탕으로 핵심을 재구성했습니다.</p></div>
+      <a class="top-link" href="#top">맨 위로 ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const progressBar = document.querySelector('#progressBar');
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#mainNav');
+    const navLinks = [...document.querySelectorAll('.nav-links a')];
+    const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+    function updateProgress() {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progressBar.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+      let current = '';
+      for (const section of sections) if (section.getBoundingClientRect().top <= 140) current = section.id;
+      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
+    }
+    addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    });
+    navLinks.forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+    function activateTab(tab) {
+      tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+      panels.forEach(panel => panel.hidden = panel.id !== tab.getAttribute('aria-controls'));
+      tab.focus();
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowDown','ArrowRight','ArrowUp','ArrowLeft'].includes(event.key)) return;
+        event.preventDefault();
+        const step = ['ArrowDown','ArrowRight'].includes(event.key) ? 1 : -1;
+        activateTab(tabs[(index + step + tabs.length) % tabs.length]);
+      });
+    });
+
+    const chart = document.querySelector('#scoreChart');
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) chart.classList.add('in-view');
+    }, { threshold: .35 }).observe(chart);
+  </script>
+</body>
+</html>
+

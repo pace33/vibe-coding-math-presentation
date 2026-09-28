@@ -111,7 +111,7 @@
     $('part1').setAttribute('aria-pressed',s.part!=='practice'); $('part2').setAttribute('aria-pressed',s.part==='practice');
     $('notes-text').textContent=s.notes || ''; $('notes-speaker').textContent=s.part==='practice' ? '2부 이인호 · 발표 메모' : '1부 이진구 · 발표 메모';
     $('toc').querySelectorAll('button').forEach((button,i)=>{button.classList.toggle('current',i===current); if(i===current)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
-    document.title=`${current+1}. ${s.title.replace(/\n/g,' ')} · 충주 혜성학교 AI 연수`;
+    document.title=`${current+1}. ${s.title.replace(/\n/g,' ')} · 디지털 활용 교육 연수`;
     window.scrollTo({top:0,behavior:'instant'});
     fitSlide();
   }

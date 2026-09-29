@@ -160,7 +160,7 @@
     .stage-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 24px; }
     .stage { min-height: 0; padding: 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: rgba(255,255,255,.055); transition: transform .25s ease, border-color .25s ease; }
     .stage:hover { transform: translateY(-5px); border-color: rgba(209,242,74,.55); }
-    .stage-shot { min-height: 340px; margin: 0 0 22px; padding: 16px; border-radius: 18px; overflow: hidden; color: #263a52; background: linear-gradient(145deg,#fff,#eef7ff); }
+    .stage-shot { min-height: 610px; margin: 0 0 22px; padding: 16px; border-radius: 18px; overflow: hidden; color: #263a52; background: linear-gradient(145deg,#fff,#eef7ff); }
     .stage-shot.stage-one { --scene-accent:#8c4ad7; background: linear-gradient(145deg,#fff7fd,#f0e7ff); }
     .stage-shot.stage-two { --scene-accent:#1496c2; background: linear-gradient(145deg,#f7fdff,#e1f5ff); }
     .stage-shot.stage-three { --scene-accent:#e36b23; background: linear-gradient(145deg,#fffaf4,#ffeddc); }
@@ -176,6 +176,63 @@
     .scene-tool { min-height: 92px; padding: 10px 7px; display: grid; place-items: center; align-content: center; gap: 5px; border: 1px solid rgba(31,49,78,.1); border-radius: 14px; background: rgba(255,255,255,.82); text-align: center; }
     .scene-tool em { font-size: 1.35rem; font-style: normal; line-height: 1; }
     .scene-tool b { color: #31435d; font-size: .74rem; line-height: 1.25; }
+    .motion-demo { min-height: 245px; padding: 13px; border: 1px solid rgba(31,49,78,.12); border-radius: 16px; background: rgba(255,255,255,.92); box-shadow: 0 8px 20px rgba(37,55,82,.08); }
+    .demo-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-bottom: 9px; }
+    .demo-top b { color: var(--scene-accent); font-size: .86rem; }
+    .demo-top small { color: #647188; font-size: .7rem; font-weight: 750; text-align: right; }
+    .draw-surface { height: 112px; position: relative; overflow: hidden; border: 2px dashed color-mix(in srgb,var(--scene-accent) 35%,#dbe2ea); border-radius: 12px; background: linear-gradient(rgba(255,255,255,.74),rgba(255,255,255,.74)), repeating-linear-gradient(0deg,transparent 0 23px,rgba(73,92,120,.1) 23px 24px); }
+    .draw-surface canvas { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 3; touch-action: none; cursor: crosshair; }
+    .guide-letter { position: absolute; inset: -4px 0 0; display: grid; place-items: center; color: color-mix(in srgb,var(--scene-accent) 17%,transparent); font-size: 6rem; font-weight: 950; line-height: 1; }
+    .motion-strokes { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    .motion-strokes path { fill: none; stroke: var(--scene-accent); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 480; stroke-dashoffset: 480; animation: write-stroke 3s ease-in-out infinite; }
+    .motion-strokes path:nth-child(2) { animation-delay: .35s; }
+    .motion-strokes path:nth-child(3) { animation-delay: .7s; }
+    .motion-strokes path:nth-child(4) { animation-delay: 1.05s; }
+    .demo-hand { width: 24px; height: 24px; position: absolute; z-index: 4; left: 15%; top: 56%; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--scene-accent); box-shadow: 0 4px 10px rgba(35,50,75,.24); font-size: .72rem; animation: hand-trace 3s ease-in-out infinite; pointer-events: none; }
+    .canvas-demo.user-active .motion-strokes,.canvas-demo.user-active .demo-hand { opacity: 0; animation: none; }
+    .demo-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
+    .demo-controls small { margin-right: 2px; color: #6a778c; font-size: .64rem; font-weight: 850; }
+    .swatch,.brush-size,.tool-toggle { width: 24px; height: 24px; display: grid; place-items: center; padding: 0; border: 2px solid transparent; border-radius: 50%; background: var(--swatch,#263a52); color: #304058; font: inherit; font-size: .62rem; font-weight: 900; cursor: pointer; }
+    .brush-size,.tool-toggle { border-color:#dbe3ec; background:#fff; }
+    .swatch[aria-pressed="true"],.brush-size[aria-pressed="true"],.tool-toggle[aria-pressed="true"] { border-color:var(--scene-accent); box-shadow:0 0 0 2px #fff,0 0 0 4px color-mix(in srgb,var(--scene-accent) 30%,transparent); }
+    .practice-tabs { display:flex; gap:5px; margin-bottom:8px; }
+    .practice-tab { flex:1; padding:5px 4px; border:1px solid #dce4ed; border-radius:8px; color:#5b687c; background:#fff; font:inherit; font-size:.65rem; font-weight:850; cursor:pointer; }
+    .practice-tab[aria-pressed="true"] { color:#fff; border-color:var(--scene-accent); background:var(--scene-accent); }
+    .demo-actions { display: flex; justify-content: flex-end; align-items:center; gap:6px; margin-top: 7px; }
+    .demo-reset,.demo-replay,.demo-action { padding: 6px 10px; border: 0; border-radius: 999px; color: #fff; background: var(--scene-accent); font: inherit; font-size: .68rem; font-weight: 850; cursor: pointer; }
+    .demo-action.secondary { color:var(--scene-accent); background:color-mix(in srgb,var(--scene-accent) 12%,#fff); }
+    .demo-status { flex:1; min-height:1em; color:#2d7b3c; font-size:.65rem; font-weight:900; }
+    .scan-stage { height: 118px; position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 9px; overflow: hidden; }
+    .scan-paper { position: relative; padding: 13px 11px; overflow: hidden; border: 1px solid #d9e0e8; border-radius: 11px; background: #fff; color: #4a5870; font-size: .72rem; font-weight: 750; line-height: 1.7; }
+    .scan-paper mark { padding: 1px 3px; color: inherit; background: #ffe299; border-radius: 4px; }
+    .scan-line { height: 3px; position: absolute; z-index: 2; left: 0; right: 0; top: 13px; border-radius: 9px; background: var(--scene-accent); box-shadow: 0 0 10px var(--scene-accent); }
+    .playing .scan-line { animation: scan-down 2.6s ease-in-out infinite; }
+    .ocr-output { display: flex; align-content: center; justify-content: center; flex-wrap: wrap; gap: 6px; padding: 11px 8px; border-radius: 11px; background: #fff5e9; }
+    .ocr-output b { align-self: center; padding: 6px 8px; border: 1px solid #ffd6b5; border-radius: 999px; color: #9f4818; background: #fff; font-size: .72rem; opacity: 0; transform: translateY(8px) scale(.9); }
+    .playing .ocr-output b { animation: chip-in 2.6s ease-in-out infinite; }
+    .playing .ocr-output b:nth-child(2) { animation-delay: .25s; }
+    .playing .ocr-output b:nth-child(3) { animation-delay: .5s; }
+    .quiz-stage { min-height: 118px; padding: 10px 11px; border-radius: 11px; background: #f5fbf1; }
+    .quiz-stage p { margin: 0 0 8px; color: #38485f; font-size: .74rem; font-weight: 750; line-height: 1.55; }
+    .quiz-stage mark { padding: 1px 3px; color: inherit; background: transparent; border-radius: 4px; }
+    .playing .quiz-stage mark { animation: text-highlight 3.4s ease-in-out infinite; }
+    .quiz-options { display: flex; gap: 7px; }
+    .quiz-options button { flex: 1; padding: 6px 8px; border: 1px solid #d8e2d2; border-radius: 8px; background: #fff; color: #586679; font:inherit; font-size: .7rem; font-weight: 800; text-align: center; cursor:pointer; }
+    .playing .quiz-options .correct { animation: choose-answer 3.4s ease-in-out infinite; }
+    .quiz-demo.user-answered .quiz-options button { animation:none; }
+    .quiz-demo.user-answered .quiz-options .selected.correct { color:#fff; border-color:var(--scene-accent); background:var(--scene-accent); }
+    .quiz-demo.user-answered .quiz-options .selected:not(.correct) { color:#9d2f2f; border-color:#ef9a9a; background:#fff0f0; }
+    .quiz-feedback { margin-top: 7px; color: #21722a; font-size: .68rem; font-weight: 900; opacity: 0; transform: translateY(5px); }
+    .playing .quiz-feedback { animation: reveal-feedback 3.4s ease-in-out infinite; }
+    .quiz-demo.user-answered .quiz-feedback { opacity:1; transform:none; animation:none; }
+    .quiz-demo.user-answered .quiz-feedback.is-wrong { color:#a33b3b; }
+    @keyframes write-stroke { 0%,12% { stroke-dashoffset:480; opacity:.25; } 55%,82% { stroke-dashoffset:0; opacity:1; } 100% { stroke-dashoffset:0; opacity:0; } }
+    @keyframes hand-trace { 0%,12% { transform:translate(0,0); opacity:.3; } 50% { transform:translate(150px,-36px); opacity:1; } 82% { transform:translate(245px,16px); opacity:1; } 100% { transform:translate(245px,16px); opacity:0; } }
+    @keyframes scan-down { 0%,12% { transform:translateY(0); opacity:0; } 20%,70% { opacity:1; } 78%,100% { transform:translateY(88px); opacity:0; } }
+    @keyframes chip-in { 0%,38% { opacity:0; transform:translateY(8px) scale(.9); } 52%,84% { opacity:1; transform:none; } 100% { opacity:0; transform:none; } }
+    @keyframes text-highlight { 0%,20% { background:transparent; } 34%,88% { background:#d8f2a1; } 100% { background:transparent; } }
+    @keyframes choose-answer { 0%,42% { color:#586679; border-color:#d8e2d2; background:#fff; } 55%,88% { color:#fff; border-color:var(--scene-accent); background:var(--scene-accent); transform:scale(1.03); } 100% { color:#586679; border-color:#d8e2d2; background:#fff; transform:none; } }
+    @keyframes reveal-feedback { 0%,58% { opacity:0; transform:translateY(5px); } 68%,88% { opacity:1; transform:none; } 100% { opacity:0; transform:none; } }
     .stage-num { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; color: var(--lime); font-size: .9rem; font-weight: 900; }
     .stage h3 { margin: 24px 0 8px; font-size: 1.45rem; }
     .stage > p { margin: 0; min-height: 54px; color: #bdcbe0; font-size: .94rem; }
@@ -302,8 +359,11 @@
       .app-overview-menu span { padding: 7px 9px; font-size: .68rem; }
       .live-stage-card { min-height: 190px; padding: 14px 9px; }
       .app-overview figcaption { margin: 16px -18px -18px; }
-      .stage-shot { min-height: 320px; padding: 12px; }
+      .stage-shot { min-height: 585px; padding: 12px; }
       .scene-mission { min-height: 150px; grid-template-columns: 92px 1fr; padding: 14px; }
+      .demo-top { align-items: flex-start; flex-direction: column; gap: 2px; }
+      .demo-top small { text-align: left; }
+      .draw-surface,.scan-stage { height: 112px; }
       .scene-mission .live-stage-icon { width: 92px; }
       .key-message { align-items: flex-start; flex-direction: column; }
       .cycle-visual { min-height: 440px; transform: scale(.83); margin: -30px -40px; }
@@ -316,6 +376,14 @@
       .bar-score { grid-column: 2; text-align: left; }
       .average-box { align-items: flex-start; flex-direction: column; }
       .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .motion-strokes path,.demo-hand,.playing .scan-line,.playing .ocr-output b,.playing .quiz-stage mark,.playing .quiz-options .correct,.playing .quiz-feedback { animation: none !important; }
+      .motion-strokes path { stroke-dashoffset: 0; }
+      .demo-hand,.scan-line { display: none; }
+      .ocr-output b,.quiz-feedback { opacity: 1; transform: none; }
+      .quiz-stage mark { background: #d8f2a1; }
+      .quiz-options .correct { color:#fff; border-color:var(--scene-accent); background:var(--scene-accent); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -455,6 +523,7 @@
               <div class="feature-scene">
                 <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>오늘의 미션</small><b>그림 미션</b><span>오늘의 그림을 그려요!</span></div></div>
                 <div class="scene-tools"><div class="scene-tool"><em>🦁</em><b>도형 동물원</b></div><div class="scene-tool"><em>🖼️</em><b>나의 그림</b></div><div class="scene-tool"><em>📒</em><b>AI 스케치북</b></div></div>
+                <div class="motion-demo canvas-demo drawing-demo" data-canvas-demo data-color="#8c4ad7"><div class="demo-top"><b>그림 미션 체험</b><small>실제 기능: 색·붓·지우개·완료</small></div><div class="demo-controls" aria-label="그리기 도구"><small>색</small><button class="swatch" style="--swatch:#8c4ad7" data-color="#8c4ad7" aria-label="보라색" aria-pressed="true"></button><button class="swatch" style="--swatch:#ef4444" data-color="#ef4444" aria-label="빨간색" aria-pressed="false"></button><button class="swatch" style="--swatch:#22c55e" data-color="#22c55e" aria-label="초록색" aria-pressed="false"></button><button class="swatch" style="--swatch:#3b82f6" data-color="#3b82f6" aria-label="파란색" aria-pressed="false"></button><small>붓</small><button class="brush-size" data-size="4" aria-label="가는 붓" aria-pressed="false">1</button><button class="brush-size" data-size="7" aria-label="보통 붓" aria-pressed="true">2</button><button class="brush-size" data-size="12" aria-label="굵은 붓" aria-pressed="false">3</button><button class="tool-toggle" data-eraser aria-label="지우개" aria-pressed="false">⌫</button></div><div class="draw-surface"><svg class="motion-strokes" viewBox="0 0 360 118" preserveAspectRatio="none" aria-hidden="true"><path d="M35 91 C58 34 121 28 151 89 C111 106 66 106 35 91 M191 86 L235 36 L279 86 Z"/></svg><span class="demo-hand" aria-hidden="true">✎</span><canvas aria-label="직접 그리기 체험판"></canvas></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-reset secondary" type="button">지우기</button><button class="demo-action" data-complete type="button">완료하기</button></div></div>
               </div>
             </div>
             <span class="stage-num">01</span><h3>그리기</h3><p>본격적인 한글 학습 전에 기초 움직임과 화면 조작을 익힙니다.</p><ul><li>그림·도형 미션</li><li>시작점과 끝점 인식</li><li>AI 결과로 수행 흥미 유도</li></ul>
@@ -464,6 +533,7 @@
               <div class="feature-scene">
                 <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>오늘의 미션</small><b>오늘의 한글</b><span>배움 2: ㅏ·ㅓ 공부하기</span></div></div>
                 <div class="scene-tools"><div class="scene-tool"><em>📖</em><b>한글 카드</b></div><div class="scene-tool"><em>✍️</em><b>쓰기 연습</b></div><div class="scene-tool"><em>🎮</em><b>듣기 게임</b></div></div>
+                <div class="motion-demo canvas-demo writing-demo" data-canvas-demo data-color="#1496c2"><div class="demo-top"><b>획순 따라쓰기 체험</b><small>쓰면 채점하고 다음 글자로 넘어가요</small></div><div class="practice-tabs" aria-label="쓰기 연습 종류"><button class="practice-tab" data-guide="가" data-speech="가" aria-pressed="true">글자 연습</button><button class="practice-tab" data-guide="나비" data-speech="나비" aria-pressed="false">낱말 연습</button><button class="practice-tab" data-guide="책" data-speech="나는 책을 읽어요" aria-pressed="false">문장 연습</button></div><div class="draw-surface"><span class="guide-letter" aria-hidden="true">가</span><svg class="motion-strokes" viewBox="0 0 360 118" preserveAspectRatio="none" aria-hidden="true"><path d="M85 31 L145 31 L145 91"/><path d="M145 60 L188 60"/><path d="M220 30 L220 92"/><path d="M220 61 L274 61"/></svg><span class="demo-hand" aria-hidden="true">✎</span><canvas aria-label="한글 획순 따라쓰기 체험판"></canvas></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action secondary" data-speak type="button">🔊 소리 듣기</button><button class="demo-action" data-grade type="button">다 썼어요</button><button class="demo-reset secondary" type="button">다시 쓰기</button></div></div>
               </div>
             </div>
             <span class="stage-num">02</span><h3>한글 해득</h3><p>모음에서 받침 있는 단어까지 소리와 글자의 관계를 단계적으로 익힙니다.</p><ul><li>모음·자모음 합성</li><li>받침 없는·있는 단어</li><li>글자 변별과 반복 쓰기</li></ul>
@@ -473,6 +543,7 @@
               <div class="feature-scene">
                 <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>사진으로 시작</small><b>교과 맞춤쓰기</b><span>공부할 내용을 찍고 단어를 모아요</span></div></div>
                 <div class="scene-tools"><div class="scene-tool"><em>🗂️</em><b>단어 카드</b></div><div class="scene-tool"><em>✍️</em><b>다시 쓰기</b></div><div class="scene-tool"><em>🏦</em><b>단어 은행</b></div></div>
+                <div class="motion-demo scan-demo playing" data-motion-demo><div class="demo-top"><b>오늘의 노트 사진 찍기</b><small>사진에서 교과 단어를 모아요</small></div><div class="scan-stage"><div class="scan-paper" data-scan-preview>식물은 <mark>햇빛</mark>과 <mark>물</mark>이 필요해요.<i class="scan-line" aria-hidden="true"></i></div><div class="ocr-output" aria-label="추출된 핵심어"><b>식물</b><b>햇빛</b><b>물</b></div></div><input data-note-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status">핵심어 3개를 단어 은행에 담았어요.</span><button class="demo-action secondary" data-photo type="button">📷 사진 선택</button><button class="demo-replay" type="button">추출 재생</button></div></div>
               </div>
             </div>
             <span class="stage-num">03</span><h3>교과 맞춤 쓰기</h3><p>실제 교과 자료에서 핵심어를 뽑아 학생 수준의 읽기·쓰기 활동으로 바꿉니다.</p><ul><li>자료 촬영과 핵심어 추출</li><li>직접 쓰기와 뜻 확인</li><li>단어 카드 저장</li></ul>
@@ -482,6 +553,7 @@
               <div class="feature-scene">
                 <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>문해력 1단</small><b>문해력 문제</b><span>쉬움·객관식 문제가 자동 출제돼요</span></div></div>
                 <div class="scene-tools"><div class="scene-tool"><em>🔎</em><b>탐정단</b></div><div class="scene-tool"><em>📚</em><b>학습 기록</b></div><div class="scene-tool"><em>🏦</em><b>단어 은행</b></div></div>
+                <div class="motion-demo quiz-demo playing" data-motion-demo><div class="demo-top"><b>문해력 1단 · 객관식</b><small>읽고 답하면 바로 확인해요</small></div><div class="quiz-stage"><p><mark>민지는 비가 와서</mark> 우산을 썼어요.</p><div class="quiz-options" aria-label="비가 온 날씨 고르기"><button type="button">① 눈</button><button class="correct" type="button">② 비</button></div><div class="quiz-feedback" role="status">✓ 정답! 핵심 문장과 연결했어요.</div></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-replay" data-next-question type="button">다음 문제</button></div></div>
               </div>
             </div>
             <span class="stage-num">04</span><h3>문해력</h3><p>교과 지문을 읽고 핵심 내용을 이해하며 자신의 답을 선택하고 씁니다.</p><ul><li>선택형 → 단답형 → 서술형</li><li>수준별 문항 생성</li><li>오답을 다음 학습에 반영</li></ul>
@@ -631,6 +703,202 @@
         event.preventDefault();
         const step = ['ArrowDown','ArrowRight'].includes(event.key) ? 1 : -1;
         activateTab(tabs[(index + step + tabs.length) % tabs.length]);
+      });
+    });
+
+    document.querySelectorAll('[data-canvas-demo]').forEach(demo => {
+      const canvas = demo.querySelector('canvas');
+      const context = canvas.getContext('2d');
+      let strokeColor = demo.dataset.color || '#263a52';
+      let lineWidth = 7;
+      let erasing = false;
+      let drawing = false;
+      let lastPoint = null;
+
+      function clearCanvas() {
+        context.save();
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.restore();
+        demo.classList.remove('user-active');
+        const status = demo.querySelector('.demo-status');
+        if (status) status.textContent = '';
+      }
+
+      function fitCanvas() {
+        const box = canvas.getBoundingClientRect();
+        const ratio = Math.min(devicePixelRatio || 1, 2);
+        canvas.width = Math.round(box.width * ratio);
+        canvas.height = Math.round(box.height * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        context.lineWidth = lineWidth;
+        context.lineCap = 'round';
+        context.lineJoin = 'round';
+        context.strokeStyle = strokeColor;
+      }
+      function pointFrom(event) {
+        const box = canvas.getBoundingClientRect();
+        return { x: event.clientX - box.left, y: event.clientY - box.top };
+      }
+      function begin(event) {
+        event.preventDefault();
+        demo.classList.add('user-active');
+        context.globalCompositeOperation = erasing ? 'destination-out' : 'source-over';
+        context.strokeStyle = strokeColor;
+        context.lineWidth = erasing ? lineWidth * 2 : lineWidth;
+        drawing = true;
+        lastPoint = pointFrom(event);
+        canvas.setPointerCapture(event.pointerId);
+      }
+      function draw(event) {
+        if (!drawing) return;
+        event.preventDefault();
+        const nextPoint = pointFrom(event);
+        context.beginPath();
+        context.moveTo(lastPoint.x, lastPoint.y);
+        context.lineTo(nextPoint.x, nextPoint.y);
+        context.stroke();
+        lastPoint = nextPoint;
+      }
+      function end() { drawing = false; lastPoint = null; }
+      fitCanvas();
+      canvas.addEventListener('pointerdown', begin);
+      canvas.addEventListener('pointermove', draw);
+      canvas.addEventListener('pointerup', end);
+      canvas.addEventListener('pointercancel', end);
+      demo.querySelector('.demo-reset').addEventListener('click', clearCanvas);
+
+      demo.querySelectorAll('[data-color]').forEach(button => {
+        button.addEventListener('click', () => {
+          strokeColor = button.dataset.color;
+          erasing = false;
+          demo.querySelectorAll('[data-color]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          const eraser = demo.querySelector('[data-eraser]');
+          if (eraser) eraser.setAttribute('aria-pressed', 'false');
+        });
+      });
+      demo.querySelectorAll('[data-size]').forEach(button => {
+        button.addEventListener('click', () => {
+          lineWidth = Number(button.dataset.size);
+          demo.querySelectorAll('[data-size]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        });
+      });
+      const eraser = demo.querySelector('[data-eraser]');
+      if (eraser) eraser.addEventListener('click', () => {
+        erasing = !erasing;
+        eraser.setAttribute('aria-pressed', String(erasing));
+      });
+      const complete = demo.querySelector('[data-complete]');
+      if (complete) complete.addEventListener('click', () => {
+        const status = demo.querySelector('.demo-status');
+        status.textContent = demo.classList.contains('user-active') ? '✓ 완료! 나의 그림에 저장했어요.' : '먼저 그림을 그려 보세요.';
+      });
+
+      const practiceTabs = [...demo.querySelectorAll('.practice-tab')];
+      let practiceIndex = 0;
+      const practiceSequences = {
+        '글자 연습': ['가','나','다'],
+        '낱말 연습': ['나비','모자','학교'],
+        '문장 연습': ['책','학교','친구']
+      };
+      practiceTabs.forEach(button => button.addEventListener('click', () => {
+        practiceTabs.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        practiceIndex = 0;
+        demo.querySelector('.guide-letter').textContent = button.dataset.guide;
+        clearCanvas();
+      }));
+      const speak = demo.querySelector('[data-speak]');
+      if (speak) speak.addEventListener('click', () => {
+        const current = practiceTabs.find(item => item.getAttribute('aria-pressed') === 'true');
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(current.dataset.speech);
+        utterance.lang = 'ko-KR';
+        speechSynthesis.speak(utterance);
+      });
+      const grade = demo.querySelector('[data-grade]');
+      if (grade) grade.addEventListener('click', () => {
+        const status = demo.querySelector('.demo-status');
+        if (!demo.classList.contains('user-active')) {
+          status.textContent = '먼저 글자를 써 보세요.';
+          return;
+        }
+        status.textContent = '✓ 잘 썼어요! 다음 글자로 넘어갑니다.';
+        const current = practiceTabs.find(item => item.getAttribute('aria-pressed') === 'true');
+        const sequence = practiceSequences[current.textContent.trim()];
+        practiceIndex = (practiceIndex + 1) % sequence.length;
+        setTimeout(() => {
+          demo.querySelector('.guide-letter').textContent = sequence[practiceIndex];
+          clearCanvas();
+        }, 700);
+      });
+    });
+
+    document.querySelectorAll('.scan-demo .demo-replay').forEach(button => {
+      button.addEventListener('click', () => {
+        const demo = button.closest('[data-motion-demo]');
+        demo.classList.remove('playing');
+        void demo.offsetWidth;
+        demo.classList.add('playing');
+      });
+    });
+
+    document.querySelectorAll('.scan-demo').forEach(demo => {
+      const fileInput = demo.querySelector('[data-note-file]');
+      const photoButton = demo.querySelector('[data-photo]');
+      const preview = demo.querySelector('[data-scan-preview]');
+      const status = demo.querySelector('.demo-status');
+      photoButton.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) return;
+        preview.style.backgroundImage = `linear-gradient(rgba(255,255,255,.72),rgba(255,255,255,.72)),url('${URL.createObjectURL(file)}')`;
+        preview.style.backgroundSize = 'cover';
+        status.textContent = '사진을 분석하고 있어요…';
+        demo.classList.remove('playing');
+        setTimeout(() => {
+          demo.classList.add('playing');
+          status.textContent = '핵심어 3개를 단어 은행에 담았어요.';
+        }, 700);
+      });
+    });
+
+    const quizQuestions = [
+      { stem:'<mark>민지는 비가 와서</mark> 우산을 썼어요.', answers:['① 눈','② 비'], correct:1 },
+      { stem:'<mark>식물은 햇빛과 물을 받아</mark> 자라요.', answers:['① 자라요','② 잠들어요'], correct:0 }
+    ];
+    document.querySelectorAll('.quiz-demo').forEach(demo => {
+      let questionIndex = 0;
+      const stem = demo.querySelector('.quiz-stage p');
+      const options = [...demo.querySelectorAll('.quiz-options button')];
+      const feedback = demo.querySelector('.quiz-feedback');
+      function renderQuestion() {
+        const question = quizQuestions[questionIndex];
+        stem.innerHTML = question.stem;
+        options.forEach((button, index) => {
+          button.textContent = question.answers[index];
+          button.className = index === question.correct ? 'correct' : '';
+        });
+        feedback.textContent = '정답을 골라 보세요.';
+        feedback.classList.remove('is-wrong');
+        demo.classList.remove('user-answered');
+        demo.classList.remove('playing');
+        void demo.offsetWidth;
+        demo.classList.add('playing');
+      }
+      options.forEach((button, index) => button.addEventListener('click', () => {
+        const question = quizQuestions[questionIndex];
+        demo.classList.remove('playing');
+        demo.classList.add('user-answered');
+        options.forEach(item => item.classList.remove('selected'));
+        button.classList.add('selected');
+        const correct = index === question.correct;
+        feedback.textContent = correct ? '✓ 정답! 핵심 문장과 연결했어요.' : '다시 읽고 핵심 문장을 찾아보세요.';
+        feedback.classList.toggle('is-wrong', !correct);
+      }));
+      demo.querySelector('[data-next-question]').addEventListener('click', () => {
+        questionIndex = (questionIndex + 1) % quizQuestions.length;
+        renderQuestion();
       });
     });
 

@@ -160,16 +160,22 @@
     .stage-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 24px; }
     .stage { min-height: 0; padding: 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: rgba(255,255,255,.055); transition: transform .25s ease, border-color .25s ease; }
     .stage:hover { transform: translateY(-5px); border-color: rgba(209,242,74,.55); }
-    .stage-shot { min-height: 230px; margin: 0 0 22px; padding: 22px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 16px; align-items: center; border-radius: 18px; overflow: hidden; color: #263a52; background: linear-gradient(145deg,#fff,#eef7ff); }
-    .stage-shot.stage-one { background: linear-gradient(145deg,#fff7fd,#f0e7ff); }
-    .stage-shot.stage-two { background: linear-gradient(145deg,#f7fdff,#e1f5ff); }
-    .stage-shot.stage-three { background: linear-gradient(145deg,#fffaf4,#ffeddc); }
-    .stage-shot.stage-four { background: linear-gradient(145deg,#f8fff3,#e5f7dc); }
-    .stage-shot .live-stage-icon { width: 100%; max-width: none; }
-    .stage-screen-copy { display: grid; gap: 9px; }
-    .stage-screen-copy small { color: var(--muted); font-weight: 900; }
-    .stage-screen-copy b { font-size: clamp(1.15rem,2vw,1.55rem); line-height: 1.3; }
-    .stage-screen-copy span { width: fit-content; padding: 7px 10px; border-radius: 999px; color: #fff; background: var(--orange); font-size: .76rem; font-weight: 900; }
+    .stage-shot { min-height: 340px; margin: 0 0 22px; padding: 16px; border-radius: 18px; overflow: hidden; color: #263a52; background: linear-gradient(145deg,#fff,#eef7ff); }
+    .stage-shot.stage-one { --scene-accent:#8c4ad7; background: linear-gradient(145deg,#fff7fd,#f0e7ff); }
+    .stage-shot.stage-two { --scene-accent:#1496c2; background: linear-gradient(145deg,#f7fdff,#e1f5ff); }
+    .stage-shot.stage-three { --scene-accent:#e36b23; background: linear-gradient(145deg,#fffaf4,#ffeddc); }
+    .stage-shot.stage-four { --scene-accent:#43a44c; background: linear-gradient(145deg,#f8fff3,#e5f7dc); }
+    .feature-scene { display: grid; gap: 11px; }
+    .scene-mission { min-height: 170px; padding: 17px; display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: center; border: 1px solid rgba(31,49,78,.1); border-bottom: 5px solid var(--scene-accent); border-radius: 16px; background: rgba(255,255,255,.86); box-shadow: 0 10px 24px rgba(37,55,82,.09); }
+    .scene-mission .live-stage-icon { width: 112px; max-width: 100%; margin: 0; }
+    .scene-copy { display: grid; gap: 5px; }
+    .scene-copy small { color: var(--scene-accent); font-size: .74rem; font-weight: 950; letter-spacing: .05em; }
+    .scene-copy b { font-size: clamp(1.18rem,2vw,1.48rem); line-height: 1.2; }
+    .scene-copy span { color: #5d6a7f; font-size: .78rem; font-weight: 750; line-height: 1.45; }
+    .scene-tools { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .scene-tool { min-height: 92px; padding: 10px 7px; display: grid; place-items: center; align-content: center; gap: 5px; border: 1px solid rgba(31,49,78,.1); border-radius: 14px; background: rgba(255,255,255,.82); text-align: center; }
+    .scene-tool em { font-size: 1.35rem; font-style: normal; line-height: 1; }
+    .scene-tool b { color: #31435d; font-size: .74rem; line-height: 1.25; }
     .stage-num { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; color: var(--lime); font-size: .9rem; font-weight: 900; }
     .stage h3 { margin: 24px 0 8px; font-size: 1.45rem; }
     .stage > p { margin: 0; min-height: 54px; color: #bdcbe0; font-size: .94rem; }
@@ -296,7 +302,9 @@
       .app-overview-menu span { padding: 7px 9px; font-size: .68rem; }
       .live-stage-card { min-height: 190px; padding: 14px 9px; }
       .app-overview figcaption { margin: 16px -18px -18px; }
-      .stage-shot { min-height: 190px; padding: 16px; grid-template-columns: .72fr 1.28fr; }
+      .stage-shot { min-height: 320px; padding: 12px; }
+      .scene-mission { min-height: 150px; grid-template-columns: 92px 1fr; padding: 14px; }
+      .scene-mission .live-stage-icon { width: 92px; }
       .key-message { align-items: flex-start; flex-direction: column; }
       .cycle-visual { min-height: 440px; transform: scale(.83); margin: -30px -40px; }
       .cycle-item { grid-template-columns: 52px 1fr; }
@@ -443,19 +451,39 @@
         </figure>
         <div class="stage-grid">
           <article class="stage">
-            <div class="stage-shot stage-one" aria-label="그리기 단계 핵심 기능 화면"><div class="live-stage-icon" aria-hidden="true"></div><div class="stage-screen-copy"><small>실제 기능</small><b>그림 미션 · 도형 게임<br>AI 스케치북</b><span>그리기 활동</span></div></div>
+            <div class="stage-shot stage-one" aria-label="그리기 단계 세부 기능 장면">
+              <div class="feature-scene">
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>오늘의 미션</small><b>그림 미션</b><span>오늘의 그림을 그려요!</span></div></div>
+                <div class="scene-tools"><div class="scene-tool"><em>🦁</em><b>도형 동물원</b></div><div class="scene-tool"><em>🖼️</em><b>나의 그림</b></div><div class="scene-tool"><em>📒</em><b>AI 스케치북</b></div></div>
+              </div>
+            </div>
             <span class="stage-num">01</span><h3>그리기</h3><p>본격적인 한글 학습 전에 기초 움직임과 화면 조작을 익힙니다.</p><ul><li>그림·도형 미션</li><li>시작점과 끝점 인식</li><li>AI 결과로 수행 흥미 유도</li></ul>
           </article>
           <article class="stage">
-            <div class="stage-shot stage-two" aria-label="한글 해득 단계 핵심 기능 화면"><div class="live-stage-icon" aria-hidden="true"></div><div class="stage-screen-copy"><small>실제 기능</small><b>소리 듣기 · 자모 결합<br>낱말 쓰기</b><span>한글 해득</span></div></div>
+            <div class="stage-shot stage-two" aria-label="한글 해득 단계 세부 기능 장면">
+              <div class="feature-scene">
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>오늘의 미션</small><b>오늘의 한글</b><span>배움 2: ㅏ·ㅓ 공부하기</span></div></div>
+                <div class="scene-tools"><div class="scene-tool"><em>📖</em><b>한글 카드</b></div><div class="scene-tool"><em>✍️</em><b>쓰기 연습</b></div><div class="scene-tool"><em>🎮</em><b>듣기 게임</b></div></div>
+              </div>
+            </div>
             <span class="stage-num">02</span><h3>한글 해득</h3><p>모음에서 받침 있는 단어까지 소리와 글자의 관계를 단계적으로 익힙니다.</p><ul><li>모음·자모음 합성</li><li>받침 없는·있는 단어</li><li>글자 변별과 반복 쓰기</li></ul>
           </article>
           <article class="stage">
-            <div class="stage-shot stage-three" aria-label="교과 맞춤 쓰기 단계 핵심 기능 화면"><div class="live-stage-icon" aria-hidden="true"></div><div class="stage-screen-copy"><small>실제 기능</small><b>교과 자료 촬영<br>핵심어 추출·단어 카드</b><span>교과 연결</span></div></div>
+            <div class="stage-shot stage-three" aria-label="교과 맞춤 쓰기 단계 세부 기능 장면">
+              <div class="feature-scene">
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>사진으로 시작</small><b>교과 맞춤쓰기</b><span>공부할 내용을 찍고 단어를 모아요</span></div></div>
+                <div class="scene-tools"><div class="scene-tool"><em>🗂️</em><b>단어 카드</b></div><div class="scene-tool"><em>✍️</em><b>다시 쓰기</b></div><div class="scene-tool"><em>🏦</em><b>단어 은행</b></div></div>
+              </div>
+            </div>
             <span class="stage-num">03</span><h3>교과 맞춤 쓰기</h3><p>실제 교과 자료에서 핵심어를 뽑아 학생 수준의 읽기·쓰기 활동으로 바꿉니다.</p><ul><li>자료 촬영과 핵심어 추출</li><li>직접 쓰기와 뜻 확인</li><li>단어 카드 저장</li></ul>
           </article>
           <article class="stage">
-            <div class="stage-shot stage-four" aria-label="문해력 단계 핵심 기능 화면"><div class="live-stage-icon" aria-hidden="true"></div><div class="stage-screen-copy"><small>실제 기능</small><b>교과 지문 읽기<br>수준별 문항·오답 복습</b><span>문해력</span></div></div>
+            <div class="stage-shot stage-four" aria-label="문해력 단계 세부 기능 장면">
+              <div class="feature-scene">
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>문해력 1단</small><b>문해력 문제</b><span>쉬움·객관식 문제가 자동 출제돼요</span></div></div>
+                <div class="scene-tools"><div class="scene-tool"><em>🔎</em><b>탐정단</b></div><div class="scene-tool"><em>📚</em><b>학습 기록</b></div><div class="scene-tool"><em>🏦</em><b>단어 은행</b></div></div>
+              </div>
+            </div>
             <span class="stage-num">04</span><h3>문해력</h3><p>교과 지문을 읽고 핵심 내용을 이해하며 자신의 답을 선택하고 씁니다.</p><ul><li>선택형 → 단답형 → 서술형</li><li>수준별 문항 생성</li><li>오답을 다음 학습에 반영</li></ul>
           </article>
         </div>

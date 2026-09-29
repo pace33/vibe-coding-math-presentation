@@ -98,16 +98,27 @@
     .section-label { margin: 0 0 14px; color: var(--orange); font-size: .83rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
     .section-title { margin: 0; max-width: 810px; font-size: clamp(2.2rem, 4.6vw, 4.25rem); line-height: 1.13; letter-spacing: -.055em; }
     .section-intro { max-width: 760px; margin: 24px 0 0; color: var(--muted); font-size: 1.08rem; }
-    .need-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 52px; }
-    .need-card { min-height: 320px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+    .need-thesis { margin-top: 42px; padding: 28px 30px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: center; border-left: 7px solid var(--orange); border-radius: 0 var(--radius) var(--radius) 0; background: var(--orange-soft); }
+    .need-thesis strong { color: var(--ink); font-size: clamp(1.35rem,2.2vw,2rem); line-height: 1.35; letter-spacing: -.035em; }
+    .need-thesis p { margin: 10px 0 0; color: var(--muted); }
+    .need-tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 9px; }
+    .need-tags span { padding: 9px 12px; border: 1px solid rgba(255,91,60,.22); border-radius: 999px; background: #fff; color: var(--ink); font-size: .87rem; font-weight: 800; }
+    .need-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 24px; }
+    .need-card { min-height: 300px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
     .need-card:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
     .need-card::after { content: attr(data-num); position: absolute; right: 20px; bottom: -28px; color: #f0f3f8; font-size: 8rem; font-weight: 950; line-height: 1; z-index: 0; }
     .need-card > * { position: relative; z-index: 1; }
     .need-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; color: #fff; background: var(--ink); font-size: 1.45rem; font-weight: 900; }
     .need-card:nth-child(2) .need-icon { background: var(--orange); }
     .need-card:nth-child(3) .need-icon { color: var(--ink); background: var(--lime); }
+    .need-card:nth-child(4) .need-icon { color: var(--ink); background: var(--cyan); }
     .need-card h3 { margin: 24px 0 13px; font-size: 1.45rem; letter-spacing: -.035em; }
     .need-card p { margin: 0; color: var(--muted); }
+    .need-chain { margin-top: 24px; padding: 24px; display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+    .need-chain div { min-height: 96px; padding: 16px; display: flex; flex-direction: column; justify-content: center; border-radius: 16px; background: var(--paper); position: relative; }
+    .need-chain div:not(:last-child)::after { content: "→"; position: absolute; right: -23px; top: 50%; color: var(--orange); font-size: 1.45rem; font-weight: 950; transform: translateY(-50%); }
+    .need-chain small { color: var(--orange); font-size: .72rem; font-weight: 950; letter-spacing: .12em; }
+    .need-chain b { margin-top: 7px; color: var(--ink); font-size: .98rem; line-height: 1.45; }
     .key-message { margin-top: 26px; padding: 30px 34px; border-radius: var(--radius); color: #fff; background: var(--ink); display: flex; gap: 20px; align-items: center; }
     .key-message b { flex: 0 0 auto; color: var(--lime); font-size: .85rem; letter-spacing: .08em; }
     .key-message p { margin: 0; font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 800; }
@@ -222,7 +233,11 @@
       .nav-links.open { display: grid; }
       .hero-inner { grid-template-columns: 1fr; gap: 36px; }
       .hero-card { max-width: 620px; }
+      .need-thesis { grid-template-columns: 1fr; }
+      .need-tags { justify-content: flex-start; }
       .need-grid, .stage-grid { grid-template-columns: repeat(2,1fr); }
+      .need-chain { grid-template-columns: repeat(2,1fr); }
+      .need-chain div:nth-child(2)::after { display: none; }
       .bridge-flow { grid-template-columns: 1fr; gap: 14px; }
       .bridge-arrow { width: 4px; height: 46px; justify-self: center; }
       .bridge-arrow::after { right: -7px; top: auto; bottom: -13px; transform: rotate(90deg); }
@@ -246,6 +261,9 @@
       .section { padding-top: 88px; padding-bottom: 88px; }
       .need-grid, .stage-grid { grid-template-columns: 1fr; }
       .need-card { min-height: 270px; }
+      .need-chain { grid-template-columns: 1fr; gap: 12px; }
+      .need-chain div:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -22px; transform: translateX(50%); }
+      .need-chain div:nth-child(2)::after { display: block; }
       .key-message { align-items: flex-start; flex-direction: column; }
       .cycle-visual { min-height: 440px; transform: scale(.83); margin: -30px -40px; }
       .cycle-item { grid-template-columns: 52px 1fr; }
@@ -308,29 +326,51 @@
 
     <section class="section" id="need" aria-labelledby="need-title">
       <div class="section-inner">
-        <p class="section-label">01 · WHY IT MATTERS</p>
-        <h2 class="section-title" id="need-title">필요성은 하나입니다.<br>수업에서 멀어지는 순간을 줄이는 것.</h2>
-        <p class="section-intro">특수교육대상학생은 특수학급에서 익힌 글자와 낱말을 통합학급의 낯선 교과 어휘와 긴 문장에 바로 적용하기 어렵습니다. 차이는 ‘의지’보다 학습 경로의 단절에서 커집니다.</p>
+        <p class="section-label">01 · RESEARCH NECESSITY</p>
+        <h2 class="section-title" id="need-title">왜 지금, ‘에이두 한글’이<br>필요한가</h2>
+        <p class="section-intro">통합교육에서 학생은 같은 교과서와 활동지를 사용하지만, 읽고 이해하는 출발선은 서로 다릅니다. 특수학급에서 익힌 한글이 통합학급의 낯선 교과 어휘와 긴 문장으로 바로 이어지지 못할 때, 학생은 내용을 배우기 전에 읽기의 문턱에서 멈추게 됩니다.</p>
+        <div class="need-thesis">
+          <div>
+            <strong>문제는 학생의 의지가 아니라,<br>같은 교과에 도달하는 ‘맞춤 경로’의 부재입니다.</strong>
+            <p>학생이 교과 핵심에 접근할 수 있도록 한글 해득 수준과 교과 학습을 이어 주는 지원이 필요합니다.</p>
+          </div>
+          <div class="need-tags" aria-label="연구 필요성 핵심 요인">
+            <span>한글 해득 수준 차이</span>
+            <span>낯선 교과 어휘</span>
+            <span>긴 문장과 개념</span>
+          </div>
+        </div>
         <div class="need-grid">
           <article class="need-card" data-num="1">
             <div class="need-icon" aria-hidden="true">≠</div>
             <h3>같은 교실, 다른 출발선</h3>
-            <p>같은 교과서와 활동지를 사용하지만 자모·음절부터 긴 문장 읽기까지 한글 해득 수준의 개인차가 큽니다. 교과 핵심 단어나 문장에 진입하기 전부터 어려움이 시작됩니다.</p>
+            <p>특수교육대상학생의 한글 해득 수준은 자모와 음절을 익히는 단계부터 낱말과 짧은 문장을 읽는 단계까지 개인차가 큽니다. 그러나 통합학급 교과서는 같은 속도와 분량으로 제시되므로, 교과 개념을 만나기 전 읽기 자체가 첫 장벽이 됩니다.</p>
           </article>
           <article class="need-card" data-num="2">
             <div class="need-icon" aria-hidden="true">↔</div>
-            <h3>한글 수업과 교과의 단절</h3>
-            <p>특수학급의 반복 연습이 통합학급의 실제 교과 학습으로 자연스럽게 이어지지 않으면, 익힌 능력이 수업 참여로 전환되지 않습니다.</p>
+            <h3>두 학습 공간 사이의 단절</h3>
+            <p>특수학급에서는 학생 수준에 맞는 글자와 낱말을 반복해 익히지만, 통합학급에서는 낯선 교과 어휘와 긴 문장이 한꺼번에 제시됩니다. 익힌 한글이 실제 교과의 핵심어와 문장으로 연결되지 않으면 학습 능력이 수업 참여로 전환되지 않습니다.</p>
           </article>
           <article class="need-card" data-num="3">
+            <div class="need-icon" aria-hidden="true">!</div>
+            <h3>참여 이전에 쌓이는 실패 경험</h3>
+            <p>교과의 핵심 단어와 문장을 읽고 이해하지 못하면 학생은 과제 시작이 늦어지고, 교사의 반복 안내나 직접 도움에 의존하게 됩니다. 결국 같은 교실에 있어도 실제 학습 참여는 줄어들고, 한글 학습과 교과 학습 모두에서 회피 경험이 누적될 수 있습니다.</p>
+          </article>
+          <article class="need-card" data-num="4">
             <div class="need-icon" aria-hidden="true">↻</div>
-            <h3>교사의 개별화 부담</h3>
-            <p>매 차시 학생별 자료를 별도로 만들면 교사 부담이 커지고, 내용을 지나치게 단순화하면 원래 교과와의 연결이 약해집니다. 같은 핵심 내용을 수준에 맞게 바꾸는 도구가 필요합니다.</p>
+            <h3>교사가 감당하는 선택의 딜레마</h3>
+            <p>학생마다 별도 자료를 제작하면 교사의 준비 부담이 커지고, 교과 내용을 지나치게 단순화하면 원래 수업과의 연결이 약해집니다. 같은 교과의 핵심은 유지하면서 어휘와 문장을 학생의 한글 수준에 맞게 재구성하고, 확인된 오류를 다음 학습에 반영할 수 있어야 합니다.</p>
           </article>
         </div>
+        <div class="need-chain" aria-label="연구 필요성의 논리 흐름">
+          <div><small>01 · 출발점</small><b>한글 해득 수준의 개인차</b></div>
+          <div><small>02 · 장벽</small><b>교과 어휘·문장 이해의 어려움</b></div>
+          <div><small>03 · 결과</small><b>과제 참여와 학습 지속의 저하</b></div>
+          <div><small>04 · 요구</small><b>교과와 해득을 잇는 개별 지원</b></div>
+        </div>
         <div class="key-message">
-          <b>핵심 관점</b>
-          <p>학생에게 별도의 쉬운 교과를 주는 것이 아니라, 자신의 문해 수준에서 같은 교과의 핵심에 접근하도록 돕습니다.</p>
+          <b>따라서 필요한 것</b>
+          <p>학생에게 별도의 쉬운 교과를 제공하는 것이 아니라, 같은 교과의 핵심어와 문장에 자신의 문해 수준으로 접근하고 그 결과를 다음 개별 한글 지도에 되돌리는 연결 도구입니다.</p>
         </div>
       </div>
     </section>

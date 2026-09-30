@@ -172,10 +172,42 @@
     .scene-copy small { color: var(--scene-accent); font-size: .74rem; font-weight: 950; letter-spacing: .05em; }
     .scene-copy b { font-size: clamp(1.18rem,2vw,1.48rem); line-height: 1.2; }
     .scene-copy span { color: #5d6a7f; font-size: .78rem; font-weight: 750; line-height: 1.45; }
-    .scene-tools { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-    .scene-tool { min-height: 92px; padding: 10px 7px; display: grid; place-items: center; align-content: center; gap: 5px; border: 1px solid rgba(31,49,78,.1); border-radius: 14px; background: rgba(255,255,255,.82); text-align: center; }
+    .scene-tools { display: grid; grid-template-columns: repeat(var(--feature-count,3),minmax(0,1fr)); gap: 7px; }
+    .scene-tool { min-height: 78px; padding: 9px 5px; display: grid; place-items: center; align-content: center; gap: 5px; border: 1px solid rgba(31,49,78,.12); border-radius: 14px; color: #31435d; background: rgba(255,255,255,.82); text-align: center; font: inherit; cursor: pointer; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+    .scene-tool:hover { transform: translateY(-2px); border-color: var(--scene-accent); }
+    .scene-tool[aria-pressed="true"] { color: #fff; border-color: var(--scene-accent); background: var(--scene-accent); box-shadow: 0 7px 16px color-mix(in srgb,var(--scene-accent) 24%,transparent); }
     .scene-tool em { font-size: 1.35rem; font-style: normal; line-height: 1; }
-    .scene-tool b { color: #31435d; font-size: .74rem; line-height: 1.25; }
+    .scene-tool b { color: inherit; font-size: .7rem; line-height: 1.25; }
+    .feature-workspace { min-height: 286px; }
+    .feature-workspace .motion-demo { min-height: 286px; }
+    .feature-badge { display:inline-flex; align-items:center; gap:5px; padding:4px 8px; border-radius:999px; color:var(--scene-accent); background:color-mix(in srgb,var(--scene-accent) 10%,#fff); font-size:.62rem; font-weight:900; }
+    .feature-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .feature-card { min-height:78px; padding:10px; border:1px solid #dce4ed; border-radius:11px; background:#fff; color:#46556c; font-size:.72rem; font-weight:800; line-height:1.45; }
+    .feature-card strong { display:block; margin-bottom:3px; color:var(--scene-accent); font-size:.78rem; }
+    .feature-card button { width:100%; margin-top:6px; padding:6px 8px; border:0; border-radius:8px; color:#fff; background:var(--scene-accent); font:inherit; font-size:.68rem; font-weight:900; cursor:pointer; }
+    .choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .choice-grid button,.syllable-choice { padding:9px 7px; border:1px solid #dce4ed; border-radius:10px; color:#43516a; background:#fff; font:inherit; font-weight:850; cursor:pointer; }
+    .choice-grid button:hover,.choice-grid button.is-selected,.syllable-choice.is-selected { color:#fff; border-color:var(--scene-accent); background:var(--scene-accent); }
+    .compose-board { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:6px; align-items:center; margin:8px 0; }
+    .compose-piece { min-height:48px; display:grid; place-items:center; border:1px solid #dce4ed; border-radius:10px; background:#fff; color:#263a52; font-size:1.35rem; font-weight:950; }
+    .compose-arrow { color:var(--scene-accent); font-weight:950; }
+    .word-picture { display:grid; grid-template-columns:72px 1fr; gap:10px; align-items:center; padding:10px; border:1px solid #dce4ed; border-radius:11px; background:#fff; }
+    .word-picture .emoji { font-size:2.35rem; text-align:center; }
+    .word-picture b { color:#263a52; font-size:1.05rem; }
+    .word-picture p { margin:3px 0 0; color:#657287; font-size:.68rem; line-height:1.45; }
+    .answer-field { width:100%; min-height:38px; padding:8px 10px; border:1px solid #cfd9e4; border-radius:9px; color:#263a52; background:#fff; font:inherit; font-size:.75rem; }
+    textarea.answer-field { min-height:74px; resize:vertical; }
+    .saved-words { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+    .saved-words button { padding:7px 9px; border:1px solid #ffd6b5; border-radius:999px; color:#9f4818; background:#fff8f1; font:inherit; font-size:.68rem; font-weight:850; cursor:pointer; }
+    .trace-lane { height:108px; position:relative; overflow:hidden; border:2px dashed color-mix(in srgb,var(--scene-accent) 35%,#dbe2ea); border-radius:12px; background:#fff; }
+    .trace-lane::before { content:""; position:absolute; left:12%; right:12%; top:50%; border-top:5px dotted color-mix(in srgb,var(--scene-accent) 45%,#dce4ed); }
+    .trace-dot { width:28px; height:28px; position:absolute; top:calc(50% - 14px); display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--scene-accent); font-size:.62rem; font-weight:900; }
+    .trace-dot.start { left:8%; }
+    .trace-dot.end { right:8%; }
+    .trace-runner { left:8%; cursor:grab; touch-action:none; box-shadow:0 5px 12px rgba(31,49,78,.2); }
+    .ai-result { min-height:106px; display:grid; place-items:center; border:1px solid #dce4ed; border-radius:12px; background:linear-gradient(145deg,#fff,#f2eaff); color:#536177; text-align:center; font-size:.73rem; font-weight:850; }
+    .ai-result.is-ready { font-size:2.8rem; animation:pop-result .45s ease; }
+    @keyframes pop-result { from { transform:scale(.7); opacity:.2; } to { transform:none; opacity:1; } }
     .motion-demo { min-height: 245px; padding: 13px; border: 1px solid rgba(31,49,78,.12); border-radius: 16px; background: rgba(255,255,255,.92); box-shadow: 0 8px 20px rgba(37,55,82,.08); }
     .demo-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-bottom: 9px; }
     .demo-top b { color: var(--scene-accent); font-size: .86rem; }
@@ -361,6 +393,9 @@
       .app-overview figcaption { margin: 16px -18px -18px; }
       .stage-shot { min-height: 585px; padding: 12px; }
       .scene-mission { min-height: 150px; grid-template-columns: 92px 1fr; padding: 14px; }
+      .scene-tools { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .scene-tool { min-height: 70px; }
+      .feature-row { grid-template-columns: 1fr; }
       .demo-top { align-items: flex-start; flex-direction: column; gap: 2px; }
       .demo-top small { text-align: left; }
       .draw-surface,.scan-stage { height: 112px; }
@@ -518,42 +553,62 @@
           <figcaption>실제 에이두 한글 웹사이트의 컬러 디자인과 단계별 기능을 반영한 핵심 화면</figcaption>
         </figure>
         <div class="stage-grid">
-          <article class="stage">
+          <article class="stage" data-stage-card="draw">
             <div class="stage-shot stage-one" aria-label="그리기 단계 세부 기능 장면">
               <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>오늘의 미션</small><b>그림 미션</b><span>오늘의 그림을 그려요!</span></div></div>
-                <div class="scene-tools"><div class="scene-tool"><em>🦁</em><b>도형 동물원</b></div><div class="scene-tool"><em>🖼️</em><b>나의 그림</b></div><div class="scene-tool"><em>📒</em><b>AI 스케치북</b></div></div>
-                <div class="motion-demo canvas-demo drawing-demo" data-canvas-demo data-color="#8c4ad7"><div class="demo-top"><b>그림 미션 체험</b><small>실제 기능: 색·붓·지우개·완료</small></div><div class="demo-controls" aria-label="그리기 도구"><small>색</small><button class="swatch" style="--swatch:#8c4ad7" data-color="#8c4ad7" aria-label="보라색" aria-pressed="true"></button><button class="swatch" style="--swatch:#ef4444" data-color="#ef4444" aria-label="빨간색" aria-pressed="false"></button><button class="swatch" style="--swatch:#22c55e" data-color="#22c55e" aria-label="초록색" aria-pressed="false"></button><button class="swatch" style="--swatch:#3b82f6" data-color="#3b82f6" aria-label="파란색" aria-pressed="false"></button><small>붓</small><button class="brush-size" data-size="4" aria-label="가는 붓" aria-pressed="false">1</button><button class="brush-size" data-size="7" aria-label="보통 붓" aria-pressed="true">2</button><button class="brush-size" data-size="12" aria-label="굵은 붓" aria-pressed="false">3</button><button class="tool-toggle" data-eraser aria-label="지우개" aria-pressed="false">⌫</button></div><div class="draw-surface"><svg class="motion-strokes" viewBox="0 0 360 118" preserveAspectRatio="none" aria-hidden="true"><path d="M35 91 C58 34 121 28 151 89 C111 106 66 106 35 91 M191 86 L235 36 L279 86 Z"/></svg><span class="demo-hand" aria-hidden="true">✎</span><canvas aria-label="직접 그리기 체험판"></canvas></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-reset secondary" type="button">지우기</button><button class="demo-action" data-complete type="button">완료하기</button></div></div>
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>보고서 핵심 기능</small><b>그리기</b><span>기초 움직임과 화면 조작을 익혀요</span></div></div>
+                <div class="scene-tools" style="--feature-count:3" aria-label="그리기 핵심 기능">
+                  <button class="scene-tool" data-stage-feature="draw" data-key="picture" aria-pressed="true"><em>🎨</em><b>그림 미션</b></button>
+                  <button class="scene-tool" data-stage-feature="draw" data-key="shape" aria-pressed="false"><em>🔺</em><b>도형 미션</b></button>
+                  <button class="scene-tool" data-stage-feature="draw" data-key="ai" aria-pressed="false"><em>✨</em><b>AI스케치북</b></button>
+                </div>
+                <div class="feature-workspace" data-feature-panel="draw" aria-live="polite"></div>
               </div>
             </div>
             <span class="stage-num">01</span><h3>그리기</h3><p>본격적인 한글 학습 전에 기초 움직임과 화면 조작을 익힙니다.</p><ul><li>그림·도형 미션</li><li>시작점과 끝점 인식</li><li>AI 결과로 수행 흥미 유도</li></ul>
           </article>
-          <article class="stage">
+          <article class="stage" data-stage-card="hangul">
             <div class="stage-shot stage-two" aria-label="한글 해득 단계 세부 기능 장면">
               <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>오늘의 미션</small><b>오늘의 한글</b><span>배움 2: ㅏ·ㅓ 공부하기</span></div></div>
-                <div class="scene-tools"><div class="scene-tool"><em>📖</em><b>한글 카드</b></div><div class="scene-tool"><em>✍️</em><b>쓰기 연습</b></div><div class="scene-tool"><em>🎮</em><b>듣기 게임</b></div></div>
-                <div class="motion-demo canvas-demo writing-demo" data-canvas-demo data-color="#1496c2"><div class="demo-top"><b>획순 따라쓰기 체험</b><small>쓰면 채점하고 다음 글자로 넘어가요</small></div><div class="practice-tabs" aria-label="쓰기 연습 종류"><button class="practice-tab" data-guide="가" data-speech="가" aria-pressed="true">글자 연습</button><button class="practice-tab" data-guide="나비" data-speech="나비" aria-pressed="false">낱말 연습</button><button class="practice-tab" data-guide="책" data-speech="나는 책을 읽어요" aria-pressed="false">문장 연습</button></div><div class="draw-surface"><span class="guide-letter" aria-hidden="true">가</span><svg class="motion-strokes" viewBox="0 0 360 118" preserveAspectRatio="none" aria-hidden="true"><path d="M85 31 L145 31 L145 91"/><path d="M145 60 L188 60"/><path d="M220 30 L220 92"/><path d="M220 61 L274 61"/></svg><span class="demo-hand" aria-hidden="true">✎</span><canvas aria-label="한글 획순 따라쓰기 체험판"></canvas></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action secondary" data-speak type="button">🔊 소리 듣기</button><button class="demo-action" data-grade type="button">다 썼어요</button><button class="demo-reset secondary" type="button">다시 쓰기</button></div></div>
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>배움 차시 핵심 기능</small><b>한글 해득</b><span>모음부터 받침 있는 단어까지 확장해요</span></div></div>
+                <div class="scene-tools" style="--feature-count:5" aria-label="한글 해득 핵심 기능">
+                  <button class="scene-tool" data-stage-feature="hangul" data-key="vowel" aria-pressed="true"><em>ㅏ</em><b>모음</b></button>
+                  <button class="scene-tool" data-stage-feature="hangul" data-key="combine" aria-pressed="false"><em>가</em><b>자모음 합성</b></button>
+                  <button class="scene-tool" data-stage-feature="hangul" data-key="openword" aria-pressed="false"><em>🚌</em><b>받침 없는 단어</b></button>
+                  <button class="scene-tool" data-stage-feature="hangul" data-key="complex" aria-pressed="false"><em>ㅘ</em><b>복잡한 모음</b></button>
+                  <button class="scene-tool" data-stage-feature="hangul" data-key="finalword" aria-pressed="false"><em>책</em><b>받침 있는 단어</b></button>
+                </div>
+                <div class="feature-workspace" data-feature-panel="hangul" aria-live="polite"></div>
               </div>
             </div>
             <span class="stage-num">02</span><h3>한글 해득</h3><p>모음에서 받침 있는 단어까지 소리와 글자의 관계를 단계적으로 익힙니다.</p><ul><li>모음·자모음 합성</li><li>받침 없는·있는 단어</li><li>글자 변별과 반복 쓰기</li></ul>
           </article>
-          <article class="stage">
+          <article class="stage" data-stage-card="curriculum">
             <div class="stage-shot stage-three" aria-label="교과 맞춤 쓰기 단계 세부 기능 장면">
               <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>사진으로 시작</small><b>교과 맞춤쓰기</b><span>공부할 내용을 찍고 단어를 모아요</span></div></div>
-                <div class="scene-tools"><div class="scene-tool"><em>🗂️</em><b>단어 카드</b></div><div class="scene-tool"><em>✍️</em><b>다시 쓰기</b></div><div class="scene-tool"><em>🏦</em><b>단어 은행</b></div></div>
-                <div class="motion-demo scan-demo playing" data-motion-demo><div class="demo-top"><b>오늘의 노트 사진 찍기</b><small>사진에서 교과 단어를 모아요</small></div><div class="scan-stage"><div class="scan-paper" data-scan-preview>식물은 <mark>햇빛</mark>과 <mark>물</mark>이 필요해요.<i class="scan-line" aria-hidden="true"></i></div><div class="ocr-output" aria-label="추출된 핵심어"><b>식물</b><b>햇빛</b><b>물</b></div></div><input data-note-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status">핵심어 3개를 단어 은행에 담았어요.</span><button class="demo-action secondary" data-photo type="button">📷 사진 선택</button><button class="demo-replay" type="button">추출 재생</button></div></div>
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>보고서 핵심 기능</small><b>교과 맞춤 쓰기</b><span>실제 교과 자료를 학생 수준에 맞춰 연결해요</span></div></div>
+                <div class="scene-tools" style="--feature-count:4" aria-label="교과 맞춤 쓰기 핵심 기능">
+                  <button class="scene-tool" data-stage-feature="curriculum" data-key="photo" aria-pressed="true"><em>📷</em><b>노트 촬영</b></button>
+                  <button class="scene-tool" data-stage-feature="curriculum" data-key="write" aria-pressed="false"><em>✍️</em><b>핵심어 쓰기</b></button>
+                  <button class="scene-tool" data-stage-feature="curriculum" data-key="meaning" aria-pressed="false"><em>💡</em><b>핵심어 설명</b></button>
+                  <button class="scene-tool" data-stage-feature="curriculum" data-key="bank" aria-pressed="false"><em>🗂️</em><b>단어 카드 저장소</b></button>
+                </div>
+                <div class="feature-workspace" data-feature-panel="curriculum" aria-live="polite"></div>
               </div>
             </div>
             <span class="stage-num">03</span><h3>교과 맞춤 쓰기</h3><p>실제 교과 자료에서 핵심어를 뽑아 학생 수준의 읽기·쓰기 활동으로 바꿉니다.</p><ul><li>자료 촬영과 핵심어 추출</li><li>직접 쓰기와 뜻 확인</li><li>단어 카드 저장</li></ul>
           </article>
-          <article class="stage">
+          <article class="stage" data-stage-card="literacy">
             <div class="stage-shot stage-four" aria-label="문해력 단계 세부 기능 장면">
               <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>문해력 1단</small><b>문해력 문제</b><span>쉬움·객관식 문제가 자동 출제돼요</span></div></div>
-                <div class="scene-tools"><div class="scene-tool"><em>🔎</em><b>탐정단</b></div><div class="scene-tool"><em>📚</em><b>학습 기록</b></div><div class="scene-tool"><em>🏦</em><b>단어 은행</b></div></div>
-                <div class="motion-demo quiz-demo playing" data-motion-demo><div class="demo-top"><b>문해력 1단 · 객관식</b><small>읽고 답하면 바로 확인해요</small></div><div class="quiz-stage"><p><mark>민지는 비가 와서</mark> 우산을 썼어요.</p><div class="quiz-options" aria-label="비가 온 날씨 고르기"><button type="button">① 눈</button><button class="correct" type="button">② 비</button></div><div class="quiz-feedback" role="status">✓ 정답! 핵심 문장과 연결했어요.</div></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-replay" data-next-question type="button">다음 문제</button></div></div>
+                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>보고서 핵심 기능</small><b>문해력</b><span>선택에서 서술로 답을 확장해요</span></div></div>
+                <div class="scene-tools" style="--feature-count:4" aria-label="문해력 핵심 기능">
+                  <button class="scene-tool" data-stage-feature="literacy" data-key="choice" aria-pressed="true"><em>☑️</em><b>선택형</b></button>
+                  <button class="scene-tool" data-stage-feature="literacy" data-key="short" aria-pressed="false"><em>⌨️</em><b>단답형</b></button>
+                  <button class="scene-tool" data-stage-feature="literacy" data-key="essay" aria-pressed="false"><em>📝</em><b>서술형</b></button>
+                  <button class="scene-tool" data-stage-feature="literacy" data-key="detective" aria-pressed="false"><em>🔎</em><b>문해력 탐정단</b></button>
+                </div>
+                <div class="feature-workspace" data-feature-panel="literacy" aria-live="polite"></div>
               </div>
             </div>
             <span class="stage-num">04</span><h3>문해력</h3><p>교과 지문을 읽고 핵심 내용을 이해하며 자신의 답을 선택하고 씁니다.</p><ul><li>선택형 → 단답형 → 서술형</li><li>수준별 문항 생성</li><li>오답을 다음 학습에 반영</li></ul>
@@ -901,6 +956,243 @@
         renderQuestion();
       });
     });
+
+    function speakKorean(text) {
+      if (!('speechSynthesis' in window)) return;
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ko-KR';
+      speechSynthesis.speak(utterance);
+    }
+
+    function canvasMarkup(title, guide, color, instruction, aiMode) {
+      return '<div class="motion-demo canvas-demo" data-interactive-canvas data-color="' + color + '">' +
+        '<div class="demo-top"><b>' + title + '</b><small>' + instruction + '</small></div>' +
+        '<div class="demo-controls" aria-label="그리기 도구"><small>색</small>' +
+        '<button class="swatch" style="--swatch:' + color + '" data-paint="' + color + '" aria-label="단계 색" aria-pressed="true"></button>' +
+        '<button class="swatch" style="--swatch:#ef4444" data-paint="#ef4444" aria-label="빨간색" aria-pressed="false"></button>' +
+        '<button class="swatch" style="--swatch:#22c55e" data-paint="#22c55e" aria-label="초록색" aria-pressed="false"></button>' +
+        '<button class="brush-size" data-brush="5" aria-pressed="false">1</button><button class="brush-size" data-brush="8" aria-pressed="true">2</button><button class="brush-size" data-brush="13" aria-pressed="false">3</button>' +
+        '<button class="tool-toggle" data-panel-eraser aria-label="지우개" aria-pressed="false">⌫</button></div>' +
+        '<div class="draw-surface"><span class="guide-letter" aria-hidden="true">' + guide + '</span><canvas aria-label="' + title + ' 직접 쓰기 영역"></canvas></div>' +
+        '<div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-reset secondary" data-panel-clear type="button">다시 하기</button>' +
+        (aiMode ? '<button class="demo-action" data-ai-create type="button">AI 그림 만들기</button>' : '<button class="demo-action" data-panel-complete type="button">완료하기</button>') +
+        '</div>' + (aiMode ? '<div class="ai-result" data-ai-result>선을 그린 뒤 AI 그림 만들기를 눌러 보세요.</div>' : '') + '</div>';
+    }
+
+    const featureCatalog = {
+      draw: {
+        picture: () => canvasMarkup('그림 미션', '⌁', '#8c4ad7', '화면에 자유롭게 표시하고 과제를 마쳐요', false),
+        shape: () => '<div class="motion-demo"><div class="demo-top"><b>도형 미션</b><small>시작점에서 끝점까지 선을 이어요</small></div><span class="feature-badge">눈-손 협응 · 선 긋기 정확성</span><div class="trace-lane" data-trace-lane><span class="trace-dot start">시작</span><span class="trace-dot end">끝</span><span class="trace-dot trace-runner" data-trace-runner>●</span></div><div class="demo-actions"><span class="demo-status" role="status">보라색 점을 끝점까지 끌어 보세요.</span><button class="demo-reset secondary" data-trace-reset type="button">다시 하기</button></div></div>',
+        ai: () => canvasMarkup('AI스케치북', '☀', '#8c4ad7', '자유롭게 그린 뒤 AI 그림으로 바꿔요', true)
+      },
+      hangul: {
+        vowel: () => canvasMarkup('모음 ㅏ 쓰기', 'ㅏ', '#1496c2', '모양과 소리를 확인하고 획순에 따라 써요', false).replace('완료하기','다 썼어요').replace('data-panel-complete','data-writing-check'),
+        combine: () => '<div class="motion-demo"><div class="demo-top"><b>자모음 합성</b><small>자음과 모음을 합쳐 글자를 만들어요</small></div><span class="feature-badge">소리 합성 · 글자 구성</span><div class="compose-board"><button class="syllable-choice is-selected" data-consonant="ㄱ">ㄱ</button><span class="compose-arrow">+</span><button class="syllable-choice is-selected" data-vowel="ㅏ">ㅏ</button><span class="compose-arrow">=</span><div class="compose-piece" data-compose-result>가</div></div><div class="choice-grid"><button data-consonant="ㄴ">ㄴ</button><button data-consonant="ㅁ">ㅁ</button><button data-vowel="ㅓ">ㅓ</button><button data-vowel="ㅗ">ㅗ</button></div><div class="demo-actions"><span class="demo-status" role="status">ㄱ + ㅏ = 가</span><button class="demo-action secondary" data-speak-result type="button">🔊 소리 듣기</button></div></div>',
+        openword: () => '<div class="motion-demo"><div class="demo-top"><b>받침 없는 단어</b><small>그림과 소리를 보고 알맞은 단어를 찾아요</small></div><div class="word-picture"><span class="emoji">🚌</span><div><b>무엇일까요?</b><p>소리 내어 읽고 정답을 선택하세요.</p></div></div><div class="choice-grid"><button data-quiz-answer="false">치즈</button><button data-quiz-answer="true">버스</button><button data-quiz-answer="false">그네</button><button data-quiz-answer="false">주스</button></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action secondary" data-speak-text="버스" type="button">🔊 단어 듣기</button></div></div>',
+        complex: () => '<div class="motion-demo"><div class="demo-top"><b>복잡한 모음</b><small>입 모양과 소리를 비교해 구별해요</small></div><div class="word-picture"><span class="emoji">🍎</span><div><b>사과의 ‘과’</b><p>ㄱ + ㅘ = 과 · 알맞은 모음을 골라 보세요.</p></div></div><div class="choice-grid"><button data-quiz-answer="false">ㅗ</button><button data-quiz-answer="true">ㅘ</button><button data-quiz-answer="false">ㅓ</button><button data-quiz-answer="false">ㅝ</button></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action secondary" data-speak-text="과" type="button">🔊 소리 비교</button></div></div>',
+        finalword: () => '<div class="motion-demo"><div class="demo-top"><b>받침 있는 단어</b><small>받침을 넣어 글자와 단어를 완성해요</small></div><div class="word-picture"><span class="emoji">📚</span><div><b>채_</b><p>‘책’을 완성하는 받침을 선택하세요.</p></div></div><div class="choice-grid"><button data-final="ㄱ" data-quiz-answer="true">ㄱ</button><button data-final="ㄴ" data-quiz-answer="false">ㄴ</button><button data-final="ㅁ" data-quiz-answer="false">ㅁ</button><button data-final="ㅇ" data-quiz-answer="false">ㅇ</button></div><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action secondary" data-speak-text="책" type="button">🔊 단어 듣기</button></div></div>'
+      },
+      curriculum: {
+        photo: () => '<div class="motion-demo scan-demo playing"><div class="demo-top"><b>노트 촬영</b><small>교과서·활동지를 촬영하고 핵심어를 추출해요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>식물은 <mark>햇빛</mark>과 <mark>물</mark>이 필요해요.<i class="scan-line" aria-hidden="true"></i></div><div class="ocr-output"><b>식물</b><b>햇빛</b><b>물</b></div></div><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status">핵심어 3개를 찾았어요.</span><button class="demo-action secondary" data-open-photo type="button">📷 사진 선택</button><button class="demo-replay" data-replay-scan type="button">추출 재생</button></div></div>',
+        write: () => canvasMarkup('핵심어 쓰기', '숲', '#e36b23', '추출된 핵심어를 듣고 읽은 뒤 직접 써요', false).replace('완료하기','쓰기 확인').replace('data-panel-complete','data-writing-check').replace('</div></div>','<button class="demo-action secondary" data-speak-text="숲" type="button">🔊 핵심어 듣기</button></div></div>'),
+        meaning: () => '<div class="motion-demo"><div class="demo-top"><b>핵심어 설명</b><small>낯선 교과 어휘를 쉬운 그림과 설명으로 확인해요</small></div><div class="word-picture" data-meaning-card><span class="emoji">🌳</span><div><b>생태계</b><p>생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.</p></div></div><div class="saved-words"><button data-meaning-word="생태계">생태계</button><button data-meaning-word="소화">소화</button><button data-meaning-word="이웃">이웃</button></div><div class="demo-actions"><span class="demo-status" role="status">단어 카드를 눌러 뜻을 확인하세요.</span><button class="demo-action secondary" data-speak-meaning type="button">🔊 설명 듣기</button></div></div>',
+        bank: () => '<div class="motion-demo"><div class="demo-top"><b>단어 카드 저장소</b><small>어려운 핵심어를 모아 반복 학습해요</small></div><span class="feature-badge">저장된 단어 4개</span><div class="saved-words"><button data-saved-word="생태계">🌱 생태계</button><button data-saved-word="숲">🌳 숲</button><button data-saved-word="소화">🍎 소화</button><button data-saved-word="이웃">🏘️ 이웃</button></div><div class="feature-row"><div class="feature-card"><strong>듣고 읽기</strong>카드를 누르면 단어 소리를 들을 수 있어요.</div><div class="feature-card"><strong>반복 기록</strong><span data-bank-count>오늘 0회 복습</span><button data-bank-review type="button">복습 완료</button></div></div><div class="demo-actions"><span class="demo-status" role="status">복습할 단어를 선택하세요.</span></div></div>'
+      },
+      literacy: {
+        choice: () => '<div class="motion-demo"><div class="demo-top"><b>선택형</b><small>교과 핵심어가 포함된 글을 읽고 알맞은 답을 골라요</small></div><div class="quiz-stage"><p><mark>식물은 햇빛과 물을 받아</mark> 자라요.</p><div class="choice-grid"><button data-quiz-answer="true">자라요</button><button data-quiz-answer="false">잠들어요</button></div></div><div class="demo-actions"><span class="demo-status" role="status"></span></div></div>',
+        short: () => '<div class="motion-demo"><div class="demo-top"><b>단답형</b><small>질문의 답을 낱말이나 짧은 문장으로 직접 써요</small></div><div class="quiz-stage"><p>식물이 자라는 데 필요한 것은 물과 무엇인가요?</p><input class="answer-field" data-user-answer aria-label="단답 입력" placeholder="답을 써 보세요"><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-text="햇빛" type="button">정답 확인</button></div></div></div>',
+        essay: () => '<div class="motion-demo"><div class="demo-top"><b>서술형</b><small>제시된 핵심어를 활용해 자신의 말로 답을 써요</small></div><div class="quiz-stage"><p><b>핵심어: 생태계</b><br>숲의 생물들이 서로 어떤 관계를 맺는지 한 문장으로 써 보세요.</p><textarea class="answer-field" data-user-answer aria-label="서술형 답 입력" placeholder="생태계라는 말을 넣어 써 보세요"></textarea><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-keyword="생태계" type="button">답 확인</button></div></div></div>',
+        detective: () => '<div class="motion-demo"><div class="demo-top"><b>문해력 탐정단</b><small>틀린 문제를 모아 다시 풀고 부족한 내용을 보충해요</small></div><div class="feature-row"><div class="feature-card"><strong>오답 단서</strong>“식물이 자라요” 문장에서 원인을 놓쳤어요.<button data-detective-hint type="button">핵심 문장 찾기</button></div><div class="feature-card"><strong>다시 풀기</strong>햇빛과 물은 식물이 자라는 데 필요해요.<button data-detective-retry type="button">재도전 완료</button></div></div><div class="demo-actions"><span class="demo-status" role="status">오답 1문항을 다시 살펴보세요.</span></div></div>'
+      }
+    };
+
+    const syllables = {
+      'ㄱㅏ':'가','ㄱㅓ':'거','ㄱㅗ':'고','ㄴㅏ':'나','ㄴㅓ':'너','ㄴㅗ':'노','ㅁㅏ':'마','ㅁㅓ':'머','ㅁㅗ':'모'
+    };
+
+    function wireFeaturePanel(panel) {
+      panel.querySelectorAll('[data-speak-text]').forEach(button => button.addEventListener('click', () => speakKorean(button.dataset.speakText)));
+      panel.querySelectorAll('[data-quiz-answer]').forEach(button => button.addEventListener('click', () => {
+        panel.querySelectorAll('[data-quiz-answer]').forEach(item => item.classList.remove('is-selected'));
+        button.classList.add('is-selected');
+        const status = panel.querySelector('.demo-status');
+        status.textContent = button.dataset.quizAnswer === 'true' ? '✓ 정답이에요! 소리와 뜻을 연결했어요.' : '다시 살펴보고 골라 보세요.';
+      }));
+
+      const canvasDemo = panel.querySelector('[data-interactive-canvas]');
+      if (canvasDemo) {
+        const canvas = canvasDemo.querySelector('canvas');
+        const context = canvas.getContext('2d');
+        let color = canvasDemo.dataset.color;
+        let size = 8;
+        let erasing = false;
+        let drawing = false;
+        let used = false;
+        let last = null;
+        const fit = () => {
+          const box = canvas.getBoundingClientRect();
+          const ratio = Math.min(devicePixelRatio || 1, 2);
+          canvas.width = Math.round(box.width * ratio);
+          canvas.height = Math.round(box.height * ratio);
+          context.setTransform(ratio,0,0,ratio,0,0);
+          context.lineCap = 'round';
+          context.lineJoin = 'round';
+        };
+        const clear = () => {
+          context.save(); context.setTransform(1,0,0,1,0,0); context.clearRect(0,0,canvas.width,canvas.height); context.restore();
+          used = false;
+          canvasDemo.querySelector('.demo-status').textContent = '';
+          canvasDemo.classList.remove('user-active');
+        };
+        fit();
+        canvas.addEventListener('pointerdown', event => {
+          event.preventDefault();
+          drawing = true; used = true; canvasDemo.classList.add('user-active');
+          const box = canvas.getBoundingClientRect(); last = {x:event.clientX-box.left,y:event.clientY-box.top};
+          canvas.setPointerCapture(event.pointerId);
+        });
+        canvas.addEventListener('pointermove', event => {
+          if (!drawing) return;
+          const box = canvas.getBoundingClientRect(); const next = {x:event.clientX-box.left,y:event.clientY-box.top};
+          context.globalCompositeOperation = erasing ? 'destination-out' : 'source-over';
+          context.strokeStyle = color; context.lineWidth = erasing ? size * 2 : size;
+          context.beginPath(); context.moveTo(last.x,last.y); context.lineTo(next.x,next.y); context.stroke(); last = next;
+        });
+        canvas.addEventListener('pointerup', () => { drawing = false; last = null; });
+        canvas.addEventListener('pointercancel', () => { drawing = false; last = null; });
+        canvasDemo.querySelector('[data-panel-clear]').addEventListener('click', clear);
+        canvasDemo.querySelectorAll('[data-paint]').forEach(button => button.addEventListener('click', () => {
+          color = button.dataset.paint; erasing = false;
+          canvasDemo.querySelectorAll('[data-paint]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          canvasDemo.querySelector('[data-panel-eraser]').setAttribute('aria-pressed','false');
+        }));
+        canvasDemo.querySelectorAll('[data-brush]').forEach(button => button.addEventListener('click', () => {
+          size = Number(button.dataset.brush);
+          canvasDemo.querySelectorAll('[data-brush]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        }));
+        canvasDemo.querySelector('[data-panel-eraser]').addEventListener('click', event => {
+          erasing = !erasing; event.currentTarget.setAttribute('aria-pressed',String(erasing));
+        });
+        const complete = canvasDemo.querySelector('[data-panel-complete],[data-writing-check]');
+        if (complete) complete.addEventListener('click', () => {
+          canvasDemo.querySelector('.demo-status').textContent = used ? '✓ 잘했어요! 활동 기록에 저장했어요.' : '먼저 화면에 직접 써 보세요.';
+        });
+        const aiButton = canvasDemo.querySelector('[data-ai-create]');
+        if (aiButton) aiButton.addEventListener('click', () => {
+          const result = canvasDemo.querySelector('[data-ai-result]');
+          if (!used) { canvasDemo.querySelector('.demo-status').textContent = '먼저 그림을 그려 보세요.'; return; }
+          result.textContent = ['☀️','🌳','🦁'][Math.floor(Math.random()*3)];
+          result.classList.add('is-ready');
+          canvasDemo.querySelector('.demo-status').textContent = '✓ 내 선을 바탕으로 AI 그림을 만들었어요.';
+        });
+      }
+
+      const runner = panel.querySelector('[data-trace-runner]');
+      if (runner) {
+        const lane = panel.querySelector('[data-trace-lane]');
+        const status = panel.querySelector('.demo-status');
+        let dragging = false;
+        const reset = () => { runner.style.left = '8%'; status.textContent = '보라색 점을 끝점까지 끌어 보세요.'; };
+        runner.addEventListener('pointerdown', event => { dragging = true; runner.setPointerCapture(event.pointerId); });
+        runner.addEventListener('pointermove', event => {
+          if (!dragging) return;
+          const box = lane.getBoundingClientRect();
+          const x = Math.max(box.width*.08, Math.min(event.clientX-box.left-14, box.width*.86));
+          runner.style.left = x + 'px';
+          if (x > box.width*.78) status.textContent = '✓ 시작점과 끝점을 정확히 이었어요!';
+        });
+        runner.addEventListener('pointerup', () => { dragging = false; });
+        panel.querySelector('[data-trace-reset]').addEventListener('click', reset);
+      }
+
+      let consonant = 'ㄱ', vowel = 'ㅏ';
+      panel.querySelectorAll('[data-consonant]').forEach(button => button.addEventListener('click', () => {
+        consonant = button.dataset.consonant;
+        panel.querySelectorAll('[data-consonant]').forEach(item => item.classList.toggle('is-selected', item === button));
+        const result = syllables[consonant + vowel] || consonant + vowel;
+        panel.querySelector('[data-compose-result]').textContent = result;
+        panel.querySelector('.demo-status').textContent = consonant + ' + ' + vowel + ' = ' + result;
+      }));
+      panel.querySelectorAll('[data-vowel]').forEach(button => button.addEventListener('click', () => {
+        vowel = button.dataset.vowel;
+        panel.querySelectorAll('[data-vowel]').forEach(item => item.classList.toggle('is-selected', item === button));
+        const result = syllables[consonant + vowel] || consonant + vowel;
+        panel.querySelector('[data-compose-result]').textContent = result;
+        panel.querySelector('.demo-status').textContent = consonant + ' + ' + vowel + ' = ' + result;
+      }));
+      const speakResult = panel.querySelector('[data-speak-result]');
+      if (speakResult) speakResult.addEventListener('click', () => speakKorean(panel.querySelector('[data-compose-result]').textContent));
+
+      const photoButton = panel.querySelector('[data-open-photo]');
+      if (photoButton) {
+        const input = panel.querySelector('[data-dynamic-file]');
+        const preview = panel.querySelector('[data-dynamic-preview]');
+        const demo = panel.querySelector('.scan-demo');
+        photoButton.addEventListener('click', () => input.click());
+        panel.querySelector('[data-replay-scan]').addEventListener('click', () => { demo.classList.remove('playing'); void demo.offsetWidth; demo.classList.add('playing'); });
+        input.addEventListener('change', () => {
+          const file = input.files && input.files[0]; if (!file) return;
+          preview.style.backgroundImage = 'linear-gradient(rgba(255,255,255,.72),rgba(255,255,255,.72)),url("' + URL.createObjectURL(file) + '")';
+          preview.style.backgroundSize = 'cover';
+          panel.querySelector('.demo-status').textContent = '사진을 분석하고 있어요…';
+          demo.classList.remove('playing');
+          setTimeout(() => { demo.classList.add('playing'); panel.querySelector('.demo-status').textContent = '핵심어 3개를 찾았어요.'; }, 650);
+        });
+      }
+
+      const meanings = {
+        '생태계':['🌳','생태계','생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.'],
+        '소화':['🍎','소화','먹은 음식이 몸에서 흡수하기 쉬운 작은 물질로 바뀌는 과정이에요.'],
+        '이웃':['🏘️','이웃','가까이 살거나 서로 도움을 주고받는 사람을 말해요.']
+      };
+      panel.querySelectorAll('[data-meaning-word]').forEach(button => button.addEventListener('click', () => {
+        const data = meanings[button.dataset.meaningWord];
+        const card = panel.querySelector('[data-meaning-card]');
+        card.querySelector('.emoji').textContent = data[0]; card.querySelector('b').textContent = data[1]; card.querySelector('p').textContent = data[2];
+        panel.querySelector('.demo-status').textContent = data[1] + '의 뜻을 확인했어요.';
+      }));
+      const speakMeaning = panel.querySelector('[data-speak-meaning]');
+      if (speakMeaning) speakMeaning.addEventListener('click', () => speakKorean(panel.querySelector('[data-meaning-card] b').textContent + '. ' + panel.querySelector('[data-meaning-card] p').textContent));
+
+      panel.querySelectorAll('[data-saved-word]').forEach(button => button.addEventListener('click', () => {
+        speakKorean(button.dataset.savedWord);
+        panel.querySelector('.demo-status').textContent = button.dataset.savedWord + '을 다시 들었어요.';
+      }));
+      const bankReview = panel.querySelector('[data-bank-review]');
+      if (bankReview) {
+        let count = 0;
+        bankReview.addEventListener('click', () => { count += 1; panel.querySelector('[data-bank-count]').textContent = '오늘 ' + count + '회 복습'; panel.querySelector('.demo-status').textContent = '✓ 복습 기록을 저장했어요.'; });
+      }
+
+      const checkText = panel.querySelector('[data-check-text]');
+      if (checkText) checkText.addEventListener('click', () => {
+        const value = panel.querySelector('[data-user-answer]').value.trim();
+        panel.querySelector('.demo-status').textContent = value.includes(checkText.dataset.checkText) ? '✓ 정답이에요! 핵심 내용을 찾았어요.' : '지문에서 식물에 필요한 것을 다시 찾아보세요.';
+      });
+      const checkKeyword = panel.querySelector('[data-check-keyword]');
+      if (checkKeyword) checkKeyword.addEventListener('click', () => {
+        const value = panel.querySelector('[data-user-answer]').value.trim();
+        panel.querySelector('.demo-status').textContent = value.length >= 10 && value.includes(checkKeyword.dataset.checkKeyword) ? '✓ 핵심어를 활용해 자신의 문장으로 표현했어요.' : '‘' + checkKeyword.dataset.checkKeyword + '’를 넣어 조금 더 길게 써 보세요.';
+      });
+      const hint = panel.querySelector('[data-detective-hint]');
+      if (hint) hint.addEventListener('click', () => { panel.querySelector('.demo-status').textContent = '단서: “햇빛과 물을 받아”가 원인을 알려 줘요.'; });
+      const retry = panel.querySelector('[data-detective-retry]');
+      if (retry) retry.addEventListener('click', () => { panel.querySelector('.demo-status').textContent = '✓ 오답을 다시 풀어 보충 학습을 마쳤어요.'; });
+    }
+
+    function renderStageFeature(stage, key) {
+      const panel = document.querySelector('[data-feature-panel="' + stage + '"]');
+      if (!panel || !featureCatalog[stage] || !featureCatalog[stage][key]) return;
+      panel.innerHTML = featureCatalog[stage][key]();
+      document.querySelectorAll('[data-stage-feature="' + stage + '"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.key === key)));
+      wireFeaturePanel(panel);
+    }
+    document.querySelectorAll('[data-stage-feature]').forEach(button => button.addEventListener('click', () => renderStageFeature(button.dataset.stageFeature, button.dataset.key)));
+    renderStageFeature('draw','picture');
+    renderStageFeature('hangul','vowel');
+    renderStageFeature('curriculum','photo');
+    renderStageFeature('literacy','choice');
 
     const chart = document.querySelector('#scoreChart');
     new IntersectionObserver(entries => {

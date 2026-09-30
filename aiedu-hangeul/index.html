@@ -663,7 +663,7 @@
       <div class="section-inner">
         <p class="section-label">03 · FOUR LEVELS</p>
         <h2 class="section-title" id="stages-title">한글 기초부터 교과 문해까지,<br>4단계로 올라갑니다.</h2>
-        <p class="section-intro">학생의 현재 수행 수준과 수업 목표에 따라 필요한 단계에서 시작하고, 어려움이 나타나면 이전 단계로 돌아가 복습합니다.</p>
+        <p class="section-intro">각 단계는 실제 세부 체험 화면이 펼쳐진 상태로 시작합니다. 오른쪽 위 ‘메뉴 보기’를 누르면 실제 에이두의 활동 선택 화면으로 돌아갈 수 있습니다.</p>
         <figure class="app-overview" aria-label="에이두 한글 컬러 단계 선택 화면">
           <div class="app-overview-top">
             <img class="app-overview-logo" src="assets/aiedu-live-logo.webp" alt="에이두 한글">
@@ -1618,15 +1618,31 @@
         $('[data-story-done]',w).addEventListener('click',()=>setStatus(w,'읽기 완료! 읽기 기록에 반영되는 흐름입니다.'));
       }
 
+      const defaultStageActions = {
+        drawing: 'drawing-free',
+        korean: 'korean-today',
+        dictation: 'dictation-today',
+        literacy: 'literacy-story'
+      };
+
       document.querySelectorAll('[data-aiedu-stage]').forEach(card => {
+        $('[data-aiedu-home]',card).textContent = '메뉴 보기';
         $('[data-aiedu-home]',card).addEventListener('click',()=>openHome(card));
-        $$(card,'[data-aiedu-action]').forEach(btn=>btn.addEventListener('click',()=>{
+        $(card,'[data-aiedu-action]').forEach(btn=>btn.addEventListener('click',()=>{
           const action=btn.dataset.aieduAction;
           if (action.startsWith('drawing-')) renderDrawing(card,action);
           else if (action.startsWith('korean-')) renderKorean(card,action);
           else if (action.startsWith('dictation-')) renderDictation(card,action);
           else if (action.startsWith('literacy-')) renderLiteracy(card,action);
         }));
+
+        // 단계 카드가 보이는 순간부터 실제 체험 화면이 펼쳐진 상태로 시작합니다.
+        const stage = card.dataset.aieduStage;
+        const action = defaultStageActions[stage];
+        if (action && action.startsWith('drawing-')) renderDrawing(card,action);
+        else if (action && action.startsWith('korean-')) renderKorean(card,action);
+        else if (action && action.startsWith('dictation-')) renderDictation(card,action);
+        else if (action && action.startsWith('literacy-')) renderLiteracy(card,action);
       });
     })();
 

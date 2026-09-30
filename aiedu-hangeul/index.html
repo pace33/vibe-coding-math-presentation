@@ -425,6 +425,131 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
+  
+    /* 실제 에이두 한글 UI/기능 구조를 반영한 단계별 체험 */
+    .aiedu-accurate-grid { align-items: stretch; }
+    .aiedu-accurate-stage { padding: 16px; }
+    .aiedu-accurate-stage:hover { transform: none; }
+    .aiedu-replica {
+      --aiedu-mint:#46b3a5; --aiedu-mint-dark:#2b7f75; --aiedu-mint-pale:#b7e4a1; --aiedu-mint-light:#f0faf9;
+      --stage-accent:#7c3aed; --stage-soft:#f5f0ff;
+      min-height: 610px; padding: 14px; margin-bottom: 20px; overflow: hidden; color:#2c3e50;
+      background:#fff; border:10px solid #fff; border-radius:30px; box-shadow:0 18px 38px rgba(0,0,0,.2);
+    }
+    .aiedu-korean { --stage-accent:#46b3a5; --stage-soft:#effbf8; }
+    .aiedu-dictation { --stage-accent:#ef4444; --stage-soft:#fff1f2; }
+    .aiedu-literacy { --stage-accent:#3b82f6; --stage-soft:#eff6ff; }
+    .aiedu-replica button, .aiedu-replica input { font:inherit; }
+    .aiedu-replica-header { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+    .aiedu-replica-header div { display:grid; gap:1px; }
+    .aiedu-replica-header small { color:var(--stage-accent); font-size:.68rem; font-weight:950; letter-spacing:.08em; }
+    .aiedu-replica-header b { color:#2c3e50; font-size:1.05rem; }
+    .aiedu-home-btn {
+      padding:7px 11px; border:2px solid var(--aiedu-mint); border-radius:999px; color:var(--aiedu-mint-dark);
+      background:#fff; font-size:.7rem; font-weight:900; cursor:pointer;
+    }
+    .aiedu-major-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-bottom:10px; }
+    .aiedu-minor-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .aiedu-grid-item {
+      min-width:0; min-height:86px; padding:10px 7px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+      border:2.5px solid var(--aiedu-mint-pale); border-radius:18px; color:#2c3e50; background:#fff;
+      box-shadow:0 4px 0 var(--aiedu-mint-pale); cursor:pointer; text-align:center; transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+    }
+    .aiedu-grid-item:hover { transform:translateY(-2px); border-color:var(--aiedu-mint); box-shadow:0 7px 0 var(--aiedu-mint); }
+    .aiedu-grid-item:active { transform:translateY(2px); box-shadow:0 2px 0 var(--aiedu-mint); }
+    .aiedu-grid-item > span:first-child { font-size:1.65rem; line-height:1; }
+    .aiedu-grid-item b { font-size:.68rem; line-height:1.25; }
+    .aiedu-major-card { min-height:165px; padding:15px 10px; background:linear-gradient(145deg,#fff,var(--stage-soft)); }
+    .aiedu-major-card .aiedu-big-icon { font-size:3.1rem; }
+    .aiedu-major-card strong { font-size:1.2rem; line-height:1.15; }
+    .aiedu-major-card small { color:#6b7280; font-size:.66rem; font-weight:750; line-height:1.35; }
+    .aiedu-mission-card { background:var(--stage-soft); }
+    .aiedu-mission-card strong, .aiedu-mission-card small { color:var(--stage-accent); }
+    .aiedu-badge-mini {
+      display:inline-flex; width:auto; padding:5px 9px; border-radius:999px; color:#fff!important; background:var(--stage-accent);
+      font-size:.58rem!important; font-weight:950!important;
+    }
+    .aiedu-disabled { opacity:.58; background:#f3f4f6; }
+    .aiedu-workspace { animation:aiedu-in .2s ease; }
+    @keyframes aiedu-in { from { opacity:.25; transform:translateY(6px); } to { opacity:1; transform:none; } }
+    .aiedu-workspace-head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:10px; }
+    .aiedu-workspace-head h4 { margin:0; color:#2c3e50; font-size:1.08rem; line-height:1.25; }
+    .aiedu-workspace-head p { margin:2px 0 0; color:#6b7280; font-size:.66rem; line-height:1.35; }
+    .aiedu-series-badge {
+      display:inline-flex; margin-bottom:4px; padding:5px 9px; border-radius:999px; color:#fff; background:var(--stage-accent);
+      font-size:.58rem; font-weight:950;
+    }
+    .aiedu-pane {
+      padding:11px; border:2px solid var(--aiedu-mint-pale); border-radius:20px; background:var(--aiedu-mint-light);
+    }
+    .aiedu-card {
+      padding:11px; border:2px solid #eef2f7; border-radius:18px; background:#fff; box-shadow:0 7px 18px rgba(44,62,80,.06);
+    }
+    .aiedu-card strong { color:#2c3e50; }
+    .aiedu-card p { margin:4px 0 0; color:#6b7280; font-size:.67rem; line-height:1.45; }
+    .aiedu-record-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:8px; }
+    .aiedu-record-grid .aiedu-card { min-height:78px; }
+    .aiedu-record-grid small { display:block; color:#9ca3af; font-size:.58rem; font-weight:900; }
+    .aiedu-record-grid b { display:block; margin-top:3px; color:var(--stage-accent); font-size:1.35rem; }
+    .aiedu-list { display:grid; gap:7px; }
+    .aiedu-list-row { padding:9px 10px; display:flex; align-items:center; justify-content:space-between; gap:8px; border:1px solid #e5e7eb; border-radius:13px; background:#fff; font-size:.68rem; font-weight:850; }
+    .aiedu-list-row span:last-child { color:var(--stage-accent); }
+    .aiedu-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:9px; }
+    .aiedu-chip, .aiedu-tab {
+      padding:6px 9px; border:2px solid #e5e7eb; border-radius:12px; color:#596579; background:#fff; font-size:.62rem; font-weight:900; cursor:pointer;
+    }
+    .aiedu-chip.active, .aiedu-tab.active { color:var(--aiedu-mint-dark); border-color:var(--aiedu-mint); background:var(--aiedu-mint-light); }
+    .aiedu-color {
+      width:28px; height:28px; padding:0; border:3px solid #fff; border-radius:50%; background:var(--c);
+      box-shadow:0 0 0 1px #d8e2ed; cursor:pointer;
+    }
+    .aiedu-color.active { box-shadow:0 0 0 3px var(--aiedu-mint); }
+    .aiedu-canvas-wrap { height:245px; position:relative; overflow:hidden; border:2px dashed #d7e7d0; border-radius:18px; background:#fff; }
+    .aiedu-canvas-wrap canvas { width:100%; height:100%; position:absolute; inset:0; z-index:2; touch-action:none; cursor:crosshair; }
+    .aiedu-guide { position:absolute; inset:0; display:grid; place-items:center; color:rgba(124,58,237,.16); font-size:6.8rem; font-weight:950; z-index:1; pointer-events:none; }
+    .aiedu-guide.mint { color:rgba(70,179,165,.18); }
+    .aiedu-guide.red { color:rgba(239,68,68,.14); }
+    .aiedu-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:6px; margin-top:9px; }
+    .aiedu-btn {
+      padding:7px 12px; border:0; border-radius:999px; color:#fff; background:var(--aiedu-mint); font-size:.64rem; font-weight:900; cursor:pointer;
+      box-shadow:0 6px 12px rgba(70,179,165,.16);
+    }
+    .aiedu-btn.stage { background:var(--stage-accent); }
+    .aiedu-btn.outline { color:var(--aiedu-mint-dark); background:#fff; border:2px solid var(--aiedu-mint); box-shadow:none; }
+    .aiedu-status { flex:1; min-width:120px; color:#2f855a; font-size:.62rem; font-weight:900; }
+    .aiedu-big-demo {
+      min-height:150px; display:grid; place-items:center; border-radius:20px; background:#fff; color:var(--aiedu-mint); font-size:5.4rem; font-weight:950;
+      box-shadow:inset 0 0 0 2px #eef2f7;
+    }
+    .aiedu-learning-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .aiedu-symbol-card { padding:13px; border-radius:16px; background:#fff; text-align:center; }
+    .aiedu-symbol-card b { display:block; color:var(--aiedu-mint); font-size:2.2rem; }
+    .aiedu-choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .aiedu-choice {
+      padding:9px; border:2px solid #e6f2e0; border-radius:14px; color:#425269; background:#fff; font-size:.7rem; font-weight:900; cursor:pointer;
+    }
+    .aiedu-choice.correct, .aiedu-choice.selected { color:#fff; border-color:var(--stage-accent); background:var(--stage-accent); }
+    .aiedu-photo-input { width:100%; padding:8px; border:2px solid #e5e7eb; border-radius:12px; background:#fff; font-size:.62rem; }
+    .aiedu-answer-box { margin-top:8px; padding:12px; border:3px solid #bbf7d0; border-radius:17px; background:#fff; }
+    .aiedu-answer-box small { color:#22c55e; font-weight:950; }
+    .aiedu-answer-box b { display:block; margin-top:3px; font-size:1.25rem; }
+    .aiedu-story { padding:15px; border-radius:18px; background:#fff; color:#43516a; font-size:.76rem; line-height:1.75; }
+    .aiedu-word-pairs { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .aiedu-word-pairs .aiedu-choice[disabled] { opacity:.45; cursor:default; }
+    .aiedu-sentence-display { min-height:68px; padding:10px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; border:3px dashed var(--aiedu-mint-pale); border-radius:16px; background:#fff; }
+    .aiedu-sentence-token { padding:6px 9px; border-radius:10px; background:var(--aiedu-mint-light); color:var(--aiedu-mint-dark); font-size:.7rem; font-weight:900; }
+    .live-stage-card:nth-child(3) { --stage-color:#ef4444; }
+    .app-overview .live-stage-icon { background-image:none; display:grid; place-items:center; }
+    .app-overview .live-stage-card:nth-child(1) .live-stage-icon::before { content:"🌱"; font-size:4.2rem; }
+    .app-overview .live-stage-card:nth-child(2) .live-stage-icon::before { content:"🌿"; font-size:4.2rem; }
+    .app-overview .live-stage-card:nth-child(3) .live-stage-icon::before { content:"🌸"; font-size:4.2rem; }
+    .app-overview .live-stage-card:nth-child(4) .live-stage-icon::before { content:"🌳"; font-size:4.2rem; }
+    @media (max-width:900px) {
+      .aiedu-minor-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .aiedu-major-grid { grid-template-columns:1fr; }
+      .aiedu-replica { min-height:0; }
+    }
+
   </style>
 </head>
 <body>
@@ -547,71 +672,102 @@
           <div class="live-stage-grid">
             <div class="live-stage-card"><i class="live-stage-icon" aria-hidden="true"></i><small>STEP 1</small><b>그리기</b><span>기초 움직임·화면 조작</span></div>
             <div class="live-stage-card"><i class="live-stage-icon" aria-hidden="true"></i><small>STEP 2</small><b>한글 해득</b><span>소리와 글자의 연결</span></div>
-            <div class="live-stage-card"><i class="live-stage-icon" aria-hidden="true"></i><small>STEP 3</small><b>교과 맞춤 쓰기</b><span>교과 자료·핵심어</span></div>
+            <div class="live-stage-card"><i class="live-stage-icon" aria-hidden="true"></i><small>STEP 3</small><b>받아쓰기</b><span>듣고 쓰기·오류 확인</span></div>
             <div class="live-stage-card"><i class="live-stage-icon" aria-hidden="true"></i><small>STEP 4</small><b>문해력</b><span>읽기·이해·표현</span></div>
           </div>
-          <figcaption>실제 에이두 한글 웹사이트의 컬러 디자인과 단계별 기능을 반영한 핵심 화면</figcaption>
+          <figcaption>실제 에이두 한글의 4단계 메뉴 구조와 활동 흐름을 그대로 반영한 체험 화면</figcaption>
         </figure>
-        <div class="stage-grid">
-          <article class="stage" data-stage-card="draw">
-            <div class="stage-shot stage-one" aria-label="그리기 단계 세부 기능 장면">
-              <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>보고서 핵심 기능</small><b>그리기</b><span>기초 움직임과 화면 조작을 익혀요</span></div></div>
-                <div class="scene-tools" style="--feature-count:3" aria-label="그리기 핵심 기능">
-                  <button class="scene-tool" data-stage-feature="draw" data-key="picture" aria-pressed="true"><em>🎨</em><b>그림 미션</b></button>
-                  <button class="scene-tool" data-stage-feature="draw" data-key="shape" aria-pressed="false"><em>🔺</em><b>도형 미션</b></button>
-                  <button class="scene-tool" data-stage-feature="draw" data-key="ai" aria-pressed="false"><em>✨</em><b>AI스케치북</b></button>
-                </div>
-                <div class="feature-workspace" data-feature-panel="draw" aria-live="polite"></div>
+        <div class="stage-grid aiedu-accurate-grid">
+          <article class="stage aiedu-accurate-stage" data-aiedu-stage="drawing">
+            <div class="aiedu-replica aiedu-drawing" aria-label="실제 에이두 그리기 체험">
+              <div class="aiedu-replica-header">
+                <div><small>1단계</small><b>에이두 그리기</b></div>
+                <button class="aiedu-home-btn" type="button" data-aiedu-home hidden>활동 홈</button>
               </div>
+              <div class="aiedu-home-screen" data-aiedu-home-screen>
+                <div class="aiedu-major-grid">
+                  <button class="aiedu-grid-item aiedu-major-card" type="button" data-aiedu-action="drawing-gallery"><span class="aiedu-big-icon">🎨</span><strong>나의 그림</strong><small>내가 그린 멋진 작품들을 확인해요</small></button>
+                  <button class="aiedu-grid-item aiedu-major-card aiedu-mission-card" type="button" data-aiedu-action="drawing-today"><span class="aiedu-badge-mini">오늘의 미션</span><strong>오늘의 그리기</strong><small>창의력이 쑥쑥!</small></button>
+                </div>
+                <div class="aiedu-minor-grid">
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="drawing-free"><span>✨</span><b>자유 그리기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="drawing-trace"><span>🖋️</span><b>따라 그리기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="drawing-color"><span>🖍️</span><b>색칠하기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="drawing-ai"><span>🤖</span><b>AI 그림 퀴즈</b></button>
+                </div>
+              </div>
+              <div class="aiedu-workspace" data-aiedu-workspace hidden></div>
             </div>
-            <span class="stage-num">01</span><h3>그리기</h3><p>본격적인 한글 학습 전에 기초 움직임과 화면 조작을 익힙니다.</p><ul><li>그림·도형 미션</li><li>시작점과 끝점 인식</li><li>AI 결과로 수행 흥미 유도</li></ul>
+            <span class="stage-num">01</span><h3>그리기</h3><p>실제 에이두 그리기의 활동 메뉴와 그림판 흐름을 그대로 체험합니다.</p><ul><li>나의 그림·오늘의 그리기</li><li>자유·따라·색칠하기</li><li>AI 그림 퀴즈</li></ul>
           </article>
-          <article class="stage" data-stage-card="hangul">
-            <div class="stage-shot stage-two" aria-label="한글 해득 단계 세부 기능 장면">
-              <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>배움 차시 핵심 기능</small><b>한글 해득</b><span>모음부터 받침 있는 단어까지 확장해요</span></div></div>
-                <div class="scene-tools" style="--feature-count:5" aria-label="한글 해득 핵심 기능">
-                  <button class="scene-tool" data-stage-feature="hangul" data-key="vowel" aria-pressed="true"><em>ㅏ</em><b>모음</b></button>
-                  <button class="scene-tool" data-stage-feature="hangul" data-key="combine" aria-pressed="false"><em>가</em><b>자모음 합성</b></button>
-                  <button class="scene-tool" data-stage-feature="hangul" data-key="openword" aria-pressed="false"><em>🚌</em><b>받침 없는 단어</b></button>
-                  <button class="scene-tool" data-stage-feature="hangul" data-key="complex" aria-pressed="false"><em>ㅘ</em><b>복잡한 모음</b></button>
-                  <button class="scene-tool" data-stage-feature="hangul" data-key="finalword" aria-pressed="false"><em>책</em><b>받침 있는 단어</b></button>
-                </div>
-                <div class="feature-workspace" data-feature-panel="hangul" aria-live="polite"></div>
+
+          <article class="stage aiedu-accurate-stage" data-aiedu-stage="korean">
+            <div class="aiedu-replica aiedu-korean" aria-label="실제 에이두 한글 해득 체험">
+              <div class="aiedu-replica-header">
+                <div><small>2단계</small><b>에이두 한글 해득</b></div>
+                <button class="aiedu-home-btn" type="button" data-aiedu-home hidden>활동 홈</button>
               </div>
+              <div class="aiedu-home-screen" data-aiedu-home-screen>
+                <div class="aiedu-major-grid">
+                  <button class="aiedu-grid-item aiedu-major-card" type="button" data-aiedu-action="korean-my"><span class="aiedu-big-icon">📚</span><strong>나의 한글</strong><small>내가 배운 한글을 확인해요</small></button>
+                  <button class="aiedu-grid-item aiedu-major-card aiedu-mission-card" type="button" data-aiedu-action="korean-today"><span class="aiedu-badge-mini">오늘의 미션</span><strong>오늘의 한글</strong><small>배움 시작 활동</small></button>
+                </div>
+                <div class="aiedu-minor-grid">
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="korean-letter"><span>✍️</span><b>글자 쓰기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="korean-word"><span>📝</span><b>낱말 쓰기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="korean-listen"><span>👂</span><b>낱말 듣기</b></button>
+                  <button class="aiedu-grid-item aiedu-disabled" type="button" data-aiedu-action="korean-game"><span>🎮</span><b>한글 게임</b></button>
+                </div>
+              </div>
+              <div class="aiedu-workspace" data-aiedu-workspace hidden></div>
             </div>
-            <span class="stage-num">02</span><h3>한글 해득</h3><p>모음에서 받침 있는 단어까지 소리와 글자의 관계를 단계적으로 익힙니다.</p><ul><li>모음·자모음 합성</li><li>받침 없는·있는 단어</li><li>글자 변별과 반복 쓰기</li></ul>
+            <span class="stage-num">02</span><h3>한글 해득</h3><p>실제 에이두 한글의 배움 활동과 쓰기·듣기 퀴즈 흐름을 체험합니다.</p><ul><li>나의 한글·오늘의 한글</li><li>글자·낱말 쓰기</li><li>낱말 듣기 퀴즈</li></ul>
           </article>
-          <article class="stage" data-stage-card="curriculum">
-            <div class="stage-shot stage-three" aria-label="교과 맞춤 쓰기 단계 세부 기능 장면">
-              <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>보고서 핵심 기능</small><b>교과 맞춤 쓰기</b><span>실제 교과 자료를 학생 수준에 맞춰 연결해요</span></div></div>
-                <div class="scene-tools" style="--feature-count:4" aria-label="교과 맞춤 쓰기 핵심 기능">
-                  <button class="scene-tool" data-stage-feature="curriculum" data-key="photo" aria-pressed="true"><em>📷</em><b>노트 촬영</b></button>
-                  <button class="scene-tool" data-stage-feature="curriculum" data-key="write" aria-pressed="false"><em>✍️</em><b>핵심어 쓰기</b></button>
-                  <button class="scene-tool" data-stage-feature="curriculum" data-key="meaning" aria-pressed="false"><em>💡</em><b>핵심어 설명</b></button>
-                  <button class="scene-tool" data-stage-feature="curriculum" data-key="bank" aria-pressed="false"><em>🗂️</em><b>단어 카드 저장소</b></button>
-                </div>
-                <div class="feature-workspace" data-feature-panel="curriculum" aria-live="polite"></div>
+
+          <article class="stage aiedu-accurate-stage" data-aiedu-stage="dictation">
+            <div class="aiedu-replica aiedu-dictation" aria-label="실제 에이두 받아쓰기 체험">
+              <div class="aiedu-replica-header">
+                <div><small>3단계</small><b>에이두 받아쓰기</b></div>
+                <button class="aiedu-home-btn" type="button" data-aiedu-home hidden>활동 홈</button>
               </div>
+              <div class="aiedu-home-screen" data-aiedu-home-screen>
+                <div class="aiedu-major-grid">
+                  <button class="aiedu-grid-item aiedu-major-card" type="button" data-aiedu-action="dictation-my"><span class="aiedu-big-icon">📝</span><strong>나의 받아쓰기</strong><small>내가 연습한 기록을 확인해요</small></button>
+                  <button class="aiedu-grid-item aiedu-major-card aiedu-mission-card" type="button" data-aiedu-action="dictation-today"><span class="aiedu-badge-mini">오늘의 미션</span><strong>오늘의 받아쓰기</strong><small>백점을 향해 도전!</small></button>
+                </div>
+                <div class="aiedu-minor-grid">
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="dictation-level"><span>🏆</span><b>급수별 받아쓰기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="dictation-ai"><span>🧠</span><b>AI 단어 연습</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="dictation-mistake"><span>🔍</span><b>틀린 글자 찾기</b></button>
+                  <button class="aiedu-grid-item aiedu-disabled" type="button" data-aiedu-action="dictation-game"><span>🎮</span><b>받아쓰기 게임</b></button>
+                </div>
+              </div>
+              <div class="aiedu-workspace" data-aiedu-workspace hidden></div>
             </div>
-            <span class="stage-num">03</span><h3>교과 맞춤 쓰기</h3><p>실제 교과 자료에서 핵심어를 뽑아 학생 수준의 읽기·쓰기 활동으로 바꿉니다.</p><ul><li>자료 촬영과 핵심어 추출</li><li>직접 쓰기와 뜻 확인</li><li>단어 카드 저장</li></ul>
+            <span class="stage-num">03</span><h3>받아쓰기</h3><p>실제 에이두 받아쓰기처럼 소리를 듣고 공책에 쓴 뒤 기록을 확인하는 흐름입니다.</p><ul><li>오늘의·급수별 받아쓰기</li><li>AI 단어 연습</li><li>틀린 글자 찾기</li></ul>
           </article>
-          <article class="stage" data-stage-card="literacy">
-            <div class="stage-shot stage-four" aria-label="문해력 단계 세부 기능 장면">
-              <div class="feature-scene">
-                <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>보고서 핵심 기능</small><b>문해력</b><span>선택에서 서술로 답을 확장해요</span></div></div>
-                <div class="scene-tools" style="--feature-count:4" aria-label="문해력 핵심 기능">
-                  <button class="scene-tool" data-stage-feature="literacy" data-key="choice" aria-pressed="true"><em>☑️</em><b>선택형</b></button>
-                  <button class="scene-tool" data-stage-feature="literacy" data-key="short" aria-pressed="false"><em>⌨️</em><b>단답형</b></button>
-                  <button class="scene-tool" data-stage-feature="literacy" data-key="essay" aria-pressed="false"><em>📝</em><b>서술형</b></button>
-                  <button class="scene-tool" data-stage-feature="literacy" data-key="detective" aria-pressed="false"><em>🔎</em><b>문해력 탐정단</b></button>
-                </div>
-                <div class="feature-workspace" data-feature-panel="literacy" aria-live="polite"></div>
+
+          <article class="stage aiedu-accurate-stage" data-aiedu-stage="literacy">
+            <div class="aiedu-replica aiedu-literacy" aria-label="실제 에이두 문해력 체험">
+              <div class="aiedu-replica-header">
+                <div><small>4단계</small><b>에이두 문해력</b></div>
+                <button class="aiedu-home-btn" type="button" data-aiedu-home hidden>활동 홈</button>
               </div>
+              <div class="aiedu-home-screen" data-aiedu-home-screen>
+                <div class="aiedu-major-grid">
+                  <button class="aiedu-grid-item aiedu-major-card" type="button" data-aiedu-action="literacy-my"><span class="aiedu-big-icon">📖</span><strong>나의 읽기 기록</strong><small>차곡차곡 쌓인 읽기 실력!</small></button>
+                  <button class="aiedu-grid-item aiedu-major-card aiedu-mission-card" type="button" data-aiedu-action="literacy-today"><span class="aiedu-badge-mini">오늘의 미션</span><strong>오늘의 문해력</strong><small>생각하는 힘을 길러요</small></button>
+                </div>
+                <div class="aiedu-minor-grid">
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="literacy-story"><span>📄</span><b>짧은 글 읽기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="literacy-vocab"><span>🌳</span><b>어휘 쑥쑥</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="literacy-sentence"><span>🔨</span><b>문장 만들기</b></button>
+                  <button class="aiedu-grid-item" type="button" data-aiedu-action="literacy-quiz"><span>💡</span><b>독해 퀴즈</b></button>
+                </div>
+              </div>
+              <div class="aiedu-workspace" data-aiedu-workspace hidden></div>
             </div>
-            <span class="stage-num">04</span><h3>문해력</h3><p>교과 지문을 읽고 핵심 내용을 이해하며 자신의 답을 선택하고 씁니다.</p><ul><li>선택형 → 단답형 → 서술형</li><li>수준별 문항 생성</li><li>오답을 다음 학습에 반영</li></ul>
+            <span class="stage-num">04</span><h3>문해력</h3><p>실제 에이두 문해력의 읽기·어휘·문장·독해 활동을 직접 눌러 체험합니다.</p><ul><li>짧은 글 읽기</li><li>어휘·문장 만들기</li><li>독해 퀴즈</li></ul>
           </article>
         </div>
       </div>
@@ -1193,6 +1349,287 @@
     renderStageFeature('hangul','vowel');
     renderStageFeature('curriculum','photo');
     renderStageFeature('literacy','choice');
+
+
+    // 실제 에이두 한글의 단계별 메뉴/활동 흐름을 로컬 체험으로 재현
+    (() => {
+      const $ = (root, sel) => root.querySelector(sel);
+      const $$ = (root, sel) => [...root.querySelectorAll(sel)];
+      const speak = (text) => {
+        if (typeof speakKorean === 'function') { speakKorean(text); return; }
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR';
+        utterance.rate = .86;
+        speechSynthesis.speak(utterance);
+      };
+      const head = (badge, title, desc) =>
+        '<div class="aiedu-workspace-head"><div><span class="aiedu-series-badge">' + badge + '</span><h4>' + title + '</h4><p>' + desc + '</p></div></div>';
+      const setStatus = (root, msg) => { const el = $(root, '.aiedu-status'); if (el) el.textContent = msg; };
+
+      function wireCanvas(root, options) {
+        const canvas = $(root, 'canvas');
+        if (!canvas) return null;
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let last = null;
+        let color = (options && options.color) || '#7c3aed';
+        let size = (options && options.size) || 10;
+        let ink = 0;
+        const fit = () => {
+          const rect = canvas.getBoundingClientRect();
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.max(1, Math.round(rect.width * ratio));
+          canvas.height = Math.max(1, Math.round(rect.height * ratio));
+          ctx.setTransform(ratio,0,0,ratio,0,0);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+        };
+        const pt = (e) => { const r = canvas.getBoundingClientRect(); return {x:e.clientX-r.left,y:e.clientY-r.top}; };
+        const down = (e) => {
+          e.preventDefault(); drawing = true; last = pt(e); canvas.setPointerCapture(e.pointerId);
+        };
+        const move = (e) => {
+          if (!drawing) return; e.preventDefault();
+          const now = pt(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(now.x,now.y);
+          ctx.strokeStyle = color; ctx.lineWidth = size; ctx.stroke(); last = now; ink++;
+        };
+        const up = (e) => { drawing = false; last = null; try { canvas.releasePointerCapture(e.pointerId); } catch(_) {} };
+        fit();
+        canvas.addEventListener('pointerdown', down);
+        canvas.addEventListener('pointermove', move);
+        canvas.addEventListener('pointerup', up);
+        canvas.addEventListener('pointercancel', up);
+        return {
+          setColor(v){ color = v; },
+          setSize(v){ size = Number(v) || 10; },
+          clear(){ ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight); ink = 0; },
+          hasInk(){ return ink > 4; }
+        };
+      }
+
+      function openHome(card) {
+        $('[data-aiedu-home-screen]', card).hidden = false;
+        $('[data-aiedu-workspace]', card).hidden = true;
+        $('[data-aiedu-home]', card).hidden = true;
+      }
+      function openWorkspace(card) {
+        $('[data-aiedu-home-screen]', card).hidden = true;
+        $('[data-aiedu-workspace]', card).hidden = false;
+        $('[data-aiedu-home]', card).hidden = false;
+        return $('[data-aiedu-workspace]', card);
+      }
+
+      function renderDrawing(card, action) {
+        const w = openWorkspace(card);
+        if (action === 'drawing-gallery') {
+          w.innerHTML = head('에이두 그리기 시리즈','나의 그림','단계별 오늘의 그리기 기록과 자유 작품을 확인해요.') +
+            '<div class="aiedu-record-grid"><div class="aiedu-card"><small>오늘의 그리기</small><b>1단계</b></div><div class="aiedu-card"><small>완료한 미션</small><b>3</b></div><div class="aiedu-card"><small>자유 작품</small><b>5</b></div></div>' +
+            '<div class="aiedu-pane"><div class="aiedu-list"><div class="aiedu-list-row"><span>1단계 · 선과 모양 그리기</span><span>완료</span></div><div class="aiedu-list-row"><span>2단계 · 도형으로 그림 만들기</span><span>완료</span></div><div class="aiedu-list-row"><span>3단계 · 오늘의 미션</span><span>이어하기</span></div></div></div>';
+          return;
+        }
+        const map = {
+          'drawing-today':['오늘의 미션','오늘의 그리기','선을 따라 그리고 미션을 완료해요.','△ ○','미션 완료'],
+          'drawing-free':['자유 그리기','그림판','마음껏 그리고 저장해요.','','저장하기'],
+          'drawing-trace':['따라 그리기','모양 따라 그리기','연습 모양을 보며 선을 따라가요.','☆','저장하기'],
+          'drawing-color':['색칠하기','색칠하기','굵기와 색을 골라 빈 공간을 채워요.','☀','저장하기'],
+          'drawing-ai':['AI 그림 퀴즈','AI 그림 퀴즈','제시된 모양을 활용해 그림을 완성해요.','○','확인하기']
+        };
+        const m = map[action] || map['drawing-free'];
+        w.innerHTML = head(m[0],m[1],m[2]) +
+          '<div class="aiedu-pane"><div class="aiedu-toolbar"><button class="aiedu-color active" style="--c:#7c3aed" data-color="#7c3aed" aria-label="보라"></button><button class="aiedu-color" style="--c:#ef4444" data-color="#ef4444" aria-label="빨강"></button><button class="aiedu-color" style="--c:#22c55e" data-color="#22c55e" aria-label="초록"></button><button class="aiedu-color" style="--c:#3b82f6" data-color="#3b82f6" aria-label="파랑"></button><span class="aiedu-chip">붓 <b data-brush-label>10</b></span><input data-brush type="range" min="3" max="30" value="10"></div>' +
+          '<div class="aiedu-canvas-wrap"><div class="aiedu-guide">' + m[3] + '</div><canvas aria-label="' + m[1] + ' 캔버스"></canvas></div>' +
+          '<div class="aiedu-actions"><span class="aiedu-status" role="status">손가락이나 마우스로 그려 보세요.</span><button class="aiedu-btn outline" type="button" data-draw-clear>지우기</button><button class="aiedu-btn stage" type="button" data-draw-save>' + m[4] + '</button></div></div>';
+        requestAnimationFrame(() => {
+          const pad = wireCanvas(w,{color:'#7c3aed',size:10});
+          $$(w,'[data-color]').forEach(btn => btn.addEventListener('click', () => {
+            $$(w,'[data-color]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); pad.setColor(btn.dataset.color);
+          }));
+          const range = $(w,'[data-brush]');
+          range.addEventListener('input', () => { pad.setSize(range.value); $('[data-brush-label]',w).textContent = range.value; });
+          $('[data-draw-clear]',w).addEventListener('click', () => { pad.clear(); setStatus(w,'깨끗하게 지웠어요.'); });
+          $('[data-draw-save]',w).addEventListener('click', () => {
+            if (!pad.hasInk()) { setStatus(w,'먼저 그림을 그려 보세요.'); return; }
+            setStatus(w, action === 'drawing-ai' ? '멋져요! 실제 서비스에서는 AI 그림 퀴즈 결과로 이어집니다.' : '저장했어요! 작품 기록에 반영되는 흐름입니다.');
+          });
+        });
+      }
+
+      function renderKoreanLetterBody(w, mode) {
+        const body = $('[data-korean-letter-body]',w);
+        $$(w,'[data-korean-subtab]').forEach(x => x.classList.toggle('active',x.dataset.koreanSubtab === mode));
+        if (mode === 'word') {
+          body.innerHTML = '<div class="aiedu-card"><strong>단어 예시</strong><div class="aiedu-toolbar" style="margin-top:8px"><button class="aiedu-chip">나무</button><button class="aiedu-chip">학교</button><button class="aiedu-chip">바나나</button><button class="aiedu-chip">호랑이</button></div></div><div class="aiedu-big-demo" data-word-output>나무</div><div class="aiedu-actions"><span class="aiedu-status">소리 내어 읽고 따라 써요.</span><button class="aiedu-btn stage" data-new-word>✨ 새 단어 만들기</button></div>';
+          const words = ['나무','학교','바나나','호랑이','모자','고기'];
+          $('[data-new-word]',body).addEventListener('click', () => { const v = words[Math.floor(Math.random()*words.length)]; $('[data-word-output]',body).textContent = v; speak(v); });
+          return;
+        }
+        if (mode === 'sentence') {
+          body.innerHTML = '<div class="aiedu-card"><strong>문장 예시</strong><p>나는 학교에 가요. · 꽃이 예쁘게 피었어요.</p></div><div class="aiedu-card" style="margin-top:8px;text-align:center"><b data-sentence-output style="font-size:1.2rem">나는 학교에 가요.</b><p>천천히 읽고 띄어쓰기까지 살펴보며 따라 써요.</p></div><div class="aiedu-actions"><span class="aiedu-status"></span><button class="aiedu-btn stage" data-new-sentence>✨ 새 문장 만들기</button></div>';
+          const sentences = ['나는 학교에 가요.','꽃이 예쁘게 피었어요.','친구와 책을 읽어요.','오늘은 하늘이 맑아요.'];
+          $('[data-new-sentence]',body).addEventListener('click', () => { const v = sentences[Math.floor(Math.random()*sentences.length)]; $('[data-sentence-output]',body).textContent = v; speak(v); });
+          return;
+        }
+        body.innerHTML = '<div class="aiedu-toolbar"><span class="aiedu-chip active" data-letter="ㄱ">ㄱ</span><span class="aiedu-chip" data-letter="ㄴ">ㄴ</span><span class="aiedu-chip" data-letter="ㄷ">ㄷ</span><span class="aiedu-chip" data-letter="ㅏ">ㅏ</span><span class="aiedu-chip" data-letter="ㅓ">ㅓ</span><span class="aiedu-chip" data-letter="가">가</span></div><div class="aiedu-canvas-wrap"><div class="aiedu-guide mint" data-letter-guide>ㄱ</div><canvas aria-label="글자 쓰기 캔버스"></canvas></div><div class="aiedu-actions"><span class="aiedu-status">회색 가이드를 따라 써 보세요.</span><button class="aiedu-btn outline" data-letter-sound>🔊 소리 듣기</button><button class="aiedu-btn stage" data-letter-grade>채점하기</button><button class="aiedu-btn" data-letter-clear>지우기</button></div>';
+        requestAnimationFrame(() => {
+          const pad = wireCanvas(body,{color:'#46b3a5',size:11});
+          let letter = 'ㄱ';
+          $$(body,'[data-letter]').forEach(btn => btn.addEventListener('click', () => {
+            $$(body,'[data-letter]').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); letter = btn.dataset.letter; $('[data-letter-guide]',body).textContent = letter; pad.clear();
+          }));
+          $('[data-letter-sound]',body).addEventListener('click', () => speak(letter));
+          $('[data-letter-clear]',body).addEventListener('click', () => { pad.clear(); setStatus(body,'다시 써 보세요.'); });
+          $('[data-letter-grade]',body).addEventListener('click', () => setStatus(body, pad.hasInk() ? '잘 썼어요! 실제 서비스는 가이드 픽셀 겹침으로 채점합니다.' : '글자를 먼저 써 주세요.'));
+        });
+      }
+
+      function renderKorean(card, action) {
+        const w = openWorkspace(card);
+        if (action === 'korean-my') {
+          w.innerHTML = head('에이두 국어 시리즈','나의 한글','완료·열림·잠김 상태를 보며 배움 단원을 선택해요.') +
+            '<div class="aiedu-toolbar"><button class="aiedu-tab active">모음</button><button class="aiedu-tab">자음</button><button class="aiedu-tab">단어</button><button class="aiedu-tab">받침</button></div><div class="aiedu-pane"><div class="aiedu-list"><div class="aiedu-list-row"><span>배움 시작 · 모음과 자음</span><span>완료</span></div><div class="aiedu-list-row"><span>배움 1 · 모음의 시작</span><span>복습</span></div><div class="aiedu-list-row"><span>배움 2 · ㅏ, ㅓ 공부하기</span><span>시작</span></div><div class="aiedu-list-row"><span>배움 3 · ㅗ, ㅜ 공부하기</span><span>잠김</span></div></div></div>';
+          return;
+        }
+        if (action === 'korean-today') {
+          w.innerHTML = head('오늘의 한글','배움 시작: 모음과 자음','이해하기 1 → 이해하기 2 순서로 진행해요.') +
+            '<div class="aiedu-pane"><div data-learn-step="1"><span class="aiedu-series-badge">이해하기 1</span><div class="aiedu-card" style="text-align:center"><strong>엄마는 모음, 아기는 자음</strong><div style="font-size:3rem;margin:12px 0">👶　👩</div><div style="font-size:4.4rem;font-weight:950;color:#46b3a5">ㄱㅏ</div><p>그림과 글자를 비교해서 모음(엄마), 자음(아기)을 찾아봐요.</p></div></div><div data-learn-step="2" hidden><span class="aiedu-series-badge">이해하기 2</span><div class="aiedu-learning-grid"><div class="aiedu-symbol-card"><b>머</b></div><div class="aiedu-symbol-card"><b>바</b></div><div class="aiedu-symbol-card"><b>나</b></div><div class="aiedu-symbol-card"><b>라</b></div></div></div><div class="aiedu-actions"><span class="aiedu-status">첫 활동을 살펴보세요.</span><button class="aiedu-btn stage" data-learn-next>이해하기 2로 이동</button></div></div>';
+          let step = 1;
+          $('[data-learn-next]',w).addEventListener('click', e => {
+            if (step === 1) {
+              $('[data-learn-step="1"]',w).hidden = true; $('[data-learn-step="2"]',w).hidden = false; e.currentTarget.textContent = '완료하기'; step = 2; setStatus(w,'두 번째 이해 활동이에요.');
+            } else {
+              e.currentTarget.disabled = true; e.currentTarget.textContent = '완료'; setStatus(w,'배움 시작 활동을 완료했어요.');
+            }
+          });
+          return;
+        }
+        if (action === 'korean-letter') {
+          w.innerHTML = head('글자 쓰기','글자 쓰기 연습','자음, 모음, 낱말을 자유롭게 써봐요.') +
+            '<div class="aiedu-pane"><div class="aiedu-toolbar"><button class="aiedu-tab active" data-korean-subtab="letter">글자 연습</button><button class="aiedu-tab" data-korean-subtab="word">단어 연습</button><button class="aiedu-tab" data-korean-subtab="sentence">문장 연습</button></div><div data-korean-letter-body></div></div>';
+          renderKoreanLetterBody(w,'letter');
+          $$(w,'[data-korean-subtab]').forEach(btn => btn.addEventListener('click', () => renderKoreanLetterBody(w,btn.dataset.koreanSubtab)));
+          return;
+        }
+        if (action === 'korean-word') {
+          w.innerHTML = head('낱말 쓰기','낱말 쓰기 퀴즈','가이드 글자를 따라 쓰고 채점해요.') +
+            '<div class="aiedu-pane"><div class="aiedu-toolbar"><button class="aiedu-tab active">낱말 연습</button><button class="aiedu-tab">단어 연습</button><button class="aiedu-tab">이름 연습</button><button class="aiedu-btn outline" data-word-sound>🔊</button></div><div style="text-align:center;font-size:2.6rem;font-weight:950;color:#46b3a5;margin-bottom:8px" data-word-target>나무</div><div class="aiedu-canvas-wrap"><div class="aiedu-guide mint" style="font-size:4.8rem" data-word-guide>나무</div><canvas aria-label="낱말 쓰기 캔버스"></canvas></div><div class="aiedu-actions"><span class="aiedu-status">가이드를 따라 써 보세요.</span><button class="aiedu-btn" data-word-clear>다시 쓰기</button><button class="aiedu-btn stage" data-word-grade>채점하기</button><button class="aiedu-btn" data-word-next>다음 문제</button></div></div>';
+          requestAnimationFrame(() => {
+            const words = ['나무','학교','바나나','호랑이']; let idx = 0; const pad = wireCanvas(w,{color:'#46b3a5',size:11});
+            const apply = () => { $('[data-word-target]',w).textContent = words[idx]; $('[data-word-guide]',w).textContent = words[idx]; pad.clear(); };
+            $('[data-word-sound]',w).addEventListener('click',()=>speak(words[idx]));
+            $('[data-word-clear]',w).addEventListener('click',()=>{pad.clear();setStatus(w,'다시 써 보세요.');});
+            $('[data-word-grade]',w).addEventListener('click',()=>setStatus(w,pad.hasInk()?'잘 썼어요! 다음 문제로 넘어가도 좋아요.':'먼저 낱말을 써 주세요.'));
+            $('[data-word-next]',w).addEventListener('click',()=>{idx=(idx+1)%words.length;apply();setStatus(w,'새 낱말이에요.');});
+          });
+          return;
+        }
+        if (action === 'korean-listen') {
+          w.innerHTML = head('낱말 듣기','낱말 듣기 퀴즈','학습 단계를 고르고 소리를 들어 정답을 선택해요.') +
+            '<div class="aiedu-pane"><div class="aiedu-toolbar"><button class="aiedu-tab active">모음</button><button class="aiedu-tab">자음</button><button class="aiedu-tab">단어</button><span class="aiedu-chip">문제 수 10</span></div><div class="aiedu-card" style="text-align:center"><button class="aiedu-btn stage" data-listen-play>🔊 문제 듣기</button><p>들은 낱말을 골라 보세요.</p></div><div class="aiedu-choice-grid" style="margin-top:8px"><button class="aiedu-choice" data-listen-answer="0">나무</button><button class="aiedu-choice" data-listen-answer="1">학교</button><button class="aiedu-choice" data-listen-answer="0">모자</button><button class="aiedu-choice" data-listen-answer="0">고기</button></div><div class="aiedu-actions"><span class="aiedu-status">소리를 먼저 들어 보세요.</span></div></div>';
+          $('[data-listen-play]',w).addEventListener('click',()=>speak('학교'));
+          $$(w,'[data-listen-answer]').forEach(btn=>btn.addEventListener('click',()=>{
+            $$(w,'[data-listen-answer]').forEach(x=>x.classList.remove('selected'));
+            btn.classList.add('selected');
+            setStatus(w,btn.dataset.listenAnswer==='1'?'정답이에요!':'한 번 더 들어 보세요.');
+          }));
+          return;
+        }
+        w.innerHTML = head('한글 게임','준비 중','실제 에이두 한글 화면에서도 현재 한글 게임은 비활성 상태입니다.') + '<div class="aiedu-card" style="text-align:center;padding:35px"><div style="font-size:3.5rem">🎮</div><strong>한글 게임은 준비 중입니다.</strong></div>';
+      }
+
+      function renderDictation(card, action) {
+        const w = openWorkspace(card);
+        if (action === 'dictation-my') {
+          w.innerHTML = head('에이두 받아쓰기 시리즈','나의 받아쓰기','단계별 받아쓰기 기록을 확인해요.') +
+            '<div class="aiedu-pane"><div class="aiedu-list"><div class="aiedu-list-row"><span>1단계 · 낱말 받아쓰기</span><span>완료 8/10</span></div><div class="aiedu-list-row"><span>2단계 · 짧은 문장 받아쓰기</span><span>진행 중</span></div><div class="aiedu-list-row"><span>틀린 글자 복습</span><span>3개</span></div></div></div>';
+          return;
+        }
+        if (action === 'dictation-ai') {
+          const words = ['학교','친구','바람','나무','하늘','연필'];
+          w.innerHTML = head('AI 단어 연습','AI 단어 연습','연습할 낱말을 새로 받아 듣고 써 보세요.') +
+            '<div class="aiedu-pane"><div class="aiedu-big-demo" style="font-size:3rem" data-ai-word>학교</div><div class="aiedu-actions"><span class="aiedu-status">단어를 듣고 공책에 써 보세요.</span><button class="aiedu-btn outline" data-ai-sound>🔊 듣기</button><button class="aiedu-btn stage" data-ai-new>새 단어</button></div></div>';
+          let word='학교';
+          $('[data-ai-sound]',w).addEventListener('click',()=>speak(word));
+          $('[data-ai-new]',w).addEventListener('click',()=>{word=words[Math.floor(Math.random()*words.length)];$('[data-ai-word]',w).textContent=word;speak(word);});
+          return;
+        }
+        if (action === 'dictation-mistake') {
+          w.innerHTML = head('틀린 글자 찾기','맞춤법/문법이 틀린 문장 고르기','문항 4개 중 틀린 문장을 골라요.') +
+            '<div class="aiedu-pane"><div class="aiedu-list"><button class="aiedu-choice" data-spell="0">오늘은 날씨가 좋아요.</button><button class="aiedu-choice" data-spell="1">친구와 책을 읽었서요.</button><button class="aiedu-choice" data-spell="0">강아지가 공을 쫓아요.</button><button class="aiedu-choice" data-spell="0">학교에서 그림을 그려요.</button></div><div class="aiedu-actions"><span class="aiedu-status">틀린 문장을 골라 보세요.</span></div></div>';
+          $$(w,'[data-spell]').forEach(btn=>btn.addEventListener('click',()=>{setStatus(w,btn.dataset.spell==='1'?'맞아요! “읽었어요”가 바른 표현이에요.':'이 문장은 맞아요. 다른 문장을 살펴보세요.');}));
+          return;
+        }
+        if (action === 'dictation-game') {
+          w.innerHTML = head('받아쓰기 게임','준비 중','실제 에이두 받아쓰기 화면에서도 현재 게임은 준비 중입니다.') + '<div class="aiedu-card" style="text-align:center;padding:35px"><div style="font-size:3.5rem">🎮</div><strong>받아쓰기 게임은 준비 중입니다.</strong></div>';
+          return;
+        }
+        const title = action === 'dictation-today' ? '오늘의 받아쓰기' : '급수별 받아쓰기';
+        w.innerHTML = head(title,'1단계 받아쓰기','소리를 듣고 공책에 쓴 뒤 사진을 올리면 정답이 열려요.') +
+          '<div class="aiedu-pane"><div class="aiedu-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div><small style="color:#ef4444;font-weight:900">문제는 TTS로만 들려요</small><strong style="display:block">문제 1</strong></div><button class="aiedu-btn stage" data-dictation-play>▶ 듣기</button></div><div style="text-align:center;padding:18px;margin-top:8px;border-radius:18px;background:#fff1f2"><div style="font-size:3rem">🔊</div><p>공책에 들은 말을 받아써요.<br>정답은 사진을 올린 뒤에만 공개됩니다.</p></div><div class="aiedu-answer-box" data-dictation-answer hidden><small>정답</small><b>오늘은 학교에 갑니다.</b></div></div><div class="aiedu-card" style="margin-top:8px"><strong>공책 사진</strong><input class="aiedu-photo-input" data-dictation-photo type="file" accept="image/*" capture="environment"><div class="aiedu-actions"><span class="aiedu-status">사진을 올려야 정답을 확인할 수 있어요.</span><button class="aiedu-btn stage" data-dictation-reveal>사진 올리고 정답 보기</button></div></div></div>';
+        $('[data-dictation-play]',w).addEventListener('click',()=>speak('오늘은 학교에 갑니다.'));
+        $('[data-dictation-reveal]',w).addEventListener('click',()=>{
+          const input=$('[data-dictation-photo]',w);
+          if (!input.files || !input.files.length) { setStatus(w,'먼저 공책 사진을 선택해 주세요.'); return; }
+          $('[data-dictation-answer]',w).hidden=false; setStatus(w,'사진을 확인했어요. 정답과 비교해 보세요.');
+        });
+      }
+
+      function renderLiteracy(card, action) {
+        const w = openWorkspace(card);
+        if (action === 'literacy-my') {
+          w.innerHTML = head('에이두 문해력','나의 읽기 기록','차곡차곡 쌓인 읽기 실력을 확인해요.') +
+            '<div class="aiedu-record-grid"><div class="aiedu-card"><small>읽은 글</small><b>12</b></div><div class="aiedu-card"><small>어휘 활동</small><b>9</b></div><div class="aiedu-card"><small>독해 퀴즈</small><b>8</b></div></div><div class="aiedu-pane"><div class="aiedu-list"><div class="aiedu-list-row"><span>봄날의 학교</span><span>완료</span></div><div class="aiedu-list-row"><span>동물의 겨울나기</span><span>완료</span></div><div class="aiedu-list-row"><span>우리 동네 도서관</span><span>이어읽기</span></div></div></div>';
+          return;
+        }
+        if (action === 'literacy-vocab') {
+          w.innerHTML = head('어휘 쑥쑥','어휘 쑥쑥','단어와 알맞은 뜻을 짝지어 어휘력을 길러요.') +
+            '<div class="aiedu-pane"><div class="aiedu-word-pairs"><div class="aiedu-list"><button class="aiedu-choice" data-pair-side="word" data-pair="1">생태계</button><button class="aiedu-choice" data-pair-side="word" data-pair="2">관찰</button><button class="aiedu-choice" data-pair-side="word" data-pair="3">이웃</button></div><div class="aiedu-list"><button class="aiedu-choice" data-pair-side="meaning" data-pair="2">자세히 살펴봄</button><button class="aiedu-choice" data-pair-side="meaning" data-pair="3">가까이 사는 사람</button><button class="aiedu-choice" data-pair-side="meaning" data-pair="1">생물과 환경의 관계</button></div></div><div class="aiedu-actions"><span class="aiedu-status">낱말과 뜻을 하나씩 선택해 보세요.</span></div></div>';
+          let selected=null;
+          $$(w,'[data-pair]').forEach(btn=>btn.addEventListener('click',()=>{
+            if (btn.disabled) return;
+            if (!selected) { selected=btn; btn.classList.add('selected'); setStatus(w,'짝이 되는 카드를 골라 보세요.'); return; }
+            if (selected.dataset.pairSide === btn.dataset.pairSide) { selected.classList.remove('selected'); selected=btn; btn.classList.add('selected'); return; }
+            if (selected.dataset.pair === btn.dataset.pair) { selected.disabled=true; btn.disabled=true; selected.classList.remove('selected'); setStatus(w,'정답이에요! 다음 낱말도 연결해 보세요.'); selected=null; }
+            else { selected.classList.remove('selected'); setStatus(w,'짝이 달라요. 다시 골라 보세요.'); selected=null; }
+          }));
+          return;
+        }
+        if (action === 'literacy-sentence') {
+          const correct=['새가','나무에서','노래해요.']; const chosen=[];
+          w.innerHTML = head('문장 만들기','문장 만들기','낱말 카드를 순서대로 클릭해서 바른 문장을 만들어요.') +
+            '<div class="aiedu-pane"><div class="aiedu-sentence-display" data-sentence-display><span style="color:#9ca3af;font-size:.68rem;font-weight:850" data-sentence-placeholder>카드를 클릭해 문장을 조립하세요.</span></div><div class="aiedu-toolbar" style="justify-content:center;margin-top:9px"><button class="aiedu-choice" data-sentence-word="나무에서">나무에서</button><button class="aiedu-choice" data-sentence-word="노래해요.">노래해요.</button><button class="aiedu-choice" data-sentence-word="새가">새가</button></div><div class="aiedu-actions"><span class="aiedu-status">알맞은 순서로 카드를 눌러 보세요.</span><button class="aiedu-btn outline" data-sentence-reset>초기화</button><button class="aiedu-btn stage" data-sentence-check>정답 확인</button></div></div>';
+          const display=$('[data-sentence-display]',w);
+          const repaint=()=>{display.innerHTML=chosen.length?chosen.map(x=>'<span class="aiedu-sentence-token">'+x+'</span>').join(''):'<span style="color:#9ca3af;font-size:.68rem;font-weight:850">카드를 클릭해 문장을 조립하세요.</span>';};
+          $$(w,'[data-sentence-word]').forEach(btn=>btn.addEventListener('click',()=>{chosen.push(btn.dataset.sentenceWord);repaint();}));
+          $('[data-sentence-reset]',w).addEventListener('click',()=>{chosen.length=0;repaint();setStatus(w,'다시 만들어 보세요.');});
+          $('[data-sentence-check]',w).addEventListener('click',()=>setStatus(w,chosen.join('|')===correct.join('|')?'정답이에요! 바른 문장을 만들었어요.':'순서를 다시 생각해 보세요.'));
+          return;
+        }
+        if (action === 'literacy-quiz') {
+          w.innerHTML = head('독해 퀴즈','독해 퀴즈','짧은 글을 읽고 알맞은 답을 골라요.') +
+            '<div class="aiedu-pane"><div class="aiedu-story">민수는 비가 오는 날 우산을 쓰고 학교에 갔습니다. 운동장은 젖어 있어서 체육 시간에는 강당에서 활동했습니다.</div><div class="aiedu-card" style="margin-top:8px"><strong>체육 시간에 어디에서 활동했나요?</strong></div><div class="aiedu-choice-grid" style="margin-top:8px"><button class="aiedu-choice" data-read-answer="0">운동장</button><button class="aiedu-choice" data-read-answer="1">강당</button><button class="aiedu-choice" data-read-answer="0">도서관</button><button class="aiedu-choice" data-read-answer="0">교실</button></div><div class="aiedu-actions"><span class="aiedu-status">글에서 근거를 찾아 보세요.</span></div></div>';
+          $$(w,'[data-read-answer]').forEach(btn=>btn.addEventListener('click',()=>setStatus(w,btn.dataset.readAnswer==='1'?'정답이에요! “강당에서 활동했습니다”가 근거예요.':'글을 한 번 더 읽어 보세요.')));
+          return;
+        }
+        w.innerHTML = head(action === 'literacy-today' ? '오늘의 문해력' : '짧은 글 읽기','짧은 글 읽기','글을 천천히 읽고 이야기 듣기와 읽기 완료를 눌러요.') +
+          '<div class="aiedu-pane"><div class="aiedu-story"><strong style="display:block;margin-bottom:6px">봄이 온 학교</strong>따뜻한 봄이 오자 운동장 옆 나무에 새잎이 돋았습니다. 아이들은 쉬는 시간에 나무를 살펴보고 새로 난 잎의 색과 모양을 이야기했습니다.</div><div class="aiedu-actions"><span class="aiedu-status">천천히 소리 내어 읽어 보세요.</span><button class="aiedu-btn stage" data-story-read>🔊 이야기 듣기</button><button class="aiedu-btn" data-story-done>✔ 읽기 완료!</button></div></div>';
+        $('[data-story-read]',w).addEventListener('click',()=>speak('따뜻한 봄이 오자 운동장 옆 나무에 새잎이 돋았습니다. 아이들은 쉬는 시간에 나무를 살펴보고 새로 난 잎의 색과 모양을 이야기했습니다.'));
+        $('[data-story-done]',w).addEventListener('click',()=>setStatus(w,'읽기 완료! 읽기 기록에 반영되는 흐름입니다.'));
+      }
+
+      document.querySelectorAll('[data-aiedu-stage]').forEach(card => {
+        $('[data-aiedu-home]',card).addEventListener('click',()=>openHome(card));
+        $$(card,'[data-aiedu-action]').forEach(btn=>btn.addEventListener('click',()=>{
+          const action=btn.dataset.aieduAction;
+          if (action.startsWith('drawing-')) renderDrawing(card,action);
+          else if (action.startsWith('korean-')) renderKorean(card,action);
+          else if (action.startsWith('dictation-')) renderDictation(card,action);
+          else if (action.startsWith('literacy-')) renderLiteracy(card,action);
+        }));
+      });
+    })();
+
 
     const chart = document.querySelector('#scoreChart');
     new IntersectionObserver(entries => {

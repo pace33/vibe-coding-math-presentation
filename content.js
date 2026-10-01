@@ -332,78 +332,79 @@ window.TRAINING = {
       "art": []
     },
     {
-      "id": "prompt-type",
-      "title": "이 요청문을 그대로 넣습니다",
+      "id": "practice-one-item-activity",
+      "title": "실습 1 · 좋아하는 아이템 + 활동",
       "part": "theory",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "어떤 사이트를 만들고 싶은지 우리말로 부탁합니다",
+      "type": "steps",
+      "visual": "text-only",
+      "lead": "학생이 좋아하는 소재로 수학 활동을 만듭니다",
       "items": [
         {
-          "heading": "요청문 넣기",
-          "body": "아래 요청문을 복사해 Gemini 입력창에 붙여넣습니다."
+          "heading": "아이템 고르기",
+          "body": "포켓몬, 강아지, 자동차 중 학생이 좋아하는 소재를 하나 정합니다."
         },
         {
-          "heading": "내용 확인",
-          "body": "세기, 덧셈, 뺄셈의 세 가지 활동이 들어 있는지 읽어 봅니다."
+          "heading": "활동 고르기",
+          "body": "개수 맞추기나 덧셈처럼 지금 연습할 활동을 정하고 요청문에 넣습니다."
+        },
+        {
+          "heading": "Canvas에서 만들어 보기",
+          "body": "요청문을 보내고 미리보기에서 그림과 답 버튼이 작동하는지 확인합니다."
         }
       ],
-      "notes": "첫 요청문은 지정된 원문 그대로 사용합니다. 프롬프트는 AI에게 부탁하는 말이라고 짧게 설명합니다. 일반 화면 상단의 첫 요청문 버튼에서 원문을 복사하고 Gemini 입력창에 Ctrl+V로 붙여넣습니다. 처음부터 긴 조건을 추가하지 않고 결과를 본 다음 필요한 점을 수정합니다. 요청문은 일반 화면 상단의 첫 요청문 또는 마지막 장의 진행자료에서 확인합니다.",
+      "notes": "학생이 좋아하는 아이템 한 가지와 연습할 활동 한 가지를 고릅니다. 예를 들어 피카츄로 1부터 5까지 개수 맞추기를 만든다고 정합니다. 첫 요청문 버튼을 열어 대괄호 안의 아이템과 활동을 바꾼 뒤 Canvas에 보냅니다. 결과가 나오면 그림 수와 정답 버튼이 맞는지 직접 눌러 봅니다.",
       "prompt": "starter",
-      "screenshot": {
-        "src": "assets/screenshots/gemini-prompt-entered.jpg",
-        "alt": "사용자가 지정한 포켓몬 수학 사이트 요청문을 입력한 Gemini 화면"
-      },
-      "art": [],
-      "promptPreview": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요. 몇개인지 맞추기, 덧셈, 뺄셈\n3가지 주제의 수학 활동이 가능하게 하세요"
+      "promptPreview": "예: 피카츄로 1~5개 세기 활동을 만들어 주세요. 큰 그림과 답 버튼을 넣어 주세요."
     },
     {
-      "id": "prompt-send",
-      "title": "보내고, 완성될 때까지 기다립니다",
+      "id": "practice-two-pokemon-sprites",
+      "title": "실습 2 · 포켓몬 스프라이트 GitHub 사용하기",
       "part": "theory",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "입력한 요청문을 확인한 뒤 전송 버튼을 누릅니다",
+      "type": "steps",
+      "visual": "text-only",
+      "lead": "PokeAPI 저장소에서 그림을 찾고 웹사이트에 적용합니다",
       "items": [
         {
-          "heading": "전송하기",
-          "body": "입력창 옆의 전송 버튼을 한 번 누릅니다."
+          "heading": "스프라이트 저장소 열기",
+          "body": "GitHub의 PokeAPI/sprites 저장소에서 포켓몬 그림을 찾습니다.",
+          "href": "https://github.com/PokeAPI/sprites"
         },
         {
-          "heading": "기다리는 동안",
-          "body": "글이나 코드가 만들어져도 그대로 기다립니다."
+          "heading": "그림 주소 확인하기",
+          "body": "official-artwork 폴더에서 번호가 붙은 PNG를 고릅니다. 예: 25.png는 피카츄입니다.",
+          "href": "https://github.com/PokeAPI/sprites/tree/master/sprites/pokemon/other/official-artwork"
+        },
+        {
+          "heading": "내 사이트에 적용하기",
+          "body": "선택한 그림의 주소를 Gemini에 알려 주고 화면에 잘 나타나는지 확인합니다."
         }
       ],
-      "notes": "입력한 문장을 읽고 전송 버튼을 한 번 누릅니다. 글이나 코드가 생성되어도 그대로 기다립니다. 계정과 네트워크에 따라 시간이 달라집니다. 같은 요청을 연속으로 보내지 않고 완료된 뒤 결과를 확인합니다.",
-      "screenshot": {
-        "src": "assets/screenshots/gemini-prompt-entered.jpg",
-        "alt": "사용자가 지정한 포켓몬 수학 사이트 요청문을 입력한 Gemini 화면"
-      },
-      "art": []
+      "notes": "GitHub의 PokeAPI/sprites 저장소에서 sprites/pokemon/other/official-artwork 폴더를 엽니다. 25.png 같은 번호 파일을 선택하고 그림 주소를 Gemini 요청문에 넣습니다. 생성된 웹사이트의 이미지가 정상적으로 표시되는지 확인합니다. 포켓몬 이미지 저작권은 The Pokémon Company에 있습니다. 출처: https://github.com/PokeAPI/sprites 및 https://github.com/PokeAPI/sprites/blob/master/LICENCE.txt"
     },
     {
-      "id": "preview",
-      "title": "만들어진 웹사이트를 열어 봅니다",
+      "id": "practice-three-ai-features",
+      "title": "실습 3 · AI 기능 추가하기",
       "part": "theory",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "직접 만든 ‘포켓몬 수학 왕국’을 미리보기에서 눌러 봅니다",
+      "type": "steps",
+      "visual": "text-only",
+      "lead": "완성한 앱에 기능을 하나씩 추가하고 직접 시험합니다",
       "items": [
         {
-          "heading": "미리보기 확인",
-          "body": "웹사이트 화면이 보이면 활동 버튼을 눌러 봅니다."
+          "heading": "AI 힌트",
+          "body": "정답을 알려 주는 대신 학생 눈높이의 짧은 단서를 주는 버튼을 만듭니다."
         },
         {
-          "heading": "코드가 먼저 보이면",
-          "body": "실제 화면에서 ‘미리보기’로 바꾸는 버튼을 찾습니다."
+          "heading": "음성 설명",
+          "body": "힌트와 응원 메시지를 읽어 주는 버튼을 추가하고 소리를 확인합니다."
+        },
+        {
+          "heading": "강아지 그리기",
+          "body": "뼈다귀 보상으로 나만의 강아지 그림을 만드는 기능을 추가합니다."
         }
       ],
-      "notes": "완성된 Canvas의 웹사이트 화면을 보여 줍니다. 이번 예시는 포켓몬 수학 왕국이며 Canvas 패널 제목은 포켓몬 수학 모험입니다. 코드가 보이면 미리보기로 전환합니다. 참가자의 결과가 교재와 똑같이 생겼는지보다 세 활동이 있는지 확인합니다.",
-      "screenshot": {
-        "src": "assets/screenshots/gemini-generated.jpg",
-        "alt": "Gemini Canvas에서 실제로 만들어진 포켓몬 수학 사이트와 미리보기 화면"
-      },
-      "art": []
+      "notes": "첫 실습에서 만든 수학 앱이 완성된 뒤 기능을 추가합니다. 힌트, 음성, 강아지 그리기를 한 번에 구현하려고 하기보다 하나씩 요청하고 결과를 확인합니다. 음성 재생과 이미지 생성 가능 여부는 Gemini 환경에 따라 달라질 수 있습니다. 필요한 기능이 보이지 않으면 현재 환경에서 가능한 대체 방법을 요청합니다. 프롬프트를 열어 복사할 수 있습니다.",
+      "prompt": "aiFeatures",
+      "promptPreview": "AI 힌트부터 추가해 주세요. 잘 작동하면 음성 설명과 강아지 그리기를 이어서 만들어요."
     },
     {
       "id": "test-three",

@@ -17,14 +17,14 @@
 
   function steps(entries = [], compact = false) {
     if (!entries.length) return '';
-    return `<ol class="cap-steps${compact ? ' cap-steps-compact' : ''}">${entries.map((item, index) => `<li><span class="cap-step-number" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span><div><h3>${escape(item.heading)}</h3><p>${escape(item.body)}</p></div></li>`).join('')}</ol>`;
+    return `<ol class="cap-steps${compact ? ' cap-steps-compact' : ''}">${entries.map((item, index) => `<li><span class="cap-step-number" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span><div><h3>${item.href ? `<a href="${escape(item.href)}" target="_blank" rel="noopener noreferrer">${escape(item.heading)} <span aria-hidden="true">↗</span></a>` : escape(item.heading)}</h3><p>${escape(item.body)}</p></div></li>`).join('')}</ol>`;
   }
 
   function prompt(slide) {
     const key = slide.prompt;
     if (!key || !window.TRAINING?.prompts?.[key]) return '';
-    const text = key === 'starter' ? window.TRAINING.prompts.starter : slide.promptPreview;
-    const label = key === 'starter' ? '프롬프트 원문 열기 / 복사' : '수정 요청문 열기 / 복사';
+    const text = slide.promptPreview || (key === 'starter' ? window.TRAINING.prompts.starter : '');
+    const label = key === 'starter' ? '실습 요청문 열기 / 복사' : key === 'aiFeatures' ? 'AI 기능 요청문 열기 / 복사' : '수정 요청문 열기 / 복사';
     return `<div class="cap-prompt">${text ? `<blockquote>${escape(text)}</blockquote>` : ''}<button class="primary" data-prompt="${escape(key)}">${label}</button></div>`;
   }
 

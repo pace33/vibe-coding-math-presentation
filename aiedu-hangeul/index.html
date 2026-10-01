@@ -180,12 +180,6 @@
     .scene-tool b { color: inherit; font-size: .7rem; line-height: 1.25; }
     .feature-workspace { min-height: 286px; }
     .feature-workspace .motion-demo { min-height: 286px; }
-    .live-function { overflow: hidden; border: 1px solid rgba(31,49,78,.14); border-radius: 14px; background: #fff; box-shadow: 0 8px 20px rgba(37,55,82,.08); }
-    .live-function-head { min-height: 38px; padding: 7px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #30415a; font-size: .68rem; font-weight: 900; }
-    .live-function-head span { display: flex; align-items: center; gap: 6px; }
-    .live-function-head span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #49ad50; box-shadow: 0 0 0 3px #e6f7e7; }
-    .live-function-head a { color: var(--scene-accent); text-decoration: underline; text-underline-offset: 2px; }
-    .live-function iframe { display: block; width: 100%; height: 430px; border: 0; border-top: 1px solid #e3e9ef; background: #f5fbfa; }
     .feature-badge { display:inline-flex; align-items:center; gap:5px; padding:4px 8px; border-radius:999px; color:var(--scene-accent); background:color-mix(in srgb,var(--scene-accent) 10%,#fff); font-size:.62rem; font-weight:900; }
     .feature-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
     .feature-card { min-height:78px; padding:10px; border:1px solid #dce4ed; border-radius:11px; background:#fff; color:#46556c; font-size:.72rem; font-weight:800; line-height:1.45; }
@@ -1073,20 +1067,15 @@
         '</div>';
     }
 
-    function actualFunctionMarkup(label, action, page) {
-      const url = 'https://aiedue.ddns.net/korean/' + page;
-      return '<div class="live-function"><div class="live-function-head"><span>' + label + '</span><a href="' + url + '" target="_blank" rel="noopener noreferrer">새 탭으로 열기</a></div><iframe title="실제 에이두 한글 ' + action + ' 화면" src="' + url + '" loading="lazy" referrerpolicy="no-referrer" allow="camera"></iframe></div>';
-    }
-
     const featureCatalog = {
       draw: {
-        actual: () => actualFunctionMarkup('1단계 그리기 대표 기능', '그림 미션', 'drawing.html'),
+        actual: () => canvasMarkup('그림 미션', '⌁', '#8c4ad7', '색과 굵기를 고르고 직접 그린 뒤 완료해요', false),
         picture: () => canvasMarkup('그림 미션', '⌁', '#8c4ad7', '화면에 자유롭게 표시하고 과제를 마쳐요', false),
         shape: () => '<div class="motion-demo"><div class="demo-top"><b>도형 미션</b><small>시작점에서 끝점까지 선을 이어요</small></div><span class="feature-badge">눈-손 협응 · 선 긋기 정확성</span><div class="trace-lane" data-trace-lane><span class="trace-dot start">시작</span><span class="trace-dot end">끝</span><span class="trace-dot trace-runner" data-trace-runner>●</span></div><div class="demo-actions"><span class="demo-status" role="status">보라색 점을 끝점까지 끌어 보세요.</span><button class="demo-reset secondary" data-trace-reset type="button">다시 하기</button></div></div>',
         ai: () => canvasMarkup('AI스케치북', '☀', '#8c4ad7', '자유롭게 그린 뒤 AI 그림으로 바꿔요', true)
       },
       hangul: {
-        actual: () => actualFunctionMarkup('2단계 한글 해득 대표 기능', '오늘의 한글', 'hangul.html'),
+        actual: () => lessonMarkup('vowel'),
         vowel: () => lessonMarkup('vowel'),
         combine: () => lessonMarkup('combine'),
         openword: () => lessonMarkup('openword'),
@@ -1094,14 +1083,14 @@
         finalword: () => lessonMarkup('finalword')
       },
       curriculum: {
-        actual: () => actualFunctionMarkup('3단계 교과 맞춤 쓰기 대표 기능', '교과 맞춤쓰기', 'dictation.html'),
+        actual: () => '<div class="motion-demo scan-demo playing"><div class="demo-top"><b>교과 어휘 뽑기</b><small>사진을 선택하고 핵심어 추출 과정을 확인해요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>식물은 <mark>햇빛</mark>과 <mark>물</mark>이 필요해요.<i class="scan-line" aria-hidden="true"></i></div><div class="ocr-output"><b>식물</b><b>햇빛</b><b>물</b></div></div><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status">예시 문장에서 핵심어 3개를 찾았어요.</span><button class="demo-action secondary" data-open-photo type="button">📷 사진 선택</button><button class="demo-replay" data-replay-scan type="button">추출 재생</button></div></div>',
         photo: () => '<div class="motion-demo scan-demo playing"><div class="demo-top"><b>노트 촬영</b><small>교과서·활동지를 촬영하고 핵심어를 추출해요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>식물은 <mark>햇빛</mark>과 <mark>물</mark>이 필요해요.<i class="scan-line" aria-hidden="true"></i></div><div class="ocr-output"><b>식물</b><b>햇빛</b><b>물</b></div></div><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status">핵심어 3개를 찾았어요.</span><button class="demo-action secondary" data-open-photo type="button">📷 사진 선택</button><button class="demo-replay" data-replay-scan type="button">추출 재생</button></div></div>',
         write: () => canvasMarkup('핵심어 쓰기', '숲', '#e36b23', '추출된 핵심어를 듣고 읽은 뒤 직접 써요', false).replace('완료하기','쓰기 확인').replace('data-panel-complete','data-writing-check').replace('</div></div>','<button class="demo-action secondary" data-speak-text="숲" type="button">🔊 핵심어 듣기</button></div></div>'),
         meaning: () => '<div class="motion-demo"><div class="demo-top"><b>핵심어 설명</b><small>낯선 교과 어휘를 쉬운 그림과 설명으로 확인해요</small></div><div class="word-picture" data-meaning-card><span class="emoji">🌳</span><div><b>생태계</b><p>생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.</p></div></div><div class="saved-words"><button data-meaning-word="생태계">생태계</button><button data-meaning-word="소화">소화</button><button data-meaning-word="이웃">이웃</button></div><div class="demo-actions"><span class="demo-status" role="status">단어 카드를 눌러 뜻을 확인하세요.</span><button class="demo-action secondary" data-speak-meaning type="button">🔊 설명 듣기</button></div></div>',
         bank: () => '<div class="motion-demo"><div class="demo-top"><b>단어 카드 저장소</b><small>어려운 핵심어를 모아 반복 학습해요</small></div><span class="feature-badge">저장된 단어 4개</span><div class="saved-words"><button data-saved-word="생태계">🌱 생태계</button><button data-saved-word="숲">🌳 숲</button><button data-saved-word="소화">🍎 소화</button><button data-saved-word="이웃">🏘️ 이웃</button></div><div class="feature-row"><div class="feature-card"><strong>듣고 읽기</strong>카드를 누르면 단어 소리를 들을 수 있어요.</div><div class="feature-card"><strong>반복 기록</strong><span data-bank-count>오늘 0회 복습</span><button data-bank-review type="button">복습 완료</button></div></div><div class="demo-actions"><span class="demo-status" role="status">복습할 단어를 선택하세요.</span></div></div>'
       },
       literacy: {
-        actual: () => actualFunctionMarkup('4단계 문해력 대표 기능', '오늘의 문해력 미션', 'literacy.html'),
+        actual: () => '<div class="motion-demo"><div class="demo-top"><b>오늘의 문해력</b><small>짧은 글을 읽고 알맞은 답을 골라요</small></div><div class="quiz-stage"><p><mark>식물은 햇빛과 물을 받아</mark> 자라요.</p><div class="choice-grid"><button data-quiz-answer="true">자라요</button><button data-quiz-answer="false">잠들어요</button></div></div><div class="demo-actions"><span class="demo-status" role="status"></span></div></div>',
         choice: () => '<div class="motion-demo"><div class="demo-top"><b>선택형</b><small>교과 핵심어가 포함된 글을 읽고 알맞은 답을 골라요</small></div><div class="quiz-stage"><p><mark>식물은 햇빛과 물을 받아</mark> 자라요.</p><div class="choice-grid"><button data-quiz-answer="true">자라요</button><button data-quiz-answer="false">잠들어요</button></div></div><div class="demo-actions"><span class="demo-status" role="status"></span></div></div>',
         short: () => '<div class="motion-demo"><div class="demo-top"><b>단답형</b><small>질문의 답을 낱말이나 짧은 문장으로 직접 써요</small></div><div class="quiz-stage"><p>식물이 자라는 데 필요한 것은 물과 무엇인가요?</p><input class="answer-field" data-user-answer aria-label="단답 입력" placeholder="답을 써 보세요"><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-text="햇빛" type="button">정답 확인</button></div></div></div>',
         essay: () => '<div class="motion-demo"><div class="demo-top"><b>서술형</b><small>제시된 핵심어를 활용해 자신의 말로 답을 써요</small></div><div class="quiz-stage"><p><b>핵심어: 생태계</b><br>숲의 생물들이 서로 어떤 관계를 맺는지 한 문장으로 써 보세요.</p><textarea class="answer-field" data-user-answer aria-label="서술형 답 입력" placeholder="생태계라는 말을 넣어 써 보세요"></textarea><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-keyword="생태계" type="button">답 확인</button></div></div></div>',

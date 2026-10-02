@@ -965,11 +965,7 @@
       const speak = demo.querySelector('[data-speak]');
       if (speak) speak.addEventListener('click', () => {
         const current = practiceTabs.find(item => item.getAttribute('aria-pressed') === 'true');
-        if (!('speechSynthesis' in window)) return;
-        speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(current.dataset.speech);
-        utterance.lang = 'ko-KR';
-        speechSynthesis.speak(utterance);
+        speakKorean(current.dataset.speech);
       });
       const grade = demo.querySelector('[data-grade]');
       if (grade) grade.addEventListener('click', () => {
@@ -1057,12 +1053,107 @@
       });
     });
 
+    const aieduTtsEndpoint = 'https://us-central1-mansungcoin-c6e06.cloudfunctions.net/ttsHandler';
+    const aieduConsonantSounds = {'ㄱ':'그','ㄲ':'끄','ㄴ':'느','ㄷ':'드','ㄸ':'뜨','ㄹ':'르','ㅁ':'므','ㅂ':'브','ㅃ':'쁘','ㅅ':'스','ㅆ':'쓰','ㅇ':'응','ㅈ':'즈','ㅉ':'쯔','ㅊ':'츠','ㅋ':'크','ㅌ':'트','ㅍ':'프','ㅎ':'흐'};
+    const aieduVowelSounds = {'ㅏ':'아','ㅐ':'애','ㅑ':'야','ㅒ':'얘','ㅓ':'어','ㅔ':'에','ㅕ':'여','ㅖ':'예','ㅗ':'오','ㅘ':'와','ㅙ':'왜','ㅚ':'외','ㅛ':'요','ㅜ':'우','ㅝ':'워','ㅞ':'웨','ㅟ':'위','ㅠ':'유','ㅡ':'으','ㅢ':'의','ㅣ':'이'};
+    let aieduAudioUnlocked = false;
+    let aieduAudioUnlockElement = null;
+    let activeAieduAudio = null;
+    let activeAieduAudioFinish = null;
+    let activeAieduAudioRequest = 0;
+    let activeAieduAudioAbort = null;
+    let activeAieduObjectUrl = '';
+    function unlockAieduAudio() {
+      if (aieduAudioUnlocked) return;
+      if (!aieduAudioUnlockElement) aieduAudioUnlockElement = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAAA');
+      aieduAudioUnlockElement.currentTime = 0;
+      aieduAudioUnlockElement.play().then(() => { aieduAudioUnlocked = true; }).catch(() => {});
+    }
+    window.addEventListener('click', unlockAieduAudio, true);
+    window.addEventListener('touchstart', unlockAieduAudio, true);
+    function stopAieduAudio() {
+      activeAieduAudioRequest += 1;
+      activeAieduAudioAbort?.abort();
+      activeAieduAudioAbort = null;
+      if (activeAieduAudio) { activeAieduAudio.pause(); try { activeAieduAudio.currentTime = 0; } catch (_) {} }
+      activeAieduAudioFinish?.(false);
+      if (activeAieduObjectUrl) { URL.revokeObjectURL(activeAieduObjectUrl); activeAieduObjectUrl = ''; }
+    }
+    function playAieduAudioSource(source, requestId) {
+      return new Promise(resolve => {
+        const audio = new Audio(source);
+        audio.preload = 'auto'; audio.volume = 1; audio.playbackRate = 1.02;
+        activeAieduAudio = audio;
+        let settled = false;
+        const finish = played => {
+          if (settled) return;
+          settled = true; audio.onended = null; audio.onerror = null;
+          if (activeAieduAudio === audio) activeAieduAudio = null;
+          if (activeAieduAudioFinish === finish) activeAieduAudioFinish = null;
+          resolve(played && requestId === activeAieduAudioRequest);
+        };
+        activeAieduAudioFinish = finish;
+        audio.onended = () => finish(true); audio.onerror = () => finish(false);
+        const playing = audio.play();
+        if (playing) playing.catch(() => finish(false));
+      });
+    }
+    function splitAieduVoiceText(value) {
+      let remaining = String(value || '').replace(/\s+/g,' ').trim();
+      const chunks = [];
+      while (remaining.length > 180) {
+        const windowText = remaining.slice(0,181);
+        const splitAt = Math.max(windowText.lastIndexOf('. '),windowText.lastIndexOf('? '),windowText.lastIndexOf('! '),windowText.lastIndexOf(', '),windowText.lastIndexOf(' '));
+        const end = splitAt > 40 ? splitAt + 1 : 180;
+        chunks.push(remaining.slice(0,end).trim());
+        remaining = remaining.slice(end).trim();
+      }
+      if (remaining) chunks.push(remaining);
+      return chunks;
+    }
+    async function speakAieduSequence(items) {
+      const clips = items.flatMap(splitAieduVoiceText);
+      if (!clips.length) return false;
+      stopAieduAudio();
+      const requestId = activeAieduAudioRequest;
+      const abort = new AbortController();
+      activeAieduAudioAbort = abort;
+      for (let index = 0; index < clips.length; index += 1) {
+        if (requestId !== activeAieduAudioRequest) return false;
+        let played = false;
+        try {
+          const response = await fetch(aieduTtsEndpoint, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:clips[index],voice:'female'}),signal:abort.signal});
+          if (!response.ok || !response.headers.get('content-type')?.startsWith('audio/')) throw new Error('에이두 한글 음원에 연결하지 못했습니다.');
+          const audioBlob = await response.blob();
+          if (requestId !== activeAieduAudioRequest) return false;
+          const objectUrl = URL.createObjectURL(audioBlob);
+          activeAieduObjectUrl = objectUrl;
+          played = await playAieduAudioSource(objectUrl, requestId);
+          if (activeAieduObjectUrl === objectUrl) { URL.revokeObjectURL(objectUrl); activeAieduObjectUrl = ''; }
+          if (!played && requestId === activeAieduAudioRequest) throw new Error('에이두 한글 음원을 재생하지 못했습니다.');
+        } catch (error) {
+          if (error?.name === 'AbortError' || requestId !== activeAieduAudioRequest) return false;
+          console.warn('에이두 한글 음성 연결 실패, 음성 대체 경로를 사용합니다.', error);
+          const fallbackUrl = 'https://translate.google.com/translate_tts?ie=UTF-8&q=' + encodeURIComponent(clips[index]) + '&tl=ko&total=1&idx=0&textlen=' + clips[index].length + '&client=tw-ob&prev=input';
+          played = await playAieduAudioSource(fallbackUrl, requestId);
+          if (!played) return false;
+        }
+        if (index < clips.length - 1) await new Promise(resolve => window.setTimeout(resolve, 160));
+      }
+      if (activeAieduAudioAbort === abort) activeAieduAudioAbort = null;
+      return true;
+    }
+    function koreanPronunciationForJamo(value) {
+      const text = String(value || '').trim();
+      if (Array.from(text).length === 1) return aieduConsonantSounds[text] || aieduVowelSounds[text] || text;
+      return text;
+    }
     function speakKorean(text) {
-      if (!('speechSynthesis' in window)) return;
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ko-KR';
-      speechSynthesis.speak(utterance);
+      return speakAieduSequence([koreanPronunciationForJamo(text)]);
+    }
+    function speakKoreanCombination(left, right, result) {
+      const jamoSounds = [...Array.from(left), ...Array.from(right)].map(koreanPronunciationForJamo);
+      return speakAieduSequence([...jamoSounds, koreanPronunciationForJamo(result)]);
     }
 
     function canvasMarkup(title, guide, color, instruction, aiMode, extraAction = '') {
@@ -1255,9 +1346,11 @@
           '<div class="lesson-letters">' + config.letters.map(letter => '<button data-lesson-speak="' + letter + '" type="button">' + letter + '</button>').join('') + '</div>' +
           '<p class="lesson-hint">글자와 소리의 관계를 살펴보고 글자를 눌러 들어 보세요.</p></div>';
         body.querySelectorAll('[data-lesson-speak]').forEach(button => button.addEventListener('click', () => {
-          speakKorean(button.dataset.lessonSpeak);
           const formula = button.closest('.lesson-formula');
-          if (formula) { formula.classList.remove('is-animating'); void formula.offsetWidth; formula.classList.add('is-animating'); }
+          if (formula) {
+            formula.classList.remove('is-animating'); void formula.offsetWidth; formula.classList.add('is-animating');
+            speakKoreanCombination(formula.querySelector('.formula-piece:first-child').textContent, formula.querySelector('.formula-piece:nth-child(3)').textContent, button.dataset.lessonSpeak);
+          } else speakKorean(button.dataset.lessonSpeak);
         }));
       }
 

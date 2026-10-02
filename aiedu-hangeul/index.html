@@ -208,21 +208,19 @@
     .lesson-formulas { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
     .lesson-formula { overflow:hidden; padding:8px 6px; border:1px solid #ffd1a9; border-radius:10px; background:#fff; color:#39485f; text-align:center; font-size:.92rem; font-weight:950; }
     .lesson-formula.is-animating { border-color:#169bc1; box-shadow:0 0 0 2px rgba(22,155,193,.12),0 5px 14px rgba(22,155,193,.12); }
-    .formula-parts { display:flex; justify-content:center; align-items:center; gap:7px; min-height:32px; }
-    .formula-piece { position:relative; z-index:1; display:inline-grid; width:31px; height:31px; place-items:center; border:1px solid #ffe1c6; border-radius:9px; color:#30435d; background:#fff8f0; font-size:1.12rem; will-change:transform,opacity; }
-    .formula-arrow { color:#ec8b2f; }
-    .formula-result { position:relative; z-index:2; display:inline-grid; min-width:35px; min-height:35px; place-items:center; border:1px solid #b8e8f3; border-radius:10px; color:#1496c2; background:#e9faff; font-size:1.3rem; will-change:transform,box-shadow; }
-    .lesson-formula.is-animating .formula-piece:first-child { animation:jamo-converge-left 2.8s cubic-bezier(.2,.75,.25,1) infinite; }
-    .lesson-formula.is-animating .formula-piece:nth-child(3) { animation:jamo-converge-right 2.8s cubic-bezier(.2,.75,.25,1) infinite; }
-    .lesson-formula.is-animating .formula-arrow:nth-child(2) { animation:merge-cue 2.8s ease-in-out infinite; }
-    .lesson-formula.is-animating .formula-arrow:nth-child(4) { animation:arrow-guide 2.8s ease-in-out infinite; }
-    .lesson-formula.is-animating .formula-result { animation:join-result 2.8s cubic-bezier(.2,.75,.25,1) infinite; }
+    .formula-parts { position:relative; min-height:51px; }
+    .formula-piece { position:absolute; z-index:1; top:50%; left:50%; display:inline-grid; min-width:34px; height:34px; padding:0 4px; place-items:center; transform:translate(-50%,-50%) translateX(var(--piece-start-x)); border:1px solid #ffe1c6; border-radius:9px; color:#30435d; background:#fff8f0; font-size:1.2rem; white-space:nowrap; will-change:transform,opacity; }
+    .formula-piece:first-child { --piece-start-x:-36px; --piece-join-x:-8px; }
+    .formula-piece:nth-child(3) { --piece-start-x:36px; --piece-join-x:8px; }
+    .formula-arrow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#ec8b2f; }
+    .formula-result { position:absolute; z-index:2; top:50%; left:50%; display:inline-grid; min-width:42px; min-height:42px; padding:0 7px; place-items:center; transform:translate(-50%,-50%) scale(.88); opacity:0; border:1px solid #b8e8f3; border-radius:10px; color:#1496c2; background:#e9faff; font-size:1.5rem; white-space:nowrap; pointer-events:none; will-change:transform,opacity; }
+    .lesson-formula.is-animating .formula-piece { animation:jamo-meet 3.4s cubic-bezier(.2,.75,.25,1) infinite both; }
+    .lesson-formula.is-animating .formula-arrow { animation:merge-cue 3.4s ease-in-out infinite both; }
+    .lesson-formula.is-animating .formula-result { animation:join-result 3.4s ease-in-out infinite both; }
     .lesson-formula.is-motion-paused .formula-piece,.lesson-formula.is-motion-paused .formula-arrow,.lesson-formula.is-motion-paused .formula-result { animation-play-state:paused !important; }
-    @keyframes jamo-converge-left { 0%,14%,100% { transform:translate(0,0) scale(1); opacity:1; } 30% { transform:translate(5px,-2px) scale(1.12); opacity:1; } 57% { transform:translate(var(--piece-left-dx,52px),0) scale(.34); opacity:.08; } 69%,76% { transform:translate(var(--piece-left-dx,52px),0) scale(.28); opacity:0; } 88% { transform:translate(0,0) scale(1); opacity:1; } }
-    @keyframes jamo-converge-right { 0%,14%,100% { transform:translate(0,0) scale(1); opacity:1; } 30% { transform:translate(4px,2px) scale(1.12); opacity:1; } 57% { transform:translate(var(--piece-right-dx,34px),0) scale(.34); opacity:.08; } 69%,76% { transform:translate(var(--piece-right-dx,34px),0) scale(.28); opacity:0; } 88% { transform:translate(0,0) scale(1); opacity:1; } }
-    @keyframes merge-cue { 0%,18%,100% { opacity:1; transform:none; } 52%,72% { opacity:.12; transform:scale(.65); } 88% { opacity:1; transform:scale(1.12); } }
-    @keyframes arrow-guide { 0%,100% { color:#ec8b2f; transform:none; } 45% { color:#1496c2; transform:translateX(1px); } 66% { color:#1496c2; transform:translateX(6px); } 86% { color:#ec8b2f; transform:translateX(1px); } }
-    @keyframes join-result { 0%,22%,100% { transform:scale(1); box-shadow:none; background:#e9faff; } 56% { transform:scale(.88); } 70% { transform:scale(1.42); box-shadow:0 0 0 9px rgba(20,150,194,.18),0 0 20px rgba(20,150,194,.32); background:#c9f4ff; } 84% { transform:scale(1.1); box-shadow:0 0 0 4px rgba(20,150,194,.1); background:#e9faff; } }
+    @keyframes jamo-meet { 0%,18% { transform:translate(-50%,-50%) translateX(var(--piece-start-x)); opacity:1; border-color:#ffe1c6; background:#fff8f0; } 48%,55% { transform:translate(-50%,-50%) translateX(var(--piece-join-x)); opacity:1; border-color:transparent; background:transparent; } 63%,100% { transform:translate(-50%,-50%) translateX(var(--piece-join-x)); opacity:0; border-color:transparent; background:transparent; } }
+    @keyframes merge-cue { 0%,18% { opacity:1; } 38%,100% { opacity:0; } }
+    @keyframes join-result { 0%,55% { opacity:0; transform:translate(-50%,-50%) scale(.88); box-shadow:none; } 65% { opacity:1; transform:translate(-50%,-50%) scale(1.1); box-shadow:0 0 0 5px rgba(20,150,194,.13); } 78%,100% { opacity:1; transform:translate(-50%,-50%) scale(1); box-shadow:none; } }
     .lesson-formula-actions { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
     .lesson-formula button { display:block; width:100%; min-width:0; margin-top:5px; padding:5px 3px; border:0; border-radius:7px; color:#fff; background:#169bc1; font:inherit; font-size:.58rem; font-weight:900; white-space:nowrap; cursor:pointer; }
     .lesson-letters { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; margin-top:7px; }
@@ -570,8 +568,8 @@
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .lesson-formula.is-animating .formula-piece:first-child,.lesson-formula.is-animating .formula-piece:nth-child(3) { animation-duration:1.1s !important; animation-iteration-count:1 !important; }
-      .lesson-formula.is-animating .formula-arrow,.lesson-formula.is-animating .formula-result { animation-duration:1.1s !important; animation-iteration-count:1 !important; }
+      .lesson-formula.is-animating .formula-piece { animation-duration:2.4s !important; animation-iteration-count:1 !important; }
+      .lesson-formula.is-animating .formula-arrow,.lesson-formula.is-animating .formula-result { animation-duration:2.4s !important; animation-iteration-count:1 !important; }
     }
   </style>
 </head>
@@ -1626,15 +1624,8 @@
 
     function playCombinationMotion(formula) {
       formula.classList.remove('is-animating');
+      formula.classList.remove('is-motion-paused');
       void formula.offsetWidth;
-      const pieces = formula.querySelectorAll('.formula-piece');
-      const result = formula.querySelector('.formula-result');
-      const centerX = element => {
-        const rect = element.getBoundingClientRect();
-        return rect.left + rect.width / 2;
-      };
-      formula.style.setProperty('--piece-left-dx', (centerX(result) - centerX(pieces[0])) + 'px');
-      formula.style.setProperty('--piece-right-dx', (centerX(result) - centerX(pieces[1])) + 'px');
       formula.classList.add('is-animating');
     }
 
@@ -1657,7 +1648,7 @@
 
       if (step === 1) {
         body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>1</i> 📖 이해하기</div>' +
-          '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula"><div class="formula-parts" aria-label="' + parts[0] + '과 ' + parts[1] + '을 합쳐 ' + parts[2] + '"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow">+</span><span class="formula-piece">' + parts[1] + '</span><span class="formula-arrow">→</span><b class="formula-result">' + parts[2] + '</b></div><div class="lesson-formula-actions"><button data-lesson-motion type="button" aria-label="합성 모션 다시 보기" title="합성 모션 다시 보기">▶ 다시 보기</button><button data-lesson-speak="' + parts[2] + '" type="button" aria-label="' + parts[2] + ' 소리 듣기" title="' + parts[2] + ' 소리 듣기">🔊 듣기</button></div></div>').join('') + '</div>' +
+          '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula"><div class="formula-parts" aria-label="' + parts[0] + '과 ' + parts[1] + '이 중앙에서 합쳐져 ' + parts[2] + '"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow" aria-hidden="true">+</span><span class="formula-piece">' + parts[1] + '</span><b class="formula-result">' + parts[2] + '</b></div><div class="lesson-formula-actions"><button data-lesson-motion type="button" aria-label="합성 모션 다시 보기" title="합성 모션 다시 보기">▶ 다시 보기</button><button data-lesson-speak="' + parts[2] + '" type="button" aria-label="' + parts[2] + ' 소리 듣기" title="' + parts[2] + ' 소리 듣기">🔊 듣기</button></div></div>').join('') + '</div>' +
           '<div class="lesson-letters">' + config.letters.map(letter => '<button data-lesson-speak="' + letter + '" type="button">' + letter + '</button>').join('') + '</div>' +
           '<p class="lesson-hint">낱자가 모여 한 글자가 되는 장면을 확인해 보세요.</p></div>';
         const formulas = [...body.querySelectorAll('.lesson-formula')];

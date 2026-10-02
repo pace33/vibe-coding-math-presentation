@@ -909,7 +909,7 @@
       const complete = demo.querySelector('[data-complete]');
       if (complete) complete.addEventListener('click', () => {
         const status = demo.querySelector('.demo-status');
-        status.textContent = demo.classList.contains('user-active') ? '✓ 완료! 나의 그림에 저장했어요.' : '먼저 그림을 그려 보세요.';
+        status.textContent = demo.classList.contains('user-active') ? '✓ 완료! 그림 활동을 확인했어요.' : '먼저 그림을 그려 보세요.';
       });
 
       const practiceTabs = [...demo.querySelectorAll('.practice-tab')];
@@ -1086,7 +1086,7 @@
         '<div class="student-test-head"><span>익명 학생 예시</span><span data-test-count>문제 1 / 3</span><span>정답 <b data-test-score>0</b> / 3</span></div>' +
         '<div class="student-test-meter" aria-label="테스트 진행"><i data-test-meter></i></div>' +
         '<div class="quiz-stage"><p data-test-stem>식물은 햇빛과 물을 받아 자라요. 식물이 자라는 데 꼭 필요한 것은 무엇인가요?</p><div class="choice-grid"><button data-test-answer="0" type="button">햇빛과 물</button><button data-test-answer="1" type="button">장난감과 공</button></div></div>' +
-        '<div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">답을 선택하면 학생 응답과 정오답이 기록돼요.</span><button data-test-next type="button" disabled>다음 문제</button></div></div>';
+        '<div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">답을 선택하면 학생 예시 응답과 정오답이 표시돼요.</span><button data-test-next type="button" disabled>다음 문제</button></div></div>';
     }
 
     function lessonMarkup(key) {
@@ -1262,7 +1262,7 @@
         }
         completed = true;
         shell.querySelectorAll('.lesson-progress button').forEach(item => { item.classList.remove('is-active'); item.classList.add('is-done'); });
-        status.textContent = '🎉 차시 학습을 완료했어요! 학습 기록에 저장되었습니다.';
+        status.textContent = '🎉 차시 쓰기 활동을 완료했어요!';
         next.textContent = '다시 학습';
       });
       mountLessonStep(shell,step);
@@ -1297,7 +1297,7 @@
           choices.forEach((button,index) => { button.textContent = question.answers[index]; button.disabled = false; button.classList.remove('is-selected','correct','incorrect'); });
           next.disabled = true;
           next.textContent = questionIndex === questions.length - 1 ? '결과 확인' : '다음 문제';
-          status.textContent = '답을 선택하면 학생 응답과 정오답이 기록돼요.';
+          status.textContent = '답을 선택하면 학생 예시 응답과 정오답이 표시돼요.';
         };
         choices.forEach((button,index) => button.addEventListener('click', () => {
           if (answered[questionIndex]) return;
@@ -1379,7 +1379,7 @@
         });
         const complete = canvasDemo.querySelector('[data-panel-complete],[data-writing-check]');
         if (complete) complete.addEventListener('click', () => {
-          canvasDemo.querySelector('.demo-status').textContent = used ? '✓ 잘했어요! 활동 기록에 저장했어요.' : '먼저 화면에 직접 써 보세요.';
+          canvasDemo.querySelector('.demo-status').textContent = used ? '✓ 잘했어요! 직접 쓴 글씨를 확인했어요.' : '먼저 화면에 직접 써 보세요.';
         });
         const aiButton = canvasDemo.querySelector('[data-ai-create]');
         if (aiButton) aiButton.addEventListener('click', () => {
@@ -1551,7 +1551,7 @@
       const bankReview = panel.querySelector('[data-bank-review]');
       if (bankReview) {
         let count = 0;
-        bankReview.addEventListener('click', () => { count += 1; panel.querySelector('[data-bank-count]').textContent = '오늘 ' + count + '회 복습'; panel.querySelector('.demo-status').textContent = '✓ 복습 기록을 저장했어요.'; });
+        bankReview.addEventListener('click', () => { count += 1; panel.querySelector('[data-bank-count]').textContent = '오늘 ' + count + '회 복습'; panel.querySelector('.demo-status').textContent = '✓ 복습 횟수를 이 화면에 표시했어요.'; });
       }
 
       const checkText = panel.querySelector('[data-check-text]');

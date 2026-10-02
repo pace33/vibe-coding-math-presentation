@@ -261,6 +261,18 @@
     .saved-words { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
     .saved-words button { padding:7px 9px; border:1px solid #ffd6b5; border-radius:999px; color:#9f4818; background:#fff8f1; font:inherit; font-size:.68rem; font-weight:850; cursor:pointer; }
     .saved-words[data-word-cards] button { color:#fff; border-color:#1496c2; background:#1496c2; }
+    .word-bank-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; margin-top:8px; }
+    .word-bank-card { min-height:67px; display:grid; grid-template-columns:32px 1fr; gap:2px 8px; align-items:center; padding:8px 10px; border:1px solid #d8e1ed; border-radius:11px; color:#263a52; background:#fff; text-align:left; font:inherit; cursor:pointer; transition:transform .16s ease,border-color .16s ease,background .16s ease; }
+    .word-bank-card:hover,.word-bank-card.is-selected { transform:translateY(-1px); border-color:#e36b23; background:#fff8f1; }
+    .word-bank-card .word-bank-icon { grid-row:span 2; font-size:1.35rem; text-align:center; }
+    .word-bank-card b { font-size:.76rem; }
+    .word-bank-card small { color:#6a778c; font-size:.59rem; line-height:1.3; }
+    .bank-empty { grid-column:1/-1; padding:15px; border:1px dashed #f0c7aa; border-radius:11px; color:#816a5a; font-size:.68rem; text-align:center; }
+    .bank-tools { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:8px; }
+    .bank-tools .demo-status { min-height:1em; }
+    .bank-tools button,.bank-review { padding:7px 10px; border:0; border-radius:9px; color:#fff; background:#e36b23; font:inherit; font-size:.65rem; font-weight:900; cursor:pointer; }
+    .bank-review { width:100%; margin-top:6px; }
+    .bank-review[disabled] { opacity:.55; cursor:default; }
     .trace-lane { height:108px; position:relative; overflow:hidden; border:2px dashed color-mix(in srgb,var(--scene-accent) 35%,#dbe2ea); border-radius:12px; background:#fff; }
     .trace-lane::before { content:""; position:absolute; left:12%; right:12%; top:50%; border-top:5px dotted color-mix(in srgb,var(--scene-accent) 45%,#dce4ed); }
     .trace-dot { width:28px; height:28px; position:absolute; top:calc(50% - 14px); display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--scene-accent); font-size:.62rem; font-weight:900; }
@@ -1099,6 +1111,55 @@
         '</div>';
     }
 
+    const wordCardCatalog = {
+      '생태계':{icon:'🌱',meaning:'생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.'},
+      '숲':{icon:'🌳',meaning:'나무와 여러 생물이 함께 살아가는 곳이에요.'},
+      '소화':{icon:'🍎',meaning:'먹은 음식이 몸에서 흡수하기 쉬운 작은 물질로 바뀌는 과정이에요.'},
+      '이웃':{icon:'🏘️',meaning:'가까이 살거나 서로 도움을 주고받는 사람을 말해요.'}
+    };
+    const defaultWordCards = Object.keys(wordCardCatalog);
+    const wordCardsStorageKey = 'aiedu-hangeul-word-cards-v1';
+    const wordReviewStorageKey = 'aiedu-hangeul-word-reviews-v1';
+    function readStoredWordCards() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(wordCardsStorageKey) || 'null');
+        return Array.isArray(stored) ? [...new Set(stored.filter(item => typeof item === 'string' && item.trim()).map(item => item.trim()))] : defaultWordCards.slice();
+      } catch (_) { return defaultWordCards.slice(); }
+    }
+    let savedWordCards = readStoredWordCards();
+    function persistWordCards() {
+      try { localStorage.setItem(wordCardsStorageKey, JSON.stringify(savedWordCards)); } catch (_) { /* Storage can be disabled; in-memory cards still work. */ }
+    }
+    function saveVocabularyCard(word) {
+      const cleanWord = String(word || '').trim();
+      if (!cleanWord) return false;
+      if (savedWordCards.includes(cleanWord)) return false;
+      savedWordCards.unshift(cleanWord);
+      persistWordCards();
+      document.querySelectorAll('[data-word-cards]').forEach(renderSavedWordChips);
+      return true;
+    }
+    function renderSavedWordChips(container) {
+      container.replaceChildren();
+      savedWordCards.forEach(word => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.word = word;
+        button.textContent = (wordCardCatalog[word]?.icon || '📖') + ' ' + word;
+        button.addEventListener('click', () => speakKorean(word));
+        container.append(button);
+      });
+    }
+    function wordBankMarkup() {
+      const cards = savedWordCards.map(word => {
+        const safeWord = word.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+        const item = wordCardCatalog[word] || {icon:'📖',meaning:'교과 자료에서 찾아 저장한 낱말이에요.'};
+        const safeMeaning = item.meaning.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+        return '<button class="word-bank-card" data-saved-word="' + safeWord + '" type="button"><span class="word-bank-icon" aria-hidden="true">' + item.icon + '</span><b>' + safeWord + '</b><small>' + safeMeaning + '</small></button>';
+      }).join('');
+      return '<div class="motion-demo"><div class="demo-top"><b>단어 카드 저장소</b><small>어려운 핵심어를 모아 반복 학습해요</small></div><span class="feature-badge" data-bank-total>저장된 단어 ' + savedWordCards.length + '개</span><div class="word-bank-grid" aria-label="저장된 단어 카드 목록">' + (cards || '<div class="bank-empty">아직 저장된 단어가 없어요.<br>교과 자료에서 핵심어를 찾아 카드로 추가해 보세요.</div>') + '</div><div class="feature-row"><div class="feature-card"><strong>듣고 읽기</strong><span data-bank-selected>카드를 누르면 낱말과 뜻을 확인해요.</span></div><div class="feature-card"><strong>반복 기록</strong><span data-bank-count>오늘 0회 복습</span><button class="bank-review" data-bank-review type="button"' + (savedWordCards.length ? '' : ' disabled') + '>복습 완료</button></div></div><div class="bank-tools"><span class="demo-status" role="status" aria-live="polite">저장한 단어 카드를 눌러 소리를 들어 보세요.</span><button data-bank-listen type="button">🔊 다시 듣기</button></div></div>';
+    }
+
     const featureCatalog = {
       draw: {
         picture: () => canvasMarkup('그림 미션', '⌁', '#8c4ad7', '화면에 자유롭게 표시하고 과제를 마쳐요', false),
@@ -1116,7 +1177,7 @@
         photo: () => '<div class="motion-demo scan-demo"><div class="demo-top"><b>교과 자료 촬영·인식</b><small>노트 사진에서 한글을 찾아 단어 카드로 만들어요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div><div class="ocr-output is-empty" data-ocr-output>인식된 핵심어가 여기에 나타나요.</div></div><video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video><canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요.</span><button class="demo-action secondary" data-open-camera type="button">카메라 켜기</button><button class="demo-action secondary" data-capture-photo type="button" disabled>촬영</button><button class="demo-action secondary" data-open-photo type="button">사진 선택</button></div><div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div></div>',
         write: () => canvasMarkup('핵심어 쓰기', '숲', '#e36b23', '핵심어를 듣고 읽은 뒤 직접 써요', false, '<button class="demo-action secondary" data-speak-text="숲" type="button">🔊 핵심어 듣기</button>').replace('완료하기','쓰기 확인').replace('data-panel-complete','data-writing-check'),
         meaning: () => '<div class="motion-demo"><div class="demo-top"><b>핵심어 설명</b><small>낯선 교과 어휘를 에이두 한글 단어 카드로 확인해요</small></div><div class="word-picture" data-meaning-card><img class="word-card-art" src="assets/word-card-character.jpg" alt="생태계 단어 카드 그림"><div><span class="feature-badge">에이두 한글 · 핵심어 카드</span><b>생태계</b><p>생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.</p></div></div><div class="saved-words"><button data-meaning-word="생태계">생태계</button><button data-meaning-word="소화">소화</button><button data-meaning-word="이웃">이웃</button></div><div class="demo-actions"><span class="demo-status" role="status">단어 카드를 눌러 뜻을 확인하세요.</span><button class="demo-action secondary" data-speak-meaning type="button">🔊 설명 듣기</button></div></div>',
-        bank: () => '<div class="motion-demo"><div class="demo-top"><b>단어 카드 저장소</b><small>어려운 핵심어를 모아 반복 학습해요</small></div><span class="feature-badge">저장된 단어 4개</span><div class="saved-words"><button data-saved-word="생태계">🌱 생태계</button><button data-saved-word="숲">🌳 숲</button><button data-saved-word="소화">🍎 소화</button><button data-saved-word="이웃">🏘️ 이웃</button></div><div class="feature-row"><div class="feature-card"><strong>듣고 읽기</strong>카드를 누르면 단어 소리를 들을 수 있어요.</div><div class="feature-card"><strong>반복 기록</strong><span data-bank-count>오늘 0회 복습</span><button data-bank-review type="button">복습 완료</button></div></div><div class="demo-actions"><span class="demo-status" role="status">복습할 단어를 선택하세요.</span></div></div>'
+        bank: () => wordBankMarkup()
       },
       literacy: {
         choice: () => literacyTestMarkup(),
@@ -1437,6 +1498,7 @@
         const capture = panel.querySelector('[data-capture-photo]');
         const captureCanvas = panel.querySelector('[data-capture-canvas]');
         const savedCards = panel.querySelector('[data-word-cards]');
+        renderSavedWordChips(savedCards);
         let imageUrl = '';
         const stopCamera = () => {
           if (panel._cameraStream) { panel._cameraStream.getTracks().forEach(track => track.stop()); panel._cameraStream = null; }
@@ -1455,15 +1517,9 @@
             chip.textContent = word;
             chip.setAttribute('aria-label', word + ' 단어 카드를 저장');
             chip.addEventListener('click', () => {
-              if ([...savedCards.children].some(card => card.dataset.word === word)) { status.textContent = '이미 저장된 핵심어예요.'; return; }
-              const card = document.createElement('button');
-              card.type = 'button';
-              card.dataset.word = word;
-              card.textContent = '📖 ' + word;
-              card.addEventListener('click', () => speakKorean(word));
-              savedCards.append(card);
+              if (!saveVocabularyCard(word)) { status.textContent = '이미 저장된 핵심어예요. 저장소에서 다시 들을 수 있어요.'; return; }
               chip.classList.add('is-saved');
-              status.textContent = '“' + word + '” 단어 카드를 저장했어요.';
+              status.textContent = '“' + word + '” 카드를 저장했어요. 단어 카드 저장소에서 확인할 수 있어요.';
             });
             output.append(chip);
           });
@@ -1530,29 +1586,50 @@
         });
       }
 
-      const meanings = {
-        '생태계':['🌳','생태계','생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.'],
-        '소화':['🍎','소화','먹은 음식이 몸에서 흡수하기 쉬운 작은 물질로 바뀌는 과정이에요.'],
-        '이웃':['🏘️','이웃','가까이 살거나 서로 도움을 주고받는 사람을 말해요.']
-      };
       panel.querySelectorAll('[data-meaning-word]').forEach(button => button.addEventListener('click', () => {
-        const data = meanings[button.dataset.meaningWord];
+        const word = button.dataset.meaningWord;
+        const data = wordCardCatalog[word] || {icon:'📖',meaning:'교과 자료에서 찾아본 낱말이에요.'};
         const card = panel.querySelector('[data-meaning-card]');
-        card.querySelector('.word-card-art').alt = data[1] + ' 단어 카드 그림'; card.querySelector('b').textContent = data[1]; card.querySelector('p').textContent = data[2];
-        panel.querySelector('.demo-status').textContent = data[1] + '의 뜻을 확인했어요.';
+        card.querySelector('.word-card-art').alt = word + ' 단어 카드 그림'; card.querySelector('b').textContent = word; card.querySelector('p').textContent = data.meaning;
+        panel.querySelector('.demo-status').textContent = word + '의 뜻을 확인했어요.';
       }));
       const speakMeaning = panel.querySelector('[data-speak-meaning]');
       if (speakMeaning) speakMeaning.addEventListener('click', () => speakKorean(panel.querySelector('[data-meaning-card] b').textContent + '. ' + panel.querySelector('[data-meaning-card] p').textContent));
 
       panel.querySelectorAll('[data-saved-word]').forEach(button => button.addEventListener('click', () => {
+        panel.querySelectorAll('[data-saved-word]').forEach(item => item.classList.toggle('is-selected', item === button));
         speakKorean(button.dataset.savedWord);
-        panel.querySelector('.demo-status').textContent = button.dataset.savedWord + '을 다시 들었어요.';
+        const selected = panel.querySelector('[data-bank-selected]');
+        if (selected) selected.textContent = button.dataset.savedWord + ' — ' + (wordCardCatalog[button.dataset.savedWord]?.meaning || '교과 자료에서 찾아 저장한 낱말이에요.');
+        const status = panel.querySelector('.demo-status');
+        if (status) status.textContent = '“' + button.dataset.savedWord + '”을 소리 내어 읽었어요.';
       }));
       const bankReview = panel.querySelector('[data-bank-review]');
       if (bankReview) {
-        let count = 0;
-        bankReview.addEventListener('click', () => { count += 1; panel.querySelector('[data-bank-count]').textContent = '오늘 ' + count + '회 복습'; panel.querySelector('.demo-status').textContent = '✓ 복습 횟수를 이 화면에 표시했어요.'; });
+        const today = new Intl.DateTimeFormat('sv-SE').format(new Date());
+        const readReviewCount = () => {
+          try {
+            const data = JSON.parse(localStorage.getItem(wordReviewStorageKey) || '{}');
+            return data.date === today ? Number(data.count) || 0 : 0;
+          } catch (_) { return 0; }
+        };
+        const countNode = panel.querySelector('[data-bank-count]');
+        countNode.textContent = '오늘 ' + readReviewCount() + '회 복습';
+        bankReview.addEventListener('click', () => {
+          const count = readReviewCount() + 1;
+          try { localStorage.setItem(wordReviewStorageKey, JSON.stringify({date:today,count})); } catch (_) { /* Keep the visible count usable for this visit. */ }
+          countNode.textContent = '오늘 ' + count + '회 복습';
+          panel.querySelector('.demo-status').textContent = '✓ 오늘 복습 기록을 이 브라우저에 저장했어요.';
+        });
       }
+      const bankListen = panel.querySelector('[data-bank-listen]');
+      if (bankListen) bankListen.addEventListener('click', () => {
+        const word = panel.querySelector('[data-saved-word].is-selected')?.dataset.savedWord || savedWordCards[0];
+        if (!word) return;
+        speakKorean(word);
+        panel.querySelector('[data-bank-selected]').textContent = word + ' — ' + (wordCardCatalog[word]?.meaning || '교과 자료에서 찾아 저장한 낱말이에요.');
+        panel.querySelector('.demo-status').textContent = '“' + word + '” 카드를 다시 들었어요.';
+      });
 
       const checkText = panel.querySelector('[data-check-text]');
       if (checkText) checkText.addEventListener('click', () => {

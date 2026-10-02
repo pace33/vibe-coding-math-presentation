@@ -208,17 +208,19 @@
     .lesson-formulas { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
     .lesson-formula { overflow:hidden; padding:8px 6px; border:1px solid #ffd1a9; border-radius:10px; background:#fff; color:#39485f; text-align:center; font-size:.92rem; font-weight:950; }
     .formula-parts { display:flex; justify-content:center; align-items:center; gap:7px; min-height:32px; }
-    .formula-piece { display:inline-grid; min-width:23px; place-items:center; font-size:1.12rem; }
+    .formula-piece { display:inline-grid; width:31px; height:31px; place-items:center; border:1px solid #ffe1c6; border-radius:9px; color:#30435d; background:#fff8f0; font-size:1.12rem; }
     .formula-arrow { color:#ec8b2f; }
-    .formula-result { color:#1496c2; font-size:1.3rem; }
-    .lesson-formula.is-animating .formula-piece:first-child { animation:jamo-converge-left 1.25s cubic-bezier(.2,.75,.25,1) both; }
-    .lesson-formula.is-animating .formula-piece:nth-child(3) { animation:jamo-converge-right 1.25s cubic-bezier(.2,.75,.25,1) both; }
-    .lesson-formula.is-animating .formula-arrow { animation:merge-cue 1.25s ease both; }
-    .lesson-formula.is-animating .formula-result { animation:join-result 1.25s .36s cubic-bezier(.2,.75,.25,1) both; }
-    @keyframes jamo-converge-left { 0% { transform:none; opacity:1; } 42% { transform:translateX(17px) scale(.82); opacity:1; } 70% { transform:translateX(22px) scale(.65); opacity:.5; } 82%,100% { transform:translateX(22px) scale(.55); opacity:.18; } }
-    @keyframes jamo-converge-right { 0% { transform:none; opacity:1; } 42% { transform:translateX(-17px) scale(.82); opacity:1; } 70% { transform:translateX(-22px) scale(.65); opacity:.5; } 82%,100% { transform:translateX(-22px) scale(.55); opacity:.18; } }
-    @keyframes merge-cue { 0%,30% { opacity:1; transform:none; } 52% { opacity:.25; transform:scale(.8); } 70%,100% { opacity:.75; transform:none; } }
-    @keyframes join-result { 0% { transform:translateX(-15px) scale(.55); opacity:0; text-shadow:none; } 55% { transform:translateX(-8px) scale(.7); opacity:.2; } 75% { transform:translateX(0) scale(1.28); opacity:1; text-shadow:0 0 12px rgba(20,150,194,.35); } 100% { transform:none; opacity:1; text-shadow:none; } }
+    .formula-result { display:inline-grid; min-width:35px; min-height:35px; place-items:center; border:1px solid #b8e8f3; border-radius:10px; color:#1496c2; background:#e9faff; font-size:1.3rem; }
+    .lesson-formula.is-animating .formula-piece:first-child { animation:jamo-converge-left 1.55s cubic-bezier(.2,.75,.25,1) both; }
+    .lesson-formula.is-animating .formula-piece:nth-child(3) { animation:jamo-converge-right 1.55s cubic-bezier(.2,.75,.25,1) both; }
+    .lesson-formula.is-animating .formula-arrow:nth-child(2) { animation:merge-cue 1.55s ease both; }
+    .lesson-formula.is-animating .formula-arrow:nth-child(4) { animation:arrow-guide 1.55s ease both; }
+    .lesson-formula.is-animating .formula-result { animation:join-result 1.55s .12s cubic-bezier(.2,.75,.25,1) both; }
+    @keyframes jamo-converge-left { 0%,100% { transform:none; } 24% { transform:translate(4px,-4px) scale(1.12); } 56% { transform:translate(28px,-3px) scale(.78); } 76% { transform:translate(18px,2px) scale(.88); } 90% { transform:translate(3px,1px) scale(1.04); } }
+    @keyframes jamo-converge-right { 0%,100% { transform:none; } 24% { transform:translate(-4px,4px) scale(1.12); } 56% { transform:translate(-28px,3px) scale(.78); } 76% { transform:translate(-18px,-2px) scale(.88); } 90% { transform:translate(-3px,-1px) scale(1.04); } }
+    @keyframes merge-cue { 0%,100% { opacity:1; transform:none; } 52% { opacity:.2; transform:scale(.65); } 72% { opacity:.5; transform:scale(.85); } 88% { opacity:1; transform:scale(1.12); } }
+    @keyframes arrow-guide { 0%,100% { color:#ec8b2f; transform:none; } 58% { color:#1496c2; transform:translateX(1px); } 78% { color:#1496c2; transform:translateX(5px); } 92% { color:#ec8b2f; transform:translateX(1px); } }
+    @keyframes join-result { 0%,100% { transform:none; box-shadow:none; } 52% { transform:scale(.82); } 72% { transform:scale(1.32); box-shadow:0 0 0 8px rgba(20,150,194,.14),0 0 18px rgba(20,150,194,.25); } 88% { transform:scale(1.12); box-shadow:0 0 0 4px rgba(20,150,194,.09); } }
     .lesson-formula button { display:block; width:100%; margin-top:5px; padding:5px; border:0; border-radius:7px; color:#fff; background:#169bc1; font:inherit; font-size:.58rem; font-weight:900; cursor:pointer; }
     .lesson-letters { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; margin-top:7px; }
     .lesson-letters button { min-height:38px; border:1px solid #ffd1a9; border-radius:9px; color:#263a52; background:#fff; font:inherit; font-size:1rem; font-weight:950; cursor:pointer; }
@@ -1574,6 +1576,12 @@
       return '<div class="trace-word-card"><div class="trace-word-heading"><span>✍️ 낱말 따라쓰기</span><strong>' + word + '</strong><small>낱말 ' + (index + 1) + ' / ' + total + '</small></div><div class="trace-grid' + (chars.length === 1 ? ' is-single' : '') + '">' + chars.map((letter,cellIndex) => '<div class="trace-cell' + (cellIndex === 0 ? ' is-current' : '') + '" data-trace-letter="' + letter + '" data-stroke-total="' + syllableStrokeCount(letter) + '"><strong>' + letter + '</strong><span class="trace-stroke-count" data-stroke-label>1 / ' + syllableStrokeCount(letter) + ' 획</span><button class="trace-reset" data-trace-reset type="button" aria-label="' + letter + ' 쓰기 지우기">↻</button><span class="trace-guide-letter" aria-hidden="true">' + letter + '</span><canvas aria-label="' + letter + ' 직접 쓰기 칸"></canvas></div>').join('') + '</div><div class="trace-word-progress" aria-label="음절 쓰기 진행">' + chars.map(() => '<i></i>').join('') + '</div></div>';
     }
 
+    function playCombinationMotion(formula) {
+      formula.classList.remove('is-animating');
+      void formula.offsetWidth;
+      formula.classList.add('is-animating');
+    }
+
     function mountLessonStep(shell, step) {
       const config = lessonConfigs[shell.dataset.hangulLesson];
       const body = shell.querySelector('[data-lesson-body]');
@@ -1592,13 +1600,19 @@
 
       if (step === 1) {
         body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>1</i> 📖 이해하기</div>' +
-          '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula is-animating"><div class="formula-parts" aria-label="' + parts[0] + '과 ' + parts[1] + '을 합쳐 ' + parts[2] + '"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow">+</span><span class="formula-piece">' + parts[1] + '</span><span class="formula-arrow">→</span><b class="formula-result">' + parts[2] + '</b></div><button data-lesson-speak="' + parts[2] + '" type="button">🔊 소리 듣기 · 다시 보기</button></div>').join('') + '</div>' +
+          '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula"><div class="formula-parts" aria-label="' + parts[0] + '과 ' + parts[1] + '을 합쳐 ' + parts[2] + '"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow">+</span><span class="formula-piece">' + parts[1] + '</span><span class="formula-arrow">→</span><b class="formula-result">' + parts[2] + '</b></div><button data-lesson-speak="' + parts[2] + '" type="button">🔊 소리 듣기 · 다시 보기</button></div>').join('') + '</div>' +
           '<div class="lesson-letters">' + config.letters.map(letter => '<button data-lesson-speak="' + letter + '" type="button">' + letter + '</button>').join('') + '</div>' +
           '<p class="lesson-hint">글자와 소리의 관계를 살펴보고 글자를 눌러 들어 보세요.</p></div>';
+        body.querySelectorAll('.lesson-formula').forEach((formula,index) => {
+          formula.addEventListener('animationend',event => {
+            if (event.target.matches('.formula-result')) formula.classList.remove('is-animating');
+          });
+          window.setTimeout(() => playCombinationMotion(formula),index * 1250 + 120);
+        });
         body.querySelectorAll('[data-lesson-speak]').forEach(button => button.addEventListener('click', () => {
           const formula = button.closest('.lesson-formula');
           if (formula) {
-            formula.classList.remove('is-animating'); void formula.offsetWidth; formula.classList.add('is-animating');
+            playCombinationMotion(formula);
             speakKoreanCombination(formula.querySelector('.formula-piece:first-child').textContent, formula.querySelector('.formula-piece:nth-child(3)').textContent, button.dataset.lessonSpeak);
           } else speakKorean(button.dataset.lessonSpeak);
         }));

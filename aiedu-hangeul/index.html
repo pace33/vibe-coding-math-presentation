@@ -227,6 +227,7 @@
     .lesson-choices button:disabled { cursor:not-allowed; opacity:.48; }
     .lesson-choices button.is-correct { color:#fff; border-color:#47a73e; background:#47a73e; }
     .lesson-choices button.is-wrong { color:#9b342c; border-color:#ef9c93; background:#fff0ed; }
+    .hangul-review .lesson-choices { grid-template-columns:repeat(3,minmax(0,1fr)); }
     .lesson-hint { margin:7px 0 0; color:#6c7788; font-size:.62rem; font-weight:800; text-align:center; }
     .trace-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; overflow:hidden; border:2px solid #ffa04d; border-radius:11px; background:#ffc992; }
     .trace-cell { height:82px; position:relative; overflow:hidden; background:#fffaf2; }
@@ -656,11 +657,12 @@
             <div class="stage-shot stage-two" aria-label="한글 해득 단계 세부 기능 장면">
               <div class="feature-scene">
                 <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>배움 차시 핵심 기능</small><b>한글 해득</b><span>모음부터 받침 있는 단어까지 확장해요</span></div></div>
-                <div class="scene-tools" style="--feature-count:4" aria-label="한글 해득 핵심 기능">
+                <div class="scene-tools" style="--feature-count:5" aria-label="한글 해득 핵심 기능">
                   <button class="scene-tool" data-stage-feature="hangul" data-key="combine" aria-pressed="true"><em>가</em><b>자모음 합성</b></button>
                   <button class="scene-tool" data-stage-feature="hangul" data-key="openword" aria-pressed="false"><em>🚌</em><b>받침 없는 단어</b></button>
                   <button class="scene-tool" data-stage-feature="hangul" data-key="complex" aria-pressed="false"><em>ㅘ</em><b>복잡한 모음</b></button>
                   <button class="scene-tool" data-stage-feature="hangul" data-key="finalword" aria-pressed="false"><em>책</em><b>받침 있는 단어</b></button>
+                  <button class="scene-tool" data-stage-feature="hangul" data-key="review" aria-pressed="false"><em>🔁</em><b>복습</b></button>
                 </div>
                 <div class="feature-workspace" data-feature-panel="hangul" aria-live="polite"></div>
               </div>
@@ -1113,6 +1115,14 @@
         '</div>';
     }
 
+    function hangulReviewMarkup() {
+      return '<div class="motion-demo student-test" data-hangul-review><div class="demo-top"><b>배움 확인 · 복습</b><small>앞서 배운 글자와 낱말을 다시 확인해요</small></div>' +
+        '<div class="student-test-head"><span data-review-topic>자모음 합성</span><span data-review-count>문제 1 / 3</span><span>맞힘 <b data-review-score>0</b> / 3</span></div>' +
+        '<div class="student-test-meter" aria-label="복습 진행"><i data-review-meter></i></div>' +
+        '<div class="lesson-card"><div class="lesson-card-title"><i data-review-number>1</i> 🎧 듣고 다시 찾아요</div><div class="listen-stage"><button class="listen-button" data-review-listen type="button">🔊<br>소리 듣기</button><div class="lesson-choices"><button data-review-answer="0" type="button" disabled>가</button><button data-review-answer="1" type="button" disabled>나</button><button data-review-answer="2" type="button" disabled>다</button></div></div><p class="lesson-hint" data-review-hint>소리를 듣고 알맞은 글자나 낱말을 골라요.</p></div>' +
+        '<div class="demo-actions"><span class="demo-status" data-review-status role="status" aria-live="polite">소리 듣기 버튼을 누르고 답을 골라 보세요.</span><button class="demo-action" data-review-next type="button" disabled>다음 문제</button></div></div>';
+    }
+
     const wordCardCatalog = {
       '생태계':{icon:'🌱',meaning:'생물과 생물을 둘러싼 환경이 서로 영향을 주고받는 관계예요.'},
       '숲':{icon:'🌳',meaning:'나무와 여러 생물이 함께 살아가는 곳이에요.'},
@@ -1172,7 +1182,8 @@
         combine: () => lessonMarkup('combine'),
         openword: () => lessonMarkup('openword'),
         complex: () => lessonMarkup('complex'),
-        finalword: () => lessonMarkup('finalword')
+        finalword: () => lessonMarkup('finalword'),
+        review: () => hangulReviewMarkup()
       },
       curriculum: {
         photo: () => '<div class="motion-demo scan-demo"><div class="demo-top"><b>교과 자료 촬영·인식</b><small>노트 사진에서 한글을 찾아 단어 카드로 만들어요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div><div class="ocr-output is-empty" data-ocr-output>인식된 핵심어가 여기에 나타나요.</div></div><video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video><canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요.</span><button class="demo-action secondary" data-open-camera type="button">카메라 켜기</button><button class="demo-action secondary" data-capture-photo type="button" disabled>촬영</button><button class="demo-action secondary" data-open-photo type="button">사진 선택</button></div><div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div></div>',
@@ -1368,6 +1379,69 @@
       const lesson = panel.querySelector('[data-hangul-lesson]');
       if (lesson) {
         wireHangulLesson(lesson);
+        return;
+      }
+      const hangulReview = panel.querySelector('[data-hangul-review]');
+      if (hangulReview) {
+        const questions = [
+          {topic:'자모음 합성',sound:'가',answers:['가','나','다'],correct:0,hint:'ㄱ과 ㅏ를 합쳐 만든 글자를 찾아요.'},
+          {topic:'받침 없는 단어',sound:'버스',answers:['버스','밤','책'],correct:0,hint:'받침 없이 소리 나는 두 글자 낱말이에요.'},
+          {topic:'받침 있는 단어',sound:'책',answers:['채','책','밤'],correct:1,hint:'마지막에 ㄱ 받침이 있는 낱말이에요.'}
+        ];
+        let questionIndex = 0;
+        let score = 0;
+        let complete = false;
+        const choices = [...hangulReview.querySelectorAll('[data-review-answer]')];
+        const next = hangulReview.querySelector('[data-review-next]');
+        const status = hangulReview.querySelector('[data-review-status]');
+        const listen = hangulReview.querySelector('[data-review-listen]');
+        const render = () => {
+          const question = questions[questionIndex];
+          hangulReview.querySelector('[data-review-topic]').textContent = question.topic;
+          hangulReview.querySelector('[data-review-count]').textContent = '문제 ' + (questionIndex + 1) + ' / ' + questions.length;
+          hangulReview.querySelector('[data-review-number]').textContent = questionIndex + 1;
+          hangulReview.querySelector('[data-review-score]').textContent = score;
+          hangulReview.querySelector('[data-review-meter]').style.width = (questionIndex / questions.length * 100) + '%';
+          choices.forEach((button,index) => { button.textContent = question.answers[index]; button.disabled = true; button.classList.remove('is-correct','is-wrong'); });
+          listen.disabled = false;
+          next.disabled = true;
+          next.textContent = questionIndex === questions.length - 1 ? '결과 확인' : '다음 문제';
+          status.textContent = '소리 듣기 버튼을 누르고 답을 골라 보세요.';
+          hangulReview.querySelector('[data-review-hint]').textContent = '소리를 듣고 알맞은 글자나 낱말을 골라요.';
+        };
+        listen.addEventListener('click', () => {
+          speakKorean(questions[questionIndex].sound);
+          choices.forEach(button => button.disabled = false);
+          status.textContent = '방금 들은 글자나 낱말을 찾아요.';
+        });
+        choices.forEach((button,index) => button.addEventListener('click', () => {
+          if (button.disabled) return;
+          const question = questions[questionIndex];
+          const correct = index === question.correct;
+          choices.forEach((choice,choiceIndex) => {
+            choice.disabled = true;
+            if (choiceIndex === question.correct) choice.classList.add('is-correct');
+            else if (choiceIndex === index) choice.classList.add('is-wrong');
+          });
+          if (correct) score += 1;
+          hangulReview.querySelector('[data-review-score]').textContent = score;
+          hangulReview.querySelector('[data-review-meter]').style.width = ((questionIndex + 1) / questions.length * 100) + '%';
+          status.textContent = correct ? '✓ 맞았어요! 잘 기억하고 있네요.' : '다시 확인해 봐요. ' + question.hint;
+          next.disabled = false;
+        }));
+        next.addEventListener('click', () => {
+          if (complete) { questionIndex = 0; score = 0; complete = false; render(); return; }
+          if (next.disabled) return;
+          if (questionIndex < questions.length - 1) { questionIndex += 1; render(); return; }
+          complete = true;
+          hangulReview.querySelector('[data-review-topic]').textContent = '복습 결과';
+          hangulReview.querySelector('[data-review-count]').textContent = '복습 완료';
+          hangulReview.querySelector('[data-review-meter]').style.width = '100%';
+          hangulReview.querySelector('[data-review-hint]').textContent = '세 가지 학습 내용을 모두 다시 확인했어요.';
+          status.textContent = '오늘의 복습 결과: ' + score + ' / ' + questions.length + ' 정답';
+          next.textContent = '다시 풀기';
+          next.disabled = false;
+        });
         return;
       }
       panel.querySelectorAll('[data-speak-text]').forEach(button => button.addEventListener('click', () => speakKorean(button.dataset.speakText)));

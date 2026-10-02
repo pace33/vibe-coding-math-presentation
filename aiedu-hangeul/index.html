@@ -334,7 +334,7 @@
     .aiedu-review-embed .korean-learning-logo { flex-shrink:0; width:148px; padding:0; border:0; background:transparent; }
     .aiedu-review-embed .korean-learning-logo img { display:block; width:100%; height:auto; object-fit:contain; }
     .aiedu-review-embed .aiedu-badge { display:inline-flex; align-items:center; justify-content:center; width:fit-content; padding:8px 16px; border-radius:999px; background:#22c55e; color:#fff; font-size:.85rem; font-weight:900; }
-    .aiedu-review-embed .btn-outline { border:2px solid #55b346; color:#55b346; padding:10px 28px; border-radius:50px; font-size:1rem; font-weight:700; background:transparent; }
+    .aiedu-review-embed .btn-outline { border:2px solid #55b346; color:#55b346; padding:10px 28px; border-radius:50px; font-size:1rem; font-weight:700; background:transparent; text-decoration:none; }
     .aiedu-review-embed .btn-outline:hover { background:#55b346; color:#fff; }
     .aiedu-review-embed .btn-primary { min-height:48px; padding:12px 24px; border:0; border-radius:50px; background:#55b346; color:#fff; font-size:1rem; font-weight:900; }
     .aiedu-review-embed .korean-learning-stage-tabs { display:flex; gap:8px; padding-bottom:16px; }
@@ -372,6 +372,85 @@
     .aiedu-review-embed .korean-record-stat span { display:block; color:#617584; font-weight:900; }
     .aiedu-review-embed .korean-record-stat strong { display:block; margin-top:7px; color:#173c58; font-size:2rem; }
     .aiedu-review-embed .korean-record-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:22px 0; }
+    .aiedu-review-embed .record-source-bar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin:0 0 14px; padding:10px 14px; border:1px solid #b8dfcf; border-radius:12px; background:#ffffffd9; }
+    .aiedu-review-embed .record-source-bar>div { display:flex; flex-wrap:wrap; gap:6px; }
+    .aiedu-review-embed .record-source-bar button { padding:7px 12px; border:1px solid #c8ded5; border-radius:999px; background:#fff; color:#456b5a; font-size:.82rem; font-weight:850; }
+    .aiedu-review-embed .record-source-bar button.is-active { border-color:#0c9f91; background:#e2f8f3; color:#06776f; }
+    .aiedu-review-embed .record-source-meta { color:#607383; font-size:.76rem; font-weight:750; }
+    .aiedu-review-embed .is-original-records .korean-record-actions { justify-content:flex-start; }
+    .aiedu-review-embed .korean-record-word-list>span { padding:9px 14px; border:2px solid #bbe0c1; border-radius:999px; background:#fff; color:#24563c; font-size:1.15rem; font-weight:900; }
+    .aiedu-review-embed .korean-focus-section { margin-top:22px; padding:22px; border:2px solid #ffd0a6; border-radius:8px; background:#fffaf4; }
+    .aiedu-review-embed .korean-growth-heading { margin-bottom:14px; }
+    .aiedu-review-embed .korean-growth-heading h4 { margin:0; color:#23455b; font-size:1.55rem; font-weight:900; }
+    .aiedu-review-embed .korean-growth-heading p { margin:4px 0 0; color:#70818b; font-size:.9rem; font-weight:800; }
+    .aiedu-review-embed .korean-focus-list { display:grid; gap:10px; }
+    .aiedu-review-embed .korean-focus-item { display:grid; grid-template-columns:44px minmax(0,1fr) auto; align-items:center; gap:14px; min-height:100px; padding:15px; border:2px solid #f6a26d; border-radius:8px; background:#fff; }
+    .aiedu-review-embed .korean-focus-rank { display:grid; place-content:center; width:40px; height:40px; border-radius:50%; background:#ff8a3d; color:#fff; font-size:1.15rem; font-weight:900; }
+    .aiedu-review-embed .korean-focus-copy>span { color:#bf5a26; font-size:.78rem; font-weight:900; }
+    .aiedu-review-embed .korean-focus-copy h5 { margin:2px 0 4px; color:#294a60; font-size:1.2rem; font-weight:900; }
+    .aiedu-review-embed .korean-focus-copy p { margin:0; color:#70818b; font-size:.85rem; font-weight:800; }
+    .aiedu-review-embed .korean-focus-copy p strong { color:#bd4f2c; }
+    .aiedu-review-embed .korean-focus-item .btn-outline { min-height:44px; white-space:nowrap; padding:9px 18px; }
+    .aiedu-review-embed .korean-growth-section { margin-top:22px; padding-top:22px; border-top:2px solid #dce9e2; }
+    .aiedu-review-embed .korean-growth-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr); gap:12px; }
+    .aiedu-review-embed .is-original-records .korean-growth-panel { margin-top:0; min-width:0; }
+    .aiedu-review-embed .is-original-records .korean-area-row { grid-template-columns:minmax(130px,1fr) minmax(100px,1.7fr) 46px; }
+    .aiedu-review-embed .is-original-records .korean-area-row strong { display:block; color:#294a60; font-size:.85rem; }
+    .aiedu-review-embed .is-original-records .korean-area-row small { color:#7b8a93; font-size:.72rem; font-weight:800; }
+    .aiedu-review-embed .is-original-records .korean-area-row b { color:#237c61; text-align:right; font-size:.9rem; }
+    .aiedu-review-embed .korean-mastery-visual { display:flex; flex-wrap:wrap; align-items:center; gap:18px; }
+    .aiedu-review-embed .korean-mastery-donut { position:relative; width:130px; aspect-ratio:1; border-radius:50%; background:conic-gradient(#ef765f 0 64%,#f2c94c 64% 93%,#42b879 93% 100%); }
+    .aiedu-review-embed .korean-mastery-donut::after { position:absolute; inset:22px; content:''; border-radius:50%; background:#fff; }
+    .aiedu-review-embed .korean-mastery-donut>span { position:absolute; inset:0; z-index:1; display:grid; place-content:center; text-align:center; }
+    .aiedu-review-embed .korean-mastery-donut strong { color:#294a60; font-size:1.7rem; line-height:1; }
+    .aiedu-review-embed .korean-mastery-donut small { margin-top:4px; color:#7d8b94; font-size:.7rem; font-weight:900; }
+    .aiedu-review-embed .korean-mastery-legend { flex:1; min-width:110px; display:grid; gap:9px; }
+    .aiedu-review-embed .korean-mastery-legend>div { display:grid; grid-template-columns:12px 1fr auto; align-items:center; gap:8px; color:#5c6e79; font-size:.82rem; font-weight:900; }
+    .aiedu-review-embed .korean-mastery-legend i { width:10px; height:10px; border-radius:50%; }
+    .aiedu-review-embed .korean-mastery-legend .weak { background:#ef765f; }
+    .aiedu-review-embed .korean-mastery-legend .learning { background:#f2c94c; }
+    .aiedu-review-embed .korean-mastery-legend .mastered { background:#42b879; }
+    .aiedu-review-embed .is-original-records .korean-weekly-chart { margin-top:12px; }
+    .aiedu-review-embed .korean-weekly-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    .aiedu-review-embed .korean-weekly-heading h4 { margin:0; }
+    .aiedu-review-embed .korean-weekly-heading>span { color:#75858f; font-size:.78rem; font-weight:900; }
+    .aiedu-review-embed .korean-weekly-bars { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:10px; height:190px; margin-top:14px; }
+    .aiedu-review-embed .korean-weekly-day { display:grid; grid-template-rows:22px 1fr 22px; align-items:end; text-align:center; }
+    .aiedu-review-embed .korean-weekly-day strong { color:#2b6f8d; font-size:.78rem; }
+    .aiedu-review-embed .korean-weekly-day small { color:#75858f; font-size:.72rem; font-weight:900; }
+    .aiedu-review-embed .korean-weekly-track { height:132px; display:flex; align-items:end; justify-content:center; border-bottom:2px solid #d7e3e8; }
+    .aiedu-review-embed .korean-weekly-track span { display:block; width:min(34px,72%); min-height:4px; border-radius:6px 6px 0 0; background:#54a9c9; }
+    .aiedu-review-embed .record-game-report { padding:20px; border:1px solid #fae8b6; border-radius:28px; background:#fffbeb; }
+    .aiedu-review-embed .record-game-report>div { display:flex; align-items:center; justify-content:space-between; gap:15px; }
+    .aiedu-review-embed .record-game-report h4 { margin:5px 0 0; color:#2c3e50; font-size:1.1rem; }
+    .aiedu-review-embed .record-game-report b { color:#b77906; font-size:.8rem; }
+    .aiedu-review-embed .record-game-report p { margin:10px 0 0; color:#68736e; font-size:.8rem; font-weight:750; }
+    .aiedu-review-embed .record-game-result { color:#b77906; text-align:right; }
+    .aiedu-review-embed .record-game-result small { display:block; color:#738078; font-weight:800; }
+    .aiedu-review-embed .record-game-result strong { font-size:1.8rem; }
+    .aiedu-review-embed .korean-stage-record-list { display:grid; gap:12px; }
+    .aiedu-review-embed .korean-stage-record { padding:20px; border:2px solid #d8e7d5; border-radius:20px; background:#fff; overflow-wrap:anywhere; }
+    .aiedu-review-embed .korean-stage-record h5 { margin:0; color:#294b37; font-size:1rem; }
+    .aiedu-review-embed .korean-stage-record time,.aiedu-review-embed .korean-stage-record p { display:block; margin:8px 0; color:#52665a; font-size:.9rem; }
+    .aiedu-review-embed .korean-stage-record>strong { color:#294b37; }
+    .aiedu-review-embed .record-original-captures { margin:22px 0; padding:16px; border:1px solid #c8ded5; border-radius:14px; background:#fff; }
+    .aiedu-review-embed .record-original-captures summary { cursor:pointer; color:#087b71; font-weight:900; }
+    .aiedu-review-embed .record-original-captures figure { margin:18px 0 0; }
+    .aiedu-review-embed .record-original-captures img { display:block; width:100%; height:auto; border:1px solid #d7e9e1; border-radius:12px; }
+    .aiedu-review-embed .record-original-captures figcaption { margin-top:5px; color:#607383; font-size:.76rem; }
+    .aiedu-review-embed .record-original-captures a { color:#087b71; }
+    .aiedu-review-embed .korean-record-filters { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 18px; }
+    .aiedu-review-embed .korean-record-filters button { padding:8px 18px; border:2px solid #bfd2df; border-radius:999px; background:#fff; color:#36556c; font-weight:900; }
+    .aiedu-review-embed .korean-record-filters button.is-active { border-color:#2ca274; background:#e4f7ed; color:#176544; }
+    .aiedu-review-embed .korean-mistake-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .aiedu-review-embed .korean-mistake-card { padding:20px; border:2px solid #d8e2e8; border-radius:8px; background:#fff; }
+    .aiedu-review-embed .korean-mistake-card>header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+    .aiedu-review-embed .korean-mistake-card h4 { margin:0; color:#173c58; font-size:1.7rem; }
+    .aiedu-review-embed .korean-mastery-label { color:#ba4f32; font-size:.82rem; font-weight:900; }
+    .aiedu-review-embed .korean-mistake-details { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:15px 0; }
+    .aiedu-review-embed .korean-mistake-details>div { padding:10px; border-radius:6px; background:#f4f8fa; }
+    .aiedu-review-embed .korean-mistake-details span { display:block; color:#6b7c87; font-size:.75rem; font-weight:900; }
+    .aiedu-review-embed .korean-mistake-details strong { display:block; margin-top:3px; color:#25465e; font-size:1.1rem; }
     .aiedu-review-embed .korean-record-band { margin-top:18px; padding:22px; border:2px solid #cfe6d3; border-radius:8px; background:#f5fcf3; }
     .aiedu-review-embed .korean-record-band h4 { margin:0 0 14px; color:#24563c; font-size:1.35rem; }
     .aiedu-review-embed .korean-record-word-list { display:flex; flex-wrap:wrap; gap:9px; }
@@ -425,6 +504,11 @@
       .aiedu-review-embed .korean-learning-scroll { height:530px; padding-right:5px; }
       .aiedu-review-embed .korean-review-activity-grid,.aiedu-review-embed .korean-record-summary { grid-template-columns:1fr; }
       .aiedu-review-embed .korean-review-activity { padding:20px; }
+      .aiedu-review-embed .korean-growth-grid,.aiedu-review-embed .korean-mistake-list { grid-template-columns:1fr; }
+      .aiedu-review-embed .korean-focus-section { padding:16px; }
+      .aiedu-review-embed .korean-focus-item { grid-template-columns:40px minmax(0,1fr); }
+      .aiedu-review-embed .korean-focus-item .btn-outline { grid-column:1/-1; width:100%; }
+      .aiedu-review-embed .is-original-records .korean-area-row { grid-template-columns:minmax(92px,1fr) minmax(70px,1.2fr) 42px; gap:7px; }
       .aiedu-review-embed .review-hud { width:100%; min-height:142px; margin-top:38px; padding:8px 12px 66px 114px; }
       .aiedu-review-embed .review-exp { width:94px; height:94px; left:8px; bottom:64px; }
       .aiedu-review-embed .review-profile { min-width:0; width:100%; }
@@ -892,10 +976,14 @@
             <button data-review-stage="3" type="button" aria-pressed="false">3단계 교과 맞춤쓰기</button>
             <button data-review-stage="4" type="button" aria-pressed="false">4단계 문해력</button>
           </nav>
+          <div class="record-source-bar" data-record-sourcebar hidden>
+            <div aria-label="기록 데이터 선택"><button data-record-source="original" type="button" class="is-active" aria-pressed="true">원본 교사 테스트 기록</button><button data-record-source="local" type="button" aria-pressed="false">이 기기 체험 기록</button><button data-record-capture type="button">원본 화면 캡처</button></div>
+            <span class="record-source-meta" data-record-source-meta>2026.10.02 확인 · 읽기 전용</span>
+          </div>
           <div class="korean-learning-scroll" data-review-scroll><div data-review-content></div></div>
           <footer class="review-hud" aria-label="학생 메뉴">
             <div class="review-exp"><b data-review-exp>0%</b><small>EXP</small><span class="review-level" data-review-level>LV.1</span></div>
-            <div class="review-profile"><div><strong data-review-student>학생 1</strong><small>체험</small></div><p>에이두 포인트 <b data-review-points>0P</b></p><p>다시 연습 <b data-review-mistake-count>0개</b></p></div>
+            <div class="review-profile"><div><strong data-review-student>학생 1</strong><small data-review-role>체험</small></div><p>에이두 포인트 <b data-review-points>0P</b></p><p><span data-review-token-label>다시 연습</span> <b data-review-mistake-count>0개</b></p></div>
             <div class="review-hud-tools">
               <button class="rpg-tool-button" data-review-home type="button"><span>🏠</span><span>홈</span></button>
               <button class="rpg-tool-button" data-original-menu="상점" type="button"><span>🛒</span><span>상점</span></button>
@@ -1437,9 +1525,52 @@
     let studentMistakes = readStoredArray(studentMistakesStorageKey);
     let supportFeedback = '학습 기록은 이 기기의 브라우저에 저장됩니다.';
     let reviewStage = 2;
-    let reviewView = 'review';
+    let reviewView = new URLSearchParams(location.search).get('view') === 'records' ? 'records' : 'review';
+    let recordDataSource = 'original';
+    let capturedMistakeFilter = 'all';
     let activeReviewSession = null;
-    // Public original lesson 20 picture/answer data. No original account records are copied.
+    // Read-only snapshot of the explicitly requested public teacher-test account.
+    // Extracted from its rendered records/notebook on 2026-10-02, without account IDs or credentials.
+    // Keep this separate from the learner's local attempts and never write it back to the source site.
+    const originalTestRecordSnapshot = {
+      capturedOn:'2026-10-02', accountName:'교사 테스트', role:'선생님',
+      stage2:{todayAttempts:0,todayCorrect:0,reviewCount:26,totalAttempts:278,learning:8,mastered:2,weak:18,
+        revisitWords:['튜브','바위','거위','더위','우표','의'],
+        recommendations:[
+          {title:'복잡한 모음 단어 읽기',wrongAttempts:11,accuracy:88},
+          {title:'복잡한 모음',wrongAttempts:9,accuracy:87},
+          {title:'대표받침 단어 읽기',wrongAttempts:3,accuracy:95}
+        ],
+        areas:[['모음',3,3,100],['받침 없는 단어 읽기',6,6,100],['복잡한 모음',44,44,100],['복잡한 모음 단어 읽기',53,53,100],['대표받침',2,2,100],['대표받침 단어 읽기',57,57,100],['복잡한 받침',3,3,100]],
+        weekly:[['9/26',0],['9/27',0],['9/28',0],['9/29',0],['9/30',0],['10/1',0],['10/2',0]],
+        mistakes:[
+          ['돼','사',2,'learning'],['의','귀',2,'learning'],['튜브','야구',2,'learning'],['바위','우표',2,'learning'],['거위','여우',2,'learning'],['더위','야구',2,'learning'],['우표','우유',2,'learning'],
+          ['국자','굴자',1,'weak'],['책상','챙상',1,'weak'],['기린','기링',1,'weak'],['튜','나',1,'weak'],['미','마',1,'weak'],['의','구',1,'weak'],['포','라',1,'weak'],['서','자',1,'weak'],['도','야',1,'weak'],['꼬','가',1,'weak'],['왜','디',1,'weak'],['바','사',1,'weak'],['더','리',1,'weak'],['ㅐ','ㅔ',1,'weak'],['ㅒ','ㅖ',1,'weak'],['ㅖ','ㅒ',1,'weak'],['ㅟ','귀',1,'weak'],['ㅢ','귀',1,'weak'],['추위','추이',1,'learning']
+        ]
+      },
+      stage3:{gameTitle:'어휘 게임',gameSuccessRate:null,records:[]},
+      stage4:{gameTitle:'문해력 탐정단',gameSuccessRate:null,records:[
+        ['2026-09-21',true,'마을 협의회가 쉼터에 이중창을 설치한 까닭은 무엇인가요?','추위를 막기 위해'],
+        ['2026-09-21',false,'글에서 유리컵에 손잡이를 붙이는 까닭으로 알맞은 것은 무엇인가요?','컵의 색깔을 까맣게 바꾸기 위해'],
+        ['2026-09-21',false,'지문에서 글쓴이가 도서관 인쇄물을 보고 반드시 찾아야 했던 것은 무엇인가요?','도서관에 놓인 음악 스피커'],
+        ['2026-09-21',true,'안내소에서 어린이들에게 나누어 주는 것은 무엇인가요?','사각형 용지'],
+        ['2026-09-21',false,'벽에 붙은 안내 게시물에는 어떤 내용이 적혀 있었나요?','물고기에게 먹이를 주는 시간'],
+        ['2026-09-21',true,'형이 글쓴이에게 알려 준 좋은 방법은 무엇인가요?','집 안의 출입문을 조용히 닫는 방법'],
+        ['2026-09-21',false,'학급 회의에서 칸막이에 무엇을 쓰기로 결정했나요?','영어 알파벳 노래 가사'],
+        ['2026-09-21',false,'지문에서 글쓴이 모둠은 몇 명씩 모여 알차게 구성되었나요?','두 명'],
+        ['2026-09-17',true,'칠판 위에는 어떤 모양의 조명을 달기로 했나요?','칠판 위에는 둥근 동심원 모양의 밝은 조명을 달기로 했습니다.'],
+        ['2026-08-26',false,'학급 회의에서 결정한 첫 단계 활동은 무엇인가요?','교실 바닥을 깨끗하게 청소하기'],
+        ['2026-08-26',true,'그림책에서 사람들은 상어를 무엇이라고 부르나요?','바다 사냥꾼'],
+        ['2026-08-26',true,'글쓴이가 눈이 침침해서 서랍에서 꺼내 쓴 것은 무엇인가요?','안경'],
+        ['2026-08-26',false,'안내문에 따르면, 구름 모양 스티커는 어디에 붙여야 하나요?','높은 교실 천장'],
+        ['2026-08-26',true,'삼촌이 숲속에서 조용히 기다렸다가 찍은 것은 무엇인가요?','새의 사진'],
+        ['2026-08-26',true,'글쓴이가 시원한 실내에서 유리컵에 담아 마신 것은 무엇인가요?','달콤한 주스 액체'],
+        ['2026-08-26',true,'오늘 학급 회의에서 방과 후에 꼭 끄기로 약속한 것은 무엇인가요?','전등'],
+        ['2026-08-26',true,'선생님께서 학생들에게 나누어 주신 것은 무엇인가요?','안전하게 타는 조건이 적힌 문서'],
+        ['2026-08-26',false,'민우는 보드마카로 어떤 그림을 그렸나요?','커다란 나무']
+      ]}
+    };
+    // Public original lesson 20 picture/answer data used by the independent practice demo.
     const originalReviewPictureItems = [
       {word:'튜브',icon:'🛟',choices:['튜브','투브']},
       {word:'바위',icon:'🪨',choices:['버위','바위']},
@@ -1489,6 +1620,7 @@
       return [];
     }
     function startLectureReview(mode = '') {
+      recordDataSource = 'local';
       const mistakes = stageReviewMistakes();
       const queue = (mode === 'word-card' ? defaultReviewQueue(3,mode) : mistakes.length ? mistakes.slice(0,10) : defaultReviewQueue(reviewStage,mode)).map(item => ({...item}));
       activeReviewSession = {stage:reviewStage,student:selectedStudentName,mode,queue,index:0,correctCount:0,wrongCount:0,saving:false};
@@ -1637,11 +1769,24 @@
         button.setAttribute('aria-pressed',String(selected)); button.classList.toggle('is-active',selected);
       });
       root.querySelectorAll('[data-review-view]').forEach(button => button.classList.toggle('is-active',button.dataset.reviewView === reviewView));
-      root.querySelector('[data-review-student]').textContent = selectedStudentName;
-      root.querySelector('[data-review-mistake-count]').textContent = studentMistakes.filter(item => item.studentName === selectedStudentName && !item.resolvedAt).length + '개';
-      root.querySelector('[data-review-points]').textContent = correctCount * 10 + 'P';
-      root.querySelector('[data-review-exp]').textContent = (correctCount % 10) * 10 + '%';
-      root.querySelector('[data-review-level]').textContent = 'LV.' + (Math.floor(correctCount / 10) + 1);
+      const isOriginalRecord = recordDataSource === 'original' && reviewView !== 'review';
+      root.querySelector('[data-record-sourcebar]').hidden = reviewView === 'review';
+      root.querySelectorAll('[data-record-source]').forEach(button => {
+        const selected = button.dataset.recordSource === recordDataSource;
+        button.setAttribute('aria-pressed',String(selected)); button.classList.toggle('is-active',selected);
+      });
+      root.querySelector('[data-record-capture]').hidden = !isOriginalRecord;
+      root.querySelector('[data-record-source-meta]').textContent = isOriginalRecord ? '2026.10.02 확인 · 읽기 전용' : '원본 계정과 분리 · 이 브라우저에 저장';
+      root.querySelector('[data-review-content]').classList.toggle('is-original-records',isOriginalRecord);
+      root.querySelector('[data-review-stage-badge]').style.background = isOriginalRecord ? '#10b9aa' : '';
+      root.querySelector('[data-review-student]').textContent = isOriginalRecord ? originalTestRecordSnapshot.accountName : selectedStudentName;
+      root.querySelector('[data-review-role]').textContent = isOriginalRecord ? originalTestRecordSnapshot.role : '체험';
+      root.querySelector('[data-review-token-label]').textContent = isOriginalRecord ? '주의토큰' : '다시 연습';
+      root.querySelector('[data-review-mistake-count]').textContent = isOriginalRecord ? '0개' : studentMistakes.filter(item => item.studentName === selectedStudentName && !item.resolvedAt).length + '개';
+      root.querySelector('[data-review-points]').textContent = (isOriginalRecord ? 0 : correctCount * 10) + 'P';
+      root.querySelector('[data-review-exp]').textContent = (isOriginalRecord ? 0 : (correctCount % 10) * 10) + '%';
+      root.querySelector('[data-review-level]').textContent = 'LV.' + (isOriginalRecord ? 1 : Math.floor(correctCount / 10) + 1);
+      root.querySelector('[data-review-note]').textContent = isOriginalRecord ? '원본 교사 테스트 계정 · 2026.10.02 화면에서 추출한 기록입니다. 실시간 연동이 아니며 원본 계정의 기록을 바꾸지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.';
       if (activeReviewSession?.saving && reviewView === 'review') return;
       if (reviewView === 'records') renderLectureRecords();
       else if (reviewView === 'mistakes') renderLectureMistakes();
@@ -1659,11 +1804,20 @@
       }));
       root.querySelector('[data-review-switch]').addEventListener('click',() => {
         if (reviewView !== 'review') { document.querySelector('#stages').scrollIntoView({behavior:'smooth'}); return; }
-        reviewView = 'records'; renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
+        reviewView = 'records'; recordDataSource = 'original'; renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
       });
       root.querySelectorAll('[data-review-view]').forEach(button => button.addEventListener('click',() => {
-        reviewView = button.dataset.reviewView; renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
+        reviewView = button.dataset.reviewView;
+        if (reviewView === 'records') recordDataSource = 'original';
+        renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
       }));
+      root.querySelectorAll('[data-record-source]').forEach(button => button.addEventListener('click',() => {
+        recordDataSource = button.dataset.recordSource; renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
+      }));
+      root.querySelector('[data-record-capture]').addEventListener('click',() => {
+        const captures = root.querySelector('[data-record-captures]');
+        if (captures) { captures.open = true; captures.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+      });
       root.querySelectorAll('[data-review-home]').forEach(button => button.addEventListener('click',() => document.querySelector('#stages').scrollIntoView({behavior:'smooth'})));
       root.querySelector('[data-review-menu-toggle]').addEventListener('click',event => {
         const menu = root.querySelector('[data-review-menu]'); menu.hidden = !menu.hidden;
@@ -1716,7 +1870,7 @@
       const content = document.querySelector('[data-review-content]');
       const progress = document.querySelector('[data-review-progress]');
       const note = document.querySelector('[data-review-note]');
-      note.textContent = '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.' + (session.queue.some(item => item.isExample) ? ' 오답이 없으면 예시 문항으로 체험합니다.' : ' 이 자료에서 틀린 문항을 복습합니다.');
+      note.textContent = session.mode === 'captured-test' ? '교사 테스트에서 추출한 오답으로 복습 화면을 체험합니다. 풀이 결과는 이 기기 체험 기록에만 저장되며 원본 테스트 기록은 바뀌지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.' + (session.queue.some(item => item.isExample) ? ' 오답이 없으면 예시 문항으로 체험합니다.' : ' 이 자료에서 틀린 문항을 복습합니다.');
       if (session.index >= session.queue.length) {
         progress.textContent = '오늘의 복습을 모두 마쳤어요.';
         content.innerHTML = '<section class="korean-review-complete"><h4>🎉 오늘의 복습 완료!</h4><p>오늘 다시 연습한 문제 ' + session.queue.length + '개 · 맞힌 문제 ' + session.correctCount + '개 · 조금 더 연습할 문제 ' + session.wrongCount + '개</p><div class="korean-record-actions"><button class="btn-primary" data-review-finish-records type="button">나의 기록 보기</button><button class="btn-outline" data-review-restart type="button">한 번 더 복습하기</button></div></section>';
@@ -1743,7 +1897,73 @@
         if (answer) submitLectureReview(answer,content.querySelector('[data-review-submit]'));
       });
     }
+    function originalRecordCaptureGallery() {
+      const captures = reviewStage === 2 ? [
+        ['aiedu-records-teacher-stage2.jpg','2단계 오늘 학습 요약과 다시 만나볼 한글'],
+        ['aiedu-records-teacher-focus.jpg','실제 오답 횟수와 단원별 정답률'],
+        ['aiedu-records-teacher-growth.jpg','영역별 도달 정도와 복습 상태']
+      ] : [[reviewStage === 3 ? 'aiedu-records-teacher-stage3.jpg' : 'aiedu-records-teacher-stage4.jpg',reviewStage + '단계 교사 테스트 원본 기록 화면']];
+      return '<details class="record-original-captures" data-record-captures><summary>📷 원본 화면 보기 · 교사 테스트</summary>' + captures.map(([file,caption]) => '<figure><img src="assets/' + file + '" width="1280" height="720" loading="lazy" alt="' + reviewEscape(caption) + '"><figcaption>' + reviewEscape(caption) + ' · 2026.10.02 캡처</figcaption></figure>').join('') + '<p><a href="https://aiedue.ddns.net/korean/index.html?activity=' + ({2:'hangul',3:'dictation',4:'literacy'}[reviewStage]) + '&amp;view=records" target="_blank" rel="noopener noreferrer">원본 기록 페이지 열기 ↗</a></p></details>';
+    }
+    function originalRecordSummary(items, label) {
+      return '<div class="korean-record-summary" aria-label="' + reviewEscape(label) + '">' + items.map(([title,value]) => '<div class="korean-record-stat"><span>' + reviewEscape(title) + '</span><strong>' + reviewEscape(value) + '</strong></div>').join('') + '</div>';
+    }
+    function capturedRecordActions() {
+      return '<div class="korean-record-actions"><button class="btn-primary" data-captured-review type="button" title="추출한 테스트 오답으로 체험합니다. 원본 기록은 바뀌지 않습니다.">🔁 오늘의 복습' + (reviewStage === 2 ? ' 시작' : '') + '</button>' + (reviewStage === 2 ? '<button class="btn-outline" data-captured-mistakes type="button">📕 오답노트 보기</button>' : '<button class="btn-outline" data-review-home type="button">공부하러 가기</button>') + '</div>';
+    }
+    function startCapturedTestReview(rows) {
+      recordDataSource = 'local';
+      if (reviewStage !== 2) {
+        activeReviewSession = null; reviewView = 'review'; renderLearningSupport();
+      } else {
+        const data = originalTestRecordSnapshot.stage2;
+        const preferred = data.revisitWords.map(word => data.mistakes.find(item => item[0] === word));
+        const selected = rows || [...preferred,...data.mistakes.filter(item => !preferred.includes(item))].slice(0,10);
+        const queue = selected.map(([word,lastAnswer],index) => ({key:'captured-test-' + index + '-' + word,stage:2,stageTitle:'한글 해득',activity:'교사 테스트 오답 · 체험',activityType:originalReviewPictureItems.some(item => item.word === word) ? 'wordPictureMatch' : 'listening',prompt:'소리를 듣고 알맞은 글자나 낱말을 골라요.',correctAnswer:word,choices:[lastAnswer,word],sound:word,isExample:true}));
+        activeReviewSession = {stage:2,student:selectedStudentName,mode:'captured-test',queue,index:0,correctCount:0,wrongCount:0,saving:false};
+        reviewView = 'review'; renderLearningSupport();
+      }
+      document.querySelector('[data-review-scroll]').scrollTop = 0;
+    }
+    function wireCapturedRecordActions(content) {
+      content.querySelector('[data-captured-review]')?.addEventListener('click',() => startCapturedTestReview());
+      content.querySelector('[data-captured-mistakes]')?.addEventListener('click',() => { reviewView = 'mistakes'; capturedMistakeFilter = 'all'; renderLearningSupport(); document.querySelector('[data-review-scroll]').scrollTop = 0; });
+      content.querySelectorAll('[data-review-home]').forEach(button => button.addEventListener('click',() => document.querySelector('#stages').scrollIntoView({behavior:'smooth'})));
+    }
+    function renderOriginalCapturedRecords() {
+      const content = document.querySelector('[data-review-content]');
+      document.querySelector('[data-review-progress]').textContent = '꾸준히 쌓은 나의 배움을 확인해요.';
+      if (reviewStage === 2) {
+        const data = originalTestRecordSnapshot.stage2;
+        content.innerHTML = originalRecordSummary([['오늘 공부',data.todayAttempts + '문제'],['맞았어요',data.todayCorrect + '개'],['다시 연습',data.reviewCount + '개']],'오늘 학습 요약') + capturedRecordActions() +
+          '<section class="korean-record-band"><h4>🔥 다시 만나볼 한글</h4><div class="korean-record-word-list">' + data.revisitWords.map(word => '<span>' + reviewEscape(word) + '</span>').join('') + '</div></section>' +
+          '<section class="korean-focus-section" aria-labelledby="captured-focus-title"><div class="korean-growth-heading"><h4 id="captured-focus-title">🎯 성장이 필요한 단원</h4><p>자주 틀린 기록을 보고 먼저 공부하면 좋은 단원을 골랐어요.</p></div><div class="korean-focus-list">' + data.recommendations.map((unit,index) => '<article class="korean-focus-item"><span class="korean-focus-rank">' + (index + 1) + '</span><div class="korean-focus-copy"><span>먼저 공부해요</span><h5>' + reviewEscape(unit.title) + '</h5><p><strong>' + unit.wrongAttempts + '번</strong> 틀렸어요 · 정답률 <strong>' + unit.accuracy + '%</strong></p></div><a class="btn-outline" href="https://aiedue.ddns.net/korean/index.html?activity=hangul&amp;view=records" target="_blank" rel="noopener noreferrer" title="원본 기록 페이지에서 해당 단원의 공부 버튼을 선택하세요.">원본에서 공부하기 ↗</a></article>').join('') + '</div></section>' +
+          '<section class="korean-growth-section" aria-labelledby="captured-growth-title"><div class="korean-growth-heading"><h4 id="captured-growth-title">📈 나의 한글 성장</h4><p>공부한 기록이 쌓일수록 그래프도 함께 자라요.</p></div><div class="korean-growth-grid"><article class="korean-growth-panel"><h4>영역별 도달 정도</h4>' + data.areas.map(([title,reached,total,rate]) => '<div class="korean-area-row"><div><strong>' + reviewEscape(title) + '</strong><small>' + reached + '/' + total + '문제</small></div><div class="korean-area-track" role="progressbar" aria-label="' + reviewEscape(title) + ' 도달 정도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + rate + '"><span style="width:' + rate + '%"></span></div><b>' + rate + '%</b></div>').join('') + '</article><article class="korean-growth-panel"><h4>복습 상태</h4><div class="korean-mastery-visual"><div class="korean-mastery-donut" role="img" aria-label="다시 연습 18개, 연습 중 8개, 익혔어요 2개"><span><strong>28</strong><small>복습 문제</small></span></div><div class="korean-mastery-legend"><div><i class="weak"></i><span>다시 연습</span><strong>18</strong></div><div><i class="learning"></i><span>연습 중</span><strong>8</strong></div><div><i class="mastered"></i><span>익혔어요</span><strong>2</strong></div></div></div></article></div>' +
+          '<article class="korean-growth-panel korean-weekly-chart"><div class="korean-weekly-heading"><h4>최근 7일 학습 발자국</h4><span>날짜별 맞힌 문제</span></div><div class="korean-weekly-bars">' + data.weekly.map(([date,correct]) => '<div class="korean-weekly-day"><strong>' + correct + '</strong><div class="korean-weekly-track"><span style="height:0%"></span></div><small>' + date + '</small></div>').join('') + '</div></article></section><div style="margin-top:18px">' + originalRecordSummary([['🌱 연습 중',data.learning + '개'],['⭐ 익혔어요',data.mastered + '개'],['📚 전체 기록',data.totalAttempts + '개']],'숙련 상태') + '</div>' + originalRecordCaptureGallery();
+      } else {
+        const data = originalTestRecordSnapshot['stage' + reviewStage];
+        content.innerHTML = '<section class="record-game-report"><div><div><b>' + reviewStage + '단계 게임</b><h4>' + reviewEscape(data.gameTitle) + '</h4></div><div class="record-game-result"><small>성공률</small><strong>기록 없음</strong></div></div><p>게임을 시작하면 성공률이 여기에 표시됩니다.</p></section>' + capturedRecordActions() + '<h4 class="korean-record-section-title">' + (reviewStage === 3 ? '최근 교과 맞춤쓰기' : '최근 문해력 학습') + '</h4><div class="korean-stage-record-list">' + (data.records.length ? data.records.map(([date,correct,prompt,answer]) => '<article class="korean-stage-record"><h5>' + (correct ? '⭕ 정답' : '다시 살펴볼 문제') + '</h5><time datetime="' + date + '">' + date + '</time><strong>' + reviewEscape(prompt) + '</strong><p>내 답: ' + reviewEscape(answer) + '</p></article>').join('') : '<p>아직 교과 맞춤쓰기 기록이 없어요.</p>') + '</div>' + originalRecordCaptureGallery();
+      }
+      wireCapturedRecordActions(content);
+    }
+    function renderOriginalCapturedMistakes() {
+      const content = document.querySelector('[data-review-content]');
+      document.querySelector('[data-review-title]').textContent = '📕 다시 연습할 한글';
+      document.querySelector('[data-review-progress]').textContent = '조금 어려웠던 한글을 다시 만나 봐요.';
+      if (reviewStage !== 2) {
+        const rows = originalTestRecordSnapshot['stage' + reviewStage].records.filter(row => !row[1]);
+        content.innerHTML = '<button class="btn-outline" data-captured-records type="button">나의 기록</button><h4 class="korean-record-section-title">다시 살펴볼 문제</h4><div class="korean-stage-record-list">' + (rows.length ? rows.map(([date,,prompt,answer]) => '<article class="korean-stage-record"><time datetime="' + date + '">' + date + '</time><strong>' + reviewEscape(prompt) + '</strong><p>내 답: ' + reviewEscape(answer) + '</p></article>').join('') : '<p>원본 테스트 계정에 이 단계의 오답 기록이 없어요.</p>') + '</div>' + originalRecordCaptureGallery();
+      } else {
+        const labels = {all:'전체',character:'글자',word:'낱말',sentence:'문장'};
+        const rows = originalTestRecordSnapshot.stage2.mistakes.map((row,index) => ({row,index})).filter(({row}) => capturedMistakeFilter === 'all' || (capturedMistakeFilter === 'character' ? Array.from(row[0]).length === 1 : capturedMistakeFilter === 'word' ? Array.from(row[0]).length > 1 && !/\s/.test(row[0]) : /\s/.test(row[0])));
+        content.innerHTML = '<button class="btn-outline" data-captured-records type="button">나의 기록</button><nav class="korean-record-filters" aria-label="오답 종류">' + Object.entries(labels).map(([key,label]) => '<button data-captured-filter="' + key + '" class="' + (key === capturedMistakeFilter ? 'is-active' : '') + '" aria-pressed="' + (key === capturedMistakeFilter) + '" type="button">' + label + '</button>').join('') + '</nav><div class="korean-mistake-list">' + (rows.length ? rows.map(({row:[word,lastAnswer,count,status],index}) => '<article class="korean-mistake-card"><header><h4>' + reviewEscape(word) + '</h4><span class="korean-mastery-label">' + (status === 'learning' ? '🟡 연습 중이에요' : '🔴 다시 연습해요') + '</span></header><div class="korean-mistake-details"><div><span>내가 고른 답</span><strong>' + reviewEscape(lastAnswer) + '</strong></div><div><span>바른 답</span><strong>' + reviewEscape(word) + '</strong></div><div><span>틀린 횟수</span><strong>' + count + '번</strong></div></div><button class="btn-outline" data-captured-question="' + index + '" type="button">다시 연습</button></article>').join('') : '<p>이 종류의 오답이 없어요.</p>') + '</div>' + originalRecordCaptureGallery();
+        content.querySelectorAll('[data-captured-filter]').forEach(button => button.addEventListener('click',() => { capturedMistakeFilter = button.dataset.capturedFilter; renderLearningSupport(); document.querySelector('[data-review-scroll]').scrollTop = 0; }));
+        content.querySelectorAll('[data-captured-question]').forEach(button => button.addEventListener('click',() => startCapturedTestReview([originalTestRecordSnapshot.stage2.mistakes[Number(button.dataset.capturedQuestion)]])));
+      }
+      content.querySelector('[data-captured-records]').addEventListener('click',() => { reviewView = 'records'; renderLearningSupport(); document.querySelector('[data-review-scroll]').scrollTop = 0; });
+    }
     function renderLectureRecords() {
+      if (recordDataSource === 'original') { renderOriginalCapturedRecords(); return; }
       const content = document.querySelector('[data-review-content]');
       document.querySelector('[data-review-progress]').textContent = '꾸준히 쌓은 나의 배움을 확인해요.';
       const records = studentRecords.filter(item => item.studentName === selectedStudentName && Number(item.stage) === reviewStage);
@@ -1779,6 +1999,7 @@
       });
     }
     function renderLectureMistakes() {
+      if (recordDataSource === 'original') { renderOriginalCapturedMistakes(); return; }
       const content = document.querySelector('[data-review-content]');
       document.querySelector('[data-review-progress]').textContent = '틀렸던 문제를 확인하고 다시 연습해요.';
       content.innerHTML = '<div class="korean-record-actions"><button class="btn-primary" data-mistake-start type="button">🔁 오늘의 복습 시작</button><button class="btn-outline" data-mistake-records type="button">나의 기록</button></div><div class="support-list" data-mistake-list></div><h4 class="korean-record-section-title">복습 완료 문항</h4><div class="support-list" data-resolved-list></div>';

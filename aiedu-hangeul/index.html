@@ -206,17 +206,19 @@
     .lesson-card-title { display:flex; align-items:center; gap:7px; margin-bottom:8px; color:#b7541d; font-size:.72rem; font-weight:950; }
     .lesson-card-title i { width:24px; height:24px; display:grid; place-items:center; border-radius:50%; color:#fff; background:#ff8b31; font-style:normal; }
     .lesson-formulas { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
-    .lesson-formula { padding:8px 6px; border:1px solid #ffd1a9; border-radius:10px; background:#fff; color:#39485f; text-align:center; font-size:.92rem; font-weight:950; }
-    .formula-parts { display:flex; justify-content:center; align-items:center; gap:7px; min-height:28px; }
-    .formula-piece { display:inline-grid; min-width:23px; place-items:center; }
+    .lesson-formula { overflow:hidden; padding:8px 6px; border:1px solid #ffd1a9; border-radius:10px; background:#fff; color:#39485f; text-align:center; font-size:.92rem; font-weight:950; }
+    .formula-parts { display:flex; justify-content:center; align-items:center; gap:7px; min-height:32px; }
+    .formula-piece { display:inline-grid; min-width:23px; place-items:center; font-size:1.12rem; }
     .formula-arrow { color:#ec8b2f; }
-    .formula-result { color:#1496c2; font-size:1.2rem; }
-    .lesson-formula.is-animating .formula-piece:first-child { animation:join-left .9s ease-in-out both; }
-    .lesson-formula.is-animating .formula-piece:nth-child(3) { animation:join-right .9s ease-in-out both; }
-    .lesson-formula.is-animating .formula-result { animation:join-result .9s .45s ease-out both; }
-    @keyframes join-left { 0% { transform:translateX(-16px); opacity:.35; } 70%,100% { transform:none; opacity:1; } }
-    @keyframes join-right { 0% { transform:translateX(16px); opacity:.35; } 70%,100% { transform:none; opacity:1; } }
-    @keyframes join-result { 0% { transform:scale(.45); opacity:.2; } 75% { transform:scale(1.18); opacity:1; } 100% { transform:none; opacity:1; } }
+    .formula-result { color:#1496c2; font-size:1.3rem; }
+    .lesson-formula.is-animating .formula-piece:first-child { animation:jamo-converge-left 1.25s cubic-bezier(.2,.75,.25,1) both; }
+    .lesson-formula.is-animating .formula-piece:nth-child(3) { animation:jamo-converge-right 1.25s cubic-bezier(.2,.75,.25,1) both; }
+    .lesson-formula.is-animating .formula-arrow { animation:merge-cue 1.25s ease both; }
+    .lesson-formula.is-animating .formula-result { animation:join-result 1.25s .36s cubic-bezier(.2,.75,.25,1) both; }
+    @keyframes jamo-converge-left { 0% { transform:none; opacity:1; } 42% { transform:translateX(17px) scale(.82); opacity:1; } 70% { transform:translateX(22px) scale(.65); opacity:.5; } 82%,100% { transform:translateX(22px) scale(.55); opacity:.18; } }
+    @keyframes jamo-converge-right { 0% { transform:none; opacity:1; } 42% { transform:translateX(-17px) scale(.82); opacity:1; } 70% { transform:translateX(-22px) scale(.65); opacity:.5; } 82%,100% { transform:translateX(-22px) scale(.55); opacity:.18; } }
+    @keyframes merge-cue { 0%,30% { opacity:1; transform:none; } 52% { opacity:.25; transform:scale(.8); } 70%,100% { opacity:.75; transform:none; } }
+    @keyframes join-result { 0% { transform:translateX(-15px) scale(.55); opacity:0; text-shadow:none; } 55% { transform:translateX(-8px) scale(.7); opacity:.2; } 75% { transform:translateX(0) scale(1.28); opacity:1; text-shadow:0 0 12px rgba(20,150,194,.35); } 100% { transform:none; opacity:1; text-shadow:none; } }
     .lesson-formula button { display:block; width:100%; margin-top:5px; padding:5px; border:0; border-radius:7px; color:#fff; background:#169bc1; font:inherit; font-size:.58rem; font-weight:900; cursor:pointer; }
     .lesson-letters { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; margin-top:7px; }
     .lesson-letters button { min-height:38px; border:1px solid #ffd1a9; border-radius:9px; color:#263a52; background:#fff; font:inherit; font-size:1rem; font-weight:950; cursor:pointer; }
@@ -1249,7 +1251,7 @@
 
       if (step === 1) {
         body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>1</i> 📖 이해하기</div>' +
-          '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula is-animating"><div class="formula-parts"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow">+</span><span class="formula-piece">' + parts[1] + '</span><span class="formula-arrow">→</span><b class="formula-result">' + parts[2] + '</b></div><button data-lesson-speak="' + parts[2] + '" type="button">🔊 소리 듣기</button></div>').join('') + '</div>' +
+          '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula is-animating"><div class="formula-parts" aria-label="' + parts[0] + '과 ' + parts[1] + '을 합쳐 ' + parts[2] + '"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow">+</span><span class="formula-piece">' + parts[1] + '</span><span class="formula-arrow">→</span><b class="formula-result">' + parts[2] + '</b></div><button data-lesson-speak="' + parts[2] + '" type="button">🔊 소리 듣기 · 다시 보기</button></div>').join('') + '</div>' +
           '<div class="lesson-letters">' + config.letters.map(letter => '<button data-lesson-speak="' + letter + '" type="button">' + letter + '</button>').join('') + '</div>' +
           '<p class="lesson-hint">글자와 소리의 관계를 살펴보고 글자를 눌러 들어 보세요.</p></div>';
         body.querySelectorAll('[data-lesson-speak]').forEach(button => button.addEventListener('click', () => {

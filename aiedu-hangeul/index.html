@@ -209,16 +209,16 @@
     .lesson-formula { overflow:hidden; padding:8px 6px; border:1px solid #ffd1a9; border-radius:10px; background:#fff; color:#39485f; text-align:center; font-size:.92rem; font-weight:950; }
     .lesson-formula.is-animating { border-color:#169bc1; box-shadow:0 0 0 2px rgba(22,155,193,.12),0 5px 14px rgba(22,155,193,.12); }
     .formula-parts { position:relative; min-height:51px; }
-    .formula-piece { position:absolute; z-index:1; top:50%; left:50%; display:inline-grid; min-width:34px; height:34px; padding:0 4px; place-items:center; transform:translate(-50%,-50%) translateX(var(--piece-start-x)); border:1px solid #ffe1c6; border-radius:9px; color:#30435d; background:#fff8f0; font-size:1.2rem; white-space:nowrap; will-change:transform,opacity; }
-    .formula-piece:first-child { --piece-start-x:-36px; --piece-join-x:-8px; }
-    .formula-piece:nth-child(3) { --piece-start-x:36px; --piece-join-x:8px; }
+    .formula-piece { position:absolute; z-index:1; top:50%; left:var(--piece-start-left); display:inline-grid; min-width:34px; height:34px; padding:0 4px; place-items:center; transform:translate(-50%,-50%); border:1px solid #ffe1c6; border-radius:9px; color:#30435d; background:#fff8f0; font-size:1.2rem; white-space:nowrap; will-change:left,opacity; }
+    .formula-piece:first-child { --piece-start-left:24%; --piece-join-left:calc(50% - 8px); }
+    .formula-piece:nth-child(3) { --piece-start-left:76%; --piece-join-left:calc(50% + 8px); }
     .formula-arrow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#ec8b2f; }
     .formula-result { position:absolute; z-index:2; top:50%; left:50%; display:inline-grid; min-width:42px; min-height:42px; padding:0 7px; place-items:center; transform:translate(-50%,-50%) scale(.88); opacity:0; border:1px solid #b8e8f3; border-radius:10px; color:#1496c2; background:#e9faff; font-size:1.5rem; white-space:nowrap; pointer-events:none; will-change:transform,opacity; }
     .lesson-formula.is-animating .formula-piece { animation:jamo-meet 3.4s cubic-bezier(.2,.75,.25,1) infinite both; }
     .lesson-formula.is-animating .formula-arrow { animation:merge-cue 3.4s ease-in-out infinite both; }
     .lesson-formula.is-animating .formula-result { animation:join-result 3.4s ease-in-out infinite both; }
     .lesson-formula.is-motion-paused .formula-piece,.lesson-formula.is-motion-paused .formula-arrow,.lesson-formula.is-motion-paused .formula-result { animation-play-state:paused !important; }
-    @keyframes jamo-meet { 0%,18% { transform:translate(-50%,-50%) translateX(var(--piece-start-x)); opacity:1; border-color:#ffe1c6; background:#fff8f0; } 48%,55% { transform:translate(-50%,-50%) translateX(var(--piece-join-x)); opacity:1; border-color:transparent; background:transparent; } 63%,100% { transform:translate(-50%,-50%) translateX(var(--piece-join-x)); opacity:0; border-color:transparent; background:transparent; } }
+    @keyframes jamo-meet { 0%,18% { left:var(--piece-start-left); opacity:1; border-color:#ffe1c6; background:#fff8f0; } 48%,55% { left:var(--piece-join-left); opacity:1; border-color:transparent; background:transparent; } 63%,100% { left:var(--piece-join-left); opacity:0; border-color:transparent; background:transparent; } }
     @keyframes merge-cue { 0%,18% { opacity:1; } 38%,100% { opacity:0; } }
     @keyframes join-result { 0%,55% { opacity:0; transform:translate(-50%,-50%) scale(.88); box-shadow:none; } 65% { opacity:1; transform:translate(-50%,-50%) scale(1.1); box-shadow:0 0 0 5px rgba(20,150,194,.13); } 78%,100% { opacity:1; transform:translate(-50%,-50%) scale(1); box-shadow:none; } }
     .lesson-formula-actions { display:grid; grid-template-columns:1fr 1fr; gap:5px; }

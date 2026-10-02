@@ -1875,7 +1875,7 @@
         progress.textContent = '오늘의 복습을 모두 마쳤어요.';
         content.innerHTML = '<section class="korean-review-complete"><h4>🎉 오늘의 복습 완료!</h4><p>오늘 다시 연습한 문제 ' + session.queue.length + '개 · 맞힌 문제 ' + session.correctCount + '개 · 조금 더 연습할 문제 ' + session.wrongCount + '개</p><div class="korean-record-actions"><button class="btn-primary" data-review-finish-records type="button">나의 기록 보기</button><button class="btn-outline" data-review-restart type="button">한 번 더 복습하기</button></div></section>';
         content.querySelector('[data-review-finish-records]').addEventListener('click',() => { reviewView = 'records'; renderLearningSupport(); });
-        content.querySelector('[data-review-restart]').addEventListener('click',() => startLectureReview(session.mode));
+        content.querySelector('[data-review-restart]').addEventListener('click',() => session.mode === 'captured-test' ? startCapturedTestReview(session.capturedRows) : startLectureReview(session.mode));
         return;
       }
       const item = session.queue[session.index];
@@ -1920,7 +1920,7 @@
         const preferred = data.revisitWords.map(word => data.mistakes.find(item => item[0] === word));
         const selected = rows || [...preferred,...data.mistakes.filter(item => !preferred.includes(item))].slice(0,10);
         const queue = selected.map(([word,lastAnswer],index) => ({key:'captured-test-' + index + '-' + word,stage:2,stageTitle:'한글 해득',activity:'교사 테스트 오답 · 체험',activityType:originalReviewPictureItems.some(item => item.word === word) ? 'wordPictureMatch' : 'listening',prompt:'소리를 듣고 알맞은 글자나 낱말을 골라요.',correctAnswer:word,choices:[lastAnswer,word],sound:word,isExample:true}));
-        activeReviewSession = {stage:2,student:selectedStudentName,mode:'captured-test',queue,index:0,correctCount:0,wrongCount:0,saving:false};
+        activeReviewSession = {stage:2,student:selectedStudentName,mode:'captured-test',capturedRows:selected,queue,index:0,correctCount:0,wrongCount:0,saving:false};
         reviewView = 'review'; renderLearningSupport();
       }
       document.querySelector('[data-review-scroll]').scrollTop = 0;

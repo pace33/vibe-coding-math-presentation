@@ -229,22 +229,24 @@
     .lesson-choices button.is-wrong { color:#9b342c; border-color:#ef9c93; background:#fff0ed; }
     .hangul-review .lesson-choices { grid-template-columns:repeat(3,minmax(0,1fr)); }
     .lesson-hint { margin:7px 0 0; color:#6c7788; font-size:.62rem; font-weight:800; text-align:center; }
-    .trace-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; overflow:hidden; border:2px solid #ffa04d; border-radius:11px; background:#ffc992; }
-    .trace-cell { height:82px; position:relative; overflow:hidden; background:#fffaf2; }
-    .trace-cell::after { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #f1d9c5; }
-    .trace-cell strong { position:absolute; z-index:1; top:5px; left:8px; color:#bb4d17; font-size:1.2rem; }
-    .trace-speak { position:absolute; z-index:4; top:4px; right:5px; padding:2px 5px; border:0; border-radius:7px; color:#9a4d19; background:#fff1e3; font:inherit; font-size:.6rem; cursor:pointer; }
-    .stroke-order-guide { width:100%; height:100%; position:absolute; z-index:2; inset:0; pointer-events:none; }
-    .stroke-order-guide .stroke-path { fill:none; stroke:#f4a16a; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:5 5; opacity:.42; transition:stroke .2s,opacity .2s; }
-    .stroke-order-guide .stroke-path.is-current { stroke:#e36b23; stroke-width:9; stroke-dasharray:9 5; opacity:.92; animation:stroke-pulse 1s ease-in-out infinite alternate; }
-    .stroke-order-guide .stroke-path.is-complete { stroke:#35a8c7; stroke-dasharray:none; opacity:.25; }
-    .stroke-order-guide .stroke-number { fill:#f0c7aa; stroke:#fff; stroke-width:2; transition:fill .2s; }
-    .stroke-order-guide .stroke-number.is-current { fill:#e36b23; }
-    .stroke-order-guide .stroke-number.is-done { fill:#35a8c7; }
-    .stroke-order-guide .stroke-number-text { fill:#9b4e23; font:900 11px sans-serif; text-anchor:middle; dominant-baseline:central; }
-    .stroke-order-guide .stroke-number.is-current + .stroke-number-text,.stroke-order-guide .stroke-number.is-done + .stroke-number-text { fill:#fff; }
-    @keyframes stroke-pulse { from { opacity:.55; } to { opacity:1; } }
+    .trace-word-card { padding:9px; border:2px solid #ffa04d; border-radius:13px; background:#fffaf2; }
+    .trace-word-heading { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:7px; color:#b84d1c; font-size:.68rem; font-weight:950; }
+    .trace-word-heading strong { color:#263a52; font-size:1.55rem; letter-spacing:.08em; }
+    .trace-word-heading small { color:#818b99; font-size:.58rem; letter-spacing:0; }
+    .trace-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; overflow:hidden; border:1px solid #ffbc7e; border-radius:11px; background:#ffc992; }
+    .trace-grid.is-single { grid-template-columns:minmax(0,1fr); }
+    .trace-cell { height:162px; position:relative; overflow:hidden; background-color:#fffdf9; background-image:linear-gradient(to bottom,transparent 49.6%,#f4e5d6 50%,transparent 50.5%); }
+    .trace-cell::after { content:""; position:absolute; left:0; right:0; top:24px; border-top:1px dashed #f1d9c5; }
+    .trace-cell strong { position:absolute; z-index:1; top:4px; left:9px; color:#bf4c19; font-size:1rem; }
+    .trace-reset { position:absolute; z-index:4; top:4px; right:5px; width:27px; height:27px; border:1px solid #ffc18e; border-radius:50%; color:#a84c1b; background:#fff; font-size:.85rem; cursor:pointer; }
+    .trace-stroke-count { position:absolute; z-index:1; left:50%; top:7px; transform:translateX(-50%); padding:3px 7px; border-radius:99px; color:#965126; background:#fff0df; font-size:.55rem; font-weight:900; white-space:nowrap; }
+    .trace-guide-letter { position:absolute; z-index:1; inset:28px 0 0; display:grid; place-items:center; color:rgba(227,107,35,.15); font-size:6.5rem; font-weight:950; line-height:1; pointer-events:none; }
+    .trace-cell.is-complete .trace-guide-letter { color:rgba(22,155,193,.1); }
     .trace-cell canvas { width:100%; height:100%; position:absolute; z-index:3; inset:0; touch-action:none; cursor:crosshair; }
+    .trace-word-progress { display:flex; justify-content:center; gap:4px; margin-top:7px; }
+    .trace-word-progress i { width:8px; height:8px; border-radius:50%; background:#e2ddd4; }
+    .trace-word-progress i.is-done { background:#47a73e; }
+    .trace-cell.is-current { box-shadow:inset 0 0 0 2px #ff9a43; }
     .lesson-status { min-height:18px; margin-top:6px; color:#2f8a3d; font-size:.62rem; font-weight:900; text-align:center; }
     .lesson-nav { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:7px; }
     .lesson-nav button { padding:7px 9px; border:2px solid #47a73e; border-radius:999px; color:#34842e; background:#fff; font:inherit; font-size:.65rem; font-weight:950; cursor:pointer; }
@@ -1082,28 +1084,28 @@
         formulas:[['ㄱ','ㅏ','가'],['ㄴ','ㅏ','나']],
         letters:['가','나','다','마'],
         target:'나',
-        traces:['가','나','다','마']
+        writingWords:['가나','다마','나무']
       },
       openword: {
         title:'받침 없는 단어 읽기',
         formulas:[['ㅂㅓ','ㅅㅡ','버스'],['ㄱㅡ','ㄴㅔ','그네']],
         letters:['버스','치즈','그네','주스'],
         target:'버스',
-        traces:['버','스','그','네']
+        writingWords:['버스','그네','주스']
       },
       complex: {
         title:'복잡한 모음 구별하기',
         formulas:[['ㅗ','ㅏ','ㅘ'],['ㅜ','ㅓ','ㅝ']],
         letters:['ㅘ','ㅝ','ㅚ','ㅟ'],
         target:'ㅘ',
-        traces:['ㅘ','ㅝ','ㅚ','ㅟ']
+        writingWords:['과자','화가','의자']
       },
       finalword: {
         title:'받침 있는 단어 읽기',
         formulas:[['채','ㄱ','책'],['바','ㅁ','밤']],
         letters:['책','산','밤','공'],
         target:'책',
-        traces:['책','산','밤','공']
+        writingWords:['책','산','밤','공']
       }
     };
 
@@ -1213,17 +1215,20 @@
       'ㄱㅏ':'가','ㄱㅓ':'거','ㄱㅗ':'고','ㄴㅏ':'나','ㄴㅓ':'너','ㄴㅗ':'노','ㅁㅏ':'마','ㅁㅓ':'머','ㅁㅗ':'모'
     };
 
-    const syllableStrokeOrders = {
-      '가':[{d:'M72 23 H121 V49',x:72,y:20},{d:'M162 15 V67',x:162,y:15},{d:'M162 41 H193',x:193,y:41}],
-      '나':[{d:'M75 20 V51 H122',x:75,y:19},{d:'M162 15 V67',x:162,y:15},{d:'M162 41 H193',x:193,y:41}],
-      '다':[{d:'M67 23 H128',x:67,y:22},{d:'M128 23 V51',x:128,y:22},{d:'M128 51 H67',x:128,y:51},{d:'M164 15 V67',x:164,y:15},{d:'M164 41 H194',x:194,y:41}],
-      '마':[{d:'M67 20 H125',x:67,y:19},{d:'M125 20 V51',x:125,y:20},{d:'M125 51 H67',x:125,y:51},{d:'M67 51 V20',x:67,y:51},{d:'M164 15 V67',x:164,y:15},{d:'M164 41 H194',x:194,y:41}]
-    };
-    function traceCellMarkup(letter) {
-      const strokes = syllableStrokeOrders[letter] || [];
-      const markerId = 'strokeArrow-' + Object.keys(syllableStrokeOrders).indexOf(letter);
-      const paths = strokes.map((stroke,index) => '<path class="stroke-path' + (index === 0 ? ' is-current' : '') + '" d="' + stroke.d + '" marker-end="url(#' + markerId + ')"></path><circle class="stroke-number' + (index === 0 ? ' is-current' : '') + '" cx="' + stroke.x + '" cy="' + stroke.y + '" r="8"></circle><text class="stroke-number-text" x="' + stroke.x + '" y="' + stroke.y + '">' + (index + 1) + '</text>').join('');
-      return '<div class="trace-cell" data-trace-letter="' + letter + '"><strong>' + letter + '</strong><button class="trace-speak" data-trace-speak="' + letter + '" type="button" aria-label="' + letter + ' 소리 듣기">🔊</button><svg class="stroke-order-guide" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="' + markerId + '" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e36b23"></path></marker></defs>' + paths + '</svg><canvas aria-label="' + letter + '을 획순대로 따라쓰기"></canvas></div>';
+    const hangulStrokeCounts = {'ㄱ':1,'ㄲ':2,'ㄴ':1,'ㄷ':3,'ㄸ':6,'ㄹ':5,'ㅁ':4,'ㅂ':4,'ㅃ':8,'ㅅ':2,'ㅆ':4,'ㅇ':1,'ㅈ':3,'ㅉ':6,'ㅊ':4,'ㅋ':2,'ㅌ':4,'ㅍ':4,'ㅎ':3,'ㅏ':2,'ㅐ':3,'ㅑ':3,'ㅒ':4,'ㅓ':2,'ㅔ':3,'ㅕ':3,'ㅖ':4,'ㅗ':2,'ㅘ':4,'ㅙ':5,'ㅚ':3,'ㅛ':3,'ㅜ':2,'ㅝ':4,'ㅞ':5,'ㅟ':3,'ㅠ':3,'ㅡ':1,'ㅢ':2,'ㅣ':1};
+    function syllableStrokeCount(letter) {
+      const code = letter.charCodeAt(0) - 0xAC00;
+      if (code < 0 || code > 11171) return hangulStrokeCounts[letter] || 1;
+      const initial = Math.floor(code / 588), medial = Math.floor((code % 588) / 28), final = code % 28;
+      const initials = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+      const medials = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+      const finals = ['', 'ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+      const compound = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ'],'ㅘ':['ㅗ','ㅏ'],'ㅙ':['ㅗ','ㅐ'],'ㅚ':['ㅗ','ㅣ'],'ㅝ':['ㅜ','ㅓ'],'ㅞ':['ㅜ','ㅔ'],'ㅟ':['ㅜ','ㅣ'],'ㅢ':['ㅡ','ㅣ']};
+      return [initials[initial],medials[medial],finals[final]].filter(Boolean).reduce((sum,part) => sum + (compound[part] ? compound[part].reduce((n,jamo) => n + hangulStrokeCounts[jamo],0) : hangulStrokeCounts[part] || 1),0);
+    }
+    function traceWordMarkup(word, index, total) {
+      const chars = Array.from(word);
+      return '<div class="trace-word-card"><div class="trace-word-heading"><span>✍️ 낱말 따라쓰기</span><strong>' + word + '</strong><small>낱말 ' + (index + 1) + ' / ' + total + '</small></div><div class="trace-grid' + (chars.length === 1 ? ' is-single' : '') + '">' + chars.map((letter,cellIndex) => '<div class="trace-cell' + (cellIndex === 0 ? ' is-current' : '') + '" data-trace-letter="' + letter + '" data-stroke-total="' + syllableStrokeCount(letter) + '"><strong>' + letter + '</strong><span class="trace-stroke-count" data-stroke-label>1 / ' + syllableStrokeCount(letter) + ' 획</span><button class="trace-reset" data-trace-reset type="button" aria-label="' + letter + ' 쓰기 지우기">↻</button><span class="trace-guide-letter" aria-hidden="true">' + letter + '</span><canvas aria-label="' + letter + ' 직접 쓰기 칸"></canvas></div>').join('') + '</div><div class="trace-word-progress" aria-label="음절 쓰기 진행">' + chars.map(() => '<i></i>').join('') + '</div></div>';
     }
 
     function mountLessonStep(shell, step) {
@@ -1240,6 +1245,7 @@
       previous.disabled = step === 1;
       next.textContent = step === 3 ? '완료하기' : '다음으로';
       shell.dataset.traceTouched = '';
+      shell.dataset.writingDone = 'false';
 
       if (step === 1) {
         body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>1</i> 📖 이해하기</div>' +
@@ -1275,71 +1281,74 @@
       }
 
       if (step === 3) {
-        body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>3</i> ✍️ 획순 따라쓰기</div>' +
-          '<div class="trace-grid">' + config.traces.map(traceCellMarkup).join('') + '</div>' +
-          '<p class="lesson-status" data-trace-status>1번부터 번호가 켜진 획을 차례로 따라 써요.</p></div>';
+        let wordIndex = 0;
+        const words = config.writingWords;
+        body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>3</i> ✍️ 낱말 획순 따라쓰기</div><div data-writing-current></div><p class="lesson-status" data-trace-status>글자 칸을 눌러 획순대로 직접 써 보세요. 글자를 모두 쓰면 다음 낱말이 나와요.</p></div>';
         const status = body.querySelector('[data-trace-status]');
-        body.querySelectorAll('[data-trace-speak]').forEach(button => button.addEventListener('click', () => speakKorean(button.dataset.traceSpeak)));
-        body.querySelectorAll('.trace-cell canvas').forEach(canvas => {
-          const cell = canvas.closest('.trace-cell');
-          const paths = [...cell.querySelectorAll('.stroke-path')];
-          const numbers = [...cell.querySelectorAll('.stroke-number')];
-          let strokeIndex = 0;
-          const context = canvas.getContext('2d');
-          const box = canvas.getBoundingClientRect();
-          const ratio = Math.min(devicePixelRatio || 1, 2);
-          canvas.width = Math.round(box.width * ratio);
-          canvas.height = Math.round(box.height * ratio);
-          context.setTransform(ratio,0,0,ratio,0,0);
-          context.lineCap = 'round';
-          context.lineJoin = 'round';
-          context.lineWidth = 7;
-          context.strokeStyle = '#169bc1';
-          let drawing = false;
-          let last = null;
-          let distance = 0;
-          const point = event => {
-            const rect = canvas.getBoundingClientRect();
-            return {x:event.clientX-rect.left,y:event.clientY-rect.top};
-          };
-          canvas.addEventListener('pointerdown', event => {
-            event.preventDefault();
-            if (strokeIndex >= paths.length) return;
-            drawing = true;
-            last = point(event);
-            distance = 0;
-            canvas.setPointerCapture(event.pointerId);
+        const renderWord = () => {
+          const host = body.querySelector('[data-writing-current]');
+          host.innerHTML = traceWordMarkup(words[wordIndex], wordIndex, words.length);
+          const cells = [...host.querySelectorAll('.trace-cell')];
+          const canvases = cells.map(cell => cell.querySelector('canvas'));
+          canvases.forEach(canvas => {
+            const cell = canvas.closest('.trace-cell');
+            let strokeIndex = 0;
+            const context = canvas.getContext('2d');
+            const bounds = canvas.getBoundingClientRect();
+            const ratio = Math.min(devicePixelRatio || 1, 2);
+            canvas.width = Math.round(bounds.width * ratio);
+            canvas.height = Math.round(bounds.height * ratio);
+            context.setTransform(ratio,0,0,ratio,0,0);
+            context.lineCap = 'round'; context.lineJoin = 'round'; context.lineWidth = 6; context.strokeStyle = '#169bc1';
+            let drawing = false, last = null, distance = 0;
+            const point = event => { const rect = canvas.getBoundingClientRect(); return {x:event.clientX-rect.left,y:event.clientY-rect.top}; };
+            canvas.addEventListener('pointerdown', event => {
+              event.preventDefault();
+              if (cell.classList.contains('is-complete')) return;
+              drawing = true; last = point(event); distance = 0; canvas.setPointerCapture(event.pointerId);
+            });
+            canvas.addEventListener('pointermove', event => {
+              if (!drawing) return;
+              const p = point(event); context.beginPath(); context.moveTo(last.x,last.y); context.lineTo(p.x,p.y); context.stroke();
+              distance += Math.hypot(p.x-last.x,p.y-last.y); last = p;
+            });
+            const finishStroke = () => {
+              if (!drawing) return;
+              drawing = false; last = null;
+              if (distance < 7) return;
+              strokeIndex += 1;
+              const total = Number(cell.dataset.strokeTotal);
+              const done = strokeIndex >= total;
+              cell.querySelector('[data-stroke-label]').textContent = done ? '✓ 획순 완료' : (strokeIndex + 1) + ' / ' + total + ' 획';
+              if (done) cell.classList.add('is-complete');
+              cells.forEach((item,index) => {
+                item.classList.toggle('is-current', !item.classList.contains('is-complete') && cells.findIndex(candidate => !candidate.classList.contains('is-complete')) === index);
+                if (item.classList.contains('is-complete')) host.querySelectorAll('.trace-word-progress i')[index]?.classList.add('is-done');
+              });
+              if (cells.every(item => item.classList.contains('is-complete'))) {
+                shell.dataset.traceTouched = String(wordIndex + 1);
+                if (wordIndex < words.length - 1) {
+                  status.textContent = '✓ ' + words[wordIndex] + '을(를) 끝까지 썼어요. 다음 낱말로 넘어가요.';
+                  window.setTimeout(() => {
+                    if (shell.dataset.writingDone === 'true') return;
+                    wordIndex += 1; renderWord(); status.textContent = '다음 낱말 ' + words[wordIndex] + '을(를) 음절별로 써 보세요.';
+                  }, 900);
+                } else {
+                  shell.dataset.writingDone = 'true';
+                  status.textContent = '🎉 모든 낱말을 썼어요! 차시 쓰기를 완료할 수 있어요.';
+                }
+              } else status.textContent = cell.dataset.traceLetter + '의 ' + strokeIndex + '번째 획을 썼어요. 다음 획을 이어 써 보세요.';
+            };
+            canvas.addEventListener('pointerup', finishStroke); canvas.addEventListener('pointercancel', finishStroke);
+            cell.querySelector('[data-trace-reset]').addEventListener('click', () => {
+              context.clearRect(0,0,canvas.width,canvas.height); strokeIndex = 0; cell.classList.remove('is-complete');
+              cell.querySelector('[data-stroke-label]').textContent = '1 / ' + cell.dataset.strokeTotal + ' 획';
+              cell.classList.add('is-current'); host.querySelectorAll('.trace-word-progress i')[cells.indexOf(cell)]?.classList.remove('is-done');
+              shell.dataset.writingDone = 'false'; status.textContent = cell.dataset.traceLetter + ' 쓰기를 지웠어요. 첫 획부터 다시 써 보세요.';
+            });
           });
-          canvas.addEventListener('pointermove', event => {
-            if (!drawing) return;
-            const nextPoint = point(event);
-            context.beginPath();
-            context.moveTo(last.x,last.y);
-            context.lineTo(nextPoint.x,nextPoint.y);
-            context.stroke();
-            distance += Math.hypot(nextPoint.x-last.x,nextPoint.y-last.y);
-            last = nextPoint;
-          });
-          const finishStroke = () => {
-            if (!drawing) return;
-            drawing = false;
-            last = null;
-            if (distance < 8) return;
-            strokeIndex += 1;
-            paths.forEach((path,index) => { path.classList.toggle('is-current', index === strokeIndex); path.classList.toggle('is-complete', index < strokeIndex); });
-            numbers.forEach((number,index) => { number.classList.toggle('is-current', index === strokeIndex); number.classList.toggle('is-done', index < strokeIndex); });
-            if (strokeIndex === paths.length) {
-              const touched = new Set((shell.dataset.traceTouched || '').split(',').filter(Boolean));
-              touched.add(cell.dataset.traceLetter);
-              shell.dataset.traceTouched = [...touched].join(',');
-              status.textContent = '✓ ' + cell.dataset.traceLetter + ' 획순 완료! 네 글자 중 ' + touched.size + '개를 연습했어요.';
-            } else {
-              status.textContent = cell.dataset.traceLetter + ' ' + (strokeIndex + 1) + '번 획을 이어서 써요. (총 ' + paths.length + '획)';
-            }
-          };
-          canvas.addEventListener('pointerup', finishStroke);
-          canvas.addEventListener('pointercancel', finishStroke);
-        });
+        };
+        renderWord();
       }
     }
 
@@ -1372,9 +1381,8 @@
           return;
         }
         const status = shell.querySelector('[data-trace-status]');
-        const traceCount = new Set((shell.dataset.traceTouched || '').split(',').filter(Boolean)).size;
-        if (traceCount < shell.querySelectorAll('.trace-cell canvas').length) {
-          status.textContent = '네 칸을 모두 손가락이나 마우스로 따라 써 보세요. (' + traceCount + '/4)';
+        if (shell.dataset.writingDone !== 'true') {
+          status.textContent = '제시된 낱말을 음절별로 끝까지 써 보세요.';
           return;
         }
         completed = true;

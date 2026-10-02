@@ -249,6 +249,9 @@
     .trace-stroke-count { position:absolute; z-index:1; left:50%; top:7px; transform:translateX(-50%); padding:3px 7px; border-radius:99px; color:#965126; background:#fff0df; font-size:.55rem; font-weight:900; white-space:nowrap; }
     .trace-guide-letter { position:absolute; z-index:1; inset:28px 0 0; display:grid; place-items:center; color:rgba(227,107,35,.15); font-size:6.5rem; font-weight:950; line-height:1; pointer-events:none; }
     .trace-cell.is-complete .trace-guide-letter { color:rgba(22,155,193,.1); }
+    .trace-order-number { position:absolute; z-index:2; display:grid; width:19px; height:19px; place-items:center; transform:translate(-50%,-50%); border:1px solid #e8b18b; border-radius:50%; color:#a97555; background:rgba(255,255,255,.94); box-shadow:0 1px 3px rgba(88,55,30,.12); font-size:.62rem; font-weight:950; pointer-events:none; transition:color .18s,background .18s,border-color .18s,transform .18s,opacity .18s; }
+    .trace-order-number.is-active { transform:translate(-50%,-50%) scale(1.2); border-color:#e36b23; color:#fff; background:#e36b23; box-shadow:0 0 0 3px rgba(227,107,35,.16); }
+    .trace-order-number.is-done { border-color:#47a73e; color:#fff; background:#47a73e; }
     .trace-cell canvas { width:100%; height:100%; position:absolute; z-index:3; inset:0; touch-action:none; cursor:crosshair; }
     .trace-word-progress { display:flex; justify-content:center; gap:4px; margin-top:7px; }
     .trace-word-progress i { width:8px; height:8px; border-radius:50%; background:#e2ddd4; }
@@ -1568,6 +1571,44 @@
     };
 
     const hangulStrokeCounts = {'ㄱ':1,'ㄲ':2,'ㄴ':1,'ㄷ':3,'ㄸ':6,'ㄹ':5,'ㅁ':4,'ㅂ':4,'ㅃ':8,'ㅅ':2,'ㅆ':4,'ㅇ':1,'ㅈ':3,'ㅉ':6,'ㅊ':4,'ㅋ':2,'ㅌ':4,'ㅍ':4,'ㅎ':3,'ㅏ':2,'ㅐ':3,'ㅑ':3,'ㅒ':4,'ㅓ':2,'ㅔ':3,'ㅕ':3,'ㅖ':4,'ㅗ':2,'ㅘ':4,'ㅙ':5,'ㅚ':3,'ㅛ':3,'ㅜ':2,'ㅝ':4,'ㅞ':5,'ㅟ':3,'ㅠ':3,'ㅡ':1,'ㅢ':2,'ㅣ':1};
+    const hangulStrokeStarts = {
+      'ㄱ':[[8,8]],'ㄲ':[[8,8],[56,8]],'ㄴ':[[8,8]],'ㄷ':[[8,8],[8,8],[8,86]],'ㄸ':[[8,8],[8,8],[8,86],[56,8],[56,8],[56,86]],'ㄹ':[[8,8],[8,8],[8,48],[8,48],[8,86]],
+      'ㅁ':[[8,8],[8,8],[88,8],[8,88]],'ㅂ':[[8,8],[8,8],[8,88],[88,8]],'ㅃ':[[8,8],[8,8],[8,88],[88,8],[52,8],[52,8],[52,88],[98,8]],'ㅅ':[[8,88],[50,8]],'ㅆ':[[8,88],[50,8],[50,88],[94,8]],
+      'ㅇ':[[50,8]],'ㅈ':[[8,8],[50,8],[92,8]],'ㅉ':[[8,8],[50,8],[92,8],[38,8],[62,8],[92,8]],'ㅊ':[[8,8],[50,8],[8,88],[92,8]],'ㅋ':[[8,8],[8,50]],'ㅌ':[[8,8],[8,8],[8,88],[92,8]],'ㅍ':[[8,8],[8,8],[8,88],[92,8]],'ㅎ':[[50,8],[8,8],[50,52]],
+      'ㅏ':[[50,8],[50,50]],'ㅐ':[[32,8],[32,50],[78,8]],'ㅑ':[[50,8],[50,34],[50,66]],'ㅒ':[[32,8],[32,34],[32,66],[78,8]],'ㅓ':[[50,8],[50,50]],'ㅔ':[[68,8],[68,50],[20,8]],'ㅕ':[[50,8],[50,34],[50,66]],'ㅖ':[[68,8],[68,34],[68,66],[20,8]],
+      'ㅗ':[[8,50],[50,50]],'ㅘ':[[8,50],[50,50],[72,8],[72,50]],'ㅙ':[[8,50],[50,50],[72,8],[72,50],[98,8]],'ㅚ':[[8,50],[50,50],[90,8]],'ㅛ':[[8,50],[50,50],[92,50]],'ㅜ':[[8,50],[50,8]],'ㅝ':[[8,50],[50,8],[72,8],[72,50]],'ㅞ':[[8,50],[50,8],[72,8],[72,50],[98,8]],'ㅟ':[[8,50],[50,8],[90,8]],'ㅠ':[[8,50],[50,8],[92,8]],'ㅡ':[[8,50]],'ㅢ':[[8,50],[90,8]],'ㅣ':[[50,8]]
+    };
+    const hangulStrokeParts = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ'],'ㅘ':['ㅗ','ㅏ'],'ㅙ':['ㅗ','ㅐ'],'ㅚ':['ㅗ','ㅣ'],'ㅝ':['ㅜ','ㅓ'],'ㅞ':['ㅜ','ㅔ'],'ㅟ':['ㅜ','ㅣ'],'ㅢ':['ㅡ','ㅣ']};
+    function traceOrderMarkup(letter) {
+      const code = letter.charCodeAt(0) - 0xAC00;
+      if (code < 0 || code > 11171) return '<span class="trace-order-number is-active" data-trace-order="0" style="left:50%;top:82px">1</span>';
+      const initialIndex = Math.floor(code / 588), medialIndex = Math.floor((code % 588) / 28), finalIndex = code % 28;
+      const initials = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+      const medials = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+      const finals = ['', 'ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+      const vowel = medials[medialIndex];
+      const horizontal = ['ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ'].includes(vowel);
+      const hasFinal = finalIndex > 0;
+      const regions = horizontal
+        ? [{left:31,top:hasFinal?8:12,width:38,height:hasFinal?26:30},{left:18,top:hasFinal?39:43,width:64,height:hasFinal?27:34},{left:26,top:69,width:48,height:23}]
+        : [{left:22,top:hasFinal?14:19,width:30,height:hasFinal?37:47},{left:50,top:hasFinal?13:17,width:29,height:hasFinal?38:57},{left:26,top:69,width:48,height:23}];
+      const parts = [initials[initialIndex],vowel,finals[finalIndex]].filter(Boolean);
+      const labels = [];
+      parts.forEach((part,partIndex) => {
+        const region = regions[partIndex];
+        const jamos = hangulStrokeParts[part] || [part];
+        jamos.forEach(jamo => {
+          const starts = hangulStrokeStarts[jamo] || [[8,8]];
+          starts.forEach(([px,py]) => {
+            const x = region.left + region.width * px / 100;
+            const y = 31 + (region.top + region.height * py / 100) * 1.12;
+            const number = labels.length + 1;
+            labels.push('<span class="trace-order-number' + (number === 1 ? ' is-active' : '') + '" data-trace-order="' + (number - 1) + '" aria-label="' + number + '번째 획" style="left:' + x.toFixed(1) + '%;top:' + y.toFixed(1) + 'px">' + number + '</span>');
+          });
+        });
+      });
+      return labels.join('');
+    }
     function syllableStrokeCount(letter) {
       const code = letter.charCodeAt(0) - 0xAC00;
       if (code < 0 || code > 11171) return hangulStrokeCounts[letter] || 1;
@@ -1580,7 +1621,7 @@
     }
     function traceWordMarkup(word, index, total) {
       const chars = Array.from(word);
-      return '<div class="trace-word-card"><div class="trace-word-heading"><span>✍️ 낱말 따라쓰기</span><strong>' + word + '</strong><small>낱말 ' + (index + 1) + ' / ' + total + '</small></div><div class="trace-grid' + (chars.length === 1 ? ' is-single' : '') + '">' + chars.map((letter,cellIndex) => '<div class="trace-cell' + (cellIndex === 0 ? ' is-current' : '') + '" data-trace-letter="' + letter + '" data-stroke-total="' + syllableStrokeCount(letter) + '"><strong>' + letter + '</strong><span class="trace-stroke-count" data-stroke-label>1 / ' + syllableStrokeCount(letter) + ' 획</span><button class="trace-reset" data-trace-reset type="button" aria-label="' + letter + ' 쓰기 지우기">↻</button><span class="trace-guide-letter" aria-hidden="true">' + letter + '</span><canvas aria-label="' + letter + ' 직접 쓰기 칸"></canvas></div>').join('') + '</div><div class="trace-word-progress" aria-label="음절 쓰기 진행">' + chars.map(() => '<i></i>').join('') + '</div></div>';
+      return '<div class="trace-word-card"><div class="trace-word-heading"><span>✍️ 낱말 따라쓰기</span><strong>' + word + '</strong><small>낱말 ' + (index + 1) + ' / ' + total + '</small></div><div class="trace-grid' + (chars.length === 1 ? ' is-single' : '') + '">' + chars.map((letter,cellIndex) => '<div class="trace-cell' + (cellIndex === 0 ? ' is-current' : '') + '" data-trace-letter="' + letter + '" data-stroke-total="' + syllableStrokeCount(letter) + '"><strong>' + letter + '</strong><span class="trace-stroke-count" data-stroke-label>1 / ' + syllableStrokeCount(letter) + ' 획</span><button class="trace-reset" data-trace-reset type="button" aria-label="' + letter + ' 쓰기 지우기">↻</button><span class="trace-guide-letter" aria-hidden="true">' + letter + '</span>' + traceOrderMarkup(letter) + '<canvas aria-label="' + letter + ' 직접 쓰기 칸"></canvas></div>').join('') + '</div><div class="trace-word-progress" aria-label="음절 쓰기 진행">' + chars.map(() => '<i></i>').join('') + '</div></div>';
     }
 
     function playCombinationMotion(formula) {
@@ -1706,6 +1747,11 @@
               const total = Number(cell.dataset.strokeTotal);
               const done = strokeIndex >= total;
               cell.querySelector('[data-stroke-label]').textContent = done ? '✓ 획순 완료' : (strokeIndex + 1) + ' / ' + total + ' 획';
+              cell.querySelectorAll('[data-trace-order]').forEach(marker => {
+                const markerIndex = Number(marker.dataset.traceOrder);
+                marker.classList.toggle('is-done',markerIndex < strokeIndex);
+                marker.classList.toggle('is-active',markerIndex === strokeIndex && !done);
+              });
               if (done) cell.classList.add('is-complete');
               cells.forEach((item,index) => {
                 item.classList.toggle('is-current', !item.classList.contains('is-complete') && cells.findIndex(candidate => !candidate.classList.contains('is-complete')) === index);
@@ -1729,6 +1775,10 @@
             cell.querySelector('[data-trace-reset]').addEventListener('click', () => {
               context.clearRect(0,0,canvas.width,canvas.height); strokeIndex = 0; cell.classList.remove('is-complete');
               cell.querySelector('[data-stroke-label]').textContent = '1 / ' + cell.dataset.strokeTotal + ' 획';
+              cell.querySelectorAll('[data-trace-order]').forEach((marker,index) => {
+                marker.classList.toggle('is-active',index === 0);
+                marker.classList.remove('is-done');
+              });
               cell.classList.add('is-current'); host.querySelectorAll('.trace-word-progress i')[cells.indexOf(cell)]?.classList.remove('is-done');
               shell.dataset.writingDone = 'false'; status.textContent = cell.dataset.traceLetter + ' 쓰기를 지웠어요. 첫 획부터 다시 써 보세요.';
             });

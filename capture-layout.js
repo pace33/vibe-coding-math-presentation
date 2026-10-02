@@ -56,13 +56,7 @@
 return `<div class="intro-icons ${slide.visual==='intro-question'?'intro-question':''}${slide.id==='interactive-repetition'?' intro-icons-feedback-centered':''}">${slide.items.map(x=>`<section>${x.href?`<a class="intro-icon-link" href="${escape(x.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escape(x.heading)} 학습자료 열기" title="${escape(x.heading)} 학습자료 열기"><div class="intro-icon">${icon(x.icon)}</div></a>`:`<div class="intro-icon">${icon(x.icon)}</div>`}<h3>${escape(x.heading)}</h3>${x.body?`<p>${escape(x.body)}</p>`:''}</section>`).join('')}</div>`;
   }
 
-  function aieduShowcase(slide) {
-    const cards = (slide.items || []).map((item, index) => `<section class="aiedu-stage-card"><span class="aiedu-stage-number">STEP 0${index + 1}</span><div class="aiedu-stage-icon">${icon(item.icon)}</div><h3>${escape(item.heading)}</h3><p>${escape(item.body)}</p></section>`).join('');
-    return `<div class="aiedu-showcase"><div class="aiedu-stage-flow">${cards}</div><a class="primary aiedu-live-link" href="${escape(slide.demoUrl)}" target="_blank" rel="noopener noreferrer">${escape(slide.demoLabel || '에이두 한글 실제 화면 열기')} <span aria-hidden="true">↗</span></a></div>`;
-  }
-
   function render(slide) {
-    if (slide.visual === 'aiedu-showcase') return aieduShowcase(slide);
     if(slide.visual?.startsWith('intro-')) return intro(slide);
     if (slide.type === 'links' || slide.visual === 'sources' || slide.type === 'worksheet') return null;
     const shot = capture(slide);

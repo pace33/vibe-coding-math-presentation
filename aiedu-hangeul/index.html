@@ -217,6 +217,7 @@
     .lesson-formula.is-animating .formula-arrow:nth-child(2) { animation:merge-cue 2.8s ease-in-out infinite; }
     .lesson-formula.is-animating .formula-arrow:nth-child(4) { animation:arrow-guide 2.8s ease-in-out infinite; }
     .lesson-formula.is-animating .formula-result { animation:join-result 2.8s cubic-bezier(.2,.75,.25,1) infinite; }
+    .lesson-formula.is-motion-paused .formula-piece,.lesson-formula.is-motion-paused .formula-arrow,.lesson-formula.is-motion-paused .formula-result { animation-play-state:paused !important; }
     @keyframes jamo-converge-left { 0%,14%,100% { transform:translate(0,0) scale(1); opacity:1; } 30% { transform:translate(5px,-2px) scale(1.12); opacity:1; } 57% { transform:translate(var(--piece-left-dx,52px),0) scale(.34); opacity:.08; } 69%,76% { transform:translate(var(--piece-left-dx,52px),0) scale(.28); opacity:0; } 88% { transform:translate(0,0) scale(1); opacity:1; } }
     @keyframes jamo-converge-right { 0%,14%,100% { transform:translate(0,0) scale(1); opacity:1; } 30% { transform:translate(4px,2px) scale(1.12); opacity:1; } 57% { transform:translate(var(--piece-right-dx,34px),0) scale(.34); opacity:.08; } 69%,76% { transform:translate(var(--piece-right-dx,34px),0) scale(.28); opacity:0; } 88% { transform:translate(0,0) scale(1); opacity:1; } }
     @keyframes merge-cue { 0%,18%,100% { opacity:1; transform:none; } 52%,72% { opacity:.12; transform:scale(.65); } 88% { opacity:1; transform:scale(1.12); } }
@@ -1597,6 +1598,7 @@
     }
 
     function mountLessonStep(shell, step) {
+      shell._lessonMotionObserver?.disconnect();
       const config = lessonConfigs[shell.dataset.hangulLesson];
       const body = shell.querySelector('[data-lesson-body]');
       const progress = [...shell.querySelectorAll('.lesson-progress button')];
@@ -1617,9 +1619,20 @@
           '<div class="lesson-formulas">' + config.formulas.map(parts => '<div class="lesson-formula"><div class="formula-parts" aria-label="' + parts[0] + '과 ' + parts[1] + '을 합쳐 ' + parts[2] + '"><span class="formula-piece">' + parts[0] + '</span><span class="formula-arrow">+</span><span class="formula-piece">' + parts[1] + '</span><span class="formula-arrow">→</span><b class="formula-result">' + parts[2] + '</b></div><div class="lesson-formula-actions"><button data-lesson-motion type="button" aria-label="합성 모션 다시 보기" title="합성 모션 다시 보기">▶ 다시 보기</button><button data-lesson-speak="' + parts[2] + '" type="button" aria-label="' + parts[2] + ' 소리 듣기" title="' + parts[2] + ' 소리 듣기">🔊 듣기</button></div></div>').join('') + '</div>' +
           '<div class="lesson-letters">' + config.letters.map(letter => '<button data-lesson-speak="' + letter + '" type="button">' + letter + '</button>').join('') + '</div>' +
           '<p class="lesson-hint">낱자가 모여 한 글자가 되는 장면을 확인해 보세요.</p></div>';
-        body.querySelectorAll('.lesson-formula').forEach((formula,index) => {
-          window.setTimeout(() => playCombinationMotion(formula),index * 1250 + 120);
-        });
+        const formulas = [...body.querySelectorAll('.lesson-formula')];
+        if ('IntersectionObserver' in window) {
+          shell._lessonMotionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              const formula = entry.target;
+              if (entry.isIntersecting && entry.intersectionRatio >= .35) {
+                formula.classList.remove('is-motion-paused');
+                const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+                if (!formula.classList.contains('is-animating') || reducedMotion) playCombinationMotion(formula);
+              } else formula.classList.add('is-motion-paused');
+            });
+          },{threshold:.35});
+          formulas.forEach(formula => shell._lessonMotionObserver.observe(formula));
+        } else formulas.forEach(playCombinationMotion);
         body.querySelectorAll('[data-lesson-motion]').forEach(button => button.addEventListener('click', () => {
           playCombinationMotion(button.closest('.lesson-formula'));
         }));

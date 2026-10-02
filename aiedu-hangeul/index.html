@@ -280,6 +280,41 @@
     .student-test .quiz-stage { min-height:95px; }
     .student-test .demo-actions { justify-content:space-between; }
     .student-test [data-test-next] { padding:5px 8px; border:0; border-radius:999px; color:#fff; background:#43a44c; font:inherit; font-size:.62rem; font-weight:900; cursor:pointer; }
+    .learning-support { background:#f4f7fc; }
+    .support-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 14px; padding:7px; border:1px solid #dce4f0; border-radius:16px; background:#fff; }
+    .support-tabs button { flex:1; min-width:150px; padding:12px 16px; border:0; border-radius:11px; color:#52627a; background:transparent; font:inherit; font-weight:900; cursor:pointer; }
+    .support-tabs button[aria-selected="true"] { color:#fff; background:#1696c2; box-shadow:0 7px 16px rgba(20,150,194,.2); }
+    .support-tabs b { margin-left:7px; padding:2px 7px; border-radius:99px; color:#a8491b; background:#fff0df; font-size:.74rem; }
+    .support-status { min-height:24px; color:#38823a; font-weight:850; }
+    .support-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:14px 0; }
+    .support-stat { padding:16px; border:1px solid #dbe4ef; border-radius:15px; background:#fff; }
+    .support-stat b { display:block; color:#1696c2; font-size:1.65rem; }
+    .support-stat span { color:#66748a; font-size:.82rem; font-weight:800; }
+    .support-list { display:grid; gap:12px; margin-top:12px; }
+    .support-card { padding:17px; border:1px solid #dbe4ef; border-left:5px solid #e36b23; border-radius:14px; background:#fff; }
+    .support-card.is-resolved { border-left-color:#43a44c; }
+    .support-card-head { display:flex; flex-wrap:wrap; justify-content:space-between; gap:7px; margin-bottom:7px; color:#748198; font-size:.75rem; font-weight:850; }
+    .support-card h3 { margin:0 0 8px; color:#273953; font-size:1.02rem; }
+    .support-card p { margin:4px 0; color:#5c6c83; font-size:.85rem; line-height:1.55; }
+    .support-choice-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:11px; }
+    .support-choice-list button,.support-submit { padding:9px 12px; border:1px solid #d5dfeb; border-radius:10px; color:#34465f; background:#fff; font:inherit; font-size:.82rem; font-weight:850; cursor:pointer; }
+    .support-choice-list button:hover,.support-submit:hover { border-color:#1696c2; }
+    .support-choice-list button.is-wrong { border-color:#e59a91; color:#a13f36; background:#fff0ed; }
+    .support-choice-list button.is-correct { border-color:#66b267; color:#287932; background:#eff9ec; }
+    .support-answer { width:100%; min-height:42px; margin-top:8px; padding:9px 11px; border:1px solid #d5dfeb; border-radius:10px; font:inherit; }
+    textarea.support-answer { min-height:78px; resize:vertical; }
+    .support-empty { padding:28px 18px; border:1px dashed #cbd6e4; border-radius:14px; color:#718097; background:#fff; text-align:center; line-height:1.6; }
+    .support-history-title { margin:28px 0 10px; color:#30415b; font-size:1.05rem; }
+    .meaning-check { grid-column:1 / -1; padding:12px; border:1px solid #d9e5ef; border-radius:12px; background:#f7fbff; }
+    .meaning-check > b { color:#1696c2; }
+    .meaning-check > p { margin:6px 0; color:#52627a; font-size:.8rem; }
+    .meaning-check .support-choice-list button { flex:1 1 180px; }
+    .support-profile { display:flex; flex-wrap:wrap; align-items:end; gap:9px; margin:12px 0; padding:14px; border:1px solid #dbe4ef; border-radius:14px; background:#fff; }
+    .support-profile label { display:grid; flex:1; min-width:220px; gap:5px; color:#586981; font-size:.78rem; font-weight:850; }
+    .support-profile input { min-height:40px; padding:8px 10px; border:1px solid #d5dfeb; border-radius:9px; font:inherit; }
+    .support-profile button { min-height:40px; padding:8px 14px; border:0; border-radius:9px; color:#fff; background:#1696c2; font:inherit; font-weight:900; cursor:pointer; }
+    .record-correct { color:#38823a!important; }
+    .record-incorrect { color:#b5473b!important; }
     .answer-field { width:100%; min-height:38px; padding:8px 10px; border:1px solid #cfd9e4; border-radius:9px; color:#263a52; background:#fff; font:inherit; font-size:.75rem; }
     textarea.answer-field { min-height:74px; resize:vertical; }
     .saved-words { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
@@ -496,6 +531,7 @@
       .scene-tools { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .scene-tool { min-height: 70px; }
       .feature-row { grid-template-columns: 1fr; }
+      .support-summary { grid-template-columns:1fr; }
       .demo-top { align-items: flex-start; flex-direction: column; gap: 2px; }
       .demo-top small { text-align: left; }
       .draw-surface,.scan-stage { height: 112px; }
@@ -541,6 +577,7 @@
         <a href="#need">왜 필요한가</a>
         <a href="#bridge">어떻게 잇는가</a>
         <a href="#stages">4단계 학습</a>
+        <a href="#review-records">복습·학생 기록</a>
         <a href="#cases">수업 사례</a>
         <a href="#results">연구 결과</a>
       </nav>
@@ -671,12 +708,11 @@
             <div class="stage-shot stage-two" aria-label="한글 해득 단계 세부 기능 장면">
               <div class="feature-scene">
                 <div class="scene-mission"><div class="live-stage-icon" aria-hidden="true"></div><div class="scene-copy"><small>배움 차시 핵심 기능</small><b>한글 해득</b><span>모음부터 받침 있는 단어까지 확장해요</span></div></div>
-                <div class="scene-tools" style="--feature-count:5" aria-label="한글 해득 핵심 기능">
+                <div class="scene-tools" style="--feature-count:4" aria-label="한글 해득 핵심 기능">
                   <button class="scene-tool" data-stage-feature="hangul" data-key="combine" aria-pressed="true"><em>가</em><b>자모음 합성</b></button>
                   <button class="scene-tool" data-stage-feature="hangul" data-key="openword" aria-pressed="false"><em>🚌</em><b>받침 없는 단어</b></button>
                   <button class="scene-tool" data-stage-feature="hangul" data-key="complex" aria-pressed="false"><em>ㅘ</em><b>복잡한 모음</b></button>
                   <button class="scene-tool" data-stage-feature="hangul" data-key="finalword" aria-pressed="false"><em>책</em><b>받침 있는 단어</b></button>
-                  <button class="scene-tool" data-stage-feature="hangul" data-key="review" aria-pressed="false"><em>🔁</em><b>복습</b></button>
                 </div>
                 <div class="feature-workspace" data-feature-panel="hangul" aria-live="polite"></div>
               </div>
@@ -717,6 +753,36 @@
       </div>
     </section>
 
+    <section class="section learning-support" id="review-records" aria-labelledby="support-title">
+      <div class="section-inner">
+        <p class="section-label">04 · REVIEW &amp; STUDENT RECORDS</p>
+        <h2 class="section-title" id="support-title">틀린 문제는 다시 풀고,<br>학생의 배움은 기록합니다.</h2>
+        <p class="section-intro">2단계 한글 해득, 3단계 교과 맞춤 쓰기, 4단계 문해력에서 나온 오답을 모아 다시 연습해요.</p>
+        <div class="support-tabs" role="tablist" aria-label="학습 지원 메뉴">
+          <button id="support-tab-review" data-support-tab="review" role="tab" aria-selected="true" aria-controls="support-panel-review">오답 복습 <b data-support-mistake-count>0</b></button>
+          <button id="support-tab-records" data-support-tab="records" role="tab" aria-selected="false" aria-controls="support-panel-records">학생 기록</button>
+        </div>
+        <p class="support-status" data-support-status role="status" aria-live="polite">학습 기록은 이 기기의 브라우저에 저장됩니다.</p>
+        <div class="support-summary" aria-label="학습 요약">
+          <div class="support-stat"><b data-support-active-count>0</b><span>다시 풀 오답</span></div>
+          <div class="support-stat"><b data-support-attempt-count>0</b><span>누적 풀이</span></div>
+          <div class="support-stat"><b data-support-accuracy>—</b><span>정답률</span></div>
+        </div>
+        <div id="support-panel-review" data-support-panel="review" role="tabpanel" aria-labelledby="support-tab-review">
+          <div class="support-list" data-support-mistakes></div>
+          <h3 class="support-history-title">복습 완료 문항</h3>
+          <div class="support-list" data-support-resolved></div>
+        </div>
+        <div id="support-panel-records" data-support-panel="records" role="tabpanel" aria-labelledby="support-tab-records" hidden>
+          <form class="support-profile" data-support-profile>
+            <label>학생 이름 <input data-support-name maxlength="24" autocomplete="off" placeholder="예: 학생 1"></label>
+            <button type="submit">이름 저장</button>
+          </form>
+          <div class="support-list" data-support-records></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="cycle-title">
       <div class="section-inner cycle-layout">
         <div class="cycle-visual" aria-hidden="true">
@@ -727,7 +793,7 @@
           <div class="cycle-tag three"><b>자람</b><span>오류로 다시 학습</span></div>
         </div>
         <div>
-          <p class="section-label">04 · TEACHING CYCLE</p>
+          <p class="section-label">05 · TEACHING CYCLE</p>
           <h2 class="section-title" id="cycle-title">진단에서 끝나지 않는<br>맞춤-이음-자람</h2>
           <p class="section-intro">학습 기록이 다음 수업 설계로 돌아오는 순환이 핵심입니다. 프로그램은 교사의 판단을 대신하는 자동화 도구가 아니라, 개별화된 판단과 수업 설계를 돕는 도구로 사용됩니다.</p>
           <div class="cycle-list">
@@ -741,7 +807,7 @@
 
     <section class="section cases" id="cases" aria-labelledby="cases-title">
       <div class="section-inner">
-        <p class="section-label">05 · CLASSROOM CASES</p>
+        <p class="section-label">06 · CLASSROOM CASES</p>
         <h2 class="section-title" id="cases-title">교과 내용을 바꾸지 않고,<br>접근 경로를 바꿉니다.</h2>
         <p class="section-intro">보고서의 실제 수업 사례를 교과별로 살펴보세요. 핵심어를 먼저 익힌 뒤 원래 수업의 질문과 활동으로 돌아갑니다.</p>
         <div class="case-tabs">
@@ -773,7 +839,7 @@
 
     <section class="section results" id="results" aria-labelledby="results-title">
       <div class="section-inner">
-        <p class="section-label">06 · WHAT CHANGED</p>
+        <p class="section-label">07 · WHAT CHANGED</p>
         <h2 class="section-title" id="results-title">한글 해득도 오르고,<br>교과 참여 방식도 달라졌습니다.</h2>
         <p class="section-intro">동일한 ‘한글 또박또박’ 진단도구로 사전·사후를 비교한 결과, 연구 참여 학생 4명 모두 총점이 상승했습니다. 변화의 폭은 사전 수준과 오류 유형에 따라 달랐습니다.</p>
         <div class="result-layout">
@@ -1220,14 +1286,6 @@
         '</div>';
     }
 
-    function hangulReviewMarkup() {
-      return '<div class="motion-demo student-test" data-hangul-review><div class="demo-top"><b>배움 확인 · 복습</b><small>앞서 배운 글자와 낱말을 다시 확인해요</small></div>' +
-        '<div class="student-test-head"><span data-review-topic>자모음 합성</span><span data-review-count>문제 1 / 3</span><span>맞힘 <b data-review-score>0</b> / 3</span></div>' +
-        '<div class="student-test-meter" aria-label="복습 진행"><i data-review-meter></i></div>' +
-        '<div class="lesson-card"><div class="lesson-card-title"><i data-review-number>1</i> 🎧 듣고 다시 찾아요</div><div class="listen-stage"><button class="listen-button" data-review-listen type="button">🔊<br>소리 듣기</button><div class="lesson-choices"><button data-review-answer="0" type="button" disabled>가</button><button data-review-answer="1" type="button" disabled>나</button><button data-review-answer="2" type="button" disabled>다</button></div></div><p class="lesson-hint" data-review-hint>소리를 듣고 알맞은 글자나 낱말을 골라요.</p></div>' +
-        '<div class="demo-actions"><span class="demo-status" data-review-status role="status" aria-live="polite">소리 듣기 버튼을 누르고 답을 골라 보세요.</span><button class="demo-action" data-review-next type="button" disabled>다음 문제</button></div></div>';
-    }
-
     const wordCardCatalog = {
       '생태계':{icon:'🌱',meaning:'생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.'},
       '숲':{icon:'🌳',meaning:'나무와 여러 생물이 함께 살아가는 곳이에요.'},
@@ -1237,6 +1295,199 @@
     const defaultWordCards = Object.keys(wordCardCatalog);
     const wordCardsStorageKey = 'aiedu-hangeul-word-cards-v1';
     const wordReviewStorageKey = 'aiedu-hangeul-word-reviews-v1';
+    const studentNameStorageKey = 'aiedu-hangeul-student-name-v1';
+    const studentRecordsStorageKey = 'aiedu-hangeul-student-records-v1';
+    const studentMistakesStorageKey = 'aiedu-hangeul-student-mistakes-v1';
+    function readStoredArray(key) {
+      try { const value = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(value) ? value : []; }
+      catch (_) { return []; }
+    }
+    let selectedStudentName = '학생 1';
+    try { selectedStudentName = localStorage.getItem(studentNameStorageKey) || selectedStudentName; } catch (_) {}
+    let studentRecords = readStoredArray(studentRecordsStorageKey);
+    let studentMistakes = readStoredArray(studentMistakesStorageKey);
+    let supportFeedback = '학습 기록은 이 기기의 브라우저에 저장됩니다.';
+    function persistLearningSupport() {
+      try {
+        localStorage.setItem(studentNameStorageKey, selectedStudentName);
+        localStorage.setItem(studentRecordsStorageKey, JSON.stringify(studentRecords.slice(0,400)));
+        localStorage.setItem(studentMistakesStorageKey, JSON.stringify(studentMistakes.slice(0,200)));
+      } catch (_) { supportFeedback = '브라우저 저장 공간을 사용할 수 없어 이번 방문 동안만 기록합니다.'; }
+    }
+    function recordLearningAttempt(question, answer, correct, source = '학습') {
+      const createdAt = new Date().toISOString();
+      const key = String(question.key || question.prompt || 'learning-item');
+      const record = {
+        recordId:Date.now() + '-' + Math.random().toString(36).slice(2,7),
+        studentName:selectedStudentName,
+        key,
+        stage:Number(question.stage) || 0,
+        stageTitle:question.stageTitle || '학습',
+        activity:question.activity || '문제 풀이',
+        prompt:question.prompt || '',
+        answer:String(answer || '').trim().slice(0,240),
+        correctAnswer:question.correctAnswer || '',
+        isCorrect:Boolean(correct),
+        source,
+        createdAt
+      };
+      studentRecords.unshift(record);
+      studentRecords = studentRecords.slice(0,400);
+      const existingIndex = studentMistakes.findIndex(item => item.key === key && item.studentName === selectedStudentName);
+      if (correct) {
+        if (existingIndex >= 0) {
+          studentMistakes[existingIndex].resolvedAt = createdAt;
+          studentMistakes[existingIndex].lastReviewAt = source === '복습' ? createdAt : studentMistakes[existingIndex].lastReviewAt;
+        }
+        supportFeedback = source === '복습' ? '맞았어요. 복습 완료 문항으로 옮겼습니다.' : '정답과 풀이 결과를 학생 기록에 저장했습니다.';
+      } else {
+        const mistake = {
+          ...question,
+          key,
+          studentName:selectedStudentName,
+          latestWrongAnswer:record.answer,
+          wrongCount:(existingIndex >= 0 ? Number(studentMistakes[existingIndex].wrongCount) || 1 : 0) + 1,
+          updatedAt:createdAt,
+          resolvedAt:''
+        };
+        if (existingIndex >= 0) studentMistakes[existingIndex] = {...studentMistakes[existingIndex],...mistake};
+        else studentMistakes.unshift(mistake);
+        supportFeedback = '오답을 복습 메뉴와 학생 기록에 저장했습니다.';
+      }
+      persistLearningSupport();
+      renderLearningSupport();
+    }
+    function appendSupportEmpty(container, message) {
+      const empty = document.createElement('div');
+      empty.className = 'support-empty';
+      empty.textContent = message;
+      container.append(empty);
+    }
+    function renderMistakeCard(mistake, container, resolved = false) {
+      const card = document.createElement('article');
+      card.className = 'support-card' + (resolved ? ' is-resolved' : '');
+      const head = document.createElement('div');
+      head.className = 'support-card-head';
+      const stage = document.createElement('span');
+      stage.textContent = (mistake.stage ? mistake.stage + '단계 · ' : '') + (mistake.stageTitle || '학습') + ' · ' + (mistake.activity || '문제 풀이');
+      const count = document.createElement('span');
+      count.textContent = resolved ? '복습 완료' : '오답 ' + (mistake.wrongCount || 1) + '회';
+      head.append(stage,count);
+      const prompt = document.createElement('h3');
+      prompt.textContent = mistake.prompt || '다시 확인할 문제';
+      card.append(head,prompt);
+      if (mistake.latestWrongAnswer) {
+        const previous = document.createElement('p');
+        previous.textContent = '이전에 고른 답: ' + mistake.latestWrongAnswer;
+        card.append(previous);
+      }
+      if (mistake.hint) {
+        const hint = document.createElement('p');
+        hint.textContent = '힌트: ' + mistake.hint;
+        card.append(hint);
+      }
+      if (resolved) {
+        const answer = document.createElement('p');
+        answer.className = 'record-correct';
+        answer.textContent = '다시 맞힌 답: ' + (mistake.correctAnswer || '확인 완료');
+        card.append(answer);
+        container.append(card);
+        return;
+      }
+      if (mistake.sound) {
+        const listen = document.createElement('button');
+        listen.type = 'button'; listen.className = 'support-submit'; listen.textContent = '🔊 문제 듣기';
+        listen.addEventListener('click', () => speakKorean(mistake.sound));
+        card.append(listen);
+      }
+      const feedback = document.createElement('p');
+      feedback.className = 'support-feedback';
+      feedback.setAttribute('role','status');
+      if (mistake.answerType === 'text' || mistake.answerType === 'keyword') {
+        const field = mistake.answerType === 'keyword' ? document.createElement('textarea') : document.createElement('input');
+        field.className = 'support-answer';
+        field.placeholder = mistake.answerType === 'keyword' ? '문장으로 다시 써 보세요.' : '답을 다시 써 보세요.';
+        field.setAttribute('aria-label','복습 답 입력');
+        const submit = document.createElement('button');
+        submit.type = 'button'; submit.className = 'support-submit'; submit.textContent = '다시 확인';
+        submit.addEventListener('click', () => {
+          const answer = field.value.trim();
+          if (!answer) { feedback.textContent = '답을 입력한 뒤 확인해 주세요.'; return; }
+          const correct = mistake.answerType === 'keyword'
+            ? answer.length >= 10 && answer.includes(mistake.keyword || mistake.correctAnswer)
+            : answer.includes(mistake.correctAnswer);
+          recordLearningAttempt(mistake,answer,correct,'복습');
+        });
+        card.append(field,submit,feedback);
+      } else {
+        const choices = document.createElement('div');
+        choices.className = 'support-choice-list';
+        (Array.isArray(mistake.choices) ? mistake.choices : []).forEach(choiceText => {
+          const choice = document.createElement('button');
+          choice.type = 'button'; choice.textContent = choiceText;
+          choice.addEventListener('click', () => recordLearningAttempt(mistake,choiceText,choiceText === mistake.correctAnswer,'복습'));
+          choices.append(choice);
+        });
+        card.append(choices,feedback);
+      }
+      container.append(card);
+    }
+    function renderLearningSupport() {
+      const root = document.querySelector('#review-records');
+      if (!root) return;
+      const currentMistakes = studentMistakes.filter(item => item.studentName === selectedStudentName);
+      const activeMistakes = currentMistakes.filter(item => !item.resolvedAt);
+      const resolvedMistakes = currentMistakes.filter(item => item.resolvedAt).slice(0,6);
+      const currentRecords = studentRecords.filter(item => item.studentName === selectedStudentName);
+      const correctCount = currentRecords.filter(item => item.isCorrect).length;
+      root.querySelector('[data-support-status]').textContent = supportFeedback;
+      root.querySelector('[data-support-mistake-count]').textContent = activeMistakes.length;
+      root.querySelector('[data-support-active-count]').textContent = activeMistakes.length;
+      root.querySelector('[data-support-attempt-count]').textContent = currentRecords.length;
+      root.querySelector('[data-support-accuracy]').textContent = currentRecords.length ? Math.round(correctCount / currentRecords.length * 100) + '%' : '—';
+      const mistakeList = root.querySelector('[data-support-mistakes]');
+      mistakeList.replaceChildren();
+      if (activeMistakes.length) activeMistakes.forEach(item => renderMistakeCard(item,mistakeList));
+      else appendSupportEmpty(mistakeList,'아직 복습할 오답이 없습니다. 2·3·4단계에서 틀린 문항이 여기에 모입니다.');
+      const resolvedList = root.querySelector('[data-support-resolved]');
+      resolvedList.replaceChildren();
+      if (resolvedMistakes.length) resolvedMistakes.forEach(item => renderMistakeCard(item,resolvedList,true));
+      else appendSupportEmpty(resolvedList,'문제를 다시 맞히면 완료 기록이 여기에 남습니다.');
+      const recordList = root.querySelector('[data-support-records]');
+      recordList.replaceChildren();
+      if (currentRecords.length) currentRecords.slice(0,40).forEach(record => {
+        const card = document.createElement('article'); card.className = 'support-card';
+        const head = document.createElement('div'); head.className = 'support-card-head';
+        const activity = document.createElement('span'); activity.textContent = record.stage + '단계 · ' + record.stageTitle + ' · ' + record.activity;
+        const date = document.createElement('time'); date.dateTime = record.createdAt; date.textContent = new Date(record.createdAt).toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+        head.append(activity,date);
+        const prompt = document.createElement('h3'); prompt.textContent = record.prompt;
+        const response = document.createElement('p'); response.className = record.isCorrect ? 'record-correct' : 'record-incorrect';
+        response.textContent = (record.isCorrect ? '정답' : '오답') + ' · 내 답: ' + (record.answer || '(빈 답)') + (record.correctAnswer ? ' · 확인 답: ' + record.correctAnswer : '');
+        card.append(head,prompt,response);
+        recordList.append(card);
+      });
+      else appendSupportEmpty(recordList,'아직 풀이 기록이 없습니다. 학습을 시작하면 학생별 시도와 결과가 저장됩니다.');
+      const nameInput = root.querySelector('[data-support-name]');
+      if (document.activeElement !== nameInput) nameInput.value = selectedStudentName;
+    }
+    function wireLearningSupport() {
+      const root = document.querySelector('#review-records');
+      root.querySelector('[data-support-profile]').addEventListener('submit',event => {
+        event.preventDefault();
+        const input = root.querySelector('[data-support-name]');
+        const name = input.value.trim().slice(0,24);
+        if (!name) { supportFeedback = '학생 이름을 입력해 주세요.'; renderLearningSupport(); input.focus(); return; }
+        selectedStudentName = name;
+        supportFeedback = name + ' 학생의 기록을 불러왔습니다. 이 브라우저에 저장됩니다.';
+        persistLearningSupport(); renderLearningSupport();
+      });
+      root.querySelectorAll('[data-support-tab]').forEach(button => button.addEventListener('click',() => {
+        root.querySelectorAll('[data-support-tab]').forEach(tab => tab.setAttribute('aria-selected',String(tab === button)));
+        root.querySelectorAll('[data-support-panel]').forEach(panel => { panel.hidden = panel.dataset.supportPanel !== button.dataset.supportTab; });
+      }));
+      renderLearningSupport();
+    }
     function readStoredWordCards() {
       try {
         const stored = JSON.parse(localStorage.getItem(wordCardsStorageKey) || 'null');
@@ -1287,13 +1538,12 @@
         combine: () => lessonMarkup('combine'),
         openword: () => lessonMarkup('openword'),
         complex: () => lessonMarkup('complex'),
-        finalword: () => lessonMarkup('finalword'),
-        review: () => hangulReviewMarkup()
+        finalword: () => lessonMarkup('finalword')
       },
       curriculum: {
         photo: () => '<div class="motion-demo scan-demo"><div class="demo-top"><b>교과 자료 촬영·인식</b><small>노트 사진에서 한글을 찾아 단어 카드로 만들어요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div><div class="ocr-output is-empty" data-ocr-output>인식된 핵심어가 여기에 나타나요.</div></div><video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video><canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요.</span><button class="demo-action secondary" data-open-camera type="button">카메라 켜기</button><button class="demo-action secondary" data-capture-photo type="button" disabled>촬영</button><button class="demo-action secondary" data-open-photo type="button">사진 선택</button></div><div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div></div>',
         write: () => canvasMarkup('핵심어 쓰기', '생태계', '#e36b23', '생태계를 듣고 읽은 뒤 직접 써요', false, '<button class="demo-action secondary" data-speak-text="생태계" type="button">🔊 생태계 듣기</button>').replace('class="motion-demo canvas-demo"','class="motion-demo canvas-demo word-writing-demo"').replace('완료하기','쓰기 확인').replace('data-panel-complete','data-writing-check'),
-        meaning: () => '<article class="motion-demo shared-word-card-demo" aria-label="에이두 한글 생태계 단어 카드"><header class="shared-word-card-head"><small>SHARED WORD CARDS</small><h3>생태계</h3><p>그림과 설명으로 단어의 뜻을 알아봐요.</p></header><div class="shared-word-card-body"><div class="shared-word-card-art" role="img" aria-label="초록 새싹 옷을 입은 아이가 물고기와 식물이 있는 생태계 어항을 들고 있어요"></div><div class="shared-word-card-copy"><span class="feature-badge">단어 카드</span><h4 data-card-word>생태계</h4><p class="shared-word-card-definition" data-card-definition role="button" tabindex="0">생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.</p><small class="shared-word-card-hint">문장을 눌러 들어보세요</small><div class="shared-word-card-actions"><button data-speak-meaning type="button">🔊 설명 듣기</button><button data-back-to-bank type="button">← 단어 카드 저장소</button></div></div></div></article>',
+        meaning: () => '<article class="motion-demo shared-word-card-demo" aria-label="에이두 한글 생태계 단어 카드"><header class="shared-word-card-head"><small>SHARED WORD CARDS</small><h3>생태계</h3><p>그림과 설명으로 단어의 뜻을 알아봐요.</p></header><div class="shared-word-card-body"><div class="shared-word-card-art" role="img" aria-label="초록 새싹 옷을 입은 아이가 물고기와 식물이 있는 생태계 어항을 들고 있어요"></div><div class="shared-word-card-copy"><span class="feature-badge">단어 카드</span><h4 data-card-word>생태계</h4><p class="shared-word-card-definition" data-card-definition role="button" tabindex="0">생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.</p><small class="shared-word-card-hint">문장을 눌러 들어보세요</small><div class="shared-word-card-actions"><button data-speak-meaning type="button">🔊 설명 듣기</button><button data-back-to-bank type="button">← 단어 카드 저장소</button></div></div><section class="meaning-check" data-stage3-check><b>뜻 확인 퀴즈</b><p>‘생태계’의 뜻으로 가장 알맞은 설명을 골라요.</p><div class="support-choice-list"><button data-stage3-answer="0" type="button">생물과 주변 환경이 서로 영향을 주고받는 관계</button><button data-stage3-answer="1" type="button">동물만 모여서 살아가는 장소</button><button data-stage3-answer="2" type="button">식물이 자라는 순서</button></div><p data-stage3-status role="status">한 가지를 선택해 보세요.</p></section></div></article>',
         bank: () => wordBankMarkup()
       },
       literacy: {
@@ -1371,6 +1621,7 @@
           const correct = button.dataset.lessonChoice === config.target;
           button.classList.add(correct ? 'is-correct' : 'is-wrong');
           status.textContent = correct ? '🎉 참 잘했어요! 알맞은 소리를 찾았어요.' : '😢 다시 들어 보아요.';
+          recordLearningAttempt({key:'stage2-' + shell.dataset.hangulLesson + '-listen',stage:2,stageTitle:'한글 해득',activity:config.title + ' · 듣기',prompt:'소리를 듣고 알맞은 글자나 낱말을 고르세요.',sound:config.target,choices:config.letters,correctAnswer:config.target,hint:'소리를 다시 듣고 글자의 첫소리와 모음을 살펴보세요.'},button.dataset.lessonChoice,correct);
           if (correct) speakKorean(config.target);
         }));
       }
@@ -1494,70 +1745,18 @@
         wireHangulLesson(lesson);
         return;
       }
-      const hangulReview = panel.querySelector('[data-hangul-review]');
-      if (hangulReview) {
-        const questions = [
-          {topic:'자모음 합성',sound:'가',answers:['가','나','다'],correct:0,hint:'ㄱ과 ㅏ를 합쳐 만든 글자를 찾아요.'},
-          {topic:'받침 없는 단어',sound:'버스',answers:['버스','밤','책'],correct:0,hint:'받침 없이 소리 나는 두 글자 낱말이에요.'},
-          {topic:'받침 있는 단어',sound:'책',answers:['채','책','밤'],correct:1,hint:'마지막에 ㄱ 받침이 있는 낱말이에요.'}
-        ];
-        let questionIndex = 0;
-        let score = 0;
-        let complete = false;
-        const choices = [...hangulReview.querySelectorAll('[data-review-answer]')];
-        const next = hangulReview.querySelector('[data-review-next]');
-        const status = hangulReview.querySelector('[data-review-status]');
-        const listen = hangulReview.querySelector('[data-review-listen]');
-        const render = () => {
-          const question = questions[questionIndex];
-          hangulReview.querySelector('[data-review-topic]').textContent = question.topic;
-          hangulReview.querySelector('[data-review-count]').textContent = '문제 ' + (questionIndex + 1) + ' / ' + questions.length;
-          hangulReview.querySelector('[data-review-number]').textContent = questionIndex + 1;
-          hangulReview.querySelector('[data-review-score]').textContent = score;
-          hangulReview.querySelector('[data-review-meter]').style.width = (questionIndex / questions.length * 100) + '%';
-          choices.forEach((button,index) => { button.textContent = question.answers[index]; button.disabled = true; button.classList.remove('is-correct','is-wrong'); });
-          listen.disabled = false;
-          next.disabled = true;
-          next.textContent = questionIndex === questions.length - 1 ? '결과 확인' : '다음 문제';
-          status.textContent = '소리 듣기 버튼을 누르고 답을 골라 보세요.';
-          hangulReview.querySelector('[data-review-hint]').textContent = '소리를 듣고 알맞은 글자나 낱말을 골라요.';
-        };
-        listen.addEventListener('click', () => {
-          speakKorean(questions[questionIndex].sound);
-          choices.forEach(button => button.disabled = false);
-          status.textContent = '방금 들은 글자나 낱말을 찾아요.';
-        });
-        choices.forEach((button,index) => button.addEventListener('click', () => {
-          if (button.disabled) return;
-          const question = questions[questionIndex];
-          const correct = index === question.correct;
-          choices.forEach((choice,choiceIndex) => {
-            choice.disabled = true;
-            if (choiceIndex === question.correct) choice.classList.add('is-correct');
-            else if (choiceIndex === index) choice.classList.add('is-wrong');
-          });
-          if (correct) score += 1;
-          hangulReview.querySelector('[data-review-score]').textContent = score;
-          hangulReview.querySelector('[data-review-meter]').style.width = ((questionIndex + 1) / questions.length * 100) + '%';
-          status.textContent = correct ? '✓ 맞았어요! 잘 기억하고 있네요.' : '다시 확인해 봐요. ' + question.hint;
-          next.disabled = false;
-        }));
-        next.addEventListener('click', () => {
-          if (complete) { questionIndex = 0; score = 0; complete = false; render(); return; }
-          if (next.disabled) return;
-          if (questionIndex < questions.length - 1) { questionIndex += 1; render(); return; }
-          complete = true;
-          hangulReview.querySelector('[data-review-topic]').textContent = '복습 결과';
-          hangulReview.querySelector('[data-review-count]').textContent = '복습 완료';
-          hangulReview.querySelector('[data-review-meter]').style.width = '100%';
-          hangulReview.querySelector('[data-review-hint]').textContent = '세 가지 학습 내용을 모두 다시 확인했어요.';
-          status.textContent = '오늘의 복습 결과: ' + score + ' / ' + questions.length + ' 정답';
-          next.textContent = '다시 풀기';
-          next.disabled = false;
-        });
-        return;
-      }
       panel.querySelectorAll('[data-speak-text]').forEach(button => button.addEventListener('click', () => speakKorean(button.dataset.speakText)));
+      const meaningCheck = panel.querySelector('[data-stage3-check]');
+      if (meaningCheck) {
+        const answers = ['생물과 주변 환경이 서로 영향을 주고받는 관계','동물만 모여서 살아가는 장소','식물이 자라는 순서'];
+        meaningCheck.querySelectorAll('[data-stage3-answer]').forEach(button => button.addEventListener('click',() => {
+          const correct = Number(button.dataset.stage3Answer) === 0;
+          button.classList.toggle('is-correct',correct);
+          button.classList.toggle('is-wrong',!correct);
+          meaningCheck.querySelector('[data-stage3-status]').textContent = correct ? '✓ 뜻을 정확하게 골랐어요.' : '단어 카드의 그림과 설명을 다시 확인해 보세요.';
+          recordLearningAttempt({key:'stage3-meaning-ecosystem',stage:3,stageTitle:'교과 맞춤 쓰기',activity:'핵심어 뜻 확인',prompt:'‘생태계’의 뜻으로 가장 알맞은 설명은?',choices:answers,correctAnswer:answers[0],hint:'생물과 주변 환경이 서로 영향을 주고받는 관계예요.'},button.textContent,correct);
+        }));
+      }
       const studentTest = panel.querySelector('[data-literacy-test]');
       if (studentTest) {
         const questions = [
@@ -1593,6 +1792,7 @@
           studentTest.querySelector('[data-test-score]').textContent = correctAnswers.filter(Boolean).length;
           studentTest.querySelector('[data-test-meter]').style.width = ((questionIndex + 1) / questions.length * 100) + '%';
           status.textContent = correct ? '✓ 정답이에요. 핵심 내용을 이해했어요.' : '한 번 더 지문을 읽어 보세요. ' + question.hint;
+          recordLearningAttempt({key:'stage4-literacy-choice-' + questionIndex,stage:4,stageTitle:'문해력',activity:'학생 테스트 · 선택형',prompt:question.stem,choices:question.answers,correctAnswer:question.answers[question.correct],hint:question.hint},button.textContent,correct);
           next.disabled = false;
         }));
         next.addEventListener('click', () => {
@@ -1860,12 +2060,18 @@
       const checkText = panel.querySelector('[data-check-text]');
       if (checkText) checkText.addEventListener('click', () => {
         const value = panel.querySelector('[data-user-answer]').value.trim();
-        panel.querySelector('.demo-status').textContent = value.includes(checkText.dataset.checkText) ? '✓ 정답이에요! 핵심 내용을 찾았어요.' : '지문에서 식물에 필요한 것을 다시 찾아보세요.';
+        if (!value) { panel.querySelector('.demo-status').textContent = '답을 입력한 뒤 확인해 주세요.'; return; }
+        const correct = value.includes(checkText.dataset.checkText);
+        panel.querySelector('.demo-status').textContent = correct ? '✓ 정답이에요! 핵심 내용을 찾았어요.' : '지문에서 식물에 필요한 것을 다시 찾아보세요.';
+        recordLearningAttempt({key:'stage4-literacy-short-sunlight',stage:4,stageTitle:'문해력',activity:'단답형',prompt:'식물이 자라는 데 필요한 것은 물과 무엇인가요?',answerType:'text',correctAnswer:checkText.dataset.checkText,hint:'지문에서 식물에게 필요한 것을 다시 찾아보세요.'},value,correct);
       });
       const checkKeyword = panel.querySelector('[data-check-keyword]');
       if (checkKeyword) checkKeyword.addEventListener('click', () => {
         const value = panel.querySelector('[data-user-answer]').value.trim();
-        panel.querySelector('.demo-status').textContent = value.length >= 10 && value.includes(checkKeyword.dataset.checkKeyword) ? '✓ 핵심어를 활용해 자신의 문장으로 표현했어요.' : '‘' + checkKeyword.dataset.checkKeyword + '’를 넣어 조금 더 길게 써 보세요.';
+        if (!value) { panel.querySelector('.demo-status').textContent = '문장을 입력한 뒤 확인해 주세요.'; return; }
+        const correct = value.length >= 10 && value.includes(checkKeyword.dataset.checkKeyword);
+        panel.querySelector('.demo-status').textContent = correct ? '✓ 핵심어를 활용해 자신의 문장으로 표현했어요.' : '‘' + checkKeyword.dataset.checkKeyword + '’를 넣어 조금 더 길게 써 보세요.';
+        recordLearningAttempt({key:'stage4-literacy-essay-ecosystem',stage:4,stageTitle:'문해력',activity:'서술형',prompt:'생태계 핵심어를 사용해 숲의 생물 관계를 한 문장으로 설명해 보세요.',answerType:'keyword',keyword:checkKeyword.dataset.checkKeyword,correctAnswer:checkKeyword.dataset.checkKeyword,hint:'‘생태계’를 넣고 10자 이상으로 써 보세요.'},value,correct);
       });
       const hint = panel.querySelector('[data-detective-hint]');
       if (hint) hint.addEventListener('click', () => { panel.querySelector('.demo-status').textContent = '단서: “햇빛과 물을 받아”가 원인을 알려 줘요.'; });
@@ -1882,6 +2088,7 @@
       wireFeaturePanel(panel);
     }
     document.querySelectorAll('[data-stage-feature]').forEach(button => button.addEventListener('click', () => renderStageFeature(button.dataset.stageFeature, button.dataset.key)));
+    wireLearningSupport();
     renderStageFeature('draw','picture');
     renderStageFeature('hangul','combine');
     renderStageFeature('curriculum','photo');

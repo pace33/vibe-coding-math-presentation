@@ -394,7 +394,7 @@
     .aiedu-review-embed .review-level { position:absolute; bottom:-5px; right:-5px; padding:3px 9px; border:2px solid #fff; border-radius:9px; background:#78a446; color:#fff; font-size:12px; }
     .aiedu-review-embed .review-profile { min-width:155px; font-size:12px; font-weight:900; }
     .aiedu-review-embed .review-profile>div { display:flex; justify-content:space-between; gap:15px; }
-    .aiedu-review-embed .review-profile strong { max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .aiedu-review-embed .review-profile strong { max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#2c3e50; }
     .aiedu-review-embed .review-profile small { color:#62a958; }
     .aiedu-review-embed .review-profile p { margin:2px 0 0; color:#9b660d; }
     .aiedu-review-embed .review-profile p:last-child { color:#dd3e50; }
@@ -404,6 +404,13 @@
     .aiedu-review-embed .rpg-tool-button.is-active { border-color:#24a36d; background:#dcf7e9; color:#116744; box-shadow:0 0 0 2px #24a36d2e; }
     .aiedu-review-embed .review-menu { margin-top:12px; padding:12px; border:1px solid #cfe6d3; border-radius:16px; background:#fff; }
     .aiedu-review-embed .review-note { margin:16px 0 0; color:#6d8279; font-size:.76rem; text-align:center; }
+    @media(max-width:900px) {
+      .aiedu-review-embed .review-hud { width:100%; min-height:142px; margin-top:38px; padding:8px 12px 66px 114px; }
+      .aiedu-review-embed .review-exp { width:94px; height:94px; left:8px; bottom:64px; }
+      .aiedu-review-embed .review-profile { min-width:0; width:100%; }
+      .aiedu-review-embed .review-hud-tools { position:absolute; left:8px; right:8px; bottom:8px; justify-content:space-between; gap:3px; }
+      .aiedu-review-embed .rpg-tool-button { min-width:0; flex:1; max-width:60px; height:48px; font-size:10px; }
+    }
     @media(max-width:700px) {
       .aiedu-review-embed { padding:18px 14px; border-width:5px; border-radius:30px; }
       .aiedu-review-embed .korean-records-header { display:grid; grid-template-columns:88px 1fr; gap:8px 12px; }

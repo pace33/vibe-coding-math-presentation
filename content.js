@@ -407,30 +407,6 @@ window.TRAINING = {
       "promptPreview": "AI 힌트부터 추가해 주세요. 잘 작동하면 음성 설명과 강아지 그리기를 이어서 만들어요."
     },
     {
-      "id": "test-three",
-      "title": "세 가지 활동을 한 번씩 눌러 봅니다",
-      "part": "theory",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "세기 · 덧셈 · 뺄셈에서 답과 반응을 확인합니다",
-      "items": [
-        {
-          "heading": "정답 확인",
-          "body": "직접 세어 보고 계산한 뒤 맞는 답을 누릅니다."
-        },
-        {
-          "heading": "다른 답도 확인",
-          "body": "틀린 답을 눌렀을 때 다시 시도할 수 있는지 봅니다."
-        }
-      ],
-      "notes": "예시 웹사이트에서 세기, 덧셈, 뺄셈을 한 번씩 엽니다. 직접 세거나 계산하고 정답을 눌러 봅니다. 다른 답도 눌러 다시 시도할 수 있는지 확인합니다. 시연 후에는 각 활동의 그림, 식, 정답을 함께 자세히 확인합니다.",
-      "screenshot": {
-        "src": "assets/screenshots/pokemon-home.jpg",
-        "alt": "Gemini가 만든 포켓몬 수학 왕국의 세기·덧셈·뺄셈 선택 화면"
-      },
-      "art": []
-    },
-    {
       "id": "revise-with-words",
       "title": "바꾸고 싶은 점도 말로 부탁합니다",
       "part": "theory",

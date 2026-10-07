@@ -408,29 +408,29 @@ window.TRAINING = {
     },
     {
       "id": "revise-with-words",
-      "title": "바꾸고 싶은 점도 말로 부탁합니다",
+      "title": "실습 1 · 만든 웹사이트 수정하기",
       "part": "theory",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "불편한 부분을 짧고 구체적으로 적으면 됩니다",
+      "type": "steps",
+      "visual": "text-only",
+      "lead": "완성 화면을 캡처해 올리고, 바꿀 점을 줄글로 적습니다",
       "items": [
         {
-          "heading": "예: 글씨와 버튼",
-          "body": "‘글씨와 답 버튼을 더 크게 해 주세요.’"
+          "heading": "웹사이트 화면 캡처",
+          "body": "수정할 부분이 보이게 완성된 웹사이트 화면을 캡처합니다."
         },
         {
-          "heading": "수정 후 확인",
-          "body": "다시 같은 활동을 눌러 원하는 대로 바뀌었는지 봅니다."
+          "heading": "Gemini 대화에 첨부",
+          "body": "처음 웹사이트를 만든 Canvas 대화에 캡처 이미지를 올립니다."
+        },
+        {
+          "heading": "수정 요청을 줄글로 적기",
+          "body": "어느 부분을 어떻게 바꿀지 한두 문장으로 적어 전송합니다."
         }
       ],
-      "notes": "웹사이트 안의 답 버튼과 Gemini의 요청 입력창을 구분해 보여 줍니다. 바꾸고 싶은 부분을 같은 대화에 짧게 적습니다. 예를 들어 글씨와 답 버튼을 더 크게 해 달라고 요청할 수 있습니다. 수정 후에는 선택한 활동이 유지되는지 다시 확인합니다. 요청문은 화면 상단의 첫 요청문 또는 마지막 장의 진행자료에서 확인합니다.",
+      "notes": "웹사이트가 완성되면 수정할 부분이 보이도록 화면을 캡처합니다. 새 대화를 시작하지 말고 웹사이트를 만든 기존 Gemini Canvas 대화에 이미지를 첨부합니다. 수정 요청사항은 목록이나 코드 대신 줄글로 구체적으로 적습니다. 예를 들어 답 버튼이 작아 누르기 어렵다는 문제와 버튼·글씨를 키워 달라는 변경 방향을 함께 적습니다. 수정 결과가 나오면 선택한 활동이 유지되고 버튼이 잘 작동하는지 확인합니다.",
       "prompt": "revise",
-      "screenshot": {
-        "src": "assets/screenshots/gemini-revision.jpg",
-        "alt": "Gemini에 웹사이트 수정 요청을 입력하는 실제 화면"
-      },
       "art": [],
-      "promptPreview": "글씨와 답 버튼을 더 크게 해 주세요. 선택한 활동은 유지해 주세요."
+      "promptPreview": "첨부한 화면에서 답 버튼이 작아 누르기 어렵습니다. 버튼과 글씨를 크게 바꿔 주세요."
     },
     {
       "id": "share-open",
@@ -734,7 +734,7 @@ window.TRAINING = {
   ],
   "prompts": {
     "starter": "[아이템]으로 [활동]을 연습하는 웹사이트를 만들어 주세요.",
-    "revise": "글씨와 답 버튼을 더 크게 해 주세요. 선택한 활동은 유지해 주세요.",
+    "revise": "첨부한 화면에서 답 버튼이 작아 누르기 어렵습니다. 버튼과 글씨를 크게 바꿔 주세요.",
     "aiFeatures": "지금 만든 수학 앱에 다음 AI 기능을 한 번에 하나씩 추가해 주세요.\n\n1. AI 힌트 버튼: 정답을 바로 말하지 말고 초등학교 1학년 눈높이의 친절한 단서를 주세요.\n2. AI 음성 설명(TTS): AI 힌트와 응원 메시지를 실제 목소리로 읽어 주세요.\n3. 나만의 강아지 그리기: 학생이 얻은 뼈다귀 보상을 사용해 이미지 생성 AI로 강아지 캐릭터를 만들고 앱에 적용해 주세요.\n\n기존 수학 활동은 그대로 유지하고, 기능을 하나 추가할 때마다 먼저 작동 여부를 확인하게 해 주세요. API 키나 비밀정보는 코드에 직접 넣지 마세요.",
     "repair": "[어느 활동]에서 [무엇을 눌렀는지] 하니 [실제로 나온 결과]가 나타납니다. [원하는 결과]가 되도록 고쳐 주세요. 선택한 활동은 유지해 주세요."
   },
@@ -776,6 +776,7 @@ function moveSlideAfter(id, previousId) {
   trainingSlides.splice(trainingSlides.findIndex(item => item.id === previousId) + 1, 0, slide);
 }
 moveSlideAfter('practice-request', 'practice-one-item-activity');
+moveSlideAfter('revise-with-words', 'practice-request');
 moveSlideAfter('practice-count', 'practice-two-pokemon-sprites');
 moveSlideAfter('practice-add', 'practice-count');
 moveSlideAfter('practice-subtract', 'practice-add');

@@ -362,7 +362,7 @@ window.TRAINING = {
       "part": "theory",
       "type": "steps",
       "visual": "text-only",
-      "lead": "PokeAPI 저장소에서 그림을 찾고 웹사이트에 적용합니다",
+      "lead": "“포켓몬 스프라이트 깃허브를 사용해서”",
       "items": [
         {
           "heading": "스프라이트 저장소 열기",

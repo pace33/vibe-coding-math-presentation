@@ -421,7 +421,7 @@ window.TRAINING = {
           "body": "수정할 부분이 보이게 완성된 웹사이트 화면을 캡처합니다."
         },
         {
-          "heading": "Gemini 대화에 첨부",
+          "heading": "Gemini 대화에 첨부(컨트롤 + V)",
           "body": "처음 웹사이트를 만든 Canvas 대화에 캡처 이미지를 올립니다."
         },
         {

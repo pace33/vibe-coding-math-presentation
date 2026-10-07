@@ -627,78 +627,6 @@ window.TRAINING = {
       "promptPreview": "[아이템]으로 [활동]을 연습하는 웹사이트를 만들어 주세요."
     },
     {
-      "id": "practice-count",
-      "title": "실습 2 확인 · 세기 활동",
-      "part": "practice",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "포켓몬 몇 마리일까요?",
-      "items": [
-        {
-          "heading": "직접 세어 보기",
-          "body": "포켓몬을 하나씩 짚으며 전체 수를 셉니다."
-        },
-        {
-          "heading": "반응 확인",
-          "body": "맞는 답과 다른 답을 각각 눌러 봅니다."
-        }
-      ],
-      "notes": "실제 생성된 세기 화면에서 포켓몬을 하나씩 짚으며 전체 수를 셉니다. 그림 수와 정답 처리가 맞는지, 다른 답을 고르면 어떤 반응이 나오는지 확인합니다. 겹친 그림이나 잘못된 정답이 보이면 어디가 다른지 적어 두었다가 수정 요청에 사용합니다.",
-      "screenshot": {
-        "src": "assets/screenshots/pokemon-count.jpg",
-        "alt": "Gemini가 실제로 만든 포켓몬 수 세기 활동 화면"
-      },
-      "art": []
-    },
-    {
-      "id": "practice-add",
-      "title": "실습 2 확인 · 덧셈 활동",
-      "part": "practice",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "포켓몬을 더해 봅니다",
-      "items": [
-        {
-          "heading": "그림과 식 읽기",
-          "body": "각 무리에 몇 마리인지 세고 모두 몇 마리인지 말해 봅니다."
-        },
-        {
-          "heading": "반응 확인",
-          "body": "화면의 덧셈식, 그림의 수, 정답이 서로 맞는지 봅니다."
-        }
-      ],
-      "notes": "덧셈 화면에서 각 무리의 수와 모두 합친 수를 세어 봅니다. 그림 수, 덧셈식, 정답이 맞는지 확인합니다. 두 무리가 잘 구분되지 않으면 두 무리의 포켓몬을 그림으로 보여 달라고 부탁할 수 있습니다. 참가자마다 숫자가 다르므로 자기 화면을 기준으로 확인합니다.",
-      "screenshot": {
-        "src": "assets/screenshots/pokemon-add.jpg",
-        "alt": "Gemini가 실제로 만든 포켓몬 덧셈 활동 화면"
-      },
-      "art": []
-    },
-    {
-      "id": "practice-subtract",
-      "title": "실습 2 확인 · 뺄셈 활동",
-      "part": "practice",
-      "type": "capture",
-      "visual": "real-capture",
-      "lead": "남은 포켓몬을 세어 봅니다",
-      "items": [
-        {
-          "heading": "무엇이 빠졌나요?",
-          "body": "사라지거나 제외되는 포켓몬이 분명히 보이는지 살핍니다."
-        },
-        {
-          "heading": "반응 확인",
-          "body": "남은 수와 뺄셈식, 정답 처리가 맞는지 봅니다."
-        }
-      ],
-      "notes": "뺄셈 화면에서 처음 수, 빠진 수, 남은 수를 차례로 말해 봅니다. 그림과 뺄셈식이 맞는지 확인합니다. 빠진 포켓몬과 남은 포켓몬이 헷갈리면 표시 방법을 바꿔 달라고 요청합니다. 잘못된 계산이나 정답 처리가 보이면 실제 상황을 적어 둡니다.",
-      "screenshot": {
-        "src": "assets/screenshots/pokemon-subtract.jpg",
-        "alt": "Gemini가 실제로 만든 포켓몬 뺄셈 활동 화면"
-      },
-      "art": []
-    },
-    {
       "id": "practice-check",
       "title": "마무리 · 에이두 커뮤니티에 공유하기",
       "part": "practice",
@@ -780,7 +708,4 @@ function moveSlideAfter(id, previousId) {
 }
 moveSlideAfter('practice-request', 'practice-one-item-activity');
 moveSlideAfter('revise-with-words', 'practice-request');
-moveSlideAfter('practice-count', 'practice-two-pokemon-sprites');
-moveSlideAfter('practice-add', 'practice-count');
-moveSlideAfter('practice-subtract', 'practice-add');
 

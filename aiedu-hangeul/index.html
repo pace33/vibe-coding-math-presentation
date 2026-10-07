@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="특수교육대상학생의 한글 해득과 통합학급 교과 참여를 잇는 에이두 한글 강의자료">
   <meta name="theme-color" content="#14213d">
+  <meta name="aiedu-release" content="20261006-fidelity-v1">
   <title>에이두 한글 | 교과는 함께, 문해 수준은 맞춤으로</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Ccircle cx='17' cy='32' r='8' fill='white'/%3E%3Ccircle cx='47' cy='32' r='8' fill='white'/%3E%3Cpath d='M25 32h14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -769,6 +770,30 @@
       .lesson-formula.is-animating .formula-piece { animation-duration:2.4s !important; animation-iteration-count:1 !important; }
       .lesson-formula.is-animating .formula-arrow,.lesson-formula.is-animating .formula-result { animation-duration:2.4s !important; animation-iteration-count:1 !important; }
     }
+
+    /* Fidelity release: clearer provenance, larger handwriting, honest original-service boundaries. */
+    .trace-cell {height:230px;}
+    .trace-cell strong,.trace-stroke-count {z-index:4;pointer-events:none;}
+    .fidelity-note {display:block;margin:10px 0 0;color:#65758a;font-size:.7rem;line-height:1.6;}
+    .original-feature p {font-size:.88rem;line-height:1.8;color:#43556c;}
+    .original-feature-link {display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin:12px 0 4px;padding:9px 14px;border-radius:12px;background:var(--scene-accent,#3ca04b);color:#fff;text-decoration:none;font-size:.76rem;font-weight:800;}
+    .original-feature-link:hover {filter:brightness(.93);}
+    .original-feature-capture {display:block;width:100%;height:auto;max-height:320px;object-fit:contain;border:1px solid #dce4ed;border-radius:12px;margin:12px 0;background:#f5faf7;}
+    .curricular-word {display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0;}
+    .curricular-word strong {font-size:2rem;color:#2c3e50;}
+    .curricular-word button {border:1px solid #f2c39b;border-radius:99px;padding:7px 12px;background:#fff7ee;color:#a64c1b;font-size:.75rem;}
+    .picture-canvas {display:block;width:100%;height:270px;border:2px dashed #d9c6ef;border-radius:12px;touch-action:none;cursor:crosshair;}
+    .curricular-canvas {display:block;width:100%;height:200px;border:2px dashed #efb895;border-radius:12px;touch-action:none;cursor:crosshair;}
+    .word-bank-ecosystem {display:block;width:38px;height:46px;}
+    .content-provenance {display:grid;grid-template-columns:auto 1fr;gap:7px 16px;padding:16px 20px;margin:0 0 24px;border:1px solid #53657f;border-radius:16px;background:rgba(255,255,255,.06);color:#dce6f2;font-size:.8rem;}
+    .content-provenance b {color:#dcf46a;}
+    .stage>ul {display:none;}
+    .stage>p {margin-bottom:0;}
+    .stage-num {margin-top:20px;}
+    .record-source-bar [aria-pressed="true"] {box-shadow:inset 0 0 0 2px #49a53b;}
+    button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible {outline:3px solid #ff9a43;outline-offset:3px;}
+    @media(max-width:900px){.stage-grid{grid-template-columns:1fr;}.feature-scene{max-width:650px;margin:auto;}.stage-shot{min-height:0;}.trace-cell{height:250px;}}
+    @media(max-width:480px){.trace-grid{grid-template-columns:1fr!important;}.trace-cell{height:210px;}.content-provenance{font-size:.72rem;gap:6px 10px;padding:12px;}.lesson-progress button{padding:7px 8px;}.trace-word-heading{flex-wrap:wrap;}.curricular-word strong{font-size:1.7rem;}}
   </style>
 </head>
 <body>
@@ -786,6 +811,7 @@
         <a href="#bridge">어떻게 잇는가</a>
         <a href="#stages">4단계 학습</a>
         <a href="#review-records">복습·학생 기록</a>
+        <a href="#cycle">수업 적용 흐름</a>
         <a href="#cases">수업 사례</a>
         <a href="#results">연구 결과</a>
       </nav>
@@ -883,7 +909,7 @@
       <div class="section-inner">
         <p class="section-label">03 · FOUR LEVELS</p>
         <h2 class="section-title" id="stages-title">한글 학습과 교과 문해 기능을<br>4단계로 살펴봅니다.</h2>
-        <p class="section-intro">현재 수행 수준과 수업 목표를 살펴 단계를 선택하고, 필요하면 이전 단계 내용을 다시 연습합니다.</p>
+        <p class="section-intro">보고서의 핵심 기능을 단계별로 살펴보고 직접 체험합니다.</p><div class="content-provenance"><b>원본 코드 체험</b><span>우리 집 그림 · 획순 쓰기 · 생태계 따라쓰기</span><b>실제 자료</b><span>생태계 카드 · 학생 테스트 기록</span><b>원본에서 실행</b><span>AI 생성·채점 · 원본 게임</span></div>
         <figure class="app-overview" aria-label="에이두 한글 컬러 단계 선택 화면">
           <div class="app-overview-top">
             <img class="app-overview-logo" src="assets/aiedu-live-logo.webp" alt="에이두 한글">
@@ -978,7 +1004,7 @@
             <button data-review-stage="4" type="button" aria-pressed="false">4단계 문해력</button>
           </nav>
           <div class="record-source-bar" data-record-sourcebar hidden>
-            <div aria-label="기록 데이터 선택"><button data-record-source="original" type="button" class="is-active" aria-pressed="true">원본 교사 테스트 기록</button><button data-record-source="local" type="button" aria-pressed="false">이 기기 체험 기록</button><button data-record-capture type="button">원본 화면 캡처</button></div>
+            <div aria-label="기록 데이터 선택"><button data-record-source="original" type="button" class="is-active" aria-pressed="true">원본 학생 테스트 기록</button><button data-record-source="teacher" type="button" aria-pressed="false">교사 테스트 기록</button><button data-record-source="local" type="button" aria-pressed="false">이 기기 체험 기록</button><button data-record-capture type="button">원본 화면 캡처</button></div>
             <span class="record-source-meta" data-record-source-meta>2026.10.02 확인 · 읽기 전용</span>
           </div>
           <div class="korean-learning-scroll" data-review-scroll><div data-review-content></div></div>
@@ -1001,7 +1027,7 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="cycle-title">
+    <section class="section" id="cycle" aria-labelledby="cycle-title">
       <div class="section-inner cycle-layout">
         <div class="cycle-visual" aria-hidden="true">
           <div class="cycle-ring"></div>
@@ -1101,6 +1127,7 @@
     </div>
   </footer>
 
+  <script src="trace-original.js?v=20261006-fidelity"></script>
   <script>
     const progressBar = document.querySelector('#progressBar');
     const navToggle = document.querySelector('.nav-toggle');
@@ -1366,7 +1393,7 @@
     function playAieduAudioSource(source, requestId) {
       return new Promise(resolve => {
         const audio = new Audio(source);
-        audio.preload = 'auto'; audio.volume = 1; audio.playbackRate = 1.02;
+        audio.preload = 'auto'; audio.volume = 1; audio.playbackRate = 0.85;
         activeAieduAudio = audio;
         let settled = false;
         const finish = played => {
@@ -1406,7 +1433,7 @@
         if (requestId !== activeAieduAudioRequest) return false;
         let played = false;
         try {
-          const response = await fetch(aieduTtsEndpoint, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:clips[index],voice:'female'}),signal:abort.signal});
+          const response = await fetch(aieduTtsEndpoint, {method:'POST',body:JSON.stringify({text:clips[index],voice:'female'}),signal:abort.signal});
           if (!response.ok || !response.headers.get('content-type')?.startsWith('audio/')) throw new Error('에이두 한글 음원에 연결하지 못했습니다.');
           const audioBlob = await response.blob();
           if (requestId !== activeAieduAudioRequest) return false;
@@ -1468,14 +1495,14 @@
         formulas:[['ㅂㅓ','ㅅㅡ','버스'],['ㄱㅡ','ㄴㅔ','그네']],
         letters:['버스','치즈','그네','주스'],
         target:'버스',
-        writingWords:['버스','그네','주스']
+        writingWords:['아이','나무','나비']
       },
       complex: {
         title:'복잡한 모음 구별하기',
         formulas:[['ㅗ','ㅏ','ㅘ'],['ㅜ','ㅓ','ㅝ']],
         letters:['ㅘ','ㅝ','ㅚ','ㅟ'],
         target:'ㅘ',
-        writingWords:['과자','화가','의자']
+        writingWords:['튜브','바위','거위']
       },
       finalword: {
         title:'받침 있는 단어 읽기',
@@ -1487,11 +1514,11 @@
     };
 
     function literacyTestMarkup() {
-      return '<div class="motion-demo student-test" data-literacy-test><div class="demo-top"><b>학생 테스트 예시</b><small>2학년 · 생태계 이해</small></div>' +
-        '<div class="student-test-head"><span>익명 학생 예시</span><span data-test-count>문제 1 / 3</span><span>정답 <b data-test-score>0</b> / 3</span></div>' +
+      return '<div class="motion-demo student-test" data-literacy-test><div class="demo-top"><b>선택형 체험 문항</b><small>강의용 예시 · 원본 학생 답 아님</small></div>' +
+        '<div class="student-test-head"><span>이 기기 체험</span><span data-test-count>문제 1 / 3</span><span>정답 <b data-test-score>0</b> / 3</span></div>' +
         '<div class="student-test-meter" aria-label="테스트 진행"><i data-test-meter></i></div>' +
         '<div class="quiz-stage"><p data-test-stem>식물은 햇빛과 물을 받아 자라요. 식물이 자라는 데 꼭 필요한 것은 무엇인가요?</p><div class="choice-grid"><button data-test-answer="0" type="button">햇빛과 물</button><button data-test-answer="1" type="button">장난감과 공</button></div></div>' +
-        '<div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">답을 선택하면 학생 예시 응답과 정오답이 표시돼요.</span><button data-test-next type="button" disabled>다음 문제</button></div></div>';
+        '<div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">지문을 읽고 답을 선택해 보세요. 풀이 결과는 이 기기에 저장됩니다.</span><button data-test-next type="button" disabled>다음 문제</button></div></div>';
     }
 
     function lessonMarkup(key) {
@@ -1533,7 +1560,7 @@
     // Read-only snapshot of the explicitly requested public teacher-test account.
     // Extracted from its rendered records/notebook on 2026-10-02, without account IDs or credentials.
     // Keep this separate from the learner's local attempts and never write it back to the source site.
-    const originalTestRecordSnapshot = {
+    const teacherTestRecordSnapshot = {
       capturedOn:'2026-10-02', accountName:'교사 테스트', role:'선생님',
       stage2:{todayAttempts:0,todayCorrect:0,reviewCount:26,totalAttempts:278,learning:8,mastered:2,weak:18,
         revisitWords:['튜브','바위','거위','더위','우표','의'],
@@ -1571,6 +1598,375 @@
         ['2026-08-26',false,'민우는 보드마카로 어떤 그림을 그렸나요?','커다란 나무']
       ]}
     };
+    // Read-only public student-test UI snapshot. No real pupil identities or account credentials.
+    const studentTestRecordSnapshot={
+  "capturedOn": "2026-10-06",
+  "accountName": "학생 테스트",
+  "role": "학생",
+  "stage2": {
+    "todayAttempts": 0,
+    "todayCorrect": 0,
+    "reviewCount": 3,
+    "totalAttempts": 58,
+    "learning": 3,
+    "mastered": 1,
+    "weak": 0,
+    "revisitWords": [
+      "ㅡ",
+      "ㅣ",
+      "ㅡ"
+    ],
+    "recommendations": [
+      {
+        "title": "모음",
+        "wrongAttempts": 5,
+        "accuracy": 83
+      }
+    ],
+    "areas": [
+      [
+        "모음",
+        19,
+        19,
+        100
+      ],
+      [
+        "자음",
+        1,
+        1,
+        100
+      ],
+      [
+        "복잡한 모음",
+        6,
+        6,
+        100
+      ],
+      [
+        "복잡한 모음 단어 읽기",
+        3,
+        3,
+        100
+      ],
+      [
+        "대표받침",
+        4,
+        4,
+        100
+      ],
+      [
+        "대표받침 단어 읽기",
+        1,
+        1,
+        100
+      ]
+    ],
+    "weekly": [
+      [
+        "9/30",
+        0
+      ],
+      [
+        "10/1",
+        0
+      ],
+      [
+        "10/2",
+        0
+      ],
+      [
+        "10/3",
+        0
+      ],
+      [
+        "10/4",
+        0
+      ],
+      [
+        "10/5",
+        0
+      ],
+      [
+        "10/6",
+        0
+      ]
+    ],
+    "mistakes": [
+      [
+        "ㅡ",
+        "ㅗ",
+        2,
+        "learning"
+      ],
+      [
+        "ㅣ",
+        "ㅗ",
+        1,
+        "learning"
+      ],
+      [
+        "ㅡ",
+        "ㅗ",
+        1,
+        "learning"
+      ]
+    ]
+  },
+  "stage3": {
+    "gameTitle": "어휘 게임",
+    "gameSuccessRate": null,
+    "records": [],
+    "portfolioCompleted": 5,
+    "wordCardCount": 56
+  },
+  "stage4": {
+    "gameTitle": "문해력 탐정단",
+    "gameSuccessRate": null,
+    "records": [
+      [
+        "2026-09-17",
+        true,
+        "글쓴이가 전화기의 액정을 켰을 때 무엇이 부족하다는 경고 창이 떴나요?",
+        "배터리"
+      ],
+      [
+        "2026-09-17",
+        true,
+        "안내문에서 나만의 도장을 만들 때 사용하는 물건은 무엇인가요?",
+        "지우개"
+      ],
+      [
+        "2026-09-14",
+        true,
+        "글쓴이가 연두색 그릇에 담아 맛있게 나누어 먹은 것은 무엇인가요?",
+        "딸기"
+      ],
+      [
+        "2026-09-14",
+        true,
+        "기사에서 아이들이 들고 연습한 칫솔은 무슨 색인가요?",
+        "주황색"
+      ],
+      [
+        "2026-09-11",
+        true,
+        "글쓴이가 노란 폴더에 모아 두었다가 찾은 것은 무엇인가요?",
+        "동화 그림"
+      ],
+      [
+        "2026-09-11",
+        true,
+        "안내문에서 손가락으로 가리켜 관찰하자고 한 것은 무엇인가요?",
+        "풀잎"
+      ],
+      [
+        "2026-09-01",
+        false,
+        "아이들이 다 함께 연습한 것은 무엇인가요?",
+        "준비"
+      ],
+      [
+        "2026-08-30",
+        true,
+        "글쓴이가 병원에서 진료실을 찾을 때 본 것은 무엇인가요?",
+        "커다란 안내판"
+      ],
+      [
+        "2026-08-30",
+        true,
+        "기사에서 아이들이 과일 조각을 찍어 먹을 때 사용한 것은 무엇인가요?",
+        "나무 포크"
+      ],
+      [
+        "2026-08-30",
+        false,
+        "태블릿 앞쪽에 달려 있어 사진을 찍거나 얼굴을 볼 수 있는 장치는 무엇인가요?",
+        "Rrrr"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "민수가 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "졸업생 형은 머리에 무엇을 쓰고 있었나요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "소년은 머리에 무엇을 쓰고 활짝 웃었나요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "형이 머리에 쓴 네모난 모자는 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "형이 졸업식에서 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "지문에서 형이 머리에 쓰고 있던 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "민수가 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "형이 머리에 쓴 네모난 모자의 이름은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        true,
+        "민우가 졸업생이 되어 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-08-21",
+        false,
+        "소년이 졸업식 날 머리에 쓴 것은 무엇인가요?",
+        "멋진채킷입고"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "글의 내용으로 보아 오늘은 어떤 날인가요?",
+        "학사모를 쓴 졸업생들을 축하하는 날"
+      ],
+      [
+        "2026-07-20",
+        false,
+        "소년이 졸업하는 날 머리에 쓴 것은 무엇인가요?",
+        "파 사모."
+      ],
+      [
+        "2026-07-20",
+        true,
+        "지문에서 학생은 교복 대신 머리에 무엇을 쓰고 사진을 찍었나요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        false,
+        "오늘 멋진 학사모를 쓰고 환하게 웃은 사람들을 지문에서 찾아 쓰세요.",
+        "학교"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "지문에서 소년이 머리에 쓰고 기쁜 졸업생이 된 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "글을 읽고 알 수 있는 형의 졸업식 모습으로 알맞은 것은 무엇인가요?",
+        "학사모를 쓰고 정장 재킷을 입었어요."
+      ],
+      [
+        "2026-07-20",
+        true,
+        "소년은 졸업식 날 어떤 옷차림을 하고 있나요?",
+        "넥타이를 매고 재킷 정장을 입었어요."
+      ],
+      [
+        "2026-07-20",
+        true,
+        "지문 속 소년이 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        false,
+        "오늘 학교를 마치는 자랑스러운 사람은 누구인가요?",
+        "학생"
+      ],
+      [
+        "2026-07-20",
+        false,
+        "지문에서 소년은 오늘 어떤 사람이 되어 축하를 받고 있나요?",
+        "입학생"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "지문의 내용으로 보아, 학사모를 쓴 소년은 무엇이 되었나요?",
+        "졸업생"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "글의 내용에 따르면, 형이 졸업식 날 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "민수는 졸업식 날 누구를 기쁘게 축하해 주었나요?",
+        "졸업생 형들"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "소년이 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "글 속에서 졸업생이 된 학생이 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        false,
+        "소년이 졸업하는 날 머리에 쓴 것은 무엇일까요?",
+        "교복"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "글의 내용으로 보아, 형이 졸업식 날 머리에 쓴 것은 무엇인가요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        true,
+        "소년은 오늘 머리에 무엇을 썼나요?",
+        "학사모"
+      ],
+      [
+        "2026-07-20",
+        false,
+        "소년은 졸업식 날 머리에 무엇을 썼나요?",
+        "요리사 모자"
+      ],
+      [
+        "2026-07-05",
+        true,
+        "우리 학교 마당에는 무엇이 있나요?",
+        "나무"
+      ]
+    ]
+  }
+};
+    let originalTestRecordSnapshot=studentTestRecordSnapshot;
     // Public original lesson 20 picture/answer data used by the independent practice demo.
     const originalReviewPictureItems = [
       {word:'튜브',icon:'🛟',choices:['튜브','투브']},
@@ -1770,29 +2166,30 @@
         button.setAttribute('aria-pressed',String(selected)); button.classList.toggle('is-active',selected);
       });
       root.querySelectorAll('[data-review-view]').forEach(button => button.classList.toggle('is-active',button.dataset.reviewView === reviewView));
-      const isOriginalRecord = recordDataSource === 'original' && reviewView !== 'review';
+      originalTestRecordSnapshot=recordDataSource==='teacher'?teacherTestRecordSnapshot:recordDataSource==='original'?studentTestRecordSnapshot:originalTestRecordSnapshot;
+      const isOriginalRecord = recordDataSource !== 'local' && reviewView !== 'review';
       root.querySelector('[data-record-sourcebar]').hidden = reviewView === 'review';
       root.querySelectorAll('[data-record-source]').forEach(button => {
         const selected = button.dataset.recordSource === recordDataSource;
         button.setAttribute('aria-pressed',String(selected)); button.classList.toggle('is-active',selected);
       });
       root.querySelector('[data-record-capture]').hidden = !isOriginalRecord;
-      root.querySelector('[data-record-source-meta]').textContent = isOriginalRecord ? '2026.10.02 확인 · 읽기 전용' : '원본 계정과 분리 · 이 브라우저에 저장';
+      root.querySelector('[data-record-source-meta]').textContent = isOriginalRecord ? originalTestRecordSnapshot.capturedOn.replace(/-/g,'.')+' 확인 · 읽기 전용' : '원본 계정과 분리 · 이 브라우저에 저장';
       root.querySelector('[data-review-content]').classList.toggle('is-original-records',isOriginalRecord);
       root.querySelector('[data-review-stage-badge]').style.background = isOriginalRecord ? '#10b9aa' : '';
-      root.querySelector('[data-review-student]').textContent = isOriginalRecord ? originalTestRecordSnapshot.accountName : selectedStudentName;
+      root.querySelector('[data-review-student]').textContent = isOriginalRecord ? originalTestRecordSnapshot.accountName : activeReviewSession?.mode==='captured-test'&&reviewView==='review'?originalTestRecordSnapshot.accountName+' · 체험':selectedStudentName;
       root.querySelector('[data-review-role]').textContent = isOriginalRecord ? originalTestRecordSnapshot.role : '체험';
       root.querySelector('[data-review-token-label]').textContent = isOriginalRecord ? '주의토큰' : '다시 연습';
       root.querySelector('[data-review-mistake-count]').textContent = isOriginalRecord ? '0개' : studentMistakes.filter(item => item.studentName === selectedStudentName && !item.resolvedAt).length + '개';
       root.querySelector('[data-review-points]').textContent = (isOriginalRecord ? 0 : correctCount * 10) + 'P';
       root.querySelector('[data-review-exp]').textContent = (isOriginalRecord ? 0 : (correctCount % 10) * 10) + '%';
       root.querySelector('[data-review-level]').textContent = 'LV.' + (isOriginalRecord ? 1 : Math.floor(correctCount / 10) + 1);
-      root.querySelector('[data-review-note]').textContent = isOriginalRecord ? '원본 교사 테스트 계정 · 2026.10.02 화면에서 추출한 기록입니다. 실시간 연동이 아니며 원본 계정의 기록을 바꾸지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.';
+      root.querySelector('[data-review-note]').textContent = isOriginalRecord ? '원본 '+originalTestRecordSnapshot.accountName+' · '+originalTestRecordSnapshot.capturedOn+' 확인 · 읽기 전용. 원본 계정과 실시간 연동하지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.';
       if (activeReviewSession?.saving && reviewView === 'review') return;
       if (reviewView === 'records') renderLectureRecords();
       else if (reviewView === 'mistakes') renderLectureMistakes();
       else if (reviewStage === 2) {
-        if (!activeReviewSession || activeReviewSession.stage !== 2 || activeReviewSession.student !== selectedStudentName) { startLectureReview(); return; }
+        if (!activeReviewSession || activeReviewSession.stage !== 2 || activeReviewSession.student !== selectedStudentName) { if(recordDataSource!=='local')startCapturedTestReview();else startLectureReview(); return; }
         renderLectureReviewQuestion();
       } else if (activeReviewSession?.stage === reviewStage && activeReviewSession.student === selectedStudentName) renderLectureReviewQuestion();
       else renderLectureHigherReview();
@@ -1832,24 +2229,28 @@
       renderLearningSupport();
     }
     function renderLectureHigherReview() {
-      const content = document.querySelector('[data-review-content]');
-      const progress = document.querySelector('[data-review-progress]');
-      if (reviewStage === 3) {
-        const count = stageReviewMistakes(3).length;
-        progress.textContent = '틀렸던 글을 다시 쓰고, 단어 카드로 뜻을 익혀요.';
-        content.innerHTML = '<div class="korean-review-activity-grid"><article class="korean-review-activity"><span class="korean-review-activity-icon" aria-hidden="true">✏️</span><h4>교과 맞춤쓰기 오답 복습</h4><p>틀렸던 단어와 문장을 따라 쓴 뒤, 소리를 듣고 다시 써 보세요.</p><p class="korean-review-availability">' + (count ? '이번에 다시 연습할 문제 ' + count + '개' : '아직 다시 쓸 오답이 없어요. 어휘 게임으로 복습해 보세요.') + '</p><button class="btn-primary" data-review-start="curricular" type="button"' + (count ? '' : ' disabled') + '>오답 다시 쓰기</button></article><article class="korean-review-activity"><span class="korean-review-activity-icon" aria-hidden="true">🃏</span><h4>어휘 게임</h4><p>그림과 설명을 보고 알맞은 단어 카드를 골라요. 배운 낱말의 뜻을 다시 떠올려 보세요.</p><button class="btn-primary" data-review-start="word-card" type="button">어휘 게임으로 복습하기</button></article></div>';
-      } else {
-        progress.textContent = '문해력 탐정단에서 글 속 단서를 찾아 복습해요.';
-        content.innerHTML = '<div class="korean-review-activity-grid is-single"><article class="korean-review-activity"><span class="korean-review-activity-icon" aria-hidden="true">🔎</span><h4>문해력 탐정단</h4><p>사건의 지문을 읽고 단서를 찾아 문제를 풀어요. 글의 내용을 이해하고 내 생각을 답하며 복습해 보세요.</p><button class="btn-primary" data-review-start="detective" type="button">탐정단으로 복습하기</button></article></div>';
+      const content=document.querySelector('[data-review-content]'),progress=document.querySelector('[data-review-progress]');
+      if(reviewStage===3){
+        const count=stageReviewMistakes(3).filter(item=>item.answerType==='trace').length;
+        progress.textContent='교과 맞춤쓰기 오답 복습 · 어휘 게임';
+        content.innerHTML='<div class="korean-review-activity-grid"><article class="korean-review-activity"><span class="korean-review-activity-icon">✏️</span><h4>교과 맞춤쓰기 오답 복습</h4><p>틀렸던 단어와 문장을 따라 쓴 뒤 소리를 듣고 다시 써요.</p><p class="korean-review-availability">'+(count?'이 기기에서 다시 쓸 오답 '+count+'개':'학생 테스트: 다시 연습할 오답 단어·문장이 없어요.')+'</p><button class="btn-primary" data-local-trace-review type="button"'+(count?'':' disabled')+'>오답 다시 쓰기</button></article><article class="korean-review-activity"><span class="korean-review-activity-icon">🃏</span><h4>어휘 게임</h4><p>내 카드 네 장 중 친구의 카드와 같은 단어를 찾아요. 정답마다 1점을 얻습니다.</p><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 어휘 게임으로 복습하기 ↗</a></article></div><small class="fidelity-note">원본 게임과 이 기기의 따라쓰기 복습은 구분됩니다.</small>';
+        content.querySelector('[data-local-trace-review]').addEventListener('click',()=>{
+          const queue=stageReviewMistakes(3).filter(item=>item.answerType==='trace').slice(0,10).map(item=>({...item}));
+          recordDataSource='local';activeReviewSession={stage:3,student:selectedStudentName,queue,index:0,correctCount:0,wrongCount:0,saving:false};renderLearningSupport();
+        });
+      }else{
+        progress.textContent='문해력 탐정단에서 글 속 단서를 찾아 복습해요.';
+        content.innerHTML='<div class="korean-review-activity-grid is-single"><article class="korean-review-activity"><span class="korean-review-activity-icon">🔎</span><h4>문해력 탐정단</h4><p>사건의 지문을 읽고 답안 보드를 작성해 사건을 해결해요.</p><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=literacy" target="_blank" rel="noopener noreferrer">원본 탐정단으로 복습하기 ↗</a></article></div><small class="fidelity-note">원본의 탐정단은 서버에서 사건을 출제합니다.</small>'+(stageReviewMistakes(4).length?'<button class="btn-outline" data-local-literacy-review type="button">이 기기에서 틀린 문항 다시 풀기</button>':'');
+        content.querySelector('[data-local-literacy-review]')?.addEventListener('click',()=>startLectureReview());
       }
-      content.querySelectorAll('[data-review-start]').forEach(button => button.addEventListener('click',() => startLectureReview(button.dataset.reviewStart)));
     }
     function submitLectureReview(answer, button) {
       const session = activeReviewSession;
       const item = session?.queue[session.index];
       if (!item || session.saving) return;
       const normalize = value => String(value || '').normalize('NFC').replace(/\s+/g,'').trim();
-      const correct = item.answerType === 'keyword' ? String(answer).trim().length >= 10 && String(answer).includes(item.keyword || item.correctAnswer) : normalize(answer) === normalize(item.correctAnswer);
+      if(item.answerType==='keyword'){document.querySelector('[data-review-feedback]').textContent='서술형은 원본 AI 채점에서 확인하세요. 이 기기에서 정답으로 처리하지 않습니다.';return;}
+      const correct=normalize(answer)===normalize(item.correctAnswer);
       session.saving = true;
       const content = document.querySelector('[data-review-content]');
       content.querySelectorAll('[data-review-answer],[data-review-submit]').forEach(choice => { choice.disabled = true; });
@@ -1871,7 +2272,7 @@
       const content = document.querySelector('[data-review-content]');
       const progress = document.querySelector('[data-review-progress]');
       const note = document.querySelector('[data-review-note]');
-      note.textContent = session.mode === 'captured-test' ? '교사 테스트에서 추출한 오답으로 복습 화면을 체험합니다. 풀이 결과는 이 기기 체험 기록에만 저장되며 원본 테스트 기록은 바뀌지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.' + (session.queue.some(item => item.isExample) ? ' 오답이 없으면 예시 문항으로 체험합니다.' : ' 이 자료에서 틀린 문항을 복습합니다.');
+      note.textContent = session.mode === 'captured-test' ? originalTestRecordSnapshot.accountName+'의 실제 오답으로 복습을 체험합니다. 결과는 이 기기에만 저장되며 원본 기록은 바뀌지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.' + (session.queue.some(item => item.isExample) ? ' 오답이 없으면 예시 문항으로 체험합니다.' : ' 이 자료에서 틀린 문항을 복습합니다.');
       if (session.index >= session.queue.length) {
         progress.textContent = '오늘의 복습을 모두 마쳤어요.';
         content.innerHTML = '<section class="korean-review-complete"><h4>🎉 오늘의 복습 완료!</h4><p>오늘 다시 연습한 문제 ' + session.queue.length + '개 · 맞힌 문제 ' + session.correctCount + '개 · 조금 더 연습할 문제 ' + session.wrongCount + '개</p><div class="korean-record-actions"><button class="btn-primary" data-review-finish-records type="button">나의 기록 보기</button><button class="btn-outline" data-review-restart type="button">한 번 더 복습하기</button></div></section>';
@@ -1880,6 +2281,12 @@
         return;
       }
       const item = session.queue[session.index];
+      if(item.answerType==='trace'){
+        progress.textContent='오늘 '+session.queue.length+'문제 중 '+(session.index+1)+'번째예요.';
+        content.innerHTML=curricularWritingMarkup(item.correctAnswer);wireCurricularWriting(content);
+        const button=content.querySelector('[data-curricular-check]');
+        button.addEventListener('click',()=>{if(content.querySelector('canvas').dataset.completed==='true'){session.correctCount++;session.index++;renderLearningSupport();}});return;
+      }
       const presentation = resolveKoreanReviewQuestion(item);
       progress.textContent = '오늘 ' + session.queue.length + '문제 중 ' + (session.index + 1) + '번째예요.';
       let body = '<p>' + reviewEscape(presentation?.prompt || item.prompt) + '</p>';
@@ -1899,12 +2306,11 @@
       });
     }
     function originalRecordCaptureGallery() {
-      const captures = reviewStage === 2 ? [
-        ['aiedu-records-teacher-stage2.jpg','2단계 오늘 학습 요약과 다시 만나볼 한글'],
-        ['aiedu-records-teacher-focus.jpg','실제 오답 횟수와 단원별 정답률'],
-        ['aiedu-records-teacher-growth.jpg','영역별 도달 정도와 복습 상태']
-      ] : [[reviewStage === 3 ? 'aiedu-records-teacher-stage3.jpg' : 'aiedu-records-teacher-stage4.jpg',reviewStage + '단계 교사 테스트 원본 기록 화면']];
-      return '<details class="record-original-captures" data-record-captures><summary>📷 원본 화면 보기 · 교사 테스트</summary>' + captures.map(([file,caption]) => '<figure><img src="assets/' + file + '" width="1280" height="720" loading="lazy" alt="' + reviewEscape(caption) + '"><figcaption>' + reviewEscape(caption) + ' · 2026.10.02 캡처</figcaption></figure>').join('') + '<p><a href="https://aiedue.ddns.net/korean/index.html?activity=' + ({2:'hangul',3:'dictation',4:'literacy'}[reviewStage]) + '&amp;view=records" target="_blank" rel="noopener noreferrer">원본 기록 페이지 열기 ↗</a></p></details>';
+      const student=originalTestRecordSnapshot===studentTestRecordSnapshot;
+      const captures=student?[[reviewStage===2?'aiedu-records-student-stage2.jpg':reviewStage===3?'aiedu-records-student-stage3.jpg':'aiedu-records-student-stage4.jpg',reviewStage+'단계 학생 테스트 원본 기록']]:reviewStage===2?[
+        ['aiedu-records-teacher-stage2.jpg','2단계 교사 테스트 기록'],['aiedu-records-teacher-focus.jpg','교사 테스트 단원별 정답률'],['aiedu-records-teacher-growth.jpg','교사 테스트 도달 정도·복습 상태']
+      ]:[[reviewStage===3?'aiedu-records-teacher-stage3.jpg':'aiedu-records-teacher-stage4.jpg',reviewStage+'단계 교사 테스트 원본 기록']];
+      return '<details class="record-original-captures" data-record-captures><summary>📷 원본 화면 보기 · '+originalTestRecordSnapshot.accountName+'</summary>'+captures.map(([file,caption])=>'<figure><img src="assets/'+file+'" width="1280" height="720" loading="lazy" alt="'+reviewEscape(caption)+'"><figcaption>'+caption+' · '+originalTestRecordSnapshot.capturedOn+' 캡처</figcaption></figure>').join('')+'<p><a href="https://aiedue.ddns.net/korean/index.html?activity='+({2:'hangul',3:'dictation',4:'literacy'}[reviewStage])+'&amp;view=records" target="_blank" rel="noopener noreferrer">원본 기록 페이지 열기 ↗</a></p></details>';
     }
     function originalRecordSummary(items, label) {
       return '<div class="korean-record-summary" aria-label="' + reviewEscape(label) + '">' + items.map(([title,value]) => '<div class="korean-record-stat"><span>' + reviewEscape(title) + '</span><strong>' + reviewEscape(value) + '</strong></div>').join('') + '</div>';
@@ -1919,8 +2325,8 @@
       } else {
         const data = originalTestRecordSnapshot.stage2;
         const preferred = data.revisitWords.map(word => data.mistakes.find(item => item[0] === word));
-        const selected = rows || [...preferred,...data.mistakes.filter(item => !preferred.includes(item))].slice(0,10);
-        const queue = selected.map(([word,lastAnswer],index) => ({key:'captured-test-' + index + '-' + word,stage:2,stageTitle:'한글 해득',activity:'교사 테스트 오답 · 체험',activityType:originalReviewPictureItems.some(item => item.word === word) ? 'wordPictureMatch' : 'listening',prompt:'소리를 듣고 알맞은 글자나 낱말을 골라요.',correctAnswer:word,choices:[lastAnswer,word],sound:word,isExample:true}));
+        const selected=rows||(originalTestRecordSnapshot===studentTestRecordSnapshot?data.mistakes:[...preferred,...data.mistakes.filter(item=>!preferred.includes(item))].slice(0,10));
+        const queue = selected.map(([word,lastAnswer],index) => ({key:'captured-test-' + index + '-' + word,stage:2,stageTitle:'한글 해득',activity:originalTestRecordSnapshot.accountName+' 오답 · 체험',activityType:originalReviewPictureItems.some(item => item.word === word) ? 'wordPictureMatch' : 'listening',prompt:'소리를 듣고 알맞은 글자나 낱말을 골라요.',correctAnswer:word,choices:originalTestRecordSnapshot===studentTestRecordSnapshot?['●','ㅏ','ㅡ','ㅣ']:[lastAnswer,word],sound:word,isExample:true}));
         activeReviewSession = {stage:2,student:selectedStudentName,mode:'captured-test',capturedRows:selected,queue,index:0,correctCount:0,wrongCount:0,saving:false};
         reviewView = 'review'; renderLearningSupport();
       }
@@ -1939,11 +2345,11 @@
         content.innerHTML = originalRecordSummary([['오늘 공부',data.todayAttempts + '문제'],['맞았어요',data.todayCorrect + '개'],['다시 연습',data.reviewCount + '개']],'오늘 학습 요약') + capturedRecordActions() +
           '<section class="korean-record-band"><h4>🔥 다시 만나볼 한글</h4><div class="korean-record-word-list">' + data.revisitWords.map(word => '<span>' + reviewEscape(word) + '</span>').join('') + '</div></section>' +
           '<section class="korean-focus-section" aria-labelledby="captured-focus-title"><div class="korean-growth-heading"><h4 id="captured-focus-title">🎯 성장이 필요한 단원</h4><p>자주 틀린 기록을 보고 먼저 공부하면 좋은 단원을 골랐어요.</p></div><div class="korean-focus-list">' + data.recommendations.map((unit,index) => '<article class="korean-focus-item"><span class="korean-focus-rank">' + (index + 1) + '</span><div class="korean-focus-copy"><span>먼저 공부해요</span><h5>' + reviewEscape(unit.title) + '</h5><p><strong>' + unit.wrongAttempts + '번</strong> 틀렸어요 · 정답률 <strong>' + unit.accuracy + '%</strong></p></div><a class="btn-outline" href="https://aiedue.ddns.net/korean/index.html?activity=hangul&amp;view=records" target="_blank" rel="noopener noreferrer" title="원본 기록 페이지에서 해당 단원의 공부 버튼을 선택하세요.">원본에서 공부하기 ↗</a></article>').join('') + '</div></section>' +
-          '<section class="korean-growth-section" aria-labelledby="captured-growth-title"><div class="korean-growth-heading"><h4 id="captured-growth-title">📈 나의 한글 성장</h4><p>공부한 기록이 쌓일수록 그래프도 함께 자라요.</p></div><div class="korean-growth-grid"><article class="korean-growth-panel"><h4>영역별 도달 정도</h4>' + data.areas.map(([title,reached,total,rate]) => '<div class="korean-area-row"><div><strong>' + reviewEscape(title) + '</strong><small>' + reached + '/' + total + '문제</small></div><div class="korean-area-track" role="progressbar" aria-label="' + reviewEscape(title) + ' 도달 정도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + rate + '"><span style="width:' + rate + '%"></span></div><b>' + rate + '%</b></div>').join('') + '</article><article class="korean-growth-panel"><h4>복습 상태</h4><div class="korean-mastery-visual"><div class="korean-mastery-donut" role="img" aria-label="다시 연습 18개, 연습 중 8개, 익혔어요 2개"><span><strong>28</strong><small>복습 문제</small></span></div><div class="korean-mastery-legend"><div><i class="weak"></i><span>다시 연습</span><strong>18</strong></div><div><i class="learning"></i><span>연습 중</span><strong>8</strong></div><div><i class="mastered"></i><span>익혔어요</span><strong>2</strong></div></div></div></article></div>' +
+          '<section class="korean-growth-section" aria-labelledby="captured-growth-title"><div class="korean-growth-heading"><h4 id="captured-growth-title">📈 나의 한글 성장</h4><p>공부한 기록이 쌓일수록 그래프도 함께 자라요.</p></div><div class="korean-growth-grid"><article class="korean-growth-panel"><h4>영역별 도달 정도</h4>' + data.areas.map(([title,reached,total,rate]) => '<div class="korean-area-row"><div><strong>' + reviewEscape(title) + '</strong><small>' + reached + '/' + total + '문제</small></div><div class="korean-area-track" role="progressbar" aria-label="' + reviewEscape(title) + ' 도달 정도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + rate + '"><span style="width:' + rate + '%"></span></div><b>' + rate + '%</b></div>').join('') + '</article><article class="korean-growth-panel"><h4>복습 상태</h4><div class="korean-mastery-visual"><div class="korean-mastery-donut" role="img" style="background:conic-gradient(#ee9a87 0 ' + (data.weak/(data.weak+data.learning+data.mastered||1)*100) + '%,#ecc863 0 ' + ((data.weak+data.learning)/(data.weak+data.learning+data.mastered||1)*100) + '%,#63ba66 0 100%)" aria-label="복습 상태"><span><strong>' + (data.weak+data.learning+data.mastered) + '</strong><small>복습 문제</small></span></div><div class="korean-mastery-legend"><div><i class="weak"></i><span>다시 연습</span><strong>' + data.weak + '</strong></div><div><i class="learning"></i><span>연습 중</span><strong>' + data.learning + '</strong></div><div><i class="mastered"></i><span>익혔어요</span><strong>' + data.mastered + '</strong></div></div></div></article></div>' +
           '<article class="korean-growth-panel korean-weekly-chart"><div class="korean-weekly-heading"><h4>최근 7일 학습 발자국</h4><span>날짜별 맞힌 문제</span></div><div class="korean-weekly-bars">' + data.weekly.map(([date,correct]) => '<div class="korean-weekly-day"><strong>' + correct + '</strong><div class="korean-weekly-track"><span style="height:0%"></span></div><small>' + date + '</small></div>').join('') + '</div></article></section><div style="margin-top:18px">' + originalRecordSummary([['🌱 연습 중',data.learning + '개'],['⭐ 익혔어요',data.mastered + '개'],['📚 전체 기록',data.totalAttempts + '개']],'숙련 상태') + '</div>' + originalRecordCaptureGallery();
       } else {
         const data = originalTestRecordSnapshot['stage' + reviewStage];
-        content.innerHTML = '<section class="record-game-report"><div><div><b>' + reviewStage + '단계 게임</b><h4>' + reviewEscape(data.gameTitle) + '</h4></div><div class="record-game-result"><small>성공률</small><strong>기록 없음</strong></div></div><p>게임을 시작하면 성공률이 여기에 표시됩니다.</p></section>' + capturedRecordActions() + '<h4 class="korean-record-section-title">' + (reviewStage === 3 ? '최근 교과 맞춤쓰기' : '최근 문해력 학습') + '</h4><div class="korean-stage-record-list">' + (data.records.length ? data.records.map(([date,correct,prompt,answer]) => '<article class="korean-stage-record"><h5>' + (correct ? '⭕ 정답' : '다시 살펴볼 문제') + '</h5><time datetime="' + date + '">' + date + '</time><strong>' + reviewEscape(prompt) + '</strong><p>내 답: ' + reviewEscape(answer) + '</p></article>').join('') : '<p>아직 교과 맞춤쓰기 기록이 없어요.</p>') + '</div>' + originalRecordCaptureGallery();
+        content.innerHTML = (reviewStage===4?originalRecordSummary([['전체 기록',data.records.length+'개'],['정답',data.records.filter(row=>row[1]).length+'개'],['오답',data.records.filter(row=>!row[1]).length+'개']],'학생 문해력 기록'):'')+'<section class="record-game-report"><div><div><b>' + reviewStage + '단계 게임</b><h4>' + reviewEscape(data.gameTitle) + '</h4></div><div class="record-game-result"><small>성공률</small><strong>기록 없음</strong></div></div><p>게임을 시작하면 성공률이 여기에 표시됩니다.</p></section>' + capturedRecordActions() + '<h4 class="korean-record-section-title">' + (reviewStage === 3 ? '최근 교과 맞춤쓰기' : '최근 문해력 학습') + '</h4><div class="korean-stage-record-list">' + (data.records.length ? data.records.map(([date,correct,prompt,answer]) => '<article class="korean-stage-record"><h5>' + (correct ? '⭕ 정답' : '다시 살펴볼 문제') + '</h5><time datetime="' + date + '">' + date + '</time><strong>' + reviewEscape(prompt) + '</strong><p>내 답: ' + reviewEscape(answer) + '</p></article>').join('') : '<p>통합 기록의 최근 교과 맞춤쓰기 항목은 비어 있습니다.</p>'+ (data.portfolioCompleted!=null?'<p>별도 교과 맞춤쓰기 화면: '+data.portfolioCompleted+'회 완료 · 단어만 받아쓰기 누적 0회 · 정답률 0% · 생성된 공유 카드 '+data.wordCardCount+'개</p>':'')) + '</div>' + originalRecordCaptureGallery();
       }
       wireCapturedRecordActions(content);
     }
@@ -1964,7 +2370,7 @@
       content.querySelector('[data-captured-records]').addEventListener('click',() => { reviewView = 'records'; renderLearningSupport(); document.querySelector('[data-review-scroll]').scrollTop = 0; });
     }
     function renderLectureRecords() {
-      if (recordDataSource === 'original') { renderOriginalCapturedRecords(); return; }
+      if (recordDataSource !== 'local') { renderOriginalCapturedRecords(); return; }
       const content = document.querySelector('[data-review-content]');
       document.querySelector('[data-review-progress]').textContent = '꾸준히 쌓은 나의 배움을 확인해요.';
       const records = studentRecords.filter(item => item.studentName === selectedStudentName && Number(item.stage) === reviewStage);
@@ -2000,7 +2406,7 @@
       });
     }
     function renderLectureMistakes() {
-      if (recordDataSource === 'original') { renderOriginalCapturedMistakes(); return; }
+      if (recordDataSource !== 'local') { renderOriginalCapturedMistakes(); return; }
       const content = document.querySelector('[data-review-content]');
       document.querySelector('[data-review-progress]').textContent = '틀렸던 문제를 확인하고 다시 연습해요.';
       content.innerHTML = '<div class="korean-record-actions"><button class="btn-primary" data-mistake-start type="button">🔁 오늘의 복습 시작</button><button class="btn-outline" data-mistake-records type="button">나의 기록</button></div><div class="support-list" data-mistake-list></div><h4 class="korean-record-section-title">복습 완료 문항</h4><div class="support-list" data-resolved-list></div>';
@@ -2054,16 +2460,69 @@
         const safeWord = word.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
         const item = wordCardCatalog[word] || {icon:'📖',meaning:'교과 자료에서 찾아 저장한 낱말이에요.'};
         const safeMeaning = item.meaning.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-        return '<button class="word-bank-card" data-saved-word="' + safeWord + '" type="button"><span class="word-bank-icon" aria-hidden="true">' + item.icon + '</span><b>' + safeWord + '</b><small>' + safeMeaning + '</small></button>';
+        return '<button class="word-bank-card" data-saved-word="' + safeWord + '" type="button"><span class="word-bank-icon" aria-hidden="true">' + (word==='생태계'?'<span class="shared-word-card-art word-bank-ecosystem"></span>':item.icon) + '</span><b>' + safeWord + '</b><small>' + safeMeaning + '</small></button>';
       }).join('');
-      return '<div class="motion-demo"><div class="demo-top"><b>단어 카드 저장소</b><small>어려운 핵심어를 모아 반복 학습해요</small></div><span class="feature-badge" data-bank-total>저장된 단어 ' + savedWordCards.length + '개</span><div class="word-bank-grid" aria-label="저장된 단어 카드 목록">' + (cards || '<div class="bank-empty">아직 저장된 단어가 없어요.<br>교과 자료에서 핵심어를 찾아 카드로 추가해 보세요.</div>') + '</div><div class="feature-row"><div class="feature-card"><strong>듣고 읽기</strong><span data-bank-selected>카드를 누르면 낱말과 뜻을 확인해요.</span></div><div class="feature-card"><strong>반복 기록</strong><span data-bank-count>오늘 0회 복습</span><button class="bank-review" data-bank-review type="button"' + (savedWordCards.length ? '' : ' disabled') + '>복습 완료</button></div></div><div class="bank-tools"><span class="demo-status" role="status" aria-live="polite">저장한 단어 카드를 눌러 소리를 들어 보세요.</span><button data-bank-listen type="button">🔊 다시 듣기</button></div></div>';
+      return '<div class="motion-demo"><div class="demo-top"><b>단어 카드 저장소</b><small>이 기기의 강의용 저장소</small></div><span class="feature-badge" data-bank-total>저장된 단어 ' + savedWordCards.length + '개</span><div class="word-bank-grid" aria-label="저장된 단어 카드 목록">' + (cards || '<div class="bank-empty">아직 저장된 단어가 없어요.<br>교과 자료에서 핵심어를 찾아 카드로 추가해 보세요.</div>') + '</div><div class="feature-row"><div class="feature-card"><strong>듣고 읽기</strong><span data-bank-selected>카드를 누르면 낱말과 뜻을 확인해요.</span></div><div class="feature-card"><strong>반복 기록</strong><span data-bank-count>오늘 0회 복습</span><button class="bank-review" data-bank-review type="button"' + (savedWordCards.length ? '' : ' disabled') + '>복습 완료</button></div></div><div class="bank-tools"><span class="demo-status" role="status" aria-live="polite">저장한 단어 카드를 눌러 소리를 들어 보세요.</span><button data-bank-listen type="button">🔊 다시 듣기</button></div><small class="fidelity-note">생태계 그림·정의는 원본 카드입니다. 원본 학생 테스트의 공유 카드는 56개이며 이 저장소와 별도입니다.</small><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 전체 단어 카드 저장소 ↗</a></div>';
+    }
+
+    function pictureMissionMarkup() {
+      return '<div class="motion-demo" data-picture-mission><div class="demo-top"><b>그림 미션 · 우리 집</b><small>원본 도안 · 도형별 정확도</small></div><div class="demo-controls" aria-label="원본 그리기 도구">'+AieduTrace.drawingColors.map((color,i)=>'<button class="swatch" data-picture-color="'+color+'" style="--swatch:'+color+'" aria-label="그리기 색상 '+(i+1)+'" aria-pressed="'+(i===0)+'"></button>').join('')+Object.entries(AieduTrace.drawingBrushSizeMap).map(([level,size])=>'<button class="brush-size" data-picture-size="'+size+'" aria-label="붓 굵기 '+level+'" aria-pressed="'+(level==='2')+'">'+level+'</button>').join('')+'<button class="tool-toggle" data-picture-eraser aria-label="그림 지우개" aria-pressed="false">⌫</button></div><canvas class="picture-canvas" aria-label="우리 집 그림 미션"></canvas><div class="demo-actions"><span class="demo-status" role="status">점선을 따라 집을 그려요.</span><button class="demo-action secondary" data-picture-reset type="button">다시 그리기</button><button class="demo-action" data-picture-check type="button">정확도 확인</button></div><small class="fidelity-note">원본 우리 집 도안·도형별 판정 코드 적용. 작품·보상은 원본 계정에 저장하지 않습니다.</small></div>';
+    }
+    function wirePictureMission(panel) {
+      const root=panel.querySelector('[data-picture-mission]');if(!root)return false;
+      const status=root.querySelector('.demo-status'),controller=AieduTrace.mountPicture(root.querySelector('canvas'));
+      panel._featureCleanup=()=>controller.destroy();
+      root.querySelectorAll('[data-picture-color]').forEach(button=>button.addEventListener('click',()=>{
+        controller.setColor(button.dataset.pictureColor);
+        root.querySelectorAll('[data-picture-color]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+        root.querySelector('[data-picture-eraser]').setAttribute('aria-pressed','false');
+      }));
+      root.querySelectorAll('[data-picture-size]').forEach(button=>button.addEventListener('click',()=>{
+        controller.setSize(Number(button.dataset.pictureSize));
+        root.querySelectorAll('[data-picture-size]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      }));
+      root.querySelector('[data-picture-eraser]').addEventListener('click',event=>{
+        const active=event.currentTarget.getAttribute('aria-pressed')!=='true';
+        controller.setErase(active);event.currentTarget.setAttribute('aria-pressed',String(active));
+      });
+      root.querySelector('[data-picture-reset]').addEventListener('click',()=>{controller.reset();status.textContent='점선을 따라 집을 그려요.';});
+      root.querySelector('[data-picture-check]').addEventListener('click',()=>{
+        const result=controller.evaluate();
+        status.textContent='도형별 평균 정확도 '+result.accuracy+'% · '+result.instances.map((item,i)=>(i+1)+'번 도형 '+item.accuracy+'%').join(' / ');
+      });
+      return true;
+    }
+
+    function originalFeatureMarkup(title,detail,activity,menu,image='') {
+      const href='https://aiedue.ddns.net/korean/index.html?activity='+activity;
+      return '<article class="motion-demo original-feature"><div class="demo-top"><b>'+title+'</b><span class="feature-badge">원본 서비스</span></div>'+(image?'<img class="original-feature-capture" src="assets/'+image+'" loading="lazy" alt="'+title+' 실제 학생 테스트 화면">':'')+'<p>'+detail+'</p><a class="original-feature-link" href="'+href+'" target="_blank" rel="noopener noreferrer">에이두 한글에서 '+menu+' 열기 ↗</a><small class="fidelity-note">원본에서 학생 테스트로 들어간 뒤 해당 메뉴를 선택하세요. 계정·AI 기능은 원본 서버에서 실행합니다.</small></article>';
+    }
+    function curricularWritingMarkup(word='생태계') {
+      return '<div class="motion-demo" data-curricular-writing="'+reviewEscape(word)+'"><div class="demo-top"><b>핵심어 따라쓰기</b><small>원본 안내 글자 · 80% 기준</small></div><div class="curricular-word"><strong>'+reviewEscape(word)+'</strong><button data-speak-text="'+reviewEscape(word)+'" type="button">🔊 단어 듣기</button></div><canvas class="curricular-canvas" aria-label="'+reviewEscape(word)+' 따라쓰기"></canvas><div class="demo-actions"><span class="demo-status" role="status">안내 글자 위에 직접 써요.</span><button class="demo-action secondary" data-curricular-reset type="button">다시 쓰기</button><button class="demo-action" data-curricular-check type="button">쓰기 확인</button></div><small class="fidelity-note">따라쓰기: 원본 글자 안내·겹침 비율 코드 적용. AI 받아쓰기 채점은 원본에서 이용합니다.</small><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 받아쓰기·AI 채점 ↗</a></div>';
+    }
+    function wireCurricularWriting(panel) {
+      const root=panel.querySelector('[data-curricular-writing]');
+      if(!root)return false;
+      const word=root.dataset.curricularWriting,status=root.querySelector('.demo-status');
+      const controller=AieduTrace.mountCurricular(root.querySelector('canvas'),word,{
+        onProgress:({coverage,done})=>{status.textContent=(done?'✓ 따라쓰기 완료 · ':'글자 위를 따라 써요 · ')+Math.round(coverage*100)+'%';}
+      });
+      panel._featureCleanup=()=>controller.destroy();
+      root.querySelector('[data-curricular-reset]').addEventListener('click',()=>controller.reset());
+      root.querySelector('[data-curricular-check]').addEventListener('click',()=>{
+        const coverage=controller.check(),correct=coverage>=.8||Math.round(coverage*100)>=80;
+        status.textContent=correct?'✓ '+word+' 따라쓰기를 완료했어요.':'글자 위를 조금 더 따라 써요. 현재 '+Math.round(coverage*100)+'%예요.';
+        recordLearningAttempt({key:'stage3-trace-'+word,stage:3,stageTitle:'교과 맞춤쓰기',activity:'핵심어 따라쓰기',prompt:word+'을(를) 안내 글자 위에 따라 써요.',answerType:'trace',correctAnswer:word},Math.round(coverage*100)+'%',correct);
+      });
+      root.querySelector('[data-speak-text]').addEventListener('click',()=>speakKorean(word));
+      return true;
     }
 
     const featureCatalog = {
       draw: {
-        picture: () => canvasMarkup('그림 미션', '⌁', '#8c4ad7', '화면에 자유롭게 표시하고 과제를 마쳐요', false),
-        shape: () => '<div class="motion-demo"><div class="demo-top"><b>도형 미션</b><small>시작점에서 끝점까지 선을 이어요</small></div><span class="feature-badge">눈-손 협응 · 선 긋기 정확성</span><div class="trace-lane" data-trace-lane><span class="trace-dot start">시작</span><span class="trace-dot end">끝</span><span class="trace-dot trace-runner" data-trace-runner>●</span></div><div class="demo-actions"><span class="demo-status" role="status">보라색 점을 끝점까지 끌어 보세요.</span><button class="demo-reset secondary" data-trace-reset type="button">다시 하기</button></div></div>',
-        ai: () => canvasMarkup('AI스케치북', '☀', '#8c4ad7', '자유롭게 그린 뒤 AI 그림으로 바꿔요', true)
+        picture: () => pictureMissionMarkup(),
+        shape: () => originalFeatureMarkup('도형 미션','제시된 도형을 직접 그려 정확도를 확인해요. 원본 게임에서 도형별 미션을 진행합니다.','drawing','도형 미션'),
+        ai: () => originalFeatureMarkup('AI스케치북','내가 그린 그림을 AI 이미지로 바꿔요. 이미지 생성과 작품 저장은 원본 에이두 한글에서 실행합니다.','drawing','AI스케치북')
       },
       hangul: {
         combine: () => lessonMarkup('combine'),
@@ -2072,16 +2531,16 @@
         finalword: () => lessonMarkup('finalword')
       },
       curriculum: {
-        photo: () => '<div class="motion-demo scan-demo"><div class="demo-top"><b>교과 자료 촬영·인식</b><small>노트 사진에서 한글을 찾아 단어 카드로 만들어요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div><div class="ocr-output is-empty" data-ocr-output>인식된 핵심어가 여기에 나타나요.</div></div><video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video><canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요.</span><button class="demo-action secondary" data-open-camera type="button">카메라 켜기</button><button class="demo-action secondary" data-capture-photo type="button" disabled>촬영</button><button class="demo-action secondary" data-open-photo type="button">사진 선택</button></div><div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div></div>',
-        write: () => canvasMarkup('핵심어 쓰기', '생태계', '#e36b23', '생태계를 듣고 읽은 뒤 직접 써요', false, '<button class="demo-action secondary" data-speak-text="생태계" type="button">🔊 생태계 듣기</button>').replace('class="motion-demo canvas-demo"','class="motion-demo canvas-demo word-writing-demo"').replace('완료하기','쓰기 확인').replace('data-panel-complete','data-writing-check'),
-        meaning: () => '<article class="motion-demo shared-word-card-demo" aria-label="에이두 한글 생태계 단어 카드"><header class="shared-word-card-head"><small>SHARED WORD CARDS</small><h3>생태계</h3><p>그림과 설명으로 단어의 뜻을 알아봐요.</p></header><div class="shared-word-card-body"><div class="shared-word-card-art" role="img" aria-label="초록 새싹 옷을 입은 아이가 물고기와 식물이 있는 생태계 어항을 들고 있어요"></div><div class="shared-word-card-copy"><span class="feature-badge">단어 카드</span><h4 data-card-word>생태계</h4><p class="shared-word-card-definition" data-card-definition role="button" tabindex="0">생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.</p><small class="shared-word-card-hint">문장을 눌러 들어보세요</small><div class="shared-word-card-actions"><button data-speak-meaning type="button">🔊 설명 듣기</button><button data-back-to-bank type="button">← 단어 카드 저장소</button></div></div><section class="meaning-check" data-stage3-check><b>뜻 확인 퀴즈</b><p>‘생태계’의 뜻으로 가장 알맞은 설명을 골라요.</p><div class="support-choice-list"><button data-stage3-answer="0" type="button">생물과 주변 환경이 서로 영향을 주고받는 관계</button><button data-stage3-answer="1" type="button">동물만 모여서 살아가는 장소</button><button data-stage3-answer="2" type="button">식물이 자라는 순서</button></div><p data-stage3-status role="status">한 가지를 선택해 보세요.</p></section></div></article>',
+        photo: () => '<div class="motion-demo scan-demo"><div class="demo-top"><b>교과 자료 촬영·인식</b><small>OCR 후보를 확인하고 체험 저장소에 넣어요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div><div class="ocr-output is-empty" data-ocr-output>OCR 후보 낱말이 여기에 나타나요. 직접 확인 후 선택해요.</div></div><video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video><canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요. 원본 AI 핵심어 선정과는 다릅니다.</span><button class="demo-action secondary" data-open-camera type="button">카메라 켜기</button><button class="demo-action secondary" data-capture-photo type="button" disabled>촬영</button><button class="demo-action secondary" data-open-photo type="button">사진 선택</button></div><div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 OCR·AI 핵심어 선정 ↗</a></div>',
+        write: () => curricularWritingMarkup('생태계'),
+        meaning: () => '<article class="motion-demo shared-word-card-demo" aria-label="에이두 한글 생태계 단어 카드"><header class="shared-word-card-head"><small>SHARED WORD CARDS</small><h3>생태계</h3><p>그림과 설명으로 단어의 뜻을 알아봐요.</p></header><div class="shared-word-card-body"><div class="shared-word-card-art" role="img" aria-label="초록 새싹 옷을 입은 아이가 물고기와 식물이 있는 생태계 어항을 들고 있어요"></div><div class="shared-word-card-copy"><span class="feature-badge">단어 카드</span><h4 data-card-word>생태계</h4><p class="shared-word-card-definition" data-card-definition role="button" tabindex="0">생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.</p><small class="shared-word-card-hint">문장을 눌러 들어보세요</small><div class="shared-word-card-actions"><button data-speak-meaning type="button">🔊 설명 듣기</button><button data-back-to-bank type="button">← 단어 카드 저장소</button></div></div></div></article>',
         bank: () => wordBankMarkup()
       },
       literacy: {
         choice: () => literacyTestMarkup(),
-        short: () => '<div class="motion-demo"><div class="demo-top"><b>단답형</b><small>질문의 답을 낱말이나 짧은 문장으로 직접 써요</small></div><div class="quiz-stage"><p>식물이 자라는 데 필요한 것은 물과 무엇인가요?</p><input class="answer-field" data-user-answer aria-label="단답 입력" placeholder="답을 써 보세요"><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-text="햇빛" type="button">정답 확인</button></div></div></div>',
-        essay: () => '<div class="motion-demo"><div class="demo-top"><b>서술형</b><small>제시된 핵심어를 활용해 자신의 말로 답을 써요</small></div><div class="quiz-stage"><p><b>핵심어: 생태계</b><br>숲의 생물들이 서로 어떤 관계를 맺는지 한 문장으로 써 보세요.</p><textarea class="answer-field" data-user-answer aria-label="서술형 답 입력" placeholder="생태계라는 말을 넣어 써 보세요"></textarea><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-keyword="생태계" type="button">답 확인</button></div></div></div>',
-        detective: () => '<div class="motion-demo"><div class="demo-top"><b>문해력 탐정단</b><small>틀린 문제를 모아 다시 풀고 부족한 내용을 보충해요</small></div><div class="feature-row"><div class="feature-card"><strong>오답 단서</strong>“식물이 자라요” 문장에서 원인을 놓쳤어요.<button data-detective-hint type="button">핵심 문장 찾기</button></div><div class="feature-card"><strong>다시 풀기</strong>햇빛과 물은 식물이 자라는 데 필요해요.<button data-detective-retry type="button">재도전 완료</button></div></div><div class="demo-actions"><span class="demo-status" role="status">오답 1문항을 다시 살펴보세요.</span></div></div>'
+        short: () => '<div class="motion-demo"><div class="demo-top"><b>학생 테스트 · 단답형</b><small>2026.10.06 확인 문항</small></div><img class="original-feature-capture" src="assets/aiedu-literacy-student-question.jpg" loading="lazy" alt="학생 테스트에서 출제된 실제 문해력 문제"><details><summary>단답 풀이 체험</summary><p class="korean-review-passage">초등학교 급식실에 새로운 식탁이 들어왔습니다. 어린이들이 다치지 않도록 모서리 테두리를 둥글게 만들었습니다.</p><p>기사에서 새로운 식탁은 어린이들이 다치지 않도록 어느 부분을 둥글게 만들었나요?</p><input class="answer-field" data-user-answer aria-label="단답 입력" placeholder="답을 써 보세요"><div class="demo-actions"><span class="demo-status" role="status"></span><button class="demo-action" data-check-text="모서리 테두리" type="button">정답 확인</button></div><small class="fidelity-note">캡처: 원본 문제. 체험 지문은 핵심 문장 요약이며 원본 단답 비교 방식으로 확인합니다.</small></details></div>',
+        essay: () => originalFeatureMarkup('서술형 · AI 피드백','지문·질문·학생 답변을 함께 분석해 점수와 피드백을 제공해요. 실제 AI 채점은 원본 서비스에서 실행합니다.','literacy','오늘의 미션'),
+        detective: () => originalFeatureMarkup('문해력 탐정단','지문에서 단서를 읽고 답을 찾아 사건을 해결해요. 원본 복습 게임에서 실제 사건과 답안 보드를 확인합니다.','literacy','문해력 탐정단')
       }
     };
 
@@ -2089,58 +2548,45 @@
       'ㄱㅏ':'가','ㄱㅓ':'거','ㄱㅗ':'고','ㄴㅏ':'나','ㄴㅓ':'너','ㄴㅗ':'노','ㅁㅏ':'마','ㅁㅓ':'머','ㅁㅗ':'모'
     };
 
-    const hangulStrokeCounts = {'ㄱ':1,'ㄲ':2,'ㄴ':1,'ㄷ':3,'ㄸ':6,'ㄹ':5,'ㅁ':4,'ㅂ':4,'ㅃ':8,'ㅅ':2,'ㅆ':4,'ㅇ':1,'ㅈ':3,'ㅉ':6,'ㅊ':4,'ㅋ':2,'ㅌ':4,'ㅍ':4,'ㅎ':3,'ㅏ':2,'ㅐ':3,'ㅑ':3,'ㅒ':4,'ㅓ':2,'ㅔ':3,'ㅕ':3,'ㅖ':4,'ㅗ':2,'ㅘ':4,'ㅙ':5,'ㅚ':3,'ㅛ':3,'ㅜ':2,'ㅝ':4,'ㅞ':5,'ㅟ':3,'ㅠ':3,'ㅡ':1,'ㅢ':2,'ㅣ':1};
-    const hangulStrokeStarts = {
-      'ㄱ':[[8,8]],'ㄲ':[[8,8],[56,8]],'ㄴ':[[8,8]],'ㄷ':[[8,8],[8,8],[8,86]],'ㄸ':[[8,8],[8,8],[8,86],[56,8],[56,8],[56,86]],'ㄹ':[[8,8],[8,8],[8,48],[8,48],[8,86]],
-      'ㅁ':[[8,8],[8,8],[88,8],[8,88]],'ㅂ':[[8,8],[8,8],[8,88],[88,8]],'ㅃ':[[8,8],[8,8],[8,88],[88,8],[52,8],[52,8],[52,88],[98,8]],'ㅅ':[[8,88],[50,8]],'ㅆ':[[8,88],[50,8],[50,88],[94,8]],
-      'ㅇ':[[50,8]],'ㅈ':[[8,8],[50,8],[92,8]],'ㅉ':[[8,8],[50,8],[92,8],[38,8],[62,8],[92,8]],'ㅊ':[[8,8],[50,8],[8,88],[92,8]],'ㅋ':[[8,8],[8,50]],'ㅌ':[[8,8],[8,8],[8,88],[92,8]],'ㅍ':[[8,8],[8,8],[8,88],[92,8]],'ㅎ':[[50,8],[8,8],[50,52]],
-      'ㅏ':[[50,8],[50,50]],'ㅐ':[[32,8],[32,50],[78,8]],'ㅑ':[[50,8],[50,34],[50,66]],'ㅒ':[[32,8],[32,34],[32,66],[78,8]],'ㅓ':[[50,8],[50,50]],'ㅔ':[[68,8],[68,50],[20,8]],'ㅕ':[[50,8],[50,34],[50,66]],'ㅖ':[[68,8],[68,34],[68,66],[20,8]],
-      'ㅗ':[[8,50],[50,50]],'ㅘ':[[8,50],[50,50],[72,8],[72,50]],'ㅙ':[[8,50],[50,50],[72,8],[72,50],[98,8]],'ㅚ':[[8,50],[50,50],[90,8]],'ㅛ':[[8,50],[50,50],[92,50]],'ㅜ':[[8,50],[50,8]],'ㅝ':[[8,50],[50,8],[72,8],[72,50]],'ㅞ':[[8,50],[50,8],[72,8],[72,50],[98,8]],'ㅟ':[[8,50],[50,8],[90,8]],'ㅠ':[[8,50],[50,8],[92,8]],'ㅡ':[[8,50]],'ㅢ':[[8,50],[90,8]],'ㅣ':[[50,8]]
-    };
-    const hangulStrokeParts = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ'],'ㅘ':['ㅗ','ㅏ'],'ㅙ':['ㅗ','ㅐ'],'ㅚ':['ㅗ','ㅣ'],'ㅝ':['ㅜ','ㅓ'],'ㅞ':['ㅜ','ㅔ'],'ㅟ':['ㅜ','ㅣ'],'ㅢ':['ㅡ','ㅣ']};
-    function traceOrderMarkup(letter) {
-      const code = letter.charCodeAt(0) - 0xAC00;
-      if (code < 0 || code > 11171) return '<span class="trace-order-number is-active" data-trace-order="0" style="left:50%;top:82px">1</span>';
-      const initialIndex = Math.floor(code / 588), medialIndex = Math.floor((code % 588) / 28), finalIndex = code % 28;
-      const initials = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-      const medials = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
-      const finals = ['', 'ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-      const vowel = medials[medialIndex];
-      const horizontal = ['ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ'].includes(vowel);
-      const hasFinal = finalIndex > 0;
-      const regions = horizontal
-        ? [{left:31,top:hasFinal?8:12,width:38,height:hasFinal?26:30},{left:18,top:hasFinal?39:43,width:64,height:hasFinal?27:34},{left:26,top:69,width:48,height:23}]
-        : [{left:22,top:hasFinal?14:19,width:30,height:hasFinal?37:47},{left:50,top:hasFinal?13:17,width:29,height:hasFinal?38:57},{left:26,top:69,width:48,height:23}];
-      const parts = [initials[initialIndex],vowel,finals[finalIndex]].filter(Boolean);
-      const labels = [];
-      parts.forEach((part,partIndex) => {
-        const region = regions[partIndex];
-        const jamos = hangulStrokeParts[part] || [part];
-        jamos.forEach(jamo => {
-          const starts = hangulStrokeStarts[jamo] || [[8,8]];
-          starts.forEach(([px,py]) => {
-            const x = region.left + region.width * px / 100;
-            const y = 31 + (region.top + region.height * py / 100) * 1.12;
-            const number = labels.length + 1;
-            labels.push('<span class="trace-order-number' + (number === 1 ? ' is-active' : '') + '" data-trace-order="' + (number - 1) + '" aria-label="' + number + '번째 획" style="left:' + x.toFixed(1) + '%;top:' + y.toFixed(1) + 'px">' + number + '</span>');
-          });
-        });
-      });
-      return labels.join('');
-    }
     function syllableStrokeCount(letter) {
-      const code = letter.charCodeAt(0) - 0xAC00;
-      if (code < 0 || code > 11171) return hangulStrokeCounts[letter] || 1;
-      const initial = Math.floor(code / 588), medial = Math.floor((code % 588) / 28), final = code % 28;
-      const initials = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-      const medials = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
-      const finals = ['', 'ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-      const compound = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ'],'ㅘ':['ㅗ','ㅏ'],'ㅙ':['ㅗ','ㅐ'],'ㅚ':['ㅗ','ㅣ'],'ㅝ':['ㅜ','ㅓ'],'ㅞ':['ㅜ','ㅔ'],'ㅟ':['ㅜ','ㅣ'],'ㅢ':['ㅡ','ㅣ']};
-      return [initials[initial],medials[medial],finals[final]].filter(Boolean).reduce((sum,part) => sum + (compound[part] ? compound[part].reduce((n,jamo) => n + hangulStrokeCounts[jamo],0) : hangulStrokeCounts[part] || 1),0);
+      return AieduTrace.collectTraceStrokeOrder(letter,0,0,200,200).length;
     }
     function traceWordMarkup(word, index, total) {
-      const chars = Array.from(word);
-      return '<div class="trace-word-card"><div class="trace-word-heading"><span>✍️ 낱말 따라쓰기</span><strong>' + word + '</strong><small>낱말 ' + (index + 1) + ' / ' + total + '</small></div><div class="trace-grid' + (chars.length === 1 ? ' is-single' : '') + '">' + chars.map((letter,cellIndex) => '<div class="trace-cell' + (cellIndex === 0 ? ' is-current' : '') + '" data-trace-letter="' + letter + '" data-stroke-total="' + syllableStrokeCount(letter) + '"><strong>' + letter + '</strong><span class="trace-stroke-count" data-stroke-label>1 / ' + syllableStrokeCount(letter) + ' 획</span><button class="trace-reset" data-trace-reset type="button" aria-label="' + letter + ' 쓰기 지우기">↻</button><span class="trace-guide-letter" aria-hidden="true">' + letter + '</span>' + traceOrderMarkup(letter) + '<canvas aria-label="' + letter + ' 직접 쓰기 칸"></canvas></div>').join('') + '</div><div class="trace-word-progress" aria-label="음절 쓰기 진행">' + chars.map(() => '<i></i>').join('') + '</div></div>';
+      const chars=Array.from(word);
+      return '<div class="trace-word-card"><div class="trace-word-heading"><span>✍️ 낱말 따라쓰기</span><strong>'+reviewEscape(word)+'</strong><small>낱말 '+(index+1)+' / '+total+'</small></div><div class="trace-grid'+(chars.length===1?' is-single':'')+'" style="grid-template-columns:repeat('+Math.min(chars.length,3)+',minmax(0,1fr))">'+chars.map((letter,i)=>'<div class="trace-cell'+(i===0?' is-current':'')+'" data-trace-letter="'+reviewEscape(letter)+'"><strong>'+reviewEscape(letter)+'</strong><span class="trace-stroke-count" data-stroke-label></span><button class="trace-reset" data-trace-reset type="button" aria-label="'+reviewEscape(letter)+' 쓰기 지우기">↻</button><canvas aria-label="'+reviewEscape(letter)+' 직접 쓰기 칸"></canvas></div>').join('')+'</div><div class="trace-word-progress" aria-label="음절 쓰기 진행">'+chars.map(()=>'<i></i>').join('')+'</div></div>';
+    }
+    function wireTraceWord(host,status,onComplete,onChange=()=>{}) {
+      const cells=[...host.querySelectorAll('.trace-cell')];
+      let reported=false;
+      const refresh=()=>{
+        const next=cells.findIndex(cell=>!cell.classList.contains('is-complete'));
+        cells.forEach((cell,i)=>{
+          cell.classList.toggle('is-current',i===next);
+          host.querySelectorAll('.trace-word-progress i')[i]?.classList.toggle('is-done',cell.classList.contains('is-complete'));
+        });
+        const done=next<0;
+        onChange(done);
+        if(done&&!reported){reported=true;onComplete();}
+        if(!done)reported=false;
+      };
+      const controllers=cells.map(cell=>{
+        const controller=AieduTrace.mount(cell.querySelector('canvas'),cell.dataset.traceLetter,{
+          onProgress:({completed,total,done})=>{
+            cell.querySelector('[data-stroke-label]').textContent=done?'✓ 획순 완료':(completed+1)+' / '+total+' 획';
+            cell.classList.toggle('is-complete',done);
+            if(completed>0&&!done)status.textContent=cell.dataset.traceLetter+'의 '+completed+'번째 획 완료. '+(completed+1)+'번을 이어 써요.';
+          },
+          onInvalid:message=>{status.textContent=message;},
+          onComplete:()=>{status.textContent=cell.dataset.traceLetter+'을(를) 획순대로 썼어요.';refresh();}
+        });
+        cell.querySelector('[data-trace-reset]').addEventListener('click',()=>{
+          controller.reset();reported=false;refresh();status.textContent='첫 번째 번호에서 다시 시작해요.';
+        });
+        return controller;
+      });
+      host._traceControllers=controllers;
+      refresh();
+      return ()=>controllers.forEach(controller=>controller.destroy());
     }
 
     function playCombinationMotion(formula) {
@@ -2152,6 +2598,7 @@
 
     function mountLessonStep(shell, step) {
       shell._lessonMotionObserver?.disconnect();
+      shell._cleanupTrace?.();
       const config = lessonConfigs[shell.dataset.hangulLesson];
       const body = shell.querySelector('[data-lesson-body]');
       const progress = [...shell.querySelectorAll('.lesson-progress button')];
@@ -2220,82 +2667,26 @@
       }
 
       if (step === 3) {
-        let wordIndex = 0;
-        const words = config.writingWords;
-        body.innerHTML = '<div class="lesson-card"><div class="lesson-card-title"><i>3</i> ✍️ 낱말 획순 따라쓰기</div><div data-writing-current></div><p class="lesson-status" data-trace-status>글자 칸을 눌러 획순대로 직접 써 보세요. 글자를 모두 쓰면 다음 낱말이 나와요.</p></div>';
-        const status = body.querySelector('[data-trace-status]');
-        const renderWord = () => {
-          const host = body.querySelector('[data-writing-current]');
-          host.innerHTML = traceWordMarkup(words[wordIndex], wordIndex, words.length);
-          const cells = [...host.querySelectorAll('.trace-cell')];
-          const canvases = cells.map(cell => cell.querySelector('canvas'));
-          canvases.forEach(canvas => {
-            const cell = canvas.closest('.trace-cell');
-            let strokeIndex = 0;
-            const context = canvas.getContext('2d');
-            const bounds = canvas.getBoundingClientRect();
-            const ratio = Math.min(devicePixelRatio || 1, 2);
-            canvas.width = Math.round(bounds.width * ratio);
-            canvas.height = Math.round(bounds.height * ratio);
-            context.setTransform(ratio,0,0,ratio,0,0);
-            context.lineCap = 'round'; context.lineJoin = 'round'; context.lineWidth = 6; context.strokeStyle = '#169bc1';
-            let drawing = false, last = null, distance = 0;
-            const point = event => { const rect = canvas.getBoundingClientRect(); return {x:event.clientX-rect.left,y:event.clientY-rect.top}; };
-            canvas.addEventListener('pointerdown', event => {
-              event.preventDefault();
-              if (cell.classList.contains('is-complete')) return;
-              drawing = true; last = point(event); distance = 0; canvas.setPointerCapture(event.pointerId);
-            });
-            canvas.addEventListener('pointermove', event => {
-              if (!drawing) return;
-              const p = point(event); context.beginPath(); context.moveTo(last.x,last.y); context.lineTo(p.x,p.y); context.stroke();
-              distance += Math.hypot(p.x-last.x,p.y-last.y); last = p;
-            });
-            const finishStroke = () => {
-              if (!drawing) return;
-              drawing = false; last = null;
-              if (distance < 7) return;
-              strokeIndex += 1;
-              const total = Number(cell.dataset.strokeTotal);
-              const done = strokeIndex >= total;
-              cell.querySelector('[data-stroke-label]').textContent = done ? '✓ 획순 완료' : (strokeIndex + 1) + ' / ' + total + ' 획';
-              cell.querySelectorAll('[data-trace-order]').forEach(marker => {
-                const markerIndex = Number(marker.dataset.traceOrder);
-                marker.classList.toggle('is-done',markerIndex < strokeIndex);
-                marker.classList.toggle('is-active',markerIndex === strokeIndex && !done);
-              });
-              if (done) cell.classList.add('is-complete');
-              cells.forEach((item,index) => {
-                item.classList.toggle('is-current', !item.classList.contains('is-complete') && cells.findIndex(candidate => !candidate.classList.contains('is-complete')) === index);
-                if (item.classList.contains('is-complete')) host.querySelectorAll('.trace-word-progress i')[index]?.classList.add('is-done');
-              });
-              if (cells.every(item => item.classList.contains('is-complete'))) {
-                shell.dataset.traceTouched = String(wordIndex + 1);
-                if (wordIndex < words.length - 1) {
-                  status.textContent = '✓ ' + words[wordIndex] + '을(를) 끝까지 썼어요. 다음 낱말로 넘어가요.';
-                  window.setTimeout(() => {
-                    if (shell.dataset.writingDone === 'true') return;
-                    wordIndex += 1; renderWord(); status.textContent = '다음 낱말 ' + words[wordIndex] + '을(를) 음절별로 써 보세요.';
-                  }, 900);
-                } else {
-                  shell.dataset.writingDone = 'true';
-                  status.textContent = '🎉 모든 낱말을 썼어요! 차시 쓰기를 완료할 수 있어요.';
-                }
-              } else status.textContent = cell.dataset.traceLetter + '의 ' + strokeIndex + '번째 획을 썼어요. 다음 획을 이어 써 보세요.';
-            };
-            canvas.addEventListener('pointerup', finishStroke); canvas.addEventListener('pointercancel', finishStroke);
-            cell.querySelector('[data-trace-reset]').addEventListener('click', () => {
-              context.clearRect(0,0,canvas.width,canvas.height); strokeIndex = 0; cell.classList.remove('is-complete');
-              cell.querySelector('[data-stroke-label]').textContent = '1 / ' + cell.dataset.strokeTotal + ' 획';
-              cell.querySelectorAll('[data-trace-order]').forEach((marker,index) => {
-                marker.classList.toggle('is-active',index === 0);
-                marker.classList.remove('is-done');
-              });
-              cell.classList.add('is-current'); host.querySelectorAll('.trace-word-progress i')[cells.indexOf(cell)]?.classList.remove('is-done');
-              shell.dataset.writingDone = 'false'; status.textContent = cell.dataset.traceLetter + ' 쓰기를 지웠어요. 첫 획부터 다시 써 보세요.';
-            });
-          });
+        let wordIndex=0,pendingAdvance=null,cleanup=()=>{};
+        const words=config.writingWords;
+        body.innerHTML='<div class="lesson-card"><div class="lesson-card-title"><i>3</i> ✍️ 낱말 획순 따라쓰기</div><div data-writing-current></div><p class="lesson-status" data-trace-status>주황색 번호에서 시작해 화살표 방향으로 써요.</p><small class="fidelity-note">원본 획 경로·번호·판정 코드 적용 · 대표 낱말 체험</small></div>';
+        const status=body.querySelector('[data-trace-status]');
+        const renderWord=()=>{
+          cleanup();
+          const host=body.querySelector('[data-writing-current]');
+          host.innerHTML=traceWordMarkup(words[wordIndex],wordIndex,words.length);
+          cleanup=wireTraceWord(host,status,()=>{
+            shell.dataset.traceTouched=String(wordIndex+1);
+            if(wordIndex<words.length-1){
+              status.textContent='✓ '+words[wordIndex]+' 쓰기 완료. 다음 낱말로 넘어가요.';
+              pendingAdvance=setTimeout(()=>{
+                if(!shell.isConnected)return;
+                wordIndex++;renderWord();status.textContent='다음 낱말 '+words[wordIndex]+'을(를) 써요.';
+              },1000);
+            }else{shell.dataset.writingDone='true';status.textContent='모든 낱말을 획순대로 썼어요. 완료하기를 눌러요.';}
+          },done=>{if(!done){clearTimeout(pendingAdvance);shell.dataset.writingDone='false';}});
         };
+        shell._cleanupTrace=()=>{clearTimeout(pendingAdvance);cleanup();};
         renderWord();
       }
     }
@@ -2342,6 +2733,8 @@
     }
 
     function wireFeaturePanel(panel) {
+      panel._featureCleanup=null;
+      if(wirePictureMission(panel)||wireCurricularWriting(panel))return;
       const lesson = panel.querySelector('[data-hangul-lesson]');
       if (lesson) {
         wireHangulLesson(lesson);
@@ -2381,7 +2774,7 @@
           choices.forEach((button,index) => { button.textContent = question.answers[index]; button.disabled = false; button.classList.remove('is-selected','correct','incorrect'); });
           next.disabled = true;
           next.textContent = questionIndex === questions.length - 1 ? '결과 확인' : '다음 문제';
-          status.textContent = '답을 선택하면 학생 예시 응답과 정오답이 표시돼요.';
+          status.textContent = '지문을 읽고 답을 선택해 보세요. 이 기기에 풀이 결과를 저장합니다.';
         };
         choices.forEach((button,index) => button.addEventListener('click', () => {
           if (answered[questionIndex]) return;
@@ -2464,15 +2857,7 @@
         });
         const complete = canvasDemo.querySelector('[data-panel-complete],[data-writing-check]');
         if (complete) complete.addEventListener('click', () => {
-          canvasDemo.querySelector('.demo-status').textContent = used ? '✓ 잘했어요! 직접 쓴 글씨를 확인했어요.' : '먼저 화면에 직접 써 보세요.';
-        });
-        const aiButton = canvasDemo.querySelector('[data-ai-create]');
-        if (aiButton) aiButton.addEventListener('click', () => {
-          const result = canvasDemo.querySelector('[data-ai-result]');
-          if (!used) { canvasDemo.querySelector('.demo-status').textContent = '먼저 그림을 그려 보세요.'; return; }
-          result.textContent = ['☀️','🌳','🦁'][Math.floor(Math.random()*3)];
-          result.classList.add('is-ready');
-          canvasDemo.querySelector('.demo-status').textContent = '✓ 내 선을 바탕으로 AI 그림을 만들었어요.';
+          canvasDemo.querySelector('.demo-status').textContent = used ? '그림을 마쳤어요. 이 체험에서는 원본의 그림 정확도·보상 판정을 하지 않습니다.' : '먼저 화면에 직접 써 보세요.';
         });
       }
 
@@ -2575,7 +2960,7 @@
             const text = result?.data?.text || '';
             const words = [...new Set(text.match(/[가-힣]{2,}/g) || [])].slice(0,8);
             showRecognizedWords(words);
-            status.textContent = words.length ? '한글을 인식했어요. 단어를 눌러 핵심어 카드에 저장하세요.' : '인식된 글자가 없어요. 빛이 고르고 글자가 크게 보이도록 다시 촬영해 주세요.';
+            status.textContent = words.length ? 'OCR 후보예요. 잘못 읽힌 글자·이름은 제외하고 필요한 단어만 저장하세요.' : '인식된 글자가 없어요. 빛이 고르고 글자가 크게 보이도록 다시 촬영해 주세요.';
           } catch (error) {
             showRecognizedWords([]);
             status.textContent = error.message || '글자 인식에 실패했어요. 사진을 다시 선택해 주세요.';
@@ -2663,27 +3048,21 @@
       if (checkText) checkText.addEventListener('click', () => {
         const value = panel.querySelector('[data-user-answer]').value.trim();
         if (!value) { panel.querySelector('.demo-status').textContent = '답을 입력한 뒤 확인해 주세요.'; return; }
-        const correct = value.includes(checkText.dataset.checkText);
-        panel.querySelector('.demo-status').textContent = correct ? '✓ 정답이에요! 핵심 내용을 찾았어요.' : '지문에서 식물에 필요한 것을 다시 찾아보세요.';
-        recordLearningAttempt({key:'stage4-literacy-short-sunlight',stage:4,stageTitle:'문해력',activity:'단답형',prompt:'식물이 자라는 데 필요한 것은 물과 무엇인가요?',answerType:'text',correctAnswer:checkText.dataset.checkText,hint:'지문에서 식물에게 필요한 것을 다시 찾아보세요.'},value,correct);
+        const normalize=value=>String(value).toLowerCase().replace(/\s+/g,'').trim();
+        const answer=normalize(value),expected=normalize(checkText.dataset.checkText);
+        const correct=!!answer&&(answer===expected||answer.includes(expected)||expected.includes(answer));
+        panel.querySelector('.demo-status').textContent = correct ? '✓ 정답이에요! 핵심 내용을 찾았어요.' : '지문에서 식탁의 어느 부분을 바꾸었는지 다시 찾아보세요.';
+        recordLearningAttempt({key:'stage4-literacy-short-table',stage:4,stageTitle:'문해력',activity:'단답형',prompt:'어린이들이 다치지 않도록 식탁의 어느 부분을 둥글게 만들었나요?',passage:"초등학교 급식실에 새로운 식탁이 들어왔습니다. 어린이들이 다치지 않도록 모서리 테두리를 둥글게 만들었습니다.",answerType:'text',correctAnswer:checkText.dataset.checkText,hint:'식탁의 모서리 테두리를 살펴보세요.'},value,correct);
       });
-      const checkKeyword = panel.querySelector('[data-check-keyword]');
-      if (checkKeyword) checkKeyword.addEventListener('click', () => {
-        const value = panel.querySelector('[data-user-answer]').value.trim();
-        if (!value) { panel.querySelector('.demo-status').textContent = '문장을 입력한 뒤 확인해 주세요.'; return; }
-        const correct = value.length >= 10 && value.includes(checkKeyword.dataset.checkKeyword);
-        panel.querySelector('.demo-status').textContent = correct ? '✓ 핵심어를 활용해 자신의 문장으로 표현했어요.' : '‘' + checkKeyword.dataset.checkKeyword + '’를 넣어 조금 더 길게 써 보세요.';
-        recordLearningAttempt({key:'stage4-literacy-essay-ecosystem',stage:4,stageTitle:'문해력',activity:'서술형',prompt:'생태계 핵심어를 사용해 숲의 생물 관계를 한 문장으로 설명해 보세요.',answerType:'keyword',keyword:checkKeyword.dataset.checkKeyword,correctAnswer:checkKeyword.dataset.checkKeyword,hint:'‘생태계’를 넣고 10자 이상으로 써 보세요.'},value,correct);
-      });
-      const hint = panel.querySelector('[data-detective-hint]');
-      if (hint) hint.addEventListener('click', () => { panel.querySelector('.demo-status').textContent = '단서: “햇빛과 물을 받아”가 원인을 알려 줘요.'; });
-      const retry = panel.querySelector('[data-detective-retry]');
-      if (retry) retry.addEventListener('click', () => { panel.querySelector('.demo-status').textContent = '✓ 오답을 다시 풀어 보충 학습을 마쳤어요.'; });
+
     }
 
     function renderStageFeature(stage, key) {
       const panel = document.querySelector('[data-feature-panel="' + stage + '"]');
       if (!panel || !featureCatalog[stage] || !featureCatalog[stage][key]) return;
+      panel.querySelector('[data-hangul-lesson]')?._cleanupTrace?.();
+      panel.querySelector('[data-hangul-lesson]')?._lessonMotionObserver?.disconnect();
+      panel._featureCleanup?.();
       if (panel._cameraStream) { panel._cameraStream.getTracks().forEach(track => track.stop()); panel._cameraStream = null; }
       panel.innerHTML = featureCatalog[stage][key]();
       document.querySelectorAll('[data-stage-feature="' + stage + '"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.key === key)));
@@ -2703,4 +3082,3 @@
   </script>
 </body>
 </html>
-

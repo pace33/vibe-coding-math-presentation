@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="특수교육대상학생의 한글 해득과 통합학급 교과 참여를 잇는 에이두 한글 강의자료">
   <meta name="theme-color" content="#14213d">
-  <meta name="aiedu-release" content="20261007-camera-layout-v1">
+  <meta name="aiedu-release" content="20261007-presenter-v1">
   <title>에이두 한글 | 교과는 함께, 문해 수준은 맞춤으로</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Ccircle cx='17' cy='32' r='8' fill='white'/%3E%3Ccircle cx='47' cy='32' r='8' fill='white'/%3E%3Cpath d='M25 32h14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -808,6 +808,7 @@
     @media(max-width:900px){.stage-grid{grid-template-columns:1fr;}.feature-scene{max-width:650px;margin:auto;}.stage-shot{min-height:0;}.trace-cell{height:250px;}}
     @media(max-width:480px){.trace-grid{grid-template-columns:1fr!important;}.trace-cell{height:210px;}.content-provenance{font-size:.72rem;gap:6px 10px;padding:12px;}.lesson-progress button{padding:7px 8px;}.trace-word-heading{flex-wrap:wrap;}.curricular-word strong{font-size:1.7rem;}}
   </style>
+  <link rel="stylesheet" href="presenter.css?v=20261007-1">
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -1123,7 +1124,7 @@
       </div>
     </section>
 
-    <section class="takeaway" aria-labelledby="takeaway-title">
+    <section class="takeaway" id="takeaway" aria-labelledby="takeaway-title">
       <div class="takeaway-inner">
         <small>강의 핵심 한 문장</small>
         <h2 id="takeaway-title">한글 해득 학습과<br>교과 활동을 연결합니다.</h2>
@@ -1149,6 +1150,7 @@
     const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
 
     function updateProgress() {
+      if (document.body.classList.contains('presenting')) return;
       const max = document.documentElement.scrollHeight - innerHeight;
       progressBar.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
       let current = '';
@@ -1166,6 +1168,7 @@
     navLinks.forEach(link => link.addEventListener('click', () => {
       nav.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', '메뉴 열기');
     }));
 
     const tabs = [...document.querySelectorAll('[role="tab"]')];
@@ -2169,6 +2172,7 @@
       const root = document.querySelector('#review-records');
       if (!root) return;
       const currentRecords = studentRecords.filter(item => item.studentName === selectedStudentName);
+      dispatchEvent(new CustomEvent('aiedu:reviewview', {detail:{view:reviewView}}));
       const correctCount = currentRecords.filter(item => item.isCorrect).length;
       const stageTitle = {2:'한글 해득',3:'교과 맞춤쓰기',4:'문해력'}[reviewStage];
       root.querySelector('[data-review-stage-badge]').textContent = reviewStage + '단계 · ' + stageTitle;
@@ -2214,7 +2218,7 @@
         renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
       }));
       root.querySelector('[data-review-switch]').addEventListener('click',() => {
-        if (reviewView !== 'review') { document.querySelector('#stages').scrollIntoView({behavior:'smooth'}); return; }
+        if (reviewView !== 'review') { navigateLectureSection('stages'); return; }
         reviewView = 'records'; recordDataSource = 'original'; renderLearningSupport(); root.querySelector('[data-review-scroll]').scrollTop = 0;
       });
       root.querySelectorAll('[data-review-view]').forEach(button => button.addEventListener('click',() => {
@@ -2229,7 +2233,7 @@
         const captures = root.querySelector('[data-record-captures]');
         if (captures) { captures.open = true; captures.scrollIntoView({behavior:'smooth',block:'nearest'}); }
       });
-      root.querySelectorAll('[data-review-home]').forEach(button => button.addEventListener('click',() => document.querySelector('#stages').scrollIntoView({behavior:'smooth'})));
+      root.querySelectorAll('[data-review-home]').forEach(button => button.addEventListener('click',() => navigateLectureSection('stages')));
       root.querySelector('[data-review-menu-toggle]').addEventListener('click',event => {
         const menu = root.querySelector('[data-review-menu]'); menu.hidden = !menu.hidden;
         event.currentTarget.setAttribute('aria-expanded',String(!menu.hidden));
@@ -3071,6 +3075,7 @@
           },'image/jpeg',.92);
         });
         window.addEventListener('pagehide',stopCamera);
+        panel._pauseCamera = stopCamera;
         panel._featureCleanup = () => {
           disposed = true;
           recognitionRequest++;
@@ -3149,6 +3154,7 @@
       panel.querySelector('[data-hangul-lesson]')?._cleanupTrace?.();
       panel.querySelector('[data-hangul-lesson]')?._lessonMotionObserver?.disconnect();
       panel._featureCleanup?.();
+      panel._pauseCamera = null;
       if (panel._cameraStream) { panel._cameraStream.getTracks().forEach(track => track.stop()); panel._cameraStream = null; }
       panel.innerHTML = featureCatalog[stage][key]();
       document.querySelectorAll('[data-stage-feature="' + stage + '"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.key === key)));
@@ -3161,10 +3167,29 @@
     renderStageFeature('curriculum','photo');
     renderStageFeature('literacy','choice');
 
+    function navigateLectureSection(id) {
+      if (window.AieduPresenter?.enabled) window.AieduPresenter.goTo(id);
+      else document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+    }
+    window.AieduLecture = {
+      showReview(view) {
+        if (reviewView === view) return;
+        reviewView = view;
+        renderLearningSupport();
+        document.querySelector('[data-review-scroll]').scrollTop = 0;
+      },
+      pauseMedia() {
+        stopAieduAudio();
+        document.querySelector('[data-feature-panel="curriculum"]')?._pauseCamera?.();
+      },
+      updateScrollProgress:updateProgress
+    };
+
     const chart = document.querySelector('#scoreChart');
     new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) chart.classList.add('in-view');
     }, { threshold: .35 }).observe(chart);
   </script>
+  <script src="presenter.js?v=20261007-1"></script>
 </body>
 </html>

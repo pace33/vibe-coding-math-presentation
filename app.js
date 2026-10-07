@@ -96,7 +96,7 @@
     if (s.type === 'thanks') return `<div class="thanks-slide" role="group" aria-label="연수 마무리"><h2>${escape(s.title)}</h2></div>`;
     if(s.type==='cover' && window.TrainingVisuals?.cover) return window.TrainingVisuals.cover(s);
     if (s.type === 'cover') return `<div class="cover"><h1>${escape(s.title)}</h1><p class="lead">${escape(s.lead)}</p></div>`;
-    return `<div class="${s.type === 'section' ? 'section-block' : s.type === 'statement' ? 'statement' : s.type === 'video-gallery' ? 'video-gallery-slide' : ''}"><h2>${escape(s.title)}</h2>${s.lead && s.type !== 'statement' ? `<p class="lead">${escape(s.lead)}</p>` : ''}${achievementStandard(s)}<div class="slide-body">${slideBody(s,print)}</div></div>`;
+    return `<div class="${s.type === 'section' ? 'section-block' : s.type === 'statement' ? 'statement' : s.type === 'video-gallery' ? 'video-gallery-slide' : ''} slide-${escape(s.id || 'default')}"><h2>${escape(s.title)}</h2>${s.lead && s.type !== 'statement' ? `<p class="lead">${escape(s.lead)}</p>` : ''}${achievementStandard(s)}<div class="slide-body">${slideBody(s,print)}</div></div>`;
   }
   function imageFallback(root) { root.querySelectorAll('[data-sprite]').forEach(img => { img.addEventListener('error', () => { const replacement=document.createElement('span'); replacement.className='sprite-fallback'; replacement.textContent='★'; replacement.setAttribute('role','img'); replacement.setAttribute('aria-label',img.alt || '친구'); img.replaceWith(replacement); }, {once:true}); }); }
   function render() {

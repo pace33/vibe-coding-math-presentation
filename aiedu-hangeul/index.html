@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="특수교육대상학생의 한글 해득과 통합학급 교과 참여를 잇는 에이두 한글 강의자료">
   <meta name="theme-color" content="#14213d">
-  <meta name="aiedu-release" content="20261007-presenter-v3">
+  <meta name="aiedu-release" content="20261007-presenter-v4">
   <title>에이두 한글 | 교과는 함께, 문해 수준은 맞춤으로</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Ccircle cx='17' cy='32' r='8' fill='white'/%3E%3Ccircle cx='47' cy='32' r='8' fill='white'/%3E%3Cpath d='M25 32h14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -1012,15 +1012,15 @@
             <button class="btn-outline" data-review-switch type="button">나의 기록</button>
           </header>
           <nav class="korean-learning-stage-tabs" aria-label="복습 단계 선택">
-            <button data-review-stage="2" type="button" aria-pressed="true" class="is-active">2단계 한글 해득</button>
-            <button data-review-stage="3" type="button" aria-pressed="false">3단계 교과 맞춤쓰기</button>
-            <button data-review-stage="4" type="button" aria-pressed="false">4단계 문해력</button>
+            <button data-review-stage="2" type="button" aria-pressed="true" aria-controls="review-stage-content" class="is-active">2단계 한글 해득</button>
+            <button data-review-stage="3" type="button" aria-pressed="false" aria-controls="review-stage-content">3단계 교과 맞춤쓰기</button>
+            <button data-review-stage="4" type="button" aria-pressed="false" aria-controls="review-stage-content">4단계 문해력</button>
           </nav>
           <div class="record-source-bar" data-record-sourcebar hidden>
             <div aria-label="기록 데이터 선택"><button data-record-source="original" type="button" class="is-active" aria-pressed="true">원본 학생 테스트 기록</button><button data-record-source="teacher" type="button" aria-pressed="false">교사 테스트 기록</button><button data-record-source="local" type="button" aria-pressed="false">이 기기 체험 기록</button><button data-record-capture type="button">원본 화면 캡처</button></div>
             <span class="record-source-meta" data-record-source-meta>2026.10.02 확인 · 읽기 전용</span>
           </div>
-          <div class="korean-learning-scroll" data-review-scroll><div data-review-content></div></div>
+          <div class="korean-learning-scroll" data-review-scroll><div id="review-stage-content" data-review-content aria-live="polite"></div></div>
           <footer class="review-hud" aria-label="학생 메뉴">
             <div class="review-exp"><b data-review-exp>0%</b><small>EXP</small><span class="review-level" data-review-level>LV.1</span></div>
             <div class="review-profile"><div><strong data-review-student>학생 1</strong><small data-review-role>체험</small></div><p>에이두 포인트 <b data-review-points>0P</b></p><p><span data-review-token-label>다시 연습</span> <b data-review-mistake-count>0개</b></p></div>
@@ -3172,7 +3172,14 @@
     }
     window.AieduLecture = {
       showReview(view) {
-        if (reviewView === view) return;
+        if (view === 'records' && (reviewView !== 'records' || (recordDataSource === 'local' && !studentRecords.length))) {
+          recordDataSource = 'original';
+        }
+        if (reviewView === view) {
+          renderLearningSupport();
+          document.querySelector('[data-review-scroll]').scrollTop = 0;
+          return;
+        }
         reviewView = view;
         renderLearningSupport();
         document.querySelector('[data-review-scroll]').scrollTop = 0;

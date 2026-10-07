@@ -389,7 +389,7 @@ window.TRAINING = {
       "part": "theory",
       "type": "steps",
       "visual": "text-only",
-      "lead": "완성된 웹앱에 AI 기능을 추가해줘",
+      "lead": "“완성된 웹앱에 AI 기능을 추가해줘”",
       "items": [
         {
           "heading": "AI 힌트 버튼",

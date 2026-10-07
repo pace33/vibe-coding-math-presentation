@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="특수교육대상학생의 한글 해득과 통합학급 교과 참여를 잇는 에이두 한글 강의자료">
   <meta name="theme-color" content="#14213d">
-  <meta name="aiedu-release" content="20261006-fidelity-v1">
+  <meta name="aiedu-release" content="20261007-camera-layout-v1">
   <title>에이두 한글 | 교과는 함께, 문해 수준은 맞춤으로</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Ccircle cx='17' cy='32' r='8' fill='white'/%3E%3Ccircle cx='47' cy='32' r='8' fill='white'/%3E%3Cpath d='M25 32h14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -262,7 +262,20 @@
     .lesson-nav button { padding:7px 9px; border:2px solid #47a73e; border-radius:999px; color:#34842e; background:#fff; font:inherit; font-size:.65rem; font-weight:950; cursor:pointer; }
     .lesson-nav button:last-child { color:#fff; border-color:#47a73e; background:#47a73e; }
     .lesson-nav button:disabled { opacity:.4; cursor:not-allowed; }
-    .scan-camera { width:100%; height:112px; object-fit:cover; border:1px solid #d9e0e8; border-radius:11px; background:#25354d; }
+    .scan-demo .scan-stage { height:auto; grid-template-columns:minmax(0,1fr); overflow:visible; gap:10px; }
+    .scan-media { position:relative; display:grid; place-items:center; width:100%; min-width:0; aspect-ratio:4/3; overflow:hidden; border:1px solid #d9e0e8; border-radius:12px; background:#f7fafc; }
+    .scan-demo .scan-paper { display:grid; place-items:center; width:100%; height:100%; padding:16px; border:0; border-radius:0; text-align:center; }
+    .scan-demo .scan-paper.is-photo { padding:0; }
+    .scan-demo .scan-paper img { display:block; width:100%; height:100%; object-fit:contain; object-position:center; }
+    .scan-camera { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; object-position:center; background:#182735; }
+    .scan-frame { position:absolute; inset:8%; border:2px dashed rgba(255,255,255,.85); border-radius:8px; pointer-events:none; }
+    .scan-demo [hidden] { display:none!important; }
+    .scan-demo .ocr-output { min-height:64px; align-items:center; }
+    .scan-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; margin-top:10px; }
+    .scan-controls button { min-width:0; min-height:42px; padding:9px 5px; white-space:normal; }
+    .scan-controls [data-capture-photo] { color:#fff; background:#e9691c; }
+    .scan-controls button:disabled { opacity:.5; cursor:not-allowed; }
+    .scan-demo > .demo-status { display:block; margin:10px 0 7px; line-height:1.6; }
     .ocr-output.is-empty { color:#7b8797; font-size:.65rem; text-align:center; }
     .ocr-output button { padding:6px 9px; border:1px solid #ffd6b5; border-radius:999px; color:#9f4818; background:#fff; font:inherit; font-size:.7rem; font-weight:850; cursor:pointer; }
     .ocr-output button.is-saved { color:#fff; background:#43a44c; border-color:#43a44c; }
@@ -2531,7 +2544,26 @@
         finalword: () => lessonMarkup('finalword')
       },
       curriculum: {
-        photo: () => '<div class="motion-demo scan-demo"><div class="demo-top"><b>교과 자료 촬영·인식</b><small>OCR 후보를 확인하고 체험 저장소에 넣어요</small></div><div class="scan-stage"><div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div><div class="ocr-output is-empty" data-ocr-output>OCR 후보 낱말이 여기에 나타나요. 직접 확인 후 선택해요.</div></div><video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video><canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden><div class="demo-actions"><span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요. 원본 AI 핵심어 선정과는 다릅니다.</span><button class="demo-action secondary" data-open-camera type="button">카메라 켜기</button><button class="demo-action secondary" data-capture-photo type="button" disabled>촬영</button><button class="demo-action secondary" data-open-photo type="button">사진 선택</button></div><div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 OCR·AI 핵심어 선정 ↗</a></div>',
+        photo: () => `<div class="motion-demo scan-demo">
+          <div class="demo-top"><b>교과 자료 촬영·인식</b><small>문서 전체가 보이도록 맞춰 주세요</small></div>
+          <div class="scan-stage">
+            <div class="scan-media">
+              <div class="scan-paper" data-dynamic-preview>교과서나 활동지 사진을<br>촬영하거나 선택해 주세요.</div>
+              <video class="scan-camera" data-camera-preview playsinline autoplay muted hidden aria-label="교과 자료 촬영 화면"></video>
+              <div class="scan-frame" data-camera-frame hidden aria-hidden="true"></div>
+            </div>
+            <div class="ocr-output is-empty" data-ocr-output>촬영하면 인식한 낱말이 여기에 나타나요.</div>
+          </div>
+          <canvas data-capture-canvas hidden></canvas><input data-dynamic-file type="file" accept="image/*" capture="environment" hidden>
+          <div class="scan-controls" aria-label="사진 촬영 도구">
+            <button class="demo-action secondary" data-open-camera type="button" aria-pressed="false">카메라 켜기</button>
+            <button class="demo-action" data-capture-photo type="button" disabled>📸 촬영</button>
+            <button class="demo-action secondary" data-open-photo type="button">사진 선택</button>
+          </div>
+          <span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요. 원본 AI 핵심어 선정과는 다릅니다.</span>
+          <div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div>
+          <a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 OCR·AI 핵심어 선정 ↗</a>
+        </div>`,
         write: () => curricularWritingMarkup('생태계'),
         meaning: () => '<article class="motion-demo shared-word-card-demo" aria-label="에이두 한글 생태계 단어 카드"><header class="shared-word-card-head"><small>SHARED WORD CARDS</small><h3>생태계</h3><p>그림과 설명으로 단어의 뜻을 알아봐요.</p></header><div class="shared-word-card-body"><div class="shared-word-card-art" role="img" aria-label="초록 새싹 옷을 입은 아이가 물고기와 식물이 있는 생태계 어항을 들고 있어요"></div><div class="shared-word-card-copy"><span class="feature-badge">단어 카드</span><h4 data-card-word>생태계</h4><p class="shared-word-card-definition" data-card-definition role="button" tabindex="0">생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.</p><small class="shared-word-card-hint">문장을 눌러 들어보세요</small><div class="shared-word-card-actions"><button data-speak-meaning type="button">🔊 설명 듣기</button><button data-back-to-bank type="button">← 단어 카드 저장소</button></div></div></div></article>',
         bank: () => wordBankMarkup()
@@ -2904,16 +2936,27 @@
         const output = panel.querySelector('[data-ocr-output]');
         const status = panel.querySelector('.demo-status');
         const video = panel.querySelector('[data-camera-preview]');
+        const frame = panel.querySelector('[data-camera-frame]');
         const capture = panel.querySelector('[data-capture-photo]');
         const captureCanvas = panel.querySelector('[data-capture-canvas]');
         const savedCards = panel.querySelector('[data-word-cards]');
         renderSavedWordChips(savedCards);
         let imageUrl = '';
+        let disposed = false;
+        let cameraRequest = 0;
+        let recognitionRequest = 0;
         const stopCamera = () => {
-          if (panel._cameraStream) { panel._cameraStream.getTracks().forEach(track => track.stop()); panel._cameraStream = null; }
+          cameraRequest++;
+          const stream = panel._cameraStream;
+          panel._cameraStream = null;
+          stream?.getTracks().forEach(track => track.stop());
           video.srcObject = null;
           video.hidden = true;
+          frame.hidden = true;
+          preview.hidden = false;
           capture.disabled = true;
+          cameraButton.disabled = false;
+          cameraButton.setAttribute('aria-pressed','false');
           cameraButton.textContent = '카메라 켜기';
         };
         const showRecognizedWords = (words) => {
@@ -2934,9 +2977,12 @@
           });
         };
         const recognizeFile = async file => {
-          if (!file) return;
+          if (!file || disposed) return;
+          const request = ++recognitionRequest;
           if (imageUrl) URL.revokeObjectURL(imageUrl);
           imageUrl = URL.createObjectURL(file);
+          preview.hidden = false;
+          preview.classList.add('is-photo');
           preview.replaceChildren();
           const image = document.createElement('img');
           image.src = imageUrl;
@@ -2956,12 +3002,15 @@
                 document.head.append(script);
               });
             }
+            if (disposed || request !== recognitionRequest) return;
             const result = await window.Tesseract.recognize(file,'kor+eng');
+            if (disposed || request !== recognitionRequest) return;
             const text = result?.data?.text || '';
             const words = [...new Set(text.match(/[가-힣]{2,}/g) || [])].slice(0,8);
             showRecognizedWords(words);
             status.textContent = words.length ? 'OCR 후보예요. 잘못 읽힌 글자·이름은 제외하고 필요한 단어만 저장하세요.' : '인식된 글자가 없어요. 빛이 고르고 글자가 크게 보이도록 다시 촬영해 주세요.';
           } catch (error) {
+            if (disposed || request !== recognitionRequest) return;
             showRecognizedWords([]);
             status.textContent = error.message || '글자 인식에 실패했어요. 사진을 다시 선택해 주세요.';
           }
@@ -2969,30 +3018,67 @@
         photoButton.addEventListener('click', () => input.click());
         const cameraButton = panel.querySelector('[data-open-camera]');
         input.addEventListener('change', () => {
-          if (input.files && input.files[0]) { stopCamera(); recognizeFile(input.files[0]); }
+          if (input.files && input.files[0]) { const file = input.files[0]; stopCamera(); recognizeFile(file); input.value = ''; }
         });
         cameraButton.addEventListener('click', async () => {
+          if (panel._cameraStream) { stopCamera(); status.textContent = '카메라를 껐어요. 사진 선택으로도 진행할 수 있어요.'; return; }
+          if (cameraButton.disabled || disposed) return;
           if (!navigator.mediaDevices?.getUserMedia) { status.textContent = '이 브라우저에서는 카메라를 사용할 수 없어요. 사진 선택을 이용해 주세요.'; return; }
+          const request = ++cameraRequest;
+          cameraButton.disabled = true;
+          cameraButton.textContent = '카메라 준비 중…';
           try {
-            panel._cameraStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:{ ideal:'environment' } }, audio:false });
-            video.srcObject = panel._cameraStream;
+            const stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:{ ideal:'environment' }, width:{ ideal:1280 }, height:{ ideal:960 } }, audio:false });
+            if (disposed || request !== cameraRequest) { stream.getTracks().forEach(track => track.stop()); return; }
+            panel._cameraStream = stream;
+            video.srcObject = stream;
+            await video.play();
+            if (disposed || request !== cameraRequest) return;
+            recognitionRequest++;
+            preview.hidden = true;
             video.hidden = false;
-            capture.disabled = false;
-            cameraButton.textContent = '카메라 켜짐';
-            status.textContent = '촬영할 교과서나 활동지를 화면에 맞춰 주세요.';
+            frame.hidden = false;
+            capture.disabled = !video.videoWidth;
+            cameraButton.disabled = false;
+            cameraButton.setAttribute('aria-pressed','true');
+            cameraButton.textContent = '카메라 끄기';
+            output.classList.add('is-empty');
+            output.textContent = '촬영하면 인식한 낱말이 여기에 나타나요.';
+            status.textContent = '문서 전체가 보이도록 맞춘 뒤 촬영을 눌러 주세요. 화면은 잘리지 않고 촬영됩니다.';
+            stream.getVideoTracks().forEach(track => track.addEventListener('ended', () => {
+              if (disposed || panel._cameraStream !== stream) return;
+              stopCamera();
+              status.textContent = '카메라 연결이 종료됐어요. 다시 켜거나 사진 선택을 이용해 주세요.';
+            }, { once:true }));
           } catch (error) {
+            if (disposed || request !== cameraRequest) return;
+            stopCamera();
             status.textContent = '카메라 권한을 확인해 주세요. 사진 선택으로도 진행할 수 있어요.';
           }
         });
+        const cameraReady = () => { if (panel._cameraStream && !video.hidden) capture.disabled = !video.videoWidth; };
+        video.addEventListener('loadeddata', cameraReady);
         capture.addEventListener('click', () => {
           if (!video.videoWidth) { status.textContent = '카메라 화면이 준비될 때까지 기다려 주세요.'; return; }
           captureCanvas.width = video.videoWidth;
           captureCanvas.height = video.videoHeight;
           captureCanvas.getContext('2d').drawImage(video,0,0);
+          stopCamera();
           captureCanvas.toBlob(blob => {
-            if (blob) { const file = new File([blob],'교과자료.jpg',{type:'image/jpeg'}); stopCamera(); recognizeFile(file); }
+            if (disposed) return;
+            if (blob) { const file = new File([blob],'교과자료.jpg',{type:'image/jpeg'}); recognizeFile(file); }
+            else status.textContent = '촬영한 사진을 만들지 못했어요. 다시 촬영해 주세요.';
           },'image/jpeg',.92);
         });
+        window.addEventListener('pagehide',stopCamera);
+        panel._featureCleanup = () => {
+          disposed = true;
+          recognitionRequest++;
+          stopCamera();
+          if (imageUrl) URL.revokeObjectURL(imageUrl);
+          window.removeEventListener('pagehide',stopCamera);
+          video.removeEventListener('loadeddata',cameraReady);
+        };
       }
 
       const speakMeaning = panel.querySelector('[data-speak-meaning]');

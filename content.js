@@ -381,7 +381,7 @@ window.TRAINING = {
       ],
       "notes": "GitHub의 PokeAPI/sprites 저장소에서 sprites/pokemon/other/official-artwork 폴더를 엽니다. 25.png 같은 번호 파일을 선택하고 그림 주소를 Gemini 요청문에 넣습니다. 생성된 웹사이트의 이미지가 정상적으로 표시되는지 확인합니다. 포켓몬 이미지 저작권은 The Pokémon Company에 있습니다. 출처: https://github.com/PokeAPI/sprites 및 https://github.com/PokeAPI/sprites/blob/master/LICENCE.txt",
       "prompt": "pokemonSprite",
-      "promptPreview": "다음 포켓몬 그림을 지금 만든 웹사이트에 넣어 주세요: [그림 주소]. 기존 수학 활동은 그대로 유지해 주세요."
+      "promptPreview": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요.\n몇개인지 맞추기, 덧셈, 뺄셈\n3가지 주제의 수학 활동이 가능하게 하세요"
     },
     {
       "id": "practice-three-ai-features",
@@ -665,7 +665,7 @@ window.TRAINING = {
   "prompts": {
     "starter": "[아이템]으로 [활동]을 연습하는 웹사이트를 만들어 주세요.",
     "revise": "첨부한 화면에서 답 버튼이 작아 누르기 어렵습니다. 버튼과 글씨를 크게 바꿔 주세요.",
-    "pokemonSprite": "다음 포켓몬 그림을 지금 만든 웹사이트에 넣어 주세요: [그림 주소]. 기존 수학 활동은 그대로 유지해 주세요.",
+    "pokemonSprite": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요.\n몇개인지 맞추기, 덧셈, 뺄셈\n3가지 주제의 수학 활동이 가능하게 하세요",
     "aiFeatures": "지금 만든 수학 앱에 다음 AI 기능을 한 번에 하나씩 추가해 주세요.\n\n1. AI 힌트 버튼: 정답을 바로 말하지 말고 초등학교 1학년 눈높이의 친절한 단서를 주세요.\n2. AI 음성 설명(TTS): AI 힌트와 응원 메시지를 실제 목소리로 읽어 주세요.\n3. 나만의 강아지 그리기: 학생이 얻은 뼈다귀 보상을 사용해 이미지 생성 AI로 강아지 캐릭터를 만들고 앱에 적용해 주세요.\n\n기존 수학 활동은 그대로 유지하고, 기능을 하나 추가할 때마다 먼저 작동 여부를 확인하게 해 주세요. API 키나 비밀정보는 코드에 직접 넣지 마세요.",
     "repair": "[어느 활동]에서 [무엇을 눌렀는지] 하니 [실제로 나온 결과]가 나타납니다. [원하는 결과]가 되도록 고쳐 주세요. 선택한 활동은 유지해 주세요."
   },

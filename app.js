@@ -74,7 +74,7 @@
     const entries = s.items || [];
     const visual = window.TrainingVisuals?.render(s, slides.indexOf(s), print);
     if (typeof visual === 'string') return visual;
-    if (s.type === 'agenda') return `<div class="steps-list">${entries.map((x, i) => `<section class="step"><b>0${i + 1}</b><h3>${escape(x.heading)}</h3><p>${escape(x.body)}</p></section>`).join('')}</div><p class="fine">권장 운영안: 1부 30분 + 2부 90분. 실제 연수 시간과 실습 진행에 따라 조정합니다.</p>`;
+    if (s.type === 'agenda') return `<div class="steps-list">${entries.map((x, i) => `<section class="step"><b>0${i + 1}</b><h3>${escape(x.heading)}</h3><p>${escape(x.body)}</p></section>`).join('')}</div><p class="fine">실제 연수 시간과 실습 진행에 따라 조정합니다.</p>`;
     if (s.type === 'steps' || s.type === 'checklist') return `<div class="steps-list">${entries.map((x, i) => `<section class="step"><b>${String(i + 1).padStart(2, '0')}</b><h3>${escape(x.heading.replace(/^\d+\s*·\s*/,''))}</h3><p>${escape(x.body)}</p></section>`).join('')}</div>`;
     if (s.type === 'prompt') return `<div class="prompt-layout"><div class="prompt-preview"><span>Gemini에 이렇게 요청해요</span><p>${escape(s.promptPreview || s.lead)}</p><button class="primary" data-prompt="${s.prompt || 'starter'}">요청문 열기 / 복사</button></div><div>${items(entries.slice(0,3))}<div class="actions">${action('Gemini 열기', 'https://gemini.google.com/', 'secondary')}</div></div></div>`;
     if (s.type === 'worksheet') {
@@ -108,8 +108,7 @@
     $('counter').textContent=`${String(current+1).padStart(2,'0')} / ${slides.length}`;
     $('prev').disabled=current===0; $('next').disabled=current===slides.length-1;
     $('progress').style.width=`${(current+1)/slides.length*100}%`;
-    $('part1').setAttribute('aria-pressed',s.part!=='practice'); $('part2').setAttribute('aria-pressed',s.part==='practice');
-    $('notes-text').textContent=s.notes || ''; $('notes-speaker').textContent=s.part==='practice' ? '2부 이인호 · 발표 메모' : '1부 이진구 · 발표 메모';
+    $('notes-text').textContent=s.notes || ''; $('notes-speaker').textContent='발표 메모';
     $('toc').querySelectorAll('button').forEach((button,i)=>{button.classList.toggle('current',i===current); if(i===current)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
     document.title=`${current+1}. ${s.title.replace(/\n/g,' ')} · 디지털 활용 교육 연수`;
     window.scrollTo({top:0,behavior:'instant'});
@@ -128,14 +127,13 @@
   async function copy(text){if(navigator.clipboard&&window.isSecureContext){try{await navigator.clipboard.writeText(text);return true;}catch{}}const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';const host=document.querySelector('dialog[open]')||document.body;host.append(t);t.select();const success=document.execCommand('copy');t.remove();return success;}
   function download(text,name,type='text/plain;charset=utf-8'){const url=URL.createObjectURL(new Blob(['\uFEFF',text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function plan(){return `나의 수학 수업 설계 카드\n2026.09.16 충주 혜성학교\n\n학생이 선택한 소재: ${worksheet.preference||'________'}\n학습 목표: ${worksheet.goal||'________'}\n응답 방법: ${worksheet.response||'________'}\n피드백: ${worksheet.feedback||'________'}\n관찰할 행동: ${worksheet.observe||'________'}\n실물 활동: ${worksheet.transfer||'________'}`;}
-  function handout(){return `# 충주 혜성학교 AI 연수\n\n2026.09.16\n1부 이진구 · 사용법과 시연\n2부 이인호 · 함께 만드는 실습\n권장 운영안 30분 + 90분, 실제 시간에 맞춰 조정\n\n## 발표 메모\n\n${slides.map((s,i)=>`### ${i+1}. ${s.title.replace(/\n/g,' ')}\n\n${s.lead||''}\n\n${(s.items||[]).map(x=>`- ${x.heading}: ${x.body}`).join('\n')}\n\n발표 메모: ${s.notes||''}`).join('\n\n')}\n\n## 실습 프롬프트\n\n${Object.entries(prompts).map(([key,value])=>`### ${labels[key]||key}\n\n${value}`).join('\n\n')}\n\n## 자료와 출처\n\n${sources.map(x=>`- ${x.title}: ${x.url}`).join('\n')}\n\nPokeAPI sprites의 이미지 저작권은 The Pokémon Company에 있습니다. 공개 배포 전 이미지 이용 범위를 확인하고 필요하면 직접 만든 그림으로 교체하세요.\n`;}
+  function handout(){return `# 디지털 활용 교육 연수\n\n원남초등학교 특수교사 이진구\n\n## 발표 메모\n\n${slides.map((s,i)=>`### ${i+1}. ${s.title.replace(/\n/g,' ')}\n\n${s.lead||''}\n\n${(s.items||[]).map(x=>`- ${x.heading}: ${x.body}`).join('\n')}\n\n발표 메모: ${s.notes||''}`).join('\n\n')}\n\n## 실습 프롬프트\n\n${Object.entries(prompts).map(([key,value])=>`### ${labels[key]||key}\n\n${value}`).join('\n\n')}\n\n## 자료와 출처\n\n${sources.map(x=>`- ${x.title}: ${x.url}`).join('\n')}\n\nPokeAPI sprites의 이미지 저작권은 The Pokémon Company에 있습니다. 공개 배포 전 이미지 이용 범위를 확인하고 필요하면 직접 만든 그림으로 교체하세요.\n`;}
   $('toc').innerHTML=slides.map((s,i)=>`<button data-slide="${i}"><span>${String(i+1).padStart(2,'0')}</span>${escape(s.title.replace(/\n/g,' '))}</button>`).join('');
   $('toc').addEventListener('click',e=>{const b=e.target.closest('[data-slide]');if(b){go(Number(b.dataset.slide));$('menu').close();}});
   $('open-menu').onclick=()=>$('menu').showModal();
   $('open-gallery').onclick=()=>{selectedPrompt='starter';$('prompt-title').textContent=labels.starter;$('prompt-text').value=prompts.starter;$('copy-status').textContent='';$('prompt-dialog').showModal();};
   document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
   $('prev').onclick=()=>go(current-1);$('next').onclick=()=>go(current+1);
-  $('part1').onclick=()=>go(Math.max(1,slides.findIndex(s=>s.part==='theory')));$('part2').onclick=()=>go(slides.findIndex(s=>s.part==='practice'));
   $('notes-toggle').onclick=()=>{ $('notes').hidden=!$('notes').hidden;$('notes-toggle').setAttribute('aria-expanded',!$('notes').hidden); };
   $('close-notes').onclick=()=>{$('notes').hidden=true;$('notes-toggle').setAttribute('aria-expanded','false');};
   $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{notify('이 브라우저에서는 전체 화면을 지원하지 않습니다.');}};

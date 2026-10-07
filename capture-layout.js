@@ -44,7 +44,7 @@
   const pokemon = (id,name) => `<img src="assets/pokemon/${id}-art.png" alt="${escape(name)}" data-sprite decoding="sync">`;
   function cover(slide) {
     const cells=[[25,'피카츄'],'＋',[133,'이브이'],'1 2 3',[7,'꼬부기'],'−',[1,'이상해씨'],'＝',[4,'파이리']];
-    return `<div class="cap-cover intro-cover"><div class="cap-cover-copy"><h1>${escape(slide.title)}</h1><div class="cap-instructors"><p><strong>1부 이진구</strong><span>도입과 사용법 시연</span></p><p><strong>2부 이인호</strong><span>함께 만드는 실습</span></p></div></div><div class="intro-mosaic" role="img" aria-label="피카츄, 이브이, 꼬부기, 이상해씨, 파이리와 수학 기호">${cells.map((x,i)=>`<div class="mosaic-cell cell-${i}">${Array.isArray(x)?pokemon(...x):`<span aria-hidden="true">${x}</span>`}</div>`).join('')}</div></div>`;
+    return `<div class="cap-cover intro-cover"><div class="cap-cover-copy"><h1>${escape(slide.title)}</h1><div class="cap-instructors"><p><strong>원남초등학교 특수교사 이진구</strong></p></div></div><div class="intro-mosaic" role="img" aria-label="피카츄, 이브이, 꼬부기, 이상해씨, 파이리와 수학 기호">${cells.map((x,i)=>`<div class="mosaic-cell cell-${i}">${Array.isArray(x)?pokemon(...x):`<span aria-hidden="true">${x}</span>`}</div>`).join('')}</div></div>`;
   }
 
   function intro(slide) {

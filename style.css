@@ -28,4 +28,15 @@ dialog{border:1px solid var(--line);border-radius:12px;padding:30px;width:min(95
 @media(max-width:560px){.video-thumbnails{grid-template-columns:1fr 1fr}.video-controls{align-items:stretch}.video-segments{order:5;width:100%;border-left:0;padding-left:0}.video-segments button{flex:1}.video-now strong{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media print{.achievement-standard{box-shadow:none;print-color-adjust:exact}.achievement-year{print-color-adjust:exact}}
+
+/* Keep slide navigation centered after removing the two-part presenter switch. */
+@media screen{
+  .toolbar{display:grid;grid-template-columns:1fr auto 1fr}
+  .paging{grid-column:2;justify-self:center}
+  .utilities{grid-column:3;justify-self:end}
+}
+@media screen and (max-width:700px){
+  .toolbar{grid-template-columns:1fr}
+  .paging,.utilities{grid-column:1;justify-self:center}
+}
 @media print{@page{size:A4 landscape;margin:10mm}body{background:white}.topbar,#stage,.toolbar,.progress-track,#notes,dialog,#toast,.skip{display:none!important}#print-slides{display:block}.slide{width:277mm;height:188mm;min-height:0;padding:8mm 7mm;max-width:none;break-after:page;break-inside:avoid;overflow:hidden}.slide:last-child{break-after:auto}.slide h2{font-size:27pt}.slide .lead{font-size:14pt}.slide h3{font-size:18pt!important}.slide p{font-size:13pt!important;line-height:1.6}.slide-body{margin-top:20px}.cover{grid-template-columns:1.2fr .8fr;gap:28px}.cover h1{font-size:43pt}.cover-art{min-height:330px;print-color-adjust:exact}.cover-meta{font-size:12pt}.item{padding-top:15px}.items{gap:24px}.items.four{grid-template-columns:repeat(4,1fr)}.items.two{grid-template-columns:1fr 1fr;gap:30px}.items.four p{font-size:12pt!important}.step{padding:15px 0}.prompt-preview,.section-block{print-color-adjust:exact}.actions{display:none}.slide-end{margin-top:20px;font-size:9pt}.worksheet-form{gap:12px}.worksheet-form input{font-size:12pt;padding:10px}.sources{gap:8px 25px}.source{font-size:14pt}.source small{font-size:9pt}.sprite-line img{width:90px;height:90px}.statement .quote{font-size:26pt}.section-block{padding:10mm}.eyebrow{font-size:10pt;margin-bottom:20px}.fine{font-size:9pt!important}}

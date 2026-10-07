@@ -24,8 +24,8 @@
     const key = slide.prompt;
     if (!key || !window.TRAINING?.prompts?.[key]) return '';
     const text = slide.promptPreview || (key === 'starter' ? window.TRAINING.prompts.starter : '');
-    const label = key === 'starter' ? '실습 요청문 열기 / 복사' : key === 'aiFeatures' ? 'AI 기능 요청문 열기 / 복사' : '수정 요청문 열기 / 복사';
-    return `<div class="cap-prompt">${text ? `<blockquote>${escape(text)}</blockquote>` : ''}<button class="primary" data-prompt="${escape(key)}">${label}</button></div>`;
+    const label = key === 'starter' ? '실습 요청문 열기 / 복사' : key === 'pokemonSprite' ? '그림 적용 요청문 열기 / 복사' : key === 'aiFeatures' ? 'AI 기능 요청문 열기 / 복사' : '수정 요청문 열기 / 복사';
+    return `<div class="cap-prompt${key === 'pokemonSprite' ? ' cap-prompt-field' : ''}">${text ? `<blockquote>${escape(text)}</blockquote>` : ''}<button class="primary" data-prompt="${escape(key)}">${label}</button></div>`;
   }
 
   const icons = {

@@ -95,6 +95,10 @@
 .cap-with-prompt .cap-prompt blockquote{padding-left:0}
 .source>span:first-child{flex:1}
 
+/* 실습 2의 주소 교체 요청문은 화면에서도 한 칸으로 구분합니다. */
+.cap-prompt-field{margin-top:14px}
+.cap-text-only .cap-prompt-field blockquote{border:1px solid var(--line);border-radius:10px;background:#fffcf6;padding:10px 14px;font-size:22px;line-height:1.55;margin-bottom:10px}
+
 /* Presentation mode contains only the slide and the two navigation arrows. */
 @media screen{
   :root:fullscreen .topbar,:root:fullscreen .part-switch,:root:fullscreen .utilities,

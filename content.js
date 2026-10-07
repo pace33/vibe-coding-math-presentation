@@ -605,28 +605,6 @@ window.TRAINING = {
       "art": []
     },
     {
-      "id": "practice-request",
-      "title": "실습 1 · 요청문 보내기",
-      "part": "practice",
-      "type": "steps",
-      "visual": "text-only",
-      "lead": "그대로 복사해서 붙여넣고 전송합니다",
-      "items": [
-        {
-          "heading": "요청문 입력",
-          "body": "아래 요청문을 Gemini에 붙여넣고 전송합니다."
-        },
-        {
-          "heading": "생성 완료 기다리기",
-          "body": "웹사이트 화면이 나타날 때까지 기다립니다."
-        }
-      ],
-      "notes": "한 줄 요청문에서 대괄호 안의 학생이 좋아하는 아이템과 교사가 정한 수학 활동을 바꿉니다. 활동은 수 세기, 합이 10이 되는 두 수, 가르기와 모으기처럼 교과서 용어로 입력합니다. Canvas가 선택된 Gemini 입력창에 붙여넣고 전송합니다. 결과가 나오면 선택한 활동이 잘 작동하는지 확인합니다. 요청문은 화면 상단의 첫 요청문 또는 이 슬라이드에서 열 수 있습니다.",
-      "prompt": "starter",
-      "art": [],
-      "promptPreview": "[학생이 좋아하는 아이템]으로 [수 세기 / 합이 10이 되는 두 수 / 가르기와 모으기]를 연습하는 웹사이트를 만들어 주세요."
-    },
-    {
       "id": "practice-check",
       "title": "마무리 · 에이두 커뮤니티에 공유하기",
       "part": "practice",
@@ -706,6 +684,5 @@ function moveSlideAfter(id, previousId) {
   const [slide] = trainingSlides.splice(from, 1);
   trainingSlides.splice(trainingSlides.findIndex(item => item.id === previousId) + 1, 0, slide);
 }
-moveSlideAfter('practice-request', 'practice-one-item-activity');
-moveSlideAfter('revise-with-words', 'practice-request');
+moveSlideAfter('revise-with-words', 'practice-one-item-activity');
 

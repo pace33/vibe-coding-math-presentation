@@ -337,7 +337,7 @@ window.TRAINING = {
       "part": "theory",
       "type": "steps",
       "visual": "text-only",
-      "lead": "학생이 좋아하는 소재로 수학 활동을 만듭니다",
+      "lead": "“웹사이트를 만들어줘”",
       "items": [
         {
           "heading": "아이템 고르기(학생이 좋아하는 것)",

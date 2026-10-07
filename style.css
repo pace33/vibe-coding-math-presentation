@@ -43,3 +43,6 @@ dialog{border:1px solid var(--line);border-radius:12px;padding:30px;width:min(95
 
 /* Emphasize the short quoted prompt on Practice 1. */
 .slide-practice-one-item-activity > .lead,.slide-practice-two-pokemon-sprites > .lead{color:var(--orange);font-weight:800;font-size:clamp(24px,2vw,30px);line-height:1.5}
+
+/* Emphasize Practice 3 quoted prompt with color only. */
+.slide-practice-three-ai-features > .lead{color:var(--orange)}

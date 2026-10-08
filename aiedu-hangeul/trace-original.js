@@ -661,8 +661,8 @@ function strokeShapePath(ctx, item, width, height) {
     ctx.stroke();
 }
 
-function drawDrawingTemplate(ctx, width, height) {
-    const template = drawingActiveTargetTemplate || drawingTemplateLibrary.find((item) => item.key === drawingActiveTemplate) || drawingTemplateLibrary[0];
+function drawDrawingTemplate(ctx, width, height, templateOverride) {
+    const template = templateOverride || drawingActiveTargetTemplate || drawingTemplateLibrary.find((item) => item.key === drawingActiveTemplate) || drawingTemplateLibrary[0];
     if (!template?.shapes?.length) return;
     ctx.save();
     ctx.strokeStyle = '#94a3b8';
@@ -682,9 +682,9 @@ function drawDrawingTemplate(ctx, width, height) {
     ctx.restore();
 }
 
-function evaluateDrawingAccuracy(canvas, drawingBrushSize, drawingUserTracePoints) {
+function evaluateDrawingAccuracy(canvas, drawingBrushSize, drawingUserTracePoints, templateOverride) {
     const rect = canvas.getBoundingClientRect();
-    const template = drawingActiveTargetTemplate || drawingTemplateLibrary.find((item) => item.key === drawingActiveTemplate) || drawingTemplateLibrary[0];
+    const template = templateOverride || drawingActiveTargetTemplate || drawingTemplateLibrary.find((item) => item.key === drawingActiveTemplate) || drawingTemplateLibrary[0];
     // 도형 하나를 조금 건드린 것만으로 전체 도안이 통과되지 않도록
     // 브러시가 커져도 판정 반경은 제한하고, 도형 인스턴스별 정확도를 따로 계산한다.
     const threshold = Math.min(22, Math.max(10, drawingBrushSize * 0.9));
@@ -722,7 +722,8 @@ function evaluateDrawingAccuracy(canvas, drawingBrushSize, drawingUserTracePoint
 
 function mountPicture(canvas,options={}){
  const ctx=canvas.getContext('2d'),ink=document.createElement('canvas'),ictx=ink.getContext('2d');
- let paths=[],active=null,width=0,height=0,color=drawingColors[0],size=9,erase=false,tracePoints=[];
+ let paths=[],active=null,width=0,height=0,color=drawingColors[0],size=9,erase=false,tracePoints=[],template=options.template;
+ const currentTemplate=()=>typeof template==='function'?template(width,height):template;
  const point=e=>{const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};};
  const redraw=()=>{
   const r=canvas.getBoundingClientRect();if(!r.width||!r.height)return;
@@ -734,7 +735,7 @@ function mountPicture(canvas,options={}){
    ictx.strokeStyle=path.color;ictx.lineCap='round';ictx.lineJoin='round';ictx.beginPath();
    path.points.forEach((p,i)=>i?ictx.lineTo(p.x*width,p.y*height):ictx.moveTo(p.x*width,p.y*height));ictx.stroke();ictx.restore();
   }
-  ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);drawDrawingTemplate(ctx,width,height);ctx.drawImage(ink,0,0,width,height);
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);drawDrawingTemplate(ctx,width,height,currentTemplate());ctx.drawImage(ink,0,0,width,height);
  };
  canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();canvas.setPointerCapture(e.pointerId);active={color,size,erase,points:[point(e)]};});
  canvas.addEventListener('pointermove',e=>{if(!active)return;active.points.push(point(e));redraw();});
@@ -748,7 +749,7 @@ function mountPicture(canvas,options={}){
  });
  canvas.addEventListener('pointercancel',()=>{active=null;redraw();});
  const observer=new ResizeObserver(redraw);observer.observe(canvas);redraw();
- return {reset(){paths=[];tracePoints=[];active=null;redraw();},setColor(value){color=value;erase=false;},setSize(value){size=value;},setErase(value){erase=value;},evaluate(){return evaluateDrawingAccuracy(canvas,size,tracePoints.map(p=>({x:p.x*width,y:p.y*height})));},destroy(){observer.disconnect();}};
+ return {reset(){paths=[];tracePoints=[];active=null;redraw();},setTemplate(value){template=value;this.reset();},setColor(value){color=value;erase=false;},setSize(value){size=value;},setErase(value){erase=value;},evaluate(){return evaluateDrawingAccuracy(canvas,size,tracePoints.map(p=>({x:p.x*width,y:p.y*height})),currentTemplate());},destroy(){observer.disconnect();}};
 }
 
 const api={mountPicture,drawingColors,drawingBrushSizeMap,mountCurricular,mount,collectTraceStrokeOrder,traceStrokeStartPoint,traceStrokeEndPoint,traceIsNearCurrentStrokeStart,traceDidCompleteStroke};

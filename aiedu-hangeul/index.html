@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="특수교육대상학생의 한글 해득과 통합학급 교과 참여를 잇는 에이두 한글 강의자료">
   <meta name="theme-color" content="#14213d">
-  <meta name="aiedu-release" content="20261007-presenter-v4">
+  <meta name="aiedu-release" content="20261008-completeness-v1">
   <title>에이두 한글 | 교과는 함께, 문해 수준은 맞춤으로</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Ccircle cx='17' cy='32' r='8' fill='white'/%3E%3Ccircle cx='47' cy='32' r='8' fill='white'/%3E%3Cpath d='M25 32h14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -808,7 +808,7 @@
     @media(max-width:900px){.stage-grid{grid-template-columns:1fr;}.feature-scene{max-width:650px;margin:auto;}.stage-shot{min-height:0;}.trace-cell{height:250px;}}
     @media(max-width:480px){.trace-grid{grid-template-columns:1fr!important;}.trace-cell{height:210px;}.content-provenance{font-size:.72rem;gap:6px 10px;padding:12px;}.lesson-progress button{padding:7px 8px;}.trace-word-heading{flex-wrap:wrap;}.curricular-word strong{font-size:1.7rem;}}
   </style>
-  <link rel="stylesheet" href="presenter.css?v=20261007-2">
+  <link rel="stylesheet" href="presenter.css?v=20261008-1">
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -1140,7 +1140,7 @@
     </div>
   </footer>
 
-  <script src="trace-original.js?v=20261006-fidelity"></script>
+  <script src="trace-original.js?v=20261008-completeness"></script>
   <script>
     const progressBar = document.querySelector('#progressBar');
     const navToggle = document.querySelector('.nav-toggle');
@@ -2015,6 +2015,11 @@
     function reviewEscape(value) {
       return String(value ?? '').replace(/[&<>"']/g,ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     }
+    function isKoreanShortAnswerCorrect(answer,expected,acceptedAnswers=[]) {
+      const normalize=value=>String(value||'').normalize('NFC').toLowerCase().replace(/\s+/g,'').trim();
+      const value=normalize(answer);
+      return !!value&&[expected,...acceptedAnswers].some(item=>normalize(item)===value);
+    }
     function stageReviewMistakes(stage = reviewStage) {
       return studentMistakes.filter(item => item.studentName === selectedStudentName && Number(item.stage) === stage && !item.resolvedAt);
     }
@@ -2026,8 +2031,7 @@
       }
       if (stage === 4) return [
         {key:'stage4-literacy-choice-0',stage:4,stageTitle:'문해력',activity:'문해력 탐정단 · 선택형',prompt:'식물이 자라는 데 꼭 필요한 것은 무엇인가요?',passage:'식물은 햇빛과 물을 받아 자라요.',choices:['햇빛과 물','장난감과 공'],correctAnswer:'햇빛과 물',isExample:true},
-        {key:'stage4-literacy-short-sunlight',stage:4,stageTitle:'문해력',activity:'문해력 탐정단 · 단답형',prompt:'식물이 자라는 데 필요한 것은 물과 무엇인가요?',passage:'식물은 햇빛과 물을 받아 자라요.',answerType:'text',correctAnswer:'햇빛',isExample:true},
-        {key:'stage4-literacy-essay-ecosystem',stage:4,stageTitle:'문해력',activity:'문해력 탐정단 · 서술형',prompt:'생태계 핵심어를 사용해 숲의 생물 관계를 한 문장으로 설명해 보세요.',passage:'숲에서는 나무와 여러 생물, 주변 환경이 서로 영향을 주고받아요. 이러한 관계를 생태계라고 해요.',answerType:'keyword',keyword:'생태계',correctAnswer:'생태계',hint:'‘생태계’를 넣고 10자 이상으로 써 보세요.',isExample:true}
+        {key:'stage4-literacy-short-sunlight',stage:4,stageTitle:'문해력',activity:'문해력 체험 · 단답형',prompt:'식물이 자라는 데 필요한 것은 물과 무엇인가요?',passage:'식물은 햇빛과 물을 받아 자라요.',answerType:'text',correctAnswer:'햇빛',isExample:true}
       ];
       return [];
     }
@@ -2202,6 +2206,8 @@
       root.querySelector('[data-review-level]').textContent = 'LV.' + (isOriginalRecord ? 1 : Math.floor(correctCount / 10) + 1);
       root.querySelector('[data-review-note]').textContent = isOriginalRecord ? '원본 '+originalTestRecordSnapshot.accountName+' · '+originalTestRecordSnapshot.capturedOn+' 확인 · 읽기 전용. 원본 계정과 실시간 연동하지 않습니다.' : '강의자료 체험 · 원본 계정과 분리되어 이 브라우저에만 저장됩니다.';
       if (activeReviewSession?.saving && reviewView === 'review') return;
+      root.querySelector('[data-review-content]')._featureCleanup?.();
+      root.querySelector('[data-review-content]')._featureCleanup = null;
       if (reviewView === 'records') renderLectureRecords();
       else if (reviewView === 'mistakes') renderLectureMistakes();
       else if (reviewStage === 2) {
@@ -2250,6 +2256,10 @@
         const count=stageReviewMistakes(3).filter(item=>item.answerType==='trace').length;
         progress.textContent='교과 맞춤쓰기 오답 복습 · 어휘 게임';
         content.innerHTML='<div class="korean-review-activity-grid"><article class="korean-review-activity"><span class="korean-review-activity-icon">✏️</span><h4>교과 맞춤쓰기 오답 복습</h4><p>틀렸던 단어와 문장을 따라 쓴 뒤 소리를 듣고 다시 써요.</p><p class="korean-review-availability">'+(count?'이 기기에서 다시 쓸 오답 '+count+'개':'학생 테스트: 다시 연습할 오답 단어·문장이 없어요.')+'</p><button class="btn-primary" data-local-trace-review type="button"'+(count?'':' disabled')+'>오답 다시 쓰기</button></article><article class="korean-review-activity"><span class="korean-review-activity-icon">🃏</span><h4>어휘 게임</h4><p>내 카드 네 장 중 친구의 카드와 같은 단어를 찾아요. 정답마다 1점을 얻습니다.</p><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 어휘 게임으로 복습하기 ↗</a></article></div><small class="fidelity-note">원본 게임과 이 기기의 따라쓰기 복습은 구분됩니다.</small>';
+        const vocabularyButton=document.createElement('button');
+        vocabularyButton.type='button';vocabularyButton.className='btn-outline';vocabularyButton.textContent='저장한 단어 카드로 체험';vocabularyButton.dataset.localVocabularyReview='';
+        content.querySelectorAll('.korean-review-activity')[1].append(vocabularyButton);
+        vocabularyButton.addEventListener('click',()=>startLectureReview('word-card'));
         content.querySelector('[data-local-trace-review]').addEventListener('click',()=>{
           const queue=stageReviewMistakes(3).filter(item=>item.answerType==='trace').slice(0,10).map(item=>({...item}));
           recordDataSource='local';activeReviewSession={stage:3,student:selectedStudentName,queue,index:0,correctCount:0,wrongCount:0,saving:false};renderLearningSupport();
@@ -2258,6 +2268,10 @@
         progress.textContent='문해력 탐정단에서 글 속 단서를 찾아 복습해요.';
         content.innerHTML='<div class="korean-review-activity-grid is-single"><article class="korean-review-activity"><span class="korean-review-activity-icon">🔎</span><h4>문해력 탐정단</h4><p>사건의 지문을 읽고 답안 보드를 작성해 사건을 해결해요.</p><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=literacy" target="_blank" rel="noopener noreferrer">원본 탐정단으로 복습하기 ↗</a></article></div><small class="fidelity-note">원본의 탐정단은 서버에서 사건을 출제합니다.</small>'+(stageReviewMistakes(4).length?'<button class="btn-outline" data-local-literacy-review type="button">이 기기에서 틀린 문항 다시 풀기</button>':'');
         content.querySelector('[data-local-literacy-review]')?.addEventListener('click',()=>startLectureReview());
+        if(!stageReviewMistakes(4).length){
+          const practice=document.createElement('button');practice.type='button';practice.className='btn-outline';practice.textContent='선택형·단답형 복습 체험';practice.dataset.localLiteracyExample='';
+          practice.addEventListener('click',()=>startLectureReview());content.querySelector('.korean-review-activity').append(practice);
+        }
       }
     }
     function submitLectureReview(answer, button) {
@@ -2266,7 +2280,7 @@
       if (!item || session.saving) return;
       const normalize = value => String(value || '').normalize('NFC').replace(/\s+/g,'').trim();
       if(item.answerType==='keyword'){document.querySelector('[data-review-feedback]').textContent='서술형은 원본 AI 채점에서 확인하세요. 이 기기에서 정답으로 처리하지 않습니다.';return;}
-      const correct=normalize(answer)===normalize(item.correctAnswer);
+      const correct=item.answerType==='text'?isKoreanShortAnswerCorrect(answer,item.correctAnswer,item.acceptedAnswers):normalize(answer)===normalize(item.correctAnswer);
       session.saving = true;
       const content = document.querySelector('[data-review-content]');
       content.querySelectorAll('[data-review-answer],[data-review-submit]').forEach(choice => { choice.disabled = true; });
@@ -2297,11 +2311,26 @@
         return;
       }
       const item = session.queue[session.index];
+      if(item.answerType==='keyword'){
+        progress.textContent='오늘 '+session.queue.length+'문제 중 '+(session.index+1)+'번째예요.';
+        content.innerHTML=originalFeatureMarkup('서술형 오답 복습','기록된 질문: '+reviewEscape(item.prompt)+'. 서술형의 점수와 피드백은 원본 AI 채점에서 확인합니다.','literacy','서술형 학습')+'<button class="btn-outline" data-review-skip type="button">채점하지 않고 다음 문항</button>';
+        content.querySelector('[data-review-skip]').addEventListener('click',()=>{session.skippedCount=(session.skippedCount||0)+1;session.index++;renderLearningSupport();});
+        return;
+      }
       if(item.answerType==='trace'){
         progress.textContent='오늘 '+session.queue.length+'문제 중 '+(session.index+1)+'번째예요.';
-        content.innerHTML=curricularWritingMarkup(item.correctAnswer);wireCurricularWriting(content);
-        const button=content.querySelector('[data-curricular-check]');
-        button.addEventListener('click',()=>{if(content.querySelector('canvas').dataset.completed==='true'){session.correctCount++;session.index++;renderLearningSupport();}});return;
+        content.innerHTML=curricularWritingMarkup(item.correctAnswer);
+        wireCurricularWriting(content,{question:item,onChecked:correct=>{
+          if(activeReviewSession!==session)return;
+          if(!correct){session.saving=false;return;}
+          session.correctCount++;
+          window.setTimeout(()=>{
+            if(activeReviewSession!==session)return;
+            session.index++;session.saving=false;
+            if(reviewView==='review'){renderLearningSupport();document.querySelector('[data-review-scroll]').scrollTop=0;}
+          },650);
+        }});
+        return;
       }
       const presentation = resolveKoreanReviewQuestion(item);
       progress.textContent = '오늘 ' + session.queue.length + '문제 중 ' + (session.index + 1) + '번째예요.';
@@ -2332,7 +2361,7 @@
       return '<div class="korean-record-summary" aria-label="' + reviewEscape(label) + '">' + items.map(([title,value]) => '<div class="korean-record-stat"><span>' + reviewEscape(title) + '</span><strong>' + reviewEscape(value) + '</strong></div>').join('') + '</div>';
     }
     function capturedRecordActions() {
-      return '<div class="korean-record-actions"><button class="btn-primary" data-captured-review type="button" title="추출한 테스트 오답으로 체험합니다. 원본 기록은 바뀌지 않습니다.">🔁 오늘의 복습' + (reviewStage === 2 ? ' 시작' : '') + '</button>' + (reviewStage === 2 ? '<button class="btn-outline" data-captured-mistakes type="button">📕 오답노트 보기</button>' : '<button class="btn-outline" data-review-home type="button">공부하러 가기</button>') + '</div>';
+      return '<div class="korean-record-actions"><button class="btn-primary" data-captured-review type="button">🔁 '+(reviewStage===2?'오늘의 복습 시작':'복습 활동 열기')+'</button><button class="btn-outline" data-captured-mistakes type="button">📕 오답노트 보기</button><button class="btn-outline" data-review-home type="button">공부하러 가기</button></div>';
     }
     function startCapturedTestReview(rows) {
       recordDataSource = 'local';
@@ -2351,7 +2380,7 @@
     function wireCapturedRecordActions(content) {
       content.querySelector('[data-captured-review]')?.addEventListener('click',() => startCapturedTestReview());
       content.querySelector('[data-captured-mistakes]')?.addEventListener('click',() => { reviewView = 'mistakes'; capturedMistakeFilter = 'all'; renderLearningSupport(); document.querySelector('[data-review-scroll]').scrollTop = 0; });
-      content.querySelectorAll('[data-review-home]').forEach(button => button.addEventListener('click',() => document.querySelector('#stages').scrollIntoView({behavior:'smooth'})));
+      content.querySelectorAll('[data-review-home]').forEach(button => button.addEventListener('click',() => navigateLectureSection({2:'stage-hangul',3:'stage-curriculum',4:'stage-literacy'}[reviewStage])));
     }
     function renderOriginalCapturedRecords() {
       const content = document.querySelector('[data-review-content]');
@@ -2448,6 +2477,7 @@
       } catch (_) { return defaultWordCards.slice(); }
     }
     let savedWordCards = readStoredWordCards();
+    let selectedCurricularWord = '생태계';
     function persistWordCards() {
       try { localStorage.setItem(wordCardsStorageKey, JSON.stringify(savedWordCards)); } catch (_) { /* Storage can be disabled; in-memory cards still work. */ }
     }
@@ -2467,7 +2497,12 @@
         button.type = 'button';
         button.dataset.word = word;
         button.textContent = (wordCardCatalog[word]?.icon || '📖') + ' ' + word;
-        button.addEventListener('click', () => speakKorean(word));
+        button.addEventListener('click', () => {
+          selectedCurricularWord=word;speakKorean(word);
+          container.querySelectorAll('button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+          const status=container.closest('.scan-demo')?.querySelector('.demo-status');
+          if(status)status.textContent='“'+word+'”을 선택했어요. 핵심어 쓰기 메뉴에서 연습하세요.';
+        });
         container.append(button);
       });
     }
@@ -2487,6 +2522,19 @@
     function wirePictureMission(panel) {
       const root=panel.querySelector('[data-picture-mission]');if(!root)return false;
       const status=root.querySelector('.demo-status'),controller=AieduTrace.mountPicture(root.querySelector('canvas'));
+      if(root.hasAttribute('data-shape-mission')){
+        const labels={circle:'원',triangle:'세모',square:'네모'};
+        const selectShape=shape=>{
+          controller.setTemplate((width,height)=>{
+            const size=Math.min(width*.65,height*.68);
+            return {label:labels[shape],shapes:[{shape,x:.5,y:.57,w:size/width,h:size/height}]};
+          });
+          root.querySelectorAll('[data-shape]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.shape===shape)));
+          status.textContent=labels[shape]+' 점선을 따라 그린 뒤 정확도를 확인해요.';
+        };
+        root.querySelectorAll('[data-shape]').forEach(button=>button.addEventListener('click',()=>selectShape(button.dataset.shape)));
+        selectShape('circle');
+      }
       panel._featureCleanup=()=>controller.destroy();
       root.querySelectorAll('[data-picture-color]').forEach(button=>button.addEventListener('click',()=>{
         controller.setColor(button.dataset.pictureColor);
@@ -2501,12 +2549,16 @@
         const active=event.currentTarget.getAttribute('aria-pressed')!=='true';
         controller.setErase(active);event.currentTarget.setAttribute('aria-pressed',String(active));
       });
-      root.querySelector('[data-picture-reset]').addEventListener('click',()=>{controller.reset();status.textContent='점선을 따라 집을 그려요.';});
+      root.querySelector('[data-picture-reset]').addEventListener('click',()=>{controller.reset();status.textContent=root.hasAttribute('data-shape-mission')?'도형의 점선을 따라 다시 그려요.':'점선을 따라 집을 그려요.';});
       root.querySelector('[data-picture-check]').addEventListener('click',()=>{
         const result=controller.evaluate();
         status.textContent='도형별 평균 정확도 '+result.accuracy+'% · '+result.instances.map((item,i)=>(i+1)+'번 도형 '+item.accuracy+'%').join(' / ');
       });
       return true;
+    }
+
+    function shapeMissionMarkup() {
+      return pictureMissionMarkup().replace('그림 미션 · 우리 집','도형 미션').replace('우리 집 그림 미션','도형 따라 그리기').replace('점선을 따라 집을 그려요.','원형 점선을 따라 그린 뒤 정확도를 확인해요.').replace('원본 우리 집 도안·도형별 판정 코드 적용.','강의용 대표 도형 · 원본 선 경로·정확도 계산 적용.').replace('data-picture-mission>','data-picture-mission data-shape-mission><nav class="shape-options" aria-label="그릴 도형 선택"><button data-shape="circle" aria-pressed="true" type="button">○ 원</button><button data-shape="triangle" aria-pressed="false" type="button">△ 세모</button><button data-shape="square" aria-pressed="false" type="button">□ 네모</button></nav>');
     }
 
     function originalFeatureMarkup(title,detail,activity,menu,image='') {
@@ -2516,7 +2568,7 @@
     function curricularWritingMarkup(word='생태계') {
       return '<div class="motion-demo" data-curricular-writing="'+reviewEscape(word)+'"><div class="demo-top"><b>핵심어 따라쓰기</b><small>원본 안내 글자 · 80% 기준</small></div><div class="curricular-word"><strong>'+reviewEscape(word)+'</strong><button data-speak-text="'+reviewEscape(word)+'" type="button">🔊 단어 듣기</button></div><canvas class="curricular-canvas" aria-label="'+reviewEscape(word)+' 따라쓰기"></canvas><div class="demo-actions"><span class="demo-status" role="status">안내 글자 위에 직접 써요.</span><button class="demo-action secondary" data-curricular-reset type="button">다시 쓰기</button><button class="demo-action" data-curricular-check type="button">쓰기 확인</button></div><small class="fidelity-note">따라쓰기: 원본 글자 안내·겹침 비율 코드 적용. AI 받아쓰기 채점은 원본에서 이용합니다.</small><a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 받아쓰기·AI 채점 ↗</a></div>';
     }
-    function wireCurricularWriting(panel) {
+    function wireCurricularWriting(panel, reviewOptions = {}) {
       const root=panel.querySelector('[data-curricular-writing]');
       if(!root)return false;
       const word=root.dataset.curricularWriting,status=root.querySelector('.demo-status');
@@ -2524,11 +2576,18 @@
         onProgress:({coverage,done})=>{status.textContent=(done?'✓ 따라쓰기 완료 · ':'글자 위를 따라 써요 · ')+Math.round(coverage*100)+'%';}
       });
       panel._featureCleanup=()=>controller.destroy();
-      root.querySelector('[data-curricular-reset]').addEventListener('click',()=>controller.reset());
+      root.querySelector('[data-curricular-reset]').addEventListener('click',()=>{
+        controller.reset(); root.dataset.checked = ''; root.querySelector('[data-curricular-check]').disabled = false;
+      });
       root.querySelector('[data-curricular-check]').addEventListener('click',()=>{
+        if (root.dataset.checked === 'true') return;
         const coverage=controller.check(),correct=coverage>=.8||Math.round(coverage*100)>=80;
         status.textContent=correct?'✓ '+word+' 따라쓰기를 완료했어요.':'글자 위를 조금 더 따라 써요. 현재 '+Math.round(coverage*100)+'%예요.';
-        recordLearningAttempt({key:'stage3-trace-'+word,stage:3,stageTitle:'교과 맞춤쓰기',activity:'핵심어 따라쓰기',prompt:word+'을(를) 안내 글자 위에 따라 써요.',answerType:'trace',correctAnswer:word},Math.round(coverage*100)+'%',correct);
+        const question = reviewOptions.question || {key:'stage3-trace-'+word,stage:3,stageTitle:'교과 맞춤쓰기',activity:'핵심어 따라쓰기',prompt:word+'을(를) 안내 글자 위에 따라 써요.',answerType:'trace',correctAnswer:word};
+        if (correct) { root.dataset.checked = 'true'; root.querySelector('[data-curricular-check]').disabled = true; }
+        if (reviewOptions.onChecked && activeReviewSession) activeReviewSession.saving = true;
+        recordLearningAttempt(question,Math.round(coverage*100)+'%',correct,reviewOptions.onChecked ? '복습' : '학습');
+        reviewOptions.onChecked?.(correct);
       });
       root.querySelector('[data-speak-text]').addEventListener('click',()=>speakKorean(word));
       return true;
@@ -2537,7 +2596,7 @@
     const featureCatalog = {
       draw: {
         picture: () => pictureMissionMarkup(),
-        shape: () => originalFeatureMarkup('도형 미션','제시된 도형을 직접 그려 정확도를 확인해요. 원본 게임에서 도형별 미션을 진행합니다.','drawing','도형 미션'),
+        shape: () => shapeMissionMarkup(),
         ai: () => originalFeatureMarkup('AI스케치북','내가 그린 그림을 AI 이미지로 바꿔요. 이미지 생성과 작품 저장은 원본 에이두 한글에서 실행합니다.','drawing','AI스케치북')
       },
       hangul: {
@@ -2564,10 +2623,11 @@
             <button class="demo-action secondary" data-open-photo type="button">사진 선택</button>
           </div>
           <span class="demo-status" role="status" aria-live="polite">사진은 브라우저 안에서 OCR 처리돼요. 원본 AI 핵심어 선정과는 다릅니다.</span>
+          <form class="scan-manual-form" data-manual-word-form><label>핵심어 확인·직접 입력<input class="answer-field" data-manual-word aria-label="저장할 핵심어" maxlength="20" placeholder="잘못 읽힌 낱말을 고쳐 입력하세요" required></label><button class="demo-action" type="submit">카드 저장</button></form>
           <div class="saved-words" data-word-cards aria-label="저장한 핵심어 카드"></div>
           <a class="original-feature-link" href="https://aiedue.ddns.net/korean/index.html?activity=dictation" target="_blank" rel="noopener noreferrer">원본 OCR·AI 핵심어 선정 ↗</a>
         </div>`,
-        write: () => curricularWritingMarkup('생태계'),
+        write: () => curricularWritingMarkup(selectedCurricularWord),
         meaning: () => '<article class="motion-demo shared-word-card-demo" aria-label="에이두 한글 생태계 단어 카드"><header class="shared-word-card-head"><small>SHARED WORD CARDS</small><h3>생태계</h3><p>그림과 설명으로 단어의 뜻을 알아봐요.</p></header><div class="shared-word-card-body"><div class="shared-word-card-art" role="img" aria-label="초록 새싹 옷을 입은 아이가 물고기와 식물이 있는 생태계 어항을 들고 있어요"></div><div class="shared-word-card-copy"><span class="feature-badge">단어 카드</span><h4 data-card-word>생태계</h4><p class="shared-word-card-definition" data-card-definition role="button" tabindex="0">생태계는 일정 공간에서 살아가는 다양한 생물들과 그들을 둘러싼 환경이 서로 영향을 주고받으며 균형을 이루는 생명 체계입니다.</p><small class="shared-word-card-hint">문장을 눌러 들어보세요</small><div class="shared-word-card-actions"><button data-speak-meaning type="button">🔊 설명 듣기</button><button data-back-to-bank type="button">← 단어 카드 저장소</button></div></div></div></article>',
         bank: () => wordBankMarkup()
       },
@@ -2686,10 +2746,14 @@
           '</div></div><p class="lesson-hint" data-lesson-status>소리 듣기 버튼을 누르고 알맞은 글자를 골라요!</p></div>';
         const status = body.querySelector('[data-lesson-status]');
         const choices = [...body.querySelectorAll('[data-lesson-choice]')];
-        body.querySelector('[data-lesson-listen]').addEventListener('click', () => {
-          speakKorean(config.target);
-          choices.forEach(button => button.disabled = false);
-          status.textContent = '방금 들은 소리와 같은 글자를 찾아보세요.';
+        body.querySelector('[data-lesson-listen]').addEventListener('click', async event => {
+          const button=event.currentTarget;button.disabled=true;
+          status.textContent='에이두 한글 소리를 준비하고 있어요…';
+          const heard=await speakKorean(config.target);
+          if(!button.isConnected)return;
+          button.disabled=false;
+          choices.forEach(choice => choice.disabled = !heard);
+          status.textContent = heard?'방금 들은 소리와 같은 글자를 찾아보세요.':'소리를 재생하지 못했어요. 네트워크·음량을 확인하고 다시 눌러 주세요.';
         });
         choices.forEach(button => button.addEventListener('click', () => {
           choices.forEach(item => item.classList.remove('is-correct','is-wrong'));
@@ -2795,6 +2859,7 @@
           { stem:'숲에 햇빛이 아주 적어지면 식물은 어떻게 될까요?', answers:['잘 자라기 어려워요','더 크게 자라요'], correct:0, hint:'식물에게 필요한 것을 생각해 보세요.' }
         ];
         let questionIndex = 0;
+        let testFinished = false;
         const answered = Array(questions.length).fill(false);
         const correctAnswers = Array(questions.length).fill(false);
         const choices = [...studentTest.querySelectorAll('[data-test-answer]')];
@@ -2802,6 +2867,7 @@
         const next = studentTest.querySelector('[data-test-next]');
         const render = () => {
           const question = questions[questionIndex];
+          studentTest.querySelector('[data-test-review]')?.remove();
           studentTest.querySelector('[data-test-count]').textContent = '문제 ' + (questionIndex + 1) + ' / ' + questions.length;
           studentTest.querySelector('[data-test-stem]').textContent = question.stem;
           studentTest.querySelector('[data-test-score]').textContent = correctAnswers.filter(Boolean).length;
@@ -2822,17 +2888,21 @@
           studentTest.querySelector('[data-test-score]').textContent = correctAnswers.filter(Boolean).length;
           studentTest.querySelector('[data-test-meter]').style.width = ((questionIndex + 1) / questions.length * 100) + '%';
           status.textContent = correct ? '✓ 정답이에요. 핵심 내용을 이해했어요.' : '한 번 더 지문을 읽어 보세요. ' + question.hint;
-          recordLearningAttempt({key:'stage4-literacy-choice-' + questionIndex,stage:4,stageTitle:'문해력',activity:'학생 테스트 · 선택형',prompt:question.stem,choices:question.answers,correctAnswer:question.answers[question.correct],hint:question.hint},button.textContent,correct);
+          recordLearningAttempt({key:'stage4-literacy-choice-' + questionIndex,stage:4,stageTitle:'문해력',activity:'문해력 체험 · 선택형',prompt:question.stem,choices:question.answers,correctAnswer:question.answers[question.correct],hint:question.hint,isExample:true},button.textContent,correct);
           next.disabled = false;
         }));
         next.addEventListener('click', () => {
+          if(testFinished){testFinished=false;questionIndex=0;answered.fill(false);correctAnswers.fill(false);studentTest.querySelector('.quiz-stage .choice-grid').hidden=false;render();return;}
           if (questionIndex < questions.length - 1) { questionIndex += 1; render(); return; }
           studentTest.querySelector('[data-test-count]').textContent = '테스트 완료';
           studentTest.querySelector('[data-test-stem]').textContent = '학생 예시 테스트가 끝났어요. 틀린 문항은 핵심어를 다시 읽고 복습해요.';
           studentTest.querySelector('.quiz-stage .choice-grid').hidden = true;
           studentTest.querySelector('[data-test-meter]').style.width = '100%';
           status.textContent = '결과: ' + correctAnswers.filter(Boolean).length + ' / ' + questions.length + ' 정답 · 오답은 다시 읽기 활동으로 연결됩니다.';
-          next.hidden = true;
+          testFinished=true;next.textContent='다시 풀기';
+          const review=document.createElement('button');review.type='button';review.className='demo-action secondary';review.textContent='오답 복습하기';
+          review.addEventListener('click',()=>{reviewStage=4;recordDataSource='local';activeReviewSession=null;startLectureReview();navigateLectureSection('review-records');});
+          next.parentElement.querySelector('[data-test-review]')?.remove();review.dataset.testReview='';next.parentElement.append(review);
         });
       }
 
@@ -2972,6 +3042,7 @@
             chip.textContent = word;
             chip.setAttribute('aria-label', word + ' 단어 카드를 저장');
             chip.addEventListener('click', () => {
+              selectedCurricularWord=word;
               if (!saveVocabularyCard(word)) { status.textContent = '이미 저장된 핵심어예요. 저장소에서 다시 들을 수 있어요.'; return; }
               chip.classList.add('is-saved');
               status.textContent = '“' + word + '” 카드를 저장했어요. 단어 카드 저장소에서 확인할 수 있어요.';
@@ -2979,8 +3050,19 @@
             output.append(chip);
           });
         };
+        panel.querySelector('[data-manual-word-form]')?.addEventListener('submit',event=>{
+          event.preventDefault();
+          const field=panel.querySelector('[data-manual-word]'),word=field.value.trim().replace(/\s+/g,' ');
+          if(!word)return;
+          if(!/[가-힣]/.test(word)){status.textContent='한글 핵심어를 입력해 주세요.';return;}
+          const added=saveVocabularyCard(word);
+          selectedCurricularWord=word;
+          status.textContent=added?'“'+word+'” 카드를 저장했어요. 핵심어 쓰기 메뉴에서 바로 연습할 수 있어요.':'이미 저장된 “'+word+'”을 핵심어 쓰기에 선택했어요.';
+          field.value='';
+        });
         const recognizeFile = async file => {
           if (!file || disposed) return;
+          if(file.size>20*1024*1024){status.textContent='20MB 이하의 사진을 선택해 주세요.';return;}
           const request = ++recognitionRequest;
           if (imageUrl) URL.revokeObjectURL(imageUrl);
           imageUrl = URL.createObjectURL(file);
@@ -3006,7 +3088,9 @@
               });
             }
             if (disposed || request !== recognitionRequest) return;
-            const result = await window.Tesseract.recognize(file,'kor+eng');
+            const result = await window.Tesseract.recognize(file,'kor+eng',{logger:message=>{
+              if(!disposed&&request===recognitionRequest&&message.status==='recognizing text')status.textContent='한글 글자 인식 '+Math.round((message.progress||0)*100)+'% · 잠시 기다려 주세요.';
+            }});
             if (disposed || request !== recognitionRequest) return;
             const text = result?.data?.text || '';
             const words = [...new Set(text.match(/[가-힣]{2,}/g) || [])].slice(0,8);
@@ -3099,6 +3183,7 @@
       if (backToBank) backToBank.addEventListener('click', () => renderStageFeature('curriculum','bank'));
 
       panel.querySelectorAll('[data-saved-word]').forEach(button => button.addEventListener('click', () => {
+        selectedCurricularWord=button.dataset.savedWord;
         if (button.dataset.savedWord === '생태계') { renderStageFeature('curriculum','meaning'); return; }
         panel.querySelectorAll('[data-saved-word]').forEach(item => item.classList.toggle('is-selected', item === button));
         speakKorean(button.dataset.savedWord);
@@ -3126,6 +3211,11 @@
         });
       }
       const bankListen = panel.querySelector('[data-bank-listen]');
+      if(bankListen){
+        const write=document.createElement('button');write.type='button';write.textContent='✍️ 선택한 단어 쓰기';write.dataset.bankWrite='';write.disabled=!savedWordCards.length;
+        write.addEventListener('click',()=>renderStageFeature('curriculum','write',panel.querySelector('[data-saved-word].is-selected')?.dataset.savedWord||(savedWordCards.includes(selectedCurricularWord)?selectedCurricularWord:savedWordCards[0])));
+        bankListen.parentElement.append(write);
+      }
       if (bankListen) bankListen.addEventListener('click', () => {
         const word = panel.querySelector('[data-saved-word].is-selected')?.dataset.savedWord || savedWordCards[0];
         if (!word) return;
@@ -3135,21 +3225,25 @@
       });
 
       const checkText = panel.querySelector('[data-check-text]');
+      if(checkText) panel.querySelector('[data-user-answer]').addEventListener('keydown',event=>{
+        if(event.key==='Enter'&&!event.isComposing){event.preventDefault();checkText.click();}
+      });
       if (checkText) checkText.addEventListener('click', () => {
         const value = panel.querySelector('[data-user-answer]').value.trim();
         if (!value) { panel.querySelector('.demo-status').textContent = '답을 입력한 뒤 확인해 주세요.'; return; }
-        const normalize=value=>String(value).toLowerCase().replace(/\s+/g,'').trim();
-        const answer=normalize(value),expected=normalize(checkText.dataset.checkText);
-        const correct=!!answer&&(answer===expected||answer.includes(expected)||expected.includes(answer));
+        const acceptedAnswers=['모서리','테두리'];
+        const correct=isKoreanShortAnswerCorrect(value,checkText.dataset.checkText,acceptedAnswers);
         panel.querySelector('.demo-status').textContent = correct ? '✓ 정답이에요! 핵심 내용을 찾았어요.' : '지문에서 식탁의 어느 부분을 바꾸었는지 다시 찾아보세요.';
-        recordLearningAttempt({key:'stage4-literacy-short-table',stage:4,stageTitle:'문해력',activity:'단답형',prompt:'어린이들이 다치지 않도록 식탁의 어느 부분을 둥글게 만들었나요?',passage:"초등학교 급식실에 새로운 식탁이 들어왔습니다. 어린이들이 다치지 않도록 모서리 테두리를 둥글게 만들었습니다.",answerType:'text',correctAnswer:checkText.dataset.checkText,hint:'식탁의 모서리 테두리를 살펴보세요.'},value,correct);
+        recordLearningAttempt({key:'stage4-literacy-short-table',stage:4,stageTitle:'문해력',activity:'단답형',prompt:'어린이들이 다치지 않도록 식탁의 어느 부분을 둥글게 만들었나요?',passage:"초등학교 급식실에 새로운 식탁이 들어왔습니다. 어린이들이 다치지 않도록 모서리 테두리를 둥글게 만들었습니다.",answerType:'text',correctAnswer:checkText.dataset.checkText,acceptedAnswers,hint:'식탁의 모서리 테두리를 살펴보세요.'},value,correct);
       });
 
     }
 
-    function renderStageFeature(stage, key) {
+    function renderStageFeature(stage, key, word) {
       const panel = document.querySelector('[data-feature-panel="' + stage + '"]');
       if (!panel || !featureCatalog[stage] || !featureCatalog[stage][key]) return;
+      stopAieduAudio();
+      if (stage==='curriculum' && key==='write' && word) selectedCurricularWord=word;
       panel.querySelector('[data-hangul-lesson]')?._cleanupTrace?.();
       panel.querySelector('[data-hangul-lesson]')?._lessonMotionObserver?.disconnect();
       panel._featureCleanup?.();

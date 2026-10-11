@@ -1,0 +1,162 @@
+/* Navy presentation theme. The slide content and layout stay unchanged. */
+:root {
+  --paper: #f2f5f9;
+  --ink: #142943;
+  --muted: #53677e;
+  --line: #d8e2ec;
+  --accent: #2d6da9;
+  --orange: var(--accent);
+  --mint: #e8f0f8;
+  --yellow: #d5e7f8;
+  --white: #ffffff;
+  --navy: #11243e;
+  --navy-soft: #1e3a5e;
+  --ice: #d9e9fa;
+}
+
+body { background: var(--paper); }
+.topbar,
+.toolbar {
+  background: var(--navy);
+  color: #f7fbff;
+  border-color: #385273;
+}
+.brand > span { color: #8cc6f5; }
+.brand small { color: #b8cadc; }
+.topbar button,
+.toolbar button { color: #f7fbff; border-color: #536d8b; }
+.topbar button:hover:not(:disabled),
+.toolbar button:hover:not(:disabled) { background: #294769; }
+.progress-track { background: #d6e1ed; }
+#progress { background: #3a7cb8; }
+
+@media screen {
+  .slide {
+    background: #ffffff;
+    border: 1px solid #e1e9f2;
+    border-top: 4px solid #315f93;
+    border-radius: 16px;
+    box-shadow: 0 18px 50px #132b4810;
+  }
+}
+.slide h1,
+.slide h2,
+.slide h3 { color: var(--ink); }
+.eyebrow,
+.item-number,
+.step b,
+.cap-step-number { color: var(--accent); }
+.slide .lead,
+.cap-steps p { color: var(--muted); }
+.primary,
+.action-link { background: var(--navy); border-color: var(--navy); color: #fff; }
+.primary:hover:not(:disabled),
+.action-link:hover { background: #234b77; border-color: #234b77; }
+.action-link.secondary { background: #fff; color: var(--navy); border-color: #bdcbdc; }
+.action-link.secondary:hover { background: var(--mint); }
+
+/* The cover and the section breaks carry the strongest navy accent. */
+.slide:has(.intro-cover) {
+  background: linear-gradient(135deg, #10213a 0%, #1b3c63 100%);
+  border-color: #24496f;
+  border-top-color: #8cc6f5;
+}
+.slide:has(.intro-cover) h1,
+.slide:has(.intro-cover) .cap-instructors strong { color: #f8fbff; }
+.slide:has(.intro-cover) .cap-instructors { color: #dce9f7; }
+.mosaic-cell { background: #e6eef8; }
+.mosaic-cell:nth-child(3n + 2) { background: #cbdff2; }
+.mosaic-cell:nth-child(3n) { background: #f3f7fc; }
+.mosaic-cell img { filter: drop-shadow(0 7px 5px #14294324); }
+
+.section-block {
+  background: linear-gradient(140deg, #152b49 0%, #224871 100%);
+  border-color: #315a85;
+  color: #f7fbff;
+  box-shadow: 0 18px 42px #14294316;
+}
+.section-block h2,
+.section-block h3,
+.section-block .item h3,
+.section-block .cap-steps h3,
+.section-block .cap-prompt blockquote { color: #f7fbff; }
+.section-block .lead,
+.section-block .item p,
+.section-block .cap-steps p,
+.section-block .slide-end { color: #d3e2f2; }
+.section-block .item,
+.section-block .cap-steps li,
+.section-block .slide-end { border-color: #527397; }
+.section-block .eyebrow,
+.section-block .item-number,
+.section-block .cap-step-number { color: #9bcdf5; }
+.section-block .action-link,
+.section-block .primary { background: #e8f3ff; color: var(--navy); border-color: #e8f3ff; }
+.section-block .action-link:hover,
+.section-block .primary:hover:not(:disabled) { background: #cfe6fb; border-color: #cfe6fb; }
+
+.thanks-slide {
+  background: linear-gradient(140deg, #122641 0%, #285481 100%);
+  border-color: #315a85;
+}
+.thanks-slide h2 { color: #f8fbff; }
+
+/* Cool blue details replace the former green and orange accents. */
+.intro-icon,
+.intro-icons section:nth-child(2) .intro-icon,
+.intro-icons section:nth-child(3) .intro-icon,
+.intro-icons section:nth-child(4) .intro-icon {
+  background: #e6eff9;
+  color: #245788;
+}
+.intro-icons section:nth-child(2) .intro-icon { background: #d6e7f6; }
+.intro-icons section:nth-child(3) .intro-icon { background: #edf3fa; }
+.intro-icons section:nth-child(4) .intro-icon { background: #c9deef; }
+.intro-icon-link:hover .intro-icon { box-shadow: 0 10px 24px #14294320; }
+.intro-icon-link:focus-visible { outline-color: var(--accent); }
+.intro-pokemon > div { background: radial-gradient(ellipse at center, #e6eff9 0%, #e6eff9 50%, transparent 51%); }
+.pokemon-friends,
+.demo-preview { background: #e6eff9; }
+.demo-preview .numbers span { border-color: #b4c9df; }
+.cap-shot img { border-color: #c9d7e6; }
+.cap-image-only .cap-shot img { border-radius: 12px; box-shadow: 0 14px 34px #14294313; }
+.cap-text-only .cap-prompt-field blockquote { background: #f2f6fb; border-color: #ccdaea; }
+
+.achievement-standard,
+.achievement-standard[data-year="2022"] {
+  background: linear-gradient(135deg, #ffffff 0%, #edf4fb 100%);
+  border-color: #c8d8e9;
+  border-left-color: var(--accent);
+  box-shadow: 0 8px 24px #1429430c;
+}
+.achievement-year,
+.achievement-standard[data-year="2022"] .achievement-year { background: var(--navy); }
+.achievement-code,
+.achievement-standard[data-year="2022"] .achievement-code { color: var(--accent); }
+.video-frame,
+.video-frame video { background: #0a1729; }
+.video-frame { box-shadow: 0 16px 42px #14294325; }
+.video-thumb.active { box-shadow: 0 0 0 2px #2d6da92a; }
+.video-thumb:hover:not(:disabled) { border-color: #89afd3; }
+.prompt-preview { background: var(--navy); color: #f7fbff; }
+.prompt-preview span { color: #bdd7ef; }
+.prompt-preview .primary { background: #d9ebfb; border-color: #d9ebfb; color: var(--navy); }
+.worksheet-form input { border-bottom-color: #a9bfd6; background: #f7faff; }
+
+#notes { box-shadow: 0 18px 70px #14294327; }
+dialog::backdrop { background: #0a1b31aa; }
+#toc button.current { background: #e5eef8; border-color: var(--accent); }
+#toast { background: var(--navy); }
+
+@media print {
+  #print-slides .slide { background: #fff; }
+  #print-slides .slide:has(.intro-cover) {
+    background: linear-gradient(135deg, #10213a 0%, #1b3c63 100%);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #print-slides .section-block,
+  #print-slides .thanks-slide,
+  #print-slides .mosaic-cell,
+  #print-slides .intro-icon { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

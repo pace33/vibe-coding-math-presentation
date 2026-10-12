@@ -131,7 +131,7 @@
   $('toc').innerHTML=slides.map((s,i)=>`<button data-slide="${i}"><span>${String(i+1).padStart(2,'0')}</span>${escape(s.title.replace(/\n/g,' '))}</button>`).join('');
   $('toc').addEventListener('click',e=>{const b=e.target.closest('[data-slide]');if(b){go(Number(b.dataset.slide));$('menu').close();}});
   $('open-menu').onclick=()=>$('menu').showModal();
-  $('open-gallery').onclick=()=>{selectedPrompt='starter';$('prompt-title').textContent=labels.starter;$('prompt-text').value=prompts.starter;$('copy-status').textContent='';$('prompt-dialog').showModal();};
+
   document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
   $('prev').onclick=()=>go(current-1);$('next').onclick=()=>go(current+1);
   $('notes-toggle').onclick=()=>{ $('notes').hidden=!$('notes').hidden;$('notes-toggle').setAttribute('aria-expanded',!$('notes').hidden); };

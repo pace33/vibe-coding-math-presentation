@@ -40,6 +40,9 @@ body { background: #fff; }
 .slide h1, .slide h2, .slide h3 { color: var(--ink); }
 .slide h2 { font-weight: 800; letter-spacing: -.045em; }
 .slide h3 { font-weight: 750; }
+.slide-practice-one-item-activity > .lead,
+.slide-practice-two-pokemon-sprites > .lead,
+.slide-practice-three-ai-features > .lead { color: #c62828; }
 .primary, .action-link {
   background: var(--accent);
   border-color: var(--accent);

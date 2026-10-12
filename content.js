@@ -623,7 +623,7 @@ window.TRAINING = {
       ],
       "notes": "사진을 누르면 에이두 커뮤니티 링크공유방이 새 탭에서 열립니다. + 링크 추가를 눌러 내가 만든 사이트의 이름, 설명, 제작자와 공유 링크를 등록합니다. 등록을 마친 뒤 다른 분들이 만든 사이트도 열어 보고 서로의 아이디어를 구경합니다.",
       "screenshot": {
-        "src": "assets/screenshots/aiedue-community-links.jpg",
+        "src": "assets/screenshots/aiedue-community-links.webp",
         "href": "https://aiedue.ddns.net/community/#links",
         "linkLabel": "에이두 커뮤니티 링크공유방 열기",
         "alt": "에이두 커뮤니티 링크공유방 화면"

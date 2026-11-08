@@ -93,7 +93,11 @@
     return `<aside class="achievement-standard" data-year="${year}" aria-label="${year} 개정 교육과정 성취기준"><span class="achievement-year">${year} 개정</span><strong class="achievement-code">${escape(s.standard.code)}</strong><span class="achievement-text">${escape(s.standard.text)}</span></aside>`;
   }
   function markup(s, i, print = false) {
-    if (s.type === 'thanks') return `<div class="thanks-slide" role="group" aria-label="연수 마무리"><h2>${escape(s.title)}</h2></div>`;
+    if (s.type === 'thanks') {
+      const url=escape(s.url||'#');
+      const shot=s.screenshot||{};
+      return `<div class="thanks-slide korean-resource" role="group" aria-label="에이두 한글 안내"><div class="korean-resource-copy"><span class="korean-resource-label">추천 학습자료</span><h2>${escape(s.title)}</h2><p>${escape(s.lead)}</p><a class="korean-resource-link" href="${url}" target="_blank" rel="noopener noreferrer">에이두 한글 열기 <span aria-hidden="true">↗</span></a><small>${url}</small></div><a class="korean-resource-preview" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="에이두 한글 첫 화면 열기"><img src="${escape(shot.src||'')}" alt="${escape(shot.alt||'에이두 한글 첫 화면')}"></a><a class="korean-resource-qr" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="에이두 한글 QR 링크 열기"><img src="${escape(s.qr||'')}" alt="에이두 한글 접속 QR 코드"><strong>QR로 바로 열기</strong><span>휴대폰 카메라로 스캔하세요</span></a></div>`;
+    }
     if(s.type==='cover' && window.TrainingVisuals?.cover) return window.TrainingVisuals.cover(s);
     if (s.type === 'cover') return `<div class="cover"><h1>${escape(s.title)}</h1><p class="lead">${escape(s.lead)}</p></div>`;
     return `<div class="${s.type === 'section' ? 'section-block' : s.type === 'statement' ? 'statement' : s.type === 'video-gallery' ? 'video-gallery-slide' : ''} slide-${escape(s.id || 'default')}"><h2>${escape(s.title)}</h2>${s.lead && s.type !== 'statement' ? `<p class="lead">${escape(s.lead)}</p>` : ''}${achievementStandard(s)}<div class="slide-body">${slideBody(s,print)}</div></div>`;

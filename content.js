@@ -357,12 +357,12 @@ window.TRAINING = {
       "promptPreview": "[학생이 좋아하는 아이템]으로 [수 세기 / 합이 10이 되는 두 수 / 가르기와 모으기]를 연습하는 웹사이트를 만들어 주세요."
     },
     {
-      "id": "practice-two-pokemon-sprites",
-      "title": "실습 2 · 포켓몬 스프라이트 GitHub 사용하기",
+      "id": "practice-three-pokemon-sprites",
+      "title": "실습 3 · 포켓몬 스프라이트 GitHub 사용하기",
       "part": "theory",
       "type": "steps",
       "visual": "text-only",
-      "lead": "“포켓몬 스프라이트 깃허브를 사용해서”",
+      "lead": "“마지막으로 포켓몬 스프라이트를 적용해줘”",
       "items": [
         {
           "heading": "스프라이트 저장소 열기",
@@ -381,15 +381,15 @@ window.TRAINING = {
       ],
       "notes": "GitHub의 PokeAPI/sprites 저장소에서 sprites/pokemon/other/official-artwork 폴더를 엽니다. 25.png 같은 번호 파일을 선택하고 그림 주소를 Gemini 요청문에 넣습니다. 생성된 웹사이트의 이미지가 정상적으로 표시되는지 확인합니다. 포켓몬 이미지 저작권은 The Pokémon Company에 있습니다. 출처: https://github.com/PokeAPI/sprites 및 https://github.com/PokeAPI/sprites/blob/master/LICENCE.txt",
       "prompt": "pokemonSprite",
-      "promptPreview": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요.\n수세기, 덧셈, 뺄셈 3가지 활동 연습이 반복하게 만들어줘"
+      "promptPreview": "지금 만든 수학 사이트의 아이템 그림을 포켓몬 스프라이트로 바꿔 주세요. 기존 수학 활동과 AI 기능은 그대로 유지해 주세요."
     },
     {
-      "id": "practice-three-ai-features",
-      "title": "실습 3 · AI 기능 추가하기",
+      "id": "practice-two-ai-features",
+      "title": "실습 2 · AI 기능 추가하기",
       "part": "theory",
       "type": "steps",
       "visual": "text-only",
-      "lead": "“완성된 웹앱에 AI 기능을 추가해줘”",
+      "lead": "“완성된 웹앱에 AI 기능 하나를 추가해줘”",
       "items": [
         {
           "heading": "AI 힌트 버튼",
@@ -636,18 +636,24 @@ window.TRAINING = {
     },
     {
       "id": "finish",
-      "title": "감사합니다",
+      "title": "에이두 한글",
       "part": "practice",
       "type": "thanks",
-      "lead": "",
+      "lead": "학생은 놀이처럼 한글 학습을 시작하고, 교사는 학습 과정을 함께 살펴볼 수 있는 웹앱입니다.",
       "items": [],
-      "notes": ""
+      "notes": "첫 화면 이미지나 QR 코드를 누르면 에이두 한글이 새 탭에서 열립니다. 학생 로그인과 선생님 로그인을 제공하는 한글 학습 웹앱입니다.",
+      "url": "https://aiedue.ddns.net/korean/",
+      "screenshot": {
+        "src": "assets/screenshots/aiedue-korean-home.png",
+        "alt": "에이두 한글 첫 화면"
+      },
+      "qr": "assets/screenshots/aiedue-korean-qr.png"
     }
   ],
   "prompts": {
     "starter": "[학생이 좋아하는 아이템]으로 [수 세기 / 합이 10이 되는 두 수 / 가르기와 모으기]를 연습하는 웹사이트를 만들어 주세요.",
     "revise": "첨부한 화면에서 답 버튼이 작아 누르기 어렵습니다. 버튼과 글씨를 크게 바꿔 주세요.",
-    "pokemonSprite": "포켓몬 스프라이트 깃허브를 사용해서 포켓몬 수학 사이트를 만들어주세요.\n수세기, 덧셈, 뺄셈 3가지 활동 연습이 반복하게 만들어줘",
+    "pokemonSprite": "지금 만든 수학 사이트의 아이템 그림을 포켓몬 스프라이트로 바꿔 주세요.\nGitHub의 PokeAPI/sprites 저장소에 있는 official-artwork 이미지 주소를 사용해 주세요.\n기존 수학 활동과 실습 2에서 추가한 AI 기능은 그대로 유지해 주세요.",
     "aiFeatures": "지금 만든 수학 앱에 다음 AI 기능을 한 번에 하나씩 추가해 주세요.\n\nAI 힌트 버튼: 정답을 바로 말하지 말고 초등학교 1학년 눈높이의 친절한 단서를 주세요.\nAI 음성 설명(TTS): AI 힌트와 응원 메시지를 실제 목소리로 읽어 주세요.\n이미지 생성: 학습 보상이나 활동 결과에 맞는 그림을 AI로 만들어 앱에 보여 주세요.\n\n기존 수학 활동은 그대로 유지하고, 기능을 하나 추가할 때마다 먼저 작동 여부를 확인하게 해 주세요. API 키나 비밀정보는 코드에 직접 넣지 마세요.",
     "repair": "[어느 활동]에서 [무엇을 눌렀는지] 하니 [실제로 나온 결과]가 나타납니다. [원하는 결과]가 되도록 고쳐 주세요. 선택한 활동은 유지해 주세요."
   },
@@ -689,4 +695,6 @@ function moveSlideAfter(id, previousId) {
   trainingSlides.splice(trainingSlides.findIndex(item => item.id === previousId) + 1, 0, slide);
 }
 moveSlideAfter('revise-with-words', 'practice-one-item-activity');
+moveSlideAfter('practice-two-ai-features', 'revise-with-words');
+moveSlideAfter('practice-three-pokemon-sprites', 'practice-two-ai-features');
 

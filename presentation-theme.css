@@ -78,8 +78,8 @@ body {
   letter-spacing: .08em;
 }
 .slide-practice-one-item-activity > .lead,
-.slide-practice-two-pokemon-sprites > .lead,
-.slide-practice-three-ai-features > .lead { color: #e15140; }
+.slide-practice-two-ai-features > .lead,
+.slide-practice-three-pokemon-sprites > .lead { color: #e15140; }
 .primary, .action-link {
   background: var(--accent);
   border-color: var(--ink);
@@ -202,13 +202,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .section-block .item, .section-block .slide-end, .cap-section .cap-steps li { border-color: #bdc8ad; }
 .section-block .item-number, .cap-section .cap-step-number { color: var(--orange); }
 .section-block .action-link { background: var(--accent); color: var(--ink); }
-.thanks-slide {
+.thanks-slide:not(.korean-resource) {
   background: #10231e;
   background-image: radial-gradient(circle at 50% 50%, #29493f 0, transparent 55%);
   border: 0;
   border-radius: 28px;
 }
-.thanks-slide h2 { color: var(--accent); font-weight: 760; letter-spacing: -.055em; }
+.thanks-slide:not(.korean-resource) h2 { color: var(--accent); font-weight: 760; letter-spacing: -.055em; }
 
 .achievement-standard, .achievement-standard[data-year="2022"] {
   background: #fbfaf5;

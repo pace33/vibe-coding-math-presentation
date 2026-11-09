@@ -648,6 +648,15 @@ window.TRAINING = {
         "alt": "에이두 한글 첫 화면"
       },
       "qr": "assets/screenshots/aiedue-korean-qr.png"
+    },
+    {
+      "id": "closing",
+      "title": "감사합니다",
+      "part": "practice",
+      "type": "closing",
+      "lead": "",
+      "items": [],
+      "notes": "연수를 마무리하며 참여해 주신 선생님들께 감사 인사를 전합니다."
     }
   ],
   "prompts": {

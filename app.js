@@ -93,6 +93,7 @@
     return `<aside class="achievement-standard" data-year="${year}" aria-label="${year} 개정 교육과정 성취기준"><span class="achievement-year">${year} 개정</span><strong class="achievement-code">${escape(s.standard.code)}</strong><span class="achievement-text">${escape(s.standard.text)}</span></aside>`;
   }
   function markup(s, i, print = false) {
+    if (s.type === 'closing') return `<div class="thanks-slide" role="group" aria-label="연수 마무리"><h2>${escape(s.title)}</h2></div>`;
     if (s.type === 'thanks') {
       const url=escape(s.url||'#');
       const shot=s.screenshot||{};

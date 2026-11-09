@@ -166,14 +166,19 @@
   };
   document.addEventListener('keydown',e=>{
     if(document.querySelector('dialog[open]')||e.ctrlKey||e.metaKey||e.altKey)return;
+    const editable=e.target.closest('input,textarea,select,[contenteditable]');
+    if(editable)return;
     const video=activeTrainingVideo();
-    if(video&&!e.target.closest('input,textarea,select,[contenteditable]')){
+    if(video){
       if(e.key===' '&&!e.target.closest('button,a')){e.preventDefault();toggleTrainingVideo();return;}
       if(e.key==='ArrowLeft'){e.preventDefault();seekTrainingVideo(-5);return;}
       if(e.key==='ArrowRight'){e.preventDefault();seekTrainingVideo(5);return;}
     }
-    if(e.target.closest('input,textarea,select,button,a,[contenteditable]'))return;
-    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(current+1);}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(current-1);}else if(e.key==='Home'){e.preventDefault();go(0);}else if(e.key==='End'){e.preventDefault();go(slides.length-1);}else if(e.key==='Escape'){$('close-notes').click();}
+    const control=e.target.closest('button,a');
+    if(control&&['Enter',' ','Spacebar'].includes(e.key))return;
+    const nextKeys=['ArrowRight','ArrowDown','PageDown',' ','Space','Spacebar','Enter','MediaTrackNext','MediaPlayPause'];
+    const prevKeys=['ArrowLeft','ArrowUp','PageUp','MediaTrackPrevious'];
+    if(nextKeys.includes(e.key)||nextKeys.includes(e.code)){e.preventDefault();go(current+1);}else if(prevKeys.includes(e.key)||prevKeys.includes(e.code)){e.preventDefault();go(current-1);}else if(e.key==='Home'){e.preventDefault();go(0);}else if(e.key==='End'){e.preventDefault();go(slides.length-1);}else if(e.key==='Escape'){$('close-notes').click();}
   });
   $('slide').addEventListener('click',e=>{
     const select=e.target.closest('[data-video-select]');
@@ -216,6 +221,10 @@
     notify(await copy(url)?'그림 주소를 복사했어요. Gemini 요청문에 붙여 넣으세요.':'복사할 수 없습니다. 그림을 새 탭으로 열어 주소를 복사해 주세요.');
   });
   $('slide').addEventListener('click',async e=>{const promptButton=e.target.closest('[data-prompt]');if(promptButton){selectedPrompt=promptButton.dataset.prompt;$('prompt-title').textContent=labels[selectedPrompt]||'제작 프롬프트';$('prompt-text').value=prompts[selectedPrompt];$('copy-status').textContent='';$('prompt-dialog').showModal();return;}const b=e.target.closest('[data-action]');if(!b)return;switch(b.dataset.action){case 'start':go(1);break;case 'copy-plan':notify(await copy(plan())?'설계 카드를 복사했습니다.':'복사할 수 없습니다. 설계 카드 받기를 이용해 주세요.');break;case 'save-plan':download(plan(),'혜성학교_수업설계카드.txt');break;case 'handout':download(handout(),'20260916_혜성학교_AI연수_진행자료.md');break;}});
+  $('slide').addEventListener('click',e=>{
+    if(e.defaultPrevented||e.target.closest('button,a,input,textarea,select,video,[contenteditable],[data-action],[data-prompt],[data-video-select],[data-video-toggle],[data-video-skip],[data-video-segment],[data-video-fullscreen]'))return;
+    go(current+1);
+  });
   $('copy-prompt').onclick=async()=>{$('copy-status').textContent=await copy($('prompt-text').value)?'전체 프롬프트를 복사했습니다.':'직접 선택해 복사하거나 텍스트로 받아 주세요.';};
   $('save-prompt').onclick=()=>download($('prompt-text').value,`${labels[selectedPrompt]||'제작'}_프롬프트.txt`);
   function hash(){const value=Number(location.hash.slice(1));current=Number.isInteger(value)&&value>=1&&value<=slides.length?value-1:0;render();}

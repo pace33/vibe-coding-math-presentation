@@ -170,8 +170,21 @@ async function copyLesson(){
  try{await navigator.clipboard.writeText(t);alert("수업 활동 흐름을 복사했습니다.");}
  catch{const area=document.createElement("textarea");area.value=t;document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();alert("수업 활동 흐름을 복사했습니다.");}
 }
+function feedbackMission(answer){
+ const target=byId("challengeFeedback");target.hidden=false;
+ target.replaceChildren();
+ const label=answer==="아니다"?"좋은 판단입니다.":"자료를 확인해 볼까요?";
+ target.appendChild(li("strong","",label+" "));
+ target.appendChild(li("span","","충북교육청 2026년 11월 3일 자료에는 제천시·보은군·음성군이 함께 선정됐다고 나옵니다. 선택한 답보다 중요한 것은 이 사실을 원문에서 직접 확인하는 것입니다. "));
+ target.appendChild(openLink("충북교육청 공식 발표 열기","https://www.cbe.go.kr/news/na/ntt/selectNttInfo.do?mi=10301&nttSn=1581690"));
+}
+function jumpToMission(){
+ byId("region").value="음성군";byId("category").value="전체";byId("keyword").value="";renderResults();selectFact("cb-01");
+}
 function init(){
  loadLogs();renderResults();renderHistory();renderLesson();
+ document.querySelectorAll("[data-answer]").forEach(btn=>btn.addEventListener("click",()=>feedbackMission(btn.dataset.answer)));
+ byId("challengeToFact").addEventListener("click",jumpToMission);
  byId("region").addEventListener("change",renderResults);
  byId("keyword").addEventListener("input",renderResults);
  byId("category").addEventListener("change",renderResults);

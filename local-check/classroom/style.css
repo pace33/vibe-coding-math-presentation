@@ -4,3 +4,13 @@
 @media(max-width:860px){.header nav{gap:12px}.hero-grid{grid-template-columns:1fr .45fr}.hero-figure{transform:scale(.7)}.results{grid-template-columns:1fr}.search-grid{grid-template-columns:1fr 1fr}.search-grid>div:last-child{grid-column:1/-1}.verify-columns,.class-grid{grid-template-columns:1fr}.external-search{flex-direction:column}.search-links{justify-content:flex-start}}
 @media(max-width:620px){.container{width:calc(100% - 28px)}.header-inner{height:64px;gap:8px}.brand{font-size:16px}.brand small{font-size:9px}.logo{height:33px;width:33px;font-size:19px}.header nav{display:none}.hero-grid{display:block;min-height:260px}.hero-grid>div:first-child{padding:35px 0}.hero-figure{display:none}.hero h1{font-size:34px}.hero p{font-size:12px}.steps{gap:6px}.steps a{font-size:10px;padding:6px 9px}.panel{padding:20px 15px;border-radius:14px}.section-head{display:block}.section-head .pill{display:inline-flex;margin-top:10px}.search-grid{grid-template-columns:1fr}.search-grid>div:last-child{grid-column:auto}.fact-card{padding:16px}.verify-columns{gap:10px}.claim-panel,.evidence-panel{padding:16px}.checkset,.verdict{display:grid;gap:11px}.note{padding:14px}.footer{display:block}.footer>p{text-align:left;margin-top:15px}.history-item{flex-direction:column}.source-actions a{flex:1}.header .small{font-size:10px}}
 @media print{.header,.hero,.search-actions,.external-search,.form-actions,.search-grid,.results,.note,.section-num,.search-links,.footer,.ghost,.fact-actions{display:none!important}.panel{box-shadow:none;border:0;padding:5px;margin:0}body{background:white}#search{display:none}.claim-panel,.evidence-panel,.lesson{background:#fff}.checkset,.verdict{break-inside:avoid}}
+
+.challenge{background:#fff;border:1px solid #d5e8d5;border-radius:17px;margin:22px 0;padding:24px 28px;display:flex;gap:20px;align-items:center;justify-content:space-between;box-shadow:0 11px 26px #18392b0d}
+.challenge h2{font-size:clamp(18px,2.2vw,24px);line-height:1.55;margin:8px 0 6px}
+.challenge p{font-size:12px;color:#748579;margin:0 0 13px}
+.challenge-actions{display:flex;gap:8px;flex-wrap:wrap}
+.challenge-actions button{font-size:12px}
+.challenge-feedback{font-size:12px;line-height:1.8;margin-top:13px;background:#eaf7ed;border-radius:9px;padding:12px;color:#325d43}
+.challenge-feedback a{font-weight:900;text-decoration:underline;color:#176c49}
+#challengeToFact{white-space:nowrap}
+@media(max-width:680px){.challenge{padding:19px;display:block}.challenge #challengeToFact{margin-top:16px;width:100%}}

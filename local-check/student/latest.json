@@ -1,8 +1,72 @@
 {
   "version": 1,
-  "origin": "Google 뉴스 RSS 공개 검색 결과",
-  "updatedAt": null,
-  "note": "새 기사 목록은 자동 수집이 성공하면 표시됩니다. 제목만으로 사실이 확인되는 것은 아닙니다.",
-  "regionsChecked": 0,
-  "items": []
+  "origin": "수업용 최근 공식자료 (2026-11-19 직접 연결)",
+  "updatedAt": "2026-11-19",
+  "note": "수집 날짜 기준의 공개 자료입니다. 현재 상태 및 실제 사실은 원문을 직접 확인해야 합니다.",
+  "regionsChecked": 11,
+  "items": [
+    {
+      "region": "청주시",
+      "title": "청주시 2026년 10월 인구통계분석 공개",
+      "publisher": "청주시 통계정보시스템",
+      "published": "2026-11-11",
+      "url": "https://www.cheongju.go.kr/stat/index.do",
+      "verified": false,
+      "sourceType": "시청 공식 통계"
+    },
+    {
+      "region": "청주시",
+      "title": "청주시의회 직지 그래피티 축제 행사 사진",
+      "publisher": "청주시의회",
+      "published": "2026-11-14",
+      "url": "https://council.cheongju.go.kr/content/activity/photo.html?fidx=6674",
+      "verified": false,
+      "sourceType": "시의회 행사기록"
+    },
+    {
+      "region": "제천시",
+      "title": "제천시 교육혁신선도지역 선정 발표",
+      "publisher": "충청북도교육청",
+      "published": "2026-11-03",
+      "url": "https://job.cbe.go.kr/news/na/ntt/selectNttInfo.do?mi=10301&nttSn=1581690",
+      "verified": false,
+      "sourceType": "교육청 보도자료"
+    },
+    {
+      "region": "보은군",
+      "title": "보은군 교육혁신선도지역 선정 발표",
+      "publisher": "충청북도교육청",
+      "published": "2026-11-03",
+      "url": "https://job.cbe.go.kr/news/na/ntt/selectNttInfo.do?mi=10301&nttSn=1581690",
+      "verified": false,
+      "sourceType": "교육청 보도자료"
+    },
+    {
+      "region": "음성군",
+      "title": "음성군 교육혁신선도지역 선정 발표",
+      "publisher": "충청북도교육청",
+      "published": "2026-11-03",
+      "url": "https://job.cbe.go.kr/news/na/ntt/selectNttInfo.do?mi=10301&nttSn=1581690",
+      "verified": false,
+      "sourceType": "교육청 보도자료"
+    },
+    {
+      "region": "증평군",
+      "title": "증평군 인삼골축제 행사 일정 공식 안내",
+      "publisher": "증평군청",
+      "published": "2026-10-08",
+      "url": "https://www.jp.go.kr/kor/cop/bbs/BBSMSTR_000000000134/selectBoardArticle.do?nttId=B00000061546tt1tI5wl",
+      "verified": false,
+      "sourceType": "군청 공지사항"
+    },
+    {
+      "region": "보은군",
+      "title": "충북 농업기술원 보은대추축제 참가 안내",
+      "publisher": "충북농업기술원",
+      "published": "2026-10-16",
+      "url": "https://ares.chungbuk.go.kr/home/sub.php?menukey=1220&mod=view&no=11f1c869d2a439a28be8901b0e43d477",
+      "verified": false,
+      "sourceType": "공공기관 보도자료"
+    }
+  ]
 }

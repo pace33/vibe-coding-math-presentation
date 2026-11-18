@@ -53,7 +53,7 @@ function renderTopics(){
  items.forEach(t=>{
   const card=document.createElement("article");card.className="topic-card";
   card.innerHTML='<div class="card-top"><div class="topic-icon" aria-hidden="true">'+esc(t.icon)+'</div><span class="tag">'+esc(t.region)+' · '+esc(t.category)+'</span></div>'+
-   '<h3>'+esc(t.topic)+'</h3><p>'+esc(t.hook)+'</p><div class="card-bottom"><span>'+esc(t.sources.length)+'개의 실제 참고자료</span><button class="select-topic" type="button" data-topic="'+esc(t.id)+'">미션 시작 →</button></div>';
+   '<h3>'+esc(t.topic)+'</h3><p>'+esc(t.hook)+'</p><div class="card-bottom"><span>'+esc(t.sources.length)+'개의 실제 참고자료</span><div class="card-actions"><button class="share-topic" type="button" data-share="'+esc(t.id)+'" title="이 주제를 학생에게 공유할 링크 복사">링크 복사</button><button class="select-topic" type="button" data-topic="'+esc(t.id)+'">미션 시작 →</button></div></div>';
   grid.appendChild(card);
  });
  $("empty").hidden=items.length>0;
@@ -183,6 +183,17 @@ function next(){
 function prev(){saveInputs();if(state.step>0){state.step--;renderMission();store();}}
 function leave(){saveInputs();$("mission").hidden=true;$("choose").scrollIntoView({behavior:"smooth",block:"start"});}
 function handleChoose(e){
+ const share=e.target.closest("[data-share]");
+ if(share){
+  const topic=TOPICS.find(t=>t.id===share.dataset.share);
+  if(!topic)return;
+  const url=new URL(location.href);
+  url.searchParams.set("topic",topic.id);
+  url.searchParams.set("grade",state.grade);
+  url.hash="";
+  copyText(url.href);
+  return;
+ }
  const btn=e.target.closest("[data-topic]");if(btn)chooseTopic(btn.dataset.topic);
 }
 function handleMissionClick(e){

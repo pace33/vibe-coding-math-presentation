@@ -2,7 +2,7 @@
 "use strict";
 const $=id=>document.getElementById(id);
 const facts=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
-const state={news:[],updated:null,story:null,report:null};
+const state={news:[],updated:null,story:null,report:null,candidates:[]};
 const safe=s=>String(s??"").trim().slice(0,1800);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=s=>{try{const u=new URL(String(s));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return ""}};
@@ -74,20 +74,99 @@ async function loadNews(){
  }
 }
 function setLink(el,link){if(link){el.href=link;el.hidden=false;}else{el.removeAttribute("href");el.hidden=true;}}
+
+const allRegionNames=["청주시","충주시","제천시","보은군","옥천군","영동군","증평군","진천군","괴산군","음성군","단양군"];
+const stopWords=new Set(["충북","충청북도","관련","지역","우리","고장","오늘","내일","올해","뉴스","기사","언론","공식","보도","공개","문화","행사","진행","방문객","관광객","지난해","최근","확인","참가","안내","사업","지원","모집","전국","시민","주민","주제","대한","소식","한다","에서","지난","위해","인기"]);
+function compact(s){return String(s||"").replace(/\s+/g,"").replace(/[^가-힣a-zA-Z0-9]/g,"").toLowerCase();}
+function topicTerms(s,region){
+ const noise=new Set([...stopWords,region,...allRegionNames]);
+ return [...new Set((String(s||"").toLowerCase().match(/[가-힣a-z0-9]+/g)||[])
+   .filter(w=>w.length>=3&&!noise.has(w)&&!w.match(/^\d+$/)))];
+}
+function matchingCurated(story){
+ const text=compact(story.title+" "+story.topic);
+ return facts.filter(t=>{
+   if(t.region!==story.region)return false;
+   const exact=compact(t.topic);
+   if(exact.length>=4&&text.includes(exact))return true;
+   // Population information is suitable for comparing statistics only.
+   if(t.category==="인구·생활"&&/인구|주민등록|고령화/.test(story.title))return true;
+   return false;
+ }).slice(0,2);
+}
+function matchingNews(story){
+ const terms=topicTerms(story.title,story.region);
+ const current=compact(story.title);
+ return state.news.filter(n=>{
+   if(n.region!==story.region||n.url===story.url)return false;
+   const newsTitle=compact(n.title);
+   if(newsTitle===current)return false;
+   const shared=terms.filter(w=>newsTitle.includes(compact(w)));
+   // Prefer distinctive overlapping words; generic city or festival terms alone aren't enough.
+   return shared.some(w=>w.length>=4)||shared.length>=2;
+ }).slice(0,2);
+}
+function getCandidateList(story){
+ const candidates=[];
+ if(story.suggested)candidates.push({title:"이 지역의 대표 사례 비교 자료",type:"관련 공개자료",source:"대표 사례 자료집",url:story.suggested,date:"원문에서 확인"});
+ for(const t of matchingCurated(story)){
+  for(const entry of t.sources.slice(0,2)){
+    if(candidates.some(x=>x.url===entry.url)||entry.url===story.url)continue;
+    candidates.push({title:entry.name,type:entry.type||"지역 관련자료",source:"대표 사례: "+t.topic,url:entry.url,date:entry.date||"원문 확인 필요"});
+  }
+ }
+ for(const n of matchingNews(story)){
+  if(candidates.some(x=>x.url===n.url))continue;
+  candidates.push({title:n.title,type:"비슷한 주제의 다른 기사",source:n.publisher||"발행기관 확인 필요",url:n.url,date:n.published||"발표일 확인"});
+ }
+ return candidates.filter(x=>url(x.url)).slice(0,4);
+}
+function renderEvidenceCandidates(){
+ const container=$("evidenceCandidates");
+ container.replaceChildren();
+ state.candidates=getCandidateList(state.story);
+ const head=document.createElement("p");head.className="candidates-caption";
+ head.textContent="같은 주제일 수 있는 참고자료예요. 실제로 관련이 있는지 원문을 읽고 확인하세요.";
+ container.appendChild(head);
+ if(!state.candidates.length){
+   const message=document.createElement("div");message.className="candidates-empty";
+   message.textContent="이 뉴스와 직접 연결된 자료 후보가 아직 없어요. 아래 '공식 자료 더 찾기' 또는 '비슷한 기사 더 찾기'를 이용해 보세요.";
+   container.appendChild(message);return;
+ }
+ const cards=document.createElement("div");cards.className="candidate-grid";
+ state.candidates.forEach((c,i)=>{
+   const card=document.createElement("article");card.className="candidate-card";
+   const tag=document.createElement("span");tag.className="candidate-kind";tag.textContent=c.type;
+   const title=document.createElement("strong");title.textContent=c.title;
+   const meta=document.createElement("p");meta.textContent=c.source+" · "+c.date;
+   const actions=document.createElement("div");actions.className="candidate-actions";
+   const link=document.createElement("a");link.textContent="원문 읽기 ↗";link.href=c.url;link.target="_blank";link.rel="noopener noreferrer";
+   const select=document.createElement("button");select.type="button";select.textContent="비교자료로 선택";select.dataset.chooseCandidate=String(i);
+   actions.append(link,select);card.append(tag,title,meta,actions);cards.appendChild(card);
+ });
+ container.appendChild(cards);
+}
+function selectCandidate(index){
+ const candidate=state.candidates[index];if(!candidate)return;
+ $("officialUrl").value=candidate.url;
+ $("officialFinding").focus();
+ $("formMessage").textContent="선택한 자료의 주소를 넣었어요. 원문을 읽고 확인한 사실을 직접 적어 주세요.";
+}
 function chooseStory(story){
  if(!story||!url(story.url))return;
- state.story={title:safe(story.title),url:url(story.url),publisher:safe(story.publisher||"발행기관 확인"),date:safe(story.date||""),region:safe(story.region||$("region").value),suggested:url(story.suggested||"")};
+ state.story={title:safe(story.title),url:url(story.url),publisher:safe(story.publisher||"발행기관 확인"),date:safe(story.date||""),region:safe(story.region||$("region").value),topic:safe(story.topic||""),suggested:url(story.suggested||"")};
  state.report=null;
  $("articleTitle").textContent=state.story.title;
  $("articlePublisher").textContent="발행한 곳: "+state.story.publisher;
  $("articleDate").textContent=state.story.date;
  setLink($("articleLink"),state.story.url);
- setLink($("suggestedLink"),state.story.suggested);
+ renderEvidenceCandidates();
  for(const id of ["articleFinding","officialFinding","officialUrl","reason"])$(id).value="";
  document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
  $("formMessage").textContent="";
  const location=state.story.region==="전체"?"충청북도":"충청북도 "+state.story.region;
  $("officialLink").href=query("official",location,story.topic||story.title);
+ $("newsCompareLink").href=query("news",location,story.topic||story.title);
  show("verify");
 }
 function fromTopic(id){
@@ -99,12 +178,6 @@ function fromNews(index){
  const row=state.news[index];if(!row)return;
  chooseStory({title:row.title,url:row.url,publisher:row.publisher,date:row.published,region:row.region,topic:row.title});
 }
-function fromCustom(){
- const title=safe($("newTitle").value),link=url($("newUrl").value);
- if(title.length<4){alert("새로 찾은 기사의 제목을 적어 주세요.");$("newTitle").focus();return;}
- if(!link){alert("실제 기사나 공지의 주소(https://...)를 입력해 주세요.");$("newUrl").focus();return;}
- chooseStory({title,url:link,publisher:"직접 찾은 자료 · 발표기관 확인 필요",date:"원문에서 발표일 확인",region:$("region").value});
-}
 function makeReport(){
  if(!state.story)return;
  const newsFact=safe($("articleFinding").value,1200);
@@ -114,7 +187,7 @@ function makeReport(){
  const reason=safe($("reason").value,1200);
  if(newsFact.length<3){$("formMessage").textContent="뉴스 원문에서 찾은 내용을 먼저 적어 주세요.";$("articleFinding").focus();return;}
  if(verdict!=="아직 모르겠어요"&&(!govUrl||govFact.length<3)){
-  $("formMessage").textContent="두 자료가 같거나 다르다고 판단하려면 공식 자료의 주소와 확인 내용을 적어 주세요.";
+  $("formMessage").textContent="두 자료를 비교하려면 비교한 자료의 주소와 확인 내용을 적어 주세요.";
   $("officialUrl").focus();return;
  }
  if(reason.length<3){$("formMessage").textContent="왜 그렇게 생각했는지 적어 주세요.";$("reason").focus();return;}
@@ -129,20 +202,20 @@ function renderReport(){
   '<div class="report-row"><strong>지역</strong><p>'+esc(d.region)+'</p></div>'+
   '<div class="report-row"><strong>선택한 뉴스</strong><p>'+esc(d.title)+'</p></div>'+
   '<div class="report-row"><strong>뉴스에서 찾은 사실</strong><p>'+esc(d.newsFact)+'</p></div>'+
-  '<div class="report-row"><strong>공식 자료에서 찾은 사실</strong><p>'+esc(d.govFact||"아직 찾지 못했어요")+'</p></div>'+
+  '<div class="report-row"><strong>비교 자료에서 찾은 사실</strong><p>'+esc(d.govFact||"아직 찾지 못했어요")+'</p></div>'+
   '<div class="report-row"><strong>나의 판단</strong><p>'+esc(d.verdict)+'</p></div>'+
   '<div class="report-row"><strong>판단한 이유</strong><p>'+esc(d.reason)+'</p></div>'+
   '<div class="report-row"><strong>참고한 원문</strong><a href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer">뉴스·기사 원문 ↗</a>'+
-   (d.govUrl?'<a href="'+esc(d.govUrl)+'" target="_blank" rel="noopener noreferrer">공식 자료 원문 ↗</a>':'')+'</div>'+
+   (d.govUrl?'<a href="'+esc(d.govUrl)+'" target="_blank" rel="noopener noreferrer">비교 자료 원문 ↗</a>':'')+'</div>'+
   '<p class="note">이 카드는 학생이 찾은 근거와 판단을 기록한 것이며, 정보의 사실 여부를 자동으로 검증한 결과가 아닙니다.</p>';
 }
 function reportText(){
  const d=state.report;
  return [
   "우리 고장 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
-  "뉴스에서 찾은 사실: "+d.newsFact,"공식 자료에서 찾은 사실: "+(d.govFact||"아직 못 찾음"),
+  "뉴스에서 찾은 사실: "+d.newsFact,"비교 자료에서 찾은 사실: "+(d.govFact||"아직 못 찾음"),
   "나의 판단: "+d.verdict,"판단한 이유: "+d.reason,
-  "뉴스 원문: "+d.url,"공식 자료: "+(d.govUrl||"추가 확인 필요"),
+  "뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
   "※ 학생이 작성한 판단이며, 자동 사실 검증은 아닙니다."
  ].join("\n");
 }
@@ -156,9 +229,9 @@ function download(){
 }
 function init(){
  $("region").addEventListener("change",refresh);$("keyword").addEventListener("input",refresh);
- $("startCustom").addEventListener("click",fromCustom);
  $("topicList").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(b)fromTopic(b.dataset.topic);});
  $("newsList").addEventListener("click",e=>{const b=e.target.closest("[data-news]");if(b)fromNews(Number(b.dataset.news));});
+ $("evidenceCandidates").addEventListener("click",e=>{const b=e.target.closest("[data-choose-candidate]");if(b)selectCandidate(Number(b.dataset.chooseCandidate));});
  $("back").addEventListener("click",()=>show("home"));
  $("backVerify").addEventListener("click",()=>show("verify"));
  $("again").addEventListener("click",()=>show("home"));

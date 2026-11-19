@@ -3,7 +3,7 @@
 const $=id=>document.getElementById(id);
 const facts=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
 const state={news:[],updated:null,story:null,report:null,candidates:[]};
-const safe=s=>String(s??"").trim().slice(0,1800);
+const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=s=>{try{const u=new URL(String(s));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return ""}};
 function place(){return $("region").value==="전체"?"충청북도":"충청북도 "+$("region").value}
@@ -17,7 +17,7 @@ function updateLinks(){
  $("officialSearch").href=query("official");
 }
 function show(screen){
- for(const id of ["home","verify","result"])$(id).hidden=id!==screen;
+ for(const id of ["home","verify","result","board","shared"])$(id).hidden=id!==screen;
  window.scrollTo({top:0,behavior:"smooth"});
 }
 function renderNews(){
@@ -192,6 +192,10 @@ function makeReport(){
  }
  if(reason.length<3){$("formMessage").textContent="왜 그렇게 생각했는지 적어 주세요.";$("reason").focus();return;}
  state.report={...state.story,newsFact,govFact,govUrl,verdict,reason};
+ if(window.LocalCheckBoard){
+  const saved=window.LocalCheckBoard.save(state.report);
+  if(saved)state.report=saved;
+ }
  renderReport();show("result");
 }
 function renderReport(){
@@ -238,6 +242,7 @@ function init(){
  $("finish").addEventListener("click",makeReport);
  $("print").addEventListener("click",()=>window.print());
  $("download").addEventListener("click",download);
+ if(window.LocalCheckBoard)window.LocalCheckBoard.init({show,getReport:()=>state.report});
  refresh();loadNews();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();

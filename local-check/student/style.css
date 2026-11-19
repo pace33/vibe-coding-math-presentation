@@ -55,3 +55,24 @@ footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid 
 .unverified-link{font-size:12px;color:#809585}
 @media(max-width:680px){.header-board{font-size:11px;padding:10px 12px;max-width:46%;white-space:normal}.brand{font-size:15px}.board-heading{display:block}.board-heading .btn{margin-top:12px;font-size:12px}.board-grid{grid-template-columns:1fr}.board-card{padding:17px}.board-privacy{padding:12px;font-size:12px}}
 @media print{.header-board,#board,#shared,.board-privacy{display:none!important}}
+
+/* Our regional enterprises: lightweight student industry discovery cards. */
+.business-section{margin-top:33px}
+.business-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.business-card{border:1px solid #dce8de;background:#fff;border-radius:15px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.business-card h3{font-size:18px;margin:0;line-height:1.45}
+.business-card p{font-size:12px;line-height:1.75;color:#64806d;flex:1;margin:0}
+.business-meta{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.business-emoji{font-size:26px;width:51px;height:51px;display:grid;place-items:center;background:#eff8ea;border-radius:13px}
+.business-tag{font-size:11px;font-weight:850;color:#367450;background:#e9f5e9;padding:6px 9px;border-radius:8px}
+.business-product{font-size:12px;color:#6b8975;background:#f2f8f1;border-radius:9px;padding:10px 12px}
+.business-product b{display:block;color:#285d40;font-size:13px}
+.business-buttons{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:3px}
+.business-buttons button,.business-buttons a{font-size:12px;line-height:1.4;border-radius:9px;padding:10px 12px;min-height:41px;font-weight:850}
+.business-buttons button{border:1px solid #236b51;background:#236b51;color:#fff;cursor:pointer}
+.business-buttons a{border:1px solid #d2e6d5;color:#336e4e;background:#f8fcf8}
+.business-buttons button:hover{background:#14583e}
+.more-businesses{display:block;margin:17px auto;border:1px solid #bfdac5;background:#e9f7e8;border-radius:10px;color:#246d4b;font-size:13px;font-weight:900;padding:11px 17px}
+.business-note{margin:15px 0 0;font-size:11px;color:#728b78;line-height:1.7}
+@media(max-width:680px){.business-list{grid-template-columns:1fr}.business-card{padding:17px}}
+@media print{.business-section{display:none!important}}

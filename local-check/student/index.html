@@ -14,7 +14,7 @@
 <a class="skip" href="#main">본문으로 이동</a>
 <header class="site-header"><div class="shell header-inner">
 <a href="./" class="brand"><span class="brand-icon">🔎</span><span>우리 고장 <b>뉴스 탐정</b><small>로컬체크 · 초등 사회 탐구</small></span></a>
-<span class="header-tag">찾기 → 확인하기 → 판단하기</span>
+<button class="header-board" id="openBoard" type="button">🗂️ 우리 반 탐정 게시판</button>
 </div></header>
 <main id="main">
 <div class="shell">
@@ -69,8 +69,25 @@
   <button type="button" id="backVerify" class="back">← 내용 다시 살펴보기</button>
   <div class="intro small-intro"><span class="eyebrow">탐구 완료!</span><h1>🎉 나도 우리 고장 뉴스 탐정!</h1><p>찾은 근거를 사용해서 친구들에게 설명해 보세요.</p></div>
   <div id="report" class="report"></div>
-  <div class="bottom-actions"><button type="button" class="btn btn-primary" id="print">🖨️ 인쇄 / PDF</button><button type="button" class="btn btn-light" id="download">📥 글로 저장</button><button type="button" class="btn btn-light" id="again">🔎 다른 뉴스 찾기</button></div>
+  <p class="board-privacy">✅ 탐구 카드는 먼저 이 기기에 저장됩니다. <b>친구에게 카드 공유</b>를 누르면 다른 기기에서도 볼 수 있는 링크를 만들어요. 이름·전화번호·학교명 등 개인정보는 쓰지 마세요.</p>
+  <div class="bottom-actions"><button type="button" class="btn btn-primary" id="print">🖨️ 인쇄 / PDF</button><button type="button" class="btn btn-light" id="shareCard">🔗 친구에게 카드 공유</button><button type="button" class="btn btn-light" id="resultBoard">📚 탐정 게시판 보기</button><button type="button" class="btn btn-light" id="download">📥 글로 저장</button><button type="button" class="btn btn-light" id="again">🔎 다른 뉴스 찾기</button></div>
 </section>
-<footer><span>로컬체크 EDU · 초등 사회과 탐구</span><span>회원가입 없음 · 학생 이름 입력 없음 · 뉴스는 스스로 검증해요</span></footer>
+
+<section id="board" class="view" hidden aria-labelledby="boardTitle">
+  <button class="back" id="boardBack" type="button">← 뉴스 탐정으로</button>
+  <div class="intro small-intro"><span class="eyebrow">탐구 결과 모아 보기</span><h1 id="boardTitle">🗂️ 우리 반 뉴스 탐정 게시판</h1><p>내가 만든 카드와 친구가 공유한 카드를 모아서 살펴봐요.</p></div>
+  <div class="board-explain"><strong>친구 자료를 어떻게 볼까요?</strong><p>친구가 보낸 <b>탐정 카드 링크</b>를 열면 결과가 보입니다. <b>내 게시판에 담기</b>를 누르면 이 기기에 저장돼요. 아직 모든 학생의 카드가 자동으로 모이는 공용 게시판은 아니에요.</p></div>
+  <div class="board-heading"><h2>모아 둔 탐정 카드 <span id="boardCount">0건</span></h2><button class="btn btn-light" type="button" id="downloadBoard">📥 내 게시판 파일 저장</button></div>
+  <div id="boardList" class="board-grid" aria-live="polite"></div>
+</section>
+<section id="shared" class="view" hidden aria-labelledby="sharedTitle">
+  <button class="back" id="sharedBack" type="button">← 게시판으로</button>
+  <div class="intro small-intro"><span class="eyebrow">친구와 나누는 근거</span><h1 id="sharedTitle">🔎 친구의 뉴스 탐정 카드</h1><p>친구가 어떤 자료를 읽고 어떻게 판단했는지 함께 살펴봐요.</p></div>
+  <div id="sharedReport" class="report" aria-live="polite"></div>
+  <p class="board-privacy">이 내용은 학생이 작성한 <b>검증 기록</b>입니다. 사실로 확인됐다는 뜻은 아니에요. 기사 원문과 근거를 다시 확인해 보세요.</p>
+  <div class="bottom-actions"><button class="btn btn-primary" id="addShared" type="button">📚 내 게시판에 담기</button><button class="btn btn-light" id="shareAgain" type="button">🔗 이 카드 링크 복사</button><button class="btn btn-light" id="sharedHome" type="button">🏠 뉴스 찾기로</button></div>
+  <p id="shareStatus" class="board-feedback" role="status" aria-live="polite"></p>
+</section>
+<footer><span>로컬체크 EDU · 초등 사회과 탐구</span><span>회원가입 없음 · 학생 이름 입력 없음 · 카드 공유 시 개인정보를 적지 마세요</span></footer>
 </div></main>
 </body></html>

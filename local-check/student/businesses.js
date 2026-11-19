@@ -12,7 +12,7 @@ window.LOCALCHECK_BUSINESSES = [
   summary:"청주에도 반도체를 생산하는 사업장이 있어요. 공장 주소는 어떤 자료로 확인할 수 있을까요?",
   inquiry:"SK하이닉스의 청주사업장이 실제로 청주에 있다는 사실을 어떻게 확인할까요?",
   source:{title:"2025년 충청지역 녹색기업 사례집(사업장 주소)",date:"2025",url:"https://daejeoncci.korcham.net/file/dext5uploaddata/2025/2025%EB%85%84%20%EC%B6%A9%EC%B2%AD%EC%A7%80%EC%97%AD%20%EB%85%B9%EC%83%89%EA%B8%B0%EC%97%85%20ESG%20%EA%B2%BD%EC%98%81%20%EC%82%AC%EB%A1%80%EC%A7%91%28%EA%B8%88%EA%B0%95%EC%9C%A0%EC%97%AD%ED%99%98%EA%B2%AD%29_1.pdf"},
-  secondary:{title:"금강유역환경청 자료 확인",date:"2025",url:"https://daejeoncci.korcham.net/file/dext5uploaddata/2025/2025%EB%85%84%20%EC%B6%A9%EC%B2%AD%EC%A7%80%EC%97%AD%20%EB%85%B9%EC%83%89%EA%B8%B0%EC%97%85%20ESG%20%EA%B2%BD%EC%98%81%20%EC%82%AC%EB%A1%80%EC%A7%91%28%EA%B8%88%EA%B0%95%EC%9C%A0%EC%97%AD%ED%99%98%EA%B2%AD%29_1.pdf"}},
+  secondary:{title:"SK하이닉스 청주 사업장 투자·건설 설명",date:"2026-04",url:"https://news.skhynix.co.kr/skhynix-chungju-pt7/"}},
  {id:"biz-chungju-elevator",region:"충주시",name:"현대엘리베이터 충주 본사·공장",type:"생활 속 기계",emoji:"🛗",produces:"엘리베이터와 승강기",
   summary:"높은 건물에서 타는 엘리베이터를 만드는 회사예요. 충주에는 본사와 공장이 있다고 안내돼 있어요.",
   inquiry:"현대엘리베이터의 본사와 공장은 어디에 있을까요?",

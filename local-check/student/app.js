@@ -2,6 +2,8 @@
 "use strict";
 const $=id=>document.getElementById(id);
 const facts=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
+const companies=Array.isArray(window.LOCALCHECK_BUSINESSES)?window.LOCALCHECK_BUSINESSES:[];
+let businessExpanded=false;
 const state={news:[],updated:null,story:null,report:null,candidates:[]};
 const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -40,6 +42,46 @@ function renderNews(){
   root.appendChild(card);
  }
 }
+
+function businessNewsUrl(region,name){
+ const q=region+" "+name+" when:90d";
+ const target=new URL("https://news.google.com/search");
+ target.searchParams.set("q",q);
+ target.searchParams.set("hl","ko");target.searchParams.set("gl","KR");target.searchParams.set("ceid","KR:ko");
+ return target.href;
+}
+function renderBusinesses(){
+ const area=$("region").value;
+ const keyword=safe($("keyword").value,150).toLowerCase();
+ const items=companies.filter(c=>(area==="전체"||c.region===area)&&
+   (!keyword||[c.region,c.name,c.produces,c.type,c.summary].join(" ").toLowerCase().includes(keyword)));
+ const visible=businessExpanded?items:items.slice(0,area==="전체"?6:5);
+ const list=$("businessList");list.replaceChildren();
+ $("businessCount").textContent=items.length+"개 사업장·사례";
+ const more=$("moreBusinesses");
+ more.hidden=items.length<=(area==="전체"?6:5);
+ more.textContent=businessExpanded?"간단히 보기 ↑":"지역 기업 "+(items.length-visible.length)+"곳 더 보기 ↓";
+ if(!visible.length){
+  const empty=document.createElement("div");empty.className="news-empty";empty.textContent="이 조건에 맞는 기업 사례가 없어요. 지역이나 검색어를 바꿔 보세요.";list.appendChild(empty);return;
+ }
+ for(const c of visible){
+  const card=document.createElement("article");card.className="business-card";
+  card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.region)+' · '+esc(c.type)+'</span></div>'+
+   '<h3>'+esc(c.name)+'</h3><div class="business-product">무엇을 만들까요? <b>'+esc(c.produces)+'</b></div>'+
+   '<p>'+esc(c.summary)+'</p><div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">🔎 이 기업 조사하기</button>'+
+   '<a href="'+esc(url(c.source.url))+'" target="_blank" rel="noopener noreferrer">소개 자료 ↗</a>'+
+   '<a href="'+esc(businessNewsUrl(c.region,c.name))+'" target="_blank" rel="noopener noreferrer">최근 뉴스 ↗</a></div>';
+  list.appendChild(card);
+ }
+}
+function fromBusiness(id){
+ const business=companies.find(c=>c.id===id);if(!business)return;
+ chooseStory({title:"기업 탐구: "+business.name,
+  url:business.source.url,publisher:business.source.title,
+  date:business.source.date||"공개자료",region:business.region,
+  topic:business.name,suggested:business.secondary?.url||"",
+  kind:"business",inquiry:business.inquiry});
+}
 function renderTopics(){
  const area=$("region").value;
  const keyword=safe($("keyword").value).toLowerCase();
@@ -54,7 +96,7 @@ function renderTopics(){
   root.appendChild(button);
  }
 }
-function refresh(){updateLinks();renderNews();renderTopics();}
+function refresh(){updateLinks();renderNews();renderBusinesses();renderTopics();}
 async function loadNews(){
  const root=$("newsList");
  root.innerHTML='<div class="news-empty">최근 지역 자료를 불러오고 있어요.</div>';
@@ -154,8 +196,14 @@ function selectCandidate(index){
 }
 function chooseStory(story){
  if(!story||!url(story.url))return;
- state.story={title:safe(story.title),url:url(story.url),publisher:safe(story.publisher||"발행기관 확인"),date:safe(story.date||""),region:safe(story.region||$("region").value),topic:safe(story.topic||""),suggested:url(story.suggested||"")};
+ state.story={title:safe(story.title),url:url(story.url),publisher:safe(story.publisher||"발행기관 확인"),date:safe(story.date||""),region:safe(story.region||$("region").value),topic:safe(story.topic||""),kind:story.kind==="business"?"business":"news",inquiry:safe(story.inquiry||""),suggested:url(story.suggested||"")};
  state.report=null;
+ const isBusiness=state.story.kind==="business";
+ $("verifyHeading").textContent=isBusiness?"기업 정보가 정말 맞을까?":"뉴스가 정말 맞을까?";
+ $("storyType").textContent=isBusiness?"🏭 우리 고장 기업 자료":"📰 내가 고른 뉴스";
+ $("findingHeading").textContent=isBusiness?"① 이 기업에 대해 무엇을 알게 되었나요?":"① 뉴스에서 어떤 내용을 찾았나요?";
+ $("findingLabel").textContent=isBusiness?"기업 소개나 사업장 자료에서 확인한 사실을 적어 보세요.":"기사나 공지에 적힌 중요한 사실을 적어 보세요.";
+ $("articleLink").textContent=isBusiness?"기업·사업장 원문 읽기 ↗":"기사 원문 읽기 ↗";
  $("articleTitle").textContent=state.story.title;
  $("articlePublisher").textContent="발행한 곳: "+state.story.publisher;
  $("articleDate").textContent=state.story.date;
@@ -234,6 +282,8 @@ function download(){
 function init(){
  $("region").addEventListener("change",refresh);$("keyword").addEventListener("input",refresh);
  $("topicList").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(b)fromTopic(b.dataset.topic);});
+ $("businessList").addEventListener("click",e=>{const b=e.target.closest("[data-business]");if(b)fromBusiness(b.dataset.business);});
+ $("moreBusinesses").addEventListener("click",()=>{businessExpanded=!businessExpanded;renderBusinesses();});
  $("newsList").addEventListener("click",e=>{const b=e.target.closest("[data-news]");if(b)fromNews(Number(b.dataset.news));});
  $("evidenceCandidates").addEventListener("click",e=>{const b=e.target.closest("[data-choose-candidate]");if(b)selectCandidate(Number(b.dataset.chooseCandidate));});
  $("back").addEventListener("click",()=>show("home"));

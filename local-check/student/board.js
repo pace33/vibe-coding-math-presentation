@@ -183,7 +183,7 @@ function importHash(){
 }
 function init({show,getReport}={}){
  navigation=show;reportProvider=getReport;
- $("openBoard").addEventListener("click",gotoBoard);
+ if($("openBoard"))$("openBoard").addEventListener("click",gotoBoard);
  $("resultBoard").addEventListener("click",gotoBoard);
  $("boardBack").addEventListener("click",()=>navigation?.("home"));
  $("sharedBack").addEventListener("click",gotoBoard);

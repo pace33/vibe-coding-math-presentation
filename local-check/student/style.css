@@ -26,3 +26,32 @@ footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid 
 .candidates-empty{font-size:13px;color:#627d6d;line-height:1.8;background:#f5faf5;border:1px dashed #cedfd1;border-radius:12px;padding:17px}
 @media(max-width:680px){.candidate-grid{grid-template-columns:1fr}.candidate-card{padding:14px}}
 @media print{.evidence-candidates{display:none!important}}
+
+/* Student evidence sharing board: readable on tablets, phones, and large displays. */
+.header-board{border:1px solid #bfddc6;color:#1b694c;background:#eaf7ea;font-size:13px;font-weight:900;border-radius:11px;padding:11px 16px;white-space:nowrap;cursor:pointer}
+.header-board:hover{background:#d9f2dd}
+.board-privacy{font-size:13px;line-height:1.8;background:#f0f8ef;border:1px solid #d8e9d6;border-radius:12px;padding:13px 16px;color:#476855;margin:16px 0}
+.board-explain{padding:18px 21px;background:#eaf5e9;border:1px solid #cfe5d3;border-radius:14px;margin-bottom:26px}
+.board-explain strong{font-size:15px;color:#266e4c}
+.board-explain p{margin:6px 0 0;font-size:13px;color:#547562;line-height:1.85}
+.board-heading{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.board-heading h2{font-size:22px;margin:0}
+.board-heading h2 span{font-size:12px;border-radius:99px;background:#e7f4e8;color:#377353;padding:5px 10px;white-space:nowrap;vertical-align:middle}
+.board-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.board-card{background:white;padding:21px;border:1px solid var(--line);border-radius:15px;display:flex;flex-direction:column;gap:10px}
+.board-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.board-region{font-size:12px;font-weight:900;color:#26764e;background:#e6f5e5;border-radius:8px;padding:5px 10px}
+.board-verdict{font-size:11px;color:#567464;border:1px solid #dbe8dd;border-radius:8px;padding:5px 9px}
+.board-card h3{font-size:18px;line-height:1.45;margin:3px 0 0;overflow-wrap:anywhere}
+.board-card p{font-size:13px;line-height:1.8;color:#68816f;margin:0;flex:1;white-space:pre-wrap;overflow-wrap:anywhere}
+.board-card-buttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.board-action{padding:10px 12px;border:1px solid #cbdfd1;border-radius:9px;background:#f7fcf6;color:#2a6c4c;font-size:12px;font-weight:900;cursor:pointer}
+.board-action.primary{background:#216c50;color:#fff;border-color:#216c50}
+.board-action.subdued{color:#829385;background:#fff}
+.board-empty{grid-column:1/-1;padding:35px 20px;text-align:center;background:#fff;border:1px dashed #ccdfce;border-radius:13px}
+.board-empty strong{font-size:17px}
+.board-empty p{font-size:13px;color:#74877b;margin:5px 0 0}
+.board-feedback{font-size:13px;color:#2c7652;min-height:18px;margin:12px 0}
+.unverified-link{font-size:12px;color:#809585}
+@media(max-width:680px){.header-board{font-size:11px;padding:10px 12px;max-width:46%;white-space:normal}.brand{font-size:15px}.board-heading{display:block}.board-heading .btn{margin-top:12px;font-size:12px}.board-grid{grid-template-columns:1fr}.board-card{padding:17px}.board-privacy{padding:12px;font-size:12px}}
+@media print{.header-board,#board,#shared,.board-privacy{display:none!important}}

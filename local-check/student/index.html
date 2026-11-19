@@ -8,6 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="stylesheet" href="style.css">
 <script src="data.js" defer></script>
+<script src="board.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
@@ -45,7 +46,7 @@
   <section class="verify-panel">
     <h2>① 뉴스에서 어떤 내용을 찾았나요?</h2>
     <label for="articleFinding">기사나 공지에 적힌 중요한 사실을 적어 보세요.</label>
-    <textarea id="articleFinding" rows="3" placeholder="예: 2026년 축제는 9월 3일에 시작한다고 해요."></textarea>
+    <textarea id="articleFinding" maxlength="500" rows="3" placeholder="예: 2026년 축제는 9월 3일에 시작한다고 해요."></textarea>
     <div class="divider"></div>
     <h2>② 다른 자료와 비교해요</h2>
     <p class="helper">아래 자료 후보를 먼저 살펴보고, 원문에서 날짜와 내용을 직접 확인해요. 추천 자료는 정답이 아니에요.</p>
@@ -57,11 +58,11 @@
     <label for="officialUrl">비교에 사용한 자료 주소 (선택)</label>
     <input id="officialUrl" type="url" placeholder="https://...">
     <label for="officialFinding">다른 자료에서는 어떤 사실을 확인했나요?</label>
-    <textarea id="officialFinding" rows="3" placeholder="예: 다른 기사에도 같은 날짜가 적혀 있어요."></textarea>
+    <textarea id="officialFinding" maxlength="500" rows="3" placeholder="예: 다른 기사에도 같은 날짜가 적혀 있어요."></textarea>
     <div class="divider"></div>
     <h2>③ 내 생각은 무엇인가요?</h2>
     <fieldset class="choices"><legend>두 자료를 비교한 결과를 선택해요.</legend><label><input type="radio" name="verdict" value="같아요">✅ 내용이 같아요</label><label><input type="radio" name="verdict" value="달라요">⚠️ 다른 점이 있어요</label><label><input type="radio" name="verdict" value="아직 모르겠어요" checked>🤔 더 확인해야 해요</label></fieldset>
-    <label for="reason">왜 그렇게 생각하나요?</label><textarea id="reason" rows="3" placeholder="예: 기사와 군청 공지의 행사 날짜가 같기 때문이에요."></textarea>
+    <label for="reason">왜 그렇게 생각하나요?</label><textarea id="reason" maxlength="500" rows="3" placeholder="예: 기사와 군청 공지의 행사 날짜가 같기 때문이에요."></textarea>
     <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">나의 탐정 카드 완성하기 →</button><span id="formMessage" role="status" aria-live="polite"></span></div>
   </section>
 </section>

@@ -2,8 +2,13 @@
 "use strict";
 const $=id=>document.getElementById(id);
 const facts=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
-const companies=Array.isArray(window.LOCALCHECK_BUSINESSES)?window.LOCALCHECK_BUSINESSES:[];
+const companies=[
+ ...(Array.isArray(window.LOCALCHECK_BUSINESSES)?window.LOCALCHECK_BUSINESSES:[]).map(c=>({...c,group:"대표 기업"})),
+ ...(Array.isArray(window.LOCALCHECK_SMALL_BUSINESSES)?window.LOCALCHECK_SMALL_BUSINESSES:[])
+];
 let businessExpanded=false;
+let activeMenu="news";
+let businessFilter="all";
 const state={news:[],updated:null,story:null,report:null,candidates:[]};
 const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -15,9 +20,34 @@ function query(kind,area=place(),topic=$("keyword").value){
  const x=new URL("https://news.google.com/search");x.searchParams.set("q",q);x.searchParams.set("hl","ko");x.searchParams.set("gl","KR");x.searchParams.set("ceid","KR:ko");return x.href;
 }
 function updateLinks(){
- $("newsSearch").href=query("news");
- $("officialSearch").href=query("official");
+ const kind=activeMenu==="business"?" 기업 산업":activeMenu==="local"?" 축제 관광 문화":"";
+ const area=place(),topic=($("keyword").value||"")+kind;
+ $("newsSearch").href=query("news",area,topic);
+ $("officialSearch").href=query("official",area,topic);
+ $("newsSearch").innerHTML=activeMenu==="business"?"📰 새 기업 뉴스 검색하기 ↗":activeMenu==="local"?"📰 지역 행사 뉴스 찾기 ↗":"📰 지금 새 뉴스 검색하기 ↗";
+ $("officialSearch").innerHTML=activeMenu==="business"?"🏭 기업·사업장 정보 찾기 ↗":activeMenu==="local"?"🏛️ 지역 공식자료 찾기 ↗":"🏛️ 시·군청 공지 찾기 ↗";
 }
+function chooseMenu(menu){
+ if(menu==="board"){
+  window.LocalCheckBoard?.renderBoard?.();show("board");return;
+ }
+ if(!["news","business","local"].includes(menu))return;
+ activeMenu=menu;
+ $("newsSection").hidden=menu!=="news";
+ $("businessSection").hidden=menu!=="business";
+ $("localSection").hidden=menu!=="local";
+ document.querySelectorAll("[data-menu]").forEach(button=>{
+  const selected=button.dataset.menu===menu;
+  button.classList.toggle("active",selected);
+  button.setAttribute("aria-pressed",String(selected));
+ });
+ $("keyword").value="";
+ const hints={news:"예: 축제, 인구, 학교",business:"예: 중소기업, 식품, 반도체",local:"예: 축제, 문화, 역사"};
+ $("keyword").placeholder=hints[menu];
+ updateLinks();renderBusinesses();renderNews();renderTopics();
+ if($("home").hidden)show("home");
+}
+
 function show(screen){
  for(const id of ["home","verify","result","board","shared"])$(id).hidden=id!==screen;
  window.scrollTo({top:0,behavior:"smooth"});
@@ -54,7 +84,8 @@ function renderBusinesses(){
  const area=$("region").value;
  const keyword=safe($("keyword").value,150).toLowerCase();
  const items=companies.filter(c=>(area==="전체"||c.region===area)&&
-   (!keyword||[c.region,c.name,c.produces,c.type,c.summary].join(" ").toLowerCase().includes(keyword)));
+   (businessFilter==="all"||(businessFilter==="small"&&c.group!=="대표 기업")||(businessFilter==="featured"&&c.group==="대표 기업"))&&
+   (!keyword||[c.region,c.name,c.produces,c.type,c.summary,c.group].join(" ").toLowerCase().includes(keyword)));
  const visible=businessExpanded?items:items.slice(0,area==="전체"?6:5);
  const list=$("businessList");list.replaceChildren();
  $("businessCount").textContent=items.length+"개 사업장·사례";
@@ -67,7 +98,7 @@ function renderBusinesses(){
  for(const c of visible){
   const card=document.createElement("article");card.className="business-card";
   card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.region)+' · '+esc(c.type)+'</span></div>'+
-   '<h3>'+esc(c.name)+'</h3><div class="business-product">무엇을 만들까요? <b>'+esc(c.produces)+'</b></div>'+
+   '<h3>'+esc(c.name)+'</h3><span class="business-scale">'+esc(c.group||"사업장")+'</span><div class="business-product">무엇을 만들까요? <b>'+esc(c.produces)+'</b></div>'+
    '<p>'+esc(c.summary)+'</p><div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">🔎 이 기업 조사하기</button>'+
    '<a href="'+esc(url(c.source.url))+'" target="_blank" rel="noopener noreferrer">소개 자료 ↗</a>'+
    '<a href="'+esc(businessNewsUrl(c.region,c.name))+'" target="_blank" rel="noopener noreferrer">최근 뉴스 ↗</a></div>';
@@ -295,6 +326,17 @@ function download(){
 }
 function init(){
  $("region").addEventListener("change",refresh);$("keyword").addEventListener("input",refresh);
+ document.querySelectorAll("[data-menu]").forEach(button=>{
+  button.addEventListener("click",()=>chooseMenu(button.dataset.menu));
+ });
+ document.querySelectorAll("[data-business-filter]").forEach(button=>button.addEventListener("click",()=>{
+  businessFilter=button.dataset.businessFilter;
+  businessExpanded=false;
+  document.querySelectorAll("[data-business-filter]").forEach(el=>{
+   const selected=el===button;el.classList.toggle("active",selected);el.setAttribute("aria-pressed",String(selected));
+  });
+  renderBusinesses();
+ }));
  $("topicList").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(b)fromTopic(b.dataset.topic);});
  $("businessList").addEventListener("click",e=>{const b=e.target.closest("[data-business]");if(b)fromBusiness(b.dataset.business);});
  $("moreBusinesses").addEventListener("click",()=>{businessExpanded=!businessExpanded;renderBusinesses();});
@@ -307,7 +349,7 @@ function init(){
  $("print").addEventListener("click",()=>window.print());
  $("download").addEventListener("click",download);
  if(window.LocalCheckBoard)window.LocalCheckBoard.init({show,getReport:()=>state.report});
- refresh();loadNews();
+ chooseMenu("news");loadNews();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();

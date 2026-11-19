@@ -8,6 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="stylesheet" href="style.css">
 <script src="data.js" defer></script>
+<script src="businesses.js" defer></script>
 <script src="board.js" defer></script>
 <script src="app.js" defer></script>
 </head>
@@ -25,7 +26,7 @@
     <div class="form-grid">
       <div class="field"><label for="region">📍 어디를 찾아볼까요?</label>
         <select id="region"><option value="전체">충청북도 전체</option><option>청주시</option><option>충주시</option><option>제천시</option><option>보은군</option><option>옥천군</option><option>영동군</option><option>증평군</option><option>진천군</option><option>괴산군</option><option>음성군</option><option>단양군</option></select></div>
-      <div class="field"><label for="keyword">🔎 무엇이 궁금한가요?</label><input id="keyword" type="search" placeholder="예: 축제, 인구, 학교, 관광"></div>
+      <div class="field"><label for="keyword">🔎 무엇이 궁금한가요?</label><input id="keyword" type="search" placeholder="예: 축제, 반도체, 식품, 회사"></div>
     </div>
     <div class="search-buttons">
       <a id="newsSearch" class="btn btn-primary" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">📰 지금 새 뉴스 검색하기 <span>↗</span></a>
@@ -35,6 +36,16 @@
   </div>
   <div class="section-title"><div><span class="eyebrow">최근 자료</span><h2>최근에 모아둔 우리 고장 소식</h2><p>기사를 골라 사실을 확인해 보세요. 자료는 실시간으로 보장되지 않아요.</p></div><span id="updatedAt" class="timestamp">자료 확인 중</span></div>
   <div id="newsList" class="news-list" aria-live="polite"></div>
+  <section class="business-section" id="businessSection" aria-labelledby="businessTitle">
+    <div class="section-title">
+      <div><span class="eyebrow">우리 지역 산업 탐구</span><h2 id="businessTitle">🏭 우리 고장에는 어떤 회사가 있을까?</h2>
+      <p>지역 기업이 무엇을 만들고, 사업장이 어디에 있는지 공식자료와 뉴스로 확인해요.</p></div>
+      <span id="businessCount" class="timestamp">기업 확인 중</span>
+    </div>
+    <div id="businessList" class="business-list"></div>
+    <button class="more-businesses" id="moreBusinesses" type="button" hidden>다른 지역 기업 더 보기 ↓</button>
+    <p class="business-note">기업 사례는 <b>2026년 11월 19일 기준으로 모은 자료</b>예요. 기업 소개나 공장이 현재도 같은지 원문에서 다시 확인하세요. 기업의 홍보 문구만으로 모든 주장이 사실이라고 판단하지 않아요.</p>
+  </section>
   <section class="recommend"><div class="section-title"><div><span class="eyebrow">찾기 어려울 때</span><h2>우리 고장 대표 주제</h2></div></div>
     <div id="topicList" class="topic-list"></div>
   </section>
@@ -42,10 +53,10 @@
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">
   <button type="button" id="back" class="back">← 뉴스 목록으로</button>
   <div class="intro small-intro"><span class="eyebrow">우리 고장 뉴스 탐정 · 2단계</span><h1 id="verifyHeading">뉴스가 정말 맞을까?</h1><p>기사와 공식 자료를 읽고, 중요한 내용을 비교해요.</p></div>
-  <article class="selected-story"><div class="story-top"><span class="pill">📰 내가 고른 뉴스</span><span id="articleDate" class="muted"></span></div><h2 id="articleTitle"></h2><p id="articlePublisher"></p><a id="articleLink" target="_blank" rel="noopener noreferrer" class="source-link">기사 원문 읽기 ↗</a></article>
+  <article class="selected-story"><div class="story-top"><span class="pill" id="storyType">📰 내가 고른 뉴스</span><span id="articleDate" class="muted"></span></div><h2 id="articleTitle"></h2><p id="articlePublisher"></p><a id="articleLink" target="_blank" rel="noopener noreferrer" class="source-link">기사 원문 읽기 ↗</a></article>
   <section class="verify-panel">
-    <h2>① 뉴스에서 어떤 내용을 찾았나요?</h2>
-    <label for="articleFinding">기사나 공지에 적힌 중요한 사실을 적어 보세요.</label>
+    <h2 id="findingHeading">① 뉴스에서 어떤 내용을 찾았나요?</h2>
+    <label id="findingLabel" for="articleFinding">기사나 공지에 적힌 중요한 사실을 적어 보세요.</label>
     <textarea id="articleFinding" maxlength="500" rows="3" placeholder="예: 2026년 축제는 9월 3일에 시작한다고 해요."></textarea>
     <div class="divider"></div>
     <h2>② 다른 자료와 비교해요</h2>

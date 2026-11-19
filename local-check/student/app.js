@@ -148,6 +148,14 @@ function matchingNews(story){
    return shared.some(w=>w.length>=4)||shared.length>=2;
  }).slice(0,2);
 }
+function matchingBusinesses(story){
+ const text=compact(story.title+" "+story.topic);
+ return companies.filter(c=>{
+  if(c.region!==story.region)return false;
+  const core=c.name.replace(/^(?:청주시|청주|충주시|충주|제천시|제천|진천군|진천|괴산군|괴산|음성군|음성|단양군|단양)\\s+/,"").split(/\\s+/)[0];
+  return core.length>=3&&text.includes(compact(core));
+ }).slice(0,2);
+}
 function getCandidateList(story){
  const candidates=[];
  if(story.suggested)candidates.push({title:"이 지역의 대표 사례 비교 자료",type:"관련 공개자료",source:"대표 사례 자료집",url:story.suggested,date:"원문에서 확인"});
@@ -155,6 +163,12 @@ function getCandidateList(story){
   for(const entry of t.sources.slice(0,2)){
     if(candidates.some(x=>x.url===entry.url)||entry.url===story.url)continue;
     candidates.push({title:entry.name,type:entry.type||"지역 관련자료",source:"대표 사례: "+t.topic,url:entry.url,date:entry.date||"원문 확인 필요"});
+  }
+ }
+ for(const b of matchingBusinesses(story)){
+  for(const evidence of [b.source,b.secondary]){
+   if(!evidence||evidence.url===story.url||candidates.some(x=>x.url===evidence.url))continue;
+   candidates.push({title:evidence.title,type:"기업·사업장 공개자료",source:b.name,url:evidence.url,date:evidence.date||"원문에서 확인"});
   }
  }
  for(const n of matchingNews(story)){

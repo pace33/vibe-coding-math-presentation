@@ -1,6 +1,7 @@
 (() => {
 "use strict";
 const TOPICS=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
+const NEWS={items:[],updatedAt:null,origin:""};
 const $=id=>document.getElementById(id);
 const steps=[["💭","예상해요"],["📰","찾아봐요"],["⚖️","비교해요"],["🔍","판단해요"],["🏅","발표해요"]];
 const names={"3-4":"3~4학년","5-6":"5~6학년",easy:"쉬운 문장"};
@@ -15,13 +16,16 @@ function readAloud(s){
  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(clean(s,1400));u.lang="ko-KR";u.rate=.88;speechSynthesis.speak(u);
 }
 function newDraft(){return {prediction:"",evidence:"",newTitle:"",newUrl:"",newPublisher:"",newDate:"",checked:[],comparison:"",difference:"",verdict:"",reason:"",visited:[]};}
-function store(){try{sessionStorage.setItem("localcheck-student-v1",JSON.stringify({id:state.topic?.id,grade:state.grade,step:state.step,draft:state.draft}));}catch{}}
+function store(){try{sessionStorage.setItem("localcheck-student-v1",JSON.stringify({id:state.topic?.id,recentTopic:state.topic?.isRecent?state.topic:null,grade:state.grade,step:state.step,draft:state.draft}));}catch{}}
 function restore(){
  try{
   const o=JSON.parse(sessionStorage.getItem("localcheck-student-v1")||"null");
-  if(!o||!TOPICS.some(t=>t.id===o.id))return;
+  if(!o)return;
+  const fromList=TOPICS.find(t=>t.id===o.id);
+  const fromNews=o.recentTopic&&o.recentTopic.id===o.id&&o.recentTopic.isRecent&&Array.isArray(o.recentTopic.sources)&&o.recentTopic.sources.length>=2?o.recentTopic:null;
+  if(!fromList&&!fromNews)return;
   if(["3-4","5-6","easy"].includes(o.grade))state.grade=o.grade;
-  state.topic=TOPICS.find(t=>t.id===o.id);state.region=state.topic.region;
+  state.topic=fromList||fromNews;state.region=state.topic.region;
   state.step=Math.min(4,Math.max(0,Number(o.step)||0));
   state.draft={...newDraft(),...o.draft};
   $("region").value=state.region;$("grade").value=state.grade;
@@ -59,9 +63,62 @@ function renderTopics(){
  $("empty").hidden=items.length>0;
  $("matchCount").textContent="추천 주제 "+items.length+"개 · 주제를 고르면 원문을 확인할 수 있어요.";
  renderSearchLinks();
+ renderNews();
+}
+function renderNews(){
+ const root=$("newsList"),stateEl=$("newsStatus");
+ if(!root||!stateEl)return;
+ root.replaceChildren();
+ const items=NEWS.items.filter(x=>state.region==="전체"||x.region===state.region).slice(0,8);
+ stateEl.textContent=NEWS.updatedAt?NEWS.updatedAt+" 자료 "+items.length+"건":"최근 자료 확인 중";
+ if(!items.length){
+  root.innerHTML='<div class="news-empty">이 지역의 저장된 새 소식은 아직 없어요. 위의 <b>최근 1개월 기사</b> 버튼으로 직접 찾아보세요.</div>';
+  return;
+ }
+ items.forEach(row=>{
+  const pos=NEWS.items.indexOf(row);
+  const card=document.createElement("article");
+  card.className="news-card";
+  card.innerHTML='<div class="news-head"><span class="news-kind">'+esc(row.sourceType||"기사 검색 결과")+' · 검증 전</span><span class="news-date">'+esc(row.published||"날짜 확인 필요")+'</span></div>'+
+  '<h3>'+esc(row.title)+'</h3><p>'+esc(row.publisher||"발행기관 확인 필요")+' · 기사 원문에서 정확한 날짜와 내용을 확인하세요.</p>'+
+  '<div class="news-actions"><a href="'+esc(safeLink(row.url))+'" target="_blank" rel="noopener noreferrer">기사·공지 원문 ↗</a><button type="button" data-news="'+pos+'">이 기사 검증하기 →</button></div>';
+  root.appendChild(card);
+ });
+}
+function launchNews(i){
+ const row=NEWS.items[i];if(!row)return;
+ const original=safeLink(row.url);if(!original){toast("기사 주소를 확인할 수 없어요.");return;}
+ const topic={
+  id:"recent-"+i+"-"+row.region,region:row.region,topic:"최근 소식: "+clean(row.title,80),category:"우리 고장 소식",icon:"🗞️",
+  isRecent:true,featured:false,
+  claim:"이 기사 제목에 쓰인 내용은 원문에서도 같은 뜻으로 설명되어 있다.",
+  hook:"신문기사와 공식자료를 비교해서 기사 제목이 알맞은지 알아봐요.",
+  fact:"이 기사는 최근 자료 제목 목록에서 가져온 것이에요. 제목만으로는 사실인지 판단할 수 없어요. 반드시 기사 원문과 지자체 공식 자료를 확인하세요.",
+  check:"발행기관, 보도일, 원문 내용과 공식 공지의 일치 여부를 비교하세요.",
+  question:"제목과 기사 내용은 정말 같을까요?",terms:row.title,date:row.published,kind:"최근 뉴스",level:2,
+  sources:[{name:row.publisher+" · "+row.title,type:row.sourceType||"언론기사(검증 전)",date:row.published,url:original},
+   {name:"해당 지역의 공식 공지 검색하기",type:"공식자료 검색 링크",date:"검색 결과에서 원문과 날짜를 다시 확인",url:currentSourceSearch("official",row.region,clean(row.title,65))}]
+ };
+ chooseTopic(topic);
+}
+async function loadNews(){
+ try{
+  const url=new URL("latest.json",location.href);
+  url.searchParams.set("v",new Date().toISOString().slice(0,10));
+  const res=await fetch(url.href,{cache:"no-store"});
+  if(!res.ok)throw Error("자료 호출 실패");
+  const body=await res.json();
+  if(!Array.isArray(body.items))throw Error("자료 형식 오류");
+  NEWS.items=body.items.filter(x=>x&&x.region&&x.title&&safeLink(x.url)).slice(0,80);
+  NEWS.updatedAt=body.updatedAt||null;NEWS.origin=body.origin||"";
+  renderNews();
+ }catch{
+  $("newsStatus").textContent="자료 연결 확인 필요";
+  $("newsList").innerHTML='<div class="news-empty">최근 기사 목록을 불러오지 못했어요. 시·군청 최신 공지 또는 최근 1개월 기사 검색 버튼으로 찾아보세요.</div>';
+ }
 }
 function chooseTopic(id,reset=true){
- const t=TOPICS.find(x=>x.id===id);if(!t)return;
+ const t=typeof id==="object"?id:TOPICS.find(x=>x.id===id);if(!t)return;
  state.topic=t;state.region=t.region;$("region").value=t.region;
  state.step=0;if(reset)state.draft=newDraft();
  $("mission").hidden=false;renderTopics();renderMission();store();
@@ -244,6 +301,7 @@ function init(){
  $("grade").addEventListener("change",()=>{state.grade=$("grade").value;renderTopics();if(state.topic){renderMission();store();}});
  $("filter").addEventListener("input",renderTopics);
  $("topicGrid").addEventListener("click",handleChoose);
+ $("newsList").addEventListener("click",e=>{const b=e.target.closest("[data-news]");if(b)launchNews(Number(b.dataset.news));});
  document.querySelectorAll("[data-category]").forEach(b=>b.addEventListener("click",()=>{
   state.category=b.dataset.category;document.querySelectorAll("[data-category]").forEach(el=>el.classList.toggle("active",el===b));renderTopics();
  }));
@@ -255,6 +313,7 @@ function init(){
  $("backChoose").addEventListener("click",leave);
  $("readIntro").addEventListener("click",()=>readAloud("로컬체크 탐험대에 오신 것을 환영해요. 우리 지역을 고르고, 뉴스와 공지사항을 찾아보세요. 자료가 맞는지 출처, 날짜, 내용을 비교하고, 내 생각을 근거와 함께 기록해 봐요."));
  renderTopics();
+ loadNews();
  const specified=deep.get("topic");
  if(specified&&TOPICS.some(x=>x.id===specified)){
   const grade=deep.get("grade");if(names[grade]){$("grade").value=grade;state.grade=grade;}

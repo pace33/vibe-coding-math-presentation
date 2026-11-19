@@ -266,7 +266,7 @@ function renderReport(){
  const root=$("report");
  root.innerHTML='<h2>🔎 나의 우리 고장 뉴스 탐정 카드</h2>'+
   '<div class="report-row"><strong>지역</strong><p>'+esc(d.region)+'</p></div>'+
-  '<div class="report-row"><strong>선택한 뉴스</strong><p>'+esc(d.title)+'</p></div>'+
+  '<div class="report-row"><strong>선택한 탐구 자료</strong><p>'+esc(d.title)+'</p></div>'+
   '<div class="report-row"><strong>뉴스에서 찾은 사실</strong><p>'+esc(d.newsFact)+'</p></div>'+
   '<div class="report-row"><strong>비교 자료에서 찾은 사실</strong><p>'+esc(d.govFact||"아직 찾지 못했어요")+'</p></div>'+
   '<div class="report-row"><strong>나의 판단</strong><p>'+esc(d.verdict)+'</p></div>'+

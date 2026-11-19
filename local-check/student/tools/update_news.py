@@ -25,7 +25,7 @@ AFTER = NOW - dt.timedelta(days=45)
 
 def valid_url(raw: str) -> str:
     p = urllib.parse.urlsplit(raw.strip())
-    return raw if p.scheme == "https" and p.netloc.endswith(("google.com", "googleusercontent.com", "news.google.com")) else ""
+    return raw if p.scheme == "https" and p.hostname == "news.google.com" else ""
 
 def query(region: str) -> str:
     q = f"충북 {region} 축제 OR 문화 OR 교육 OR 지역사회 when:45d"

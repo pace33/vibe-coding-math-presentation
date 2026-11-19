@@ -152,7 +152,7 @@ function matchingBusinesses(story){
  const text=compact(story.title+" "+story.topic);
  return companies.filter(c=>{
   if(c.region!==story.region)return false;
-  const core=c.name.replace(/^(?:청주시|청주|충주시|충주|제천시|제천|진천군|진천|괴산군|괴산|음성군|음성|단양군|단양)\\s+/,"").split(/\\s+/)[0];
+  const core=c.name.replace(/^(?:청주시|청주|충주시|충주|제천시|제천|진천군|진천|괴산군|괴산|음성군|음성|단양군|단양)\s+/,"").split(/\s+/)[0];
   return core.length>=3&&text.includes(compact(core));
  }).slice(0,2);
 }

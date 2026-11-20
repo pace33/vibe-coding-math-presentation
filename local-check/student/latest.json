@@ -1,10 +1,37 @@
 {
   "version": 1,
   "origin": "Google 뉴스 RSS 공개 검색 결과",
-  "updatedAt": "2026-11-19",
+  "updatedAt": "2026-11-20",
   "note": "검색 결과 제목만 제공합니다. 기사 원문·발행일·사실 여부는 학생이 직접 확인해야 합니다.",
   "regionsChecked": 11,
   "items": [
+    {
+      "region": "충주시",
+      "title": "'제18회 대한민국 고미술축제' 20일 충북 충주서 개막",
+      "publisher": "경남미디어",
+      "published": "2026-11-20",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBGd1dlRllhRlBNMWQ3LUNJOEtjbWVuSVlkZXN6WGpxZ0pNNmpKMFEzRmlqLWdsa1liSUV2d0ZNV2E0TFFwZlZlNkVDaTRRQjJZWkI0WUp0TUE2R0xtRjdnZzNQd05razl4aFQ0?oc=5",
+      "verified": false,
+      "sourceType": "언론 기사 검색 결과"
+    },
+    {
+      "region": "진천군",
+      "title": "진천군, 제47회 생거진천 문화축제, 피나클 어워즈 한국대회 은상 외 (11월19일 종합)",
+      "publisher": "충북데일리",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1ic3lRUlNwQ3VPXzZhM1VwbVNMZkNsdy1xdXc4YVpqeG5PaFJkbFV5dkJ4c21kSHlLUmlfVUFqUFZUUzhqSEg4V2RTN3RQUTV5QzlNVEpoakpmMDdoSnY2b0ln?oc=5",
+      "verified": false,
+      "sourceType": "언론 기사 검색 결과"
+    },
+    {
+      "region": "단양군",
+      "title": "단양군 온달문화축제 성정표 보니!",
+      "publisher": "K-Life TV",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE0zOEFqR2JESEdJY3phVU9Kem5iRFdJYWc0WnVkNmxoQk1zRW9tMjNUTXFOR0ZjM090UjZ4Y1RRcmZkN25Qb0ctdlVZd0dMTFB1a1R2dktsYS1IRkJPQzBpZ1UtamYxOGE4S3lqag?oc=5",
+      "verified": false,
+      "sourceType": "언론 기사 검색 결과"
+    },
     {
       "region": "충주시",
       "title": "충주 역사문화 유산 첨단 예술로 재해석",
@@ -88,10 +115,10 @@
     },
     {
       "region": "진천군",
-      "title": "생거진천 문화축제, 11만7000명 방문·237개 부스 운영…성과공유회 개최",
-      "publisher": "국제뉴스",
+      "title": "11만 7천명 ‘출발 진천행’…생거진천 문화축제, 다음 무대 그린다",
+      "publisher": "중부매일",
       "published": "2026-11-05",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5na3lmQ0gyTk95eGtQX05kNFdGS1Z4X3FCSFFFNGg2UWozVDJ0V2dMWHN0TzBKVzZILWRXWmNZVGdGNVpHQko4NlVvZ2V2bUFValpvWEpjbjhYVjVFVXF3UE9NbFlGWjdELUVaam1B?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5IS0NZdFFPSHI3TUxSVUpxVlpDQnQzWTJGUkFFQWRJdUE3cmt2VTQ2N2s1QVRUM2NQSXhXcXUzb1lKRUFBQU1jd1RpMFRrQWZWcmxOdEpmX1NDMUxVM1F1WU8zc1hfY2ZDLXfSAW5BVV95cUxNZ1FUYlI5ekpXRVNzcGRSWmgyRHg0OGFPNjhGbEoyN25WQTA3aTZQRkZxcFpqbGkza1ZqdWJQUU9wa21OaTRtSEczZ1BUa3liSEpoWUFsc19HM1pfSEZPc3phV1Jza1I4SjdtaWRPZw?oc=5",
       "verified": false,
       "sourceType": "언론 기사 검색 결과"
     },
@@ -110,6 +137,15 @@
       "publisher": "경향신문",
       "published": "2026-11-04",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA1cWNvX3REazhPLWJPd0hWMEE4NDhKclM2b3ZaVWpDbFZvRXhtM2Y2R0dEeHNiVkFpSVB5QzJzaVdvUDRZbkl3bzJwSG45QjZrM2dQN3h3eWQ0Z9IBX0FVX3lxTFB3YUFjMk1SRWtWZER5RXpkRE54YUZyLTdzall3UFlwLTMzUFdwUDhQdEJLTVRmb3JSTi1kMTNaZnprN3J5X3JaWFBtWEMzak5kVDYyY0MyckZqTW1LWE5B?oc=5",
+      "verified": false,
+      "sourceType": "언론 기사 검색 결과"
+    },
+    {
+      "region": "옥천군",
+      "title": "[옥천소식] 제11회 청소년축제 7일 열려",
+      "publisher": "연합뉴스",
+      "published": "2026-11-04",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1pTlNHSUg5N1htM2hBRVNBOFBVV0pIRXRBa05KMy11dmdwQ1BUMHF2OGxQZlgwTkxxaVYtaGE0Y3JjTXMzZTBkM3otVGtISjA5NTg1SEhIWEttTTjSAWBBVV95cUxQTnhVa3JBNzg4Uy1WQVA3bkxGa005czZIeTc1SzhwQ0dOY0NQbEtzTW9iYWpUSklTQllsZG5YMlFxMUREWjA0N0taWDdlZzBDaWxGWEFBN2l2S0xaTjhCT1o?oc=5",
       "verified": false,
       "sourceType": "언론 기사 검색 결과"
     },
@@ -146,15 +182,6 @@
       "publisher": "경기1뉴스",
       "published": "2026-11-02",
       "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE91aWQ4Q1ZJUDhveHFkRk9RYkVudkxMRVR2NHJRLU1ZRm9RNzBJS2cxX3MyOC1QT0R6WU03TmtqbUU2RTh1Ry1YbE1xbFMtSGpvX1pTUTB5dkdwWnhQQ1Ywdg?oc=5",
-      "verified": false,
-      "sourceType": "언론 기사 검색 결과"
-    },
-    {
-      "region": "옥천군",
-      "title": "[옥천소식] 제2회 산성문화축제 31일 열려",
-      "publisher": "연합뉴스",
-      "published": "2026-10-30",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1yWXI0dVpGMHUyOG5lb3ItcWdsNzRCemxESFlKTmZ0R2I3N3FaZGp0OF9uZmVWdzJkelFnekx5Q3BxTlJsMDZObVM1NU9PMjZ5ZFJxNUIxZWM4UlHSAWBBVV95cUxPOWl2X3RvUFFyOWVMaDJvYWtpS1hJRmxBQ0VpSWdPdFJtNzlzN1JPTlRremFScW5ZUG5tbkdrUjBDR0IxSnVON0ptLXQyX29mT2hkMVVVamc3MjJmYk9xOHQ?oc=5",
       "verified": false,
       "sourceType": "언론 기사 검색 결과"
     },
@@ -357,47 +384,20 @@
       "sourceType": "언론 기사 검색 결과"
     },
     {
+      "region": "진천군",
+      "title": "충북 진천군, 제47회 생거진천 문화축제 맞아 ‘진천몰(JCmall)’ 전 품목 30% 할인",
+      "publisher": "청주일보",
+      "published": "2026-10-08",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rY0xfZzNaYTlqOElhZExHdm5ubkQ5dkFhSDlWTkFwMUpPX2tPWUU4aG5HMllGWG9ZbnNTNUJBSDNTSUFmbWhPNWY2S1ZSU1drOFpfSXlGQW92T3FpbExzM1RKNlNaUmdlUk40?oc=5",
+      "verified": false,
+      "sourceType": "언론 기사 검색 결과"
+    },
+    {
       "region": "영동군",
       "title": "[포토] 신용한 충북도지사, 영동군 방문 군민과 소통…‘체류관광 활성화’ 논의",
       "publisher": "뉴시니어",
       "published": "2026-10-06",
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE01YU1oQzdTclpvVWZVZWwzY3BtakdYeFdVY0haaTNyOEZETkJSa3RHcERJcHFJSFF0aGNzdWFuVnVUSGdrYm4tYkU1SWFORU1keGlvMmFGSFg0dGxVQ3FwYWdBTQ?oc=5",
-      "verified": false,
-      "sourceType": "언론 기사 검색 결과"
-    },
-    {
-      "region": "충주시",
-      "title": "9천 명 찾은 충주파크뮤직페스티벌…‘충주다운 음악축제’ 가능성 열었다",
-      "publisher": "중부매일",
-      "published": "2026-10-05",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9qbm42MktyZy1iUmpSQVFCdzZyOGFPZUJtOFJfWDJHVGZtSm5hY05Jbi1CZGEyejZYNTRoWDNRUU54T2dpZTZYM3ZkSnQ0YmpoX3VTUWZLTmxZMFBNZkVaTFFyQzB2RGI4VkHSAW5BVV95cUxQa1AzSm53OVpOYThVQUh2ZmFIbE93dG1BdkI2OXZIV0Y2QmFBdFNhMlBCeGkyeVFicGFuWXBHMUEtdncxM0NtdjQ1MHlUWHZiMVR2OWgtb2ZFZ3RUQnUtWnJUSk5POTJJOVpmZVNyQQ?oc=5",
-      "verified": false,
-      "sourceType": "언론 기사 검색 결과"
-    },
-    {
-      "region": "진천군",
-      "title": "진천군, 제47회 생거진천 문화축제 9일 개막",
-      "publisher": "금강일보",
-      "published": "2026-10-05",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE00UXFFb04zN0pFQmU4aHF6eXVUM1lVQU81OWJTS2RLRklCVk9SXy1JbWZzLVVMQjNzajhvR0JIcHVULS1DODNOSUtUN1VGUW4yeDQwbEdURi1Rd2NVaVpyQlkxaW9Cblh0aHc?oc=5",
-      "verified": false,
-      "sourceType": "언론 기사 검색 결과"
-    },
-    {
-      "region": "진천군",
-      "title": "제47회 생거진천 문화축제 9일 개막…사흘간 체험행사 풍성",
-      "publisher": "연합뉴스",
-      "published": "2026-10-05",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFAzNFVYZG1jaE1ySEpEOFFpdDNWMk11Yks3cDk3ejc3WjdYZ2pJOExNTE1IRXNpWmFQT3NaQVFQbGFIQUFobElmTk9CcDcySDVxZDRpLUNzZXpuLUXSAWBBVV95cUxNVXMyakpWTlM1Y2tMcjhrMUcwdnlkbHpkWk9KRWYwblFFRE4zUzhFckttZ0lmY09mU2RSekVSX3NJSUZNQW9YZ1dtWGl1TFJiTnJQMFk1ZUN4NHlxZUl4LVU?oc=5",
-      "verified": false,
-      "sourceType": "언론 기사 검색 결과"
-    },
-    {
-      "region": "단양군",
-      "title": "단양군온달문화축제, 고구려의 혼을 불러일으키다",
-      "publisher": "브릿지경제",
-      "published": "2026-10-05",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9iN0N3d1N5M3gxb0JYVmJrWFZ0Z0Rmak1fZ2hFTkd1QlBtZDNWYjlKZWwzTzFlRGN4UmM2c21OTm9MUTk4RVhhSzQwTTNRTU1KcW4yR0tWM1NsQQ?oc=5",
       "verified": false,
       "sourceType": "언론 기사 검색 결과"
     }

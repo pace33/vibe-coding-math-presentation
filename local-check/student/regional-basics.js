@@ -50,10 +50,17 @@ const EUMSEONG={
   {icon:"🌲",title:"숲과 생태",value:"봉학골 산림욕장",summary:"가섭산 자락에 숲길과 자연학습 공간이 있어요. 주변 생태환경을 살펴보세요.",source:"충북나드리 봉학골 산림욕장",href:"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=56&pageIndex=140&pageUnit=12&searchCnd=all&searchMainSe=ATTR&tourNo=184",more:[{label:"국립생태원 생태 정보",href:ECO}]}
  ],
  facilities:[
-  {icon:"🏛️",title:"공공기관",value:"음성군청 · 행정복지센터",summary:"주민을 위해 행정 업무를 하는 기관이에요.",source:"음성군청",href:REGION_SITES["음성군"]},
-  {icon:"🚒",title:"안전시설",value:"소방서 · 보건기관",summary:"우리 지역의 안전과 건강을 돕는 시설을 찾아보세요.",source:"음성군청 기관 안내",href:REGION_SITES["음성군"]},
-  {icon:"📚",title:"교육·문화시설",value:"학교 · 도서관",summary:"배우고 책을 읽는 공공시설이 있어요. 이용 안내는 기관 원문에서 확인해요.",source:"음성군청",href:REGION_SITES["음성군"]},
-  {icon:"🚌",title:"교통",value:"도로 · 버스",summary:"우리 지역 안팎을 오가는 교통수단과 주요 도로를 살펴보세요.",source:"음성군청 교통 안내",href:REGION_SITES["음성군"]}
+  {icon:"🏛️",title:"공공기관",value:"음성군청 · 행정복지센터",summary:"주민을 위해 행정 업무를 하는 기관이에요.",source:"음성군청 공식 홈페이지",href:REGION_SITES["음성군"]},
+  {icon:"🚒",title:"안전시설",value:"119안전센터 · 보건소",summary:"음성소방서의 119안전센터 위치·담당 업무와 음성군보건소를 각각 살펴보세요.",source:"음성소방서 119안전센터 현황",href:"https://cb119.chungbuk.go.kr/us119/sub.do?menukey=1867",more:[
+   {label:"음성군보건소 ↗",href:"https://www.eumseong.go.kr/health/index.do"}
+  ]},
+  {icon:"📚",title:"교육·문화시설",value:"도서관 · 문화예술회관",summary:"지역별 도서관과 평생교육기관, 문화예술회관의 위치와 시설을 찾아보세요.",source:"음성군 평생교육기관 목록",href:"https://edu.eumseong.go.kr/www/contents.do?key=114",more:[
+   {label:"음성문화예술회관 시설 ↗",href:"https://www.esart.go.kr/www/contents.do?key=32"},
+   {label:"음성군립도서관 ↗",href:"https://lib.eumseong.go.kr/"}
+  ]},
+  {icon:"🚌",title:"교통",value:"농어촌버스 · 정류소",summary:"버스 노선·시간표와 정류소 위치를 따로 확인해 보세요. 운행시간은 변경될 수 있으므로 게시일을 확인해요.",source:"음성군청 버스시간표 게시판",href:"https://www.eumseong.go.kr/www/selectBbsNttList.do?bbsNo=32&key=216",more:[
+   {label:"버스정류소 공공데이터(2026) ↗",href:"https://www.data.go.kr/data/15116426/fileData.do"}
+  ]}
  ],
  issues:[
   {icon:"💦",title:"하천 환경",value:"응천 수질 개선",summary:"환경부는 2024년에 응천을 오염하천 집중관리 대상으로 선정했어요. 사업의 현재 성과는 새로운 자료와 비교하세요.",source:"환경부 2024년 보도자료",href:"https://me.go.kr/home/web/board/read.do?boardId=1665320&boardMasterId=1"},

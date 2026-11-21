@@ -131,11 +131,17 @@ function renderInquiries(){
    '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
   const newsTerm=item.newsTerm||regionalNewsTerm(item,activeMenu);
   const checkNews='<button class="regional-card-news" type="button" data-card-news="'+esc(newsTerm)+'">📰 이 정보 관련 뉴스 검증</button>';
+  const visit=item.visit;
+  const visitMode=visit?.status==="reserve"?"예약·신청 안내":visit?.status==="school"?"학교 단체 안내":visit?.status==="visit"?"방문·관람 안내":"사전 협의 필요";
+  const visitTag=visit?'<span class="regional-visit-tag">🏫 견학·체험 · '+esc(visitMode)+'</span>':"";
+  const visitNote=visit?.notes?'<div class="regional-visit-note">'+esc(visit.notes)+'</div>':"";
+  const visitLink=visit?.url&&url(visit.url)?'<a class="regional-visit-link" href="'+esc(url(visit.url))+'" target="_blank" rel="noopener noreferrer">'+esc(visitMode)+' ↗</a>':"";
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong>'+(item.summary?'<p>'+esc(item.summary)+'</p>':"")+
+   visitTag+visitNote+
    (item.note?'<span class="festival-note">'+esc(item.note)+'</span>':"")+
    '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
-   '<div class="basic-card-actions">'+mainLink+checkNews+extras+'</div>';
+   '<div class="basic-card-actions">'+(visit?visitLink:mainLink)+checkNews+extras+'</div>';
   root.appendChild(card);
  }
  if(!basics.length)root.textContent="준비된 자료가 없어요.";

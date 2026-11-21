@@ -13,10 +13,10 @@ function validUrl(v){
  try{const u=new URL(String(v));return u.protocol==="https:"?u.href:"";}catch{return"";}
 }
 function rssUrl(region,keyword,category){
- const location=region==="전체"?"충청북도 충북":"충북 "+clean(region,30);
+ const location=region==="전체"?"충북":"충북 "+clean(region,30);
  const typed=clean(keyword,85);
- const topic=typed||({"business":"기업 산업 공장","local":"축제 문화 관광"}[category]||"지역 소식");
- const terms=[location,topic,"when:30d"].join(" ");
+ const topic=typed||({"business":"기업","local":"축제"}[category]||"");
+ const terms=[location,topic,"when:30d"].filter(Boolean).join(" ");
  const feed=new URL("https://news.google.com/rss/search");
  feed.searchParams.set("q",terms);
  feed.searchParams.set("hl","ko");

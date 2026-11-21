@@ -244,3 +244,15 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  #result{display:block!important}
  .report{border:0;box-shadow:none;padding:0}
 }
+
+
+/* 지역별 직접 출처 또는 구글 검색 대체 연결 */
+.regional-link-note{font-size:11px!important;color:#7a6040!important;background:#fff7e8;border-radius:8px;padding:8px 10px;margin:0!important}
+.regional-google-search{margin-top:7px;border-top:1px solid var(--line);padding-top:8px}
+.regional-google-search summary{cursor:pointer;color:var(--green);font-size:12px;font-weight:800;list-style-position:inside}
+.regional-google-search form{margin-top:9px}
+.regional-google-search label{display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:4px}
+.regional-search-line{display:flex;gap:6px;align-items:stretch}
+.regional-search-line input{flex:1;min-width:0;min-height:40px;font-size:12px}
+.regional-search-line button{white-space:nowrap;background:var(--green);color:white;border:0;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:800}
+@media(max-width:660px){.regional-search-line{flex-direction:column}}

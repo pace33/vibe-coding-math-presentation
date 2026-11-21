@@ -133,16 +133,18 @@ async function searchNewsInside({scroll=true}={}){
   const result=await window.LocalCheckLiveNews.search({region,keyword,category,signal:controller.signal});
   if(seq!==liveSequence)return;
   renderLiveResults(result.items,"live");
+  const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"대체 뉴스 검색(GDELT)";
   $("liveStatus").textContent=result.items.length?
-   "공개 구글 뉴스 RSS 검색 결과입니다. 게시일과 내용은 원문에서 확인하세요. (최대 10건, RSS 변환 서비스 경유)":
-   "해당 검색어로 표시할 새 기사가 없어요. 다른 단어로 다시 찾아보세요.";
+   provider+"에서 찾은 기사입니다. 제목·날짜·사실 여부는 원문에서 확인하세요.":
+   provider+"에서 검색한 기사가 없어요. 다른 검색어로 찾아보세요.";
  }catch(err){
   if(seq!==liveSequence)return;
-  const fallback=fallbackRows(region,keyword);
+  const exact=fallbackRows(region,keyword);
+  const fallback=exact.length?exact:(!keyword?fallbackRows(region,""):[]);
   renderLiveResults(fallback,"saved");
   $("liveStatus").textContent=fallback.length?
-   "현재 새 뉴스 조회가 연결되지 않아 저장된 기사 "+fallback.length+"건을 표시합니다. 저장 기준일: "+(state.updated||"확인 필요"):
-   "새 뉴스 조회 서비스에 연결할 수 없어요. '구글 뉴스에서 더 보기'로 직접 찾아보세요.";
+   "외부 검색 서비스에 연결하지 못해 저장된 기사 "+fallback.length+"건을 표시합니다. 최신 검색 결과가 아닙니다. 저장 기준일: "+(state.updated||"확인 필요"):
+   "외부 뉴스 검색 서비스 두 곳 모두 응답하지 않았습니다. 저장된 기사에도 해당 검색어가 없습니다. 아래 구글 뉴스 원본 검색을 이용해 주세요.";
   $("retryNews").hidden=false;
  }finally{
   clearTimeout(timer);

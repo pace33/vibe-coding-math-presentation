@@ -12,33 +12,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .shell{max-width:980px;width:calc(100% - 36px);margin:0 auto}
 .skip{position:absolute;top:-150px;left:10px;background:white;padding:12px;z-index:100}
 .skip:focus{top:10px}
-.site-header{height:68px;background:white;border-bottom:1px solid var(--line)}
+.site-header{height:61px;background:white;border-bottom:1px solid var(--line)}
 .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-size:19px;line-height:1.2;font-weight:850}
 .brand b{color:var(--green)}
 .brand small{display:block;font-size:11px;font-weight:550;color:var(--muted);margin-top:4px}
-.brand-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:12px;background:var(--soft);font-size:23px}
-.view{padding:25px 0 0}
-.home-intro{margin:0 0 18px}
-.home-intro h1{font-size:clamp(25px,3.5vw,33px);line-height:1.35;letter-spacing:-.06em;margin:0 0 4px}
-.home-intro p{margin:0;color:var(--muted);font-size:13px}
-.category-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 15px}
-.category-button{min-height:58px;border:1.5px solid var(--line);border-radius:13px;background:#fff;color:#466e56;font-size:16px;font-weight:850;padding:12px 6px}
+.brand-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:var(--soft);font-size:21px}
+.view{padding:19px 0 0}
+.category-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 13px}
+.category-button{min-height:54px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:#466e56;font-size:15px;font-weight:800;padding:10px 6px;line-height:1.35}
 .category-button.active,.category-button:hover{border-color:var(--green);background:var(--green);color:#fff}
-.explore-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 15px}
-.explore-tab{min-width:0;min-height:73px;border:1px solid var(--line);padding:10px 12px;border-radius:12px;background:#fff;color:#466e56;font-weight:850;font-size:14px;text-align:left;line-height:1.45}
-.explore-tab small{display:block;font-size:11px;font-weight:550;line-height:1.4;margin-top:4px;color:#72877a}
+.explore-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 13px}
+.explore-tab{min-width:0;min-height:47px;border:1px solid var(--line);padding:10px 9px;border-radius:10px;background:#fff;color:#466e56;font-weight:800;font-size:14px;text-align:center;line-height:1.3}
 .explore-tab.active{border-color:#8ccba1;background:#e5f4e9;color:var(--green-dark)}
-.explore-tab.active small{color:#456a52}
 .inquiry-guide{font-size:13px;color:var(--muted);margin:-6px 0 12px}
-.inquiry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.inquiry-card{min-width:0;display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.inquiry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.inquiry-card{min-width:0;display:flex;flex-direction:column;gap:9px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px}
 .inquiry-card h3{font-size:15px;margin:0;line-height:1.4}
 .basic-card-title{display:flex;align-items:center;gap:8px}
 .basic-card-title span{font-size:23px}
 .basic-card-value{font-size:18px;color:var(--green-dark);line-height:1.5;overflow-wrap:anywhere}
 .basic-card-source{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
-.inquiry-news-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--green-dark);font-size:13px;font-weight:700}
+.inquiry-news-footer{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:11px;padding:5px 0;color:var(--green-dark)}
 .explore-mode #keywordField,.explore-mode #newsSearch,.explore-mode #searchHelp{display:none!important}
 .explore-mode .form-grid{grid-template-columns:1fr}
 .explore-mode .search-panel{padding:14px 19px}
@@ -64,8 +59,8 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .btn-subtle{background:var(--soft);color:var(--green);border-color:#d2e8d6}
 .main-search{width:100%;margin-top:12px;min-height:48px}
 .search-hint{font-size:12px;line-height:1.5;color:var(--muted);text-align:center;margin:9px 0 0}
-.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:27px 0 12px}
-.section-title h2{font-size:20px;line-height:1.4;margin:0;letter-spacing:-.04em}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 10px}
+.section-title h2{font-size:19px;line-height:1.4;margin:0;letter-spacing:-.04em}
 .section-title p{color:var(--muted);font-size:12px;margin:4px 0}
 .timestamp{color:#587863;font-size:11px;font-weight:800;white-space:nowrap}
 .news-list,.business-list,.candidate-grid,.board-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
@@ -92,19 +87,14 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .business-filter{background:#fff;border:1px solid #cfdfd1;color:#6b806e;padding:8px 13px;border-radius:99px;font-size:12px;font-weight:800}
 .business-filter.active{background:#dff1e4;border-color:#9fd3ae;color:var(--green-dark)}
 .business-emoji{font-size:23px}
-.business-product{font-size:12px;color:#497058;line-height:1.65;flex:1}
+.business-product{font-size:13px;color:#497058;line-height:1.6;flex:1}
 .more-businesses{display:block;margin:14px auto 0;border:1px solid #c3dbca;background:var(--soft);border-radius:9px;padding:10px 16px;font-size:12px;font-weight:800;color:var(--green)}
 .muted-note{font-size:11px;color:var(--muted);margin:12px 0 0}
-.topic-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.topic{border:1px solid var(--line);border-radius:10px;background:white;text-align:left;padding:13px 15px;font-size:13px;font-weight:850;color:var(--ink)}
-.topic:hover{background:var(--soft)}
 .back{border:0;background:none;color:var(--green);font-size:13px;font-weight:800;padding:6px 0}
 .intro{margin:12px 0 18px}
 .intro h1{font-size:clamp(23px,3.2vw,30px);line-height:1.4;margin:0 0 7px}
 .intro p{font-size:13px;color:var(--muted);margin:0}
 .eyebrow{font-size:11px;font-weight:850;color:var(--green)}
-.verify-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:14px 0}
-.verify-steps span{border-radius:9px;background:var(--soft);color:var(--green);padding:9px 4px;text-align:center;font-size:12px;font-weight:800}
 .selected-story{padding:19px;background:var(--soft);border:1px solid #cce3d1;border-radius:14px;margin:17px 0}
 .story-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .pill{font-size:11px;font-weight:850;color:var(--green);background:#d7eddb;border-radius:99px;padding:5px 9px}
@@ -167,16 +157,15 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
 @media(max-width:660px){
  .shell{width:calc(100% - 24px)}
- .site-header{height:62px}
+ .site-header{height:58px}
  .view{padding-top:19px}
  .category-menu{gap:6px}
- .category-button{font-size:12px;min-height:52px;padding:8px 2px;letter-spacing:-.05em}
+ .category-button{font-size:12px;min-height:48px;padding:8px 2px;letter-spacing:-.05em}
  .form-grid{grid-template-columns:1fr;gap:9px}
  .search-panel{padding:15px}
  .news-list,.business-list,.candidate-grid,.board-grid,.topic-list{grid-template-columns:1fr}
  .explore-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
- .explore-tab{font-size:13px;min-height:69px;padding:9px 10px}
- .explore-tab small{font-size:10px}
+ .explore-tab{font-size:12px;min-height:44px;padding:8px 4px}
  .inquiry-grid{grid-template-columns:1fr}
  .inquiry-card{padding:14px}
  .recent-news-more .google-more-button{width:100%}
@@ -187,15 +176,12 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  .verify-panel,.report{padding:16px}
  .verdict-choices label{font-size:12px;padding:9px 3px;gap:3px}
  .verdict-choices input{width:14px;height:14px}
- .verify-steps span{font-size:11px}
  .selected-story{padding:15px}
  .selected-story h2{font-size:17px}
  .bottom-actions .btn{flex:1}
  footer{display:block}
  footer span{display:block}
 }
-.category-button{font-size:1.05rem;min-height:86px}
-.category-button small{display:block;font-size:.875rem;font-weight:500;line-height:1.5;margin-top:5px}
 .report:has(.detective-header){padding:clamp(18px,3vw,32px);border-radius:22px;background:#fff}
 .detective-header{margin-bottom:24px}
 .detective-region{display:inline-block;padding:5px 12px;border-radius:30px;background:#e6f3eb;color:#205a42;font-size:1rem;font-weight:800;margin-bottom:12px}
@@ -228,7 +214,6 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .detective-origin p{font-size:1rem;overflow-wrap:anywhere;margin-bottom:8px}
 .detective-origin a{display:inline-block;font-size:1rem;text-decoration:underline;text-underline-offset:4px;font-weight:750;padding:10px 0;min-height:44px;color:#205a73}
 .detective-verdict{font-size:1.25rem;line-height:1.6;font-weight:800;margin:15px 0}
-.verify-steps span{font-size:1rem}
 #verify .helper,#verify .short-reason-label,#verify .verify-extra summary,#verify .verify-extra-fields label{font-size:1rem}
 .verdict-choices label{font-size:1rem;min-height:86px;padding:12px 8px}
 .verdict-choices small{display:block;font-size:.875rem;font-weight:500;margin-top:5px}
@@ -247,7 +232,6 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 
 
 /* 지역별 직접 출처 또는 구글 검색 대체 연결 */
-.regional-link-note{font-size:11px!important;color:#7a6040!important;background:#fff7e8;border-radius:8px;padding:8px 10px;margin:0!important}
 .regional-google-search{margin-top:7px;border-top:1px solid var(--line);padding-top:8px}
 .regional-google-search summary{cursor:pointer;color:var(--green);font-size:12px;font-weight:800;list-style-position:inside}
 .regional-google-search form{margin-top:9px}
@@ -271,3 +255,30 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .issue-topic.active{background:#e5f4e9;border-color:#65b481}
 @media(max-width:860px){.issue-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:660px){.explore-mode.issues-mode .form-grid{grid-template-columns:1fr}.issue-topic{min-height:72px}}
+
+
+/* 간결한 학습 화면: 출처와 추가 검색은 보이되, 보조 기능은 접어서 표시 */
+.inquiry-card .basic-card-source{font-size:11px;line-height:1.55}
+.basic-card-actions{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.basic-primary-link{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;min-height:39px;max-width:100%;padding:8px 15px;border:1px solid #b9d8c2;border-radius:9px;background:var(--soft);color:var(--green-dark);font-size:12px;font-weight:800;text-align:center;overflow-wrap:anywhere}
+.basic-primary-link:hover{background:#e0f1e5}
+.regional-google-search{margin-top:0;border-top:0;padding-top:0}
+.regional-google-search summary{font-size:11px;color:#647d6e}
+.regional-google-search[open]{border-top:1px solid var(--line);padding-top:9px}
+.regional-google-search .inquiry-actions{margin:8px 0;gap:6px}
+.regional-google-search .inquiry-actions a{min-height:35px;font-size:11px}
+.regional-google-search input{font-size:12px}
+.crop-only-grid{grid-template-columns:minmax(0,1fr)}
+.crop-only-grid .inquiry-card{max-width:100%}
+.issue-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.issue-topic{align-items:center;justify-content:center;text-align:center;gap:0;min-height:56px;padding:10px 8px}
+.issue-topic strong{font-size:13px}
+.inquiry-news-footer .btn{min-height:38px;font-size:12px;padding:7px 13px}
+.business-card{gap:8px}
+@media(max-width:660px){
+ .shell{width:calc(100% - 24px)}
+ .issue-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .issue-topic{min-height:49px}
+ .basic-primary-link{width:100%}
+ .inquiry-news-footer .btn{width:auto}
+}

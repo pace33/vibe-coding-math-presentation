@@ -36,6 +36,69 @@ const NATURE={
  "음성군":spot("가섭산","음성읍 일대에 있는 산이에요. 산 아래 봉학골 숲길도 살펴보세요.","충북나드리","https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=1604"),
  "단양군":spot("도담삼봉과 남한강","남한강에 솟아 있는 바위 봉우리와 강 주변의 모습을 살펴볼 수 있어요.","충북나드리",TOUR)
 };
+// 각 지역의 공식 세부 페이지. 주소가 없는 임의의 경로는 만들지 않습니다.
+const FACILITY_PAGES={
+ "청주시":{
+  office:["시청 부서 안내","https://www.cheongju.go.kr/jiksok/index.do","청주시 직속부서"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/db119/sub.do?menukey=2133","청주동부소방서 안전센터","https://cb119.chungbuk.go.kr/sb119/sub.do?menukey=2217"],
+  library:["청주시 도서관","https://library.cheongju.go.kr/lib-ml/index.do","청주기적의도서관"],
+  transit:["청주버스 정보","https://tdata.cheongju.go.kr/intro/introPage","청주 교통 빅데이터 플랫폼"]
+ },
+ "충주시":{
+  office:["대소원면 행정복지센터","https://www.chungju.go.kr/town/contents.do?key=1456","충주시 대소원면 안내"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/cj119/sub.do?menukey=1955","충주소방서 안전센터"],
+  library:["충주시립도서관","https://www.chungju.go.kr/lib/web/index.do","충주시립도서관"],
+  transit:["버스노선·시간표","https://its.chungju.go.kr/bis/","충주시 교통정보센터"]
+ },
+ "제천시":{
+  office:["시청·복지시설 안내","https://www.jecheon.go.kr/bokjidadam/www/index.do","제천시 복지다담"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/jc119/sub.do?menukey=2300","제천소방서 안전센터"],
+  library:["제천시립도서관","https://www.jecheon.go.kr/jclib/index.do","제천시립도서관"],
+  transit:["버스 운행시간표","https://its.jecheon.go.kr/bis/time-table.do","제천시 교통정보센터"]
+ },
+ "보은군":{
+  office:["보은읍 행정복지센터","https://www.boeun.go.kr/www/contents.do?key=1029","보은군 읍면 안내"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/be119/sub.do?menukey=2817","보은소방서 안전센터"],
+  library:["보은군립도서관","https://lib.boeun.go.kr/front/","보은군립도서관"],
+  transit:["농어촌버스 운행표","https://www.data.go.kr/data/15053571/fileData.do","공공데이터포털(보은군 제공)"]
+ },
+ "옥천군":{
+  office:["읍면 행정복지센터","https://www.oc.go.kr/www/contents.do?key=636","옥천군 읍면소개"],
+  safety:["119안전센터 관할","https://cb119.chungbuk.go.kr/oc119/sub.do?menukey=2637","옥천소방서 관할현황"],
+  library:["옥천군민도서관","https://tour.chungbuk.go.kr/www/contents.do?key=271","충북나드리 도서관 소개"],
+  transit:["버스 시간표","https://www.oc.go.kr/tour/contents.do?key=2595","옥천군 문화관광 버스안내"]
+ },
+ "영동군":{
+  office:["읍면 행정복지센터","https://www.yd21.go.kr/site/kr/html/sub06/06.html","영동군 읍면별 안내"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/yd119/sub.do?menukey=2384","영동소방서 안전센터"],
+  library:["영동 교육·도서관","https://www.yd21.go.kr/kr/html/sub04/040805.html?category2=6","영동군 교육기관 목록"],
+  transit:["농어촌버스 시간표","https://www.yd21.go.kr/kr/html/sub05/05070102.html","영동군 오지마을버스 시간표"]
+ },
+ "증평군":{
+  office:["읍면 담당 부서","https://www.jp.go.kr/kor/prog/deptPerson/sub04_04_02/deptList.do","증평군 직원·부서 안내"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/jp119/sub.do?menukey=2468","증평소방서 안전센터"],
+  library:["증평군 도서관 목록","https://new.jp.go.kr/kor/sub04_05_04.do","증평군 관내 도서관"],
+  transit:["시내버스 시간표","https://www.jp.go.kr/kor/prog/pbtrnspInfo/sub05_05_01/TM01/list.do","증평군 교통정보"]
+ },
+ "진천군":{
+  office:["행정복지센터 위치","https://www.jincheon.go.kr/home/sub.do?menukey=4019","진천군 민원발급 안내"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/jcfire119/sub.do?menukey=2552","진천소방서 안전센터"],
+  library:["교육·문화시설 안내","https://www.jincheon.go.kr/site/edu/main.do","진천군 교육·문화 페이지"],
+  transit:["농어촌버스 시간표","https://www.jincheon.go.kr/site/tour/sub.do?menukey=1622","진천군 관광 교통안내"]
+ },
+ "괴산군":{
+  office:["민원 창구 안내","https://www.goesan.go.kr/www/contents.do?key=101","괴산군 신속민원과"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/gs119/sub.do?menukey=2721","괴산소방서 안전센터"],
+  library:["괴산군립도서관","https://lib.goesan.go.kr/front/","괴산군립도서관"],
+  transit:["농어촌버스 시간표","https://www.goesan.go.kr/trenv/contents.do?key=397","괴산군 교통환경 안내"]
+ },
+ "단양군":{
+  office:["지역 민원기관 안내","https://www.danyang.go.kr/tour/1936","단양군 공식 관광지도(행정기관 위치 참고)"],
+  safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/dy119/sub.do?menukey=2042","단양소방서 안전센터"],
+  library:["단양군립올누림도서관","https://www.danyang.go.kr/lib/front/index.php?g_page=intro&m_page=intro01","단양군립도서관"],
+  transit:["농촌버스 시간표","https://www.danyang.go.kr/tour/1919","단양군 관광 교통정보"]
+ }
+};
 const EUMSEONG={
  overview:[
   {icon:"📍",title:"위치",value:"충청북도 음성군",summary:"충청북도에 있는 군이에요.",source:"충청북도 시군현황",href:GOV_STATS},
@@ -85,12 +148,18 @@ function cards(region,category,companies=[],facts=[]){
   asCard("🌤️","날씨와 기후","기온 · 강수량","기후평년값은 오랜 기간 관측한 평균이에요. 관측 지점을 확인하세요.","기상청 기후평년값",CLIMATE),
   asCard("🌳","숲과 생태","숲 · 생물 · 자연환경","지역의 식생과 생태 분포를 공식 생태정보에서 살펴보세요.","국립생태원 EcoBank",ECO)
  ];
- if(category==="facilities")return [
-  asCard("🏛️","행정기관",region+(region.endsWith("시")?"청":"청"),"시청·군청과 읍면동 행정복지센터는 주민의 일을 도와요.","지역 공식 홈페이지",REGION_SITES[region]),
-  asCard("🚒","안전과 건강","소방 · 보건기관","사람의 안전과 건강을 지키는 시설이에요.","지역 공식 홈페이지",REGION_SITES[region]),
-  asCard("📚","교육·문화","학교 · 도서관","학생과 주민이 배우거나 문화 활동을 하는 시설이에요.","지역 공식 홈페이지",REGION_SITES[region]),
-  asCard("🚌","교통","도로 · 버스","지역 안팎을 연결하는 교통 시설과 교통수단을 살펴보세요.","지역 공식 홈페이지",REGION_SITES[region])
- ];
+ if(category==="facilities"){
+  const places=FACILITY_PAGES[region];
+  if(!places)return [];
+  const [office,safety,library,transit]=["office","safety","library","transit"].map(k=>places[k]);
+  const link=(entry)=>({href:entry[1],source:entry[2],primaryLabel:entry[0]+" ↗"});
+  return [
+   {...asCard("🏛️","행정기관",office[0],"이 지역의 행정기관과 민원 담당 시설을 알아보세요.",office[2],office[1]),primaryLabel:office[0]+" ↗"},
+   {...asCard("🚒","안전시설","119안전센터","관할 소방서의 안전센터 위치와 역할을 살펴보세요.",safety[2],safety[1]),primaryLabel:safety[0]+" ↗",more:safety[3]?[{label:"다른 소방서 안전센터 ↗",href:safety[3]}]:[]},
+   {...asCard("📚","교육·문화시설","도서관 · 문화시설","지역 도서관과 교육·문화시설을 찾아보세요.",library[2],library[1]),primaryLabel:library[0]+" ↗"},
+   {...asCard("🚌","교통","버스 노선 · 시간표","노선과 시간표는 변경될 수 있어요. 이용하기 전에 공식 안내의 게시일을 확인하세요.",transit[2],transit[1]),primaryLabel:transit[0]+" ↗"}
+  ];
+ }
  if(category==="business"){
   const hits=companies.filter(x=>x.region===region).slice(0,3).map(x=>asCard(x.emoji||"🏭","지역 기업",x.name,x.produces||x.summary||"지역 사업장",x.source?.title||"기업 공개자료",x.source?.url||REGION_SITES[region]));
   return [...hits,asCard("🌾","농산물과 특산물","지역 농산물","우리 지역의 대표 농산물과 판매 정보는 지자체 자료에서 확인해요.","시·군청",REGION_SITES[region])];

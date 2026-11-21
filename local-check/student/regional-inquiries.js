@@ -22,7 +22,7 @@ window.LOCALCHECK_CATEGORIES = {
   ["문화유산","우리 지역에서 오래전의 흔적을 찾아볼까요?","문화유산 유적"],
   ["지역 축제","우리 지역에는 어떤 축제가 열릴까요?","축제 행사"],
   ["전통과 예술","우리 지역에는 어떤 문화와 예술이 있을까요?","전통문화 박물관"]]},
- issues:{title:"지역문제",description:"환경·안전·주민 참여",defaultTerm:"지역 환경 안전",sites:"(site:go.kr OR site:or.kr)",prompts:[
+ issues:{title:"지역문제",description:"최신 지역 현안 뉴스",defaultTerm:"환경",sites:"(site:go.kr OR site:or.kr)",prompts:[
   ["환경문제","우리 지역의 환경을 지키려면 무엇이 필요할까요?","환경 쓰레기"],
   ["교통과 안전","우리 지역의 안전을 위해 무엇을 바꿀까요?","교통 안전 개선"],
   ["주민 참여","주민들은 지역문제를 어떻게 해결할까요?","주민 참여 정책"]]}

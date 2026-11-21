@@ -34,6 +34,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .inquiry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .inquiry-card{min-width:0;display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
 .inquiry-card h3{font-size:15px;margin:0;line-height:1.4}
+.basic-card-title{display:flex;align-items:center;gap:8px}
+.basic-card-title span{font-size:23px}
+.basic-card-value{font-size:18px;color:var(--green-dark);line-height:1.5;overflow-wrap:anywhere}
+.basic-card-source{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
+.inquiry-news-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--green-dark);font-size:13px;font-weight:700}
+.explore-mode #keywordField,.explore-mode #newsSearch,.explore-mode #searchHelp{display:none!important}
+.explore-mode .form-grid{grid-template-columns:1fr}
+.explore-mode .search-panel{padding:14px 19px}
+.explore-mode .search-panel .field{max-width:420px}
+@media(max-width:660px){.inquiry-news-footer{align-items:stretch;flex-direction:column}.inquiry-news-footer button{width:100%}}
 .inquiry-card p{font-size:12px;color:var(--muted);margin:0;flex:1;line-height:1.65}
 .inquiry-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}
 .inquiry-actions button,.inquiry-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:39px;border-radius:8px;padding:7px 10px;border:1px solid #cde0d1;font-size:12px;font-weight:800;text-align:center;background:var(--soft);color:var(--green)}

@@ -202,7 +202,7 @@ function cardSearch(region,category,c,extra=""){
  if(category==="issues"&&/물과 환경/.test(c.title))phrase=region+" 하천 수질 환경보전";
  const site=category==="overview"?"site:chungbuk.go.kr OR site:mois.go.kr":
  category==="local"?"site:go.kr OR site:heritage.go.kr":"site:go.kr OR site:or.kr";
- return phrase+" "+site;
+ return phrase+" ("+site+")";
 }
 function googleSearch(q){
  const u=new URL("https://www.google.com/search");u.searchParams.set("q",q);return u.href;

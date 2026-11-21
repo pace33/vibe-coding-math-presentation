@@ -18,6 +18,7 @@ window.LOCALCHECK_REGIONAL_VISITS={
    V("nature","청주랜드 기후변화체험관","기후변화와 탄소중립을 전시·체험하며 배울 수 있어요.","https://ticket.cheongju.go.kr/www/selectExprnWebList.do?key=8","청주시 통합예약","reserve","회차별 접수 대상이 달라요. 학교 단체 이용 여부 확인")
   ],
   facilities:[
+   V("facilities","충북자연과학교육원 과학체험관","과학기구와 전시를 보며 관찰·실험 체험을 해요.","https://www.cbnse.go.kr/reserve/sub.php?menukey=16","충북자연과학교육원 통합예약","school","도내 유·초·중·고·특수학교 단체 예약 안내 확인"),
    V("facilities","충북안전체험관","화재·지진·생활·교통안전을 체험해요.","https://safe119.chungbuk.go.kr/safety/sub.do?menukey=1672","충북안전체험관 공식 이용안내","school","단체는 사전 예약, 인솔교사 동행, 프로그램별 연령·장애학생 편의 확인")
   ],
   local:[
@@ -63,7 +64,7 @@ window.LOCALCHECK_REGIONAL_VISITS={
    V("nature","장령산자연휴양림","금천계곡과 숲을 걸으며 자연환경을 관찰해요.","https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=1303","충북나드리 장령산자연휴양림","visit","단체 방문 전 현지 시설·탐방로 확인")
   ],
   facilities:[
-   V("facilities","옥천군민도서관·지역 도서관","책을 읽고 지역 공공도서관의 역할을 살펴봐요.","https://www.oc.go.kr/","옥천군청 공식 안내","consult","도서관 이전·운영 장소 변경 가능성이 있어 방문 전에 군청 확인")
+   V("facilities","옥천군민도서관·지역 도서관","책을 읽고 지역 공공도서관의 역할을 살펴봐요.","https://www.google.com/search?q=%EC%98%A5%EC%B2%9C%EA%B5%B0%EB%AF%BC%EB%8F%84%EC%84%9C%EA%B4%80+2026+%EC%9A%B4%EC%98%81+%EC%9C%84%EC%B9%98+site%3Aoc.go.kr","옥천군청 자료 찾기","consult","도서관 이전·운영 장소 변경 가능성이 있어 방문 전에 군청 확인")
   ],
   local:[
    V("local","정지용문학관","시인 정지용의 작품과 영상·전시를 체험해요.","https://oc.go.kr/jiyong/contents.do?key=2477","옥천군 정지용문학관 공식 소개","visit","문학교실 단체 이용은 사전 신청")
@@ -71,7 +72,7 @@ window.LOCALCHECK_REGIONAL_VISITS={
  },
  "영동군":{
   nature:[
-   V("nature","민주지산자연휴양림","민주지산의 숲과 계곡을 체험하며 관찰해요.","https://www.foresttrip.go.kr/pot/cc/bb/selectFripRsrvtPolcyView.do?hmpgId=FRIP&menuId=002001","산림청 숲나들e 휴양림 목록","visit","산림 체험 프로그램은 해당 시설에 운영 여부 문의")
+   V("nature","민주지산자연휴양림","민주지산의 숲과 계곡을 체험하며 관찰해요.","https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030107","산림청 숲나들e 휴양림 목록","visit","산림 체험 프로그램은 해당 시설에 운영 여부 문의")
   ],
   facilities:[
    V("facilities","영동국악체험촌","공공 문화체험시설에서 국악기 연주와 전통음악을 체험해요.","https://www.yd21.go.kr/portal/html/sub07/0701.html","영동군 국악체험촌 안내","consult","단체 체험 공연·예약·체류 프로그램 구분 문의")
@@ -82,9 +83,10 @@ window.LOCALCHECK_REGIONAL_VISITS={
  },
  "증평군":{
   nature:[
-   V("nature","좌구산 휴양랜드","숲길과 자연환경을 관찰하며 체험시설을 알아봐요.","https://www.foresttrip.go.kr/pot/cc/bb/selectFripRsrvtPolcyView.do?hmpgId=FRIP&menuId=002001","산림청 숲나들e 좌구산휴양랜드","visit","체험별 정원·연령·이동 지원 확인")
+   V("nature","좌구산 휴양랜드","숲길과 자연환경을 관찰하며 체험시설을 알아봐요.","https://jp.go.kr/park/sub03_01.do","산림청 숲나들e 좌구산휴양랜드","visit","체험별 정원·연령·이동 지원 확인")
   ],
   facilities:[
+   V("facilities","좌구산천문대","별과 우주를 관찰하는 천문·과학체험 프로그램을 알아봐요.","https://jp.go.kr/park/sub03_05.do","증평군 좌구산천문대","reserve","홈페이지 사전 예약 운영, 회차별 대상 확인"),
    V("facilities","증평군립도서관","도서관 시설과 독서문화 활동을 살펴봐요.","https://new.jp.go.kr/kor/sub04_05_04.do","증평군청 관내 도서관 안내","consult","학교 단체 이용교육 가능 여부 문의")
   ],
   local:[
@@ -127,7 +129,7 @@ window.LOCALCHECK_REGIONAL_VISITS={
  },
  "단양군":{
   nature:[
-   V("nature","황정산자연휴양림","숲길을 걸으며 산림과 자연을 탐방해요.","https://www.foresttrip.go.kr/pot/cc/bb/selectFripRsrvtPolcyView.do?hmpgId=FRIP&menuId=002001","산림청 숲나들e 황정산자연휴양림","visit","단체 이용·숲해설은 별도 문의")
+   V("nature","황정산자연휴양림","숲길을 걸으며 산림과 자연을 탐방해요.","https://www.foresttrip.go.kr/pot/rm/fa/selectPrgrmListView.do?hmpgId=0242&menuId=002003","산림청 숲나들e 황정산자연휴양림","visit","단체 이용·숲해설은 별도 문의")
   ],
   facilities:[
    V("facilities","단양군립올누림도서관","도서관 시설견학과 도서관 이용교육을 받을 수 있어요.","https://www.danyang.go.kr/lib/front/index.php?g_page=service&m_page=service04","단양군립올누림도서관 견학 신청","reserve","단체 견학 신청 페이지에서 방문일·인원 확인")

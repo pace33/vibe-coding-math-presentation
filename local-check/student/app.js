@@ -9,8 +9,9 @@ const companies=[
 let businessExpanded=false;
 let activeMenu="news";
 let businessFilter="all";
-const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null};
+const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null,evidenceNews:[],evidenceSearching:false,evidenceError:"",selectedEvidence:null};
 let liveController=null,liveSequence=0;
+let evidenceController=null,evidenceSequence=0;
 const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=s=>{try{const u=new URL(String(s));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return ""}};
@@ -262,14 +263,16 @@ function matchingCurated(story){
 function matchingNews(story){
  const terms=topicTerms(story.title,story.region);
  const current=compact(story.title);
- return state.news.filter(n=>{
-   if(n.region!==story.region||n.url===story.url)return false;
+ const seen=new Set();
+ const news=[...state.evidenceNews,...state.news];
+ return news.filter(n=>{
+   if(n.url===story.url||n.region!==story.region||!url(n.url))return false;
    const newsTitle=compact(n.title);
-   if(newsTitle===current)return false;
+   if(newsTitle===current||seen.has(n.url))return false;
+   seen.add(n.url);
    const shared=terms.filter(w=>newsTitle.includes(compact(w)));
-   // Prefer distinctive overlapping words; generic city or festival terms alone aren't enough.
    return shared.some(w=>w.length>=4)||shared.length>=2;
- }).slice(0,2);
+ }).sort((a,b)=>(a.publisher===story.publisher?1:0)-(b.publisher===story.publisher?1:0)).slice(0,3);
 }
 function matchingBusinesses(story){
  const text=compact(story.title+" "+story.topic);
@@ -280,56 +283,111 @@ function matchingBusinesses(story){
  }).slice(0,2);
 }
 function getCandidateList(story){
- const candidates=[];
- if(story.suggested)candidates.push({title:"이 지역의 대표 사례 비교 자료",type:"관련 공개자료",source:"대표 사례 자료집",url:story.suggested,date:"원문에서 확인"});
+ const sources=[];
+ if(story.suggested)sources.push({title:"관련 공개자료",type:"공식·참고 자료",source:"대표 사례 자료집",url:story.suggested,date:"원문 확인 필요"});
  for(const t of matchingCurated(story)){
   for(const entry of t.sources.slice(0,2)){
-    if(candidates.some(x=>x.url===entry.url)||entry.url===story.url)continue;
-    candidates.push({title:entry.name,type:entry.type||"지역 관련자료",source:"대표 사례: "+t.topic,url:entry.url,date:entry.date||"원문 확인 필요"});
+   if(sources.some(x=>x.url===entry.url)||entry.url===story.url)continue;
+   sources.push({title:entry.name,type:entry.type||"지역 관련자료",source:"대표 사례: "+t.topic,url:entry.url,date:entry.date||"원문 확인"});
   }
  }
  for(const b of matchingBusinesses(story)){
-  for(const evidence of [b.source,b.secondary]){
-   if(!evidence||evidence.url===story.url||candidates.some(x=>x.url===evidence.url))continue;
-   candidates.push({title:evidence.title,type:"기업·사업장 공개자료",source:b.name,url:evidence.url,date:evidence.date||"원문에서 확인"});
+  for(const entry of [b.source,b.secondary]){
+   if(!entry||entry.url===story.url||sources.some(x=>x.url===entry.url))continue;
+   sources.push({title:entry.title,type:"기업·사업장 공개자료",source:b.name,url:entry.url,date:entry.date||"원문 확인"});
   }
  }
+ const others=[];
  for(const n of matchingNews(story)){
-  if(candidates.some(x=>x.url===n.url))continue;
-  candidates.push({title:n.title,type:"비슷한 주제의 다른 기사",source:n.publisher||"발행기관 확인 필요",url:n.url,date:n.published||"발표일 확인"});
+  if(sources.some(x=>x.url===n.url))continue;
+  others.push({title:n.title,type:n.publisher===story.publisher?"비슷한 주제의 기사":"다른 언론사 기사",
+   source:n.publisher||"발행기관 확인 필요",url:n.url,date:n.published||"발표일 확인"});
  }
- return candidates.filter(x=>url(x.url)).slice(0,4);
+ // Leave room for independently published articles even when archived sources are plentiful.
+ return [...sources.filter(c=>url(c.url)).slice(0,2),...others.filter(c=>url(c.url)).slice(0,2)].slice(0,4);
 }
 function renderEvidenceCandidates(){
  const container=$("evidenceCandidates");
  container.replaceChildren();
  state.candidates=getCandidateList(state.story);
- const head=document.createElement("p");head.className="candidates-caption";
- head.textContent="같은 주제일 수 있는 참고자료예요. 실제로 관련이 있는지 원문을 읽고 확인하세요.";
- container.appendChild(head);
+ const status=$("evidenceStatus");
+ const selected=state.selectedEvidence;
+ if(state.evidenceSearching){
+  status.textContent="관련 기사를 자동 검색하고 있어요. 먼저 보이는 자료를 읽어도 좋아요.";
+ }else if(state.evidenceError){
+  status.textContent=state.candidates.length?
+   "새 기사를 찾지 못했어요. 아래 저장된 자료로 비교할 수 있어요.":
+   "새 기사 검색이 연결되지 않았어요. '자료를 더 찾아볼래요'에서 직접 확인할 수 있어요.";
+ }else{
+  status.textContent=state.candidates.length?
+   "관련 자료 "+state.candidates.length+"개를 찾았어요. 제목만으로 판단하지 말고 원문을 읽어 보세요.":
+   "직접 연결되는 근거가 없어요. '자료를 더 찾아볼래요'에서 찾을 수 있어요.";
+ }
+ if(selected)status.textContent+=" 선택한 자료: "+selected.title;
  if(!state.candidates.length){
-   const message=document.createElement("div");message.className="candidates-empty";
-   message.textContent="이 뉴스와 직접 연결된 자료 후보가 아직 없어요. 아래 '공식 자료 더 찾기' 또는 '비슷한 기사 더 찾기'를 이용해 보세요.";
-   container.appendChild(message);return;
+  const empty=document.createElement("p");empty.className="candidates-empty";
+  empty.textContent=state.evidenceSearching?"관련 자료를 찾고 있어요…":"지금은 추천할 자료가 없어요. 모르겠어요를 선택해도 괜찮아요.";
+  container.appendChild(empty);return;
  }
  const cards=document.createElement("div");cards.className="candidate-grid";
- state.candidates.forEach((c,i)=>{
-   const card=document.createElement("article");card.className="candidate-card";
-   const tag=document.createElement("span");tag.className="candidate-kind";tag.textContent=c.type;
-   const title=document.createElement("strong");title.textContent=c.title;
-   const meta=document.createElement("p");meta.textContent=c.source+" · "+c.date;
-   const actions=document.createElement("div");actions.className="candidate-actions";
-   const link=document.createElement("a");link.textContent="원문 읽기 ↗";link.href=c.url;link.target="_blank";link.rel="noopener noreferrer";
-   const select=document.createElement("button");select.type="button";select.textContent="비교자료로 선택";select.dataset.chooseCandidate=String(i);
-   actions.append(link,select);card.append(tag,title,meta,actions);cards.appendChild(card);
+ state.candidates.forEach((candidate,i)=>{
+  const card=document.createElement("article");card.className="candidate-card";
+  const chosen=!!selected&&selected.url===candidate.url;
+  if(chosen)card.classList.add("candidate-selected");
+  const tag=document.createElement("span");tag.className="candidate-kind";tag.textContent=candidate.type;
+  const title=document.createElement("strong");title.textContent=candidate.title;
+  const meta=document.createElement("p");meta.textContent=candidate.source+" · "+candidate.date;
+  const actions=document.createElement("div");actions.className="candidate-actions";
+  const link=document.createElement("a");link.textContent="원문 읽기 ↗";link.href=candidate.url;link.target="_blank";link.rel="noopener noreferrer";
+  const button=document.createElement("button");button.type="button";button.textContent=chosen?"✓ 선택한 근거":"이 자료로 비교하기";
+  button.dataset.chooseCandidate=String(i);button.setAttribute("aria-pressed",String(chosen));
+  actions.append(link,button);card.append(tag,title,meta,actions);cards.appendChild(card);
  });
  container.appendChild(cards);
 }
 function selectCandidate(index){
  const candidate=state.candidates[index];if(!candidate)return;
+ state.selectedEvidence=candidate;
  $("officialUrl").value=candidate.url;
- $("officialFinding").focus();
- $("formMessage").textContent="선택한 자료의 주소를 넣었어요. 원문을 읽고 확인한 사실을 직접 적어 주세요.";
+ renderEvidenceCandidates();
+ $("formMessage").textContent="비교할 자료를 골랐어요! 원문을 읽고 나의 판단을 선택해 보세요.";
+}
+function evidenceKeyword(story){
+ if(story.kind==="business"){
+  const company=matchingBusinesses(story)[0];
+  if(company)return company.name.replace(/\s+(?:본사·공장|청주사업장|진천공장|제천공장|보은공장|옥천공장|상우공장)$/,"").trim().slice(0,55);
+ }
+ return topicTerms(story.title,story.region).slice(0,2).join(" ").slice(0,55)||safe(story.title,45);
+}
+async function searchEvidence(){
+ if(!state.story)return;
+ const story=state.story,sequence=++evidenceSequence;
+ if(evidenceController)evidenceController.abort();
+ const controller=new AbortController();evidenceController=controller;
+ state.evidenceSearching=true;state.evidenceError="";state.evidenceNews=[];
+ renderEvidenceCandidates();
+ const timeout=setTimeout(()=>controller.abort(),10000);
+ $("retryEvidence").disabled=true;
+ try{
+  if(!window.LocalCheckLiveNews)throw new Error("뉴스 검색 기능 없음");
+  const keyword=evidenceKeyword(story);
+  const result=await window.LocalCheckLiveNews.search({
+    region:story.region==="충청북도"?"전체":story.region,
+    keyword,category:story.kind==="business"?"business":"news",
+    signal:controller.signal
+  });
+  if(sequence!==evidenceSequence)return;
+  state.evidenceNews=result.items||[];
+ }catch(err){
+  if(sequence!==evidenceSequence)return;
+  state.evidenceError="새 검색에 연결하지 못함";
+ }finally{
+  clearTimeout(timeout);
+  if(sequence===evidenceSequence){
+   evidenceController=null;state.evidenceSearching=false;
+   $("retryEvidence").disabled=false;renderEvidenceCandidates();
+  }
+ }
 }
 function chooseStory(story){
  if(!story||!url(story.url))return;
@@ -345,14 +403,18 @@ function chooseStory(story){
  $("articlePublisher").textContent="발행한 곳: "+state.story.publisher;
  $("articleDate").textContent=state.story.date;
  setLink($("articleLink"),state.story.url);
- renderEvidenceCandidates();
+ if(evidenceController){evidenceController.abort();evidenceController=null;}
+ evidenceSequence++;
+ state.selectedEvidence=null;state.evidenceNews=[];state.evidenceError="";state.evidenceSearching=false;
  for(const id of ["articleFinding","officialFinding","officialUrl","reason"])$(id).value="";
+ $("detailEvidence").open=false;
  document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
  $("formMessage").textContent="";
  const location=state.story.region==="전체"?"충청북도":"충청북도 "+state.story.region;
  $("officialLink").href=query("official",location,story.topic||story.title);
  $("newsCompareLink").href=query("news",location,story.topic||story.title);
  show("verify");
+ searchEvidence();
 }
 function fromTopic(id){
  const t=facts.find(x=>x.id===id);if(!t)return;
@@ -365,17 +427,17 @@ function fromNews(index){
 }
 function makeReport(){
  if(!state.story)return;
- const newsFact=safe($("articleFinding").value,1200);
- const govFact=safe($("officialFinding").value,1200);
- const govUrl=url($("officialUrl").value);
  const verdict=document.querySelector('input[name="verdict"]:checked')?.value||"아직 모르겠어요";
- const reason=safe($("reason").value,1200);
- if(newsFact.length<3){$("formMessage").textContent="뉴스 원문에서 찾은 내용을 먼저 적어 주세요.";$("articleFinding").focus();return;}
- if(verdict!=="아직 모르겠어요"&&(!govUrl||govFact.length<3)){
-  $("formMessage").textContent="두 자료를 비교하려면 비교한 자료의 주소와 확인 내용을 적어 주세요.";
-  $("officialUrl").focus();return;
+ const govUrl=url($("officialUrl").value);
+ if(verdict!=="아직 모르겠어요"&&!govUrl){
+  $("formMessage").textContent="먼저 비교할 근거 자료를 하나 골라 주세요. 못 찾으면 '모르겠어요'를 선택해도 좋아요.";
+  $("evidenceCandidates").scrollIntoView({block:"center",behavior:"smooth"});
+  return;
  }
- if(reason.length<3){$("formMessage").textContent="왜 그렇게 생각했는지 적어 주세요.";$("reason").focus();return;}
+ const newsFact=safe($("articleFinding").value,500)||"검증할 뉴스 제목: "+safe(state.story.title,200);
+ const chosen=state.selectedEvidence;
+ const govFact=safe($("officialFinding").value,500)||(chosen?"비교자료 제목: "+safe(chosen.title,190):"비교자료 내용을 아직 적지 않았어요.");
+ const reason=safe($("reason").value,220)||"판단한 이유는 아직 적지 않았어요.";
  state.report={...state.story,newsFact,govFact,govUrl,verdict,reason};
  if(window.LocalCheckBoard){
   const saved=window.LocalCheckBoard.save(state.report);
@@ -445,6 +507,7 @@ function init(){
  $("moreBusinesses").addEventListener("click",()=>{businessExpanded=!businessExpanded;renderBusinesses();});
  $("newsList").addEventListener("click",e=>{const b=e.target.closest("[data-news]");if(b)fromNews(Number(b.dataset.news));});
  $("evidenceCandidates").addEventListener("click",e=>{const b=e.target.closest("[data-choose-candidate]");if(b)selectCandidate(Number(b.dataset.chooseCandidate));});
+ $("retryEvidence").addEventListener("click",searchEvidence);
  $("back").addEventListener("click",()=>show("home"));
  $("backVerify").addEventListener("click",()=>show("verify"));
  $("again").addEventListener("click",()=>show("home"));

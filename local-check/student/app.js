@@ -69,13 +69,21 @@ function renderInquiries(){
  $("inquiryTitle").textContent=region+" · "+category.title;
  $("inquiryGuide").textContent=category.description+" · 기본 자료를 먼저 읽고 원문과 기준일을 확인하세요.";
  const basics=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];
- for(const item of basics){
+ for(const [index,item] of basics.entries()){
   const card=document.createElement("article");card.className="inquiry-card";
-  const links=[{label:item.primaryLabel||"공식 자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
+  const links=[{label:item.primaryLabel||"자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
+  const searchInputId="regional-google-"+activeMenu+"-"+index;
+  const searchBox=item.searchQuery?
+   '<details class="regional-google-search"><summary>🔎 구글 검색어 직접 바꾸기</summary>'+
+   '<form action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer">'+
+   '<label for="'+esc(searchInputId)+'">검색어</label>'+
+   '<div class="regional-search-line"><input id="'+esc(searchInputId)+'" name="q" type="search" maxlength="180" value="'+esc(item.searchQuery)+'" required>'+
+   '<button type="submit">구글 검색 ↗</button></div></form></details>':"";
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong><p>'+esc(item.summary)+'</p>'+
    '<div class="basic-card-source">자료: '+esc(item.source||"원문 확인 필요")+'</div>'+
-   '<div class="inquiry-actions">'+links.map(link=>'<a href="'+esc(url(link.href))+'" target="_blank" rel="noopener noreferrer">'+esc(link.label)+'</a>').join("")+'</div>';
+   (item.linkType==="search"?'<p class="regional-link-note">해당 정보의 직접 연결 페이지를 찾지 못했어요. 검색 결과에서 공식 출처를 확인하세요.</p>':"")+
+   '<div class="inquiry-actions">'+links.map(link=>'<a href="'+esc(url(link.href))+'" target="_blank" rel="noopener noreferrer">'+esc(link.label)+'</a>').join("")+'</div>'+searchBox;
   root.appendChild(card);
  }
  if(!basics.length)root.textContent="이 지역의 자료는 아직 준비 중입니다.";

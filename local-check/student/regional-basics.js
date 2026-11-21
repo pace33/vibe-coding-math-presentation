@@ -132,6 +132,20 @@ const EUMSEONG={
   {icon:"🗳️",title:"주민 참여",value:"지역문제에 의견 내기",summary:"주민은 불편한 점을 알리고 지역문제 해결에 참여할 수 있어요.",source:"국민신문고",href:"https://www.epeople.go.kr/"}
  ]
 };
+const REGION_SPECIALTIES={
+ "청주시":"청원생명쌀 · 딸기",
+ "충주시":"사과 · 복숭아",
+ "제천시":"황기 · 약초",
+ "보은군":"대추 · 사과",
+ "옥천군":"포도 · 복숭아",
+ "영동군":"포도 · 곶감",
+ "증평군":"인삼",
+ "진천군":"생거진천쌀",
+ "괴산군":"고추 · 대학찰옥수수",
+ "음성군":"복숭아 · 수박",
+ "단양군":"마늘"
+};
+// 대표 농산물 이름은 공개된 충북교육청 지역특산물 교육자료 및 충청북도 지역 상품 자료를 참조합니다.
 const asCard=(icon,title,value,summary,source,href,more)=>({icon,title,value,summary,source,href,more});
 function rawCards(region,category,companies=[],facts=[]){
  const fixed=window.LOCALCHECK_REGIONAL_LANDMARKS?.[region]?.[category];
@@ -164,7 +178,7 @@ function rawCards(region,category,companies=[],facts=[]){
  }
  if(category==="business"){
   const hits=companies.filter(x=>x.region===region).slice(0,6).map(x=>asCard(x.emoji||"🏭","지역 기업",x.name,x.produces||x.summary||"지역 사업장",x.source?.title||"기업 공개자료",x.source?.url||REGION_SITES[region]));
-  return [...hits,asCard("🌾","농산물과 특산물","지역 농산물","우리 지역의 대표 농산물과 판매 정보는 지자체 자료에서 확인해요.","시·군청",REGION_SITES[region])];
+  return [...hits,asCard("🌾","농산물과 특산물",REGION_SPECIALTIES[region]||"지역 농산물","이 지역에서 생산하는 대표 농산물을 살펴보세요.","충북 지역 농특산물 자료",REGION_SITES[region])];
  }
  if(category==="local"){
   const hits=facts.filter(x=>x.region===region&&["축제·행사","역사·문화","자연·관광"].includes(x.category)).slice(0,3).map(x=>asCard(x.icon||"🏛️","지역 문화",x.topic,x.hook||"지역 문화 소개",x.sources?.[0]?.name||"지역 공식자료",x.sources?.[0]?.url||TOUR));
@@ -196,7 +210,7 @@ function cardSearch(region,category,c,extra=""){
  if(category==="overview"&&/행정구역/.test(c.title))phrase=region+" 읍면동 행정구역 현황";
  if(category==="nature"&&/기후|날씨/.test(c.title))phrase=region+" 기온 강수량 기후평년값";
  if(category==="nature"&&/생태/.test(c.title))phrase=region+" 산림 생태 숲";
- if(category==="business"&&/농산물|특산물/.test(c.title))phrase=region+" 농산물 특산물 농업기술센터";
+ if(category==="business"&&/농산물|특산물/.test(c.title))phrase=region+" "+c.value+" 농산물 특산물 농업기술센터";
  if(category==="local"&&/문화유산/.test(c.title))phrase=region+" 문화유산 국가유산청";
  if(category==="issues"&&/쓰레기|생활환경/.test(c.title))phrase=region+" 생활쓰레기 재활용 분리배출";
  if(category==="issues"&&/지역 안전/.test(c.title))phrase=region+" 교통안전 재난안전";

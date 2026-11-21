@@ -60,6 +60,12 @@ function renderInquiries(){
  const root=$("inquiryList");root.replaceChildren();
  if(!category)return;
  const region=$("region").value;
+ if(region==="전체"){
+  $("inquiryTitle").textContent="우리 지역 선택";
+  $("inquiryGuide").textContent="기초정보는 한 지역씩 보여줘요. 충청북도 11개 시·군 중 하나를 선택하세요.";
+  root.textContent="위의 지역 선택에서 시·군을 골라 주세요.";
+  return;
+ }
  $("inquiryTitle").textContent=region+" · "+category.title;
  $("inquiryGuide").textContent=category.description+" · 기본 자료를 먼저 읽고 원문과 기준일을 확인하세요.";
  const basics=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];

@@ -21,25 +21,25 @@
 <body>
 <a class="skip" href="#main">본문으로 이동</a>
 <header class="site-header"><div class="shell header-inner">
-<a href="./" class="brand"><span class="brand-icon">🔎</span><span>우리 지역 <b>탐정</b><small>로컬체크 · 초등 사회 탐구</small></span></a>
+<a href="./" class="brand"><span class="brand-icon">🔎</span><span>우리 지역 <b>탐정</b></span></a>
 
 </div></header>
 <main id="main">
 <div class="shell">
 <section id="home" class="view">
-  <div class="home-intro"><h1>우리 지역을 알아봐요</h1><p>찾아보고 · 비교하고 · 판단해요</p></div>
+  <h1 class="visually-hidden">우리 지역 탐정</h1>
   <nav class="category-menu" aria-label="주요 메뉴">
-    <button type="button" class="category-button active" data-menu="news" aria-pressed="true">📰 뉴스 찾기<small>최근 소식을 찾아봐요</small></button>
-    <button type="button" class="category-button" data-menu="explore" aria-pressed="false">🗺️ 우리 지역<small>6가지 분야로 살펴봐요</small></button>
-    <button type="button" class="category-button" data-menu="board" aria-pressed="false">🗂️ 탐정 게시판<small>나와 친구의 카드를 봐요</small></button>
+    <button type="button" class="category-button active" data-menu="news" aria-pressed="true">📰 뉴스 찾기</button>
+    <button type="button" class="category-button" data-menu="explore" aria-pressed="false">🗺️ 우리 지역</button>
+    <button type="button" class="category-button" data-menu="board" aria-pressed="false">🗂️ 탐정 게시판</button>
   </nav>
   <nav id="exploreTabs" class="explore-tabs" aria-label="우리 지역 정보의 6개 분야" hidden>
-    <button type="button" class="explore-tab" data-explore="overview" aria-pressed="false">🧭 기본 정보<small>위치·인구·면적</small></button>
-    <button type="button" class="explore-tab" data-explore="nature" aria-pressed="false">🏞️ 자연환경<small>산·강·날씨</small></button>
-    <button type="button" class="explore-tab" data-explore="facilities" aria-pressed="false">🏫 생활시설<small>공공기관·교통</small></button>
-    <button type="button" class="explore-tab" data-explore="business" aria-pressed="false">🏭 산업과 경제<small>기업·농산물·특산물</small></button>
-    <button type="button" class="explore-tab" data-explore="local" aria-pressed="false">🏛️ 역사와 문화<small>유적·박물관·미술관</small></button>
-    <button type="button" class="explore-tab" data-explore="issues" aria-pressed="false">📰 지역문제<small>최신 지역 현안 뉴스</small></button>
+    <button type="button" class="explore-tab" data-explore="overview" aria-pressed="false">🧭 기본 정보</button>
+    <button type="button" class="explore-tab" data-explore="nature" aria-pressed="false">🏞️ 자연환경</button>
+    <button type="button" class="explore-tab" data-explore="facilities" aria-pressed="false">🏫 생활시설</button>
+    <button type="button" class="explore-tab" data-explore="business" aria-pressed="false">🏭 산업과 경제</button>
+    <button type="button" class="explore-tab" data-explore="local" aria-pressed="false">🏛️ 역사와 문화</button>
+    <button type="button" class="explore-tab" data-explore="issues" aria-pressed="false">📰 지역문제</button>
   </nav>
   <div class="search-panel">
     <div class="form-grid">
@@ -48,13 +48,13 @@
       <div class="field" id="keywordField"><label for="keyword">검색어</label><input id="keyword" type="search" placeholder="예: 축제, 반도체, 중소기업" maxlength="85" autocomplete="off" aria-controls="liveResults" aria-describedby="searchHelp"></div>
     </div>
     <button id="newsSearch" class="btn btn-primary main-search" type="button">🔎 뉴스 검색</button>
-    <p id="searchHelp" class="search-hint">검색어 2글자 이상 입력하면 아래에 뉴스가 자동으로 나와요.</p>
+    <p id="searchHelp" class="visually-hidden">두 글자 이상 입력하면 관련 뉴스가 아래에 자동으로 나옵니다.</p>
   </div>
   <section id="inquirySection" class="inquiry-section" aria-labelledby="inquiryTitle" hidden>
     <div class="section-title"><h2 id="inquiryTitle">우리 지역 탐구</h2></div>
     <p id="inquiryGuide" class="inquiry-guide"></p>
     <div id="inquiryList" class="inquiry-grid"></div>
-    <div class="inquiry-news-footer"><span>새로 바뀌는 정보는 뉴스에서 확인해요.</span><button class="btn btn-light" id="inquiryNews" type="button">📰 최신 뉴스 찾아보기</button></div>
+    <div class="inquiry-news-footer"><button class="btn btn-light" id="inquiryNews" type="button">📰 관련 뉴스 보기</button></div>
   </section>
   <section id="liveResults" class="live-results" aria-labelledby="liveHeading" hidden>
     <div class="section-title"><h2 id="liveHeading">검색 결과</h2><span id="liveCount" class="timestamp"></span></div>
@@ -71,31 +71,24 @@
     <div class="section-title"><h2>최근 뉴스</h2><span id="updatedAt" class="timestamp">자료 확인 중</span></div>
     <div id="newsList" class="news-list" aria-live="polite"></div>
     <div class="recent-news-more">
-      <button type="button" id="showMoreNews" class="btn btn-light google-more-button">📰 구글 뉴스 더 보기 ↓</button>
+      <button type="button" id="showMoreNews" class="btn btn-light google-more-button">뉴스 더 찾기 ↓</button>
     </div>
   </section>
   <section class="business-section" id="businessSection" aria-labelledby="businessTitle" hidden>
     <div class="section-title"><h2 id="businessTitle">지역 기업</h2><span id="businessCount" class="timestamp"></span></div>
     <div class="business-filters" aria-label="기업 유형">
       <button type="button" class="business-filter active" data-business-filter="all" aria-pressed="true">전체</button>
-      <button type="button" class="business-filter" data-business-filter="small" aria-pressed="false">중소기업·지역업체</button>
+      <button type="button" class="business-filter" data-business-filter="small" aria-pressed="false">지역업체·중소기업</button>
       <button type="button" class="business-filter" data-business-filter="featured" aria-pressed="false">대표기업</button>
     </div>
     <div id="businessList" class="business-list"></div>
     <button id="moreBusinesses" class="more-businesses" type="button" hidden>기업 더 보기</button>
-    <p class="muted-note">사업장과 제품은 등록 자료 기준이며, 최신 정보는 원문에서 확인하세요.</p>
-  </section>
-  <section class="recommend" id="localSection" hidden>
-    <div class="section-title"><h2 id="topicHeading">대표 지역 자료</h2></div>
-    <div id="topicList" class="topic-list"></div>
+    <p class="muted-note">기업 정보는 자료 기준이며 변동될 수 있어요.</p>
   </section>
 </section>
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">
   <button type="button" id="back" class="back">← 목록으로</button>
-  <div class="verify-steps" aria-label="뉴스 검증 3단계">
-    <span>① 출처 확인</span><span>② 근거 확인</span><span>③ 기사 비교</span>
-  </div>
-  <div class="intro small-intro"><span class="eyebrow">우리 지역 탐정 · 3단계 검증</span><h1 id="verifyHeading">사실일까?</h1><p>누가 썼는지 보고, 근거를 찾고, 다른 기사와 비교해요.</p></div>
+  <div class="intro small-intro"><h1 id="verifyHeading">사실일까?</h1><p>출처와 근거를 확인하고 비교해요.</p></div>
   <article class="selected-story">
     <h2>① 출처 확인</h2>
     <p class="verification-guide">누가 썼나요? 언제 썼나요? 아래 원문을 열어 언론사·기자·날짜를 찾아보세요.</p>
@@ -131,8 +124,7 @@
     </details>
     <div class="divider"></div>
     <h2>③ 기사 비교</h2>
-    <p class="helper">다른 언론사의 기사도 같은 이야기를 하나요? 같은 사건·연도·날짜를 다룬 기사끼리 비교해요. 공식 자료로 비교했다면 그 내용을 적어도 좋아요.</p>
-    <p class="verification-guide">여러 기사에 같은 말이 나와도 모두 같은 자료를 옮겼을 수 있어요. 내용이 같다는 것만으로 사실이라고 정하지 않아요.</p>
+    <p class="helper">같은 사건을 다룬 다른 기사나 공식 자료와 비교하세요. 여러 기사가 같은 보도자료를 인용했을 수도 있어요.</p>
     <fieldset class="choices verdict-choices"><legend>비교해 보니 어떤가요?</legend>
       <label><input type="radio" name="verdict" value="같아요"><span>🟢 내용이 같아요<small>두 자료가 같은 이야기를 해요</small></span></label>
       <label><input type="radio" name="verdict" value="달라요"><span>🟠 내용이 달라요<small>서로 다른 내용을 찾았어요</small></span></label>
@@ -154,8 +146,7 @@
 
 <section id="board" class="view" hidden aria-labelledby="boardTitle">
   <button class="back" id="boardBack" type="button">← 목록으로</button>
-  <div class="intro small-intro"><h1 id="boardTitle">🗂️ 탐정 게시판</h1><p>내 카드와 친구의 카드</p></div>
-  <p class="board-tip">친구에게 받은 카드는 ‘내 게시판에 담기’로 저장할 수 있어요. 기기별로 보관됩니다.</p>
+  <div class="intro small-intro"><h1 id="boardTitle">🗂️ 탐정 게시판</h1><p>이 기기에 저장한 카드와 친구에게 받은 카드</p></div>
   <div class="board-heading"><h2>모아 둔 카드 <span id="boardCount">0건</span></h2></div>
   <div id="boardList" class="board-grid" aria-live="polite"></div><details class="secondary-tools"><summary>게시판 자료 내보내기</summary><button class="btn btn-light" type="button" id="downloadBoard">파일 저장</button></details>
 </section>
@@ -167,6 +158,6 @@
   <div class="bottom-actions"><button class="btn btn-primary" id="addShared" type="button">📚 내 게시판에 담기</button><button class="btn btn-light" id="shareAgain" type="button">🔗 이 카드 링크 복사</button><button class="btn btn-light" id="sharedHome" type="button">🏠 첫 화면으로</button></div>
   <p id="shareStatus" class="board-feedback" role="status" aria-live="polite"></p>
 </section>
-<footer><span>로컬체크 EDU · 우리 지역 탐구</span><span>회원가입 없음 · 학생 이름 입력 없음 · 카드 공유 시 개인정보를 적지 마세요</span></footer>
+<footer><span>우리 지역 탐정 · 로컬체크 EDU</span><span>카드 공유 시 개인정보를 적지 마세요.</span></footer>
 </div></main>
 </body></html>

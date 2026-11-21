@@ -116,6 +116,7 @@ async function searchNewsInside(){
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
  if(category==="news")$("newsSection").hidden=true;
+ if(category!=="news")$("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
  $("liveStatus").textContent="구글 뉴스 RSS에서 기사를 찾고 있어요.";

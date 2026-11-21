@@ -71,7 +71,7 @@ function renderInquiries(){
  const basics=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];
  for(const item of basics){
   const card=document.createElement("article");card.className="inquiry-card";
-  const links=[{label:"공식 자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
+  const links=[{label:item.primaryLabel||"공식 자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong><p>'+esc(item.summary)+'</p>'+
    '<div class="basic-card-source">자료: '+esc(item.source||"원문 확인 필요")+'</div>'+

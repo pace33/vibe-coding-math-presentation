@@ -339,3 +339,14 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  padding:9px 12px;font-size:12px;font-weight:850;color:var(--green-dark);min-height:40px}
 .business-buttons:has(.business-tour-link) button:first-of-type{background:#fff;color:var(--green);border-color:#cfe1d1}
 @media(max-width:660px){.business-tour-info p{font-size:12px}.business-buttons .business-tour-link{flex:1}}
+
+/* 자연환경·공공기관·박물관·미술관 방문 정보 */
+.inquiry-card:has(.regional-visit-tag){border-left:3px solid #6ea98c}
+.regional-visit-tag{display:inline-flex;align-items:center;align-self:flex-start;
+ font-size:11px;font-weight:800;color:#256246;background:#e7f4ea;border-radius:99px;padding:5px 9px}
+.regional-visit-note{font-size:11px;color:#795a2e;line-height:1.55}
+.regional-visit-link{display:inline-flex;align-items:center;justify-content:center;
+ align-self:flex-start;min-height:39px;padding:8px 14px;border:1px solid #aacdb4;
+ background:#e7f3e8;color:#205a40;border-radius:9px;font-size:12px;font-weight:850}
+.regional-visit-link:hover{background:#d9eedd}
+@media(max-width:660px){.regional-visit-link{width:100%}}

@@ -12,6 +12,7 @@
 <script src="small-businesses.js" defer></script>
 <script src="board.js" defer></script>
 <script src="live-news.js" defer></script>
+<script src="regional-inquiries.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
@@ -26,12 +27,16 @@
   <div class="home-intro"><h1>우리 지역을 알아봐요</h1><p>찾아보고 · 비교하고 · 판단해요</p></div>
   <nav class="category-menu" aria-label="주요 메뉴">
     <button type="button" class="category-button active" data-menu="news" aria-pressed="true">📰 뉴스 찾기<small>최근 소식을 찾아봐요</small></button>
-    <button type="button" class="category-button" data-menu="explore" aria-pressed="false">🏭 우리 지역<small>기업·명소·축제를 알아봐요</small></button>
+    <button type="button" class="category-button" data-menu="explore" aria-pressed="false">🗺️ 우리 지역<small>6가지 분야로 살펴봐요</small></button>
     <button type="button" class="category-button" data-menu="board" aria-pressed="false">🗂️ 탐정 게시판<small>나와 친구의 카드를 봐요</small></button>
   </nav>
-  <nav id="exploreTabs" class="explore-tabs" aria-label="우리 지역 세부 메뉴" hidden>
-    <button type="button" class="explore-tab active" data-explore="business" aria-pressed="true">기업·산업</button>
-    <button type="button" class="explore-tab" data-explore="local" aria-pressed="false">명소·축제</button>
+  <nav id="exploreTabs" class="explore-tabs" aria-label="우리 지역 정보의 6개 분야" hidden>
+    <button type="button" class="explore-tab" data-explore="overview" aria-pressed="false">🧭 기본 정보<small>위치·인구·면적</small></button>
+    <button type="button" class="explore-tab" data-explore="nature" aria-pressed="false">🏞️ 자연환경<small>산·강·날씨</small></button>
+    <button type="button" class="explore-tab" data-explore="facilities" aria-pressed="false">🏫 생활시설<small>공공기관·교통</small></button>
+    <button type="button" class="explore-tab" data-explore="business" aria-pressed="false">🏭 산업과 경제<small>기업·농산물·특산물</small></button>
+    <button type="button" class="explore-tab" data-explore="local" aria-pressed="false">🏛️ 역사와 문화<small>문화유산·축제</small></button>
+    <button type="button" class="explore-tab" data-explore="issues" aria-pressed="false">🌱 지역문제<small>환경·안전·주민 참여</small></button>
   </nav>
   <div class="search-panel">
     <div class="form-grid">
@@ -60,6 +65,11 @@
       <button type="button" id="showMoreNews" class="btn btn-light google-more-button">📰 구글 뉴스 더 보기 ↓</button>
     </div>
   </section>
+  <section id="inquirySection" class="inquiry-section" aria-labelledby="inquiryTitle" hidden>
+    <div class="section-title"><h2 id="inquiryTitle">우리 지역 탐구</h2></div>
+    <p id="inquiryGuide" class="inquiry-guide"></p>
+    <div id="inquiryList" class="inquiry-grid"></div>
+  </section>
   <section class="business-section" id="businessSection" aria-labelledby="businessTitle" hidden>
     <div class="section-title"><h2 id="businessTitle">지역 기업</h2><span id="businessCount" class="timestamp"></span></div>
     <div class="business-filters" aria-label="기업 유형">
@@ -72,7 +82,7 @@
     <p class="muted-note">사업장과 제품은 등록 자료 기준이며, 최신 정보는 원문에서 확인하세요.</p>
   </section>
   <section class="recommend" id="localSection" hidden>
-    <div class="section-title"><h2>명소·축제 탐구</h2></div>
+    <div class="section-title"><h2 id="topicHeading">대표 지역 자료</h2></div>
     <div id="topicList" class="topic-list"></div>
   </section>
 </section>

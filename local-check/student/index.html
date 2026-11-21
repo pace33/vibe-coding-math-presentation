@@ -50,6 +50,17 @@
     <button id="newsSearch" class="btn btn-primary main-search" type="button">🔎 뉴스 검색</button>
     <p id="searchHelp" class="visually-hidden">두 글자 이상 입력하면 관련 뉴스가 아래에 자동으로 나옵니다.</p>
   </div>
+  <section class="business-section" id="businessSection" aria-labelledby="businessTitle" hidden>
+    <div class="section-title"><h2 id="businessTitle">지역 기업</h2><span id="businessCount" class="timestamp"></span></div>
+    <div class="business-filters" aria-label="기업 유형">
+      <button type="button" class="business-filter active" data-business-filter="all" aria-pressed="true">전체</button>
+      <button type="button" class="business-filter" data-business-filter="small" aria-pressed="false">지역업체·중소기업</button>
+      <button type="button" class="business-filter" data-business-filter="featured" aria-pressed="false">대표기업</button>
+    </div>
+    <div id="businessList" class="business-list"></div>
+    <button id="moreBusinesses" class="more-businesses" type="button" hidden>기업 더 보기</button>
+    <p class="muted-note">기업 정보는 자료 기준이며 변동될 수 있어요.</p>
+  </section>
   <section id="inquirySection" class="inquiry-section" aria-labelledby="inquiryTitle" hidden>
     <div class="section-title"><h2 id="inquiryTitle">우리 지역 탐구</h2></div>
     <p id="inquiryGuide" class="inquiry-guide"></p>
@@ -73,17 +84,6 @@
     <div class="recent-news-more">
       <button type="button" id="showMoreNews" class="btn btn-light google-more-button">뉴스 더 찾기 ↓</button>
     </div>
-  </section>
-  <section class="business-section" id="businessSection" aria-labelledby="businessTitle" hidden>
-    <div class="section-title"><h2 id="businessTitle">지역 기업</h2><span id="businessCount" class="timestamp"></span></div>
-    <div class="business-filters" aria-label="기업 유형">
-      <button type="button" class="business-filter active" data-business-filter="all" aria-pressed="true">전체</button>
-      <button type="button" class="business-filter" data-business-filter="small" aria-pressed="false">지역업체·중소기업</button>
-      <button type="button" class="business-filter" data-business-filter="featured" aria-pressed="false">대표기업</button>
-    </div>
-    <div id="businessList" class="business-list"></div>
-    <button id="moreBusinesses" class="more-businesses" type="button" hidden>기업 더 보기</button>
-    <p class="muted-note">기업 정보는 자료 기준이며 변동될 수 있어요.</p>
   </section>
 </section>
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">

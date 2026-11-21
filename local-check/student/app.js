@@ -157,7 +157,7 @@ async function searchNewsInside({scroll=true}={}){
   if(seq!==liveSequence)return;
   renderLiveResults(result.items,"live");
   if(result.items.length){
-   const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"대체 뉴스 검색(GDELT)";
+   const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"Bing 뉴스 RSS";
    $("liveStatus").textContent=provider+"에서 찾은 기사입니다. 원문에서 날짜와 사실 여부를 확인하세요.";
   }else{
    const stored=fallbackRows(region,keyword);
@@ -173,9 +173,13 @@ async function searchNewsInside({scroll=true}={}){
   const fallback=fallbackRows(region,keyword);
   renderLiveResults(fallback,"saved");
   $("liveStatus").textContent=fallback.length?
-   "외부 뉴스 검색 두 곳에 연결하지 못해 저장된 관련 기사 "+fallback.length+"건을 표시합니다. **실시간 검색 결과가 아닙니다.** 저장 날짜: "+(state.indexUpdated||state.updated||"확인 필요"):
+   "뉴스 검색 서버에 연결하지 못해 저장된 관련 기사 "+fallback.length+"건을 표시합니다. 실시간 검색 결과가 아닙니다. 저장 날짜: "+(state.indexUpdated||state.updated||"확인 필요"):
    "실시간 뉴스 검색 연결에 실패했으며 저장된 자료에도 일치하는 기사가 없습니다. 구글 뉴스 원본 검색을 이용해 주세요.";
   $("retryNews").hidden=false;
+  if(!fallback.length){
+   $("liveCount").textContent="연결 실패";
+   $("liveNewsList").textContent="검색을 완료하지 못했어요. 잠시 후 다시 검색해 주세요.";
+  }
  }finally{
   clearTimeout(timer);
   if(seq===liveSequence){

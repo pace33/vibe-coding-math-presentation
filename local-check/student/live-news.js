@@ -1,16 +1,8 @@
-/*
- * 로컬체크: 지역 뉴스 검색 (학생용, 개인정보 전송 금지)
- * 1) Google News RSS -> AllOrigins CORS 중계 -> RSS XML 해석
- * 2) RSS 중계 장애 시 GDELT DOC 2.0 뉴스검색 대체
- * 두 외부 서비스 모두 실패하면 상위 app.js에서 명시적으로 저장된 뉴스를 표시.
- * 이것은 Google 공식 API가 아닙니다. 실제 브라우저 가용성은 보장되지 않습니다.
- */
 (() => {
 "use strict";
 const MAX=10;
 const CACHE_TTL=4*60*1000;
-const GOOGLE_PROXY="https://api.allorigins.win/raw?url=";
-const GDELT_URL="https://api.gdeltproject.org/api/v2/doc/doc";
+const NEWS_API="https://localcheck-news-pace33.lejinku.chatgpt.site/api/news";
 const REGIONS=["청주시","충주시","제천시","보은군","옥천군","영동군","증평군","진천군","괴산군","음성군","단양군"];
 const cache=new Map();
 function clean(raw,length=240){return String(raw??"").replace(/<[^>]*>/g,"").replace(/[\u0000-\u001f]/g," ").trim().slice(0,length);}
@@ -48,7 +40,7 @@ function normalizeGoogle(items,region){
  }
  return output;
 }
-function parseRSS(xmlString,region){
+function parseRSS(xmlString,region,service="Google News RSS"){
  if(typeof DOMParser==="undefined")throw Error("RSS 해석 기능을 사용할 수 없어요");
  const document=new DOMParser().parseFromString(xmlString,"application/xml");
  if(document.querySelector("parsererror"))throw Error("RSS 파일이 아닌 응답이 도착했어요");
@@ -59,16 +51,14 @@ function parseRSS(xmlString,region){
  }
  const rows=nodes.slice(0,45).map(node=>{
   const get=name=>node.querySelector(name)?.textContent?.trim()||"";
-  return {title:get("title"),link:get("link"),publisher:get("source"),pubDate:get("pubDate")};
+  let link=get("link");
+  if(service==="Bing News RSS"){
+   try{const redirect=new URL(link);if(redirect.hostname==="www.bing.com"&&redirect.pathname==="/news/apiclick.aspx")link=redirect.searchParams.get("url")||"";}catch{link="";}
+  }
+  const publisher=get("source")||[...node.children].find(child=>child.localName==="Source")?.textContent||"";
+  return {title:get("title"),link,publisher,pubDate:get("pubDate")};
  });
- return normalizeGoogle(rows,region);
-}
-async function fromGoogleRss(feed,region,signal){
- const response=await fetch(GOOGLE_PROXY+encodeURIComponent(feed),{mode:"cors",credentials:"omit",cache:"no-store",signal,headers:{Accept:"application/xml, text/xml, */*"}});
- if(!response.ok)throw Error("구글 뉴스 RSS 중계 오류 "+response.status);
- const xml=await response.text();
- if(xml.length>650000)throw Error("RSS 응답 크기 초과");
- return {items:parseRSS(xml,region),service:"Google News RSS"};
+ return normalizeGoogle(rows,region).map(item=>({...item,sourceType:service==="Bing News RSS"?"Bing 뉴스 RSS":"구글 뉴스 RSS"}));
 }
 function parseGdelt(body,region){
  if(!body||!Array.isArray(body.articles))throw Error("GDELT 뉴스 응답이 올바르지 않아요");
@@ -86,37 +76,22 @@ function parseGdelt(body,region){
  }
  return items;
 }
-async function fromGdelt(region,keyword,category,signal){
- const place=region==="전체"?"충북":region;
- const typed=clean(keyword,85)||({business:"기업",local:"축제"}[category]||"지역");
- const q=place+" "+typed;
- const u=new URL(GDELT_URL);
- u.searchParams.set("query",q);
- u.searchParams.set("mode","artlist");
- u.searchParams.set("format","json");
- u.searchParams.set("maxrecords","25");
- u.searchParams.set("timespan","1month");
- u.searchParams.set("sort","datedesc");
- const response=await fetch(u.href,{mode:"cors",credentials:"omit",cache:"no-store",signal,headers:{Accept:"application/json"}});
- if(!response.ok)throw Error("대체 뉴스 검색 오류 "+response.status);
- const data=await response.json();
- return {items:parseGdelt(data,region),service:"GDELT 뉴스 검색"};
-}
 async function search({region="전체",keyword="",category="news",signal}={}){
  const key=JSON.stringify([region,clean(keyword,85),category]);
  const cached=cache.get(key);
  if(cached&&Date.now()-cached.when<CACHE_TTL)return {...cached.value,fromCache:true};
- const feed=rssUrl(region,keyword,category);
- // First try Google RSS via a distinct proxy; a failing public service must not
- // prevent checking a separate news index.
- const attempts=[fromGoogleRss(feed,region,signal),fromGdelt(region,keyword,category,signal)];
- const results=await Promise.allSettled(attempts);
- // Prefer Google News when both providers succeed with articles.
- const chosen=results.find(r=>r.status==="fulfilled"&&r.value.items.length>0);
- if(chosen){const value={...chosen.value,feed};cache.set(key,{when:Date.now(),value});if(cache.size>30)cache.delete(cache.keys().next().value);return value;}
- const empty=results.find(r=>r.status==="fulfilled");
- if(empty)return {...empty.value,feed};
- throw Error("뉴스 검색 서비스 두 곳에 연결하지 못했습니다");
+ signal?.throwIfAborted();
+ const endpoint=new URL(NEWS_API);
+ endpoint.search=new URLSearchParams({region,keyword:clean(keyword,85),category});
+ const response=await fetch(endpoint,{credentials:"omit",signal,headers:{Accept:"application/xml"}});
+ if(!response.ok)throw Error("뉴스 검색 서버 연결 오류 "+response.status);
+ const xml=await response.text();
+ if(xml.length>650000)throw Error("RSS 응답 크기 초과");
+ const service=response.headers.get("X-News-Provider")||"Google News RSS";
+ const value={items:parseRSS(xml,region,service),service,feed:rssUrl(region,keyword,category),fetchedAt:response.headers.get("X-News-Fetched-At")};
+ cache.set(key,{when:Date.now(),value});
+ if(cache.size>30)cache.delete(cache.keys().next().value);
+ return value;
 }
 window.LocalCheckLiveNews={search,rssUrl,parseRSS,parseGdelt,normalizeGoogle};
 })();

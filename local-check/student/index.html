@@ -73,29 +73,52 @@
 </section>
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">
   <button type="button" id="back" class="back">← 뉴스 목록으로</button>
-  <div class="intro small-intro"><span class="eyebrow">우리 고장 뉴스 탐정 · 2단계</span><h1 id="verifyHeading">뉴스가 정말 맞을까?</h1><p>기사와 공식 자료를 읽고, 중요한 내용을 비교해요.</p></div>
-  <article class="selected-story"><div class="story-top"><span class="pill" id="storyType">📰 내가 고른 뉴스</span><span id="articleDate" class="muted"></span></div><h2 id="articleTitle"></h2><p id="articlePublisher"></p><a id="articleLink" target="_blank" rel="noopener noreferrer" class="source-link">기사 원문 읽기 ↗</a></article>
+  <div class="verify-steps" aria-label="뉴스 검증 3단계">
+    <span>① 뉴스 선택 ✓</span><span>② 근거 찾기</span><span>③ 내가 판단</span>
+  </div>
+  <div class="intro small-intro"><span class="eyebrow">우리 고장 탐정 · 3단계 검증</span><h1 id="verifyHeading">이 뉴스가 정말 맞을까?</h1><p>다른 자료를 읽고 나의 생각을 선택해 보세요.</p></div>
+  <article class="selected-story">
+    <div class="story-top"><span class="pill" id="storyType">📰 내가 고른 뉴스</span><span id="articleDate" class="muted"></span></div>
+    <h2 id="articleTitle"></h2><p id="articlePublisher"></p>
+    <a id="articleLink" target="_blank" rel="noopener noreferrer" class="source-link">뉴스 원문 읽기 ↗</a>
+  </article>
   <section class="verify-panel">
-    <h2 id="findingHeading">① 뉴스에서 어떤 내용을 찾았나요?</h2>
-    <label id="findingLabel" for="articleFinding">기사나 공지에 적힌 중요한 사실을 적어 보세요.</label>
-    <textarea id="articleFinding" maxlength="500" rows="3" placeholder="예: 2026년 축제는 9월 3일에 시작한다고 해요."></textarea>
-    <div class="divider"></div>
-    <h2>② 다른 자료와 비교해요</h2>
-    <p class="helper">아래 자료 후보를 먼저 살펴보고, 원문에서 날짜와 내용을 직접 확인해요. 추천 자료는 정답이 아니에요.</p>
-    <div id="evidenceCandidates" class="evidence-candidates" aria-live="polite"></div>
-    <div class="source-row">
-      <a id="officialLink" class="btn btn-light" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">🏛️ 이 주제의 공식 자료 더 찾기 ↗</a>
-      <a id="newsCompareLink" class="btn btn-subtle" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">🗞️ 비슷한 기사 더 찾기 ↗</a>
+    <div class="evidence-heading">
+      <h2>② 관련 자료 자동 찾기</h2>
+      <button type="button" id="retryEvidence" class="btn btn-subtle">다시 찾기 ↻</button>
     </div>
-    <label for="officialUrl">비교에 사용한 자료 주소 (선택)</label>
-    <input id="officialUrl" type="url" placeholder="https://...">
-    <label for="officialFinding">다른 자료에서는 어떤 사실을 확인했나요?</label>
-    <textarea id="officialFinding" maxlength="500" rows="3" placeholder="예: 다른 기사에도 같은 날짜가 적혀 있어요."></textarea>
+    <p id="evidenceStatus" class="evidence-status" role="status" aria-live="polite">관련 자료를 찾고 있어요.</p>
+    <div id="evidenceCandidates" class="evidence-candidates" aria-live="polite"></div>
+    <details class="verify-extra"><summary>자료를 더 찾아볼래요</summary>
+      <div class="source-row">
+        <a id="officialLink" class="btn btn-light" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">🏛️ 공식 자료 검색 ↗</a>
+        <a id="newsCompareLink" class="btn btn-subtle" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">📰 다른 기사 검색 ↗</a>
+      </div>
+    </details>
     <div class="divider"></div>
-    <h2>③ 내 생각은 무엇인가요?</h2>
-    <fieldset class="choices"><legend>두 자료를 비교한 결과를 선택해요.</legend><label><input type="radio" name="verdict" value="같아요">✅ 내용이 같아요</label><label><input type="radio" name="verdict" value="달라요">⚠️ 다른 점이 있어요</label><label><input type="radio" name="verdict" value="아직 모르겠어요" checked>🤔 더 확인해야 해요</label></fieldset>
-    <label for="reason">왜 그렇게 생각하나요?</label><textarea id="reason" maxlength="500" rows="3" placeholder="예: 기사와 군청 공지의 행사 날짜가 같기 때문이에요."></textarea>
-    <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">나의 탐정 카드 완성하기 →</button><span id="formMessage" role="status" aria-live="polite"></span></div>
+    <h2>③ 나는 어떻게 생각할까?</h2>
+    <p class="helper">원문과 비교 자료를 읽은 다음 골라 보세요. 근거가 부족하면 '모르겠어요'를 선택해도 좋아요.</p>
+    <fieldset class="choices verdict-choices"><legend>나의 판단을 선택해요.</legend>
+      <label><input type="radio" name="verdict" value="같아요">✅ 맞아요</label>
+      <label><input type="radio" name="verdict" value="달라요">⚠️ 달라요</label>
+      <label><input type="radio" name="verdict" value="아직 모르겠어요" checked>🤔 모르겠어요</label>
+    </fieldset>
+    <label for="reason" class="short-reason-label">왜 그렇게 생각했나요? <span>(선택)</span></label>
+    <textarea id="reason" maxlength="220" rows="2" placeholder="예: 두 기사에 나온 날짜가 같아요."></textarea>
+    <details class="verify-extra" id="detailEvidence">
+      <summary>확인한 내용을 더 자세히 적기 (선택)</summary>
+      <div class="verify-extra-fields">
+        <h3 id="findingHeading">기사에서 확인한 내용</h3>
+        <label id="findingLabel" for="articleFinding">기사에서 확인한 사실을 적어 보세요.</label>
+        <textarea id="articleFinding" maxlength="500" rows="2" placeholder="기사에서 확인한 숫자나 날짜"></textarea>
+        <label for="officialUrl">비교한 자료 주소</label>
+        <input id="officialUrl" type="url" placeholder="https://...">
+        <label for="officialFinding">비교자료에서 확인한 내용</label>
+        <textarea id="officialFinding" maxlength="500" rows="2" placeholder="비교자료에서 확인한 숫자나 날짜"></textarea>
+      </div>
+    </details>
+    <p class="evidence-disclaimer">※ 자동 검색은 관련 자료를 추천할 뿐, 사실 여부를 AI가 판정하지 않아요.</p>
+    <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">✅ 탐정 카드 완성하기</button><span id="formMessage" role="status" aria-live="polite"></span></div>
   </section>
 </section>
 <section id="result" class="view" hidden>

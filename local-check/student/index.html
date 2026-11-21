@@ -41,20 +41,24 @@
     </div>
     <button id="newsSearch" class="btn btn-primary main-search" type="button">🔎 뉴스 검색</button>
   </div>
+  <section id="newsSection" aria-label="추천 뉴스">
+    <div class="section-title"><h2>최근 뉴스</h2><span id="updatedAt" class="timestamp">자료 확인 중</span></div>
+    <div id="newsList" class="news-list" aria-live="polite"></div>
+    <div class="recent-news-more">
+      <button type="button" id="showMoreNews" class="btn btn-light google-more-button">📰 구글 뉴스 더 보기 ↓</button>
+    </div>
+  </section>
   <section id="liveResults" class="live-results" aria-labelledby="liveHeading" hidden>
     <div class="section-title"><h2 id="liveHeading">검색 결과</h2><span id="liveCount" class="timestamp"></span></div>
     <p id="liveStatus" class="live-status" role="status" aria-live="polite"></p>
     <div class="google-more-row">
-      <a id="googleNewsFallback" class="btn btn-light google-more-button" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">📰 구글 뉴스에서 더 보기 ↗</a>
+      <a id="googleNewsFallback" class="btn btn-light google-more-button" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">구글 뉴스 원본 검색 ↗</a>
     </div>
     <p id="liveExplanation" class="visually-hidden">검색한 뉴스의 원문을 읽고 사실을 확인해 보세요.</p>
     <div id="liveNewsList" class="news-list" aria-live="polite"></div>
     <div class="live-actions"><button type="button" id="retryNews" class="btn btn-light" hidden>다시 검색</button></div>
   </section>
-  <section id="newsSection" aria-label="추천 뉴스">
-    <div class="section-title"><h2>최근 뉴스</h2><span id="updatedAt" class="timestamp">자료 확인 중</span></div>
-    <div id="newsList" class="news-list" aria-live="polite"></div>
-  </section>
+
   <section class="business-section" id="businessSection" aria-labelledby="businessTitle" hidden>
     <div class="section-title"><h2 id="businessTitle">지역 기업</h2><span id="businessCount" class="timestamp"></span></div>
     <div class="business-filters" aria-label="기업 유형">

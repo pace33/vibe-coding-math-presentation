@@ -454,7 +454,7 @@ function chooseStory(story){
  const isBusiness=state.story.kind==="business";
  $("verifyHeading").textContent=isBusiness?"기업 정보가 정말 맞을까?":"뉴스가 정말 맞을까?";
  $("storyType").textContent=isBusiness?"🏭 우리 지역 기업 자료":"📰 내가 고른 뉴스";
- $("findingHeading").textContent=isBusiness?"① 이 기업에 대해 무엇을 알게 되었나요?":"① 뉴스에서 어떤 내용을 찾았나요?";
+ $("findingHeading").textContent=isBusiness?"기업 자료에서 찾은 근거":"뉴스에서 찾은 근거";
  $("findingLabel").textContent=isBusiness?"기업 소개나 사업장 자료에서 확인한 사실을 적어 보세요.":"기사나 공지에 적힌 중요한 사실을 적어 보세요.";
  $("articleLink").textContent=isBusiness?"기업·사업장 원문 읽기 ↗":"기사 원문 읽기 ↗";
  $("articleTitle").textContent=state.story.title;
@@ -465,7 +465,7 @@ function chooseStory(story){
  evidenceSequence++;
  state.selectedEvidence=null;state.evidenceNews=[];state.evidenceError="";state.evidenceSearching=false;
  for(const id of ["articleFinding","officialFinding","officialUrl","reason"])$(id).value="";
- $("detailEvidence").open=false;
+ $("detailEvidence").open=true;
  document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
  $("formMessage").textContent="";
  const location=state.story.region==="전체"?"충청북도":"충청북도 "+state.story.region;
@@ -511,9 +511,9 @@ function reportText(){
  const d=state.report;
  return [
   "우리 지역 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
-  "검증할 뉴스·자료: "+d.newsFact,"비교자료 제목·내용: "+(d.govFact||"아직 못 찾음"),
-  "나의 판단: "+d.verdict,"판단한 이유: "+d.reason,
-  "뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
+  "① 출처 확인","발행한 곳: "+d.publisher,"발행 날짜: "+(d.date||"원문에서 확인해요"),"뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
+  "② 근거 확인","뉴스에서 찾은 근거: "+d.newsFact,"비교 자료에서 찾은 근거: "+(d.govFact||"아직 못 찾음"),
+  "③ 기사 비교","비교 결과: "+d.verdict,"같거나 다른 내용과 나의 생각: "+d.reason,
   "※ 학생이 작성한 판단이며, 자동 사실 검증은 아닙니다."
  ].join("\n");
 }

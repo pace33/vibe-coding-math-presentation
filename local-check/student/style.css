@@ -197,6 +197,13 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .detective-thought .detective-step{color:#344b40}
 .detective-reason{background:#fff;border-radius:12px;padding:16px;margin-bottom:0;border:1px solid #d3ddd6}
 .detective-note{margin:20px 0 0;padding-top:16px;border-top:1px solid #d9e4dc}
+.selected-story .verification-guide,.verification-guide{font-size:1rem;line-height:1.7;color:#405b4c;margin:10px 0 18px}
+.detective-origin{padding:22px;border:2px solid #c8d7e6;border-radius:18px;background:#f5f8fc;margin-bottom:24px}
+.detective-origin h3,.detective-evidence-record>h3{font-size:1.3rem;margin:0 0 8px}
+.detective-origin p{font-size:1rem;overflow-wrap:anywhere;margin-bottom:8px}
+.detective-origin a{display:inline-block;font-size:1rem;text-decoration:underline;text-underline-offset:4px;font-weight:750;padding:10px 0;min-height:44px;color:#205a73}
+.detective-verdict{font-size:1.25rem;line-height:1.6;font-weight:800;margin:15px 0}
+.verify-steps span{font-size:1rem}
 #verify .helper,#verify .short-reason-label,#verify .verify-extra summary,#verify .verify-extra-fields label{font-size:1rem}
 .verdict-choices label{font-size:1rem;min-height:86px;padding:12px 8px}
 .verdict-choices small{display:block;font-size:.875rem;font-weight:500;margin-top:5px}

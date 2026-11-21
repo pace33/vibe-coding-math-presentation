@@ -79,19 +79,22 @@
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">
   <button type="button" id="back" class="back">← 목록으로</button>
   <div class="verify-steps" aria-label="뉴스 검증 3단계">
-    <span>① 뉴스 선택 ✓</span><span>② 근거 찾기</span><span>③ 내가 판단</span>
+    <span>① 출처 확인</span><span>② 근거 확인</span><span>③ 기사 비교</span>
   </div>
-  <div class="intro small-intro"><span class="eyebrow">우리 지역 탐정 · 3단계 검증</span><h1 id="verifyHeading">사실일까?</h1><p>다른 자료를 읽고 나의 생각을 선택해 보세요.</p></div>
+  <div class="intro small-intro"><span class="eyebrow">우리 지역 탐정 · 3단계 검증</span><h1 id="verifyHeading">사실일까?</h1><p>누가 썼는지 보고, 근거를 찾고, 다른 기사와 비교해요.</p></div>
   <article class="selected-story">
+    <h2>① 출처 확인</h2>
+    <p class="verification-guide">누가 썼나요? 언제 썼나요? 아래 원문을 열어 언론사·기자·날짜를 찾아보세요.</p>
     <div class="story-top"><span class="pill" id="storyType">📰 내가 고른 뉴스</span><span id="articleDate" class="muted"></span></div>
     <h2 id="articleTitle"></h2><p id="articlePublisher"></p>
     <a id="articleLink" target="_blank" rel="noopener noreferrer" class="source-link">뉴스 원문 읽기 ↗</a>
   </article>
   <section class="verify-panel">
     <div class="evidence-heading">
-      <h2>② 관련 자료 자동 찾기</h2>
+      <h2>② 근거 확인</h2>
       <button type="button" id="retryEvidence" class="btn btn-subtle">다시 찾기 ↻</button>
     </div>
+    <p class="verification-guide">그렇게 말하는 까닭이 있나요? 기사 속 숫자·날짜·사진·인터뷰와 그 자료가 나온 곳을 찾아보세요.</p>
     <p id="evidenceStatus" class="evidence-status" role="status" aria-live="polite">관련 자료를 찾고 있어요.</p>
     <div id="evidenceCandidates" class="evidence-candidates" aria-live="polite"></div>
     <details class="verify-extra"><summary>자료를 더 찾아볼래요</summary>
@@ -100,28 +103,29 @@
         <a id="newsCompareLink" class="btn btn-subtle" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">📰 다른 기사 검색 ↗</a>
       </div>
     </details>
-    <div class="divider"></div>
-    <h2>③ 나는 어떻게 생각할까?</h2>
-    <p class="helper">두 자료에서 같은 내용을 찾아보세요. 연도·날짜·장소·숫자가 같은지 확인한 뒤 골라요. 아직 잘 모르겠다면 ‘더 알아볼래요’를 선택해도 괜찮아요.</p>
-    <fieldset class="choices verdict-choices"><legend>나의 판단을 선택해요.</legend>
-      <label><input type="radio" name="verdict" value="같아요"><span>🟢 내용이 같아요<small>두 자료가 같은 이야기를 해요</small></span></label>
-      <label><input type="radio" name="verdict" value="달라요"><span>🟠 내용이 달라요<small>서로 다른 내용을 찾았어요</small></span></label>
-      <label><input type="radio" name="verdict" value="아직 모르겠어요" checked><span>🔵 더 알아볼래요<small>아직 판단하기 어려워요</small></span></label>
-    </fieldset>
-    <label for="reason" class="short-reason-label">왜 그렇게 생각했나요? <span>(선택)</span></label>
-    <textarea id="reason" maxlength="220" rows="3" placeholder="뉴스에는 ___, 비교 자료에는 ___라고 나와서 이렇게 생각했어요."></textarea>
-    <details class="verify-extra" id="detailEvidence">
-      <summary>두 자료에서 찾은 날짜·숫자 적기 (선택)</summary>
+    <details class="verify-extra" id="detailEvidence" open>
+      <summary>찾은 근거를 적어요 (선택)</summary>
       <div class="verify-extra-fields">
         <h3 id="findingHeading">기사에서 확인한 내용</h3>
         <label id="findingLabel" for="articleFinding">기사에서 확인한 사실을 적어 보세요.</label>
-        <textarea id="articleFinding" maxlength="500" rows="2" placeholder="기사에서 확인한 숫자나 날짜"></textarea>
+        <textarea id="articleFinding" maxlength="500" rows="2" placeholder="예: 기사에는 인구가 ___명이라고 나와요. 숫자는 ___의 통계에서 가져왔어요."></textarea>
         <label for="officialUrl">비교한 자료 주소</label>
         <input id="officialUrl" type="url" placeholder="https://...">
         <label for="officialFinding">비교자료에서 확인한 내용</label>
         <textarea id="officialFinding" maxlength="500" rows="2" placeholder="비교자료에서 확인한 숫자나 날짜"></textarea>
       </div>
     </details>
+    <div class="divider"></div>
+    <h2>③ 기사 비교</h2>
+    <p class="helper">다른 언론사의 기사도 같은 이야기를 하나요? 같은 사건·연도·날짜를 다룬 기사끼리 비교해요. 공식 자료로 비교했다면 그 내용을 적어도 좋아요.</p>
+    <p class="verification-guide">여러 기사에 같은 말이 나와도 모두 같은 자료를 옮겼을 수 있어요. 내용이 같다는 것만으로 사실이라고 정하지 않아요.</p>
+    <fieldset class="choices verdict-choices"><legend>비교해 보니 어떤가요?</legend>
+      <label><input type="radio" name="verdict" value="같아요"><span>🟢 내용이 같아요<small>두 자료가 같은 이야기를 해요</small></span></label>
+      <label><input type="radio" name="verdict" value="달라요"><span>🟠 내용이 달라요<small>서로 다른 내용을 찾았어요</small></span></label>
+      <label><input type="radio" name="verdict" value="아직 모르겠어요" checked><span>🔵 더 알아볼래요<small>아직 판단하기 어려워요</small></span></label>
+    </fieldset>
+    <label for="reason" class="short-reason-label">어떤 내용이 같거나 달랐나요? <span>(선택)</span></label>
+    <textarea id="reason" maxlength="220" rows="3" placeholder="첫 기사에는 ___, 다른 기사나 자료에는 ___라고 나와요. 그래서 ___라고 생각해요."></textarea>
     <p class="evidence-disclaimer">※ 자동 검색은 관련 자료를 추천할 뿐, 사실 여부를 AI가 판정하지 않아요.</p>
     <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">✅ 탐정 카드 완성하기</button><span id="formMessage" role="status" aria-live="polite"></span></div>
   </section>

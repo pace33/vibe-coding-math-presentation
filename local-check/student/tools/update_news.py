@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Refresh public RSS headlines for the student regional inquiry website.
+"""Collect Google News RSS link metadata for local student news inquiry.
 
-No API keys. Headlines are NOT fact-checked, full article text is never copied.
-Failures leave the previous file unchanged to avoid replacing good data with an outage.
+No API keys; no article bodies; results are not fact checked.
+Provides two cached resources:
+  latest.json: four most recent headlines for each Chungbuk municipality
+  search-index.json: more article metadata by region/topic, locally searchable
+Caching is a fallback; it is not a live Google News API.
 """
 from __future__ import annotations
+
 import datetime as dt
 import email.utils
 import json
@@ -17,47 +21,57 @@ import xml.etree.ElementTree as ET
 
 REGIONS = (
     "청주시", "충주시", "제천시", "보은군", "옥천군", "영동군",
-    "증평군", "진천군", "괴산군", "음성군", "단양군"
+    "증평군", "진천군", "괴산군", "음성군", "단양군",
 )
-DATA = pathlib.Path(__file__).resolve().parents[1] / "latest.json"
+TOPICS = (
+    ("지역생활", "축제 OR 문화 OR 교육 OR 지역사회"),
+    ("기업산업", "기업 OR 중소기업 OR 공장 OR 산업"),
+    ("특화산업", "반도체 OR 식품 OR 농업 OR 취업"),
+    ("관광환경", "관광 OR 생태 OR 여행 OR 교통"),
+)
+BASE = pathlib.Path(__file__).resolve().parents[1]
 NOW = dt.datetime.now(dt.timezone.utc)
-AFTER = NOW - dt.timedelta(days=45)
+AFTER = NOW - dt.timedelta(days=40)
+MAX_INDEX = 450
 
 def valid_url(raw: str) -> str:
     p = urllib.parse.urlsplit(raw.strip())
     return raw if p.scheme == "https" and p.hostname == "news.google.com" else ""
 
-def query(region: str) -> str:
-    q = f"충북 {region} 축제 OR 문화 OR 교육 OR 지역사회 when:45d"
+def query(region: str, expression: str) -> str:
+    q = f"충북 {region} ({expression}) when:40d"
     return "https://news.google.com/rss/search?" + urllib.parse.urlencode({
-        "q": q, "hl": "ko", "gl": "KR", "ceid": "KR:ko"
+        "q": q, "hl": "ko", "gl": "KR", "ceid": "KR:ko",
     })
 
-def fetch(region: str) -> list[dict]:
+def fetch(region: str, tag: str, expression: str) -> list[dict]:
     req = urllib.request.Request(
-        query(region),
-        headers={"User-Agent": "Mozilla/5.0 (compatible; LocalCheckEdu/1.0; educational RSS reader)", "Accept": "application/rss+xml, text/xml"}
+        query(region, expression),
+        headers={
+            "User-Agent": "Mozilla/5.0 (compatible; LocalCheckEdu/2.0; educational RSS metadata reader)",
+            "Accept": "application/rss+xml, text/xml",
+        },
     )
-    with urllib.request.urlopen(req, timeout=15) as response:
-        xml_data = response.read(512000)
+    with urllib.request.urlopen(req, timeout=12) as response:
+        xml_data = response.read(600000)
     root = ET.fromstring(xml_data)
     items = []
     token = region[:-1]
-    for node in root.findall(".//channel/item")[:45]:
+    for node in root.findall(".//channel/item")[:55]:
         title = (node.findtext("title") or "").strip()
-        link = (node.findtext("link") or "").strip()
+        link = valid_url((node.findtext("link") or "").strip())
         publisher = (node.findtext("source") or "뉴스 제공처").strip()
         date_str = node.findtext("pubDate") or ""
-        if not title or not valid_url(link) or token not in title:
+        if not title or not link or token not in title:
             continue
         try:
             published = email.utils.parsedate_to_datetime(date_str).astimezone(dt.timezone.utc)
-            if published < AFTER or published > NOW + dt.timedelta(days=1):
+            if not AFTER <= published <= NOW + dt.timedelta(days=1):
                 continue
         except (TypeError, ValueError, OverflowError):
             continue
         headline = title.removesuffix(" - " + publisher).strip()[:180]
-        if not headline or len(headline) < 7:
+        if len(headline) < 7:
             continue
         items.append({
             "region": region,
@@ -66,39 +80,75 @@ def fetch(region: str) -> list[dict]:
             "published": published.date().isoformat(),
             "url": link,
             "verified": False,
-            "sourceType": "언론 기사 검색 결과"
+            "sourceType": "구글 뉴스 RSS 저장 결과",
+            "topicGroup": tag,
         })
-        if len(items) == 4:
+        if len(items) >= 7:
             break
     return items
 
+def previous_rows() -> list[dict]:
+    target = BASE / "search-index.json"
+    try:
+        old = json.loads(target.read_text(encoding="utf-8"))
+        rows = old.get("items", [])
+        if not isinstance(rows, list):
+            return []
+        return [
+            r for r in rows
+            if isinstance(r, dict)
+            and r.get("region") in REGIONS
+            and valid_url(str(r.get("url", "")))
+            and r.get("published", "") >= AFTER.date().isoformat()
+        ]
+    except (OSError, ValueError, TypeError):
+        return []
+
 def main() -> None:
-    found = []
-    succeeded = 0
+    collected, successes = [], 0
     for region in REGIONS:
-        try:
-            found.extend(fetch(region))
-            succeeded += 1
-        except (urllib.error.URLError, TimeoutError, ET.ParseError, ValueError) as exc:
-            print(f"{region}: RSS 자료를 가져오지 못했습니다: {type(exc).__name__}")
-        time.sleep(0.35)
-    # Do not wipe good data on feed outage.
-    if succeeded == 0:
-        raise RuntimeError("No valid RSS responses; the existing latest.json is preserved.")
-    uniq = {}
-    for row in found:
+        for tag, terms in TOPICS:
+            try:
+                collected.extend(fetch(region, tag, terms))
+                successes += 1
+            except (urllib.error.URLError, TimeoutError, ET.ParseError, ValueError) as exc:
+                print(f"{region} {tag}: RSS 응답 실패: {type(exc).__name__}", flush=True)
+            time.sleep(0.12)
+    if successes == 0:
+        raise RuntimeError("RSS 자료가 전부 차단되어 이전 캐시를 그대로 유지합니다.")
+
+    merged = {}
+    for row in collected + previous_rows():
         key = (row["region"], row["title"])
-        uniq.setdefault(key, row)
-    result = {
-        "version": 1,
-        "origin": "Google 뉴스 RSS 공개 검색 결과",
-        "updatedAt": NOW.date().isoformat(),
-        "note": "검색 결과 제목만 제공합니다. 기사 원문·발행일·사실 여부는 학생이 직접 확인해야 합니다.",
-        "regionsChecked": succeeded,
-        "items": sorted(uniq.values(), key=lambda x: x["published"], reverse=True)[:44]
-    }
-    DATA.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Saved {len(result['items'])} headline links for {succeeded} of {len(REGIONS)} regions.")
+        merged.setdefault(key, row)
+    indexed = sorted(merged.values(), key=lambda r: r["published"], reverse=True)[:MAX_INDEX]
+    latest = []
+    for region in REGIONS:
+        latest.extend(next((r for r in indexed if r["region"] == region and r["title"] == title), None)
+                      for title in list(dict.fromkeys(r["title"] for r in indexed if r["region"] == region))[:4])
+    latest = [row for row in latest if row]
+    stamp = NOW.date().isoformat()
+    (BASE / "search-index.json").write_text(
+        json.dumps({
+            "version": 1,
+            "updatedAt": stamp,
+            "requestsSucceeded": successes,
+            "source": "Google 뉴스 RSS 정기 저장 자료(실시간 아님)",
+            "note": "기사는 자동 검증되지 않았습니다.",
+            "items": indexed,
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8",
+    )
+    (BASE / "latest.json").write_text(
+        json.dumps({
+            "version": 1,
+            "origin": "Google 뉴스 RSS 공개 검색 결과",
+            "updatedAt": stamp,
+            "note": "검색 결과 제목만 제공. 원문과 사실 여부는 학생이 확인.",
+            "regionsChecked": len({r["region"] for r in indexed}),
+            "items": sorted(latest, key=lambda r: r["published"], reverse=True),
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8",
+    )
+    print(f"Updated {len(indexed)} indexed and {len(latest)} featured headlines using {successes}/{len(REGIONS)*len(TOPICS)} RSS queries.")
 
 if __name__ == "__main__":
     main()

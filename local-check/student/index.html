@@ -13,6 +13,7 @@
 <script src="board.js" defer></script>
 <script src="live-news.js" defer></script>
 <script src="regional-inquiries.js" defer></script>
+<script src="regional-basics.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
@@ -42,7 +43,7 @@
     <div class="form-grid">
       <div class="field"><label for="region">지역 선택</label>
         <select id="region"><option value="전체">충청북도 전체</option><option>청주시</option><option>충주시</option><option>제천시</option><option>보은군</option><option>옥천군</option><option>영동군</option><option>증평군</option><option>진천군</option><option>괴산군</option><option>음성군</option><option>단양군</option></select></div>
-      <div class="field"><label for="keyword">검색어</label><input id="keyword" type="search" placeholder="예: 축제, 반도체, 중소기업" maxlength="85" autocomplete="off" aria-controls="liveResults" aria-describedby="searchHelp"></div>
+      <div class="field" id="keywordField"><label for="keyword">검색어</label><input id="keyword" type="search" placeholder="예: 축제, 반도체, 중소기업" maxlength="85" autocomplete="off" aria-controls="liveResults" aria-describedby="searchHelp"></div>
     </div>
     <button id="newsSearch" class="btn btn-primary main-search" type="button">🔎 뉴스 검색</button>
     <p id="searchHelp" class="search-hint">검색어 2글자 이상 입력하면 아래에 뉴스가 자동으로 나와요.</p>
@@ -69,6 +70,7 @@
     <div class="section-title"><h2 id="inquiryTitle">우리 지역 탐구</h2></div>
     <p id="inquiryGuide" class="inquiry-guide"></p>
     <div id="inquiryList" class="inquiry-grid"></div>
+    <div class="inquiry-news-footer"><span>새로 바뀌는 정보는 뉴스에서 확인해요.</span><button class="btn btn-light" id="inquiryNews" type="button">📰 최신 뉴스 찾아보기</button></div>
   </section>
   <section class="business-section" id="businessSection" aria-labelledby="businessTitle" hidden>
     <div class="section-title"><h2 id="businessTitle">지역 기업</h2><span id="businessCount" class="timestamp"></span></div>

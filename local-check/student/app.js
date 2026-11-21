@@ -116,7 +116,7 @@ async function searchNewsInside(){
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
  if(category==="news")$("newsSection").hidden=true;
- if(category!=="news")$("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
+ $("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
  $("liveStatus").textContent="구글 뉴스 RSS에서 기사를 찾고 있어요.";
@@ -137,7 +137,7 @@ async function searchNewsInside(){
   renderLiveResults(fallback,"saved");
   $("liveStatus").textContent=fallback.length?
    "현재 새 뉴스 조회가 연결되지 않아 저장된 기사 "+fallback.length+"건을 표시합니다. 저장 기준일: "+(state.updated||"확인 필요"):
-   "새 뉴스 조회 서비스가 연결되지 않았고 저장된 기사도 조건에 맞지 않아요. 아래 '구글 뉴스에서도 보기'를 이용해 주세요.";
+   "새 뉴스 조회 서비스에 연결할 수 없어요. '구글 뉴스에서 더 보기'로 직접 찾아보세요.";
   $("retryNews").hidden=false;
  }finally{
   clearTimeout(timer);

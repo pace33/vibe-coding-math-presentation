@@ -85,7 +85,7 @@ function renderLiveResults(items,mode){
   card.innerHTML='<div class="meta"><span class="tag">'+esc(x.region)+" · "+esc(x.sourceType||"뉴스")+'</span><span>'+esc(x.published||"날짜 확인")+'</span></div>'+
    '<h3>'+esc(x.title)+'</h3><p>'+esc(x.publisher||"발행기관 확인")+'</p>'+
    '<div class="news-actions"><a href="'+esc(valid)+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a>'+
-   '<button type="button" data-live-news="'+i+'">이 뉴스 검증하기 →</button></div>';
+   '<button type="button" data-live-news="'+i+'">검증하기 →</button></div>';
   box.appendChild(card);
  }
 }
@@ -163,7 +163,7 @@ function renderNews(){
   const card=document.createElement("article");card.className="news-card";
   card.innerHTML='<div class="meta"><span class="tag">'+esc(item.region)+' · '+esc(item.sourceType||"자료")+'</span><span>'+esc(item.published||"날짜 확인 필요")+'</span></div>'+
    '<h3>'+esc(item.title)+'</h3><p>'+esc(item.publisher||"발행기관 확인 필요")+'</p>'+
-   '<div class="news-actions"><a href="'+esc(url(item.url))+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a><button type="button" data-news="'+state.news.indexOf(item)+'">이 뉴스 확인하기 →</button></div>';
+   '<div class="news-actions"><a href="'+esc(url(item.url))+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a><button type="button" data-news="'+state.news.indexOf(item)+'">검증하기 →</button></div>';
   root.appendChild(card);
  }
 }
@@ -451,16 +451,15 @@ function renderReport(){
  if(!state.report)return;
  const d=state.report;
  const root=$("report");
- root.innerHTML='<h2>🔎 우리 고장 탐정 카드</h2>'+
-  '<div class="report-row"><strong>지역</strong><p>'+esc(d.region)+'</p></div>'+
-  '<div class="report-row"><strong>선택한 탐구 자료</strong><p>'+esc(d.title)+'</p></div>'+
-  '<div class="report-row"><strong>검증할 뉴스·자료</strong><p>'+esc(d.newsFact)+'</p></div>'+
-  '<div class="report-row"><strong>비교자료 제목·확인 내용</strong><p>'+esc(d.govFact||"아직 찾지 못했어요")+'</p></div>'+
-  '<div class="report-row"><strong>나의 판단</strong><p>'+esc(d.verdict)+'</p></div>'+
-  '<div class="report-row"><strong>판단한 이유</strong><p>'+esc(d.reason)+'</p></div>'+
-  '<div class="report-row"><strong>참고한 원문</strong><a href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer">뉴스·기사 원문 ↗</a>'+
-   (d.govUrl?'<a href="'+esc(d.govUrl)+'" target="_blank" rel="noopener noreferrer">비교 자료 원문 ↗</a>':'')+'</div>'+
-  '<p class="note">이 카드는 학생이 찾은 근거와 판단을 기록한 것이며, 정보의 사실 여부를 자동으로 검증한 결과가 아닙니다.</p>';
+ root.innerHTML='<h2>🔎 나의 탐정 카드</h2>'+
+  '<div class="report-row"><strong>'+esc(d.region)+'</strong><p>'+esc(d.title)+'</p></div>'+
+  '<div class="report-row"><strong>내가 생각한 결과</strong><p class="student-verdict">'+esc(d.verdict)+'</p><p>'+esc(d.reason)+'</p></div>'+
+  '<div class="report-row"><strong>확인한 원문</strong><a href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer">첫 번째 자료 ↗</a>'+
+  (d.govUrl?'<a href="'+esc(d.govUrl)+'" target="_blank" rel="noopener noreferrer">비교자료 ↗</a>':'')+'</div>'+
+  '<details class="secondary-tools"><summary>내가 기록한 내용 보기</summary>'+
+   '<div class="report-row"><strong>첫 번째 자료</strong><p>'+esc(d.newsFact)+'</p></div>'+
+   '<div class="report-row"><strong>비교자료</strong><p>'+esc(d.govFact||"아직 확인하지 않았어요")+'</p></div></details>'+
+  '<p class="note">학생의 판단 기록입니다. 사이트가 사실 여부를 자동 판정한 결과는 아니에요.</p>';
 }
 function reportText(){
  const d=state.report;

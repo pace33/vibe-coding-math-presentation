@@ -265,7 +265,8 @@ function isGeneric(href){
  return [POP,ECO,TOUR,CLIMATE].includes(href)||href==="https://www.heritage.go.kr/"||href==="https://www.epeople.go.kr/";
 }
 function cards(region,category,companies=[],facts=[]){
- return rawCards(region,category,companies,facts).map((item,i)=>{
+ const visits=["nature","facilities","local"].includes(category)?window.LOCALCHECK_REGIONAL_VISITS?.[region]?.[category]||[]:[];
+ return [...rawCards(region,category,companies,facts),...visits].map((item,i)=>{
   const c={...item,more:Array.isArray(item.more)?item.more.map(v=>({...v})):[]};
   if(category==="nature"&&i===0&&!window.LOCALCHECK_REGIONAL_LANDMARKS?.[region]?.nature&&KNOWN_NATURE[region]&&region!=="음성군"){
     c.href=KNOWN_NATURE[region];

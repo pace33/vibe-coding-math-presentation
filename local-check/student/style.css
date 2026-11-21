@@ -318,3 +318,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  .inquiry-workflow-actions .btn{width:100%;min-height:44px;font-size:11px;padding:8px 5px;white-space:normal}
  .basic-card-actions .regional-card-news{align-self:stretch;text-align:center}
 }
+
+/* 역사와 문화: 지역 축제·예술 행사 정보는 한눈에 구분 */
+.festival-card{border-left:3px solid #79b994}
+.festival-card .basic-card-value{font-size:18px;line-height:1.4}
+.festival-card .basic-card-title h3{color:var(--green-dark)}
+.festival-note{align-self:flex-start;color:#805c25;background:#fff6e8;border-radius:7px;font-size:11px;font-weight:750;padding:4px 8px}

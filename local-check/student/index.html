@@ -69,11 +69,11 @@
   </section>
 </section>
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">
-  <button type="button" id="back" class="back">← 뉴스 목록으로</button>
+  <button type="button" id="back" class="back">← 목록으로</button>
   <div class="verify-steps" aria-label="뉴스 검증 3단계">
     <span>① 뉴스 선택 ✓</span><span>② 근거 찾기</span><span>③ 내가 판단</span>
   </div>
-  <div class="intro small-intro"><span class="eyebrow">우리 고장 탐정 · 3단계 검증</span><h1 id="verifyHeading">이 뉴스가 정말 맞을까?</h1><p>다른 자료를 읽고 나의 생각을 선택해 보세요.</p></div>
+  <div class="intro small-intro"><span class="eyebrow">우리 고장 탐정 · 3단계 검증</span><h1 id="verifyHeading">사실일까?</h1><p>다른 자료를 읽고 나의 생각을 선택해 보세요.</p></div>
   <article class="selected-story">
     <div class="story-top"><span class="pill" id="storyType">📰 내가 고른 뉴스</span><span id="articleDate" class="muted"></span></div>
     <h2 id="articleTitle"></h2><p id="articlePublisher"></p>
@@ -127,9 +127,9 @@
 </section>
 
 <section id="board" class="view" hidden aria-labelledby="boardTitle">
-  <button class="back" id="boardBack" type="button">← 뉴스 탐정으로</button>
-  <div class="intro small-intro"><h1 id="boardTitle">🗂️ 탐정 게시판</h1><p>내가 만든 카드와 친구에게 받은 카드</p></div>
-  <p class="board-tip">친구가 보내 준 링크를 열고 ‘내 게시판에 담기’를 누르세요. 카드는 이 기기에만 모입니다.</p>
+  <button class="back" id="boardBack" type="button">← 목록으로</button>
+  <div class="intro small-intro"><h1 id="boardTitle">🗂️ 탐정 게시판</h1><p>내 카드와 친구의 카드</p></div>
+  <p class="board-tip">친구에게 받은 카드는 ‘내 게시판에 담기’로 저장할 수 있어요. 기기별로 보관됩니다.</p>
   <div class="board-heading"><h2>모아 둔 카드 <span id="boardCount">0건</span></h2></div>
   <div id="boardList" class="board-grid" aria-live="polite"></div><details class="secondary-tools"><summary>게시판 자료 내보내기</summary><button class="btn btn-light" type="button" id="downloadBoard">파일 저장</button></details>
 </section>
@@ -138,7 +138,7 @@
   <div class="intro small-intro"><h1 id="sharedTitle">🔎 친구의 탐정 카드</h1></div>
   <div id="sharedReport" class="report" aria-live="polite"></div>
   <p class="board-privacy">친구의 판단입니다. 사실 여부는 원문에서 다시 확인하세요.</p>
-  <div class="bottom-actions"><button class="btn btn-primary" id="addShared" type="button">📚 내 게시판에 담기</button><button class="btn btn-light" id="shareAgain" type="button">🔗 이 카드 링크 복사</button><button class="btn btn-light" id="sharedHome" type="button">🏠 뉴스 찾기로</button></div>
+  <div class="bottom-actions"><button class="btn btn-primary" id="addShared" type="button">📚 내 게시판에 담기</button><button class="btn btn-light" id="shareAgain" type="button">🔗 이 카드 링크 복사</button><button class="btn btn-light" id="sharedHome" type="button">🏠 첫 화면으로</button></div>
   <p id="shareStatus" class="board-feedback" role="status" aria-live="polite"></p>
 </section>
 <footer><span>로컬체크 EDU · 우리 고장 탐구</span><span>회원가입 없음 · 학생 이름 입력 없음 · 카드 공유 시 개인정보를 적지 마세요</span></footer>

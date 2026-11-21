@@ -163,7 +163,7 @@ function rawCards(region,category,companies=[],facts=[]){
   ];
  }
  if(category==="business"){
-  const hits=companies.filter(x=>x.region===region).slice(0,3).map(x=>asCard(x.emoji||"🏭","지역 기업",x.name,x.produces||x.summary||"지역 사업장",x.source?.title||"기업 공개자료",x.source?.url||REGION_SITES[region]));
+  const hits=companies.filter(x=>x.region===region).slice(0,6).map(x=>asCard(x.emoji||"🏭","지역 기업",x.name,x.produces||x.summary||"지역 사업장",x.source?.title||"기업 공개자료",x.source?.url||REGION_SITES[region]));
   return [...hits,asCard("🌾","농산물과 특산물","지역 농산물","우리 지역의 대표 농산물과 판매 정보는 지자체 자료에서 확인해요.","시·군청",REGION_SITES[region])];
  }
  if(category==="local"){

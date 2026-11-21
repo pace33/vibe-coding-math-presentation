@@ -61,6 +61,8 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .live-results{margin-top:22px}
 .live-results .section-title{margin-top:0}
 .live-status,.evidence-status,.board-tip{font-size:12px;line-height:1.75;color:#4f755f;background:var(--soft);padding:11px 14px;border-radius:10px;margin:0 0 12px}
+.google-more-row{display:flex;justify-content:flex-end;margin:0 0 13px}
+.google-more-button{min-height:41px;padding:9px 14px;font-size:13px}
 .live-actions{display:flex;justify-content:flex-end;gap:12px;align-items:center;margin:12px 0 0}
 .quiet-link{font-size:12px;font-weight:800;color:var(--green);text-decoration:underline}
 .business-filters{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
@@ -149,6 +151,8 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  .form-grid{grid-template-columns:1fr;gap:9px}
  .search-panel{padding:15px}
  .news-list,.business-list,.candidate-grid,.board-grid,.topic-list{grid-template-columns:1fr}
+ .google-more-row{justify-content:stretch}
+ .google-more-button{width:100%}
  .section-title h2{font-size:19px}
  .section-title{margin-top:22px}
  .verify-panel,.report{padding:16px}

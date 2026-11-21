@@ -5,7 +5,7 @@
  * 상세 자료가 확인된 경우에만 URL을 입력하고, 나머지는 지역·명칭 구글 검색으로 연결.
  */
 const n=(title,value,summary,href="",source="지역 자연환경 공공자료")=>({icon:{"산과 지형":"⛰️","하천과 강":"💧","호수와 저수지":"🌊","숲과 계곡":"🌲","바위와 강 경관":"🏞️"}[title]||"🏞️",title,value,summary,href,source});
-const h=(title,value,summary,href="",source="지역 역사·문화 공식자료")=>({icon:{"문화유산·유물":"🏛️","박물관·전시관":"🏺","역사 장소":"📜","미술관·예술":"🎨"}[title]||"🏛️",title,value,summary,href,source});
+const h=(title,value,summary,href="",source="지역 역사·문화 공식자료")=>({icon:{"문화유산·유물":"🏛️","박물관·전시관":"🏺","역사 장소":"📜","미술관·예술":"🎨","대표 축제":"🎉","예술·공연 축제":"🎭"}[title]||"🏛️",title,value,summary,href,source});
 window.LOCALCHECK_REGIONAL_LANDMARKS={
 "청주시":{
  nature:[
@@ -142,4 +142,66 @@ window.LOCALCHECK_REGIONAL_LANDMARKS={
   h("역사 장소","온달관광지 · 구인사","온달 이야기와 지역 종교·역사의 흔적을 알아볼 수 있어요.")
  ]}
 };
+/* 실제 행사의 '이름'은 지역 문화 기초정보이며, 개최 일시·프로그램은 매년 달라집니다.
+ * 지역 축제와 예술·공연 축제를 별도 카드로 추가합니다. 공식 행사 소개 URL 우선.
+ * 일부 비정기·격년 행사는 매년 열리는 것으로 표시하지 않습니다.
+ * 정보 확인 기준: 2026-11-21 (현재 연도 개최 사실은 해당 연도 공식 안내로 확인).
+ */
+const festival=(kind,name,summary,href,source="시·군청 또는 행사 주최기관 공식자료",note="")=>({
+ ...h(kind,name,summary,href,source),
+ primaryLabel:"행사 소개 보기 ↗",
+ event:true,
+ newsTerm:name,
+ ...(note?{note}:{}),
+});
+const FESTIVALS={
+ "청주시":[
+  festival("대표 축제","청원생명축제","청주의 농업과 농특산물을 알아보고 다양한 체험을 하는 축제예요.","https://www.cheongju.go.kr/news/webCtznNwsprList.do?ctznNwsprItemNo=1966&ctznNwsprNo=346&key=22512","청주시민신문 2026"),
+  festival("예술·공연 축제","청주공예비엔날레","세계 여러 나라의 공예 작품을 보고 체험하는 국제 예술 행사예요.","https://www.cheongju.go.kr/news/webCtznNwsprList.do?ctznNwsprItemNo=1348&ctznNwsprNo=305&key=22512","청주시민신문 2025","격년 개최 · 다음 행사 연도 확인")
+ ],
+ "충주시":[
+  festival("대표 축제","충주 다이브 페스티벌","음악·춤·공연을 즐기고 지역 문화를 만나는 축제예요.","https://tour.chungbuk.go.kr/www/selectBbsNttView.do?bbsNo=10&integrDeptCode=&key=80&nttNo=23292&pageIndex=1&searchCnd=all&searchCtgry=&searchKrwd=","충북나드리 2026 축제"),
+  festival("예술·공연 축제","우륵문화제","가야금을 만든 것으로 전해지는 우륵의 음악 정신과 예술을 기리는 축제예요.","https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pRo=40&pSeq=11660","문화체육관광부 2026")
+ ],
+ "제천시":[
+  festival("대표 축제","제천한방천연물산업박람회","제천의 약초와 한방·천연물 산업을 알아보고 체험하는 행사예요.","","제천한방천연물산업진흥재단 2026 자료"),
+  festival("예술·공연 축제","제천국제음악영화제","음악을 주제로 한 영화와 공연을 만날 수 있는 예술 축제예요.","https://www.jimff.org/kor/artyboard/mboard.asp?Action=view&intSeq=5118&strBoardID=NNWR_1GN9","제천국제음악영화제 2026")
+ ],
+ "보은군":[
+  festival("대표 축제","보은대추축제","지역 특산물 대추와 보은의 농산물을 살펴보는 축제예요.","https://www.boeunjujube.com/144","보은대추축제 공식 사이트 2026"),
+  festival("예술·공연 축제","속리산 가을축제","속리산의 전통 민속놀이와 풍물공연, 영신행차 등을 만나는 행사예요.","https://www.festivalsongni.kr/content/30","속리산 가을축제 주최 측 2026")
+ ],
+ "옥천군":[
+  festival("대표 축제","향수옥천 포도·복숭아축제","옥천의 포도·복숭아를 알리고 체험하는 농특산물 축제예요.","https://oc.go.kr/tour/contents.do?key=2733","옥천군 문화관광 2026"),
+  festival("예술·공연 축제","지용제","옥천 출신 시인 정지용의 시와 문학을 즐기는 문화예술 축제예요.","https://www.oc.go.kr/tour/contents.do?key=2708","옥천군 문화관광 2026")
+ ],
+ "영동군":[
+  festival("대표 축제","영동포도축제","영동의 포도를 직접 보고 농산물 가공 체험을 즐기는 축제예요.","https://www.yd21.go.kr/ydft/html/sub01/010101.html","영동군 문화관광재단 2026"),
+  festival("예술·공연 축제","영동난계국악축제","국악인 난계 박연을 기리고 전통음악 공연을 즐기는 축제예요.","https://www.yd21.go.kr/ydft/html/sub01/010301.html","영동군 문화관광재단 2026")
+ ],
+ "증평군":[
+  festival("대표 축제","증평인삼골축제","증평 특산물 인삼과 지역 먹거리·체험을 알리는 축제예요.","https://www.jp.go.kr/tour/prog/tursmCn/sub03_01/view.do?progNo=p00000006356hw4uR8as","증평군 문화관광 2026"),
+  festival("예술·공연 축제","증평장뜰들노래축제","예전 농사일에 부르던 들노래와 전통 농경문화를 체험하는 축제예요.","https://www.jp.go.kr/tour/prog/tursmCn/sub03_02/view.do?progNo=p00000006370bi3vF1tv","증평군 문화관광 2026")
+ ],
+ "진천군":[
+  festival("대표 축제","생거진천 농다리축제","오래된 돌다리 농다리를 중심으로 전통과 공연을 만나는 축제예요.","https://www.jincheon.go.kr/site/tour/sub.do?menukey=2832","진천군 관광 2026"),
+  festival("예술·공연 축제","생거진천 문화축제","지역 전통놀이와 무용·합창·공연을 함께 즐기는 문화축제예요.","https://www.jincheon.go.kr/site/tour/sub.do?menukey=2831","진천군 관광 2026")
+ ],
+ "괴산군":[
+  festival("대표 축제","괴산고추축제","괴산의 고추와 지역 농산물을 알리고 체험하는 축제예요.","https://www.goesan.go.kr/festival/contents.do?key=1267","괴산군 축제 소개 2026"),
+  festival("예술·공연 축제","목도백중놀이","옛 나루터를 재현하고 농악·민속놀이·공연을 함께하는 전통 행사예요.","https://www.goesan.go.kr/festival/contents.do?key=992","괴산군 축제 소개 2026")
+ ],
+ "음성군":[
+  festival("대표 축제","음성명작페스티벌","음성의 대표 농산물을 전시·체험하고 지역 공연을 즐기는 축제예요.","https://www.esmjf.com/home/sub.php?menukey=3101","음성명작페스티벌 공식 2026"),
+  festival("예술·공연 축제","음성품바축제","품바 공연·길놀이·음악 공연을 통해 나눔과 예술을 만나는 축제예요.","https://www.pumba.kr/page25/festivalas/summary.php","음성품바축제 공식 2026")
+ ],
+ "단양군":[
+  festival("대표 축제","단양 소백산철쭉제","소백산의 철쭉과 자연을 알리고 다양한 공연을 즐기는 봄 축제예요.","https://www.danyang.go.kr/sobaeksan/654","단양군 소백산철쭉제 2026"),
+  festival("예술·공연 축제","온달문화축제","온달과 평강공주 이야기를 전통 공연·연극·체험으로 즐기는 축제예요.","https://www.danyang.go.kr/ondal/635","단양군 온달문화축제 2026")
+ ]
+};
+for(const [region,events] of Object.entries(FESTIVALS)){
+ const landmark=window.LOCALCHECK_REGIONAL_LANDMARKS[region];
+ if(landmark?.local)landmark.local.push(...events);
+}
 })();

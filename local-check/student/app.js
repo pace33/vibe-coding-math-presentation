@@ -115,7 +115,7 @@ async function searchNewsInside(){
  searchButton.disabled=true;
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
- if(category==="news")$("newsSection").hidden=true;
+ // Show retrieved Google News below the existing recent-news cards.
  $("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
@@ -484,6 +484,7 @@ function init(){
  $("region").addEventListener("change",refresh);$("keyword").addEventListener("input",refresh);
  $("keyword").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchNewsInside();}});
  $("newsSearch").addEventListener("click",searchNewsInside);
+ $("showMoreNews").addEventListener("click",searchNewsInside);
  $("retryNews").addEventListener("click",searchNewsInside);
  $("liveNewsList").addEventListener("click",e=>{const b=e.target.closest("[data-live-news]");if(b)fromLiveNews(Number(b.dataset.liveNews));});
  document.querySelectorAll("[data-menu]").forEach(button=>{

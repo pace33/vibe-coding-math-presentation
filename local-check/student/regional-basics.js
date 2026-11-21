@@ -134,6 +134,8 @@ const EUMSEONG={
 };
 const asCard=(icon,title,value,summary,source,href,more)=>({icon,title,value,summary,source,href,more});
 function rawCards(region,category,companies=[],facts=[]){
+ const fixed=window.LOCALCHECK_REGIONAL_LANDMARKS?.[region]?.[category];
+ if((category==="nature"||category==="local")&&Array.isArray(fixed))return fixed.map(x=>({...x}));
  if(region==="음성군"&&EUMSEONG[category])return EUMSEONG[category].map(x=>({...x}));
  const spot=NATURE[region];
  if(category==="overview")return [
@@ -219,7 +221,7 @@ function isGeneric(href){
 function cards(region,category,companies=[],facts=[]){
  return rawCards(region,category,companies,facts).map((item,i)=>{
   const c={...item,more:Array.isArray(item.more)?item.more.map(v=>({...v})):[]};
-  if(category==="nature"&&i===0&&KNOWN_NATURE[region]&&region!=="음성군"){
+  if(category==="nature"&&i===0&&!window.LOCALCHECK_REGIONAL_LANDMARKS?.[region]?.nature&&KNOWN_NATURE[region]&&region!=="음성군"){
     c.href=KNOWN_NATURE[region];
     c.primaryLabel="자연환경 상세자료 ↗";
     c.source=region==="제천시"?"제천시 문화관광":region==="옥천군"?"환경부 생태관광":"충북나드리";

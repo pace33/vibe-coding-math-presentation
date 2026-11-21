@@ -22,34 +22,34 @@ function query(kind,area=place(),topic=$("keyword").value){
  const x=new URL("https://news.google.com/search");x.searchParams.set("q",q);x.searchParams.set("hl","ko");x.searchParams.set("gl","KR");x.searchParams.set("ceid","KR:ko");return x.href;
 }
 function updateLinks(){
- const kind=activeMenu==="business"?" 기업 산업":activeMenu==="local"?" 축제 관광 문화":"";
- const area=place(),topic=($("keyword").value||"")+kind;
- $("officialSearch").href=query("official",area,topic);
- $("newsSearch").textContent=activeMenu==="business"?"🔎 새 기업 뉴스 검색하기":activeMenu==="local"?"🔎 새 지역 행사 뉴스 찾기":"🔎 새 뉴스 검색하기";
- $("officialSearch").innerHTML=activeMenu==="business"?"🏭 기업·사업장 정보 찾기 ↗":activeMenu==="local"?"🏛️ 지역 공식자료 찾기 ↗":"🏛️ 시·군청 공지 찾기 ↗";
+ $("newsSearch").textContent="🔎 "+(activeMenu==="business"?"기업 뉴스 검색":activeMenu==="local"?"축제 뉴스 검색":"뉴스 검색");
 }
 function chooseMenu(menu){
- if(menu==="board"){
-  window.LocalCheckBoard?.renderBoard?.();show("board");return;
- }
+ if(menu==="board"){window.LocalCheckBoard?.renderBoard?.();show("board");return;}
+ if(menu==="explore")menu="business";
  if(!["news","business","local"].includes(menu))return;
  activeMenu=menu;
  clearLiveResults();
- $("newsSection").hidden=menu!=="news";
+ const isExplore=menu!=="news";
+ $("newsSection").hidden=isExplore;
  $("businessSection").hidden=menu!=="business";
  $("localSection").hidden=menu!=="local";
+ $("exploreTabs").hidden=!isExplore;
  document.querySelectorAll("[data-menu]").forEach(button=>{
-  const selected=button.dataset.menu===menu;
+  const selected=button.dataset.menu===(isExplore?"explore":"news");
+  button.classList.toggle("active",selected);
+  button.setAttribute("aria-pressed",String(selected));
+ });
+ document.querySelectorAll("[data-explore]").forEach(button=>{
+  const selected=button.dataset.explore===menu;
   button.classList.toggle("active",selected);
   button.setAttribute("aria-pressed",String(selected));
  });
  $("keyword").value="";
- const hints={news:"예: 축제, 인구, 학교",business:"예: 중소기업, 식품, 반도체",local:"예: 축제, 문화, 역사"};
- $("keyword").placeholder=hints[menu];
+ $("keyword").placeholder=menu==="business"?"예: 김치, 반도체, 중소기업":menu==="local"?"예: 축제, 문화, 역사":"예: 축제, 인구, 학교";
  updateLinks();renderBusinesses();renderNews();renderTopics();
  if($("home").hidden)show("home");
 }
-
 function show(screen){
  for(const id of ["home","verify","result","board","shared"])$(id).hidden=id!==screen;
  window.scrollTo({top:0,behavior:"smooth"});
@@ -82,7 +82,7 @@ function renderLiveResults(items,mode){
   card.className="news-card";
   const valid=url(x.url);if(!valid)continue;
   card.innerHTML='<div class="meta"><span class="tag">'+esc(x.region)+" · "+esc(x.sourceType||"뉴스")+'</span><span>'+esc(x.published||"날짜 확인")+'</span></div>'+
-   '<h3>'+esc(x.title)+'</h3><p>'+esc(x.publisher||"발행기관 확인")+' · 사실 여부는 직접 확인해야 해요.</p>'+
+   '<h3>'+esc(x.title)+'</h3><p>'+esc(x.publisher||"발행기관 확인")+'</p>'+
    '<div class="news-actions"><a href="'+esc(valid)+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a>'+
    '<button type="button" data-live-news="'+i+'">이 뉴스 검증하기 →</button></div>';
   box.appendChild(card);
@@ -148,19 +148,19 @@ async function searchNewsInside(){
 function renderNews(){
  const area=$("region").value;
  const keyword=safe($("keyword").value).toLowerCase();
- const found=state.news.filter(x=>(area==="전체"||x.region===area)&&(!keyword||[x.title,x.publisher,x.region].join(" ").toLowerCase().includes(keyword))).slice(0,6);
+ const found=state.news.filter(x=>(area==="전체"||x.region===area)&&(!keyword||[x.title,x.publisher,x.region].join(" ").toLowerCase().includes(keyword))).slice(0,4);
  const root=$("newsList");
  root.replaceChildren();
  const date=state.updated||"갱신 여부 확인 필요";
  $("updatedAt").textContent="저장 기준일: "+date;
  if(!found.length){
-  root.innerHTML='<div class="news-empty">이 지역에서 저장된 뉴스가 아직 없어요. 위의 <b>지금 새 뉴스 검색하기</b> 버튼으로 찾아보세요.</div>';
+  root.innerHTML='<div class="news-empty">이 지역에 저장된 뉴스가 없어요. 위에서 새 뉴스를 검색해 보세요.</div>';
   return;
  }
  for(const item of found){
   const card=document.createElement("article");card.className="news-card";
   card.innerHTML='<div class="meta"><span class="tag">'+esc(item.region)+' · '+esc(item.sourceType||"자료")+'</span><span>'+esc(item.published||"날짜 확인 필요")+'</span></div>'+
-   '<h3>'+esc(item.title)+'</h3><p>'+esc(item.publisher||"발행기관 확인 필요")+' · 내용은 아직 검증되지 않았어요.</p>'+
+   '<h3>'+esc(item.title)+'</h3><p>'+esc(item.publisher||"발행기관 확인 필요")+'</p>'+
    '<div class="news-actions"><a href="'+esc(url(item.url))+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a><button type="button" data-news="'+state.news.indexOf(item)+'">이 뉴스 확인하기 →</button></div>';
   root.appendChild(card);
  }
@@ -179,22 +179,22 @@ function renderBusinesses(){
  const items=companies.filter(c=>(area==="전체"||c.region===area)&&
    (businessFilter==="all"||(businessFilter==="small"&&c.group!=="대표 기업")||(businessFilter==="featured"&&c.group==="대표 기업"))&&
    (!keyword||[c.region,c.name,c.produces,c.type,c.summary,c.group].join(" ").toLowerCase().includes(keyword)));
- const visible=businessExpanded?items:items.slice(0,area==="전체"?6:5);
+ const visible=businessExpanded?items:items.slice(0,4);
  const list=$("businessList");list.replaceChildren();
  $("businessCount").textContent=items.length+"개 사업장·사례";
  const more=$("moreBusinesses");
- more.hidden=items.length<=(area==="전체"?6:5);
- more.textContent=businessExpanded?"간단히 보기 ↑":"지역 기업 "+(items.length-visible.length)+"곳 더 보기 ↓";
+ more.hidden=items.length<=4;
+ more.textContent=businessExpanded?"접기 ↑":"기업 "+(items.length-visible.length)+"곳 더 보기 ↓";
  if(!visible.length){
   const empty=document.createElement("div");empty.className="news-empty";empty.textContent="이 조건에 맞는 기업 사례가 없어요. 지역이나 검색어를 바꿔 보세요.";list.appendChild(empty);return;
  }
  for(const c of visible){
   const card=document.createElement("article");card.className="business-card";
   card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.region)+' · '+esc(c.type)+'</span></div>'+
-   '<h3>'+esc(c.name)+'</h3><span class="business-scale">'+esc(c.group||"사업장")+'</span><div class="business-product">무엇을 만들까요? <b>'+esc(c.produces)+'</b></div>'+
-   '<p>'+esc(c.summary)+'</p><div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">🔎 이 기업 조사하기</button>'+
-   '<a href="'+esc(url(c.source.url))+'" target="_blank" rel="noopener noreferrer">소개 자료 ↗</a>'+
-   '<button type="button" class="business-inline-news" data-business-news="'+esc(c.id)+'">최근 뉴스 검색 ↗</button></div>';
+   '<h3>'+esc(c.name)+'</h3><div class="business-product">'+esc(c.produces)+'</div>'+
+   '<div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">자료 확인 →</button>'+
+   
+   '<button type="button" class="business-inline-news" data-business-news="'+esc(c.id)+'">관련 뉴스</button></div>';
   list.appendChild(card);
  }
 }
@@ -211,12 +211,12 @@ function renderTopics(){
  const keyword=safe($("keyword").value).toLowerCase();
  let chosen=facts.filter(x=>(area==="전체"||x.region===area)&&(!keyword||[x.topic,x.region,x.hook,x.terms].join(" ").toLowerCase().includes(keyword)));
  if(area==="전체"&&!keyword)chosen=chosen.filter(x=>x.featured);
- chosen=chosen.slice(0,area==="전체"?7:5);
+ chosen=chosen.slice(0,6);
  const root=$("topicList");root.replaceChildren();
- if(!chosen.length){root.textContent="이 지역에 등록된 대표 주제는 아직 없어요.";return;}
+ if(!chosen.length){root.textContent="이 지역의 탐구 주제가 아직 없어요.";return;}
  for(const item of chosen){
   const button=document.createElement("button");button.type="button";button.className="topic";button.dataset.topic=item.id;
-  button.innerHTML=esc(item.icon)+" "+esc(item.region)+" · "+esc(item.topic)+"<small>대표 사례로 탐구해요 →</small>";
+  button.innerHTML=esc(item.icon)+" "+esc(item.region)+" · "+esc(item.topic);
   root.appendChild(button);
  }
 }
@@ -486,6 +486,9 @@ function init(){
  $("liveNewsList").addEventListener("click",e=>{const b=e.target.closest("[data-live-news]");if(b)fromLiveNews(Number(b.dataset.liveNews));});
  document.querySelectorAll("[data-menu]").forEach(button=>{
   button.addEventListener("click",()=>chooseMenu(button.dataset.menu));
+ });
+ document.querySelectorAll("[data-explore]").forEach(button=>{
+  button.addEventListener("click",()=>chooseMenu(button.dataset.explore));
  });
  document.querySelectorAll("[data-business-filter]").forEach(button=>button.addEventListener("click",()=>{
   businessFilter=button.dataset.businessFilter;

@@ -57,6 +57,28 @@ function chooseMenu(menu){
  if($("home").hidden)show("home");
  if(menu==="issues")searchNewsInside({scroll:false});
 }
+// 지역 기초정보의 제목·고유 명칭으로 뉴스 탐색어를 만듭니다.
+// 학습한 공공자료는 비교 근거이며, 자동으로 뉴스의 진위를 판정하지 않습니다.
+function regionalNewsTerm(item,category){
+ const title=String(item.title||"");
+ if(category==="overview"){
+  if(title==="인구")return "인구";
+  if(title==="면적")return "면적";
+  return "행정구역";
+ }
+ const name=String(item.value||"").split(/[·,\/]/)[0].trim();
+ if(category==="nature")return (name&&!/기온|강수량|날씨/.test(name))?name:"기후";
+ if(category==="local")return name||"문화유산";
+ if(category==="facilities")return title==="교통"?"버스 교통":title;
+ if(category==="business")return "농산물 특산물";
+ return EXPLORE_CATEGORIES[category]?.defaultTerm||title||"지역";
+}
+function searchRegionalNews(term){
+ const keyword=safe(term,85)||EXPLORE_CATEGORIES[activeMenu]?.defaultTerm||"지역";
+ $("keyword").value=keyword;
+ // 지역 선택과 세부 분야를 유지한 채 결과를 바로 아래에 표시합니다.
+ searchNewsInside({scroll:true});
+}
 function renderInquiries(){
  const category=EXPLORE_CATEGORIES[activeMenu],section=$("inquirySection");
  section.hidden=!category;
@@ -104,10 +126,12 @@ function renderInquiries(){
    '<details class="regional-google-search"><summary>추가 자료·검색</summary>'+extraLinks+searchForm+'</details>':"";
   const mainLink=primary?
    '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
+  const newsTerm=regionalNewsTerm(item,activeMenu);
+  const checkNews='<button class="regional-card-news" type="button" data-card-news="'+esc(newsTerm)+'">📰 이 정보 관련 뉴스 검증</button>';
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong>'+(item.summary?'<p>'+esc(item.summary)+'</p>':"")+
    '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
-   '<div class="basic-card-actions">'+mainLink+extras+'</div>';
+   '<div class="basic-card-actions">'+mainLink+checkNews+extras+'</div>';
   root.appendChild(card);
  }
  if(!basics.length)root.textContent="준비된 자료가 없어요.";
@@ -579,18 +603,20 @@ function init(){
   button.addEventListener("click",()=>chooseMenu(button.dataset.explore));
  });
  $("inquiryList").addEventListener("click",e=>{
+  const cardNews=e.target.closest("[data-card-news]");
+  if(cardNews){
+   searchRegionalNews(cardNews.dataset.cardNews);
+   return;
+  }
   const topic=e.target.closest("[data-issue-term]");
   if(!topic||activeMenu!=="issues")return;
-  $("keyword").value=topic.dataset.issueTerm;
   document.querySelectorAll("[data-issue-term]").forEach(b=>b.classList.toggle("active",b===topic));
-  searchNewsInside({scroll:true});
+  searchRegionalNews(topic.dataset.issueTerm);
  });
  $("inquiryNews").addEventListener("click",()=>{
-  const topic=EXPLORE_CATEGORIES[activeMenu]?.defaultTerm||"";
-  chooseMenu("news");
-  $("keyword").value=topic;
-  searchNewsInside({scroll:true});
+  searchRegionalNews($("keyword").value||EXPLORE_CATEGORIES[activeMenu]?.defaultTerm);
  });
+ $("inquiryBoard").addEventListener("click",()=>chooseMenu("board"));
  document.querySelectorAll("[data-business-filter]").forEach(button=>button.addEventListener("click",()=>{
   businessFilter=button.dataset.businessFilter;
   businessExpanded=false;

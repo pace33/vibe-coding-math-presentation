@@ -66,7 +66,13 @@
     <div class="section-title"><h2 id="inquiryTitle">우리 지역 탐구</h2></div>
     <p id="inquiryGuide" class="inquiry-guide"></p>
     <div id="inquiryList" class="inquiry-grid"></div>
-    <div class="inquiry-news-footer"><button class="btn btn-light" id="inquiryNews" type="button">📰 관련 뉴스 보기</button></div>
+    <div class="inquiry-news-footer" role="group" aria-label="이 분야 뉴스 검증과 결과 확인">
+      <p class="inquiry-workflow-text">자료 살펴보기 → 뉴스 검증 → 카드 확인</p>
+      <div class="inquiry-workflow-actions">
+        <button class="btn btn-primary" id="inquiryNews" type="button">📰 이 분야 뉴스 검증하기</button>
+        <button class="btn btn-light" id="inquiryBoard" type="button">🗂️ 탐정 게시판 보기</button>
+      </div>
+    </div>
   </section>
   <section id="liveResults" class="live-results" aria-labelledby="liveHeading" hidden>
     <div class="section-title"><h2 id="liveHeading">검색 결과</h2><span id="liveCount" class="timestamp"></span></div>

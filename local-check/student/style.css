@@ -43,6 +43,7 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .btn-light:hover{background:var(--soft)}
 .btn-subtle{background:var(--soft);color:var(--green);border-color:#d2e8d6}
 .main-search{width:100%;margin-top:12px;min-height:48px}
+.search-hint{font-size:12px;line-height:1.5;color:var(--muted);text-align:center;margin:9px 0 0}
 .section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:27px 0 12px}
 .section-title h2{font-size:20px;line-height:1.4;margin:0;letter-spacing:-.04em}
 .section-title p{color:var(--muted);font-size:12px;margin:4px 0}
@@ -60,7 +61,7 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-empty,.candidates-empty,.board-empty{grid-column:1/-1;padding:24px;text-align:center;border:1px dashed #d2dfd3;border-radius:12px;background:#fff;color:var(--muted);font-size:13px}
 .recent-news-more{display:flex;justify-content:center;margin:18px 0 8px}
 .recent-news-more .google-more-button{min-width:230px}
-.live-results{margin-top:22px}
+.live-results{margin-top:13px;scroll-margin-top:16px}
 .live-results .section-title{margin-top:0}
 .live-status,.evidence-status,.board-tip{font-size:12px;line-height:1.75;color:#4f755f;background:var(--soft);padding:11px 14px;border-radius:10px;margin:0 0 12px}
 .google-more-row{display:flex;justify-content:flex-end;margin:0 0 13px}

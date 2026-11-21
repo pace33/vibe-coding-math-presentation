@@ -115,11 +115,12 @@ async function searchNewsInside(){
  searchButton.disabled=true;
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
+ $("liveHeading").textContent=keyword?"‘"+keyword+"’ 검색 결과":(region==="전체"?"충북":region)+" 뉴스 검색 결과";
  // Show retrieved Google News below the existing recent-news cards.
  $("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
- $("liveStatus").textContent="구글 뉴스 RSS에서 기사를 찾고 있어요.";
+ $("liveStatus").textContent=keyword?"‘"+keyword+"’ 관련 구글 뉴스를 찾고 있어요.":"해당 지역의 구글 뉴스를 찾고 있어요.";
  $("liveExplanation").textContent="검색어와 관련된 기사를 원문에서 읽고 확인하세요.";
  $("googleNewsFallback").href=googleNewsUrl(region,keyword,category);
  $("retryNews").hidden=true;
@@ -150,8 +151,8 @@ async function searchNewsInside(){
 }
 function renderNews(){
  const area=$("region").value;
- const keyword=safe($("keyword").value).toLowerCase();
- const found=state.news.filter(x=>(area==="전체"||x.region===area)&&(!keyword||[x.title,x.publisher,x.region].join(" ").toLowerCase().includes(keyword))).slice(0,4);
+ // Recent headlines stay visible while the typed keyword is searched separately below.
+ const found=state.news.filter(x=>area==="전체"||x.region===area).slice(0,4);
  const root=$("newsList");
  root.replaceChildren();
  const date=state.updated||"갱신 여부 확인 필요";

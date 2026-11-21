@@ -34,7 +34,8 @@ function chooseMenu(menu){
  activeMenu=menu;
  clearLiveResults();
  const isExplore=menu!=="news";
- if(isExplore&&$("region").value==="전체")$("region").value="음성군";
+ if(isExplore&&menu!=="issues"&&$("region").value==="전체")$("region").value="음성군";
+ $("home").classList.toggle("issues-mode",menu==="issues");
  $("home").classList.toggle("explore-mode",isExplore);
  $("newsSection").hidden=isExplore;
  $("businessSection").hidden=menu!=="business";
@@ -49,10 +50,11 @@ function chooseMenu(menu){
   button.classList.toggle("active",selected);
   button.setAttribute("aria-pressed",String(selected));
  });
- $("keyword").value="";
+ $("keyword").value=menu==="issues"?"환경":"";
  $("keyword").placeholder=isExplore?"예: "+EXPLORE_CATEGORIES[menu].prompts[0][2]:"예: 축제, 인구, 학교";
  updateLinks();renderBusinesses();renderNews();renderInquiries();renderTopics();
  if($("home").hidden)show("home");
+ if(menu==="issues")searchNewsInside({scroll:false});
 }
 function renderInquiries(){
  const category=EXPLORE_CATEGORIES[activeMenu],section=$("inquirySection");
@@ -60,6 +62,21 @@ function renderInquiries(){
  const root=$("inquiryList");root.replaceChildren();
  if(!category)return;
  const region=$("region").value;
+ root.classList.toggle("issue-topic-grid",activeMenu==="issues");
+ if(activeMenu==="issues"){
+  $("inquiryTitle").textContent=(region==="전체"?"충청북도":region)+" · 최신 지역문제 뉴스";
+  $("inquiryGuide").textContent="지역문제는 현재 상황이 달라질 수 있어요. 뉴스의 날짜·출처를 보고 공공기관 자료와 비교해 보세요.";
+  const topics=[
+   ["🌱 환경·쓰레기","환경","쓰레기·하천 등 환경과 관련된 소식"],
+   ["🚦 교통·안전","교통 안전","도로·교통·생활안전에 관한 소식"],
+   ["🏫 교육·복지","교육 복지","학교와 복지시설에 관한 소식"],
+   ["🏘️ 지역 생활","지역 현안","우리 마을의 새로운 문제와 해결 노력"]
+  ];
+  root.innerHTML=topics.map(([name,term,description])=>
+   '<button class="issue-topic '+($("keyword").value===term?'active':'')+'" type="button" data-issue-term="'+esc(term)+'">'+
+   '<strong>'+esc(name)+'</strong><span>'+esc(description)+'</span></button>').join("");
+  return;
+ }
  if(region==="전체"){
   $("inquiryTitle").textContent="우리 지역 선택";
   $("inquiryGuide").textContent="기초정보는 한 지역씩 보여줘요. 충청북도 11개 시·군 중 하나를 선택하세요.";
@@ -240,6 +257,7 @@ function onKeywordInput(){
 function onRegionChange(){
  const keyword=safe($("keyword").value,85);
  refresh();
+ if(activeMenu==="issues"){searchNewsInside({scroll:false});return;}
  if(keyword.length>=2)keywordTimer=setTimeout(()=>searchNewsInside({scroll:false}),250);
 }
 function renderNews(){
@@ -581,6 +599,13 @@ function init(){
  });
  document.querySelectorAll("[data-explore]").forEach(button=>{
   button.addEventListener("click",()=>chooseMenu(button.dataset.explore));
+ });
+ $("inquiryList").addEventListener("click",e=>{
+  const topic=e.target.closest("[data-issue-term]");
+  if(!topic||activeMenu!=="issues")return;
+  $("keyword").value=topic.dataset.issueTerm;
+  document.querySelectorAll("[data-issue-term]").forEach(b=>b.classList.toggle("active",b===topic));
+  searchNewsInside({scroll:true});
  });
  $("inquiryNews").addEventListener("click",()=>{
   const topic=EXPLORE_CATEGORIES[activeMenu]?.defaultTerm||"";

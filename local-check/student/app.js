@@ -83,8 +83,8 @@ function renderInquiries(){
   return;
  }
  $("inquiryTitle").textContent=crops?region+" · 농산물·특산물":region+" · "+category.title;
- guide.hidden=crops;
- guide.textContent=crops?"":"대표 정보를 확인하고 자료 출처를 살펴보세요.";
+ guide.hidden=true;
+ guide.textContent="";
  const available=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];
  const basics=crops?available.filter(x=>x.title==="농산물과 특산물"):available;
  for(const [index,item] of basics.entries()){
@@ -261,6 +261,7 @@ function onKeywordInput(){
 }
 function onRegionChange(){
  const keyword=safe($("keyword").value,85);
+ businessExpanded=false;
  refresh();
  if(activeMenu==="issues"){searchNewsInside({scroll:false});return;}
  if(keyword.length>=2)keywordTimer=setTimeout(()=>searchNewsInside({scroll:false}),250);
@@ -288,6 +289,7 @@ function renderNews(){
 
 function renderBusinesses(){
  const area=$("region").value;
+ $("businessTitle").textContent=(area==="전체"?"충북":area)+" 기업";
  const keyword=safe($("keyword").value,150).toLowerCase();
  const items=companies.filter(c=>(area==="전체"||c.region===area)&&
    (businessFilter==="all"||(businessFilter==="small"&&c.group!=="대표 기업")||(businessFilter==="featured"&&c.group==="대표 기업"))&&
@@ -303,7 +305,7 @@ function renderBusinesses(){
  }
  for(const c of visible){
   const card=document.createElement("article");card.className="business-card";
-  card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.region)+' · '+esc(c.type)+' · '+esc(c.group||"지역 기업")+'</span></div>'+
+  card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.type)+'</span></div>'+
    '<h3>'+esc(c.name)+'</h3><div class="business-product">'+esc(c.produces)+'</div>'+
    '<div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">자료 확인 →</button>'+
    

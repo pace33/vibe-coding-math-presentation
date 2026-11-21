@@ -282,3 +282,14 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  .basic-primary-link{width:100%}
  .inquiry-news-footer .btn{width:auto}
 }
+
+/* 기본정보: 위치·행정구역·인구·면적을 숫자 중심으로 바로 확인 */
+.overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.overview-grid .inquiry-card{padding:18px 20px;gap:9px}
+.overview-grid .basic-card-value{font-size:clamp(21px,2.6vw,29px);line-height:1.35;letter-spacing:-.045em}
+.overview-grid .basic-card-title h3{font-size:15px}
+.overview-grid .inquiry-card p{flex:0;font-size:12px;line-height:1.5}
+.overview-grid .basic-card-source{margin-top:auto}
+.overview-grid .basic-card-actions{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.overview-grid .basic-primary-link{min-height:36px;padding:7px 12px}
+@media(max-width:660px){.overview-grid{grid-template-columns:1fr}.overview-grid .inquiry-card{padding:15px 16px}.overview-grid .basic-card-value{font-size:24px}}

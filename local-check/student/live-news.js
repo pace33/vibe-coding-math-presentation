@@ -7,6 +7,7 @@
 "use strict";
 const ENDPOINT="https://api.rss2json.com/v1/api.json";
 const LIVE_MAX=10;
+const REGIONS=["청주시","충주시","제천시","보은군","옥천군","영동군","증평군","진천군","괴산군","음성군","단양군"];
 function clean(s,n=180){return String(s??"").replace(/<[^>]*>/g,"").replace(/[\u0000-\u001f]/g," ").trim().slice(0,n);}
 function validUrl(v){
  try{const u=new URL(String(v));return u.protocol==="https:"?u.href:"";}catch{return"";}
@@ -39,7 +40,8 @@ function parseRows(body,region){
   seen.add(link);
   const rawDate=clean(item.pubDate,35);
   const date=/^\d{4}-\d{2}-\d{2}/.test(rawDate)?rawDate.slice(0,10):"날짜 원문 확인";
-  rows.push({region:region==="전체"?"충청북도":region,title,publisher:publisher||"발행기관 원문 확인",published:date,url:link,verified:false,sourceType:"구글 뉴스 검색 결과"});
+  const detected=region==="전체"?(REGIONS.find(r=>title.includes(r)||title.includes(r.slice(0,-1)))||"충청북도"):region;
+  rows.push({region:detected,title,publisher:publisher||"발행기관 원문 확인",published:date,url:link,verified:false,sourceType:"구글 뉴스 검색 결과"});
   if(rows.length===LIVE_MAX)break;
  }
  return rows;

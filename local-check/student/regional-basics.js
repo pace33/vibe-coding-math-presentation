@@ -41,8 +41,8 @@ const FACILITY_PAGES={
  "청주시":{
   office:["시청 부서 안내","https://www.cheongju.go.kr/jiksok/index.do","청주시 직속부서"],
   safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/db119/sub.do?menukey=2133","청주동부소방서 안전센터","https://cb119.chungbuk.go.kr/sb119/sub.do?menukey=2217"],
-  library:["청주시 도서관","https://library.cheongju.go.kr/lib-ml/index.do","청주기적의도서관"],
-  transit:["청주버스 정보","https://tdata.cheongju.go.kr/intro/introPage","청주 교통 빅데이터 플랫폼"]
+  library:["청주기적의도서관","https://library.cheongju.go.kr/lib-ml/index.do","청주기적의도서관"],
+  transit:["청주시 버스정보","https://www.cjbus.co.kr/home/sub.php?menukey=3205","청주시 시내버스 준공영제 관리위원회"]
  },
  "충주시":{
   office:["대소원면 행정복지센터","https://www.chungju.go.kr/town/contents.do?key=1456","충주시 대소원면 안내"],
@@ -93,7 +93,7 @@ const FACILITY_PAGES={
   transit:["농어촌버스 시간표","https://www.goesan.go.kr/trenv/contents.do?key=397","괴산군 교통환경 안내"]
  },
  "단양군":{
-  office:["지역 민원기관 안내","https://www.danyang.go.kr/tour/1936","단양군 공식 관광지도(행정기관 위치 참고)"],
+  office:["단양읍 행정복지센터","https://www.danyang.go.kr/town/271","단양군 통합읍면 안내"],
   safety:["119안전센터 안내","https://cb119.chungbuk.go.kr/dy119/sub.do?menukey=2042","단양소방서 안전센터"],
   library:["단양군립올누림도서관","https://www.danyang.go.kr/lib/front/index.php?g_page=intro&m_page=intro01","단양군립도서관"],
   transit:["농촌버스 시간표","https://www.danyang.go.kr/tour/1919","단양군 관광 교통정보"]

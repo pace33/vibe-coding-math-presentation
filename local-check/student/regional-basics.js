@@ -133,7 +133,7 @@ const EUMSEONG={
  ]
 };
 const asCard=(icon,title,value,summary,source,href,more)=>({icon,title,value,summary,source,href,more});
-function cards(region,category,companies=[],facts=[]){
+function rawCards(region,category,companies=[],facts=[]){
  if(region==="음성군"&&EUMSEONG[category])return EUMSEONG[category].map(x=>({...x}));
  const spot=NATURE[region];
  if(category==="overview")return [
@@ -176,5 +176,70 @@ function cards(region,category,companies=[],facts=[]){
  ];
  return [];
 }
+
+/* 원문이 특정 주제의 세부 페이지가 아니면, 검색어가 입력된 구글 검색을 제공합니다.
+ * 검색 결과 자체는 검증된 자료가 아니므로 원문의 기관명, 게시일과 통계 기준일을 확인하세요.
+ */
+const KNOWN_NATURE={
+ "충주시":"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=594",
+ "제천시":"https://tour.jecheon.go.kr/tour/base/tour/contents/view?clturCntntsNo=1117&menuLevel=3&menuNo=67",
+ "옥천군":"https://www.ecotour.go.kr/front/tour/choice/detail/121",
+ "괴산군":"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=1494",
+ "단양군":"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&pageIndex=1&pageUnit=12&searchAreaSe=11&searchCnd=all&searchMainSe=ATTR&tourNo=2717"
+};
+function cardSearch(region,category,c,extra=""){
+ let phrase=[region,c.title,c.value,extra].filter(Boolean).join(" ").replace(/·/g," ");
+ if(category==="overview"&&/인구/.test(c.title))phrase=region+" 주민등록 인구 기준월 통계";
+ if(category==="overview"&&/면적/.test(c.title))phrase=region+" 행정구역 면적 통계";
+ if(category==="overview"&&/행정구역/.test(c.title))phrase=region+" 읍면동 행정구역 현황";
+ if(category==="nature"&&/기후|날씨/.test(c.title))phrase=region+" 기온 강수량 기후평년값";
+ if(category==="nature"&&/생태/.test(c.title))phrase=region+" 산림 생태 숲";
+ if(category==="business"&&/농산물|특산물/.test(c.title))phrase=region+" 농산물 특산물 농업기술센터";
+ if(category==="local"&&/문화유산/.test(c.title))phrase=region+" 문화유산 국가유산청";
+ if(category==="issues"&&/쓰레기|생활환경/.test(c.title))phrase=region+" 생활쓰레기 재활용 분리배출";
+ if(category==="issues"&&/지역 안전/.test(c.title))phrase=region+" 교통안전 재난안전";
+ if(category==="issues"&&/주민 참여/.test(c.title))phrase=region+" 주민제안 주민참여예산";
+ if(category==="issues"&&/물과 환경/.test(c.title))phrase=region+" 하천 수질 환경보전";
+ const site=category==="overview"?"site:chungbuk.go.kr OR site:mois.go.kr":
+ category==="local"?"site:go.kr OR site:heritage.go.kr":"site:go.kr OR site:or.kr";
+ return phrase+" "+site;
+}
+function googleSearch(q){
+ const u=new URL("https://www.google.com/search");u.searchParams.set("q",q);return u.href;
+}
+function isGeneric(href){
+ if(!href)return true;
+ let u;try{u=new URL(href);}catch{return true;}
+ if(!["http:","https:"].includes(u.protocol))return true;
+ if(u.hostname==="www.google.com"&&u.pathname==="/search")return false;
+ const p=u.pathname.replace(/\/+$/,"");
+ if(!p||["/index.do","/index.html","/index.php","/front","/front/index.do","/www/index.do","/site/edu/main.do","/lib/web/index.do","/lib-ml/index.do","/stat/index.do","/tour/index.do"].includes(p))return true;
+ return [POP,ECO,TOUR,CLIMATE].includes(href)||href==="https://www.heritage.go.kr/"||href==="https://www.epeople.go.kr/";
+}
+function cards(region,category,companies=[],facts=[]){
+ return rawCards(region,category,companies,facts).map((item,i)=>{
+  const c={...item,more:Array.isArray(item.more)?item.more.map(v=>({...v})):[]};
+  if(category==="nature"&&i===0&&KNOWN_NATURE[region]&&region!=="음성군"){
+    c.href=KNOWN_NATURE[region];
+    c.primaryLabel="자연환경 상세자료 ↗";
+    c.source=region==="제천시"?"제천시 문화관광":region==="옥천군"?"환경부 생태관광":"충북나드리";
+  }
+  c.searchQuery=cardSearch(region,category,c);
+  c.searchHref=googleSearch(c.searchQuery);
+  c.more=c.more.map(v=>isGeneric(v.href)?{label:(v.label||"관련 자료")+" · 구글 검색 ↗",href:googleSearch(cardSearch(region,category,c,v.label))}:v);
+  if(isGeneric(c.href)){
+   c.href=c.searchHref;
+   c.primaryLabel="🔎 구글에서 검색 ↗";
+   c.source="구글 검색 · 기관·날짜 직접 확인";
+   c.linkType="search";
+  }else{
+   c.linkType="direct";
+   c.primaryLabel=c.primaryLabel||"상세자료 확인 ↗";
+   if(!c.more.some(v=>v.href===c.searchHref))c.more.push({label:"링크가 안 열리면 구글 검색 ↗",href:c.searchHref});
+  }
+  return c;
+ });
+}
+
 window.LocalCheckRegionalBasics={cards,REGION_SITES};
 })();

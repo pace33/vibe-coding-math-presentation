@@ -2,11 +2,13 @@
 "use strict";
 const $=id=>document.getElementById(id);
 const facts=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
+const regionalTour=window.LOCALCHECK_TOUR_BUSINESSES||{listed:[],upgrades:{}};
 const companies=[
  ...(Array.isArray(window.LOCALCHECK_BUSINESSES)?window.LOCALCHECK_BUSINESSES:[]).map(c=>({...c,group:"대표 기업"})),
  ...(Array.isArray(window.LOCALCHECK_ADDITIONAL_BUSINESSES)?window.LOCALCHECK_ADDITIONAL_BUSINESSES:[]).map(c=>({...c,group:"대표 기업"})),
- ...(Array.isArray(window.LOCALCHECK_SMALL_BUSINESSES)?window.LOCALCHECK_SMALL_BUSINESSES:[])
-];
+ ...(Array.isArray(window.LOCALCHECK_SMALL_BUSINESSES)?window.LOCALCHECK_SMALL_BUSINESSES:[]),
+ ...(Array.isArray(regionalTour.listed)?regionalTour.listed:[])
+].map(company=>regionalTour.upgrades?.[company.id]?{...company,tour:regionalTour.upgrades[company.id]}:company);
 let businessExpanded=false;
 let activeMenu="news";
 let businessFilter="all";
@@ -318,24 +320,53 @@ function renderBusinesses(){
  const area=$("region").value;
  $("businessTitle").textContent=(area==="전체"?"충북":area)+" 기업";
  const keyword=safe($("keyword").value,150).toLowerCase();
+ const tourTab=document.querySelector('[data-business-filter="tour"]');
+ const toursInRegion=companies.filter(c=>c.tour&&(area==="전체"||c.region===area));
+ if(tourTab)tourTab.textContent="🏫 견학·체험 ("+toursInRegion.length+")";
+ $("tourNotice").hidden=businessFilter!=="tour";
  const items=companies.filter(c=>(area==="전체"||c.region===area)&&
-   (businessFilter==="all"||(businessFilter==="small"&&c.group!=="대표 기업")||(businessFilter==="featured"&&c.group==="대표 기업"))&&
-   (!keyword||[c.region,c.name,c.produces,c.type,c.summary,c.group].join(" ").toLowerCase().includes(keyword)));
- const visible=businessExpanded?items:items.slice(0,6);
+    (businessFilter==="all"||
+     (businessFilter==="small"&&c.group!=="대표 기업"&&c.group!=="지역 체험기업")||
+     (businessFilter==="featured"&&c.group==="대표 기업")||
+     (businessFilter==="tour"&&!!c.tour))&&
+    (!keyword||[c.region,c.name,c.produces,c.type,c.summary,c.group,c.tour?.program].join(" ").toLowerCase().includes(keyword)))
+    .sort((a,b)=>Number(!!b.tour)-Number(!!a.tour));
+ const showAll=businessFilter==="tour";
+ const visible=showAll||businessExpanded?items:items.slice(0,6);
  const list=$("businessList");list.replaceChildren();
- $("businessCount").textContent=items.length+"개 사업장·사례";
+ $("businessCount").textContent=items.length+(showAll?"개 견학·체험처":"개 사업장·사례");
  const more=$("moreBusinesses");
- more.hidden=items.length<=6;
+ more.hidden=showAll||items.length<=6;
  more.textContent=businessExpanded?"접기 ↑":"기업 "+(items.length-visible.length)+"곳 더 보기 ↓";
  if(!visible.length){
-  const empty=document.createElement("div");empty.className="news-empty";empty.textContent="이 조건에 맞는 기업 사례가 없어요. 지역이나 검색어를 바꿔 보세요.";list.appendChild(empty);return;
+  const empty=document.createElement("div");empty.className="news-empty";
+  if(showAll){
+   const message=document.createElement("p");
+   message.textContent="현재 이 지역에서 공개된 기업 견학 안내를 찾지 못했어요. 학교 단체 방문이 가능한지는 업체별로 확인해야 해요.";
+   const search=document.createElement("a");
+   const u=new URL("https://www.google.com/search");
+   u.searchParams.set("q",(area==="전체"?"충청북도":area)+" 학생 단체 공장견학 기업 체험 예약");
+   search.href=u.href;search.target="_blank";search.rel="noopener noreferrer";
+   search.textContent="기업 견학 자료 더 찾아보기 ↗";search.className="quiet-link";
+   empty.append(message,search);
+  }else empty.textContent="이 조건에 맞는 기업이 없어요. 지역이나 필터를 바꿔 보세요.";
+  list.appendChild(empty);return;
  }
  for(const c of visible){
   const card=document.createElement("article");card.className="business-card";
+  const tour=c.tour;
+  const tag=tour?'<span class="business-tour-tag">'+(tour.status==="online"?"🏫 견학 신청 안내":tour.status==="school"?"🏫 학교 연계 체험":"🏫 사전 문의 견학")+'</span>':"";
+  const info=tour&&showAll?
+   '<div class="business-tour-info"><strong>체험</strong> '+esc(tour.program)+
+   '<p><strong>대상·방법</strong> '+esc(tour.who)+'</p>'+
+   (tour.contact?'<p><strong>문의</strong> '+esc(tour.contact)+'</p>':"")+
+   (tour.notes?'<p class="tour-caution">'+esc(tour.notes)+'</p>':"")+'</div>':"";
+  const link=tour&&url(tour.url)?
+    '<a class="business-tour-link" href="'+esc(url(tour.url))+'" target="_blank" rel="noopener noreferrer">'+
+     (tour.status==="online"?"견학 안내·신청 ↗":"견학·체험 안내 ↗")+'</a>':"";
   card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.type)+'</span></div>'+
-   '<h3>'+esc(c.name)+'</h3><div class="business-product">'+esc(c.produces)+'</div>'+
-   '<div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">자료 확인 →</button>'+
-   
+   '<h3>'+esc(c.name)+'</h3><div class="business-product">'+esc(c.produces)+'</div>'+tag+info+
+   '<div class="business-buttons">'+link+'<button type="button" data-business="'+esc(c.id)+'">자료 검증 →</button>'+
    '<button type="button" class="business-inline-news" data-business-news="'+esc(c.id)+'">관련 뉴스</button></div>';
   list.appendChild(card);
  }

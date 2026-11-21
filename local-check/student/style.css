@@ -324,3 +324,18 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .festival-card .basic-card-value{font-size:18px;line-height:1.4}
 .festival-card .basic-card-title h3{color:var(--green-dark)}
 .festival-note{align-self:flex-start;color:#805c25;background:#fff6e8;border-radius:7px;font-size:11px;font-weight:750;padding:4px 8px}
+
+/* 공개 기업 견학 안내: 일반 기업과 구분하고, 학교 예약조건 표시 */
+.tour-notice{background:#eef7f0;color:#3b6650;font-size:12px;line-height:1.6;
+ padding:10px 13px;border-radius:9px;margin:0 0 12px}
+.business-tour-tag{font-size:11px;font-weight:800;color:#315e4b;
+ align-self:flex-start;background:#e5f3e9;padding:5px 10px;border-radius:99px}
+.business-tour-info{border-top:1px solid var(--line);padding-top:10px;font-size:12px;color:#365f4c}
+.business-tour-info>strong{font-size:12px;color:var(--ink)}
+.business-tour-info p{font-size:12px;line-height:1.5;margin:5px 0 0;flex:none}
+.business-tour-info .tour-caution{color:#815a28}
+.business-buttons .business-tour-link{display:inline-flex;align-items:center;justify-content:center;
+ background:#edf6ee;border:1px solid #b9d6c1;border-radius:8px;
+ padding:9px 12px;font-size:12px;font-weight:850;color:var(--green-dark);min-height:40px}
+.business-buttons:has(.business-tour-link) button:first-of-type{background:#fff;color:var(--green);border-color:#cfe1d1}
+@media(max-width:660px){.business-tour-info p{font-size:12px}.business-buttons .business-tour-link{flex:1}}

@@ -256,3 +256,18 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .regional-search-line input{flex:1;min-width:0;min-height:40px;font-size:12px}
 .regional-search-line button{white-space:nowrap;background:var(--green);color:white;border:0;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:800}
 @media(max-width:660px){.regional-search-line{flex-direction:column}}
+
+
+/* 지역문제: 기초자료 카드 대신 검색어·뉴스 결과 중심 */
+.explore-mode.issues-mode #keywordField,
+.explore-mode.issues-mode #newsSearch,
+.explore-mode.issues-mode #searchHelp{display:block!important}
+.explore-mode.issues-mode .form-grid{grid-template-columns:.85fr 1.4fr}
+.issues-mode .inquiry-news-footer{display:none!important}
+.issue-topic-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.issue-topic{display:flex;flex-direction:column;text-align:left;gap:6px;min-height:85px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px;cursor:pointer;color:var(--green-dark)}
+.issue-topic strong{font-size:13px}
+.issue-topic span{color:var(--muted);font-size:11px;line-height:1.5}
+.issue-topic.active{background:#e5f4e9;border-color:#65b481}
+@media(max-width:860px){.issue-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:660px){.explore-mode.issues-mode .form-grid{grid-template-columns:1fr}.issue-topic{min-height:72px}}

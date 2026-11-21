@@ -11,6 +11,7 @@ let activeMenu="news";
 let businessFilter="all";
 const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null,evidenceNews:[],evidenceSearching:false,evidenceError:"",selectedEvidence:null};
 let liveController=null,liveSequence=0;
+let keywordTimer=null;
 let evidenceController=null,evidenceSequence=0;
 const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -56,6 +57,7 @@ function show(screen){
 }
 
 function clearLiveResults(){
+ if(keywordTimer!==null){clearTimeout(keywordTimer);keywordTimer=null;}
  liveSequence++;
  if(liveController){liveController.abort();liveController=null;}
  state.liveNews=[];state.liveMode=null;
@@ -102,7 +104,8 @@ function googleNewsUrl(region,keyword,menu){
  u.searchParams.set("gl","KR");u.searchParams.set("ceid","KR:ko");
  return u.href;
 }
-async function searchNewsInside(){
+async function searchNewsInside({scroll=true}={}){
+ if(keywordTimer!==null){clearTimeout(keywordTimer);keywordTimer=null;}
  const region=$("region").value;
  const keyword=safe($("keyword").value,90);
  const category=activeMenu;
@@ -115,9 +118,10 @@ async function searchNewsInside(){
  searchButton.disabled=true;
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
+ if(category==="news")$("newsSection").hidden=true;
  $("liveHeading").textContent=keyword?"‘"+keyword+"’ 검색 결과":(region==="전체"?"충북":region)+" 뉴스 검색 결과";
- // Show retrieved Google News below the existing recent-news cards.
- $("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
+ // Automatic typing searches update in place; explicit button searches move to the result.
+ if(scroll)$("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
  $("liveStatus").textContent=keyword?"‘"+keyword+"’ 관련 구글 뉴스를 찾고 있어요.":"해당 지역의 구글 뉴스를 찾고 있어요.";
@@ -148,6 +152,20 @@ async function searchNewsInside(){
    liveController=null;
   }
  }
+}
+function onKeywordInput(){
+ clearLiveResults();
+ renderBusinesses();
+ renderTopics();
+ const keyword=safe($("keyword").value,85);
+ if(keyword.length<2)return;
+ // Wait for a short typing pause to avoid unnecessary RSS requests while composing Korean.
+ keywordTimer=setTimeout(()=>searchNewsInside({scroll:false}),650);
+}
+function onRegionChange(){
+ const keyword=safe($("keyword").value,85);
+ refresh();
+ if(keyword.length>=2)keywordTimer=setTimeout(()=>searchNewsInside({scroll:false}),250);
 }
 function renderNews(){
  const area=$("region").value;
@@ -482,11 +500,12 @@ function download(){
  setTimeout(()=>URL.revokeObjectURL(href),1500);
 }
 function init(){
- $("region").addEventListener("change",refresh);$("keyword").addEventListener("input",refresh);
- $("keyword").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchNewsInside();}});
- $("newsSearch").addEventListener("click",searchNewsInside);
- $("showMoreNews").addEventListener("click",searchNewsInside);
- $("retryNews").addEventListener("click",searchNewsInside);
+ $("region").addEventListener("change",onRegionChange);
+ $("keyword").addEventListener("input",onKeywordInput);
+ $("keyword").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchNewsInside({scroll:true});}});
+ $("newsSearch").addEventListener("click",()=>searchNewsInside({scroll:true}));
+ $("showMoreNews").addEventListener("click",()=>searchNewsInside({scroll:true}));
+ $("retryNews").addEventListener("click",()=>searchNewsInside({scroll:true}));
  $("liveNewsList").addEventListener("click",e=>{const b=e.target.closest("[data-live-news]");if(b)fromLiveNews(Number(b.dataset.liveNews));});
  document.querySelectorAll("[data-menu]").forEach(button=>{
   button.addEventListener("click",()=>chooseMenu(button.dataset.menu));

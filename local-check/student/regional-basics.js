@@ -157,7 +157,7 @@ const asCard=(icon,title,value,summary,source,href,more)=>({icon,title,value,sum
 const BASIC_REGION_FACTS={
  "청주시":{position:"충북 서부",admin:"3읍 · 10면 · 30동",note:"상당구·서원구·흥덕구·청원구 4개 구",population:861711,area:941},
  "충주시":{position:"충북 북부",admin:"1읍 · 12면 · 12동",note:"도시의 동 지역과 농촌의 읍·면 지역",population:205369,area:983},
- "제천시":{position:"충북 북동부",admin:"1읍 · 7면 · 9동",note:"제천읍과 주변 면·동 지역",population:127751,area:883},
+ "제천시":{position:"충북 북동부",admin:"1읍 · 7면 · 9동",note:"봉양읍과 7개 면, 9개 동",population:127751,area:883},
  "보은군":{position:"충북 남부",admin:"1읍 · 10면",note:"보은읍과 10개 면",population:31594,area:584},
  "옥천군":{position:"충북 남부",admin:"1읍 · 8면",note:"옥천읍과 8개 면",population:50812,area:537},
  "영동군":{position:"충북 남단",admin:"1읍 · 10면",note:"영동읍과 10개 면",population:43043,area:847},

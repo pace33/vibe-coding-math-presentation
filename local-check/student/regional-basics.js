@@ -171,10 +171,10 @@ function overviewCards(region){
  const info=BASIC_REGION_FACTS[region];if(!info)return [];
  const fmt=n=>Number(n).toLocaleString("ko-KR");
  return [
-  {...asCard("📍","위치",info.position,"충청북도 "+region+"의 위치예요.","충청북도 시·군 행정구역 지도","https://www.chungbuk.go.kr/www/contents.do?key=450"),primaryLabel:"지도·위치 자료 ↗"},
-  {...asCard("🗺️","행정구역",info.admin,info.note,"충청북도 시군현황 · 2026년 3월 이후 변경 반영",GOV_STATS),primaryLabel:"행정구역 자료 ↗"},
-  {...asCard("👥","인구",fmt(info.population)+"명","2026년 10월 말 · 외국인 제외","행정안전부 주민등록 인구통계 · 2026.10","https://jumin.mois.go.kr/statMonth.do"),primaryLabel:"인구통계 보기 ↗"},
-  {...asCard("📐","면적","약 "+fmt(info.area)+"㎢","2025년 말 지적통계 · ㎢ 단위 반올림","충청북도 지적통계 · 2025년 말","https://www.data.go.kr/data/3075683/fileData.do"),primaryLabel:"면적 통계 보기 ↗"}
+  {...asCard("📍","위치",info.position,"","충청북도 시·군 행정구역 지도","https://www.chungbuk.go.kr/www/contents.do?key=450"),primaryLabel:"지도·위치 자료 ↗"},
+  {...asCard("🗺️","행정구역",info.admin,info.note,"충청북도 시군현황",GOV_STATS),primaryLabel:"행정구역 자료 ↗"},
+  {...asCard("👥","인구",fmt(info.population)+"명","2026.10.31 기준 · 외국인 제외","행정안전부 주민등록 인구통계","https://jumin.mois.go.kr/statMonth.do"),primaryLabel:"인구통계 보기 ↗"},
+  {...asCard("📐","면적","약 "+fmt(info.area)+"㎢","2025년 말 기준 · ㎢ 단위 반올림","충청북도 지적통계","https://www.data.go.kr/data/3075683/fileData.do"),primaryLabel:"면적 통계 보기 ↗"}
  ];
 }
 

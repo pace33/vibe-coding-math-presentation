@@ -9,7 +9,7 @@ const companies=[
 let businessExpanded=false;
 let activeMenu="news";
 let businessFilter="all";
-const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null,evidenceNews:[],evidenceSearching:false,evidenceError:"",selectedEvidence:null};
+const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null,searchIndex:[],indexUpdated:null,evidenceNews:[],evidenceSearching:false,evidenceError:"",selectedEvidence:null};
 let liveController=null,liveSequence=0;
 let keywordTimer=null;
 let evidenceController=null,evidenceSequence=0;
@@ -67,9 +67,32 @@ function clearLiveResults(){
  $("retryNews").hidden=true;
 }
 function fallbackRows(region,keyword){
- const key=String(keyword||"").trim().toLowerCase();
- return state.news.filter(x=>(region==="전체"||x.region===region)&&
-  (!key||[x.title,x.publisher,x.region].join(" ").toLowerCase().includes(key))).slice(0,10);
+ const search=String(keyword||"").trim().toLowerCase();
+ const tokens=search.split(/\s+/).filter(w=>w.length>=2&&!["충북","충청북도","지역","우리","고장","뉴스","기사","회사"].includes(w));
+ const records=[...state.searchIndex,...state.news];
+ const seen=new Set();
+ const found=records.filter(x=>{
+  if(region!=="전체"&&x.region!==region)return false;
+  if(!url(x.url))return false;
+  if(seen.has(x.url))return false;
+  const text=[x.title,x.publisher,x.topicGroup].join(" ").toLowerCase();
+  if(tokens.length&&!tokens.some(w=>text.includes(w)))return false;
+  seen.add(x.url);
+  return true;
+ });
+ return found.sort((a,b)=>String(b.published||"").localeCompare(String(a.published||""))).slice(0,10);
+}
+async function loadSearchIndex(){
+ try{
+  const u=new URL("search-index.json",location.href);
+  u.searchParams.set("v",new Date().toISOString().slice(0,10));
+  const response=await fetch(u.href,{cache:"no-store"});
+  if(!response.ok)throw Error("index unavailable");
+  const parsed=await response.json();
+  if(!Array.isArray(parsed.items))return;
+  state.searchIndex=parsed.items.filter(x=>x&&url(x.url)&&x.title&&x.region).slice(0,450);
+  state.indexUpdated=parsed.updatedAt||null;
+ }catch{state.searchIndex=[];state.indexUpdated=null;}
 }
 function renderLiveResults(items,mode){
  state.liveNews=items;
@@ -133,18 +156,25 @@ async function searchNewsInside({scroll=true}={}){
   const result=await window.LocalCheckLiveNews.search({region,keyword,category,signal:controller.signal});
   if(seq!==liveSequence)return;
   renderLiveResults(result.items,"live");
-  const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"대체 뉴스 검색(GDELT)";
-  $("liveStatus").textContent=result.items.length?
-   provider+"에서 찾은 기사입니다. 제목·날짜·사실 여부는 원문에서 확인하세요.":
-   provider+"에서 검색한 기사가 없어요. 다른 검색어로 찾아보세요.";
+  if(result.items.length){
+   const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"대체 뉴스 검색(GDELT)";
+   $("liveStatus").textContent=provider+"에서 찾은 기사입니다. 원문에서 날짜와 사실 여부를 확인하세요.";
+  }else{
+   const stored=fallbackRows(region,keyword);
+   if(stored.length){
+    renderLiveResults(stored,"saved");
+    $("liveStatus").textContent="새 기사 검색 결과가 없어 저장된 자료 "+stored.length+"건을 표시합니다. 최신 검색 결과는 아닙니다. 자료 날짜: "+(state.indexUpdated||state.updated||"확인 필요");
+   }else{
+    $("liveStatus").textContent="검색한 새 기사가 없습니다. 아래 구글 뉴스 원본 검색도 이용해 보세요.";
+   }
+  }
  }catch(err){
   if(seq!==liveSequence)return;
-  const exact=fallbackRows(region,keyword);
-  const fallback=exact.length?exact:(!keyword?fallbackRows(region,""):[]);
+  const fallback=fallbackRows(region,keyword);
   renderLiveResults(fallback,"saved");
   $("liveStatus").textContent=fallback.length?
-   "외부 검색 서비스에 연결하지 못해 저장된 기사 "+fallback.length+"건을 표시합니다. 최신 검색 결과가 아닙니다. 저장 기준일: "+(state.updated||"확인 필요"):
-   "외부 뉴스 검색 서비스 두 곳 모두 응답하지 않았습니다. 저장된 기사에도 해당 검색어가 없습니다. 아래 구글 뉴스 원본 검색을 이용해 주세요.";
+   "외부 뉴스 검색 두 곳에 연결하지 못해 저장된 관련 기사 "+fallback.length+"건을 표시합니다. **실시간 검색 결과가 아닙니다.** 저장 날짜: "+(state.indexUpdated||state.updated||"확인 필요"):
+   "실시간 뉴스 검색 연결에 실패했으며 저장된 자료에도 일치하는 기사가 없습니다. 구글 뉴스 원본 검색을 이용해 주세요.";
   $("retryNews").hidden=false;
  }finally{
   clearTimeout(timer);
@@ -543,7 +573,7 @@ function init(){
  $("print").addEventListener("click",()=>window.print());
  $("download").addEventListener("click",download);
  if(window.LocalCheckBoard)window.LocalCheckBoard.init({show,getReport:()=>state.report});
- chooseMenu("news");loadNews();
+ chooseMenu("news");loadNews();loadSearchIndex();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();

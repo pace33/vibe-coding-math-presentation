@@ -193,7 +193,7 @@ function renderBusinesses(){
    '<h3>'+esc(c.name)+'</h3><span class="business-scale">'+esc(c.group||"사업장")+'</span><div class="business-product">무엇을 만들까요? <b>'+esc(c.produces)+'</b></div>'+
    '<p>'+esc(c.summary)+'</p><div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">🔎 이 기업 조사하기</button>'+
    '<a href="'+esc(url(c.source.url))+'" target="_blank" rel="noopener noreferrer">소개 자료 ↗</a>'+
-   '<a href="'+esc(businessNewsUrl(c.region,c.name))+'" target="_blank" rel="noopener noreferrer">최근 뉴스 ↗</a></div>';
+   '<button type="button" class="business-inline-news" data-business-news="'+esc(c.id)+'">최근 뉴스 검색 ↗</button></div>';
   list.appendChild(card);
  }
 }
@@ -434,7 +434,14 @@ function init(){
   renderBusinesses();
  }));
  $("topicList").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(b)fromTopic(b.dataset.topic);});
- $("businessList").addEventListener("click",e=>{const b=e.target.closest("[data-business]");if(b)fromBusiness(b.dataset.business);});
+ $("businessList").addEventListener("click",e=>{
+  const check=e.target.closest("[data-business]");if(check){fromBusiness(check.dataset.business);return;}
+  const find=e.target.closest("[data-business-news]");if(!find)return;
+  const company=companies.find(c=>c.id===find.dataset.businessNews);if(!company)return;
+  $("region").value=company.region;
+  $("keyword").value=company.name.replace(/\s+(?:본사·공장|청주사업장|진천공장|제천공장|보은공장|옥천공장|상우공장)$/,"").trim();
+  refresh();searchNewsInside();
+ });
  $("moreBusinesses").addEventListener("click",()=>{businessExpanded=!businessExpanded;renderBusinesses();});
  $("newsList").addEventListener("click",e=>{const b=e.target.closest("[data-news]");if(b)fromNews(Number(b.dataset.news));});
  $("evidenceCandidates").addEventListener("click",e=>{const b=e.target.closest("[data-choose-candidate]");if(b)selectCandidate(Number(b.dataset.chooseCandidate));});

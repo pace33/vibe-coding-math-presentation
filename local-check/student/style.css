@@ -250,7 +250,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .explore-mode.issues-mode #newsSearch,
 .explore-mode.issues-mode #searchHelp{display:block!important}
 .explore-mode.issues-mode .form-grid{grid-template-columns:.85fr 1.4fr}
-.issues-mode .inquiry-news-footer{display:none!important}
+.issues-mode .inquiry-news-footer{display:flex}
 .issue-topic-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
 .issue-topic{display:flex;flex-direction:column;text-align:left;gap:6px;min-height:85px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px;cursor:pointer;color:var(--green-dark)}
 .issue-topic strong{font-size:13px}
@@ -296,3 +296,25 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .overview-grid .basic-card-actions{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .overview-grid .basic-primary-link{min-height:36px;padding:7px 12px}
 @media(max-width:660px){.overview-grid{grid-template-columns:1fr}.overview-grid .inquiry-card{padding:15px 16px}.overview-grid .basic-card-value{font-size:24px}}
+
+/* 모든 '우리 지역' 세부 분야에서 기사 검증 → 게시판으로 이동 */
+.inquiry-news-footer{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ gap:12px;margin-top:15px;padding:13px 15px;
+ border:1px solid #d2e3d6;border-radius:12px;background:#f4f9f5;
+}
+.inquiry-workflow-text{margin:0;color:#537262;font-size:12px;font-weight:700}
+.inquiry-workflow-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.inquiry-workflow-actions .btn{min-height:42px;font-size:13px;white-space:nowrap}
+.basic-card-actions .regional-card-news{
+ align-self:flex-start;min-height:34px;border:0;border-radius:8px;padding:6px 10px;
+ background:transparent;color:var(--green);font-size:12px;font-weight:800;
+ text-align:left;text-decoration:underline;text-underline-offset:3px;
+}
+.basic-card-actions .regional-card-news:hover{background:#eef7ef}
+@media(max-width:660px){
+ .inquiry-news-footer{align-items:stretch;padding:12px;gap:10px}
+ .inquiry-workflow-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:7px}
+ .inquiry-workflow-actions .btn{width:100%;min-height:44px;font-size:11px;padding:8px 5px;white-space:normal}
+ .basic-card-actions .regional-card-news{align-self:stretch;text-align:center}
+}

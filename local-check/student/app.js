@@ -449,11 +449,11 @@ function renderReport(){
  if(!state.report)return;
  const d=state.report;
  const root=$("report");
- root.innerHTML='<h2>🔎 나의 우리 고장 뉴스 탐정 카드</h2>'+
+ root.innerHTML='<h2>🔎 우리 고장 탐정 카드</h2>'+
   '<div class="report-row"><strong>지역</strong><p>'+esc(d.region)+'</p></div>'+
   '<div class="report-row"><strong>선택한 탐구 자료</strong><p>'+esc(d.title)+'</p></div>'+
-  '<div class="report-row"><strong>뉴스에서 찾은 사실</strong><p>'+esc(d.newsFact)+'</p></div>'+
-  '<div class="report-row"><strong>비교 자료에서 찾은 사실</strong><p>'+esc(d.govFact||"아직 찾지 못했어요")+'</p></div>'+
+  '<div class="report-row"><strong>검증할 뉴스·자료</strong><p>'+esc(d.newsFact)+'</p></div>'+
+  '<div class="report-row"><strong>비교자료 제목·확인 내용</strong><p>'+esc(d.govFact||"아직 찾지 못했어요")+'</p></div>'+
   '<div class="report-row"><strong>나의 판단</strong><p>'+esc(d.verdict)+'</p></div>'+
   '<div class="report-row"><strong>판단한 이유</strong><p>'+esc(d.reason)+'</p></div>'+
   '<div class="report-row"><strong>참고한 원문</strong><a href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer">뉴스·기사 원문 ↗</a>'+
@@ -464,7 +464,7 @@ function reportText(){
  const d=state.report;
  return [
   "우리 고장 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
-  "뉴스에서 찾은 사실: "+d.newsFact,"비교 자료에서 찾은 사실: "+(d.govFact||"아직 못 찾음"),
+  "검증할 뉴스·자료: "+d.newsFact,"비교자료 제목·내용: "+(d.govFact||"아직 못 찾음"),
   "나의 판단: "+d.verdict,"판단한 이유: "+d.reason,
   "뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
   "※ 학생이 작성한 판단이며, 자동 사실 검증은 아닙니다."

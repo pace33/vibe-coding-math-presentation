@@ -147,7 +147,39 @@ const REGION_SPECIALTIES={
 };
 // 대표 농산물 이름은 공개된 충북교육청 지역특산물 교육자료 및 충청북도 지역 상품 자료를 참조합니다.
 const asCard=(icon,title,value,summary,source,href,more)=>({icon,title,value,summary,source,href,more});
+
+/* 기본 정보 카드에 직접 표시할 수치.
+ * 인구: 행정안전부 주민등록 인구통계, 2026-10-31, 외국인 제외(시·군 단위).
+ * 면적: 충청북도 2025년 말 지적통계, 초등 학습용 반올림(㎢).
+ * 행정구역: 시·군 공식 현황, 음성군 대소읍(2026년 3월 승격) 반영.
+ * 자동 갱신 자료가 아니므로 값 옆에 기준 시점을 표시합니다.
+ */
+const BASIC_REGION_FACTS={
+ "청주시":{position:"충북 서부",admin:"3읍 · 10면 · 30동",note:"상당구·서원구·흥덕구·청원구 4개 구",population:861711,area:941},
+ "충주시":{position:"충북 북부",admin:"1읍 · 12면 · 12동",note:"도시의 동 지역과 농촌의 읍·면 지역",population:205369,area:983},
+ "제천시":{position:"충북 북동부",admin:"1읍 · 7면 · 9동",note:"제천읍과 주변 면·동 지역",population:127751,area:883},
+ "보은군":{position:"충북 남부",admin:"1읍 · 10면",note:"보은읍과 10개 면",population:31594,area:584},
+ "옥천군":{position:"충북 남부",admin:"1읍 · 8면",note:"옥천읍과 8개 면",population:50812,area:537},
+ "영동군":{position:"충북 남단",admin:"1읍 · 10면",note:"영동읍과 10개 면",population:43043,area:847},
+ "증평군":{position:"충북 중부",admin:"1읍 · 1면",note:"증평읍과 도안면",population:36780,area:82},
+ "진천군":{position:"충북 북서부",admin:"2읍 · 5면",note:"진천읍·덕산읍과 5개 면",population:85608,area:407},
+ "괴산군":{position:"충북 동부",admin:"1읍 · 10면",note:"괴산읍과 10개 면",population:36959,area:842},
+ "음성군":{position:"충북 북서부",admin:"3읍 · 6면",note:"대소읍 승격 반영(2026년 3월)",population:96297,area:520},
+ "단양군":{position:"충북 북동부",admin:"2읍 · 6면",note:"단양읍·매포읍과 6개 면",population:26458,area:780}
+};
+function overviewCards(region){
+ const info=BASIC_REGION_FACTS[region];if(!info)return [];
+ const fmt=n=>Number(n).toLocaleString("ko-KR");
+ return [
+  {...asCard("📍","위치",info.position,"충청북도 "+region+"의 위치예요.","충청북도 시·군 행정구역 지도","https://www.chungbuk.go.kr/www/contents.do?key=450"),primaryLabel:"지도·위치 자료 ↗"},
+  {...asCard("🗺️","행정구역",info.admin,info.note,"충청북도 시군현황 · 2026년 3월 이후 변경 반영",GOV_STATS),primaryLabel:"행정구역 자료 ↗"},
+  {...asCard("👥","인구",fmt(info.population)+"명","2026년 10월 말 · 외국인 제외","행정안전부 주민등록 인구통계 · 2026.10","https://jumin.mois.go.kr/statMonth.do"),primaryLabel:"인구통계 보기 ↗"},
+  {...asCard("📐","면적","약 "+fmt(info.area)+"㎢","2025년 말 지적통계 · ㎢ 단위 반올림","충청북도 지적통계 · 2025년 말","https://www.data.go.kr/data/3075683/fileData.do"),primaryLabel:"면적 통계 보기 ↗"}
+ ];
+}
+
 function rawCards(region,category,companies=[],facts=[]){
+ if(category==="overview")return overviewCards(region);
  const fixed=window.LOCALCHECK_REGIONAL_LANDMARKS?.[region]?.[category];
  if((category==="nature"||category==="local")&&Array.isArray(fixed))return fixed.map(x=>({...x}));
  if(region==="음성군"&&EUMSEONG[category])return EUMSEONG[category].map(x=>({...x}));

@@ -66,6 +66,7 @@ function renderInquiries(){
  const issues=activeMenu==="issues",crops=activeMenu==="business";
  root.classList.toggle("issue-topic-grid",issues);
  root.classList.toggle("crop-only-grid",crops);
+ root.classList.toggle("overview-grid",activeMenu==="overview");
  const guide=$("inquiryGuide");
  if(issues){
   $("inquiryTitle").textContent=(region==="전체"?"충청북도":region)+" · 지역문제";
@@ -104,7 +105,7 @@ function renderInquiries(){
   const mainLink=primary?
    '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
-   '<strong class="basic-card-value">'+esc(item.value)+'</strong><p>'+esc(item.summary)+'</p>'+
+   '<strong class="basic-card-value">'+esc(item.value)+'</strong>'+(item.summary?'<p>'+esc(item.summary)+'</p>':"")+
    '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
    '<div class="basic-card-actions">'+mainLink+extras+'</div>';
   root.appendChild(card);

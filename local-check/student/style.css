@@ -58,6 +58,8 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-actions a,.news-actions button,.business-buttons a,.business-buttons button,.candidate-actions a,.candidate-actions button,.board-action{min-height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:850;border-radius:8px;border:1px solid #cfe1d1;padding:9px 12px;background:var(--soft);color:var(--green);cursor:pointer;text-align:center}
 .news-actions button,.business-buttons button:first-child,.candidate-actions button,.board-action.primary{background:var(--green);border-color:var(--green);color:white}
 .news-empty,.candidates-empty,.board-empty{grid-column:1/-1;padding:24px;text-align:center;border:1px dashed #d2dfd3;border-radius:12px;background:#fff;color:var(--muted);font-size:13px}
+.recent-news-more{display:flex;justify-content:center;margin:18px 0 8px}
+.recent-news-more .google-more-button{min-width:230px}
 .live-results{margin-top:22px}
 .live-results .section-title{margin-top:0}
 .live-status,.evidence-status,.board-tip{font-size:12px;line-height:1.75;color:#4f755f;background:var(--soft);padding:11px 14px;border-radius:10px;margin:0 0 12px}
@@ -151,6 +153,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  .form-grid{grid-template-columns:1fr;gap:9px}
  .search-panel{padding:15px}
  .news-list,.business-list,.candidate-grid,.board-grid,.topic-list{grid-template-columns:1fr}
+ .recent-news-more .google-more-button{width:100%}
  .google-more-row{justify-content:stretch}
  .google-more-button{width:100%}
  .section-title h2{font-size:19px}

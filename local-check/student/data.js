@@ -2,7 +2,7 @@
  * 각 항목의 '탐정 질문'은 판단 연습을 위한 주장이지 확인된 사실이 아닙니다.
  * 최신 정보 자동 업데이트가 아닌 출처 연결 자료집입니다. */
 window.STUDENT_FACTS = [
- {id:"cjj-pop",region:"청주시",topic:"우리 고장 인구",category:"인구·생활",icon:"👨‍👩‍👧‍👦",featured:true,
+ {id:"cjj-pop",region:"청주시",topic:"우리 지역 인구",category:"인구·생활",icon:"👨‍👩‍👧‍👦",featured:true,
    hook:"청주 인구가 86만 명이라고도, 89만 명이라고도 해요. 왜 다를까요?",
    claim:"청주시 인구는 2026년 10월에 약 89만 명이었다.",
    fact:"청주시 홈페이지는 2026년 10월 말 인구를 약 89만 명으로 표시하고, 행정안전부 주민등록 인구를 재게시한 자료는 약 86만 명으로 표시합니다. 집계 대상에 차이가 있는지 공식 통계 원문에서 확인해야 합니다.",
@@ -101,7 +101,7 @@ window.STUDENT_FACTS = [
    terms:"음성, 품바, 축제",date:"2026-06-10",kind:"축제",level:2,
    sources:[{name:"충북나드리 제27회 음성품바축제",type:"도청 관광공지",url:"https://tour.chungbuk.go.kr/www/selectBbsNttView.do?bbsNo=10&integrDeptCode=&key=80&nttNo=23095&pageIndex=1",date:"행사 2026-06-10~14"},
     {name:"충북나드리 음성품바축제 일반 소개",type:"도청 관광자료",url:"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=1620",date:"일반 소개, 기준일 확인 필요"}]},
- {id:"es-education",region:"음성군",topic:"교육혁신선도지역",category:"우리 고장 소식",icon:"🏫",featured:true,
+ {id:"es-education",region:"음성군",topic:"교육혁신선도지역",category:"우리 지역 소식",icon:"🏫",featured:true,
    hook:"처음에는 충북 11개 시·군이 지원하려 했는데, 나중에 어떤 지역이 선정됐을까요?",
    claim:"충북의 교육혁신선도지역 공모에는 최종적으로 11개 시·군이 모두 선정되었다.",
    fact:"충북교육청은 2026년 9월에 11개 시·군이 공모에 함께 대응한다는 내용을 발표했습니다. 11월 3일에는 제천시·보은군·음성군 3개 지역이 선정됐다고 알렸습니다. ‘참여 계획’과 ‘최종 선정’은 다릅니다.",

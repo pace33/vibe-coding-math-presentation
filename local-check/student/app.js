@@ -453,7 +453,7 @@ function chooseStory(story){
  state.report=null;
  const isBusiness=state.story.kind==="business";
  $("verifyHeading").textContent=isBusiness?"기업 정보가 정말 맞을까?":"뉴스가 정말 맞을까?";
- $("storyType").textContent=isBusiness?"🏭 우리 고장 기업 자료":"📰 내가 고른 뉴스";
+ $("storyType").textContent=isBusiness?"🏭 우리 지역 기업 자료":"📰 내가 고른 뉴스";
  $("findingHeading").textContent=isBusiness?"① 이 기업에 대해 무엇을 알게 되었나요?":"① 뉴스에서 어떤 내용을 찾았나요?";
  $("findingLabel").textContent=isBusiness?"기업 소개나 사업장 자료에서 확인한 사실을 적어 보세요.":"기사나 공지에 적힌 중요한 사실을 적어 보세요.";
  $("articleLink").textContent=isBusiness?"기업·사업장 원문 읽기 ↗":"기사 원문 읽기 ↗";
@@ -505,22 +505,12 @@ function makeReport(){
 }
 function renderReport(){
  if(!state.report)return;
- const d=state.report;
- const root=$("report");
- root.innerHTML='<h2>🔎 나의 탐정 카드</h2>'+
-  '<div class="report-row"><strong>'+esc(d.region)+'</strong><p>'+esc(d.title)+'</p></div>'+
-  '<div class="report-row"><strong>내가 생각한 결과</strong><p class="student-verdict">'+esc(d.verdict)+'</p><p>'+esc(d.reason)+'</p></div>'+
-  '<div class="report-row"><strong>확인한 원문</strong><a href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer">첫 번째 자료 ↗</a>'+
-  (d.govUrl?'<a href="'+esc(d.govUrl)+'" target="_blank" rel="noopener noreferrer">비교자료 ↗</a>':'')+'</div>'+
-  '<details class="secondary-tools"><summary>내가 기록한 내용 보기</summary>'+
-   '<div class="report-row"><strong>첫 번째 자료</strong><p>'+esc(d.newsFact)+'</p></div>'+
-   '<div class="report-row"><strong>비교자료</strong><p>'+esc(d.govFact||"아직 확인하지 않았어요")+'</p></div></details>'+
-  '<p class="note">학생의 판단 기록입니다. 사이트가 사실 여부를 자동 판정한 결과는 아니에요.</p>';
+ window.LocalCheckBoard.detailReport(state.report,$("report"));
 }
 function reportText(){
  const d=state.report;
  return [
-  "우리 고장 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
+  "우리 지역 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
   "검증할 뉴스·자료: "+d.newsFact,"비교자료 제목·내용: "+(d.govFact||"아직 못 찾음"),
   "나의 판단: "+d.verdict,"판단한 이유: "+d.reason,
   "뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),

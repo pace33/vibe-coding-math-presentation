@@ -63,29 +63,39 @@ function elementLink(label,raw){
 }
 function detailReport(data,target){
  target.replaceChildren();
- target.appendChild(tag("h2","","🔎 뉴스 탐정 카드"));
- const rows=[
-  ["우리 고장",data.region],
-  ["뉴스 제목",data.title],
-  ["검증할 뉴스·자료",data.newsFact],
-  ["비교자료 제목·내용",data.govFact||"아직 확인하지 못했어요"],
-  ["내가 내린 판단",data.verdict],
-  ["판단 이유",data.reason]
- ];
- for(const [heading,value] of rows){
-  const row=tag("div","report-row");row.append(tag("strong","",heading),tag("p","",value));target.appendChild(row);
- }
- const source=tag("div","report-row");source.appendChild(tag("strong","","친구가 참고한 원문"));
- source.appendChild(elementLink("기사 원문",data.url));
- if(data.govUrl)source.appendChild(elementLink("비교 자료 원문",data.govUrl));
- target.appendChild(source);
- const foot=tag("p","note","※ 학생의 탐구 기록입니다. 자료의 정확성을 사이트가 보증하거나 자동 검증한 것은 아니에요.");
- target.appendChild(foot);
+ const header=tag("div","detective-header");
+ header.append(tag("span","detective-region","📍 "+(data.region||"우리 지역")),tag("h2","","🔎 뉴스 탐정 카드"),tag("p","","뉴스와 다른 자료를 비교한 나의 기록이에요."));
+ target.appendChild(header);
+ const comparison=tag("div","detective-comparison");
+ const first=tag("section","detective-source detective-news");
+ first.append(tag("span","detective-step","1 · 읽은 뉴스"),tag("h3","","어떤 뉴스를 읽었나요?"),tag("p","detective-title",data.title));
+ const metadata=[data.publisher,data.date].filter(Boolean).join(" · ");
+ if(metadata)first.appendChild(tag("p","detective-meta",metadata));
+ const titleOnly=/^검증할 뉴스 제목:/.test(data.newsFact)||data.newsFact===data.title;
+ first.append(tag("strong","detective-label","뉴스에서 찾은 내용"),tag("p",titleOnly?"detective-missing":"detective-finding",titleOnly?"제목만 기록했어요. 기사에서 확인한 날짜나 숫자도 적어 보세요.":data.newsFact));
+ first.appendChild(elementLink("뉴스 원문 읽기",data.url));
+ const second=tag("section","detective-source detective-evidence");
+ second.append(tag("span","detective-step","2 · 비교한 자료"),tag("h3","","다른 자료에는 뭐라고 나왔나요?"));
+ const evidenceTitle=/^비교자료 제목:/.test(data.govFact||"");
+ if(evidenceTitle)second.append(tag("p","detective-title",data.govFact.replace(/^비교자료 제목:\s*/,"")),tag("strong","detective-label","비교 자료에서 찾은 내용"),tag("p","detective-missing","제목만 기록했어요. 같은 내용이 있는지 원문을 읽어 보세요."));
+ else second.append(tag("strong","detective-label","비교 자료에서 찾은 내용"),tag("p","detective-finding",data.govFact||"아직 비교 자료를 찾지 못했어요."));
+ if(data.govUrl)second.appendChild(elementLink("비교 자료 원문 읽기",data.govUrl));
+ else second.appendChild(tag("p","detective-missing","비교 자료의 주소가 아직 없어요."));
+ comparison.append(first,second);target.appendChild(comparison);
+ const reminder=tag("aside","detective-reminder");
+ reminder.append(tag("strong","","🔎 잠깐! 같은 것을 비교했나요?"),tag("p","","연도 · 날짜 · 장소 · 숫자를 살펴보세요. 같은 이름의 축제라도 열린 해가 다르면 다른 자료일 수 있어요."));
+ target.appendChild(reminder);
+ const verdicts={"같아요":["same","🟢 두 자료의 내용이 같다고 생각해요"],"달라요":["different","🟠 두 자료의 내용이 다르다고 생각해요"],"아직 모르겠어요":["unsure","🔵 아직 모르겠어요. 더 알아볼래요"]};
+ const [tone,label]=verdicts[data.verdict]||verdicts["아직 모르겠어요"];
+ const thought=tag("section","detective-thought "+tone);
+ thought.append(tag("span","detective-step","3 · 나의 생각"),tag("h3","",label),tag("strong","detective-label","왜 그렇게 생각했나요?"),tag("p","detective-reason",data.reason));
+ target.appendChild(thought);
+ target.appendChild(tag("p","detective-note","💬 이 카드는 학생의 생각을 담은 기록이에요. 정답 표시가 아니에요. 친구도 원문을 읽고 함께 생각해 보세요."));
 }
 function createCardRow(d){
  const section=tag("article","board-card");
  const top=tag("div","board-card-top");
- top.append(tag("span","board-region",d.region||"우리 고장"),tag("span","board-verdict",d.verdict));
+ top.append(tag("span","board-region",d.region||"우리 지역"),tag("span","board-verdict",d.verdict));
  section.appendChild(top);
  section.appendChild(tag("h3","",d.title));
  section.appendChild(tag("p","",d.reason));
@@ -209,5 +219,5 @@ function init({show,getReport}={}){
  window.addEventListener("hashchange",importHash);
  renderBoard();importHash();
 }
-window.LocalCheckBoard={init,save,share:copyShare,renderBoard,encodeCard,decodeCard};
+window.LocalCheckBoard={init,save,share:copyShare,renderBoard,encodeCard,decodeCard,detailReport};
 })();

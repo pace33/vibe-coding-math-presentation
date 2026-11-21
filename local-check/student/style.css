@@ -169,6 +169,43 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  footer{display:block}
  footer span{display:block}
 }
+.category-button{font-size:1.05rem;min-height:86px}
+.category-button small{display:block;font-size:.875rem;font-weight:500;line-height:1.5;margin-top:5px}
+.report:has(.detective-header){padding:clamp(18px,3vw,32px);border-radius:22px;background:#fff}
+.detective-header{margin-bottom:24px}
+.detective-region{display:inline-block;padding:5px 12px;border-radius:30px;background:#e6f3eb;color:#205a42;font-size:1rem;font-weight:800;margin-bottom:12px}
+.report .detective-header h2{font-size:clamp(24px,4vw,32px);margin:0 0 8px}
+.detective-header p,.detective-note{font-size:1rem;color:#415b4d;line-height:1.7}
+.detective-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.detective-source{display:flex;flex-direction:column;min-width:0;padding:22px;border:2px solid #bdd9e9;border-radius:18px;background:#f3f9fd}
+.detective-evidence{border-color:#bcdcc9;background:#f3faf5}
+.detective-step{font-size:1rem;font-weight:850;color:#235c80;display:block;margin-bottom:10px}
+.detective-evidence .detective-step{color:#256345}
+.report .detective-source h3,.report .detective-thought h3{font-size:1.25rem;line-height:1.5;margin:0 0 15px}
+.detective-title{font-size:1.15rem;font-weight:750;line-height:1.7;overflow-wrap:anywhere;margin-bottom:12px}
+.detective-meta{font-size:.9rem;color:#46616e;margin-bottom:16px}
+.detective-label{display:block;font-size:1rem;margin:8px 0;color:#253f32}
+.detective-finding,.detective-missing,.detective-reason{font-size:1.05rem;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+.detective-missing{color:#4e5d64}
+.detective-source a{display:block;margin-top:auto;align-self:flex-start;min-height:48px;padding:10px 16px;border:1px solid #6395aa;border-radius:10px;background:white;color:#164a64;font-size:1rem;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.detective-evidence a{border-color:#649d7c;color:#205a3c}
+.detective-reminder{margin:20px 0;padding:18px 20px;border-radius:14px;border:1px solid #e4c36f;background:#fff8df;color:#62460b;font-size:1rem}
+.detective-reminder p{margin:7px 0 0;line-height:1.7}
+.detective-thought{padding:22px;border:2px solid #afd3c0;border-radius:18px;background:#edf8f0}
+.detective-thought.different{background:#fff5e9;border-color:#e4ba81}
+.detective-thought.unsure{background:#edf4ff;border-color:#b5c9e6}
+.detective-thought .detective-step{color:#344b40}
+.detective-reason{background:#fff;border-radius:12px;padding:16px;margin-bottom:0;border:1px solid #d3ddd6}
+.detective-note{margin:20px 0 0;padding-top:16px;border-top:1px solid #d9e4dc}
+#verify .helper,#verify .short-reason-label,#verify .verify-extra summary,#verify .verify-extra-fields label{font-size:1rem}
+.verdict-choices label{font-size:1rem;min-height:86px;padding:12px 8px}
+.verdict-choices small{display:block;font-size:.875rem;font-weight:500;margin-top:5px}
+@media(max-width:660px){
+ .detective-comparison{grid-template-columns:1fr}
+ .detective-source,.detective-thought{padding:18px}
+ .verdict-choices{grid-template-columns:1fr}
+ .verdict-choices label{justify-content:flex-start;text-align:left;font-size:1rem;padding:12px 16px;gap:12px;min-height:74px}
+}
 @media print{
  body{background:#fff}
  .site-header,.category-menu,.search-panel,.home-intro,.explore-tabs,#home,#verify,#board,#shared,footer,.back,.bottom-actions,.secondary-tools,.board-privacy{display:none!important}

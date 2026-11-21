@@ -1,4 +1,4 @@
-# 로컬체크 | 학생용 우리 고장 탐정
+# 로컬체크 | 학생용 우리 지역 탐정
 
 웹사이트: https://pace33.github.io/vibe-coding-math-presentation/local-check/student/
 

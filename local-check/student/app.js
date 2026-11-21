@@ -22,19 +22,19 @@ function query(kind,area=place(),topic=$("keyword").value){
  if(kind==="official"){const x=new URL("https://www.google.com/search");x.searchParams.set("q",q);x.searchParams.set("tbs","qdr:m");return x.href;}
  const x=new URL("https://news.google.com/search");x.searchParams.set("q",q);x.searchParams.set("hl","ko");x.searchParams.set("gl","KR");x.searchParams.set("ceid","KR:ko");return x.href;
 }
+const EXPLORE_CATEGORIES=window.LOCALCHECK_CATEGORIES||{};
 function updateLinks(){
- $("newsSearch").textContent="🔎 "+(activeMenu==="business"?"기업 뉴스 검색":activeMenu==="local"?"축제 뉴스 검색":"뉴스 검색");
+ $("newsSearch").textContent=activeMenu==="news"?"🔎 뉴스 검색":"🔎 "+EXPLORE_CATEGORIES[activeMenu].title+" 뉴스 검색";
 }
 function chooseMenu(menu){
  if(menu==="board"){window.LocalCheckBoard?.renderBoard?.();show("board");return;}
- if(menu==="explore")menu="business";
- if(!["news","business","local"].includes(menu))return;
+ if(menu==="explore")menu=EXPLORE_CATEGORIES[activeMenu]?activeMenu:"overview";
+ if(menu!=="news"&&!EXPLORE_CATEGORIES[menu])return;
  activeMenu=menu;
  clearLiveResults();
  const isExplore=menu!=="news";
  $("newsSection").hidden=isExplore;
  $("businessSection").hidden=menu!=="business";
- $("localSection").hidden=menu!=="local";
  $("exploreTabs").hidden=!isExplore;
  document.querySelectorAll("[data-menu]").forEach(button=>{
   const selected=button.dataset.menu===(isExplore?"explore":"news");
@@ -47,9 +47,26 @@ function chooseMenu(menu){
   button.setAttribute("aria-pressed",String(selected));
  });
  $("keyword").value="";
- $("keyword").placeholder=menu==="business"?"예: 김치, 반도체, 중소기업":menu==="local"?"예: 축제, 문화, 역사":"예: 축제, 인구, 학교";
- updateLinks();renderBusinesses();renderNews();renderTopics();
+ $("keyword").placeholder=isExplore?"예: "+EXPLORE_CATEGORIES[menu].prompts[0][2]:"예: 축제, 인구, 학교";
+ updateLinks();renderBusinesses();renderNews();renderInquiries();renderTopics();
  if($("home").hidden)show("home");
+}
+function renderInquiries(){
+ const category=EXPLORE_CATEGORIES[activeMenu],section=$("inquirySection");
+ section.hidden=!category;
+ const root=$("inquiryList");root.replaceChildren();
+ if(!category)return;
+ $("inquiryTitle").textContent=category.title+" 탐구";
+ $("inquiryGuide").textContent=category.description+" · 주제를 선택한 다음 뉴스와 공공기관 자료를 비교해 보세요.";
+ for(const [i,prompt] of category.prompts.entries()){
+  const search=new URL("https://www.google.com/search");
+  search.searchParams.set("q",[place(),prompt[2],category.sites].join(" "));
+  const card=document.createElement("article");card.className="inquiry-card";
+  card.innerHTML='<h3>'+esc(prompt[0])+'</h3><p>'+esc(prompt[1])+'</p>'+
+   '<div class="inquiry-actions"><button type="button" data-inquiry="'+i+'">뉴스 찾기</button>'+
+   '<a href="'+esc(search.href)+'" target="_blank" rel="noopener noreferrer">공공자료 찾기 ↗</a></div>';
+  root.appendChild(card);
+ }
 }
 function show(screen){
  for(const id of ["home","verify","result","board","shared"])$(id).hidden=id!==screen;
@@ -120,7 +137,7 @@ function fromLiveNews(index){
 }
 function googleNewsUrl(region,keyword,menu){
  const area=region==="전체"?"충청북도":"충북 "+region;
- const type={news:"",business:"기업 산업",local:"축제 문화"}[menu]||"";
+ const type=EXPLORE_CATEGORIES[menu]?.defaultTerm||"";
  const q=[area,keyword||type,"when:30d"].filter(Boolean).join(" ");
  const u=new URL("https://news.google.com/search");
  u.searchParams.set("q",q);u.searchParams.set("hl","ko");
@@ -132,6 +149,8 @@ async function searchNewsInside({scroll=true}={}){
  const region=$("region").value;
  const keyword=safe($("keyword").value,90);
  const category=activeMenu;
+ const searchTerm=keyword||(EXPLORE_CATEGORIES[category]?.defaultTerm||"");
+ const rssCategory=category==="business"?"business":category==="local"?"local":"news";
  const seq=++liveSequence;
  if(liveController)liveController.abort();
  const controller=new AbortController();
@@ -142,25 +161,25 @@ async function searchNewsInside({scroll=true}={}){
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
  if(category==="news")$("newsSection").hidden=true;
- $("liveHeading").textContent=keyword?"‘"+keyword+"’ 검색 결과":(region==="전체"?"충북":region)+" 뉴스 검색 결과";
+ $("liveHeading").textContent=keyword?"‘"+keyword+"’ 검색 결과":(region==="전체"?"충북":region)+" "+(EXPLORE_CATEGORIES[category]?.title||"뉴스")+" 검색 결과";
  // Automatic typing searches update in place; explicit button searches move to the result.
  if(scroll)$("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
  $("liveStatus").textContent=keyword?"‘"+keyword+"’ 관련 구글 뉴스를 찾고 있어요.":"해당 지역의 구글 뉴스를 찾고 있어요.";
  $("liveExplanation").textContent="검색어와 관련된 기사를 원문에서 읽고 확인하세요.";
- $("googleNewsFallback").href=googleNewsUrl(region,keyword,category);
+ $("googleNewsFallback").href=googleNewsUrl(region,searchTerm,category);
  $("retryNews").hidden=true;
  try{
   if(!window.LocalCheckLiveNews)throw new Error("RSS 검색 연결을 준비하지 못했어요.");
-  const result=await window.LocalCheckLiveNews.search({region,keyword,category,signal:controller.signal});
+  const result=await window.LocalCheckLiveNews.search({region,keyword:searchTerm,category:rssCategory,signal:controller.signal});
   if(seq!==liveSequence)return;
   renderLiveResults(result.items,"live");
   if(result.items.length){
    const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"Bing 뉴스 RSS";
    $("liveStatus").textContent=provider+"에서 찾은 기사입니다. 원문에서 날짜와 사실 여부를 확인하세요.";
   }else{
-   const stored=fallbackRows(region,keyword);
+   const stored=fallbackRows(region,searchTerm);
    if(stored.length){
     renderLiveResults(stored,"saved");
     $("liveStatus").textContent="새 기사 검색 결과가 없어 저장된 자료 "+stored.length+"건을 표시합니다. 최신 검색 결과는 아닙니다. 자료 날짜: "+(state.indexUpdated||state.updated||"확인 필요");
@@ -170,7 +189,7 @@ async function searchNewsInside({scroll=true}={}){
   }
  }catch(err){
   if(seq!==liveSequence)return;
-  const fallback=fallbackRows(region,keyword);
+  const fallback=fallbackRows(region,searchTerm);
   renderLiveResults(fallback,"saved");
   $("liveStatus").textContent=fallback.length?
    "뉴스 검색 서버에 연결하지 못해 저장된 관련 기사 "+fallback.length+"건을 표시합니다. 실시간 검색 결과가 아닙니다. 저장 날짜: "+(state.indexUpdated||state.updated||"확인 필요"):
@@ -267,18 +286,22 @@ function fromBusiness(id){
 function renderTopics(){
  const area=$("region").value;
  const keyword=safe($("keyword").value).toLowerCase();
- let chosen=facts.filter(x=>(area==="전체"||x.region===area)&&(!keyword||[x.topic,x.region,x.hook,x.terms].join(" ").toLowerCase().includes(keyword)));
+ const categories=activeMenu==="overview"?["인구·생활"]:activeMenu==="local"?["역사·문화","축제·행사","자연·관광"]:[];
+ let chosen=facts.filter(x=>categories.includes(x.category)&&(area==="전체"||x.region===area)&&
+  (!keyword||[x.topic,x.region,x.hook,x.terms].join(" ").toLowerCase().includes(keyword)));
  if(area==="전체"&&!keyword)chosen=chosen.filter(x=>x.featured);
  chosen=chosen.slice(0,6);
  const root=$("topicList");root.replaceChildren();
- if(!chosen.length){root.textContent="이 지역의 탐구 주제가 아직 없어요.";return;}
+ $("localSection").hidden=!chosen.length;
+ if(!chosen.length)return;
+ $("topicHeading").textContent=activeMenu==="overview"?"인구 관련 대표 자료":"역사·문화 대표 자료";
  for(const item of chosen){
   const button=document.createElement("button");button.type="button";button.className="topic";button.dataset.topic=item.id;
   button.innerHTML=esc(item.icon)+" "+esc(item.region)+" · "+esc(item.topic);
   root.appendChild(button);
  }
 }
-function refresh(){clearLiveResults();updateLinks();renderNews();renderBusinesses();renderTopics();}
+function refresh(){clearLiveResults();updateLinks();renderNews();renderBusinesses();renderInquiries();renderTopics();}
 async function loadNews(){
  const root=$("newsList");
  root.innerHTML='<div class="news-empty">최근 지역 자료를 불러오고 있어요.</div>';
@@ -538,6 +561,13 @@ function init(){
  });
  document.querySelectorAll("[data-explore]").forEach(button=>{
   button.addEventListener("click",()=>chooseMenu(button.dataset.explore));
+ });
+ $("inquiryList").addEventListener("click",e=>{
+  const button=e.target.closest("[data-inquiry]");if(!button)return;
+  const prompt=EXPLORE_CATEGORIES[activeMenu]?.prompts[Number(button.dataset.inquiry)];
+  if(!prompt)return;
+  $("keyword").value=prompt[2];
+  clearLiveResults();renderBusinesses();renderTopics();searchNewsInside({scroll:true});
  });
  document.querySelectorAll("[data-business-filter]").forEach(button=>button.addEventListener("click",()=>{
   businessFilter=button.dataset.businessFilter;

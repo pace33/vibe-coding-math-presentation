@@ -53,7 +53,7 @@ function chooseMenu(menu){
  });
  $("keyword").value=menu==="issues"?"환경":"";
  $("keyword").placeholder=isExplore?"예: "+EXPLORE_CATEGORIES[menu].prompts[0][2]:"예: 축제, 인구, 학교";
- updateLinks();renderBusinesses();renderNews();renderInquiries();renderTopics();
+ updateLinks();renderBusinesses();renderNews();renderInquiries();
  if($("home").hidden)show("home");
  if(menu==="issues")searchNewsInside({scroll:false});
 }
@@ -63,48 +63,53 @@ function renderInquiries(){
  const root=$("inquiryList");root.replaceChildren();
  if(!category)return;
  const region=$("region").value;
- root.classList.toggle("issue-topic-grid",activeMenu==="issues");
- if(activeMenu==="issues"){
-  $("inquiryTitle").textContent=(region==="전체"?"충청북도":region)+" · 최신 지역문제 뉴스";
-  $("inquiryGuide").textContent="지역문제는 현재 상황이 달라질 수 있어요. 뉴스의 날짜·출처를 보고 공공기관 자료와 비교해 보세요.";
-  const topics=[
-   ["🌱 환경·쓰레기","환경","쓰레기·하천 등 환경과 관련된 소식"],
-   ["🚦 교통·안전","교통 안전","도로·교통·생활안전에 관한 소식"],
-   ["🏫 교육·복지","교육 복지","학교와 복지시설에 관한 소식"],
-   ["🏘️ 지역 생활","지역 현안","우리 마을의 새로운 문제와 해결 노력"]
-  ];
-  root.innerHTML=topics.map(([name,term,description])=>
+ const issues=activeMenu==="issues",crops=activeMenu==="business";
+ root.classList.toggle("issue-topic-grid",issues);
+ root.classList.toggle("crop-only-grid",crops);
+ const guide=$("inquiryGuide");
+ if(issues){
+  $("inquiryTitle").textContent=(region==="전체"?"충청북도":region)+" · 지역문제";
+  guide.hidden=false;guide.textContent="주제를 고르면 관련 뉴스를 검색해요.";
+  const topics=[["🌱 환경","환경"],["🚦 교통·안전","교통 안전"],["🏫 교육·복지","교육 복지"],["🏘️ 지역 생활","지역 현안"]];
+  root.innerHTML=topics.map(([name,term])=>
    '<button class="issue-topic '+($("keyword").value===term?'active':'')+'" type="button" data-issue-term="'+esc(term)+'">'+
-   '<strong>'+esc(name)+'</strong><span>'+esc(description)+'</span></button>').join("");
+   '<strong>'+esc(name)+'</strong></button>').join("");
   return;
  }
  if(region==="전체"){
-  $("inquiryTitle").textContent="우리 지역 선택";
-  $("inquiryGuide").textContent="기초정보는 한 지역씩 보여줘요. 충청북도 11개 시·군 중 하나를 선택하세요.";
-  root.textContent="위의 지역 선택에서 시·군을 골라 주세요.";
+  $("inquiryTitle").textContent="지역을 선택하세요";
+  guide.hidden=true;
+  root.textContent="위에서 시·군을 선택해 주세요.";
   return;
  }
- $("inquiryTitle").textContent=region+" · "+category.title;
- $("inquiryGuide").textContent=category.description+" · 기본 자료를 먼저 읽고 원문과 기준일을 확인하세요.";
- const basics=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];
+ $("inquiryTitle").textContent=crops?region+" · 농산물·특산물":region+" · "+category.title;
+ guide.hidden=crops;
+ guide.textContent=crops?"":"대표 정보를 확인하고 자료 출처를 살펴보세요.";
+ const available=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];
+ const basics=crops?available.filter(x=>x.title==="농산물과 특산물"):available;
  for(const [index,item] of basics.entries()){
   const card=document.createElement("article");card.className="inquiry-card";
-  const links=[{label:item.primaryLabel||"자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
+  const allLinks=[{label:item.primaryLabel||"자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
+  const primary=allLinks[0],other=allLinks.slice(1);
   const searchInputId="regional-google-"+activeMenu+"-"+index;
-  const searchBox=item.searchQuery?
-   '<details class="regional-google-search"><summary>🔎 구글 검색어 직접 바꾸기</summary>'+
+  const extraLinks=other.length?'<div class="inquiry-actions">'+other.map(link=>
+    '<a href="'+esc(url(link.href))+'" target="_blank" rel="noopener noreferrer">'+esc(link.label)+'</a>').join("")+'</div>':"";
+  const searchForm=item.searchQuery?
    '<form action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer">'+
    '<label for="'+esc(searchInputId)+'">검색어</label>'+
    '<div class="regional-search-line"><input id="'+esc(searchInputId)+'" name="q" type="search" maxlength="180" value="'+esc(item.searchQuery)+'" required>'+
-   '<button type="submit">구글 검색 ↗</button></div></form></details>':"";
+   '<button type="submit">검색 ↗</button></div></form>':"";
+  const extras=(extraLinks||searchForm)?
+   '<details class="regional-google-search"><summary>추가 자료·검색</summary>'+extraLinks+searchForm+'</details>':"";
+  const mainLink=primary?
+   '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong><p>'+esc(item.summary)+'</p>'+
-   '<div class="basic-card-source">자료: '+esc(item.source||"원문 확인 필요")+'</div>'+
-   (item.linkType==="search"?'<p class="regional-link-note">해당 정보의 직접 연결 페이지를 찾지 못했어요. 검색 결과에서 공식 출처를 확인하세요.</p>':"")+
-   '<div class="inquiry-actions">'+links.map(link=>'<a href="'+esc(url(link.href))+'" target="_blank" rel="noopener noreferrer">'+esc(link.label)+'</a>').join("")+'</div>'+searchBox;
+   '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
+   '<div class="basic-card-actions">'+mainLink+extras+'</div>';
   root.appendChild(card);
  }
- if(!basics.length)root.textContent="이 지역의 자료는 아직 준비 중입니다.";
+ if(!basics.length)root.textContent="준비된 자료가 없어요.";
 }
 function show(screen){
  for(const id of ["home","verify","result","board","shared"])$(id).hidden=id!==screen;
@@ -249,7 +254,6 @@ async function searchNewsInside({scroll=true}={}){
 function onKeywordInput(){
  clearLiveResults();
  renderBusinesses();
- renderTopics();
  const keyword=safe($("keyword").value,85);
  if(keyword.length<2)return;
  // Wait for a short typing pause to avoid unnecessary RSS requests while composing Korean.
@@ -282,13 +286,6 @@ function renderNews(){
  }
 }
 
-function businessNewsUrl(region,name){
- const q=region+" "+name+" when:90d";
- const target=new URL("https://news.google.com/search");
- target.searchParams.set("q",q);
- target.searchParams.set("hl","ko");target.searchParams.set("gl","KR");target.searchParams.set("ceid","KR:ko");
- return target.href;
-}
 function renderBusinesses(){
  const area=$("region").value;
  const keyword=safe($("keyword").value,150).toLowerCase();
@@ -322,25 +319,7 @@ function fromBusiness(id){
   topic:business.name,suggested:business.secondary?.url||"",
   kind:"business",inquiry:business.inquiry});
 }
-function renderTopics(){
- const area=$("region").value;
- const keyword=safe($("keyword").value).toLowerCase();
- const categories=activeMenu==="overview"?["인구·생활"]:activeMenu==="local"?["역사·문화","축제·행사","자연·관광"]:[];
- let chosen=facts.filter(x=>categories.includes(x.category)&&(area==="전체"||x.region===area)&&
-  (!keyword||[x.topic,x.region,x.hook,x.terms].join(" ").toLowerCase().includes(keyword)));
- if(area==="전체"&&!keyword)chosen=chosen.filter(x=>x.featured);
- chosen=chosen.slice(0,6);
- const root=$("topicList");root.replaceChildren();
- $("localSection").hidden=true; // 기사형 추천 목록 대신 분야별 기초정보 카드를 사용
- if(!chosen.length)return;
- $("topicHeading").textContent=activeMenu==="overview"?"인구 관련 대표 자료":"역사·문화 대표 자료";
- for(const item of chosen){
-  const button=document.createElement("button");button.type="button";button.className="topic";button.dataset.topic=item.id;
-  button.innerHTML=esc(item.icon)+" "+esc(item.region)+" · "+esc(item.topic);
-  root.appendChild(button);
- }
-}
-function refresh(){clearLiveResults();updateLinks();renderNews();renderBusinesses();renderInquiries();renderTopics();}
+function refresh(){clearLiveResults();updateLinks();renderNews();renderBusinesses();renderInquiries();}
 async function loadNews(){
  const root=$("newsList");
  root.innerHTML='<div class="news-empty">최근 지역 자료를 불러오고 있어요.</div>';
@@ -536,11 +515,6 @@ function chooseStory(story){
  show("verify");
  searchEvidence();
 }
-function fromTopic(id){
- const t=facts.find(x=>x.id===id);if(!t)return;
- const s=t.sources[0];
- chooseStory({title:"지역 탐구: "+t.topic,url:s.url,publisher:s.name,date:s.date||t.date,region:t.region,topic:t.topic,suggested:t.sources[1]?.url});
-}
 function fromNews(index){
  const row=state.news[index];if(!row)return;
  chooseStory({title:row.title,url:row.url,publisher:row.publisher,date:row.published,region:row.region,topic:row.title});
@@ -622,7 +596,6 @@ function init(){
   });
   renderBusinesses();
  }));
- $("topicList").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(b)fromTopic(b.dataset.topic);});
  $("businessList").addEventListener("click",e=>{
   const check=e.target.closest("[data-business]");if(check){fromBusiness(check.dataset.business);return;}
   const find=e.target.closest("[data-business-news]");if(!find)return;

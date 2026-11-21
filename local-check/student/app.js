@@ -60,6 +60,7 @@ function clearLiveResults(){
  if(liveController){liveController.abort();liveController=null;}
  state.liveNews=[];state.liveMode=null;
  $("liveResults").hidden=true;
+ $("newsSection").hidden=activeMenu!=="news";
  $("newsSearch").disabled=false;
  $("retryNews").hidden=true;
 }
@@ -114,6 +115,7 @@ async function searchNewsInside(){
  searchButton.disabled=true;
  searchButton.textContent="뉴스 찾는 중…";
  $("liveResults").hidden=false;
+ if(category==="news")$("newsSection").hidden=true;
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
  $("liveStatus").textContent="구글 뉴스 RSS에서 기사를 찾고 있어요.";

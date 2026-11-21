@@ -4,6 +4,7 @@ const $=id=>document.getElementById(id);
 const facts=Array.isArray(window.STUDENT_FACTS)?window.STUDENT_FACTS:[];
 const companies=[
  ...(Array.isArray(window.LOCALCHECK_BUSINESSES)?window.LOCALCHECK_BUSINESSES:[]).map(c=>({...c,group:"대표 기업"})),
+ ...(Array.isArray(window.LOCALCHECK_ADDITIONAL_BUSINESSES)?window.LOCALCHECK_ADDITIONAL_BUSINESSES:[]).map(c=>({...c,group:"대표 기업"})),
  ...(Array.isArray(window.LOCALCHECK_SMALL_BUSINESSES)?window.LOCALCHECK_SMALL_BUSINESSES:[])
 ];
 let businessExpanded=false;
@@ -294,18 +295,18 @@ function renderBusinesses(){
  const items=companies.filter(c=>(area==="전체"||c.region===area)&&
    (businessFilter==="all"||(businessFilter==="small"&&c.group!=="대표 기업")||(businessFilter==="featured"&&c.group==="대표 기업"))&&
    (!keyword||[c.region,c.name,c.produces,c.type,c.summary,c.group].join(" ").toLowerCase().includes(keyword)));
- const visible=businessExpanded?items:items.slice(0,4);
+ const visible=businessExpanded?items:items.slice(0,6);
  const list=$("businessList");list.replaceChildren();
  $("businessCount").textContent=items.length+"개 사업장·사례";
  const more=$("moreBusinesses");
- more.hidden=items.length<=4;
+ more.hidden=items.length<=6;
  more.textContent=businessExpanded?"접기 ↑":"기업 "+(items.length-visible.length)+"곳 더 보기 ↓";
  if(!visible.length){
   const empty=document.createElement("div");empty.className="news-empty";empty.textContent="이 조건에 맞는 기업 사례가 없어요. 지역이나 검색어를 바꿔 보세요.";list.appendChild(empty);return;
  }
  for(const c of visible){
   const card=document.createElement("article");card.className="business-card";
-  card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.region)+' · '+esc(c.type)+'</span></div>'+
+  card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.region)+' · '+esc(c.type)+' · '+esc(c.group||"지역 기업")+'</span></div>'+
    '<h3>'+esc(c.name)+'</h3><div class="business-product">'+esc(c.produces)+'</div>'+
    '<div class="business-buttons"><button type="button" data-business="'+esc(c.id)+'">자료 확인 →</button>'+
    

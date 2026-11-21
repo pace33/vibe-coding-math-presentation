@@ -106,12 +106,13 @@ function renderInquiries(){
   return;
  }
  $("inquiryTitle").textContent=crops?region+" · 농산물·특산물":region+" · "+category.title;
- guide.hidden=true;
- guide.textContent="";
+ guide.hidden=activeMenu!=="local";
+ guide.textContent=activeMenu==="local"?"지역 축제는 해마다 날짜와 프로그램이 달라요. 개최 여부는 공식 안내나 관련 뉴스로 확인하세요.":"";
  const available=REGIONAL_BASICS?.cards(region,activeMenu,companies,facts)||[];
  const basics=crops?available.filter(x=>x.title==="농산물과 특산물"):available;
  for(const [index,item] of basics.entries()){
   const card=document.createElement("article");card.className="inquiry-card";
+  if(item.event)card.classList.add("festival-card");
   const allLinks=[{label:item.primaryLabel||"자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
   const primary=allLinks[0],other=allLinks.slice(1);
   const searchInputId="regional-google-"+activeMenu+"-"+index;
@@ -126,10 +127,11 @@ function renderInquiries(){
    '<details class="regional-google-search"><summary>추가 자료·검색</summary>'+extraLinks+searchForm+'</details>':"";
   const mainLink=primary?
    '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
-  const newsTerm=regionalNewsTerm(item,activeMenu);
+  const newsTerm=item.newsTerm||regionalNewsTerm(item,activeMenu);
   const checkNews='<button class="regional-card-news" type="button" data-card-news="'+esc(newsTerm)+'">📰 이 정보 관련 뉴스 검증</button>';
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong>'+(item.summary?'<p>'+esc(item.summary)+'</p>':"")+
+   (item.note?'<span class="festival-note">'+esc(item.note)+'</span>':"")+
    '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
    '<div class="basic-card-actions">'+mainLink+checkNews+extras+'</div>';
   root.appendChild(card);

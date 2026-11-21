@@ -37,4 +37,14 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add local-check/student/latest.json local-check/student/search-index.json
           git commit -m "data: refresh unverified regional headline links"
-          git push
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Concurrent update on main; retry $n"
+            sleep 3
+          done
+          echo "Could not publish refreshed search data after three attempts" >&2
+          exit 1

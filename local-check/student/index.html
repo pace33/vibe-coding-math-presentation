@@ -36,11 +36,17 @@
       <div class="field"><label for="keyword">🔎 무엇이 궁금한가요?</label><input id="keyword" type="search" placeholder="관심 있는 주제 검색"></div>
     </div>
     <div class="search-buttons">
-      <a id="newsSearch" class="btn btn-primary" href="https://news.google.com/" target="_blank" rel="noopener noreferrer">📰 지금 새 뉴스 검색하기 <span>↗</span></a>
+      <button id="newsSearch" class="btn btn-primary" type="button">🔎 새 뉴스 검색하기</button>
       <a id="officialSearch" class="btn btn-light" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">🏛️ 시·군청 공지 찾기 <span>↗</span></a>
     </div>
-    <p class="note">두 버튼은 <b>검색 결과를 새 창으로 열어요.</b> 앱에서 바로 검증하려면 아래에 수집된 뉴스를 선택하세요.</p>
+    <p class="note">뉴스 검색 결과는 <b>이 화면 안</b>에 나타나요. 기사 제목·언론사·날짜와 원문 링크를 확인한 뒤 사실 검증을 시작하세요.</p>
   </div>
+  <section id="liveResults" class="live-results" aria-labelledby="liveHeading" hidden>
+    <div class="section-title"><div><span class="eyebrow">구글 뉴스 RSS 검색</span><h2 id="liveHeading">🔎 새 뉴스 검색 결과</h2><p id="liveExplanation">검색된 뉴스의 원문을 읽고 탐구해 보세요.</p></div><span id="liveCount" class="timestamp">검색 준비</span></div>
+    <p id="liveStatus" class="live-status" role="status" aria-live="polite"></p>
+    <div id="liveNewsList" class="news-list" aria-live="polite"></div>
+    <div class="live-actions"><button type="button" id="retryNews" class="btn btn-light" hidden>다시 검색하기</button><a id="googleNewsFallback" href="https://news.google.com/" target="_blank" rel="noopener noreferrer" class="btn btn-light">구글 뉴스에서도 보기 ↗</a></div>
+  </section>
   <section id="newsSection" aria-label="최근 지역 뉴스">
   <div class="section-title"><div><span class="eyebrow">최근 자료</span><h2>최근에 모아둔 우리 고장 소식</h2><p>기사를 골라 사실을 확인해 보세요. 자료는 실시간으로 보장되지 않아요.</p></div><span id="updatedAt" class="timestamp">자료 확인 중</span></div>
   <div id="newsList" class="news-list" aria-live="polite"></div>

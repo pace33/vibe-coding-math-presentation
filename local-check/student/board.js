@@ -67,8 +67,8 @@ function detailReport(data,target){
  const rows=[
   ["우리 고장",data.region],
   ["뉴스 제목",data.title],
-  ["뉴스에서 찾은 사실",data.newsFact],
-  ["다른 자료에서 찾은 사실",data.govFact||"아직 확인하지 못했어요"],
+  ["검증할 뉴스·자료",data.newsFact],
+  ["비교자료 제목·내용",data.govFact||"아직 확인하지 못했어요"],
   ["내가 내린 판단",data.verdict],
   ["판단 이유",data.reason]
  ];

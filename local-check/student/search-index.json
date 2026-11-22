@@ -1,10 +1,20 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-22",
   "requestsSucceeded": 44,
   "source": "Google 뉴스 RSS 정기 저장 자료(실시간 아님)",
   "note": "기사는 자동 검증되지 않았습니다.",
   "items": [
+    {
+      "region": "제천시",
+      "title": "충북 공공기관 유치전 ‘각자도생’…오송·제천 유치전 속 ‘교통정리’ 과제",
+      "publisher": "아시아투데이",
+      "published": "2026-11-22",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5RTXFRWnR5dkZwaFI1RHNscG9DcDlkenh0Mk1JT2N4ZUkyenU3OV9YVGdvc2RLb1ZlaE5vSWl1UkpNcHduemV3RFRPbUI4eEtGRnpva21ZRlNOY0xxN3duNmtQSm92cmlYWUp0Ni13?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
     {
       "region": "충주시",
       "title": "충북도, ‘충주제1산업단지 에너지 자급자족 인프라 구축사업’ 선정",
@@ -57,16 +67,6 @@
     },
     {
       "region": "충주시",
-      "title": "'제18회 대한민국 고미술축제' 20일 충북 충주서 개막",
-      "publisher": "경남미디어",
-      "published": "2026-11-20",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBGd1dlRllhRlBNMWQ3LUNJOEtjbWVuSVlkZXN6WGpxZ0pNNmpKMFEzRmlqLWdsa1liSUV2d0ZNV2E0TFFwZlZlNkVDaTRRQjJZWkI0WUp0TUE2R0xtRjdnZzNQd05razl4aFQ0?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
-      "region": "충주시",
       "title": "이동석 충주시장, 청년기업 '곱창파는 청년들' 찾아 현장 소통",
       "publisher": "굿모닝충청",
       "published": "2026-11-20",
@@ -84,16 +84,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
-    },
-    {
-      "region": "제천시",
-      "title": "영주 반띵 관광택시, 제천서 운영 노하우 배웠다",
-      "publisher": "경북뉴스",
-      "published": "2026-11-20",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE90VWM2Q2VHUWN3a1lBUTZESnYwcWI1TzVWUXg2ZVBqUkJuUy02cGJfNnpRaUFxVENpTmRKUXRiXzFOMW0yTDZySlg1TFBTWkhfS0pJb3pLZTRlT0U?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
     },
     {
       "region": "증평군",
@@ -140,10 +130,30 @@
       "title": "NH투자증권, 충북 괴산군 학생에 장학금 1500만원 전달",
       "publisher": "메가경제",
       "published": "2026-11-20",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9OdV92VUZTT3JGNWtDM2tKbklWZEV6SllDbDZTREpWUjFvUFJoM1hoeTJiNV8tY2gwZVI5eVljdXlsM0dXdzFKVDdVN1NkQ1hvUDloVVgxeGlOSHdwNmJsUkFSMXVYMzZnWFFfLXlmdDdqUmJm0gFyQVVfeXFMUFY0Mk1wVGFHWjJYQlE2OUhWeGlKMzJIQmhZMDZpSVg4Mm5oOTdJRGpsS0tEejN4YmVFRGtpcVBYM19fZGxOUFM3akNYMXpHN3JDd3B1U1lQdENwSEdxSmx2QjhPc21Od1N6TnRPa0ZPUmp3?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBWNDJNcFRhR1oyWEJRNjlIVnhpSjMySEJoWTA2aUlYODJuaDk3SURqbEtLRHozeGJlRURraXFQWDNfX2RsTlBTN2pDWDF6RzdyQ3dwdVNZUHRDcEhHcUpsdkI4T3NtTndTek50T2tGT1Jqd9IBckFVX3lxTFBWNDJNcFRhR1oyWEJRNjlIVnhpSjMySEJoWTA2aUlYODJuaDk3SURqbEtLRHozeGJlRURraXFQWDNfX2RsTlBTN2pDWDF6RzdyQ3dwdVNZUHRDcEhHcUpsdkI4T3NtTndTek50T2tGT1Jqdw?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
+    },
+    {
+      "region": "충주시",
+      "title": "'제18회 대한민국 고미술축제' 20일 충북 충주서 개막",
+      "publisher": "경남미디어",
+      "published": "2026-11-20",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBGd1dlRllhRlBNMWQ3LUNJOEtjbWVuSVlkZXN6WGpxZ0pNNmpKMFEzRmlqLWdsa1liSUV2d0ZNV2E0TFFwZlZlNkVDaTRRQjJZWkI0WUp0TUE2R0xtRjdnZzNQd05razl4aFQ0?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
+      "region": "제천시",
+      "title": "영주 반띵 관광택시, 제천서 운영 노하우 배웠다",
+      "publisher": "경북뉴스",
+      "published": "2026-11-20",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE90VWM2Q2VHUWN3a1lBUTZESnYwcWI1TzVWUXg2ZVBqUkJuUy02cGJfNnpRaUFxVENpTmRKUXRiXzFOMW0yTDZySlg1TFBTWkhfS0pJb3pLZTRlT0U?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "제천시",
@@ -176,16 +186,6 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "제천시",
-      "title": "제천농촌재생대학 6기, 주민 주도 마을 공간 조성",
-      "publisher": "서울일보",
-      "published": "2026-11-19",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9zQmNVNVdhZTZ2Z1czbFZlSnRld2Z4aFRDakd5WC1LdkhlZk9aNE9sSG95ejd5TVVtNFdiNDNqVjZrazNUUTFyaXI4U21ZTFpUUmROYUZMbzJuaDFZM2dlNzc0OW9xUmJxU2tFb9IBb0FVX3lxTE9fRUszZXpWZkxUcjdZZW5NbnRTRXJCcUZZUERhVVJLQXpyeFFFdzJUQ3FKUldwMnNidjN1eGtWNTFaeE5QbEVuVGloSXdLc281U21RYUYtQVYwQmFyQlBTOG5qV2kteDlsT1B6Wno1bw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
       "region": "보은군",
       "title": "신용한 충북지사, 보은찾아 군민의 목소리에 귀 기울여",
       "publisher": "보은신문",
@@ -194,6 +194,36 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "기업산업"
+    },
+    {
+      "region": "보은군",
+      "title": "신용한 충북지사, 보은서 ‘스마트농업 대전환’ 강조…군민 200명과 미래농업 논의",
+      "publisher": "필드뉴스",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE02Q2RsUkRXZFdfc0dVaHdVSW00UmVPRE5MRUhZZ3liNGJncW5oSHVtaXNsMXVxUUUyTlhqTDdrd0VISEZRT0hXNFczSlFTWHYyOGRPUVYySWpUa0RlRFFVSjhxVTA5dy1kYklvdtIBbEFVX3lxTE02Q2RsUkRXZFdfc0dVaHdVSW00UmVPRE5MRUhZZ3liNGJncW5oSHVtaXNsMXVxUUUyTlhqTDdrd0VISEZRT0hXNFczSlFTWHYyOGRPUVYySWpUa0RlRFFVSjhxVTA5dy1kYklvdg?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "보은군",
+      "title": "[종합]신용한 지사, 보은 현안에 어떤 답 내놨나",
+      "publisher": "K-Life TV",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5jV1g5RHlYZHJOVWRsLUw2R3J4MzZHX29SQ015OHNYbFFjYlRCLVhsdEJCOHd3OFMwTUluVnRWdFR0aGtnMmhPOVg2Zkk0eEUtRW9MUEdFdFlpU1hyZlBFVTgySnUxQk9VSlVoSA?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "증평군",
+      "title": "[FN Focus] 이재영 증평군수 “군민 중심 새로운 미래 증평…작지만 강한 자족도시”",
+      "publisher": "파이낸스뉴스 I 파이낸스뉴스TV",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5uSUdkZHhneHM0Q01CVF9oOTZpWmpmSXp5Q09WR1dtaWdwMGdwNnVCRXlEdXk1aTNuSzZ3VDdYaV9SX1RISUNkamh5UlRLRUtHYVRYOV9sUXdnN25qT293NFJNLXJtM0tBR095MVd30gFuQVVfeXFMTm5JR2RkeGd4czRDTUJUX2g5NmlaamZJenlDT1ZHV21pZ3AwZ3A2dUJFeUR1eTVpM25LNndUN1hpX1JfVEhJQ2RqaHlSVEtFS0dhVFg5X2xRd2c3bmpPb3c0Uk0tcm0zS0FHT3kxV3c?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
     },
     {
       "region": "진천군",
@@ -236,6 +266,16 @@
       "topicGroup": "지역생활"
     },
     {
+      "region": "진천군",
+      "title": "생거진천 혁신대학, 박영선 전 중소벤처기업부 장관 초청 강연",
+      "publisher": "타임뉴스",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9OX1dhWXYwWllDR2lmazlwU004YnM0ZURUa2Z1UWJMM0NVbVBsVEoxMUpfZ3N6VFJ3VlVxZzNpeHIzS3JBX3RqRndXcnh3WUtUNHQ1MQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
       "region": "괴산군",
       "title": "괴산군기업경영인협의회, 고향사랑기부금 1500만 원 기탁",
       "publisher": "국제뉴스",
@@ -244,6 +284,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "기업산업"
+    },
+    {
+      "region": "제천시",
+      "title": "제천농촌재생대학 6기, 주민 주도 마을 공간 조성",
+      "publisher": "서울일보",
+      "published": "2026-11-19",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9zQmNVNVdhZTZ2Z1czbFZlSnRld2Z4aFRDakd5WC1LdkhlZk9aNE9sSG95ejd5TVVtNFdiNDNqVjZrazNUUTFyaXI4U21ZTFpUUmROYUZMbzJuaDFZM2dlNzc0OW9xUmJxU2tFb9IBb0FVX3lxTE9fRUszZXpWZkxUcjdZZW5NbnRTRXJCcUZZUERhVVJLQXpyeFFFdzJUQ3FKUldwMnNidjN1eGtWNTFaeE5QbEVuVGloSXdLc281U21RYUYtQVYwQmFyQlBTOG5qV2kteDlsT1B6Wno1bw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
     },
     {
       "region": "괴산군",
@@ -346,11 +396,21 @@
       "topicGroup": "기업산업"
     },
     {
-      "region": "보은군",
-      "title": "신용한 지사 “보은농업의 미래, 위기 넘어 도약으로”",
-      "publisher": "굿모닝충청",
+      "region": "제천시",
+      "title": "영주 관광택시 기사들, 이번엔 관광객 돼 제천 찾았다",
+      "publisher": "영주시민신문",
       "published": "2026-11-18",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5xakt6Y0JsUlgtalhSNmN3bXo3cHdKamtkdE4yRlBOWklET09QNFo0bWU4RkNtNERfMkN2a2JzeS1jc2ZuX3JwaG1udmxUYlBZWG1GQmU1d0FCOWdLdlZ1bFN6WnNEVU5neDcyNW1FcGtCdw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBrTmNnWXdqdGJvdHJZYTFNendGNVgwRDFRWWxQNDU0U0p2MXp2SklyQWFva2s5VDlIdk1CVkFPbUc0aEhRN1NORGs3UmczNGFRa3dFWDl6dHYzV1ZPcGI5R000NWZyUzUy?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "보은군",
+      "title": "신용한 충북지사 \"보은 반려동물 테마파크·내륙철도 추진 속도\"",
+      "publisher": "뉴시스",
+      "published": "2026-11-18",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1MU1Vjay0tVFZ2aWJucWUwN3IxeDdYNld0T0p0anUxeDlTbGVaWTdzT2tfeWtkUUFCbkgySldVU2Z5VnlhVHlBc3llSDNqc1N1cVl3cHBTSm1xaVg1aXdRbFo0bVRzV1RpUEJXVXpwckdLRmRhLXhLMtIBeEFVX3lxTE1MU1Vjay0tVFZ2aWJucWUwN3IxeDdYNld0T0p0anUxeDlTbGVaWTdzT2tfeWtkUUFCbkgySldVU2Z5VnlhVHlBc3llSDNqc1N1cVl3cHBTSm1xaVg1aXdRbFo0bVRzV1RpUEJXVXpwckdLRmRhLXhLMg?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
@@ -366,36 +426,6 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "보은군",
-      "title": "보은군, 신용한 충북지사와 타운홀 미팅…농업 발전·지역 현안 논의",
-      "publisher": "충청일보",
-      "published": "2026-11-18",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1uNlBORDQyMk85RzdFblhoZlJ4cmNjUjhpZHBGVFVIMF9xc0Z3bDNIQm5OaEFKNjdMMmhSUnppbUpkeTdwNTNjazB1SEZqRkUtYmxmU0RkLXBwdzhwamtHUVJkaVVjdVpVUy1BUzJnM08?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "보은군",
-      "title": "신용한 충북지사, 보은서 ‘스마트농업 대전환’ 강조…군민 200명과 미래농업 논의",
-      "publisher": "필드뉴스",
-      "published": "2026-11-18",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5ndGhRWElpbFdOYmpxTTdad21qNjhuNlZzdlloRXVVT3Awb09jTkVONW84Q0VxS2dXX2ZPWE1JZ2xibDlJc1hmc2NRLUZFTGRNZ0FOa2xzZVhsdzcxS3RvNHBkUGltQnlfYXfSAWxBVV95cUxNNkNkbFJEV2RXX3NHVWh3VUltNFJlT0ROTEVIWWd5YjRiZ3FuaEh1bWlzbDF1cVFFMk5Yakw3a3dFSEhGUU9IVzRXM0pRU1h2MjhkT1FWMklqVGtEZURRVUo4cVUwOXctZGJJb3Y?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "보은군",
-      "title": "보은군, 농업 발전·지역 현안 논의",
-      "publisher": "충청도민일보",
-      "published": "2026-11-18",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5zVmp4M2JQTDR6Ty1VT09HMFBmdnNCZnc5NXo0OXpzQzBLU0I1aTlkSGNqbWRJSVhDN0Izc1pOM1ZyMEhWWDM1bEZFaG44NzNEQjl6Z0lQUk05QzVET05pT3hscldLUG9QX1NmWA?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
       "region": "옥천군",
       "title": "옥천군, 공공일자리 참여자 산업안전교육 실시",
       "publisher": "충청일보",
@@ -406,24 +436,14 @@
       "topicGroup": "기업산업"
     },
     {
-      "region": "옥천군",
-      "title": "[옥천소식]노인복지관, 우리동네나눔밥상 51호점 운영 등",
-      "publisher": "뉴시스",
+      "region": "증평군",
+      "title": "[포토] 증평군, 시니어 대상 충북영상자서전 성과공유회 개최",
+      "publisher": "뉴시니어",
       "published": "2026-11-18",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE15TExHWUZWRzZHZjI4RXUtNS1SbWQtenN1cUFCNUZBamU5MTNodlBVRlp5UW5NemZvaGp2Qm9zS2pHOHVaVzBMdmkybUhMaDg0VHdTM1p6RUJpWGVnUC0zVjlPdHpjTTNWU0xvX01FY2U5SXV1b1R2X9IBeEFVX3lxTE15TExHWUZWRzZHZjI4RXUtNS1SbWQtenN1cUFCNUZBamU5MTNodlBVRlp5UW5NemZvaGp2Qm9zS2pHOHVaVzBMdmkybUhMaDg0VHdTM1p6RUJpWGVnUC0zVjlPdHpjTTNWU0xvX01FY2U5SXV1b1R2Xw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9Ic2l5ZEEzWTNMd0dkVVg5NzR1SGVQS3ExYWtvM05YZWZxNzlJTnBBTjh6ZFd0Rm13MUFhR2FGa0JKOFFRU2lKMnh5dHR3Zk8zeFBXWUl4VGhpVTZvenpWMl9XVQ?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "진천군",
-      "title": "진천군 농업인 2명, 충북 우수농업인 시상식서 수상",
-      "publisher": "일간대한뉴스",
-      "published": "2026-11-18",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE04QXBYbU5vMG1CRmdib2lYVDBHRDRmMkxveEpsSjBMZDQyWXM5eTJMQjR0ZjlMTmpJdDdwd0twa1NNSHhncURzNUVhMG9yQXZHa1o4SVJzV04zOEEyVUhzNzU3ajR1TFE?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
+      "topicGroup": "기업산업"
     },
     {
       "region": "괴산군",
@@ -474,6 +494,56 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
+    },
+    {
+      "region": "보은군",
+      "title": "신용한 지사 “보은농업의 미래, 위기 넘어 도약으로”",
+      "publisher": "굿모닝충청",
+      "published": "2026-11-18",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5xakt6Y0JsUlgtalhSNmN3bXo3cHdKamtkdE4yRlBOWklET09QNFo0bWU4RkNtNERfMkN2a2JzeS1jc2ZuX3JwaG1udmxUYlBZWG1GQmU1d0FCOWdLdlZ1bFN6WnNEVU5neDcyNW1FcGtCdw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "보은군",
+      "title": "보은군, 신용한 충북지사와 타운홀 미팅…농업 발전·지역 현안 논의",
+      "publisher": "충청일보",
+      "published": "2026-11-18",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1uNlBORDQyMk85RzdFblhoZlJ4cmNjUjhpZHBGVFVIMF9xc0Z3bDNIQm5OaEFKNjdMMmhSUnppbUpkeTdwNTNjazB1SEZqRkUtYmxmU0RkLXBwdzhwamtHUVJkaVVjdVpVUy1BUzJnM08?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "보은군",
+      "title": "보은군, 농업 발전·지역 현안 논의",
+      "publisher": "충청도민일보",
+      "published": "2026-11-18",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5zVmp4M2JQTDR6Ty1VT09HMFBmdnNCZnc5NXo0OXpzQzBLU0I1aTlkSGNqbWRJSVhDN0Izc1pOM1ZyMEhWWDM1bEZFaG44NzNEQjl6Z0lQUk05QzVET05pT3hscldLUG9QX1NmWA?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "옥천군",
+      "title": "[옥천소식]노인복지관, 우리동네나눔밥상 51호점 운영 등",
+      "publisher": "뉴시스",
+      "published": "2026-11-18",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE15TExHWUZWRzZHZjI4RXUtNS1SbWQtenN1cUFCNUZBamU5MTNodlBVRlp5UW5NemZvaGp2Qm9zS2pHOHVaVzBMdmkybUhMaDg0VHdTM1p6RUJpWGVnUC0zVjlPdHpjTTNWU0xvX01FY2U5SXV1b1R2X9IBeEFVX3lxTE15TExHWUZWRzZHZjI4RXUtNS1SbWQtenN1cUFCNUZBamU5MTNodlBVRlp5UW5NemZvaGp2Qm9zS2pHOHVaVzBMdmkybUhMaDg0VHdTM1p6RUJpWGVnUC0zVjlPdHpjTTNWU0xvX01FY2U5SXV1b1R2Xw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "진천군",
+      "title": "진천군 농업인 2명, 충북 우수농업인 시상식서 수상",
+      "publisher": "일간대한뉴스",
+      "published": "2026-11-18",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE04QXBYbU5vMG1CRmdib2lYVDBHRDRmMkxveEpsSjBMZDQyWXM5eTJMQjR0ZjlMTmpJdDdwd0twa1NNSHhncURzNUVhMG9yQXZHa1o4SVJzV04zOEEyVUhzNzU3ajR1TFE?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
     },
     {
       "region": "청주시",
@@ -606,16 +676,6 @@
       "topicGroup": "기업산업"
     },
     {
-      "region": "진천군",
-      "title": "진천군, 첨단산단·RE100산단 조성…미래 산업 경쟁력 강화",
-      "publisher": "국제뉴스",
-      "published": "2026-11-17",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBfUElHMkNUZFZINFpQUUxVVUs5clBCSXRnYVVITG1mQ1VYRDM3REhFYmJ3UUFrOTVHTFQ5SzBBbmJlUXF4QW1QcVpneS13VlhLWjdEU3lIZzVJQ3dHU0tYRmVkX3dNa1J5U3MyZzhB?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
-    },
-    {
       "region": "음성군",
       "title": "충북 음성군, 2026년 블로그 공모전 ‘음·성’ 개최",
       "publisher": "청주일보",
@@ -644,6 +704,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
+    },
+    {
+      "region": "진천군",
+      "title": "진천군, 첨단산단·RE100산단 조성…미래 산업 경쟁력 강화",
+      "publisher": "국제뉴스",
+      "published": "2026-11-17",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBfUElHMkNUZFZINFpQUUxVVUs5clBCSXRnYVVITG1mQ1VYRDM3REhFYmJ3UUFrOTVHTFQ5SzBBbmJlUXF4QW1QcVpneS13VlhLWjdEU3lIZzVJQ3dHU0tYRmVkX3dNa1J5U3MyZzhB?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
     },
     {
       "region": "충주시",
@@ -694,6 +764,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "기업산업"
+    },
+    {
+      "region": "청주시",
+      "title": "‘환승 없는 충북 여행’ 열린다…청주공항~단양 직통 연결",
+      "publisher": "공뉴스",
+      "published": "2026-11-16",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBvR2xocFQtRS1rQS0wVHRlMGdsOFlCUm9sb2FZODVFdjQtZXRrSERjX0Z4Z1NiajYyOC1QNF9CaXVQby1uU0M4dEtpT2F0V3N0YVcxSzM2VEZDOEY4NWpKeWVWUWRadjRYTHNVaw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "충주시",
@@ -767,6 +847,16 @@
     },
     {
       "region": "진천군",
+      "title": "진천 농업에도 '월급날' 온다…농업인 소득안정 시동",
+      "publisher": "굿모닝충청",
+      "published": "2026-11-16",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1yNmhfOFJxenN0ZXAyeldJNFU0SFRWNXU4WXY5d0VFZmkxQ0VpVHVENE1kQXBOaHB4UDlOcVlsRXJOc3hSdEZiaVV2R1dpa0FBZFVZVS0xMFVhdWFKWmo2aXV0bWEyaS1CbGtlNVA0NUcxQQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "진천군",
       "title": "충북 진천군, ‘진천형 농업인 월급제’ 도입 추진",
       "publisher": "경향신문",
       "published": "2026-11-16",
@@ -774,16 +864,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
-    },
-    {
-      "region": "음성군",
-      "title": "[충북] 음성군지회, 어려운 이웃돕기 성금 기탁",
-      "publisher": "한국부동산뉴스",
-      "published": "2026-11-16",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE45enYycGNSTlBBMDJILW1scXVrMjBxdlBQZUxUSFpfendpMzQ2S29VUTVMQzBDS1R4ZmZDMVNHejhkaGVud3NsdXRkdXM3U1hEbC1IVk9PeEVXczNPMjJ4a1hyQmR4RndSWW5j?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
     },
     {
       "region": "음성군",
@@ -816,14 +896,14 @@
       "topicGroup": "관광환경"
     },
     {
-      "region": "청주시",
-      "title": "‘환승 없는 충북 여행’ 열린다…청주공항~단양 직통 연결",
-      "publisher": "공뉴스",
+      "region": "음성군",
+      "title": "[충북] 음성군지회, 어려운 이웃돕기 성금 기탁",
+      "publisher": "한국부동산뉴스",
       "published": "2026-11-16",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBvR2xocFQtRS1rQS0wVHRlMGdsOFlCUm9sb2FZODVFdjQtZXRrSERjX0Z4Z1NiajYyOC1QNF9CaXVQby1uU0M4dEtpT2F0V3N0YVcxSzM2VEZDOEY4NWpKeWVWUWRadjRYTHNVaw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE45enYycGNSTlBBMDJILW1scXVrMjBxdlBQZUxUSFpfendpMzQ2S29VUTVMQzBDS1R4ZmZDMVNHejhkaGVud3NsdXRkdXM3U1hEbC1IVk9PeEVXczNPMjJ4a1hyQmR4RndSWW5j?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "지역생활"
     },
     {
       "region": "청주시",
@@ -834,16 +914,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
-    },
-    {
-      "region": "청주시",
-      "title": "충북 청주시, 역사문화 스탬프투어 운영… 참가자 100명 모집",
-      "publisher": "청주일보",
-      "published": "2026-11-15",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rbzV6ODBjay1xbHB4ZFdjTENvd3hYNmNLN0RNa21YS3lMRURQdXIyN1lHZjhXNmNockMxXzlxbXZyamZNS2RoUTBWZXdXV3VYVG9QeDFHbi1OOHhKQU9QSnI1RlJMM2trWGZZ?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
     },
     {
       "region": "보은군",
@@ -874,6 +944,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
+    },
+    {
+      "region": "청주시",
+      "title": "충북 청주시, 역사문화 스탬프투어 운영… 참가자 100명 모집",
+      "publisher": "청주일보",
+      "published": "2026-11-15",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rbzV6ODBjay1xbHB4ZFdjTENvd3hYNmNLN0RNa21YS3lMRURQdXIyN1lHZjhXNmNockMxXzlxbXZyamZNS2RoUTBWZXdXV3VYVG9QeDFHbi1OOHhKQU9QSnI1RlJMM2trWGZZ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "단양군",
@@ -1097,6 +1177,16 @@
     },
     {
       "region": "옥천군",
+      "title": "신용한 충북지사 \"옥천 미래성장 산업단지로 지역소멸 돌파\"",
+      "publisher": "뉴스핌",
+      "published": "2026-11-12",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5hakJ5cFowY19CQkRUUHR2R0Q3LXVmdUUtWG5nVGpfOFF0OTYyeV9feWFOSkNsd1JqN2x4c2JzYTVVM19fOHhqS2xDOWJwdzBjdzk3cGFMN2FuVUh5?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
+      "region": "옥천군",
       "title": "신용한 충북지사, 옥천 미래산단으로 지역소멸 위기 돌파…일자리·정주여건 개선 강조",
       "publisher": "필드뉴스",
       "published": "2026-11-12",
@@ -1111,16 +1201,6 @@
       "publisher": "뉴시니어",
       "published": "2026-11-12",
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1Gb0drekw0d2VhdHQ3U095QnN6Y0Z5c3lfZUZjT0RtV203RnVrQ2NqdTh0R29QdzVKdmQxQi0yZkxNdzhycUx5OW4ySmxaUEdlQlVKZ3BrcmZwYXJpdktmWWtYWQ?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
-    },
-    {
-      "region": "옥천군",
-      "title": "신용한 충북지사 \"옥천 미래성장 산업단지로 지역소멸 돌파\"",
-      "publisher": "뉴스핌",
-      "published": "2026-11-12",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5hakJ5cFowY19CQkRUUHR2R0Q3LXVmdUUtWG5nVGpfOFF0OTYyeV9feWFOSkNsd1JqN2x4c2JzYTVVM19fOHhqS2xDOWJwdzBjdzk3cGFMN2FuVUh5?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "기업산업"
@@ -1163,7 +1243,7 @@
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1ES1o5ZXpRTlNOS2VVWDlzSGpGbmhrSUtDck1nVmw4ZWVPcVBOUjJQRkExbEQ0QmRfZFVuU0dhbTNmcjZnQlpjeVBZaDJacjB1OGhOam1JdVJIU3PSAWBBVV95cUxQT0d3OURlTHAzZkpnYWZBSUdaVWNPRmpWaUdUYkNJeTBIMExac182aE1sd3N4bUhSc3hqbVItQ0NDeGIyd0JoNTVnTEZCSkdyU0czSGdLTFZrU0pfaUtld2E?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "지역생활"
     },
     {
       "region": "영동군",
@@ -1176,14 +1256,14 @@
       "topicGroup": "관광환경"
     },
     {
-      "region": "영동군",
-      "title": "영동군, “숙박도 하고, 힐링도 즐기고!” 영동일라이트 휴양빌리지, 이용객 대상 관광시설 이용권 제공 외 (11월12일 종합)",
+      "region": "증평군",
+      "title": "증평군, 국회서 ‘증평형 AI 콤팩트 도시’ 제시... 지방도시의 새 길 모색 외 (11월12일 종합)",
       "publisher": "충북데일리",
       "published": "2026-11-12",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBOWW5DYUhTX0dyU1BCSVBrZFhNOXFxN3hvOHBjR0o0NXJZYkdEYkFaWkc2M1VFaGZSSEVDcHlORXE4SHBQQWVYWGRjOXlWTVZSdmlMMGdldG5xWUZfNENtenBn?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFB6ZW82QXFUVTlBQVpVbTk2TDBlYjJFQmpUdFcyeEZoT1p6X2VvVkNpcHQ2RngyOXRoa1VHMldWQ2d5Nk00WWJkQmNjSkJKWUNpQkNyQjZRdDRpZTcwVHZyUnFB?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "특화산업"
     },
     {
       "region": "증평군",
@@ -1191,16 +1271,6 @@
       "publisher": "국제뉴스",
       "published": "2026-11-12",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1WNktsQjNxdmVXWlFZTnZhaW9ZQU1OdDctM0lHT3BuTUpjWnA0MWlhZ1VtRzNEWVRQSWtxQ1pvS0hkbG9nWGFoWUc1WjNoc1hUQ2ZZMjdVOUQ2Nm83ZnJMN2FIVGpfYTZFNjJsM1F3?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "증평군",
-      "title": "증평군, 국회서 ‘증평형 AI 콤팩트 도시’ 제시... 지방도시의 새 길 모색 외 (11월12일 종합)",
-      "publisher": "충북데일리",
-      "published": "2026-11-12",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFB6ZW82QXFUVTlBQVpVbTk2TDBlYjJFQmpUdFcyeEZoT1p6X2VvVkNpcHQ2RngyOXRoa1VHMldWQ2d5Nk00WWJkQmNjSkJKWUNpQkNyQjZRdDRpZTcwVHZyUnFB?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
@@ -1223,7 +1293,7 @@
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9sZFhENk0zcXpDeVJWdVVmN1BObFZvbGhpVF9rMDctX1RkcFlNV2hXazk1VXM4Q285MGdlMzJHd2RVd1YxSU9mZ25IbGtPcDdZRE5ZaloyOG5YSFFGV0ZhdVJEUTVNdy1qX1hEdEwtUG5aQQ?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "기업산업"
     },
     {
       "region": "괴산군",
@@ -1266,24 +1336,24 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "청주시",
-      "title": "청주 발산공원",
-      "publisher": "고향사랑기부제 위기브",
-      "published": "2026-11-11",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1POU5YeEhzMTBydkRDdWJPUTJKd2FqT3k4N3RsSWJmSjNKemhFREJxQ0tYelZTck9reDVOUVVrWGtwb0tzc2l4MkdzZXd4Y21hWENqd1FzTHMwd2thcF9hRWFXcU8?oc=5",
+      "region": "영동군",
+      "title": "영동군, “숙박도 하고, 힐링도 즐기고!” 영동일라이트 휴양빌리지, 이용객 대상 관광시설 이용권 제공 외 (11월12일 종합)",
+      "publisher": "충북데일리",
+      "published": "2026-11-12",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBOWW5DYUhTX0dyU1BCSVBrZFhNOXFxN3hvOHBjR0o0NXJZYkdEYkFaWkc2M1VFaGZSSEVDcHlORXE4SHBQQWVYWGRjOXlWTVZSdmlMMGdldG5xWUZfNENtenBn?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
     },
     {
       "region": "충주시",
-      "title": "충주시, 수변 규제 완화…체류형 관광 기반 넓힌다",
-      "publisher": "경충일보",
+      "title": "충주·음성, 농업인의 날 화합 잔치",
+      "publisher": "충청매일",
       "published": "2026-11-11",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE01ajlKYnNkTUhRQWN1UVJnSC1IZ0FqZF82U3R1WEZXYlI5UEVvaTh6U014ZXFXeVJ6X2xuSmprbmM4b0M1YkVUdmU0VTBaaWJRdUtOdEtmYjQ?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1iMnF6aWpuVDB3QkQxUnZHWms0Z0VKVjZYcTFMNDlFRnZNMW9tMW96QVRwY1d0SDlfWm9TbFNydzRkMXdIUTd6Zm9GTF9pS3hMdVNsWTN6aXRjSjBLS2ozdUhuZU1HLThQa2c?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "특화산업"
     },
     {
       "region": "보은군",
@@ -1296,14 +1366,14 @@
       "topicGroup": "기업산업"
     },
     {
-      "region": "증평군",
-      "title": "증평군, 제26회 농업인의 날 기념행사… 농업인 500여 명 화합",
-      "publisher": "충청매일",
+      "region": "옥천군",
+      "title": "충북 옥천군 옥천읍, “미래세대와 함께하는 금구천 생태학습 체험” 업무 협약 체결",
+      "publisher": "청주일보",
       "published": "2026-11-11",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9lYWZiTGxyOGJEWk9ubDVVamFwSmc5ZVRESC1mNnRoWDNyWXNHQ1NHSklrWUFfTkxxVnNRZUhwd09hNDNUTHhpdUtCUkMxSkl1SThyU05YbDRib3RSUVZKX2JYM01ieDRCRXc?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9LeGp0dXJJMWF6S05mSzBwRHpPbEo2QW9kTFZVY1RMSjRpZlA4V3N6c1ZSVm5lTGpBU3dHdnpDaUtKVWRmbGxZbFpkMFZuR3M4QTNjZjNjLS1uRnRESkF1ek5EUVg3WEdLYlBn?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
+      "topicGroup": "관광환경"
     },
     {
       "region": "증평군",
@@ -1386,6 +1456,36 @@
       "topicGroup": "특화산업"
     },
     {
+      "region": "청주시",
+      "title": "청주 발산공원",
+      "publisher": "고향사랑기부제 위기브",
+      "published": "2026-11-11",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1POU5YeEhzMTBydkRDdWJPUTJKd2FqT3k4N3RsSWJmSjNKemhFREJxQ0tYelZTck9reDVOUVVrWGtwb0tzc2l4MkdzZXd4Y21hWENqd1FzTHMwd2thcF9hRWFXcU8?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "충주시",
+      "title": "충주시, 수변 규제 완화…체류형 관광 기반 넓힌다",
+      "publisher": "경충일보",
+      "published": "2026-11-11",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE01ajlKYnNkTUhRQWN1UVJnSC1IZ0FqZF82U3R1WEZXYlI5UEVvaTh6U014ZXFXeVJ6X2xuSmprbmM4b0M1YkVUdmU0VTBaaWJRdUtOdEtmYjQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "증평군",
+      "title": "증평군, 제26회 농업인의 날 기념행사… 농업인 500여 명 화합",
+      "publisher": "충청매일",
+      "published": "2026-11-11",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9lYWZiTGxyOGJEWk9ubDVVamFwSmc5ZVRESC1mNnRoWDNyWXNHQ1NHSklrWUFfTkxxVnNRZUhwd09hNDNUTHhpdUtCUkMxSkl1SThyU05YbDRib3RSUVZKX2JYM01ieDRCRXc?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
       "region": "보은군",
       "title": "보은 법주사 [유네스코 세계유산]",
       "publisher": "고향사랑기부제 위기브",
@@ -1426,14 +1526,14 @@
       "topicGroup": "지역생활"
     },
     {
-      "region": "제천시",
-      "title": "Omada·VIGI, 충북 제천 방치 빈집 리모델링 사업에 네트워크 및 보안 인프라 지원",
-      "publisher": "보안뉴스",
+      "region": "보은군",
+      "title": "보은군, 민선9기 핵심 공약 ‘스마트농업 육성 핵심지구’ 조성 순항 외 (11월10일 종합)",
+      "publisher": "충북데일리",
       "published": "2026-11-10",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5vcGkwTUZwYXg3dnd6Z2x5aEdLT1lYdXVxUmhEaEJyNUdUVEkya1Rhd3JEWmFhVkhucGQ1Um5nSy1Ddkc1TktJdzM5eTZGMFJzVnBocjk4akZYM1RZWU5yUUtGaFVuTWJ5MUNN?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9XY080ellXZEFPajd1OWZOdi1VVHAwdTd4dDZMZ0lRNEdDTHF5dmRDZEhSWEh5clRkOFJENWtQMUpTdlFySE9DYkcwZW9JOThwbkpOZjRHUC16aHM5NENDcFJ3?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
+      "topicGroup": "특화산업"
     },
     {
       "region": "옥천군",
@@ -1464,6 +1564,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
+    },
+    {
+      "region": "제천시",
+      "title": "Omada·VIGI, 충북 제천 방치 빈집 리모델링 사업에 네트워크 및 보안 인프라 지원",
+      "publisher": "보안뉴스",
+      "published": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5vcGkwTUZwYXg3dnd6Z2x5aEdLT1lYdXVxUmhEaEJyNUdUVEkya1Rhd3JEWmFhVkhucGQ1Um5nSy1Ddkc1TktJdzM5eTZGMFJzVnBocjk4akZYM1RZWU5yUUtGaFVuTWJ5MUNN?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
     },
     {
       "region": "보은군",
@@ -1507,13 +1617,13 @@
     },
     {
       "region": "충주시",
-      "title": "충주 호암공원, 수달과 공존하는 생태휴식처로 탈바꿈",
-      "publisher": "중부매일",
+      "title": "충주상업고 코레일 합격자 배출… 공기업 취업 성과 이어져",
+      "publisher": "메가충청뉴스",
       "published": "2026-11-09",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5NaEsxRy1ERXRVOXdJZS1YOGtpMmJoM0lJdHBQUHdQMGlRQlVLbWZadnMxQjk5a3o5cUNZQTJsN3FmQkxoQkR1cUlybDhSYUxuTUFfdnlXWnpoT28tOWhWcTNBWXk1enlZbmfSAW5BVV95cUxPQlpwSURjWVpTSDJrVVpseEoxN3BZUFVFUzlFVTIyNENtel9GTk9ybTlBT2pfNXlwdldrY29ybGp2aEJZQ3lVd0pLb2I1NTU5eW5yVl9WNDlKR1pXTUJUQUl5U1JPWTFNaGtwb3p5QQ?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9CaUNQeEdTeGttRzBPZUJoZElBckw0czRFaVhfYW1QV0Z4OTRmNG8yem4teHJoZl9zYW80RlJwUVd2VHdSOG5XSGNmaDZIS05TcW96ZzNKRW5ZQUN6YWI5N19KUEc4UXlPZnRmSg?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "특화산업"
     },
     {
       "region": "옥천군",
@@ -1536,6 +1646,16 @@
       "topicGroup": "지역생활"
     },
     {
+      "region": "진천군",
+      "title": "충북 진천군, 생거진천 치유의 숲 내‘이월 숯채화 무장애나눔길’ 조성",
+      "publisher": "청주일보",
+      "published": "2026-11-09",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8zOGI5TUYwX3F4SWhpN0FfZ2Z1VkJ4TEJFbzJuUzJURE84c09QVE5Xd0RiWDBXSFFMOGdZZnh4NTdSZk5kTy1jdnhZa0tRbUhwM2xpR3RWT3JsUU5pYnhTMGZqenVBWE83TlhV?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
       "region": "괴산군",
       "title": "17만 명이 빨갛게 즐긴 ‘2026 괴산김장축제’ 성황리 페막",
       "publisher": "굿모닝충청",
@@ -1556,11 +1676,31 @@
       "topicGroup": "지역생활"
     },
     {
+      "region": "음성군",
+      "title": "음성군농업기술센터, 가축분뇨 부숙도 검사 연중 무료 지원",
+      "publisher": "동양뉴스",
+      "published": "2026-11-09",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE00NFh4X1oyZFRYUER4bDlDM3dlVTAwV3FMSkl0U00xNG03VTctUDNfYlU1Z1BiWC1CVUp2Y1BqSFFyeDhTanQwdTEzX1A0a3B3N2lHYzVGTWx4WVI0b1Zvek9hV1Nla21VbHc?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
       "region": "단양군",
       "title": "충북 단양군, 선암골 생태유람길서 14일 걷기행사",
       "publisher": "연합뉴스",
       "published": "2026-11-09",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1UNzRSOEcyVEdrLTRlVV9WWkNVQndMczl0T3ZQT2RtUlE5YkM4RmR0c3lta0E2UXZNVjR2UUhQa1JFdXR5b0I3MExZeUxyUGtsdUhhOVczMlBuVmvSAWBBVV95cUxNVkdFdmhlN1Q5QzdlNHp4ME9uUV9FREF6bHZFNDdDQjBISUxJczk3SFR1SkVlelhvbjVIYi1MOF84Y0ZTSThUd1FrZEZYakk2MHRSX05Rc3ItNlFVVVBLOWM?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "충주시",
+      "title": "충주 호암공원, 수달과 공존하는 생태휴식처로 탈바꿈",
+      "publisher": "중부매일",
+      "published": "2026-11-09",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5NaEsxRy1ERXRVOXdJZS1YOGtpMmJoM0lJdHBQUHdQMGlRQlVLbWZadnMxQjk5a3o5cUNZQTJsN3FmQkxoQkR1cUlybDhSYUxuTUFfdnlXWnpoT28tOWhWcTNBWXk1enlZbmfSAW5BVV95cUxPQlpwSURjWVpTSDJrVVpseEoxN3BZUFVFUzlFVTIyNENtel9GTk9ybTlBT2pfNXlwdldrY29ybGp2aEJZQ3lVd0pLb2I1NTU5eW5yVl9WNDlKR1pXTUJUQUl5U1JPWTFNaGtwb3p5QQ?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -1606,6 +1746,16 @@
       "topicGroup": "관광환경"
     },
     {
+      "region": "충주시",
+      "title": "충주시, 로컬관광콘텐츠 기획 전문인력 양성 나선다",
+      "publisher": "금강일보",
+      "published": "2026-11-08",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1rU3VJSXU4cjJOU29CZWFOYVNoTEFLN2o4MWFGbXN1VmxCUTdZSjdaY3loUHNhQjBFODEwRDJSNmo0TG5qWERLX2RsaHg2RVJMdFBua0c1bjRZbmh4NHR6VVZiTVdNQXdObXc?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
       "region": "제천시",
       "title": "제천시 중국서 유학생 유치·관광 활성화 모색",
       "publisher": "대전일보",
@@ -1626,21 +1776,21 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "진천군",
-      "title": "충북 진천군, 생거진천 치유의 숲 내‘이월 숯채화 무장애나눔길’ 조성",
-      "publisher": "청주일보",
-      "published": "2026-11-08",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8zOGI5TUYwX3F4SWhpN0FfZ2Z1VkJ4TEJFbzJuUzJURE84c09QVE5Xd0RiWDBXSFFMOGdZZnh4NTdSZk5kTy1jdnhZa0tRbUhwM2xpR3RWT3JsUU5pYnhTMGZqenVBWE83TlhV?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
       "region": "괴산군",
       "title": "충북문화재단, 괴산을 합격 명소로… ‘찰떡합격로드’ 관광상품 내놨다",
       "publisher": "경향신문",
       "published": "2026-11-08",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lV1ZabFdhNGFzVGZtVUMxQTB6cTRPWEFHUHhEbDg5RHJyVWIxaXo1V2cwc1VGVHhENEF0OVhpdV9ETHhST0RDQjg4Q3FRYnlCbEVHcFhSZGdPUdIBX0FVX3lxTE1rNlJKOWlYRnA5WWp6Z0YyMjhGWUdaNndYU1R4dDlXbmw2SGZ3YURDc3JITExsQzA2dUlocmJ2Y1pyLVFySXdCUVVqek80SFZDaURSV3dZOFdGVHJTcnIw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
+      "region": "음성군",
+      "title": "음성군, 내년도 28회 음성품바축제 쇼케이스 성료",
+      "publisher": "충청일보",
+      "published": "2026-11-08",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5nWU5wLU1YUDRIcjQyYW5IalA0TjkwUXRqR1R2QWViQkdWVXZSWjVlUG91TkRTaFFpRXRXSnFSMWRXSE9ob2lYcngteHpJdzN3WnBqSHRfTVpRNE0xSENPS1JuNWZBRFF4bzk3ejdXd3k?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
@@ -1654,6 +1804,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
+    },
+    {
+      "region": "단양군",
+      "title": "단양 만천하스카이워크 짚와이어 운행 중 멈춰…여성 승객 30분간 공중에 매달려",
+      "publisher": "조선일보",
+      "published": "2026-11-08",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPc0JsOVQtMXJZS29OLWtvNFRvc0x4OXhneUNqNVRMVlg4a21pTjNmd1p6UDc3THBEb3VIUm85TUdhRnplb21mb2Zod2R1TGpPTVZHSnU0bDFPZDJwRWdjMWFaczVabWhycDZzTWNaYnU3aTJFeEhpNDQzTFVvNFhXZVVrZDNQQQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "청주시",
@@ -1686,6 +1846,16 @@
       "topicGroup": "지역생활"
     },
     {
+      "region": "충주시",
+      "title": "충주시, '로컬관광콘텐츠기획자 양성과정' 11월 운영",
+      "publisher": "국제뉴스",
+      "published": "2026-11-06",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1ZX2g1WUZYTGptVmItOXpjS1RxRzVnVEdUMExGRDFJbjV1TURzUjhONXhuNkhCdUhhRVN5UkIycllJdnpIUURPaDVoTWo4UldtQlJza2pWMUxSWWlMVzZrZFV6dkNZbERvUUh4Y3R3?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
       "region": "제천시",
       "title": "농금원, 충북 제천서 농촌 일손돕기…농번기 인력난 해소 지원",
       "publisher": "축산신문",
@@ -1694,6 +1864,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
+    },
+    {
+      "region": "보은군",
+      "title": "보은 김치업체 ㈜이킴, 화마 상처 딛고 재가동",
+      "publisher": "연합뉴스",
+      "published": "2026-11-06",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9LclZKVGlWUC14YmRyS0V1dUc1ZVFYeUJva2ZxY2xOLUNacU1heGUwejRBazRwRThGQmJxa3l1bGFwZ3hJQVBsazdJblFJMGFtZFpNanBNTTd3aGfSAWBBVV95cUxOb0JpdEJsT3FwTms0V2tOS1FQeEp0Y1BpdkpXajQ1NlRpOWJoSkhZU3NBd3hGUEpXR1FNQ1pHZTRBTzBJWXlNa0NsXzBFVDVBWENUYXpCLXItT2Npclh5ZEQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
     },
     {
       "region": "괴산군",
@@ -1734,16 +1914,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
-    },
-    {
-      "region": "보은군",
-      "title": "보은군, 화재 딛고 정상 가동한 ㈜이킴 보은공장 방문",
-      "publisher": "경기종합뉴스",
-      "published": "2026-11-05",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE8wc1FLSUowQlZwRXdWMG5oNkVXRHU0dDlWV1c4c3RZQi1aV05jZ2hoRnhXcks5Y0QtZnZrRTIyTTZCTEI5eGs0MlNDZW1vVV84SVdfVlVNZDUyQmdoeVk5WnNwUzl3T3NGNUdNMkcxamplV1Rp?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
     },
     {
       "region": "영동군",
@@ -1804,6 +1974,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
+    },
+    {
+      "region": "보은군",
+      "title": "보은군, 화재 딛고 정상 가동한 ㈜이킴 보은공장 방문",
+      "publisher": "경기종합뉴스",
+      "published": "2026-11-05",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE8wc1FLSUowQlZwRXdWMG5oNkVXRHU0dDlWV1c4c3RZQi1aV05jZ2hoRnhXcks5Y0QtZnZrRTIyTTZCTEI5eGs0MlNDZW1vVV84SVdfVlVNZDUyQmdoeVk5WnNwUzl3T3NGNUdNMkcxamplV1Rp?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
     },
     {
       "region": "청주시",
@@ -1976,16 +2156,6 @@
       "topicGroup": "지역생활"
     },
     {
-      "region": "충주시",
-      "title": "\"판로를 넓혀라\"…충주시, '2026 푸드위크 코리아' 참가",
-      "publisher": "충청일보",
-      "published": "2026-11-03",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE54WHZwRXI1cHl4SGFDZUc4X1VmSzdCYjlyYVYyeFdpUTRrWm8teDdFOG01aXlYcjYteE1IaEpDSG13RWhLQU42eWVld09SMExrRXV0bk9wMWljSkdRbHBSQll0eFpjSk9rVDJHTEdYc0I?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
       "region": "제천시",
       "title": "충북교육청, 교육혁신선도지역에 제천·보은·음성 선정",
       "publisher": "BBS불교방송",
@@ -2047,6 +2217,16 @@
     },
     {
       "region": "진천군",
+      "title": "진천혁신산단 피해대책 요구에 충북개발공사 “보상 근거 없어”",
+      "publisher": "K-Life TV",
+      "published": "2026-11-03",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE95Tl9hZVUzRU5NQkJWQmRLWThfRzdvTF9uakR3Z1BPMlRhb0o5eThFOENqa3NnUFZzT3dfQVRwZG5QTGRCcFNwTW1UNU01LWZhbnB3UkZNZGZUVzlvTVdWZXIxenVSZ0pJZGNpRg?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
+      "region": "진천군",
       "title": "‘생거진천에서 살아보기’ 2기 수료",
       "publisher": "충청타임즈",
       "published": "2026-11-03",
@@ -2087,6 +2267,16 @@
     },
     {
       "region": "충주시",
+      "title": "\"판로를 넓혀라\"…충주시, '2026 푸드위크 코리아' 참가",
+      "publisher": "충청일보",
+      "published": "2026-11-03",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE54WHZwRXI1cHl4SGFDZUc4X1VmSzdCYjlyYVYyeFdpUTRrWm8teDdFOG01aXlYcjYteE1IaEpDSG13RWhLQU42eWVld09SMExrRXV0bk9wMWljSkdRbHBSQll0eFpjSk9rVDJHTEdYc0I?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "충주시",
       "title": "충주 관광명소 '수주팔봉'에도 선불형 음식물 종량기 설치",
       "publisher": "굿모닝충청",
       "published": "2026-11-03",
@@ -2116,6 +2306,16 @@
       "topicGroup": "지역생활"
     },
     {
+      "region": "충주시",
+      "title": "충주 비내섬서 11월 7~8일 생태관광축제 열린다",
+      "publisher": "경충일보",
+      "published": "2026-11-02",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9PQUFnbzJNQXJEQ0pTQ2xjTm0tRVRxWDB1RndrTTBGVGo5OVMwcmZIb0R4Ql9rLUk5RmE2OV9OSGRadTJDREg1elhkZlBlVjdjV2YtTEpYMTk?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
       "region": "제천시",
       "title": "부발읍지역사회보장협의체, 충북 제천시 찾아 벤치마킹 실시",
       "publisher": "경기1뉴스",
@@ -2126,14 +2326,14 @@
       "topicGroup": "지역생활"
     },
     {
-      "region": "옥천군",
-      "title": "한발 앞서 나가는 옥천군…농어촌기본소득, 지역 관광 연계 추진",
-      "publisher": "뉴스1",
+      "region": "영동군",
+      "title": "영동군, 일라이트 지식산업센터 입주율 75% 달성… 산업화 기반 구축 순항",
+      "publisher": "뉴스다",
       "published": "2026-11-02",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE50YkZ0QlFPYXdyRDZuR3dPVk81bUZTSXotZ0VBYU96R3h0dWRENmNZUEYtbTBpLU1SYmFzT3Rqb0dwVUJSSWU2MG1XR0F3NEtfeHIxUkk4N1FlclVHSGk0?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1jd0hpU0NUclc4RWxvSVAydWJad3RUdUZ0VnlLdGQtZVJWSTB5MXA2RS05V0hmVXlJOW11YTV1U3pWeFJnV2lXQTRBTEswSjdSMGV5RmVqVng0UzlSeHI4?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
+      "topicGroup": "기업산업"
     },
     {
       "region": "증평군",
@@ -2141,16 +2341,6 @@
       "publisher": "굿모닝충청",
       "published": "2026-11-02",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE15aHBtVVlvM2NCem9SRXlmVkJSVVN6LVM2ZzAzRWlFY3VYdm5fNXhuN3hfZ1hMRF9qRXh2Y3hOQzgydTExMGhtQjB6SDJ4MVFzWUc2TzBUT3hNU1FKME5WYXI4NVhTRjFWendZS2xaVjlHQQ?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
-      "region": "증평군",
-      "title": "증평군 생활정보 ‘맵갤러리’ 신설",
-      "publisher": "충청타임즈",
-      "published": "2026-11-02",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1WWUNacy1pZ2ZQUWVJdllaVG9WTnpldkVWblNpRGQ4TlJfMUVFNjA4VzgxdnM4dlNLcmJVSzBPZzc4R3RvZlJsSERJN0E2cG8tN1FwVXBZV2tfWmVIOUJnMVF0d1JQbzht?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2171,6 +2361,26 @@
       "publisher": "충청타임즈",
       "published": "2026-11-02",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBlaUlPVUg3WTQzQ3lqRnZLRk1FZUdYOVo3dVllSVVhMnFyZ2NBQ3loRS1wcWxoUXg4Wlp1TFZVWEF4MzdZZDE4THluVEZET3F0WGxnWFFBR3JvbmNmengyYnBGUjMxcmhp?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "옥천군",
+      "title": "한발 앞서 나가는 옥천군…농어촌기본소득, 지역 관광 연계 추진",
+      "publisher": "뉴스1",
+      "published": "2026-11-02",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE50YkZ0QlFPYXdyRDZuR3dPVk81bUZTSXotZ0VBYU96R3h0dWRENmNZUEYtbTBpLU1SYmFzT3Rqb0dwVUJSSWU2MG1XR0F3NEtfeHIxUkk4N1FlclVHSGk0?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "증평군",
+      "title": "증평군 생활정보 ‘맵갤러리’ 신설",
+      "publisher": "충청타임즈",
+      "published": "2026-11-02",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1WWUNacy1pZ2ZQUWVJdllaVG9WTnpldkVWblNpRGQ4TlJfMUVFNjA4VzgxdnM4dlNLcmJVSzBPZzc4R3RvZlJsSERJN0E2cG8tN1FwVXBZV2tfWmVIOUJnMVF0d1JQbzht?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2214,6 +2424,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
+    },
+    {
+      "region": "증평군",
+      "title": "충북 증평군, ‘불타는 청춘’ 개최... 다름을 넘어 하나로",
+      "publisher": "청주일보",
+      "published": "2026-10-31",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8yc1M5bVhQNVZSVF9pMTBiWXRVLUZQN0RYZUJsZ040dG04TG90MjZYRTNULXNXMndob3ZLSmNZS0NfemJLQ0xFQk90R1g2aVdvRl8tTmR2NUFGdEpBTDlZV2dySDE4MF9Ra2JJ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
     },
     {
       "region": "진천군",
@@ -2387,16 +2607,6 @@
     },
     {
       "region": "충주시",
-      "title": "충주 전통주 '청명주' 파리 식품박람회서 수출계약",
-      "publisher": "연합뉴스",
-      "published": "2026-10-28",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBSREJWdGdjZ2JvTTVJTGhha1Nhdk5jZmY5d1dkTld5SnEwbmxJQzFRVGNLUHlCS2FHUnRNRlY0Z25xUGhWbkdfa2lUZktsTjBsUHJHaFY3WXdKMGfSAWBBVV95cUxOMmZPbTE3TmMyTmhoODE4aEl4TkFLOWdUMW1yenI4U2FOVm1JMVBxRDk1dEFtUkdyY2t2VkdacGY3S29CaFdqZTM5ZHNRSXdDTTBFelJoaDE0R1NETE44OWI?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "충주시",
       "title": "충주 식품공장서 천장 무너져 작업자 3명 추락… 중경상",
       "publisher": "대전일보",
       "published": "2026-10-28",
@@ -2411,16 +2621,6 @@
       "publisher": "연합뉴스",
       "published": "2026-10-28",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9CaW4wV192QV9JbXlDc2VsWVdtblBoOC1tZE5WVDdnOEFyb0VHTXNRUWFzc0YwRFh6STU5RFJFNU8xTlRibENzMnNXZkZiWnRpUXFYUmVGODg1RzjSAWBBVV95cUxNNUlTcUJMRTdYREhkZXNSRC00TnMxTWc4OUx2UXQwNk5MZ05YSmNoSE1LQXdCallWb1FHdEt4cEczMVR6U3Z6UG1IUFpxazdZQklUMGhSYjdsS1hnb2ZpaVA?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
-      "region": "제천시",
-      "title": "엄태영 의원, 제천 운전적성정밀검사장 개소… 충북 북부권 교통안전 강화",
-      "publisher": "국토일보",
-      "published": "2026-10-28",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1CenlkLTNzYUxOWXF0WjBVS0Y4R0VhQV9qZVlCTXdPaDl4U2pwd19HZ1hab2FZNEdoSFNVbkRfMFlsSU01dGoyVlMyWXMydmxEWExlMnFJbVJnMnJZSl9PakluOA?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2441,6 +2641,36 @@
       "publisher": "충청리뷰",
       "published": "2026-10-28",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBnUG9Vb3hhN1NQbklvWkNSNzhLVGJOV3RmWDJqcnBiSnJXN2p2LW1LUTk4eGl0c3lySzV1U3hQem9nblVLTkpfeU1jM2MyVEdkQ1VEVnZTdGxBMVl3ZFlqM2dvLU1POFdKOThMNHJR0gFyQVVfeXFMUDBHNHJtbkJnSFBhT0lGTW83RGtQSGFCOVhlTklQTlNBb2Vka2F5NnJuVWhqNHB5SzdHd19tbi1QVnJ6bmo2NVMwUzlyM3hlZnoxWGtRajNKakowenJNY3BBLWJMWUR4ME1WVXUyVDRjSlhn?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "단양군",
+      "title": "서울 동대문 상인들, 충북 단양 굿즈개발·마케팅 나선다",
+      "publisher": "경향신문",
+      "published": "2026-10-28",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE85M0V2RVg5WklHSTY4VmFXSG1ZeEkxNGNiWnRrSFVtSE13VVZhYnZneG5yaVZpUTdUNnRldVdiUjFvR2pEQVZHMWE3Z3c4dnJ1MnVXeUowd1Atd9IBX0FVX3lxTFA4UWxoVEc5c2IzWFB6ZHZoczZVb3ZocWVuRlpmQ2lrMkFGR3ZMdlRxZDBBV2h1MkxwREh1WUtJd244aHc5T0tfU0Fld3dVSjF2c3N4THZfaWdkUVVNN0ZJ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "충주시",
+      "title": "충주 전통주 '청명주' 파리 식품박람회서 수출계약",
+      "publisher": "연합뉴스",
+      "published": "2026-10-28",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBSREJWdGdjZ2JvTTVJTGhha1Nhdk5jZmY5d1dkTld5SnEwbmxJQzFRVGNLUHlCS2FHUnRNRlY0Z25xUGhWbkdfa2lUZktsTjBsUHJHaFY3WXdKMGfSAWBBVV95cUxOMmZPbTE3TmMyTmhoODE4aEl4TkFLOWdUMW1yenI4U2FOVm1JMVBxRDk1dEFtUkdyY2t2VkdacGY3S29CaFdqZTM5ZHNRSXdDTTBFelJoaDE0R1NETE44OWI?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "제천시",
+      "title": "엄태영 의원, 제천 운전적성정밀검사장 개소… 충북 북부권 교통안전 강화",
+      "publisher": "국토일보",
+      "published": "2026-10-28",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1CenlkLTNzYUxOWXF0WjBVS0Y4R0VhQV9qZVlCTXdPaDl4U2pwd19HZ1hab2FZNEdoSFNVbkRfMFlsSU01dGoyVlMyWXMydmxEWExlMnFJbVJnMnJZSl9PakluOA?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2467,20 +2697,20 @@
     },
     {
       "region": "진천군",
-      "title": "진천군 4-H 연합회, ‘제47회 충북 4-H 대상’ 영농 기술 부문 대상 영예",
-      "publisher": "https://www.kgdm.kr/",
-      "published": "2026-10-27",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBtRG03c2dtVFRtZFJyNGI4RmI5TDVMemhCcWR6WFJLVDhZdGd2QzNDUXFGWXNpd2s1UV9rcVhtaE1rbjdTbWFfQ2tFU0JKRWJVQi1iSjNmaC03TWt0cGRINV9kbVlUdw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "진천군",
       "title": "진천군 \"내년 10월 제1회 생거진천 세계산림치유대회 개최\"",
       "publisher": "연합뉴스",
       "published": "2026-10-27",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBhSG9EYXB4SkU1ZzAybk9nWkFDZlgza2dXdmhPZFJVVjV1VXhNak9BaTN2YWEzU05sdzBHckJyc1ZvUTAyRlF5ZS1zeVRtZjJBLWoyUGFtV1B3U2_SAWBBVV95cUxQTF8xcTJuUDdXMkt3UjVmYkMwcDZ5TlFsbU8yQlM1Y0tnV05ZWUtoeHVWbEt5al9Xd21aU0xUQmszWDdhQ0pFNHFFUUFfRmVjbFpMUndRVnhYWXRjM2ZjTHA?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "진천군",
+      "title": "충북 진천군, 세계산림치유대회로 새 가능성 연다",
+      "publisher": "세계일보",
+      "published": "2026-10-27",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5hTFpPQ04xQ3h3b2p6Mjk1MDNGekFYVHJCVkR3NjJHM0xfSU1jS0Rodk9FQTMzVk92dlRWU3BlYnRsRXN3S0tOWjlyd1pnVFVFSkpyZUFOOFbSAVRBVV95cUxNaC1aVllkcWktaVFvVWxwNGNySTQxQmNBV3ZrYVFnTVNBak5fVjNfcFpuQVhZNE1RZm0wS1VhcmVHOTZIbE9TSVFvcHpFQTRQa3lxa0o?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2506,21 +2736,21 @@
       "topicGroup": "관광환경"
     },
     {
+      "region": "진천군",
+      "title": "진천군 4-H 연합회, ‘제47회 충북 4-H 대상’ 영농 기술 부문 대상 영예",
+      "publisher": "https://www.kgdm.kr/",
+      "published": "2026-10-27",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBtRG03c2dtVFRtZFJyNGI4RmI5TDVMemhCcWR6WFJLVDhZdGd2QzNDUXFGWXNpd2s1UV9rcVhtaE1rbjdTbWFfQ2tFU0JKRWJVQi1iSjNmaC03TWt0cGRINV9kbVlUdw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
       "region": "옥천군",
       "title": "[문장 따라 걷기] 정지용의 ‘향수’와 충북 옥천의 옛 풍경",
       "publisher": "관광레저신문",
       "published": "2026-10-27",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBWU2VMSUtXbk9Ibkd1MDU2Q0pKcHV3bXFwemVJVlQ0YjdfNk95WjhYZk1acFQtWEpvWHI1Vi1IRXFYdHAzYmVKOEdWYndyNjgzMENlZDhjY1NNRUdMUmw3eWh4ekd5MmROWmc?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
-      "region": "진천군",
-      "title": "충북 진천군, 세계산림치유대회로 새 가능성 연다",
-      "publisher": "세계일보",
-      "published": "2026-10-27",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5hTFpPQ04xQ3h3b2p6Mjk1MDNGekFYVHJCVkR3NjJHM0xfSU1jS0Rodk9FQTMzVk92dlRWU3BlYnRsRXN3S0tOWjlyd1pnVFVFSkpyZUFOOFbSAVRBVV95cUxNaC1aVllkcWktaVFvVWxwNGNySTQxQmNBV3ZrYVFnTVNBak5fVjNfcFpuQVhZNE1RZm0wS1VhcmVHOTZIbE9TSVFvcHpFQTRQa3lxa0o?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2586,21 +2816,21 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "증평군",
-      "title": "[포토] 증평 보강천 미루나무숲, 추억을 기억하며",
-      "publisher": "뉴시니어",
-      "published": "2026-10-26",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1kSXhhMlVmUWg2ZXlaMUYwOVhWbU9icFZvcW53Qi1pZFR5V1ZwZ2hHclM0TWF1RUhhNHBwaTlTUVlSYk5XS0wwV2U4TlNwRk1GdjAxUTVKNE1MMlVaYmRqNUYwQQ?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
-    },
-    {
       "region": "진천군",
       "title": "충북 진천성석LH행복주택 ‘정원 음악 축제’ 개최",
       "publisher": "한국아파트신문",
       "published": "2026-10-26",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1wX1VzaFNyVzVtYmhzUU9XTzRoWXlnb3A3djlHTm1GRlppM2tXMzF0d3c3Qk1DVk9fWHpQX0ZpQkRiazRaQzBxblNrbUlvaFAxNFVNalhnVDBpbTZaQWtobzBvZzhBMFg1?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
+      "region": "괴산군",
+      "title": "충북 괴산군, 김장축제 맞아 고향사랑기부 이벤트",
+      "publisher": "농민신문",
+      "published": "2026-10-26",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5Wd3VNd1ZVWU1xbW5Hdy1xaWQ1TkFnZHNQOG84M2dzNHNmUUZjWlpObnhhNERVYkZDNmFHeDFOWUIycXBWRTFCTDZqTUN1djRLNmVlbnQ1Q2s0UQ?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
@@ -2636,14 +2866,14 @@
       "topicGroup": "관광환경"
     },
     {
-      "region": "괴산군",
-      "title": "충북 괴산군, 김장축제 맞아 고향사랑기부 이벤트",
-      "publisher": "농민신문",
+      "region": "증평군",
+      "title": "[포토] 증평 보강천 미루나무숲, 추억을 기억하며",
+      "publisher": "뉴시니어",
       "published": "2026-10-26",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5Wd3VNd1ZVWU1xbW5Hdy1xaWQ1TkFnZHNQOG84M2dzNHNmUUZjWlpObnhhNERVYkZDNmFHeDFOWUIycXBWRTFCTDZqTUN1djRLNmVlbnQ1Q2s0UQ?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1kSXhhMlVmUWg2ZXlaMUYwOVhWbU9icFZvcW53Qi1pZFR5V1ZwZ2hHclM0TWF1RUhhNHBwaTlTUVlSYk5XS0wwV2U4TlNwRk1GdjAxUTVKNE1MMlVaYmRqNUYwQQ?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
+      "topicGroup": "기업산업"
     },
     {
       "region": "음성군",
@@ -2676,14 +2906,14 @@
       "topicGroup": "기업산업"
     },
     {
-      "region": "음성군",
-      "title": "음성군 의용소방대, 기술경연대회 열려",
-      "publisher": "충청매일",
+      "region": "증평군",
+      "title": "증평 배움누리 3행 축제 성료… 평생학습 참여의 장 마련",
+      "publisher": "중부매일",
       "published": "2026-10-25",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE4xRGZHU01xME5hd3dZenBHWGRkMjJkdmNVenktaFRvTmdsNTF2S0tidXlRUWpjWk4tMzUzLVM5Ujdkdk5jYVhyRXNBM3J4U1FBRENrV3FtV0NUZXhNLUQ1VG5KZ3JrRHc5SGc?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9md0dUY0NyYkF0SHoyVnRRUklzQXBxTHVVenpoWllCV2NmZzVuY0lzalVqY2J2U3RKZVp4SHpWOVRvS1N4UVBhV09sR01waVZqeTRQQnRDeFZJVWswY2FwaDYxQmV3a2N6U2fSAW5BVV95cUxNNDJiWFZwX0oydGRtOWFoUUFQNnlhaVZqb0pxdnZRNkIyTDJxQzh3NjJPY3UzaERER0FlTHBnRUJqRHVycW5XaEFMcm93Ui1zVjluRTBwbWRCSW55cFN1anNERGhvazczbFl6RE91QQ?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
+      "topicGroup": "지역생활"
     },
     {
       "region": "단양군",
@@ -2694,6 +2924,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
+    },
+    {
+      "region": "음성군",
+      "title": "음성군 의용소방대, 기술경연대회 열려",
+      "publisher": "충청매일",
+      "published": "2026-10-25",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE4xRGZHU01xME5hd3dZenBHWGRkMjJkdmNVenktaFRvTmdsNTF2S0tidXlRUWpjWk4tMzUzLVM5Ujdkdk5jYVhyRXNBM3J4U1FBRENrV3FtV0NUZXhNLUQ1VG5KZ3JrRHc5SGc?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
     },
     {
       "region": "청주시",
@@ -2757,23 +2997,13 @@
     },
     {
       "region": "증평군",
-      "title": "충북 증평군·SOOP, 업무협약 체결... 지역문화·콘텐츠 활성화 맞손",
-      "publisher": "청주일보",
+      "title": "SOOP, 증평군과 지역 콘텐츠 발굴 나선다",
+      "publisher": "지디넷코리아",
       "published": "2026-10-22",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBvR2xpRzFObk5qdWdPRzk1aVk0cG1zZ0ktbmI4QnNMNlo2YjdQYUdDdFo1X2NmWllvOExOMm01TXNtNE1kYk53MFcyMzJVTWhRZUppcU9ISG1PbmNSZklRWjdVMW1vSVZXMTNN?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5iYTZvLXVPY3NvSnZodlZwa3J5Unl2aThhdld3NHZDREpiNlV0MlNYQmdwbV9IRkpyY1hqZ2ZVX2l3dDZFTXpVU085bEtoR1ZLbDR1cE5n?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
-    },
-    {
-      "region": "진천군",
-      "title": "“7년간 재산권 묶였는데 보상은 안 된다?”…진천 혁신산단 주민들 분통",
-      "publisher": "K-Life TV",
-      "published": "2026-10-22",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1lZU4xSG1Ocm0xYnNYRndCRmtiLXQxYmtBNV9kd0hRdmctWl9BSllCaXh6eTRIa3JXQ0ZWTkRENkVwbklBNDY4M054ZzBqZWZSckhtVjJtaFpMV3dnbS1vNVNhTWJydVJrVjVhNw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
+      "topicGroup": "관광환경"
     },
     {
       "region": "괴산군",
@@ -2794,6 +3024,26 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
+    },
+    {
+      "region": "증평군",
+      "title": "충북 증평군·SOOP, 업무협약 체결... 지역문화·콘텐츠 활성화 맞손",
+      "publisher": "청주일보",
+      "published": "2026-10-22",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBvR2xpRzFObk5qdWdPRzk1aVk0cG1zZ0ktbmI4QnNMNlo2YjdQYUdDdFo1X2NmWllvOExOMm01TXNtNE1kYk53MFcyMzJVTWhRZUppcU9ISG1PbmNSZklRWjdVMW1vSVZXMTNN?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
+      "region": "진천군",
+      "title": "“7년간 재산권 묶였는데 보상은 안 된다?”…진천 혁신산단 주민들 분통",
+      "publisher": "K-Life TV",
+      "published": "2026-10-22",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1lZU4xSG1Ocm0xYnNYRndCRmtiLXQxYmtBNV9kd0hRdmctWl9BSllCaXh6eTRIa3JXQ0ZWTkRENkVwbklBNDY4M054ZzBqZWZSckhtVjJtaFpMV3dnbS1vNVNhTWJydVJrVjVhNw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
     },
     {
       "region": "영동군",
@@ -2837,6 +3087,16 @@
     },
     {
       "region": "청주시",
+      "title": "충북 청주시, 청주국제공항서 청주관광 매력 알린다",
+      "publisher": "청주일보",
+      "published": "2026-10-21",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rSWpfZ3Zwdnp5TnhGd0lTUDIwSmdHaEJtR2hMTEFSUEhiMEhRTlI3ZmlsMHFfdHhFbnhEdDFfZWVZMzdjaTFTTnlIRFFFbi1zWldLekZSaklZYzRrbWdKbjFxeS1leGgzZjVV?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "청주시",
       "title": "시민단체 “명암저수지에 65m 대관람차 웬 말”…청주 관광개발 재검토 촉구",
       "publisher": "한국NGO신문",
       "published": "2026-10-21",
@@ -2854,16 +3114,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "기업산업"
-    },
-    {
-      "region": "청주시",
-      "title": "충북 청주시, 청주국제공항서 청주관광 매력 알린다",
-      "publisher": "청주일보",
-      "published": "2026-10-21",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rSWpfZ3Zwdnp5TnhGd0lTUDIwSmdHaEJtR2hMTEFSUEhiMEhRTlI3ZmlsMHFfdHhFbnhEdDFfZWVZMzdjaTFTTnlIRFFFbi1zWldLekZSaklZYzRrbWdKbjFxeS1leGgzZjVV?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
     },
     {
       "region": "진천군",
@@ -2911,16 +3161,6 @@
       "publisher": "중부매일",
       "published": "2026-10-20",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5XaFh5NWNlam1YUFAxRzVWMGdBc05nWWh6QnVNakx2UlpkcExiY0k1ZjNYa3gxek5zcmJudllqRk55OFplcmE2b0FIbllKdWRla1dZQW95bDFxd2w5aXRIWlJ5Y0ZrektzMEHSAW5BVV95cUxPQTVSdzBNZ2dzX2drVEczNnZTaWhBbnBHU01ESHQzTVlPWFRESVBBd2hsNUxKdFBGM3NRdXV1MXZkVzRfM2NFM2FESlJ6alJpLVVnbEJsMktlMkZzdWdfV3VWVUJBMjBDS0kwMW13dw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
-      "region": "증평군",
-      "title": "충북 증평 추성산성에 탐방센터·둘레길 생겼다",
-      "publisher": "경향신문",
-      "published": "2026-10-20",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBmNTBTV25MajM4TGFQbXlyQlphcmxBTzJqZmR6WVlyT0pOWXEwa1djVWlKMWxhbVB3MlY4X01mUy13WHVtMHgyUWlmc0hfYzVjZGJmZkxFT1J2QdIBX0FVX3lxTFBWS0ZiNkROVFNwSGtGRDFrbmxGZVQwOFhpWEhweG9KUldjaGdHMTdUUVZsbXBoVndMcFRBeVB4VmZ3RzNCVERud3FpWW42Z01QNEVlY1RUczN2Z0llZWRn?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -2981,6 +3221,16 @@
       "publisher": "뉴데일리 충청세종",
       "published": "2026-10-20",
       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1RbVJZVkFTbTNHX24zeHFsN2VCRVRacUd6ZE9Da1lRTVpEblQ5azVJTGVGYkIzMmdvbmhqZ0lBdG5Qb0xVZ1RWSDA5V1BMRXMzY2g0WVR6am53UEFDYjJVUjZQTzNuZWVEb1R3TkswUmNnLTk2ckc3NENR0gF_QVVfeXFMTzBNR19FRWlXR19oNFdMX0MzWWFkZ01qY3JNUzhwbTFCT215N0VQWGpobl96Z0VrYXpsTnpnLVlOQ2ZxZHctNlhNLTk0SFIyUWIzZUIwdF9zZ05xMXg4czVIU2hxLTd0aVZidVByM3hUSnM3aWVLT0FhWHF6MFROQQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
+    {
+      "region": "증평군",
+      "title": "충북 증평 추성산성에 탐방센터·둘레길 생겼다",
+      "publisher": "경향신문",
+      "published": "2026-10-20",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBmNTBTV25MajM4TGFQbXlyQlphcmxBTzJqZmR6WVlyT0pOWXEwa1djVWlKMWxhbVB3MlY4X01mUy13WHVtMHgyUWlmc0hfYzVjZGJmZkxFT1J2QdIBX0FVX3lxTFBWS0ZiNkROVFNwSGtGRDFrbmxGZVQwOFhpWEhweG9KUldjaGdHMTdUUVZsbXBoVndMcFRBeVB4VmZ3RzNCVERud3FpWW42Z01QNEVlY1RUczN2Z0llZWRn?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "관광환경"
@@ -3106,6 +3356,16 @@
       "topicGroup": "기업산업"
     },
     {
+      "region": "단양군",
+      "title": "[기획 & 뉴스] 단양의 미래 4년, 성장의 판을 바꿀 수 있을까",
+      "publisher": "퍼블릭뉴스통신",
+      "published": "2026-10-16",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1VVEpKeEhnNlV4RFRGNTdybkgxWktTY09HekVVa3hhV0IzYVZCTWpja2pCaHI4VFRBWEFDWDZkSDZDRGF2bTNzTG85Y0QwVU1QemdXRUJIbE1TSnJYR1NiS3ZKbnlmNjFSb0E?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
       "region": "괴산군",
       "title": "괴산군, '제2회 충북 농식품산업박람회' 참가… 지역 농특산물 판로 개척",
       "publisher": "경기뉴스원",
@@ -3154,6 +3414,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
+    },
+    {
+      "region": "영동군",
+      "title": "영동군, 국장제 폐지→3실‧1담당관‧16과로 조직 개편",
+      "publisher": "굿모닝충청",
+      "published": "2026-10-15",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBDWk00c0ExQi1QZi1mR3pZZURTVm9rMUI0aVBqQUFQVWo1N1NiRVdkakttWGY4MFdueUp5Q0xlazFLMk1CTXlIV1VsS0FJb3NwNlFGa1RRc1JJQ2wtN2hGN1ZNRV9teGdQbWRleHRMVkpHdw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "증평군",
@@ -3207,16 +3477,6 @@
     },
     {
       "region": "단양군",
-      "title": "단양군, 옛 기업 사택을 주민 행복마을로 재탄생",
-      "publisher": "동양일보",
-      "published": "2026-10-15",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1aOXBmbjJNNUJDNWxTXzFTX29waGk3YWt5XzdDSjUwRG8yV2R2UTJvRjN1b21aVl8xS1FJaVlqUXNqcjBzdm16eDR5cE93dFJuSjZFby12aUhNWm9kUmYwNzFKSHBWUDhKeXBV?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
-    },
-    {
-      "region": "단양군",
       "title": "충북 육성 '장미' 단양 관광자원 활용",
       "publisher": "충청매일",
       "published": "2026-10-15",
@@ -3226,11 +3486,31 @@
       "topicGroup": "특화산업"
     },
     {
+      "region": "단양군",
+      "title": "단양군, 옛 기업 사택을 주민 행복마을로 재탄생",
+      "publisher": "동양일보",
+      "published": "2026-10-15",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1aOXBmbjJNNUJDNWxTXzFTX29waGk3YWt5XzdDSjUwRG8yV2R2UTJvRjN1b21aVl8xS1FJaVlqUXNqcjBzdm16eDR5cE93dFJuSjZFby12aUhNWm9kUmYwNzFKSHBWUDhKeXBV?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "기업산업"
+    },
+    {
       "region": "청주시",
       "title": "청주도시공사 사장‧문화재단 대표 인사청문회 연다",
       "publisher": "굿모닝충청",
       "published": "2026-10-14",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE02WG1rSUg3TE9xSFVUbkQzYnpISGgwN3NxVVp2OVNQaDFaQTIwUEh1di1iNjF5VUFaNFNqSFdHTzFpUll1RWN5dzNFY2tKRldaSzFvVGlaNHRKc1BFRFVCOHFtVXNtX3VXOEVwX3M0aU5oZw?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
+      "region": "제천시",
+      "title": "제천시, 16~18일 '제천일품육 축제' 개최…한우 최대 15% 할인",
+      "publisher": "신아일보",
+      "published": "2026-10-14",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5tbXhqWnotZm84djJEWVNZLXhJLWx3YjIzYjVOWVhoMHlNcHFRUFF3ZGE4Z0VpY2ppTUUxVDN0YW9ISDNocnNVNnZDSzBEbDlaRHJXZExlMTRneUFWRkFlaGpuRWJzODZoa0JmMlBuMl8?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
@@ -3267,16 +3547,6 @@
     },
     {
       "region": "증평군",
-      "title": "증평인삼골축제 기간에 문화누리카드 결제 폭증",
-      "publisher": "충청매일",
-      "published": "2026-10-14",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1qMEJHOVI0M1RIWFRCckZyZUxrbWFNSEJOT3Q0SFg4VkVWSXRwUnVKdllCVTRNWVdRdnpkVHZtcHRiMTdZQUNFdEhBVUp5UW1ZM3hkZE5FUUhXWmZWWEdYZkx1d0Q2TjNiSXc?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
-      "region": "증평군",
       "title": "증평군, ‘2026 일자리 이음 취업박람회’ 212명 채용 추진",
       "publisher": "굿모닝충청",
       "published": "2026-10-14",
@@ -3284,16 +3554,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "기업산업"
-    },
-    {
-      "region": "증평군",
-      "title": "증평군, ‘2026 일자리 이음 취업박람회’서 212명 채용 추진",
-      "publisher": "프레스뉴스",
-      "published": "2026-10-14",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBMbldkWjdrWEltZ1lOM19ENDBPMG1VNERHRnRUdmdqVU5nVkFsTkZmMjFBWjFrMGhhdTFPanYwSFU4WXowT0tEREdtUHVKUndFYmZ4QmlHVkZlN2l6Y1NkOVpZeDg3ZndlekdyQ1V0VDZwdw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
     },
     {
       "region": "증평군",
@@ -3321,6 +3581,26 @@
       "publisher": "농민신문",
       "published": "2026-10-14",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1jb09EdTJNVkV2VW1GYVh5ZlVPV2tfaDlySGJPT090QWRTWHhlZHBmYWZiQmVOZzdhRE5PZ0YyUnZWQm9DQTNKRm9hSU1XOU5hTXFtY1gzdnoyQQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "증평군",
+      "title": "증평인삼골축제 기간에 문화누리카드 결제 폭증",
+      "publisher": "충청매일",
+      "published": "2026-10-14",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1qMEJHOVI0M1RIWFRCckZyZUxrbWFNSEJOT3Q0SFg4VkVWSXRwUnVKdllCVTRNWVdRdnpkVHZtcHRiMTdZQUNFdEhBVUp5UW1ZM3hkZE5FUUhXWmZWWEdYZkx1d0Q2TjNiSXc?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
+      "region": "증평군",
+      "title": "증평군, ‘2026 일자리 이음 취업박람회’서 212명 채용 추진",
+      "publisher": "프레스뉴스",
+      "published": "2026-10-14",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBMbldkWjdrWEltZ1lOM19ENDBPMG1VNERHRnRUdmdqVU5nVkFsTkZmMjFBWjFrMGhhdTFPanYwSFU4WXowT0tEREdtUHVKUndFYmZ4QmlHVkZlN2l6Y1NkOVpZeDg3ZndlekdyQ1V0VDZwdw?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
@@ -3356,16 +3636,6 @@
       "topicGroup": "지역생활"
     },
     {
-      "region": "영동군",
-      "title": "영동군, “영동곶감, 감으로 놀고 기억으로 머물다”... 2027 영동곶감축제, 내년 1월 22일(금) ~ 24일(일) 영동천 하상주차장 일원 개최 외 (10월13일 종합)",
-      "publisher": "충북데일리",
-      "published": "2026-10-13",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5ySmdnLUJKM2tnN253S3VBTDdTMjR0a3ZyNGZodlptMjZWWkpNVjJrT2pYbEdKSllVa3NVV25CYTl6NGZidVRnLVRsQ245LW8zNzB0ZEd5dGJIMW9SN25Ra1Bn?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
       "region": "괴산군",
       "title": "괴산군 \"문광저수지 은행나무길 등 관광명소서 가을 즐기세요\"",
       "publisher": "연합뉴스",
@@ -3386,6 +3656,16 @@
       "topicGroup": "관광환경"
     },
     {
+      "region": "영동군",
+      "title": "영동군, “영동곶감, 감으로 놀고 기억으로 머물다”... 2027 영동곶감축제, 내년 1월 22일(금) ~ 24일(일) 영동천 하상주차장 일원 개최 외 (10월13일 종합)",
+      "publisher": "충북데일리",
+      "published": "2026-10-13",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5ySmdnLUJKM2tnN253S3VBTDdTMjR0a3ZyNGZodlptMjZWWkpNVjJrT2pYbEdKSllVa3NVV25CYTl6NGZidVRnLVRsQ245LW8zNzB0ZEd5dGJIMW9SN25Ra1Bn?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
       "region": "옥천군",
       "title": "[옥천소식]107농가 농축산물 가격안정기금 1.8억 지급 등",
       "publisher": "뉴시스",
@@ -3404,56 +3684,6 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "지역생활"
-    },
-    {
-      "region": "청주시",
-      "title": "역사부터 미식까지 ··· 청주시, 10월 내내 가을 축제 ‘풍성’",
-      "publisher": "금강일보",
-      "published": "2026-10-12",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1SZGdydC1IYzlJeFF3eGk4OURod2FVbnRDX3FXZFFDY1J3ek8wY3FVd1FkU25RNG9xaGFQaUp0ZDNRcmFXcll1UVE2bEtaMEg5TlNPekFfSTJLeExWd2dkbnRPeXFaWDhJWHc?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
-      "region": "청주시",
-      "title": "청주 관광, 미식 넘어 체험으로…체류시간 늘리고 지역경제 살린다",
-      "publisher": "www.cctoday.co.kr",
-      "published": "2026-10-12",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5HY25YRFJhalhLaDNnXy1jVGgyUGVYSHdNanpjQ0E5ZTlKUzllRXdYQXV3eVFVZXI1N2Z4cWlfUWF4WFNoMUpmU0FNeFhvSURmcGtrZUVoZzNweXIwcDZqeFdxSkRnVUVNQ1BFOEd3?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
-      "region": "옥천군",
-      "title": "충북 옥천군, 2026년 옥천묘목산업특구대학 교육생 모집",
-      "publisher": "국민기자뉴스",
-      "published": "2026-10-12",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBtTnBJMnF1OGphbHRCai1GMDJ5WnU3Y2RTakMyOU5nbUhUSTVaNEdoLVlFdEw0ZkVNRWJScTVFUkhfOGo5MW9xZ3hDc3JkQXQyc0RPalB1R05pVHd1X3hXcHlPb9IBZ0FVX3lxTE5lN2RnU2lLcW9tOXBCYWgtajRWZ0luYW1KQXlLcDFZZ1RlT1RPdW0tSkg5VlllVnlnRmR6NE1EX3FsbW5XaGNLcDM1UU1mVWJ5Nl9OTFpoWkxqMnpKWjV5S0RUWFNEOGc?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
-      "region": "증평군",
-      "title": "증평인삼골축제, 42만 명 찾았다... 농특산물 10억5000만 원 판매",
-      "publisher": "굿모닝충청",
-      "published": "2026-10-12",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE8zZ254LVdyN3ZIZ0J6Q3dmajJlNWNYQkxLeXNvMXA2TkoxUlV6VjllMHNwNXJLTTRDN2M4dmZZUHdBdHlZc3FfVk1JRDAtMHhJNnY5NGduZlRnOUlpbVI2eTlFMXZVNk1oOUdWX0JINS1adw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
-      "region": "단양군",
-      "title": "\"관광 활성화 시동\" 단양 시루섬 기적의 다리, 14일부터 '유료'",
-      "publisher": "굿모닝충청",
-      "published": "2026-10-12",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBCdlpIdE1DUjEyQzlTUkMtRFVPZ3Y3WW1SZjlNMzBET2VkUjVkQ21IZVItV0x6RzVGRFF2SWs0Umo1RWp5eXU1eXZiYm1WcVdCaThjYkZaempucjJXMFNNNWxyd2s5TVZqdWNnbFREbTEwdw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
     }
   ]
 }

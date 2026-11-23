@@ -244,7 +244,7 @@ async function searchNewsInside({scroll=true}={}){
  if(scroll)$("liveResults").scrollIntoView({behavior:"smooth",block:"start"});
  $("liveNewsList").replaceChildren();
  $("liveCount").textContent="검색 중";
- $("liveStatus").textContent=keyword?"‘"+keyword+"’ 관련 구글 뉴스를 찾고 있어요.":"해당 지역의 구글 뉴스를 찾고 있어요.";
+ $("liveStatus").textContent=keyword?"‘"+keyword+"’ 관련 뉴스를 찾고 있어요.":"해당 지역의 뉴스를 찾고 있어요.";
  $("liveExplanation").textContent="검색어와 관련된 기사를 원문에서 읽고 확인하세요.";
  $("googleNewsFallback").href=googleNewsUrl(region,searchTerm,category);
  $("retryNews").hidden=true;
@@ -254,7 +254,7 @@ async function searchNewsInside({scroll=true}={}){
   if(seq!==liveSequence)return;
   renderLiveResults(result.items,"live");
   if(result.items.length){
-   const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":"Bing 뉴스 RSS";
+   const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":result.service==="Bing News RSS"?"빙 뉴스 RSS":"제공처 미확인 뉴스 RSS";
    $("liveStatus").textContent=provider+"에서 찾은 기사입니다. 원문에서 날짜와 사실 여부를 확인하세요.";
   }else{
    const stored=fallbackRows(region,searchTerm);
@@ -262,7 +262,7 @@ async function searchNewsInside({scroll=true}={}){
     renderLiveResults(stored,"saved");
     $("liveStatus").textContent="새 기사 검색 결과가 없어 저장된 자료 "+stored.length+"건을 표시합니다. 최신 검색 결과는 아닙니다. 자료 날짜: "+(state.indexUpdated||state.updated||"확인 필요");
    }else{
-    $("liveStatus").textContent="검색한 새 기사가 없습니다. 아래 구글 뉴스 원본 검색도 이용해 보세요.";
+    $("liveStatus").textContent="새 기사를 찾지 못했어요. 아래 외부 뉴스 검색도 이용해 보세요.";
    }
   }
  }catch(err){
@@ -271,7 +271,7 @@ async function searchNewsInside({scroll=true}={}){
   renderLiveResults(fallback,"saved");
   $("liveStatus").textContent=fallback.length?
    "뉴스 검색 서버에 연결하지 못해 저장된 관련 기사 "+fallback.length+"건을 표시합니다. 실시간 검색 결과가 아닙니다. 저장 날짜: "+(state.indexUpdated||state.updated||"확인 필요"):
-   "실시간 뉴스 검색 연결에 실패했으며 저장된 자료에도 일치하는 기사가 없습니다. 구글 뉴스 원본 검색을 이용해 주세요.";
+   "뉴스 검색에 연결하지 못했고 저장된 자료에도 일치하는 기사가 없습니다. 외부 뉴스 검색을 이용해 주세요.";
   $("retryNews").hidden=false;
   if(!fallback.length){
    $("liveCount").textContent="연결 실패";

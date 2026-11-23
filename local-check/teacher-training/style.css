@@ -236,3 +236,15 @@ kbd{font-family:inherit;border-radius:5px;padding:2px 6px;background:#dde9df;bor
  .slide{border-radius:0;box-shadow:none;outline:none;width:100vw;height:56.25vw;max-height:100vh;page-break-after:always;break-after:page}
  .slide-main{padding:4% 5%}
 }
+
+/* 비인쇄 접근성 보조 텍스트 및 전체 슬라이드 PDF 출력 */
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.print-deck{display:none}
+@media print{
+ .deck-wrap{display:none!important}
+ .print-deck{display:block!important;width:100%;margin:0;padding:0}
+ .print-deck .slide{width:100%!important;height:auto!important;aspect-ratio:16/9!important;max-height:none!important;box-shadow:none!important;outline:none!important;margin:0!important;break-after:page;page-break-after:always;border-radius:0!important}
+ .print-deck .slide:last-child{break-after:auto;page-break-after:auto}
+ .print-deck .slide-main{min-height:100%;padding:4% 5%}
+ .slide-body{overflow:visible!important}
+}

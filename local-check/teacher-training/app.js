@@ -96,7 +96,7 @@ async function toggleFullscreen(){
   else await document.documentElement.requestFullscreen();
  }catch(e){$("notice").textContent="이 브라우저에서는 전체화면 전환을 사용할 수 없습니다.";}
 }
-function printAll(){
+async function printAll(){
  const target=$("printDeck");
  target.innerHTML="";
  slides.forEach((s,i)=>{
@@ -106,6 +106,11 @@ function printAll(){
   frame.innerHTML=slideMarkup(s,i);
   target.appendChild(frame);
  });
+ // 이미지 파일을 읽기 전에 인쇄 대화상자가 열려 빈 그림이 출력되지 않게 합니다.
+ const ready=[...target.querySelectorAll("img")].map(img=>img.complete?Promise.resolve():new Promise(resolve=>{
+  img.addEventListener("load",resolve,{once:true});img.addEventListener("error",resolve,{once:true});
+ }));
+ await Promise.race([Promise.all(ready),new Promise(resolve=>setTimeout(resolve,3500))]);
  window.print();
 }
 document.addEventListener("DOMContentLoaded",()=>{

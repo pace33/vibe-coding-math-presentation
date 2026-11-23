@@ -3,6 +3,9 @@
   "functions": {
     "api/search.mjs": {
       "maxDuration": 60
+    },
+    "api/verify.mjs": {
+      "maxDuration": 60
     }
   },
   "headers": [

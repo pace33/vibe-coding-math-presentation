@@ -35,18 +35,18 @@ function normalizeGoogle(items,region){
    date=Number.isFinite(parsed)?new Date(parsed).toISOString().slice(0,10):"날짜 원문 확인";
   }else date=date.slice(0,10);
   seen.add(link);
-  output.push({region:detectRegion(title,region),title,publisher:publisher||"원문에서 확인",published:date,url:link,verified:false,sourceType:"구글 뉴스 RSS"});
+  output.push({region:detectRegion(title,region),title,publisher:publisher||"원문에서 확인",published:date,url:link,verified:false,sourceType:"뉴스 RSS"});
   if(output.length===MAX)break;
  }
  return output;
 }
-function parseRSS(xmlString,region,service="Google News RSS"){
+function parseRSS(xmlString,region,service="News RSS"){
  if(typeof DOMParser==="undefined")throw Error("RSS 해석 기능을 사용할 수 없어요");
  const document=new DOMParser().parseFromString(xmlString,"application/xml");
  if(document.querySelector("parsererror"))throw Error("RSS 파일이 아닌 응답이 도착했어요");
  const nodes=[...document.querySelectorAll("channel > item")];
  if(!nodes.length){
-  if(!document.querySelector("rss,feed"))throw Error("구글 뉴스에서 RSS를 받지 못했어요");
+  if(!document.querySelector("rss,feed"))throw Error("뉴스 제공처에서 RSS를 받지 못했어요");
   return [];
  }
  const rows=nodes.slice(0,45).map(node=>{
@@ -58,7 +58,7 @@ function parseRSS(xmlString,region,service="Google News RSS"){
   const publisher=get("source")||[...node.children].find(child=>child.localName==="Source")?.textContent||"";
   return {title:get("title"),link,publisher,pubDate:get("pubDate")};
  });
- return normalizeGoogle(rows,region).map(item=>({...item,sourceType:service==="Bing News RSS"?"Bing 뉴스 RSS":"구글 뉴스 RSS"}));
+ return normalizeGoogle(rows,region).map(item=>({...item,sourceType:service==="Bing News RSS"?"빙 뉴스 RSS":service==="Google News RSS"?"구글 뉴스 RSS":"뉴스 RSS"}));
 }
 function parseGdelt(body,region){
  if(!body||!Array.isArray(body.articles))throw Error("GDELT 뉴스 응답이 올바르지 않아요");
@@ -87,8 +87,8 @@ async function search({region="전체",keyword="",category="news",signal}={}){
  if(!response.ok)throw Error("뉴스 검색 서버 연결 오류 "+response.status);
  const xml=await response.text();
  if(xml.length>650000)throw Error("RSS 응답 크기 초과");
- const service=response.headers.get("X-News-Provider")||"Google News RSS";
- const value={items:parseRSS(xml,region,service),service,feed:rssUrl(region,keyword,category),fetchedAt:response.headers.get("X-News-Fetched-At")};
+ const service=response.headers.get("X-News-Provider")||"News RSS";
+ const value={items:parseRSS(xml,region,service),service,feed:service==="Google News RSS"?rssUrl(region,keyword,category):null,fetchedAt:response.headers.get("X-News-Fetched-At")};
  cache.set(key,{when:Date.now(),value});
  if(cache.size>30)cache.delete(cache.keys().next().value);
  return value;

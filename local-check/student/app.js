@@ -189,21 +189,43 @@ async function loadSearchIndex(){
   state.indexUpdated=parsed.updatedAt||null;
  }catch{state.searchIndex=[];state.indexUpdated=null;}
 }
+function newsDate(value){
+ const v=String(value||"").trim();
+ return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:"";
+}
+function newsExcerpt(item,keyword){
+ const raw=String(item.snippet||item.description||item.summary||"").replace(/\s+/g," ").trim();
+ if(!raw||raw===item.title)return "";
+ const tokens=String(keyword||"").toLowerCase().split(/\s+/).filter(x=>x.length>=2&&!["충북","충청북도","지역","뉴스"].includes(x));
+ const lower=raw.toLowerCase();
+ const found=tokens.map(t=>lower.indexOf(t)).find(i=>i>=0);
+ const start=found===undefined?0:Math.max(0,found-45);
+ return (start?"…":"")+raw.slice(start,start+170)+(raw.length>start+170?"…":"");
+}
 function renderLiveResults(items,mode){
- state.liveNews=items;
+ const ordered=[...items].sort((a,b)=>newsDate(b.published).localeCompare(newsDate(a.published)));
+ state.liveNews=ordered;
  state.liveMode=mode;
  const box=$("liveNewsList");box.replaceChildren();
- $("liveCount").textContent=items.length+"건";
- if(!items.length){
+ $("liveCount").textContent=ordered.length+"건 · 최신 날짜순";
+ if(!ordered.length){
   box.innerHTML='<div class="news-empty">조건에 맞는 기사를 찾지 못했어요. 다른 검색어를 입력하거나 검색 범위를 바꿔 보세요.</div>';
   return;
  }
- for(let i=0;i<items.length;i++){
-  const x=items[i],card=document.createElement("article");
+ if(!document.getElementById("newsExcerptStyles")){
+  const style=document.createElement("style");style.id="newsExcerptStyles";
+  style.textContent=".news-card .news-excerpt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;line-height:1.6;margin:.45rem 0 .7rem;color:#425466}.news-card .news-excerpt-empty{color:#677887;font-size:.88rem}";
+  document.head.appendChild(style);
+ }
+ const searchTerm=$("keyword")?.value||"";
+ for(let i=0;i<ordered.length;i++){
+  const x=ordered[i],card=document.createElement("article");
   card.className="news-card";
   const valid=url(x.url);if(!valid)continue;
+  const excerpt=newsExcerpt(x,searchTerm);
   card.innerHTML='<div class="meta"><span class="tag">'+esc(x.region)+" · "+esc(x.sourceType||"뉴스")+'</span><span>'+esc(x.published||"날짜 확인")+'</span></div>'+
    '<h3>'+esc(x.title)+'</h3><p>'+esc(x.publisher||"발행기관 확인")+'</p>'+
+   (excerpt?'<p class="news-excerpt">'+esc(excerpt)+'</p>':'<p class="news-excerpt news-excerpt-empty">기사 요약이 제공되지 않았어요. 원문에서 내용을 확인하세요.</p>')+
    '<div class="news-actions"><a href="'+esc(valid)+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a>'+
    '<button type="button" data-live-news="'+i+'">검증하기 →</button></div>';
   box.appendChild(card);

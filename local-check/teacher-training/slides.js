@@ -297,7 +297,7 @@ const fieldGap=(task,block,solution)=>'<div class="field-reality">'+
  '<div class="field-cell"><span>교실에서 발생할 수 있는 어려움</span><strong>'+block+'</strong></div>'+
  '<div class="field-cell solved"><span>웹앱에 반영한 해결 방식</span><strong>'+solution+'</strong></div></div>';
 const lessonPreview=(line1,line2,prompt,source)=>'<div class="lesson-preview">'+
- '<div class="lesson-page"><div class="lesson-page-top">사회 4학년 2학기 · 지역 문제와 주민 참여</div>'+
+ '<div class="lesson-page"><div class="lesson-page-top">경기도 지역화 교재 예시 · 4학년 2학기</div>'+
  '<h3>'+line1+'</h3><p>'+line2+'</p><div class="lesson-page-task">'+prompt+'</div></div>'+
  '<div class="lesson-page-explain"><span>수업 준비에서 실제로 필요한 것은?</span>'+
  '<strong>우리 시·군의 기사,<br>최신 날짜, 확인 가능한 근거</strong>'+

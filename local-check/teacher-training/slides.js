@@ -195,10 +195,23 @@ const SLIDES=[
  note:"[4사09-02]는 지역의 자연환경·역사·문화·생산물과 지역사회의 노력을 탐구하는 내용이므로, 문화유산 이름만 제공하는 것으로 부족합니다. 전시·체험이 가능한 박물관·미술관과 지역 축제·예술 행사 정보를 추가했습니다. 다만 축제 개최일과 운영 정보는 해마다 변경되므로 최신 공지로 확인하도록 안내합니다."
 },
 {
- id:"app-issues",section:"완성된 수업 도구",type:"image",kicker:"지역문제 · 사회 [4사09-01]",title:"이 분야는 뉴스를 먼저 보여줍니다",
- lead:"환경 · 교통 안전 · 교육·복지 · 지역 생활 문제",
+ id:"app-issues",section:"수업 문제 해결",type:"image",kicker:"수업 문제의 해결 방안 · 사회 [4사09-01]",
+ title:"기사 검색에 막힌 수업, 이렇게 해결했습니다",
+ lead:"우리 시·군 선택 → 관심 주제·검색어 입력 → 기사·언론사·날짜 확인",
  image:"assets/10-issues.svg",
- note:"다른 세부 분야는 지명·시설명처럼 변동이 적은 기초정보를 먼저 보여 주지만 지역문제 영역은 현재 지역에서 일어나는 문제를 조사하는 교과 활동에 맞춰 뉴스 검색을 우선 배치했습니다. 교사는 기사 제목이 사실 검증 완료가 아니라는 점을 분명히 하고 공공기관 자료와 비교하는 절차를 지도합니다."
+ note:"바로 앞 페이지에서는 지역 뉴스를 찾으려고 하면 광역 기사·오래된 기사·관련 없는 검색 결과가 섞여 수업이 어려울 수 있음을 설명했습니다. 이 페이지는 그 문제를 해결하기 위한 실제 웹앱 화면입니다. 학생이 사는 충북 시·군을 선택하고 환경·교통안전·교육복지·지역 생활 문제 등 관심 분야나 검색어로 기사를 찾습니다. 검색 결과의 기사 제목·언론사·날짜를 먼저 보고 원문을 열도록 구성해, 시간을 기사 찾기에만 쓰지 않고 비교·검증 활동으로 연결하도록 했습니다. 화면에 보이는 기사는 수업용 예시이며 뉴스 검색은 외부 뉴스 서비스 연결 상태에 따라 달라질 수 있습니다."
+},
+{
+ id:"app-problem-features",section:"수업 문제 해결",kicker:"수업의 어려움 → 웹앱의 핵심 기능",
+ title:"수업에서 막힌 지점을\n네 가지 기능으로 연결했습니다",
+ lead:"자료를 빨리 찾고, 그 시간을 기사 비교와 근거 확인에 사용합니다",
+ body:'<div class="solution-grid">'+
+ '<article class="solution-card"><small>01 · 기사 찾기</small><p>“우리 고장 기사를 찾기 어려워요”</p><strong>충북 11개 시·군 선택 · 뉴스 검색</strong><span>지역과 검색어로 필요한 기사부터 찾기</span></article>'+
+ '<article class="solution-card"><small>02 · 출처 확인</small><p>“어떤 기사를 믿어야 할까요?”</p><strong>기사 제목 · 언론사 · 날짜 · 원문</strong><span>제목만 읽지 않고 누가 언제 썼는지 확인</span></article>'+
+ '<article class="solution-card"><small>03 · 근거 비교</small><p>“기사가 두 개면 모두 사실일까요?”</p><strong>다른 기사 · 공공기관 자료 비교</strong><span>같은 내용, 다른 내용과 근거 구별하기</span></article>'+
+ '<article class="solution-card"><small>04 · 탐구 기록</small><p>“확인한 생각을 어떻게 남길까요?”</p><strong>판단 선택 · 이유 작성 · 탐정 카드</strong><span>확인한 사실과 더 알아볼 점 기록하기</span></article>'+
+ '</div>',
+ note:"앞 슬라이드의 수업 문제를 학생용 웹앱의 실제 기능과 연결합니다. ① 충북 11개 시·군을 고르고 검색어로 관련 뉴스를 찾습니다. ② 기사 제목·언론사·발행 날짜와 원문을 살펴봅니다. ③ 다른 기사나 공식 자료를 비교하고 내용의 공통점과 차이점을 확인합니다. ④ 같아요·달라요·아직 모르겠어요 등을 선택하고 이유를 적어 탐정 카드로 남깁니다. 웹앱이 진위를 자동으로 판정하는 기능은 아닙니다. 탐정 카드 저장은 현재 사용 중인 브라우저 중심입니다. 이제 다음 페이지에서 실제 뉴스 2건을 가지고 이 과정을 적용해 보겠습니다."
 },
 {
 
@@ -511,7 +524,7 @@ Object.assign(classes,{
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need",
- "field-textbook-news","field-gap-news","app-issues",
+ "field-textbook-news","field-gap-news","app-issues","app-problem-features",
  "app-article-traffic","app-article-environment","field-compare-gap","app-verify",
  "field-textbook-region","field-gap-region","app-menu","app-basics","field-standards",
  "section-build",

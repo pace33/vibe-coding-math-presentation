@@ -112,7 +112,6 @@ const SLIDES=[
  id:"six-fields",section:"웹앱 살펴보기",kicker:"교과 내용에 가까운 분류",title:"‘우리 지역’에는 여섯 분야",
  lead:"교육과정의 지역 이해에서 익숙하게 다루는 주제로 묶었습니다.",
  body:'<div class="fields-grid">'+
- ["기본 정보","위치·행정구역·인구·면적","01"].map((x,i)=>i).slice(0,0).join("")+
  ['<b>01</b><strong>기본 정보</strong><small>위치·행정구역·인구·면적</small>',
  '<b>02</b><strong>자연환경</strong><small>산·강·호수·숲</small>',
  '<b>03</b><strong>생활시설</strong><small>공공기관·교통·도서관</small>',

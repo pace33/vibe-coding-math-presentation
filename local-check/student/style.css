@@ -354,3 +354,52 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  background:#e7f3e8;color:#205a40;border-radius:9px;font-size:12px;font-weight:850}
 .regional-visit-link:hover{background:#d9eedd}
 @media(max-width:660px){.regional-visit-link{width:100%}}
+
+
+/* 학생 직접 검증 → AI 근거 검토 → 최종 판단 */
+.ai-review-stage{
+ margin-top:22px;
+ padding:20px;
+ border-radius:14px;
+ border:1px solid #c8dbc8;
+ background:#f7faf5;
+}
+.ai-review-stage h2{font-size:20px;margin:0 0 8px}
+.ai-review-stage>.verification-guide{margin:4px 0 14px}
+.ai-review-stage .bottom-actions{margin:12px 0}
+.ai-review-status{background:#e6f2e9;color:#285d44;font-size:13px;font-weight:700;line-height:1.55;padding:10px 12px;border-radius:9px;margin:12px 0}
+.ai-review-result{background:white;border:1px solid #c6d8cb;border-left:5px solid #51946b;border-radius:12px;margin:14px 0;padding:17px}
+.ai-review-result[data-status="conflict"]{border-left-color:#d18d4b;background:#fffaf2}
+.ai-review-result[data-status="insufficient"],.ai-review-result[data-status="unavailable"]{border-left-color:#7b95b1;background:#f7f9fd}
+.ai-review-result>strong{display:block;color:#1d583d;font-size:18px;line-height:1.4;margin-bottom:8px}
+.ai-review-result>p{color:#3c5747;font-size:14px;line-height:1.75;margin:7px 0}
+.ai-review-sources{display:flex;flex-direction:column;gap:8px;border-top:1px solid #d8e5dc;margin-top:12px;padding-top:12px}
+.ai-review-sources>strong{font-size:13px;color:#2c5943}
+.ai-review-sources a{display:inline-flex;align-self:flex-start;color:#1f684a;font-size:13px;font-weight:800;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.ai-review-sources p{font-size:12px;color:#567166}
+.final-stage{margin-top:20px;padding-top:18px;border-top:2px solid #c9decf}
+.final-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.final-choices legend{grid-column:1/-1}
+.final-choices label{display:flex;align-items:center;gap:7px;border:1px solid #cbded1;border-radius:10px;padding:12px;background:#fff;font-size:13px;font-weight:850;cursor:pointer}
+.final-choices label:has(input:checked){background:#e4f4e8;border-color:#4aaa71}
+.final-choices input{width:17px;height:17px;min-height:0;accent-color:var(--green)}
+.ai-review-stage input[disabled],.ai-review-stage textarea[readonly],.verify-panel textarea[readonly]{background:#f1f3f0;color:#53655b;cursor:not-allowed}
+#finish:disabled{opacity:.48;cursor:not-allowed}
+.detective-ai-record,.detective-final-record{
+ border:2px solid #bdd7c6;border-radius:17px;background:#f3f9f4;
+ padding:20px;margin:20px 0;
+}
+.detective-ai-record{background:#f6f8fb;border-color:#c7d5e4}
+.detective-ai-record h3,.detective-final-record h3{font-size:1.28rem;margin:0 0 13px}
+.detective-ai-record p,.detective-final-record p{line-height:1.65;overflow-wrap:anywhere}
+.detective-ai-links{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.detective-ai-links strong{font-size:.95rem}
+.detective-ai-links a{font-size:.9rem;color:#235f48;text-decoration:underline;overflow-wrap:anywhere}
+.detective-ai-caution{font-size:.9rem;color:#6a5d4a}
+@media(max-width:660px){
+ .ai-review-stage{padding:14px}
+ .ai-review-stage .bottom-actions .btn{width:100%}
+ .final-choices{grid-template-columns:1fr}
+ .final-choices label{min-height:52px}
+ .detective-ai-record,.detective-final-record{padding:14px}
+}

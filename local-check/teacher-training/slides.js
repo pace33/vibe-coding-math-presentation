@@ -500,12 +500,14 @@ Object.assign(classes,{
   note:"코드 구문 검사를 통과했다고 수업 운영 테스트가 끝난 것은 아닙니다. 실제 기사 검색과 공공기관 외부 링크는 통신 상태·운영 사이트 변경에 영향받습니다. 테스트에는 정상 검색, 기사 없음, 연결 실패, 원문 링크, 저장·새로고침, 지역 변경, 모바일 화면, 화면 글자 겹침 등을 포함해야 합니다. 본 발표에는 테스트 항목을 가르치는 것이며 모든 브라우저·외부 링크에 대해 지금 실시간 테스트를 완료했다는 주장은 하지 않습니다."
  },
  "build-deploy":{
-  id:"build-deploy",section:"웹앱 제작 방법",kicker:"개발 과정 12 · 배포와 운영",
-  title:"웹주소를 만드는 것과\n뉴스 서비스를 운영하는 것은 다릅니다",
-  body:twoStep(
-   ["학생용 화면 배포","GitHub Pages","/local-check/student/ 경로의 HTML·CSS·JS를 공개"],
-   ["뉴스 검색 서비스 운영","별도 RSS 검색 서버","/api/news 응답·오류·외부 검색 제공처를 확인"]
-  ),
+  id:"build-deploy",section:"웹앱 제작 방법",kicker:"개발 과정 12 · 실제 공개 절차",
+  title:"만든 웹앱을 교실에서\n열 수 있게 배포합니다",
+  body:buildRow([
+   ["파일 정리","index.html · style.css · app.js · 지역 자료 JS"],
+   ["저장소 반영","GitHub의 local-check/student/ 폴더에 저장"],
+   ["웹주소 공개","GitHub Pages 설정 후 학생용 주소 접속 확인"],
+   ["서버 점검","뉴스 검색은 별도 /api/news 연결까지 확인"]
+  ]),
   note:"학생용 실제 주소는 https://pace33.github.io/vibe-coding-math-presentation/local-check/student/ 입니다. 학생용 화면은 GitHub Pages에 배포되는 정적 페이지입니다. 서버 파일은 local-check/server/news.mjs이며 실제 운영 주소는 https://localcheck-news-pace33.lejinku.chatgpt.site/api/news 입니다. 서버가 중단되면 학생용 UI는 보여도 새 기사 검색은 실패할 수 있습니다. 뉴스 데이터의 최신성과 출처, 운영 여부까지 점검해야 수업 준비가 끝납니다. 참가자의 직접 배포 실습은 없습니다."
  }
 });

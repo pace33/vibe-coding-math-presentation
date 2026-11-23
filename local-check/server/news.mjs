@@ -1,3 +1,4 @@
+import {verifyEvidence} from './verify.mjs';
 const REGIONS = ['전체','청주시','충주시','제천시','보은군','옥천군','영동군','증평군','진천군','괴산군','음성군','단양군'];
 const ORIGIN = 'https://pace33.github.io';
 const requests = new Map();
@@ -76,7 +77,8 @@ export async function news(request, edgeCache) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
+    if (new URL(request.url).pathname === '/api/verify') return verifyEvidence(request, env || {});
     if (new URL(request.url).pathname !== '/api/news') return Response.json({service:'LocalCheck News',endpoint:'/api/news',provider:'Google News RSS'});
     let edgeCache;
     try { edgeCache = await globalThis.caches?.open('localcheck-news-v1'); } catch {}

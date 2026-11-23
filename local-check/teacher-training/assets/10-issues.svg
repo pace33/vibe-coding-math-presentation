@@ -1,1 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" role="img" aria-label="지역문제 · 실제 뉴스 탐색"><style>text{font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;letter-spacing:-.45px}</style><rect x="0" y="0" width="1400" height="800" rx="0" fill="#f4f8f3" stroke="none" stroke-width="1.8"/><rect x="45" y="33" width="1310" height="735" rx="25" fill="#fff" stroke="#d7e5da" stroke-width="1.8"/><rect x="45" y="33" width="1310" height="75" rx="20" fill="#1d4b38" stroke="#d7e5da" stroke-width="1.8"/><rect x="45" y="80" width="1310" height="28" rx="0" fill="#1d4b38" stroke="#d7e5da" stroke-width="1.8"/><text x="89" y="81" font-size="30" fill="#fff" font-weight="850" text-anchor="start">우리 지역 탐정</text><text x="1305" y="81" font-size="19" fill="#cae8d5" font-weight="650" text-anchor="end">사회 [4사09-01]</text><text x="97" y="164" font-size="35" fill="#1e4c35" font-weight="850" text-anchor="start">지역문제 · 실제 뉴스 탐색</text><text x="107" y="222" font-size="22" fill="#5a7765" font-weight="700" text-anchor="start">지역 선택</text><rect x="106" y="239" width="1180" height="60" rx="14" fill="#fff" stroke="#d7e5da" stroke-width="1.8"/><text x="138" y="279" font-size="24" fill="#19372c" font-weight="800" text-anchor="start">음성군</text><text x="1231" y="280" font-size="25" fill="#285e44" font-weight="800" text-anchor="start">⌄</text><text x="107" y="350" font-size="22" fill="#5a7765" font-weight="600" text-anchor="start">주제를 고르면 지역 뉴스가 검색됩니다.</text><rect x="107" y="370" width="284" height="65" rx="10" fill="#d7eee0" stroke="#d7e5da" stroke-width="1.8"/><text x="249" y="412" font-size="23" fill="#1c6c4b" font-weight="800" text-anchor="middle">환경</text><rect x="407" y="370" width="284" height="65" rx="10" fill="#f6faf7" stroke="#d7e5da" stroke-width="1.8"/><text x="549" y="412" font-size="23" fill="#38594a" font-weight="800" text-anchor="middle">교통·안전</text><rect x="707" y="370" width="284" height="65" rx="10" fill="#f6faf7" stroke="#d7e5da" stroke-width="1.8"/><text x="849" y="412" font-size="23" fill="#38594a" font-weight="800" text-anchor="middle">교육·복지</text><rect x="1007" y="370" width="284" height="65" rx="10" fill="#f6faf7" stroke="#d7e5da" stroke-width="1.8"/><text x="1149" y="412" font-size="23" fill="#38594a" font-weight="800" text-anchor="middle">지역 생활</text><rect x="107" y="460" width="1180" height="162" rx="12" fill="#fff" stroke="#d7e5da" stroke-width="1.8"/><text x="138" y="503" font-size="24" fill="#1d4d34" font-weight="850" text-anchor="start">최근 검색된 기사 · 제목·언론사·발행 날짜를 확인</text><rect x="139" y="525" width="975" height="69" rx="8" fill="#f2f7f3" stroke="#d7e5da" stroke-width="1.8"/><text x="161" y="566" font-size="21" fill="#576f5e" font-weight="650" text-anchor="start">[기사 제목 예시] 지역 문제를 다룬 뉴스와 원문 확인</text><rect x="1130" y="529" width="140" height="57" rx="9" fill="#1b7554" stroke="#d7e5da" stroke-width="1.8"/><text x="1200" y="565" font-size="20" fill="#fff" font-weight="800" text-anchor="middle">검증하기</text><text x="120" y="677" font-size="24" fill="#a1513d" font-weight="800" text-anchor="start">검색된 기사 ≠ 검증 완료된 사실</text><rect x="97" y="716" width="1198" height="1" rx="0" fill="#e4eee6" stroke="#d7e5da" stroke-width="1.8"/><text x="100" y="746" font-size="18" fill="#819a89" font-weight="500" text-anchor="start">학생용 웹앱의 기능을 설명하기 위한 재구성 예시 화면</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 580" role="img" aria-label="지역문제 뉴스 탐색 화면. 지역 선택, 주제 선택, 기사 제목·날짜 확인과 검증하기 버튼">
+<style>text{font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;letter-spacing:-.45px}</style>
+<rect width="1400" height="580" rx="16" fill="#f3f8f3"/>
+<rect x="18" y="12" width="1364" height="554" rx="21" fill="#fff" stroke="#d7e5da" stroke-width="2"/>
+<path d="M39 12H1361Q1382 12 1382 33V77H18V33Q18 12 39 12Z" fill="#1d4b38"/>
+<text x="58" y="51" font-size="26" font-weight="850" fill="#fff">우리 지역 탐정</text>
+<text x="1333" y="51" font-size="20" font-weight="650" text-anchor="end" fill="#d4eddd">사회 [4사09-01]</text>
+<text x="58" y="123" font-size="34" font-weight="850" fill="#1e4c35">지역문제 · 실제 뉴스 탐색</text>
+<text x="58" y="168" font-size="21" font-weight="700" fill="#5a7765">지역 선택</text>
+<rect x="58" y="182" width="1284" height="54" rx="12" fill="#fff" stroke="#d7e5da" stroke-width="2"/>
+<text x="83" y="218" font-size="24" font-weight="800" fill="#19372c">음성군</text>
+<text x="1301" y="217" font-size="26" font-weight="800" text-anchor="middle" fill="#285e44">⌄</text>
+<text x="58" y="268" font-size="21" font-weight="620" fill="#5a7765">주제를 고르면 지역 뉴스가 검색됩니다.</text>
+<rect x="58" y="281" width="307" height="55" rx="10" fill="#d7eee0" stroke="#d7e5da" stroke-width="2"/>
+<text x="212" y="317" font-size="23" font-weight="800" text-anchor="middle" fill="#1c6c4b">환경</text>
+<rect x="379" y="281" width="307" height="55" rx="10" fill="#f6faf7" stroke="#d7e5da" stroke-width="2"/>
+<text x="533" y="317" font-size="23" font-weight="800" text-anchor="middle" fill="#38594a">교통·안전</text>
+<rect x="700" y="281" width="307" height="55" rx="10" fill="#f6faf7" stroke="#d7e5da" stroke-width="2"/>
+<text x="854" y="317" font-size="23" font-weight="800" text-anchor="middle" fill="#38594a">교육·복지</text>
+<rect x="1021" y="281" width="321" height="55" rx="10" fill="#f6faf7" stroke="#d7e5da" stroke-width="2"/>
+<text x="1181" y="317" font-size="23" font-weight="800" text-anchor="middle" fill="#38594a">지역 생활</text>
+<rect x="58" y="354" width="1284" height="140" rx="12" fill="#fff" stroke="#d7e5da" stroke-width="2"/>
+<text x="86" y="392" font-size="24" font-weight="850" fill="#1d4d34">최근 검색된 기사 · 제목·언론사·발행 날짜를 확인</text>
+<rect x="86" y="410" width="1060" height="59" rx="8" fill="#f2f7f3" stroke="#d7e5da" stroke-width="2"/>
+<text x="105" y="447" font-size="21" font-weight="620" fill="#576f5e">[기사 제목 예시] 관련 뉴스를 찾고 기사 원문 확인</text>
+<rect x="1158" y="412" width="160" height="56" rx="9" fill="#1b7554"/>
+<text x="1238" y="447" font-size="21" font-weight="800" text-anchor="middle" fill="#fff">검증하기</text>
+<text x="58" y="539" font-size="23" font-weight="800" fill="#a1513d">검색된 기사 ≠ 검증 완료된 사실</text>
+<text x="1340" y="539" font-size="17" font-weight="500" text-anchor="end" fill="#819a89">수업용 재구성 예시 화면</text>
+</svg>

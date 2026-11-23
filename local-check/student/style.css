@@ -72,6 +72,10 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-card .tag,.business-tag,.board-region,.board-verdict{font-size:11px;border-radius:7px;padding:4px 8px;background:var(--soft);color:#377457;font-weight:750}
 .news-card h3,.business-card h3,.board-card h3{font-size:16px;line-height:1.45;overflow-wrap:anywhere;margin:0}
 .news-card p,.business-card p,.board-card p{font-size:12px;color:var(--muted);margin:0;flex:1;line-height:1.65}
+/* Keep RSS preview text readable on small screens; avoid clipped descenders and flex stretching. */
+.news-card .news-publisher{flex:none}
+.news-card .news-excerpt{display:block;flex:none;overflow:visible;overflow-wrap:anywhere;line-height:1.7;margin:4px 0 8px;color:#425466}
+.news-card .news-excerpt-empty{color:#677887;font-size:12px}
 .news-actions,.business-buttons,.candidate-actions,.board-card-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .news-actions a,.news-actions button,.business-buttons a,.business-buttons button,.candidate-actions a,.candidate-actions button,.board-action{min-height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:850;border-radius:8px;border:1px solid #cfe1d1;padding:9px 12px;background:var(--soft);color:var(--green);cursor:pointer;text-align:center}
 .news-actions button,.business-buttons button:first-child,.candidate-actions button,.board-action.primary{background:var(--green);border-color:var(--green);color:white}

@@ -52,9 +52,9 @@ function normalizeGoogle(items,region,keyword=""){
   }else date=date.slice(0,10);
   seen.add(link);
   output.push({region:detectRegion(title,region),title,publisher:publisher||"원문에서 확인",published:date,url:link,snippet:extractSnippet(item.description||item.summary||"",title,keyword),verified:false,sourceType:"뉴스 RSS"});
-  if(output.length===MAX)break;
+
  }
- return output;
+ return newestFirst(output).slice(0,MAX);
 }
 function parseRSS(xmlString,region,service="News RSS",keyword=""){
  if(typeof DOMParser==="undefined")throw Error("RSS 해석 기능을 사용할 수 없어요");
@@ -88,9 +88,9 @@ function parseGdelt(body,region){
   const publisher=clean(item.domain||item.source,80)||"언론사 원문 확인";
   items.push({region:detectRegion(title,region),title,publisher,published,url:link,snippet:extractSnippet(item.description||"",title),verified:false,sourceType:"GDELT 뉴스 검색"});
   seen.add(link);
-  if(items.length===MAX)break;
+
  }
- return items;
+ return newestFirst(items).slice(0,MAX);
 }
 async function search({region="전체",keyword="",category="news",signal}={}){
  const key=JSON.stringify([region,clean(keyword,85),category]);

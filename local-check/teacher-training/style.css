@@ -182,3 +182,49 @@ a{color:inherit}
  .print-deck .slide:last-child{page-break-after:auto;break-after:auto}
  .print-deck .slide-main{height:100%!important;padding:4.3% 5.4% 3.3%!important}
 }
+
+/* 교과서 근거와 실제 제작 요청문: 홍보형 카드 대신 근거 중심 편집 */
+.standard-block{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+ padding:clamp(22px,3.3cqw,46px);border-left:7px solid var(--coral);background:#f2f6ed;
+ border-radius:0 15px 15px 0;min-height:280px;max-width:1160px;width:100%;gap:15px}
+.standard-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:#65776a;font-size:clamp(12px,1.3cqw,18px);font-weight:740}
+.standard-code{color:#15291f;font-size:clamp(17px,1.8cqw,25px);font-weight:900;background:var(--accent);padding:7px 14px;border-radius:6px}
+.standard-text{font-size:clamp(22px,2.5cqw,36px);letter-spacing:-.055em;line-height:1.48;font-weight:900;color:#1e3228;word-break:keep-all}
+.standard-block p{font-size:clamp(15px,1.55cqw,22px);line-height:1.45;color:#506b58;font-weight:650;margin:0;word-break:keep-all}
+.standard-block a{color:#35664c;font-size:clamp(11px,1.2cqw,16px);font-weight:800;text-underline-offset:4px;align-self:flex-end;margin-top:auto}
+.prompt-example{border-left:6px solid var(--coral);background:#f7f4ec;padding:clamp(22px,3.1cqw,44px);
+ width:100%;display:flex;flex-direction:column;gap:14px;border-radius:0 13px 13px 0}
+.prompt-type{font-size:clamp(12px,1.35cqw,18px);font-weight:850;color:#b34a38}
+.prompt-example blockquote{font-weight:850;font-size:clamp(24px,3.2cqw,46px);line-height:1.46;letter-spacing:-.06em;
+ color:#223a2b;margin:0;word-break:keep-all;overflow-wrap:break-word}
+.double-prompts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.double-prompts .prompt-example{min-width:0;justify-content:center;gap:15px;padding:24px;border-left-width:5px}
+.double-prompts .prompt-example blockquote{font-size:clamp(21px,2.3cqw,31px);line-height:1.5}
+.double-prompts .prompt-type{font-size:clamp(11px,1.1cqw,15px)}
+.fineprint{font-size:clamp(12px,1.15cqw,16px);color:#687e70;margin:0;padding-left:5px;line-height:1.4}
+.goal-line{display:flex;align-items:center;gap:22px;border-bottom:1px solid var(--line);padding:20px 0}
+.goal-line span{font-size:clamp(13px,1.4cqw,19px);color:var(--coral);font-weight:900}
+.goal-line strong{font-size:clamp(22px,2.4cqw,33px);font-weight:850}
+@media(max-width:900px){
+ .standard-block{min-height:0;padding:16px;gap:8px;border-left-width:4px}
+ .standard-code{font-size:clamp(12px,1.9cqw,16px);padding:4px 7px}
+ .standard-text{font-size:clamp(15px,2.75cqw,23px)}
+ .standard-block p{font-size:clamp(10px,1.8cqw,15px)}
+ .standard-block a{font-size:10px}
+ .prompt-example{padding:14px;gap:8px;border-left-width:4px}
+ .prompt-example blockquote{font-size:clamp(16px,3.1cqw,27px)}
+ .double-prompts .prompt-example{padding:12px}
+ .double-prompts .prompt-example blockquote{font-size:clamp(13px,2.25cqw,20px)}
+ .fineprint{font-size:10px}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .standard-text{font-size:clamp(19px,5cqw,24px)}
+ .standard-block p{font-size:13px}
+ .standard-block a{font-size:10px}
+ .prompt-example blockquote{font-size:clamp(20px,5.2cqw,26px)}
+ .double-prompts{grid-template-columns:1fr;gap:10px}
+ .double-prompts .prompt-example blockquote{font-size:16px}
+ .double-prompts .prompt-example{padding:12px;gap:4px}
+ .double-prompts .prompt-type{font-size:10px}
+ .fineprint{font-size:11px}
+}

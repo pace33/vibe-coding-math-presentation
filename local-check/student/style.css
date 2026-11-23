@@ -81,7 +81,7 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .live-results{margin-top:13px;scroll-margin-top:16px}
 .live-results .section-title{margin-top:0}
 .live-status,.evidence-status,.board-tip{font-size:12px;line-height:1.75;color:#4f755f;background:var(--soft);padding:11px 14px;border-radius:10px;margin:0 0 12px}
-.google-more-row{display:flex;justify-content:flex-end;margin:0 0 13px}
+.google-more-row{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin:0 0 13px}
 .google-more-button{min-height:41px;padding:9px 14px;font-size:13px}
 .live-actions{display:flex;justify-content:flex-end;gap:12px;align-items:center;margin:12px 0 0}
 .quiet-link{font-size:12px;font-weight:800;color:var(--green);text-decoration:underline}

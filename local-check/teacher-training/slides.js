@@ -15,6 +15,15 @@ const quote=(s,kind)=>'<div class="prompt-example"><span class="prompt-type">'+k
 const small=(s)=>'<p class="fineprint">'+s+'</p>';
 const list=(items)=>'<div class="big-list">'+items.map((v,i)=>'<div class="big-list-row"><span>'+String(i+1).padStart(2,"0")+'</span><strong>'+v+'</strong></div>').join("")+'</div>';
 const compare=(a,b)=>'<div class="comparison"><div><small>'+a[0]+'</small><strong>'+a[1]+'</strong><p>'+a[2]+'</p></div><div><small>'+b[0]+'</small><strong>'+b[1]+'</strong><p>'+b[2]+'</p></div></div>';
+const newsCompare=(articles,question,sourceNote)=>'<div class="news-comparison">'+
+ '<div class="news-comparison-grid">'+articles.map((a,i)=>
+ '<article class="news-comparison-paper">'+
+ '<div class="news-paper-top"><span>기사 '+(i+1)+'</span><b>'+a.source+'</b><time>'+a.date+'</time></div>'+
+ '<h3>'+a.title+'</h3>'+
+ '<p class="news-paper-summary">'+a.summary+'</p>'+
+ '<div class="news-paper-bottom"><span>'+a.focus+'</span><a href="'+a.url+'" target="_blank" rel="noopener noreferrer">기사 원문 ↗</a></div>'+
+ '</article>').join("")+'</div>'+
+ '<div class="news-compare-question"><strong>'+question+'</strong><span>'+sourceNote+'</span></div></div>';
 const flow=(items)=>'<div class="simple-flow">'+items.map((v,i)=>'<div class="flow-step"><small>'+String(i+1).padStart(2,"0")+'</small><strong>'+v+'</strong></div>').join("")+'</div>';
 const target=(social,subject)=>'<div class="goal-line"><span>'+social+'</span><strong>'+subject+'</strong></div>';
 const SLIDES=[
@@ -198,18 +207,23 @@ const SLIDES=[
  note:"학생은 자신이 선택한 지역의 뉴스와 공공기관 자료를 찾아봅니다. 실시간 뉴스 검색은 외부 제공자의 응답에 의존하고, 검색 결과에는 검증 완료 표시가 붙지 않습니다. 제공처는 실제 구글/빙 RSS에 따라 달라집니다."
 },
 {
- id:"app-article-traffic",section:"완성된 수업 도구",type:"image",kicker:"실제 기사문 예시 ① · 사회 [4사09-01]",title:"음성군의 교통 문제를 기사로 읽습니다",
- lead:"2026년 8월 4일 · 연합뉴스와 아이뉴스24의 실제 보도",
- image:"assets/14-real-article-traffic.svg",
- body:'<div class="article-links"><a href="https://www.yna.co.kr/amp/view/AKR20260804078900064" target="_blank" rel="noopener noreferrer">연합뉴스 기사 원문 ↗</a><a href="https://v.daum.net/v/20260804101508047" target="_blank" rel="noopener noreferrer">아이뉴스24 기사 원문 ↗</a></div>',
- note:"실제 기사 사례 ①. 연합뉴스 박재천 기자 2026-08-04 11:24 '음성군, 혁신도시 버스터미널 인근 불법주정차 24시간 단속', 아이뉴스24 소진섭 기자 2026-08-04 10:15 '충북혁신도시 버스터미널 앞 불법 주정차 24시간 단속'. 두 기사 모두 음성군이 8월 5일부터 해당 구간 단속을 확대한다는 발표를 보도합니다. 교사는 실제 제목·언론사·날짜와 기사 본문의 구분을 안내합니다. 그림은 원문 화면 캡처가 아니라 실제 기사 정보를 바탕으로 재구성한 시각자료입니다."
+ id:"app-article-traffic",section:"완성된 수업 도구",kicker:"처음 발표자료의 좌우 기사 비교 구성 복원 · 사회 [4사09-01]",
+ title:"실제 기사 두 개를\n나란히 비교합니다",
+ lead:"같은 지역 문제를 다른 언론사는 어떻게 보도했을까요?",
+ body:newsCompare([
+  {source:"연합뉴스",date:"2026. 8. 4. 11:24",title:"음성군, 혁신도시 버스터미널 인근 불법주정차 24시간 단속",summary:"음성군이 보행 안전과 차량 통행 문제를 이유로 8월 5일부터 단속 시간을 확대한다고 발표한 내용.",focus:"무엇을 발표했을까?",url:"https://www.yna.co.kr/amp/view/AKR20260804078900064"},
+  {source:"아이뉴스24",date:"2026. 8. 4. 10:15",title:"충북혁신도시 버스터미널 앞 불법 주정차 ‘24시간 단속’",summary:"버스터미널 인근 도로 한 구간에서 주말·공휴일 및 점심시간에도 CCTV로 단속한다는 내용.",focus:"단속 방법은 무엇일까?",url:"https://v.daum.net/v/20260804101508047"}
+ ],"두 기사는 어떤 점이 같고, 무엇을 더 확인해야 할까요?","공통 원천인 음성군 발표 자료도 확인하기"),
+ note:"초기 연수자료의 좌우 비교형 시각 구성을 복원했습니다. 실제 기사 제목과 언론사, 2026-08-04 발행시각을 반영했습니다. 연합뉴스(박재천)와 아이뉴스24(소진섭) 보도가 모두 음성군 발표를 전달합니다. 보도가 두 개여도 근거가 독립적인 두 개라고 할 수 없으므로 음성군 공식 자료를 추가로 찾아보게 합니다. 두 기사의 전체 내용을 복제하지 않고 요약했습니다."
 },
 {
- id:"app-article-environment",section:"완성된 수업 도구",type:"image",kicker:"실제 기사문 예시 ② · 사회 [4사09-01]",title:"같은 지역 문제를 다른 날짜에 읽습니다",
- lead:"옥천군 생활쓰레기 문제 · 2026년 4월 기사와 9월 기사",
- image:"assets/15-real-article-environment.svg",
- body:'<div class="article-links"><a href="https://v.daum.net/v/20260401103225867" target="_blank" rel="noopener noreferrer">뉴스1 4월 기사 원문 ↗</a><a href="https://www.gukjenews.com/news/articleView.html?idxno=3699363" target="_blank" rel="noopener noreferrer">국제뉴스 9월 기사 원문 ↗</a></div>',
- note:"실제 기사 사례 ②. 뉴스1 장인수 기자 2026-04-01 기사는 옥천군 불법 생활쓰레기 투기 실태를, 국제뉴스 이재기 기자 2026-09-18 기사는 옥천군의 추석 전 국토대청결 활동을 보도합니다. 날짜와 활동이 다르며 두 기사가 동일 사건을 보도하는 것이 아닙니다. 뒤의 청결 활동이 앞 기사 때문에 실시됐다고 인과관계를 단정하지 않습니다. 원문 기사 제목과 발행일은 확인했고 이미지의 요약은 교육용 재구성입니다."
+ id:"app-article-environment",section:"완성된 수업 도구",kicker:"실제 기사문 비교 ② · 지역 문제 탐구",title:"같은 지역의 기사라도\n시점이 다를 수 있습니다",
+ lead:"옥천군 생활쓰레기 문제 · 2026년 4월과 9월",
+ body:newsCompare([
+  {source:"뉴스1",date:"2026. 4. 1.",title:"종량제봉투 파장 탓?…옥천군 곳곳 몰래 버린 쓰레기 몸살",summary:"옥천군의 일부 지역에서 생활쓰레기가 무단으로 버려지는 문제를 다룬 기사.",focus:"문제를 지적한 기사",url:"https://v.daum.net/v/20260401103225867"},
+  {source:"국제뉴스",date:"2026. 9. 18.",title:"옥천군, 추석 앞두고 200여 공직자와 국토대청결 활동",summary:"추석을 앞두고 도로·하천변의 쓰레기를 수거하는 환경 정화 활동을 소개한 기사.",focus:"환경 정화 활동 기사",url:"https://www.gukjenews.com/news/articleView.html?idxno=3699363"}
+ ],"두 기사는 같은 문제를 다루지만, 같은 사건을 보도할까요?","날짜·사건·출처를 구분하고 인과관계 단정하지 않기"),
+ note:"처음 버전의 비교형 화면처럼 두 신문 기사를 좌우로 배치하되, 옥천 사례는 같은 사건의 상반된 보도가 아니라 시점이 다른 별개의 기사라는 점을 강조합니다. 2026-04-01 뉴스1 장인수 기자가 쓰레기 불법 투기를 다뤘고, 2026-09-18 국제뉴스 이재기 기자는 추석 대비 환경 정화 활동을 보도했습니다. 후자가 전자의 직접적인 결과라고 단정하면 안 됩니다. 실제 기사 제목은 발표 가독성을 위해 축약하거나 일부 편집할 수 있으며 원문 링크를 통해 정식 제목을 확인합니다."
 },
 {
  id:"app-article-check",section:"완성된 수업 도구",kicker:"실제 기사문 비교 활동 · 국어 [6국06-02]",title:"기사 두 개가 같다고,\n증거도 두 개일까요?",

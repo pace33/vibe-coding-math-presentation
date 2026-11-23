@@ -10,23 +10,28 @@ const $=id=>document.getElementById(id);
 const allowedVerdicts=new Set(["같아요","달라요","아직 모르겠어요"]);
 const trim=(x,n)=>String(x??"").trim().slice(0,n);
 const safeUrl=v=>{try{const u=new URL(String(v));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return"";}};
-const fields=["region","title","publisher","date","url","newsFact","govFact","govUrl","verdict","reason"];
+const fields=["region","title","publisher","date","url","newsFact","govFact","govUrl","verdict","reason","initialVerdict","initialReason","finalVerdict","finalReason","aiStatus","aiSummary","aiComparison","aiCaution","aiCheckedAt"];
 let navigation=null,currentShared=null,reportProvider=null,selectedSaved=null;
 function sanitized(item){
  if(!item||typeof item!=="object"||Array.isArray(item))return null;
  const d={};
  for(const field of fields){
-  const maximum=["newsFact","govFact","reason"].includes(field)?500:field.endsWith("Url")||field==="url"?1350:220;
+  const maximum=["newsFact","govFact"].includes(field)?500:["reason","initialReason","finalReason"].includes(field)?220:["aiSummary","aiComparison"].includes(field)?550:field==="aiCaution"?260:field.endsWith("Url")||field==="url"?1350:220;
   d[field]=trim(item[field],maximum);
  }
  if(!d.title||!d.newsFact||!d.reason||!safeUrl(d.url)||!allowedVerdicts.has(d.verdict))return null;
  d.url=safeUrl(d.url);d.govUrl=safeUrl(d.govUrl);
+ d.initialVerdict=allowedVerdicts.has(d.initialVerdict)?d.initialVerdict:"";
+ d.finalVerdict=allowedVerdicts.has(d.finalVerdict)?d.finalVerdict:d.verdict;
+ d.aiStatus=["match","conflict","insufficient","unavailable"].includes(d.aiStatus)?d.aiStatus:"";
+ d.aiCheckedAt=/^\d{4}-\d{2}-\d{2}T/.test(d.aiCheckedAt)?d.aiCheckedAt:"";
+ d.aiSources=(Array.isArray(item.aiSources)?item.aiSources:[]).slice(0,3).map(x=>({title:trim(x?.title,110),url:safeUrl(x?.url),date:trim(x?.date,30)})).filter(x=>x.url);
  d.id=/^[a-z0-9-]{5,70}$/i.test(String(item.id||""))?item.id:String(Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10));
  d.createdAt=/^\d{4}-\d{2}-\d{2}/.test(String(item.createdAt||""))?trim(item.createdAt,40):new Date().toISOString();
  return d;
 }
 function personalDataPresent(d){
- const content=[d.title,d.newsFact,d.govFact,d.reason,d.publisher].join(" ");
+ const content=[d.title,d.newsFact,d.govFact,d.reason,d.initialReason,d.finalReason,d.publisher].join(" ");
  return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/.test(content)||
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/.test(content);
 }
@@ -97,19 +102,42 @@ function detailReport(data,target){
  reminder.append(tag("strong","","🔎 잠깐! 같은 것을 비교했나요?"),tag("p","","연도 · 날짜 · 장소 · 숫자를 살펴보세요. 같은 이름의 축제라도 열린 해가 다르면 다른 자료일 수 있어요."));
  target.appendChild(reminder);
  const verdicts={"같아요":["same","🟢 두 자료의 내용이 같다고 생각해요"],"달라요":["different","🟠 두 자료의 내용이 다르다고 생각해요"],"아직 모르겠어요":["unsure","🔵 아직 모르겠어요. 더 알아볼래요"]};
- const [tone,label]=verdicts[data.verdict]||verdicts["아직 모르겠어요"];
+ const hasFirst=Boolean(data.initialVerdict);
+ const [tone,label]=verdicts[hasFirst?data.initialVerdict:data.verdict]||verdicts["아직 모르겠어요"];
  const thought=tag("section","detective-thought "+tone);
- thought.append(tag("h3","","③ 기사 비교"),tag("p","verification-guide","다른 기사나 공식 자료와 비교한 결과예요. 내용이 같아도 사실로 확인된 것은 아니에요."),tag("p","detective-verdict",label),tag("strong","detective-label","어떤 내용이 같거나 달랐나요?"),tag("p","detective-reason",data.reason));
+ thought.append(tag("h3","",hasFirst?"③ 학생의 첫 판단":"③ 기사 비교"),tag("p","verification-guide","내용이 같더라도 사실 확인이 끝났다는 뜻은 아니에요."),tag("p","detective-verdict",label),tag("strong","detective-label","내가 처음 생각한 이유"),tag("p","detective-reason",hasFirst?(data.initialReason||"이유를 확인하지 못했어요."):data.reason));
  target.appendChild(thought);
- target.appendChild(tag("p","detective-note","💬 이 카드는 학생의 생각을 담은 기록이에요. 정답 표시가 아니에요. 친구도 원문을 읽고 함께 생각해 보세요."));
+ if(hasFirst){
+  const ai=tag("section","detective-ai-record");
+  const statusText={match:"찾은 근거와 일부 내용이 일치해요",conflict:"찾은 근거와 다른 내용이 있어요",insufficient:"확인할 근거가 부족해요",unavailable:"AI 검토를 이용하지 못했어요"};
+  ai.appendChild(tag("h3","","④ AI 근거 검토"));
+  ai.appendChild(tag("strong","detective-label",statusText[data.aiStatus]||"AI 검토 기록이 없어요"));
+  ai.appendChild(tag("p","",data.aiSummary||"AI가 확인한 근거가 없어요."));
+  if(data.aiComparison)ai.appendChild(tag("p","",data.aiComparison));
+  if(data.aiSources?.length){
+   const links=tag("div","detective-ai-links");
+   links.appendChild(tag("strong","","AI가 제시한 참고 자료"));
+   for(const src of data.aiSources)links.appendChild(elementLink(src.title||"근거 자료",src.url));
+   ai.appendChild(links);
+  }
+  if(data.aiCaution)ai.appendChild(tag("p","detective-ai-caution",data.aiCaution));
+  target.appendChild(ai);
+  const final=tag("section","detective-final-record");
+  final.append(tag("h3","","⑤ 학생의 최종 판단"),
+   tag("p","detective-verdict","처음: "+data.initialVerdict+" → 최종: "+(data.finalVerdict||data.verdict)),
+   tag("strong","detective-label","판단을 유지하거나 바꾼 이유"),
+   tag("p","detective-reason",data.finalReason||data.reason));
+  target.appendChild(final);
+ }
+ target.appendChild(tag("p","detective-note","💬 AI 의견은 정답이 아니에요. 학생의 첫 판단과 최종 판단을 원문 자료로 비교해 보세요."));
 }
 function createCardRow(d){
  const section=tag("article","board-card");
  const top=tag("div","board-card-top");
- top.append(tag("span","board-region",d.region||"우리 지역"),tag("span","board-verdict",d.verdict));
+ top.append(tag("span","board-region",d.region||"우리 지역"),tag("span","board-verdict",d.initialVerdict&&d.initialVerdict!==d.verdict?d.initialVerdict+" → "+d.verdict:d.verdict));
  section.appendChild(top);
  section.appendChild(tag("h3","",d.title));
- section.appendChild(tag("p","",d.reason));
+ section.appendChild(tag("p","",d.initialVerdict?"최종 이유: "+d.reason:d.reason));
  const btns=tag("div","board-card-buttons");
  const view=tag("button","board-action primary","자세히 보기");view.type="button";view.dataset.cardAction="view";view.dataset.cardId=d.id;
  const share=tag("button","board-action","친구에게 공유");share.type="button";share.dataset.cardAction="share";share.dataset.cardId=d.id;
@@ -145,7 +173,7 @@ function showCard(c){
 function encodeCard(d){
  const safe=sanitized(d);
  if(!safe)return null;
- const payload={v:1,record:Object.fromEntries(["id","createdAt",...fields].map(k=>[k,safe[k]]))};
+ const payload={v:1,record:{...Object.fromEntries(["id","createdAt",...fields].map(k=>[k,safe[k]])),aiSources:safe.aiSources}};
  const bytes=new TextEncoder().encode(JSON.stringify(payload));
  let binary="";
  // Payload is deliberately bounded; do not allow huge peer-generated links.

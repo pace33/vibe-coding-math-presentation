@@ -12,10 +12,12 @@ const companies=[
 let businessExpanded=false;
 let activeMenu="news";
 let businessFilter="all";
-const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null,searchIndex:[],indexUpdated:null,evidenceNews:[],evidenceSearching:false,evidenceError:"",selectedEvidence:null};
+const state={news:[],updated:null,story:null,report:null,candidates:[],liveNews:[],liveMode:null,searchIndex:[],indexUpdated:null,evidenceNews:[],evidenceSearching:false,evidenceError:"",selectedEvidence:null,firstReview:null,aiReview:null};
 let liveController=null,liveSequence=0;
 let keywordTimer=null;
 let evidenceController=null,evidenceSequence=0;
+let aiController=null,aiSequence=0;
+const AI_VERIFY_API='https://localcheck-news-pace33.lejinku.chatgpt.site/api/verify';
 const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=s=>{try{const u=new URL(String(s));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return ""}};
@@ -554,6 +556,7 @@ function renderEvidenceCandidates(){
  container.appendChild(cards);
 }
 function selectCandidate(index){
+ if(state.firstReview)return;
  const candidate=state.candidates[index];if(!candidate)return;
  state.selectedEvidence=candidate;
  $("officialUrl").value=candidate.url;
@@ -597,10 +600,154 @@ async function searchEvidence(){
   }
  }
 }
+
+function editFirstJudgement(){
+ aiSequence++;
+ if(aiController){aiController.abort();aiController=null;}
+ state.firstReview=null;
+ state.aiReview=null;
+ document.querySelectorAll('input[name="verdict"]').forEach(x=>x.disabled=false);
+ for(const id of ["reason","articleFinding","officialFinding","officialUrl"])$(id).readOnly=false;
+ $("retryEvidence").disabled=false;
+ $("askAi").disabled=false;
+ $("askAi").textContent="🤖 내 판단을 기록하고 AI 근거 검토하기";
+ $("editFirst").hidden=true;
+ $("aiReviewMessage").textContent="직접 검증한 뒤 AI에게 근거 검토를 요청해 보세요.";
+ $("aiReviewResult").hidden=true;
+ $("aiReviewLabel").textContent="";
+ $("aiReviewSummary").textContent="";
+ $("aiReviewComparison").textContent="";
+ $("aiReviewSources").replaceChildren();
+ $("aiReviewCaution").textContent="";
+ $("finalStage").hidden=true;
+ $("finalReason").value="";
+ document.querySelectorAll('input[name="finalVerdict"]').forEach(x=>x.checked=false);
+ $("finish").disabled=true;
+ $("formMessage").textContent="";
+}
+function firstJudgement(){
+ if(!state.story)return null;
+ const verdict=document.querySelector('input[name="verdict"]:checked')?.value||"아직 모르겠어요";
+ const reason=safe($("reason").value,220);
+ const compareUrl=url($("officialUrl").value);
+ if(reason.length<3){
+  $("formMessage").textContent="AI 검토 전에 내 판단의 이유를 먼저 적어 주세요.";
+  $("reason").focus();return null;
+ }
+ if(verdict!=="아직 모르겠어요"&&!compareUrl){
+  $("formMessage").textContent="내용이 같거나 다르다고 판단했다면 비교한 자료 링크를 먼저 골라 주세요. 찾지 못하면 '더 알아볼래요'를 선택해도 돼요.";
+  $("evidenceCandidates").scrollIntoView({block:"center",behavior:"smooth"});return null;
+ }
+ return {
+  verdict,reason,govUrl:compareUrl,
+  newsFact:safe($("articleFinding").value,500)||"검증할 뉴스 제목: "+safe(state.story.title,200),
+  govFact:safe($("officialFinding").value,500)||(state.selectedEvidence?"비교자료 제목: "+safe(state.selectedEvidence.title,190):"비교할 근거를 아직 적지 않았어요.")
+ };
+}
+function showAIReviewResult(review){
+ const names={match:"찾은 근거와 일부 내용이 일치해요",conflict:"찾은 근거와 다른 내용이 있어요",insufficient:"확인할 근거가 부족해요",unavailable:"AI 검토에 연결하지 못했어요"};
+ const el=$("aiReviewResult");
+ el.hidden=false;
+ el.dataset.status=review.status;
+ $("aiReviewLabel").textContent=names[review.status]||names.insufficient;
+ $("aiReviewSummary").textContent=review.summary||"AI가 확인한 내용을 안내하지 못했어요.";
+ $("aiReviewComparison").textContent=review.comparison||"";
+ $("aiReviewCaution").textContent=review.caution||"AI가 제시한 자료도 원문에서 직접 확인하세요.";
+ const list=$("aiReviewSources");list.replaceChildren();
+ if(review.sources?.length){
+  const heading=document.createElement("strong");heading.textContent="AI가 참고한 자료 (원문 확인 필요)";list.appendChild(heading);
+  for(const src of review.sources.slice(0,3)){
+   const href=url(src.url);
+   if(!href)continue;
+   const a=document.createElement("a");a.href=href;a.target="_blank";a.rel="noopener noreferrer";
+   a.textContent=(safe(src.title,105)||"근거 자료")+" ↗";
+   list.appendChild(a);
+  }
+ }else{
+  const p=document.createElement("p");p.textContent="직접 확인할 수 있는 근거 링크가 제공되지 않았어요.";list.appendChild(p);
+ }
+ const final=document.querySelector('input[name="finalVerdict"][value="'+state.firstReview.verdict+'"]');
+ if(final)final.checked=true;
+ $("finalStage").hidden=false;
+ $("finish").disabled=false;
+ $("editFirst").hidden=false;
+}
+async function askAIEvidence(){
+ if(!state.story)return;
+ if(!state.firstReview){
+  const first=firstJudgement();
+  if(!first)return;
+  state.firstReview=first;
+  document.querySelectorAll('input[name="verdict"]').forEach(x=>x.disabled=true);
+  for(const id of ["reason","articleFinding","officialFinding","officialUrl"])$(id).readOnly=true;
+  $("retryEvidence").disabled=true;
+ }
+ const current=++aiSequence;
+ if(aiController)aiController.abort();
+ const controller=new AbortController();aiController=controller;
+ $("askAi").disabled=true;
+ $("editFirst").hidden=false;
+ $("aiReviewResult").hidden=true;
+ $("finalStage").hidden=true;
+ $("finish").disabled=true;
+ $("formMessage").textContent="";
+ $("aiReviewMessage").textContent="AI가 공개된 근거 자료를 찾고 있어요. 원문 확인 결과가 없으면 '근거 부족'으로 안내합니다.";
+ const wait=setTimeout(()=>controller.abort(),45000);
+ try{
+  const first=state.firstReview,article=state.story;
+  const response=await fetch(AI_VERIFY_API,{
+   method:"POST",mode:"cors",
+   headers:{"Content-Type":"application/json"},
+   signal:controller.signal,
+   body:JSON.stringify({
+    region:safe(article.region,50),
+    article:{title:safe(article.title,200),publisher:safe(article.publisher,100),date:safe(article.date,40),url:article.url},
+    initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:first.govFact,comparisonUrl:first.govUrl}
+   })
+  });
+  const raw=await response.json().catch(()=>({}));
+  if(!response.ok)throw Error(safe(raw.error||"AI 검토 서비스에 연결하지 못했어요.",130));
+  if(current!==aiSequence)return;
+  if(!["match","conflict","insufficient"].includes(raw.status))throw Error("AI 검토 결과를 해석할 수 없어요.");
+  const sources=(Array.isArray(raw.sources)?raw.sources:[]).slice(0,3).map(x=>({title:safe(x.title,110),url:url(x.url),date:safe(x.published,30)})).filter(x=>x.url);
+  // AI 의견에 출처가 없다면 불일치/일치 판정을 화면에 보여주지 않습니다.
+  const status=sources.length?raw.status:"insufficient";
+  state.aiReview={
+   status,
+   summary:sources.length?safe(raw.summary,550):"검증에 사용할 수 있는 출처 링크가 없어 내용을 판단하지 않았어요.",
+   comparison:sources.length?safe(raw.comparison,400):"",
+   caution:safe(raw.caution,260)||"AI가 제시한 자료를 직접 확인하세요.",
+   sources,
+   checkedAt:new Date().toISOString()
+  };
+  $("aiReviewMessage").textContent="AI의 검토 의견을 읽고 근거 링크를 확인한 뒤 최종 판단을 선택하세요.";
+ }catch(err){
+  if(current!==aiSequence)return;
+  state.aiReview={
+   status:"unavailable",
+   summary:"AI 검토를 이용하지 못했어요. 지금까지 직접 찾은 자료를 바탕으로 최종 판단을 기록할 수 있어요.",
+   comparison:"",
+   caution:err.name==="AbortError"?"요청 시간이 지났어요. 필요하면 다시 검토해 주세요.":"AI 기능을 사용하려면 서버 연결과 운영 설정이 필요해요. AI가 검증했다고 표시하지 않습니다.",
+   sources:[],
+   checkedAt:""
+  };
+  $("aiReviewMessage").textContent=err.name==="AbortError"?"AI 응답이 지연되고 있어요. 직접 검증을 계속할 수 있어요.":"AI 검토가 불가능해요. 직접 검증 내용은 그대로 남길 수 있어요.";
+ }finally{
+  clearTimeout(wait);
+  if(current===aiSequence){
+   aiController=null;
+   $("askAi").disabled=false;
+   $("askAi").textContent="↻ 같은 판단으로 AI 다시 검토하기";
+   showAIReviewResult(state.aiReview);
+  }
+ }
+}
+
 function chooseStory(story){
  if(!story||!url(story.url))return;
  state.story={title:safe(story.title),url:url(story.url),publisher:safe(story.publisher||"발행기관 확인"),date:safe(story.date||""),region:safe(story.region||$("region").value),topic:safe(story.topic||""),kind:story.kind==="business"?"business":"news",inquiry:safe(story.inquiry||""),suggested:url(story.suggested||"")};
  state.report=null;
+ editFirstJudgement();
  const isBusiness=state.story.kind==="business";
  $("verifyHeading").textContent=isBusiness?"기업 정보가 정말 맞을까?":"뉴스가 정말 맞을까?";
  $("storyType").textContent=isBusiness?"🏭 우리 지역 기업 자료":"📰 내가 고른 뉴스";
@@ -629,19 +776,28 @@ function fromNews(index){
  chooseStory({title:row.title,url:row.url,publisher:row.publisher,date:row.published,region:row.region,topic:row.title});
 }
 function makeReport(){
- if(!state.story)return;
- const verdict=document.querySelector('input[name="verdict"]:checked')?.value||"아직 모르겠어요";
- const govUrl=url($("officialUrl").value);
- if(verdict!=="아직 모르겠어요"&&!govUrl){
-  $("formMessage").textContent="먼저 비교할 근거 자료를 하나 골라 주세요. 못 찾으면 '모르겠어요'를 선택해도 좋아요.";
-  $("evidenceCandidates").scrollIntoView({block:"center",behavior:"smooth"});
-  return;
+ if(!state.story||!state.firstReview||!state.aiReview){
+  $("formMessage").textContent="먼저 학생 판단과 AI 근거 검토 단계를 마쳐 주세요.";return;
  }
- const newsFact=safe($("articleFinding").value,500)||"검증할 뉴스 제목: "+safe(state.story.title,200);
- const chosen=state.selectedEvidence;
- const govFact=safe($("officialFinding").value,500)||(chosen?"비교자료 제목: "+safe(chosen.title,190):"비교자료 내용을 아직 적지 않았어요.");
- const reason=safe($("reason").value,220)||"판단한 이유는 아직 적지 않았어요.";
- state.report={...state.story,newsFact,govFact,govUrl,verdict,reason};
+ const first=state.firstReview,ai=state.aiReview;
+ const finalVerdict=document.querySelector('input[name="finalVerdict"]:checked')?.value;
+ const finalReason=safe($("finalReason").value,220);
+ if(!finalVerdict){
+  $("formMessage").textContent="근거를 살펴본 뒤 최종 판단을 골라 주세요.";return;
+ }
+ if(finalReason.length<3){
+  $("formMessage").textContent="처음 판단을 유지하거나 바꾼 이유를 한 문장으로 적어 주세요.";
+  $("finalReason").focus();return;
+ }
+ state.report={
+  ...state.story,
+  newsFact:first.newsFact,govFact:first.govFact,govUrl:first.govUrl,
+  verdict:finalVerdict,reason:finalReason,
+  initialVerdict:first.verdict,initialReason:first.reason,
+  finalVerdict,finalReason,
+  aiStatus:ai.status,aiSummary:ai.summary,aiComparison:ai.comparison,
+  aiCaution:ai.caution,aiSources:ai.sources,aiCheckedAt:ai.checkedAt
+ };
  if(window.LocalCheckBoard){
   const saved=window.LocalCheckBoard.save(state.report);
   if(saved)state.report=saved;
@@ -658,8 +814,11 @@ function reportText(){
   "우리 지역 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
   "① 출처 확인","발행한 곳: "+d.publisher,"발행 날짜: "+(d.date||"원문에서 확인해요"),"뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
   "② 근거 확인","뉴스에서 찾은 근거: "+d.newsFact,"비교 자료에서 찾은 근거: "+(d.govFact||"아직 못 찾음"),
-  "③ 기사 비교","비교 결과: "+d.verdict,"같거나 다른 내용과 나의 생각: "+d.reason,
-  "※ 학생이 작성한 판단이며, 자동 사실 검증은 아닙니다."
+  "③ 학생 첫 판단","처음 판단: "+(d.initialVerdict||d.verdict),"처음 이유: "+(d.initialReason||d.reason),
+  "④ AI 근거 검토","AI 상태: "+(d.aiStatus||"사용 안 함"),"AI 요약: "+(d.aiSummary||"검토 기록 없음"),
+  ...(d.aiSources||[]).map(x=>"AI 참고 근거: "+x.title+" "+x.url),
+  "⑤ 최종 판단","비교 결과: "+d.verdict,"최종 이유: "+d.reason,
+  "※ 학생의 판단 기록이며 AI 의견은 정답이나 자동 판정이 아닙니다."
  ].join("\n");
 }
 function download(){
@@ -723,6 +882,8 @@ function init(){
  $("back").addEventListener("click",()=>show("home"));
  $("backVerify").addEventListener("click",()=>show("verify"));
  $("again").addEventListener("click",()=>show("home"));
+ $("askAi").addEventListener("click",askAIEvidence);
+ $("editFirst").addEventListener("click",editFirstJudgement);
  $("finish").addEventListener("click",makeReport);
  $("print").addEventListener("click",()=>window.print());
  $("download").addEventListener("click",download);

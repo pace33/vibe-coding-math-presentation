@@ -243,3 +243,42 @@ a{color:inherit}
 .slide[data-type="image"] .slide-body:has(.article-links) .slide-visual{min-height:0}
 @media(max-width:900px){.double-standards .standard-text{font-size:clamp(13px,2cqw,21px)}.double-standards .standard-block{padding:10px;gap:6px}.article-links a{font-size:10px;padding:5px 9px}}
 @media(max-width:520px) and (orientation:portrait){.double-standards{grid-template-columns:1fr;gap:8px}.double-standards .standard-text{font-size:17px}.double-standards .standard-block p{font-size:10px}.article-links{gap:5px}.article-links a{padding:5px 8px;font-size:9px}}
+
+/* 첫 연수자료의 좌·우 비교 배치 복원: 실제 기사 원문을 두 칸에 나란히 */
+.news-comparison{width:100%;display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,1.3cqw,18px);height:100%;min-height:0}
+.news-comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.7cqw,25px);min-height:0}
+.news-comparison-paper{display:flex;flex-direction:column;gap:clamp(10px,1.15cqw,16px);min-width:0;padding:clamp(17px,2.1cqw,30px);background:#f3f8ef;border:1px solid #d5dfd1;border-radius:15px;border-top:4px solid var(--ink)}
+.news-comparison-paper:nth-child(2){background:#f9f4e9;border-color:#e8e0d4;border-top-color:var(--coral)}
+.news-paper-top{display:flex;align-items:center;gap:10px;min-height:26px;flex-wrap:wrap;font-size:clamp(12px,1.23cqw,17px);color:#5c7164;line-height:1.2}
+.news-paper-top>span{font-size:clamp(11px,1.05cqw,15px);font-weight:850;color:#c45d48;margin-right:auto}
+.news-paper-top>b{color:#306347;font-size:clamp(13px,1.28cqw,18px);font-weight:850}
+.news-paper-top>time{font-size:clamp(10px,1.04cqw,15px);font-weight:650}
+.news-comparison-paper h3{font-size:clamp(21px,2.35cqw,34px);font-weight:900;line-height:1.38;letter-spacing:-.045em;color:#1b3526;margin:0;word-break:keep-all}
+.news-paper-summary{color:#587264;font-size:clamp(14px,1.45cqw,21px);font-weight:580;line-height:1.55;margin:0;word-break:keep-all}
+.news-paper-bottom{margin-top:auto;padding-top:10px;border-top:1px solid #d8e2d8;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.news-paper-bottom span{color:#315d45;font-size:clamp(12px,1.15cqw,16px);font-weight:780}
+.news-paper-bottom a{display:inline-block;color:#1d5a40;white-space:nowrap;text-decoration:underline;text-underline-offset:4px;font-size:clamp(12px,1.1cqw,16px);font-weight:850}
+.news-compare-question{display:flex;justify-content:space-between;align-items:center;gap:18px;background:#eaf2e3;border-left:5px solid #638f65;border-radius:8px;padding:clamp(12px,1.45cqw,21px)}
+.news-compare-question strong{font-size:clamp(17px,1.85cqw,26px);line-height:1.4;letter-spacing:-.04em;color:#235037;font-weight:900;word-break:keep-all}
+.news-compare-question span{font-size:clamp(11px,1.13cqw,15px);font-weight:650;color:#627d69;max-width:32%;text-align:right;line-height:1.45}
+@media(max-width:900px){
+ .news-comparison{gap:8px}
+ .news-comparison-paper{padding:11px;gap:7px}
+ .news-comparison-paper h3{font-size:clamp(15px,2.3cqw,25px)}
+ .news-paper-summary{font-size:clamp(10px,1.4cqw,16px)}
+ .news-compare-question{padding:10px}
+ .news-compare-question strong{font-size:clamp(12px,1.8cqw,18px)}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .slide-body:has(.news-comparison){overflow-y:auto;justify-content:flex-start;padding:8px 0;scrollbar-width:thin}
+ .news-comparison-grid{grid-template-columns:1fr;gap:8px}
+ .news-comparison-paper{padding:11px;gap:5px;border-radius:8px}
+ .news-comparison-paper h3{font-size:17px}
+ .news-paper-summary{font-size:12px}
+ .news-paper-top{gap:5px}
+ .news-paper-top>b{font-size:12px}
+ .news-paper-top>time{font-size:10px}
+ .news-compare-question{display:block;padding:10px}
+ .news-compare-question strong{font-size:13px}
+ .news-compare-question span{display:block;max-width:100%;text-align:left;margin-top:5px;font-size:11px}
+}

@@ -282,6 +282,101 @@ const SLIDES=[
  note:"사회과 내용은 국립특수교육원이 제공한 2022 개정 공통교육과정 사회과 성취수준 및 활동 도움자료에서 확인했습니다. 뉴스의 신뢰성 평가 [6국06-02]는 국어과 성취기준입니다. 사회 교과서의 정확한 판본과 페이지가 확인되지 않아 구체적인 교과서 본문 인용은 넣지 않았습니다. 초기 개발 프롬프트는 재구성임을 밝히고, 실제 요청 원문은 별도 슬라이드에 구분하여 제시했습니다."
 }
 ];
-window.TRAINING_SLIDES=SLIDES;
+
+/* 2026-11-23 교실 현장 중심 개정:
+ * 교재를 비판하는 것이 아니라, 교재의 '실제 자료 조사' 과제를 지역별 최신 자료로
+ * 수행할 때 발생하는 준비·탐색·검증의 어려움을 웹앱이 어떻게 보조하는지 보여줍니다.
+ * 특정 출판사 사회 교과서의 원문·이미지를 자칭하지 않습니다.
+ */
+const LOCAL_TEXTBOOK="https://www.goe.go.kr/resource/old/BBSMSTR_000000030222/BBS_202503311108019371.pdf";
+const LOCAL_ASSESS="https://www.ice.go.kr/upload/ice/na/bbs_1630/2026/02/99349a5278e3ed9b63bb236e6ca06d29.pdf";
+const PUBLISHER_FEST="https://e.m-teacher.co.kr/pages/ele/bbs/tabList.mrn/TBM-ltnof1j6-7IXkb99ZR3/55669";
+const refLink=(label,href)=>'<a class="field-source" href="'+href+'" target="_blank" rel="noopener noreferrer">'+label+' ↗</a>';
+const fieldGap=(task,block,solution)=>'<div class="field-reality">'+
+ '<div class="field-cell"><span>교재에서 요구하는 활동</span><strong>'+task+'</strong></div>'+
+ '<div class="field-cell"><span>교실에서 발생할 수 있는 어려움</span><strong>'+block+'</strong></div>'+
+ '<div class="field-cell solved"><span>웹앱에 반영한 해결 방식</span><strong>'+solution+'</strong></div></div>';
+const lessonPreview=(line1,line2,prompt,source)=>'<div class="lesson-preview">'+
+ '<div class="lesson-page"><div class="lesson-page-top">사회 4학년 2학기 · 지역 문제와 주민 참여</div>'+
+ '<h3>'+line1+'</h3><p>'+line2+'</p><div class="lesson-page-task">'+prompt+'</div></div>'+
+ '<div class="lesson-page-explain"><span>수업 준비에서 실제로 필요한 것은?</span>'+
+ '<strong>우리 시·군의 기사,<br>최신 날짜, 확인 가능한 근거</strong>'+
+ '<p>교재가 제시한 활동을 우리 지역 자료로 실행할 수 있어야 합니다.</p></div></div>'+
+ refLink("교육청 지역화 교재·활동 페이지 확인",source);
+const regionalTask=(line1,line2,source)=>'<div class="regional-task">'+
+ '<div><span>사회 수업 활동</span><strong>'+line1+'</strong><p>'+line2+'</p></div>'+
+ '<div><span>학생이 직접 찾을 정보</span><strong>실제 지역의 장소 이름<br>특징 · 선택한 이유</strong><p>교재 예시를 우리 고장의 실제 장소로 바꿔 보는 활동</p></div>'+
+ '</div>'+refLink("교육청 사회과 서·논술형 활동 예시 확인",source);
+const classes={
+ "field-textbook-news":{
+  id:"field-textbook-news",section:"현장 수업의 문제",kicker:"사회 4학년 2학기 · 교재 활동에서 출발",
+  title:"교재는 ‘우리 지역 뉴스를\n찾아보자’고 합니다",
+  lead:"신문기사·뉴스를 읽고, 지역 문제의 원인을 조사하는 활동",
+  body:lessonPreview("지역문제를 확인하는 방법","지역 뉴스와 시·군청 누리집을 찾아보고, 신문기사를 읽어 문제 원인을 조사해 봅니다.","교재 속 예시: OO시의 출퇴근 문제를 기사로 읽고 원인 파악",LOCAL_TEXTBOOK),
+  note:"출처는 2022 개정 교육과정에 맞춰 공개된 경기도교육청 지역화 교재 「경기도의 생활」 4학년 2학기 118~119쪽입니다. (교재 기준 표기이며 다른 시도 교과서의 쪽수와 동일하지 않습니다.) 교재가 지역 뉴스와 공공기관 사이트를 살펴보라고 요청한다는 사실과, 우리 충북 학생이 자기 지역의 기사를 직접 찾아야 한다는 수업 운영상의 부담을 구별해서 설명합니다. 교재의 'OO시' 기사는 학습용 예시이며 실제 음성군 기사와 구분합니다."
+ },
+ "field-gap-news":{
+  id:"field-gap-news",section:"현장 수업의 문제",kicker:"교재 활동을 실제로 진행할 때",
+  title:"기사를 찾는 데\n수업 시간이 다 지나간다면?",
+  body:fieldGap("지역 뉴스·신문기사 찾기","광역 기사·예전 기사·관련 없는 검색 결과가 함께 나옴","시·군 선택 → 지역 뉴스 검색 → 기사 제목·날짜·언론사 확인"),
+  note:"교과서 자체의 결함을 주장하는 슬라이드가 아닙니다. 실제 수업에서 학생들이 인터넷 검색으로 지역과 시점을 구분하는 데 많은 안내를 필요로 할 수 있다는 예상 가능한 교수학습상의 문제입니다. 웹앱은 기사 검색의 출발점을 한 화면으로 묶습니다. 자동으로 뉴스의 진위를 확인해 주지는 않습니다."
+ },
+ "field-compare-gap":{
+  id:"field-compare-gap",section:"현장 수업의 문제",kicker:"실제 기사 2개 다음에 물어볼 질문",
+  title:"기사 두 개가 같아도\n근거가 두 개인 것은 아닙니다",
+  body:fieldGap("기사를 읽고 문제·원인 파악","두 언론사가 동일한 지자체 발표를 보도할 수 있음","원문 읽기 → 공식 보도자료 확인 → 같은 점·다른 점 기록"),
+  note:"앞의 음성군 기사 2개는 동일한 정책 발표를 다룹니다. 제목이 비슷하다고 바로 사실이 확정되지는 않습니다. 서로 독립된 자료인지, 발표 주체가 동일한지, 정책의 대상·시점을 원문에서 확인해야 합니다. 학생은 '맞아요 / 달라요 / 아직 모르겠어요' 중 선택하고 이유를 기록할 수 있습니다. 사회 [4사09-01], 국어 [6국06-02]의 교과 연계입니다."
+ },
+ "field-textbook-region":{
+  id:"field-textbook-region",section:"현장 수업의 문제",kicker:"사회 4학년 2학기 · 우리 지역 알리기",
+  title:"지역의 자랑거리 한 곳을\n소개해 봅시다",
+  lead:"장소 이름 · 특징 · 사람들이 좋아하는 이유를 조사하고 표현하기",
+  body:regionalTask("자랑할 만한 장소를 정해 소개하기","이름과 특징을 찾아보고 사람들이 좋아하는 이유를 자기 말로 표현합니다.",LOCAL_ASSESS)+
+  '<p class="fineprint">관련 교과서 활동: 미래엔 사회 4-2 ‘다양한 지역 축제 조사하기’(81쪽) · '+refLink("수업자료",PUBLISHER_FEST)+'</p>',
+  note:"인천광역시교육청 2026 초등 사회 서·논술형 평가도구의 4학년 2학기 2단원(137쪽)에서 장소 이름·특징·좋아하는 이유를 조사하여 소개하는 예시를 확인했습니다. 미래엔 사회 4-2 교사용 자료에서는 다양한 지역 축제 조사하기(81쪽)를 안내합니다. 이는 서로 다른 출판사·시도의 자료를 보여 주는 사례이지 충북 특정 교과서의 81쪽·137쪽이라는 뜻이 아닙니다. 웹앱은 실제 장소·축제 정보를 찾는 일을 돕지만 최종 발표문·그림을 자동으로 만들어 주지 않습니다."
+ },
+ "field-gap-region":{
+  id:"field-gap-region",section:"현장 수업의 문제",kicker:"교실에서 실제 자료 찾기의 어려움",
+  title:"‘우리 지역’이라는 말에\n학생마다 다른 자료가 나옵니다",
+  body:fieldGap("우리 고장의 장소·축제 조사하기","교재의 다른 지역 예시와 실제 시·군 자료가 다름. 기관 사이트도 흩어져 있음","충북 11개 시·군 선택 → 6개 분야에서 실제 명칭·출처 확인"),
+  note:"교과서는 지역 탐구 절차를 안내합니다. 그런데 학생이 사는 충북 음성군·옥천군·진천군 등에서는 구체적 장소·행사·기업이 달라져 지역별 자료 수집이 필요합니다. 웹앱은 기본 정보·자연환경·생활시설·산업과 경제·역사와 문화·지역문제를 나눠 실제 명칭을 카드에서 먼저 제시합니다. 목록은 대표 사례로 한정되며 완전한 지역 백과사전은 아닙니다."
+ },
+ "field-standards":{
+  id:"field-standards",section:"현장 수업의 문제",kicker:"교과서 활동과 웹앱 설계의 실제 연결",
+  title:"그래서 이런 기능을 만들었습니다",
+  body:'<div class="field-matrix">'+
+  '<div><span>사회 [4사09-01]</span><strong>지역의 문제 조사</strong><b>지역 뉴스 검색 · 공공자료 비교</b></div>'+
+  '<div><span>사회 [4사09-02]</span><strong>지역의 자랑거리 알리기</strong><b>11개 시·군 · 축제·문화·생산물</b></div>'+
+  '<div><span>국어 [6국06-02]</span><strong>뉴스의 신뢰성 살펴보기</strong><b>출처·날짜·근거 확인 · 탐정 카드</b></div>'+
+  '</div>'+
+  '<p class="fineprint">성취기준은 수업 설계의 근거이며, 웹앱의 6개 메뉴가 교과서의 공식 분류라는 뜻은 아닙니다.</p>',
+  note:"사회 [4사09-01]은 지역 문제 파악과 해결, [4사09-02]는 자연·역사·문화·생산물에 대한 지역사회의 노력을 다룹니다. 국어 [6국06-02]는 뉴스 및 정보매체 자료의 신뢰성 평가입니다. 사회 탐구의 자료 수집과 국어 신뢰성 평가를 연계한 수업 사례라는 점을 보여줍니다. 과도한 성취기준 해설 대신 학생이 무엇을 수행하는지와 실제 기능을 연결합니다."
+ }
+};
+const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
+const order=[
+ "cover","section-need",
+ "field-textbook-news","field-gap-news","app-issues",
+ "app-article-traffic","app-article-environment","field-compare-gap","app-verify",
+ "field-textbook-region","field-gap-region","app-menu","app-basics","field-standards",
+ "section-build","prompt-basics","prompt-verify","prompt-provider","prompt-coverage",
+ "revision-loop","verify-created",
+ "section-app","app-nature","app-public","app-industry","app-culture","app-news",
+ "app-article-check","app-record","boundaries",
+ "section-class","sample-question","lesson-40","assessment","closing","sources"
+];
+if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
+const classroomSlides=order.map(id=>{
+ const slide=classes[id]||oldSlides.get(id);
+ if(!slide)throw Error("Missing slide "+id);
+ if(id==="cover")return {...slide,title:"교과서의 뉴스 탐구,\n우리 지역 수업으로",lead:"자료 찾기에서 막힌 수업을 어떻게 연결했을까?",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
+ if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"교재 활동을\n우리 교실에서 해보면?",lead:"학생에게 어떤 자료를 주고, 무엇부터 찾게 해야 할까요?",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
+ if(id==="section-build")return {...slide,title:"이 문제를 해결하려고\nAI에 이렇게 요청했습니다",lead:"작은 수정 하나하나가 수업에서 생긴 요구였습니다.",note:"다음 네 프롬프트는 실제 웹앱 수정 대화에서 사용한 문장입니다. 기존 재구성한 가상 초기 프롬프트는 화면에서 제거했습니다. 학생이 수행해야 할 활동과 화면의 역할을 먼저 정하고 기능을 수정했습니다."};
+ if(id==="section-app")return {...slide,title:"그 밖의 지역 조사 활동도\n웹앱에 연결했습니다",lead:"지역의 자연·생활시설·산업·문화와 관련 뉴스를 살펴봅니다.",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
+ return slide;
+});
+if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");
+window.TRAINING_SLIDES=classroomSlides;
+
 window.TRAINING_META={title:"교과서 속 뉴스 탐구, 우리 지역 웹앱으로",date:"2026. 11. 25.(수)",time:"15:00–17:00",originalUrl:SITE};
 })();

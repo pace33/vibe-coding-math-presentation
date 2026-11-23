@@ -120,6 +120,7 @@ function createCardRow(d){
 function renderBoard(){
  const root=$("boardList");root.replaceChildren();
  const cards=readCards();
+ buildComparison();
  $("boardCount").textContent=cards.length+"건";
  if(!cards.length){
   const empty=tag("div","board-empty");

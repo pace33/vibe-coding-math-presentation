@@ -222,6 +222,25 @@ function googleNewsUrl(region,keyword,menu){
  u.searchParams.set("gl","KR");u.searchParams.set("ceid","KR:ko");
  return u.href;
 }
+// 뉴스 서버는 구글·빙 RSS 중 먼저 완료된 제공처를 반환합니다.
+// 링크도 실제 응답의 제공처에 맞추고, 검색 전·연결 오류에는 둘 다 표시합니다.
+function bingNewsUrl(region,keyword){
+ const area=region==="전체"?"충북":region;
+ const u=new URL("https://www.bing.com/news/search");
+ u.searchParams.set("q",[area,keyword].filter(Boolean).join(" "));
+ u.searchParams.set("setlang","ko");
+ u.searchParams.set("cc","kr");
+ return u.href;
+}
+function updateNewsSourceLinks(region,keyword,menu,service=""){
+ const google=$("googleNewsFallback"),bing=$("bingNewsFallback");
+ google.href=googleNewsUrl(region,keyword,menu);
+ bing.href=bingNewsUrl(region,keyword);
+ google.textContent="구글 뉴스에서 더 찾기 ↗";
+ bing.textContent="빙 뉴스에서 더 찾기 ↗";
+ google.hidden=service==="Bing News RSS";
+ bing.hidden=service==="Google News RSS";
+}
 async function searchNewsInside({scroll=true}={}){
  if(keywordTimer!==null){clearTimeout(keywordTimer);keywordTimer=null;}
  const region=$("region").value;
@@ -246,13 +265,14 @@ async function searchNewsInside({scroll=true}={}){
  $("liveCount").textContent="검색 중";
  $("liveStatus").textContent=keyword?"‘"+keyword+"’ 관련 뉴스를 찾고 있어요.":"해당 지역의 뉴스를 찾고 있어요.";
  $("liveExplanation").textContent="검색어와 관련된 기사를 원문에서 읽고 확인하세요.";
- $("googleNewsFallback").href=googleNewsUrl(region,searchTerm,category);
+ updateNewsSourceLinks(region,searchTerm,category);
  $("retryNews").hidden=true;
  try{
   if(!window.LocalCheckLiveNews)throw new Error("RSS 검색 연결을 준비하지 못했어요.");
   const result=await window.LocalCheckLiveNews.search({region,keyword:searchTerm,category:rssCategory,signal:controller.signal});
   if(seq!==liveSequence)return;
   renderLiveResults(result.items,"live");
+  updateNewsSourceLinks(region,searchTerm,category,result.service);
   if(result.items.length){
    const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":result.service==="Bing News RSS"?"빙 뉴스 RSS":"제공처 미확인 뉴스 RSS";
    $("liveStatus").textContent=provider+"에서 찾은 기사입니다. 원문에서 날짜와 사실 여부를 확인하세요.";

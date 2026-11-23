@@ -202,6 +202,118 @@ function importHash(){
  if(!record){alert("탐정 카드 링크를 열 수 없어요. 공유 링크를 다시 확인해 주세요.");return false;}
  showCard(record);return true;
 }
+
+/* 두 뉴스 비교 활동: 저장한 탐정 카드 두 건의 원문을 나란히 살펴봅니다.
+ * 게시판은 개인 브라우저 저장소이므로 비교 기록도 이 기기에만 보관합니다. */
+const COMPARE_KEY="localcheck-student-comparison-v1";
+let comparisonSelection=["",""];
+function buildComparison(){
+ const host=$("boardList")?.parentNode;
+ if(!host)return;
+ let panel=$("newsComparisonPanel");
+ if(!panel){
+  const style=tag("style");
+  style.textContent=`
+   .news-compare-panel{margin:1.25rem 0;padding:1.2rem;border:1px solid #c9d9e5;border-radius:18px;background:#f7fbff}
+   .news-compare-panel h2{font-size:1.25rem;margin:0 0 .35rem}
+   .news-compare-panel .compare-help{color:#526477;margin:.3rem 0 1rem}
+   .news-compare-selects,.news-compare-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+   .news-compare-panel label{display:block;font-weight:700;margin-bottom:.35rem}
+   .news-compare-panel select,.news-compare-panel textarea{box-sizing:border-box;width:100%;padding:.7rem;border:1px solid #b7c8d6;border-radius:10px;background:#fff;color:#183047;font:inherit}
+   .news-compare-columns{margin:1rem 0}
+   .news-compare-article{background:#fff;border:1px solid #d7e1e9;border-radius:14px;padding:1rem;min-width:0;overflow-wrap:anywhere}
+   .news-compare-article h3{font-size:1.05rem;margin:.4rem 0}
+   .news-compare-article p{line-height:1.5;margin:.55rem 0}
+   .news-compare-article a{display:inline-block;margin:.3rem 0;color:#135c9b;text-decoration:underline}
+   .news-compare-panel .compare-question{margin:.8rem 0}
+   .news-compare-panel .compare-question textarea{min-height:65px}
+   .news-compare-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:1rem}
+   .news-compare-status{font-weight:700;color:#245777}
+   @media(max-width:640px){.news-compare-selects,.news-compare-columns{grid-template-columns:1fr}.news-compare-panel{padding:.9rem}}
+  `;
+  document.head.appendChild(style);
+  panel=tag("section","news-compare-panel");panel.id="newsComparisonPanel";
+  const heading=tag("h2","","🔎 두 뉴스 비교·검증하기");
+  const info=tag("p","compare-help","탐정 카드 두 개를 고르고, 기사 원문을 읽어 공통점과 차이점을 찾으세요. 내용이 같다고 바로 사실이 되는 것은 아니에요.");
+  const selects=tag("div","news-compare-selects");
+  for(let i=0;i<2;i++){
+   const holder=tag("div");
+   const label=tag("label","","뉴스 "+(i===0?"A":"B")+" 선택");
+   const sel=tag("select");sel.id="compareSelect"+i;label.htmlFor=sel.id;
+   sel.addEventListener("change",()=>{comparisonSelection[i]=sel.value;drawComparison();});
+   holder.append(label,sel);selects.appendChild(holder);
+  }
+  const columns=tag("div","news-compare-columns");columns.id="compareColumns";
+  panel.append(heading,info,selects,columns);
+  const same=tag("div","compare-question");
+  const sameLabel=tag("label","","① 두 뉴스의 같은 점은?");
+  const sameInput=tag("textarea");sameInput.id="compareSame";sameInput.placeholder="두 뉴스에서 공통으로 말하는 내용을 적어요.";sameLabel.htmlFor=sameInput.id;same.append(sameLabel,sameInput);
+  const diff=tag("div","compare-question");
+  const diffLabel=tag("label","","② 두 뉴스의 다른 점은?");
+  const diffInput=tag("textarea");diffInput.id="compareDiff";diffInput.placeholder="날짜, 장소, 숫자, 표현이 어떻게 다른가요?";diffLabel.htmlFor=diffInput.id;diff.append(diffLabel,diffInput);
+  const judgement=tag("div","compare-question");
+  const judgementLabel=tag("label","","③ 원문과 근거를 확인한 뒤 판단하기");
+  const judgementSelect=tag("select");judgementSelect.id="compareJudgement";judgementLabel.htmlFor=judgementSelect.id;
+  for(const [value,label] of [["pending","아직 확인이 필요해요"],["supported","근거로 확인했어요"],["contradicted","근거와 달라요"]]){
+   const option=tag("option","",label);option.value=value;judgementSelect.appendChild(option);
+  }
+  judgement.append(judgementLabel,judgementSelect);
+  const basis=tag("div","compare-question");
+  const basisLabel=tag("label","","④ 판단의 근거는? (출처·날짜·숫자 등)");
+  const basisInput=tag("textarea");basisInput.id="compareBasis";basisInput.placeholder="어떤 원문이나 공식 자료를 보고 판단했나요?";basisLabel.htmlFor=basisInput.id;basis.append(basisLabel,basisInput);
+  const actions=tag("div","news-compare-actions");
+  const saveBtn=tag("button","btn btn-primary","💾 비교 기록 저장");saveBtn.type="button";
+  const status=tag("span","news-compare-status");status.id="compareStatus";status.setAttribute("role","status");
+  saveBtn.addEventListener("click",()=>{
+   const [a,b]=comparisonSelection;
+   if(!a||!b||a===b){status.textContent="서로 다른 탐정 카드 두 개를 선택하세요.";return;}
+   const record={a,b,same:trim(sameInput.value,600),different:trim(diffInput.value,600),judgement:judgementSelect.value,basis:trim(basisInput.value,600),savedAt:new Date().toISOString()};
+   if(!record.same||!record.different||!record.basis){status.textContent="같은 점·다른 점·판단 근거를 모두 적어 주세요.";return;}
+   try{localStorage.setItem(COMPARE_KEY,JSON.stringify(record));status.textContent="이 기기에 비교 기록을 저장했어요.";}
+   catch{status.textContent="저장하지 못했어요. 브라우저 저장 공간을 확인하세요.";}
+  });
+  actions.append(saveBtn,status);panel.append(same,diff,judgement,basis,actions);
+  host.insertBefore(panel,$("boardList"));
+ }
+ const cards=readCards();
+ for(let i=0;i<2;i++){
+  const sel=$("compareSelect"+i),prior=comparisonSelection[i];
+  sel.replaceChildren();
+  const blank=tag("option","","탐정 카드를 선택하세요");blank.value="";sel.appendChild(blank);
+  for(const c of cards){const opt=tag("option","",c.title);opt.value=c.id;sel.appendChild(opt);}
+  const preferred=cards.some(c=>c.id===prior)?prior:(cards[i]?.id||"");
+  comparisonSelection[i]=preferred;sel.value=preferred;
+ }
+ drawComparison();
+}
+function drawComparison(){
+ const container=$("compareColumns");if(!container)return;
+ container.replaceChildren();
+ const cards=readCards();
+ const selected=comparisonSelection.map(id=>cards.find(c=>c.id===id));
+ const valid=selected.every(Boolean)&&selected[0].id!==selected[1].id;
+ for(let i=0;i<2;i++){
+  const c=selected[i],article=tag("article","news-compare-article");
+  article.appendChild(tag("strong","","뉴스 "+(i===0?"A":"B")));
+  if(c){
+   article.append(tag("h3","",c.title),tag("p","","발행: "+(c.publisher||"원문 확인 필요")),tag("p","","날짜: "+(c.date||"원문 확인 필요")));
+   article.append(tag("strong","","기사에서 찾은 내용"),tag("p","",c.newsFact));
+   article.appendChild(elementLink("뉴스 원문 확인",c.url));
+   if(c.govUrl){
+    article.appendChild(tag("p","","추가 비교 근거: "+(c.govFact||"원문에서 확인하세요")));
+    article.appendChild(elementLink("비교 자료 확인",c.govUrl));
+   }
+  }else article.appendChild(tag("p","","게시판에 저장한 탐정 카드를 선택하세요."));
+  container.appendChild(article);
+ }
+ const status=$("compareStatus");if(status)status.textContent=valid?"두 원문을 확인하고 아래 내용을 기록하세요.":"서로 다른 카드 두 개가 필요해요.";
+ const saved=(()=>{try{return JSON.parse(localStorage.getItem(COMPARE_KEY)||"null");}catch{return null;}})();
+ const match=valid&&saved?.a===comparisonSelection[0]&&saved?.b===comparisonSelection[1];
+ for(const [id,value] of [["compareSame",match?saved.same:""],["compareDiff",match?saved.different:""],["compareBasis",match?saved.basis:""],["compareJudgement",match?saved.judgement:"pending"]]){
+  const input=$(id);if(input)input.value=value;
+ }
+}
+
 function init({show,getReport}={}){
  navigation=show;reportProvider=getReport;
  if($("openBoard"))$("openBoard").addEventListener("click",gotoBoard);

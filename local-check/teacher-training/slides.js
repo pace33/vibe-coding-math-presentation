@@ -15,7 +15,7 @@ const quote=(s,kind)=>'<div class="prompt-example"><span class="prompt-type">'+k
 const small=(s)=>'<p class="fineprint">'+s+'</p>';
 const list=(items)=>'<div class="big-list">'+items.map((v,i)=>'<div class="big-list-row"><span>'+String(i+1).padStart(2,"0")+'</span><strong>'+v+'</strong></div>').join("")+'</div>';
 const compare=(a,b)=>'<div class="comparison"><div><small>'+a[0]+'</small><strong>'+a[1]+'</strong><p>'+a[2]+'</p></div><div><small>'+b[0]+'</small><strong>'+b[1]+'</strong><p>'+b[2]+'</p></div></div>';
-const newsCompare=(articles,question,sourceNote)=>'<div class="news-comparison">'+
+const newsCompare=(articles,conclusion,detail,learning=[])=>'<div class="news-comparison">'+
  '<div class="news-comparison-grid">'+articles.map((a,i)=>
  '<article class="news-comparison-paper">'+
  '<div class="news-paper-top"><span>기사 '+(i+1)+'</span><b>'+a.source+'</b><time>'+a.date+'</time></div>'+
@@ -23,7 +23,8 @@ const newsCompare=(articles,question,sourceNote)=>'<div class="news-comparison">
  '<p class="news-paper-summary">'+a.summary+'</p>'+
  '<div class="news-paper-bottom"><span>'+a.focus+'</span><a href="'+a.url+'" target="_blank" rel="noopener noreferrer">기사 원문 ↗</a></div>'+
  '</article>').join("")+'</div>'+
- '<div class="news-compare-question"><strong>'+question+'</strong><span>'+sourceNote+'</span></div></div>';
+ '<div class="news-compare-result"><span class="news-result-label">비교 결과</span><strong>'+conclusion+'</strong><p>'+detail+'</p>'+
+ (learning.length?'<div class="news-compare-learning"><b>학생이 배울 점</b>'+learning.map(v=>'<span>'+v+'</span>').join("")+'</div>':'')+'</div></div>';
 const flow=(items)=>'<div class="simple-flow">'+items.map((v,i)=>'<div class="flow-step"><small>'+String(i+1).padStart(2,"0")+'</small><strong>'+v+'</strong></div>').join("")+'</div>';
 const target=(social,subject)=>'<div class="goal-line"><span>'+social+'</span><strong>'+subject+'</strong></div>';
 const SLIDES=[
@@ -207,29 +208,35 @@ const SLIDES=[
  note:"학생은 자신이 선택한 지역의 뉴스와 공공기관 자료를 찾아봅니다. 실시간 뉴스 검색은 외부 제공자의 응답에 의존하고, 검색 결과에는 검증 완료 표시가 붙지 않습니다. 제공처는 실제 구글/빙 RSS에 따라 달라집니다."
 },
 {
- id:"app-article-traffic",section:"완성된 수업 도구",kicker:"처음 발표자료의 좌우 기사 비교 구성 복원 · 사회 [4사09-01]",
- title:"실제 기사 두 개를\n나란히 비교합니다",
- lead:"같은 지역 문제를 다른 언론사는 어떻게 보도했을까요?",
+ id:"app-article-traffic",section:"완성된 수업 도구",kicker:"실제 기사 비교 ① · 사회 [4사09-01]",
+ title:"두 기사는 무엇이 같고\n어떤 점을 더 확인해야 할까요?",
+ lead:"음성군 불법 주정차 단속 · 같은 정책을 다룬 두 언론사",
  body:newsCompare([
-  {source:"연합뉴스",date:"2026. 8. 4. 11:24",title:"음성군, 혁신도시 버스터미널 인근 불법주정차 24시간 단속",summary:"음성군이 보행 안전과 차량 통행 문제를 이유로 8월 5일부터 단속 시간을 확대한다고 발표한 내용.",focus:"무엇을 발표했을까?",url:"https://www.yna.co.kr/amp/view/AKR20260804078900064"},
-  {source:"아이뉴스24",date:"2026. 8. 4. 10:15",title:"충북혁신도시 버스터미널 앞 불법 주정차 ‘24시간 단속’",summary:"버스터미널 인근 도로 한 구간에서 주말·공휴일 및 점심시간에도 CCTV로 단속한다는 내용.",focus:"단속 방법은 무엇일까?",url:"https://v.daum.net/v/20260804101508047"}
- ],"두 기사는 어떤 점이 같고, 무엇을 더 확인해야 할까요?","공통 원천인 음성군 발표 자료도 확인하기"),
- note:"초기 연수자료의 좌우 비교형 시각 구성을 복원했습니다. 실제 기사 제목과 언론사, 2026-08-04 발행시각을 반영했습니다. 연합뉴스(박재천)와 아이뉴스24(소진섭) 보도가 모두 음성군 발표를 전달합니다. 보도가 두 개여도 근거가 독립적인 두 개라고 할 수 없으므로 음성군 공식 자료를 추가로 찾아보게 합니다. 두 기사의 전체 내용을 복제하지 않고 요약했습니다."
+  {source:"연합뉴스",date:"2026. 8. 4. 11:24",title:"음성군, 혁신도시 버스터미널 인근 불법주정차 24시간 단속",summary:"음성군 발표: 8월 5일부터 버스터미널 인근의 단속 시간을 24시간으로 확대.",focus:"단속 시기·정책 목적",url:"https://www.yna.co.kr/amp/view/AKR20260804078900064"},
+  {source:"아이뉴스24",date:"2026. 8. 4. 10:15",title:"충북혁신도시 버스터미널 앞 불법 주정차 ‘24시간 단속’",summary:"단속 방법: 주말·공휴일과 점심시간에도 CCTV 단속을 실시한다는 내용.",focus:"구체적 단속 방법",url:"https://v.daum.net/v/20260804101508047"}
+ ],"두 기사 모두 음성군의 동일한 단속 발표를 전합니다.","언론사는 달라도 공통 원천은 음성군 발표입니다. 공식 공고로 시행일·단속 구간을 확인해야 합니다.",[
+  "① 공통 사실 찾기","② 기사마다 강조한 내용 비교","③ 원자료까지 확인하기"
+ ]),
+ note:"연수 진행 예시: ‘두 기사가 공통으로 말하는 것은 음성군의 24시간 불법 주정차 단속 계획입니다. 연합뉴스는 시행 시기와 취지를, 아이뉴스24는 CCTV 단속 방식과 적용 시간을 더 설명합니다. 그러나 두 기사가 모두 음성군의 발표를 바탕으로 하므로 독립적인 증거가 두 개인 것은 아닙니다. 학생에게는 공통점과 차이점을 정리하게 하고 음성군 공식 안내로 시행일과 구간을 확인하게 합니다.’ 두 기사의 문장은 수업용 요약입니다."
 },
 {
- id:"app-article-environment",section:"완성된 수업 도구",kicker:"실제 기사문 비교 ② · 지역 문제 탐구",title:"같은 지역의 기사라도\n시점이 다를 수 있습니다",
- lead:"옥천군 생활쓰레기 문제 · 2026년 4월과 9월",
+ id:"app-article-environment",section:"완성된 수업 도구",kicker:"실제 기사 비교 ② · 국어 [6국06-02]",
+ title:"같은 지역의 뉴스라도\n같은 사건은 아닙니다",
+ lead:"옥천군의 환경 기사 · 4월 무단 투기와 9월 추석맞이 청소",
  body:newsCompare([
-  {source:"뉴스1",date:"2026. 4. 1.",title:"종량제봉투 파장 탓?…옥천군 곳곳 몰래 버린 쓰레기 몸살",summary:"옥천군의 일부 지역에서 생활쓰레기가 무단으로 버려지는 문제를 다룬 기사.",focus:"문제를 지적한 기사",url:"https://v.daum.net/v/20260401103225867"},
-  {source:"국제뉴스",date:"2026. 9. 18.",title:"옥천군, 추석 앞두고 200여 공직자와 국토대청결 활동",summary:"추석을 앞두고 도로·하천변의 쓰레기를 수거하는 환경 정화 활동을 소개한 기사.",focus:"환경 정화 활동 기사",url:"https://www.gukjenews.com/news/articleView.html?idxno=3699363"}
- ],"두 기사는 같은 문제를 다루지만, 같은 사건을 보도할까요?","날짜·사건·출처를 구분하고 인과관계 단정하지 않기"),
- note:"처음 버전의 비교형 화면처럼 두 신문 기사를 좌우로 배치하되, 옥천 사례는 같은 사건의 상반된 보도가 아니라 시점이 다른 별개의 기사라는 점을 강조합니다. 2026-04-01 뉴스1 장인수 기자가 쓰레기 불법 투기를 다뤘고, 2026-09-18 국제뉴스 이재기 기자는 추석 대비 환경 정화 활동을 보도했습니다. 후자가 전자의 직접적인 결과라고 단정하면 안 됩니다. 실제 기사 제목은 발표 가독성을 위해 축약하거나 일부 편집할 수 있으며 원문 링크를 통해 정식 제목을 확인합니다."
+  {source:"뉴스1",date:"2026. 4. 1.",title:"종량제봉투 파장 탓?…옥천군 곳곳 몰래 버린 쓰레기 몸살",summary:"대청호 주변 야산과 낚시터에서 생활쓰레기 무단 투기가 이어지는 문제를 보도.",focus:"문제 발견 · 대청호 주변",url:"https://v.daum.net/v/20260401103225867"},
+  {source:"국제뉴스",date:"2026. 9. 18.",title:"옥천군, 추석 앞두고 200여 공직자와 국토대청결 활동",summary:"추석을 앞두고 공직자 200여 명이 주요 시가지에서 환경 정화 활동을 진행한 내용.",focus:"환경 개선 활동 · 주요 시가지",url:"https://www.gukjenews.com/news/articleView.html?idxno=3699363"}
+ ],"두 기사는 날짜·장소·사건이 다르므로 직접적인 원인과 결과가 아닙니다.","9월의 청소 활동만으로 4월 대청호 무단 투기 문제가 해결되었다고 말할 수 없습니다.",[
+  "① 언제·어디서·무슨 일인지 구별","② 제목의 추측과 사실 구분","③ 근거 없는 ‘문제 해결’ 단정 피하기"
+ ]),
+ note:"교사 설명: ‘4월 뉴스1 기사는 대청호 주변 야산·낚시터의 불법 쓰레기 투기를 문제로 지적합니다. 기사 제목 속 “종량제봉투 파장 탓?”은 의문형으로 원인을 확정한 표현이 아닙니다. 9월 국제뉴스 기사는 추석을 앞둔 옥천군 주요 시가지의 환경 정화 활동을 전합니다. 같은 옥천군의 환경 뉴스지만 날짜와 장소와 사건이 달라 9월의 청소가 4월 문제를 해결한 증거는 아닙니다.’ 학생이 배울 점은 시간·장소·사건 확인, 사실과 추측 구별, 근거가 부족할 때 판단 유보입니다. 이어지는 활동은 ‘문제가 계속되는지 옥천군 공식 자료와 현장 자료를 더 찾아보기’로 안내합니다."
 },
 {
- id:"app-article-check",section:"완성된 수업 도구",kicker:"실제 기사문 비교 활동 · 국어 [6국06-02]",title:"기사 두 개가 같다고,\n증거도 두 개일까요?",
- body:flow(["언론사·날짜<br>확인하기","같은 발표를<br>인용했는지 보기","공식 안내·자료<br>추가로 찾기","확인한 사실과<br>아직 모르는 점 기록"])+
- small("음성군 사례는 같은 정책 발표를 보도한 두 기사, 옥천군 사례는 날짜가 다른 별개의 보도입니다."),
- note:"음성군 사례에서는 같은 날짜의 두 언론사 기사가 음성군 발표를 공통 원천으로 삼았을 수 있습니다. 서로 다른 기사 2개가 자동으로 독립된 증거 2개라는 뜻은 아닙니다. 옥천군 사례는 날짜와 사건이 달라 바로 같은 사실을 비교할 수 없습니다. 이 차이를 토론한 뒤 공공기관의 공식 발표와 실제 기준일을 확인하게 합니다. 이것이 국어 [6국06-02] 신뢰성 평가와 사회 [4사09-01] 문제 조사 연결의 핵심입니다."
+ id:"app-article-check",section:"완성된 수업 도구",kicker:"교실에서 학생이 익히는 검증 절차 · 국어 [6국06-02]",
+ title:"뉴스를 비교할 때\n이 세 가지를 확인합니다",
+ body:flow(["기사 날짜·장소·<br>사건 구분하기","공통 내용과<br>다른 내용 찾기","공식 자료로 확인하고<br>모르는 것은 남겨두기"])+
+ small("음성군: 같은 발표를 다룬 기사 2개 ≠ 독립된 증거 2개 / 옥천군: 같은 지역의 환경 뉴스 2개 ≠ 같은 사건"),
+ note:"앞의 두 비교 사례를 연결해 학생이 실제로 배울 방법을 정리하는 페이지입니다. 음성군은 동일한 정책 발표를 서로 다른 언론이 보도한 사례, 옥천군은 같은 지역의 환경 주제이지만 시점과 장소가 다른 별개의 사건입니다. 따라서 기사 개수만 세는 것이 아니라 언제·어디서·무엇이 일어났는지와 원자료가 같은지를 구분한 뒤 확인된 사실만 결론으로 말하도록 안내합니다."
 },
 {
 

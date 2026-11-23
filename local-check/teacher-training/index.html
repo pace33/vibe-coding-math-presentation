@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#143d30">
+<meta name="description" content="초등교원 연수: 지역 가치중심 AI 데이터 교육, 우리 지역 탐정 웹앱 제작과 뉴스 검증 수업의 교육적 필요성·제작 과정·적용 사례">
+<title>우리 지역을 탐정처럼 읽다 | 초등교원 연수</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./slides.js" defer></script>
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+ <header class="topbar" aria-label="발표 도구">
+  <div class="brand"><span class="brand-mark" aria-hidden="true">⌕</span><span>우리 지역 탐정</span></div>
+  <span class="top-desc">인성교육 현장적용 활동 사례 연구 1 · 2026.11.25</span>
+  <div class="top-actions">
+   <button id="contentsButton" type="button" class="toolbar-btn" aria-pressed="false" aria-controls="overviewSheet">☷ 목차 <span aria-hidden="true">O</span></button>
+   <button id="notesButton" type="button" class="toolbar-btn" aria-pressed="false" aria-controls="notesSheet">▤ 발표 노트 <span aria-hidden="true">N</span></button>
+   <button id="fullscreenButton" type="button" class="toolbar-btn">⛶ 전체화면 <span aria-hidden="true">F</span></button>
+   <button id="printButton" type="button" class="toolbar-btn">인쇄·PDF</button>
+   <a class="toolbar-btn" href="https://pace33.github.io/vibe-coding-math-presentation/local-check/student/" target="_blank" rel="noopener noreferrer" title="기존 우리 지역 탐정 웹앱을 새 창에서 열기">기존 웹앱 ↗</a>
+  </div>
+ </header>
+ <main class="deck-wrap" id="presentation">
+  <article class="slide" id="slide" aria-live="polite" aria-label="슬라이드">
+   <div class="slide-main"><h1 class="slide-title">우리 지역을 탐정처럼 읽다</h1></div>
+  </article>
+ </main>
+ <footer class="bottombar" aria-label="슬라이드 이동">
+  <div class="left">
+   <button type="button" id="prev" class="control" aria-label="이전 슬라이드">← 이전</button>
+   <button type="button" id="next" class="control primary" aria-label="다음 슬라이드">다음 →</button>
+  </div>
+  <div class="progress-wrap" aria-hidden="true">
+   <div class="progress-track"><div id="progressValue" class="progress-value"></div></div>
+   <span class="page-number" id="pageCounter">1 / 34</span>
+  </div>
+  <div class="right">
+   <span class="shortcuts"><kbd>←</kbd><kbd>→</kbd> 이동 · <kbd>F</kbd> 전체화면</span>
+   <span class="page-number" id="currentSection">시작</span>
+  </div>
+ </footer>
+ <p id="notice" role="status" aria-live="polite" class="visually-hidden"></p>
+</div>
+<div class="sheet" id="overviewSheet" role="dialog" aria-modal="true" aria-label="전체 슬라이드 목차" hidden>
+ <div class="sheet-panel">
+  <div class="sheet-header"><h2>전체 슬라이드 목차</h2><button class="sheet-close" type="button" id="closeOverview">닫기 ×</button></div>
+  <div class="overview-grid" id="overviewGrid"></div>
+ </div>
+</div>
+<div class="sheet" id="notesSheet" role="dialog" aria-modal="true" aria-label="발표자 노트" hidden>
+ <div class="sheet-panel note-panel">
+  <div class="sheet-header"><div><span class="note-title">발표자 메모</span><h2 id="pageTitle">슬라이드</h2></div><button class="sheet-close" type="button" id="closeNotes">닫기 ×</button></div>
+  <p id="speakerNote"></p>
+ </div>
+</div>
+<div id="printDeck" class="print-deck" aria-hidden="true"></div>
+</body>
+</html>

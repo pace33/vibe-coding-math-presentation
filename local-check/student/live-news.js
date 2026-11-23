@@ -19,7 +19,23 @@ function detectRegion(title,region){
  if(region!=="전체")return region;
  return REGIONS.find(r=>title.includes(r)||title.includes(r.slice(0,-1)))||"충청북도";
 }
-function normalizeGoogle(items,region){
+function extractSnippet(raw,title,keyword=""){
+ const text=String(raw??"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/&lt;/gi,"<").replace(/&gt;/gi,">").replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(Number(n))).replace(/\s+/g," ").trim();
+ const withoutTitle=text.startsWith(title)?text.slice(title.length).replace(/^[\s:–—-]+/,"").trim():text;
+ const tokens=String(keyword).split(/\s+/).filter(t=>t.length>=2&&!["충북","충청북도","뉴스","지역"].includes(t));
+ const lower=withoutTitle.toLowerCase();
+ const hit=tokens.map(t=>lower.indexOf(t.toLowerCase())).find(i=>i>=0);
+ const start=hit===undefined?0:Math.max(0,hit-45);
+ const snippet=withoutTitle.slice(start,start+185).trim();
+ return (start>0?"…":"")+snippet+(withoutTitle.length>start+185?"…":"");
+}
+function newestFirst(items){
+ return items.slice().sort((a,b)=>{
+  const date=v=>/^\d{4}-\d{2}-\d{2}$/.test(v||"")?v:"";
+  return date(b.published).localeCompare(date(a.published));
+ });
+}
+function normalizeGoogle(items,region,keyword=""){
  const output=[],seen=new Set();
  for(const item of items){
   const link=validUrl(item.link)||validUrl(item.guid);
@@ -35,12 +51,12 @@ function normalizeGoogle(items,region){
    date=Number.isFinite(parsed)?new Date(parsed).toISOString().slice(0,10):"날짜 원문 확인";
   }else date=date.slice(0,10);
   seen.add(link);
-  output.push({region:detectRegion(title,region),title,publisher:publisher||"원문에서 확인",published:date,url:link,verified:false,sourceType:"뉴스 RSS"});
+  output.push({region:detectRegion(title,region),title,publisher:publisher||"원문에서 확인",published:date,url:link,snippet:extractSnippet(item.description||item.summary||"",title,keyword),verified:false,sourceType:"뉴스 RSS"});
   if(output.length===MAX)break;
  }
  return output;
 }
-function parseRSS(xmlString,region,service="News RSS"){
+function parseRSS(xmlString,region,service="News RSS",keyword=""){
  if(typeof DOMParser==="undefined")throw Error("RSS 해석 기능을 사용할 수 없어요");
  const document=new DOMParser().parseFromString(xmlString,"application/xml");
  if(document.querySelector("parsererror"))throw Error("RSS 파일이 아닌 응답이 도착했어요");
@@ -56,9 +72,9 @@ function parseRSS(xmlString,region,service="News RSS"){
    try{const redirect=new URL(link);if(redirect.hostname==="www.bing.com"&&redirect.pathname==="/news/apiclick.aspx")link=redirect.searchParams.get("url")||"";}catch{link="";}
   }
   const publisher=get("source")||[...node.children].find(child=>child.localName==="Source")?.textContent||"";
-  return {title:get("title"),link,publisher,pubDate:get("pubDate")};
+  return {title:get("title"),link,publisher,pubDate:get("pubDate"),description:get("description")||get("summary")};
  });
- return normalizeGoogle(rows,region).map(item=>({...item,sourceType:service==="Bing News RSS"?"빙 뉴스 RSS":service==="Google News RSS"?"구글 뉴스 RSS":"뉴스 RSS"}));
+ return normalizeGoogle(rows,region,keyword).map(item=>({...item,sourceType:service==="Bing News RSS"?"빙 뉴스 RSS":service==="Google News RSS"?"구글 뉴스 RSS":"뉴스 RSS"}));
 }
 function parseGdelt(body,region){
  if(!body||!Array.isArray(body.articles))throw Error("GDELT 뉴스 응답이 올바르지 않아요");
@@ -70,7 +86,7 @@ function parseGdelt(body,region){
   let published=/^\d{8}/.test(raw)?raw.slice(0,4)+"-"+raw.slice(4,6)+"-"+raw.slice(6,8):"원문 확인";
   if(/^\d{4}-\d{2}-\d{2}/.test(raw))published=raw.slice(0,10);
   const publisher=clean(item.domain||item.source,80)||"언론사 원문 확인";
-  items.push({region:detectRegion(title,region),title,publisher,published,url:link,verified:false,sourceType:"GDELT 뉴스 검색"});
+  items.push({region:detectRegion(title,region),title,publisher,published,url:link,snippet:extractSnippet(item.description||"",title),verified:false,sourceType:"GDELT 뉴스 검색"});
   seen.add(link);
   if(items.length===MAX)break;
  }
@@ -88,7 +104,7 @@ async function search({region="전체",keyword="",category="news",signal}={}){
  const xml=await response.text();
  if(xml.length>650000)throw Error("RSS 응답 크기 초과");
  const service=response.headers.get("X-News-Provider")||"News RSS";
- const value={items:parseRSS(xml,region,service),service,feed:service==="Google News RSS"?rssUrl(region,keyword,category):null,fetchedAt:response.headers.get("X-News-Fetched-At")};
+ const value={items:parseRSS(xml,region,service,keyword),service,feed:service==="Google News RSS"?rssUrl(region,keyword,category):null,fetchedAt:response.headers.get("X-News-Fetched-At")};
  cache.set(key,{when:Date.now(),value});
  if(cache.size>30)cache.delete(cache.keys().next().value);
  return value;

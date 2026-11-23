@@ -83,8 +83,10 @@ export async function verifyEvidence(request,env={}){
  const size=Number(request.headers.get('content-length')||0);
  if(size>6500)return json({error:'요청 내용이 너무 깁니다.'},413,allowOrigin);
  if(limited(request))return json({error:'AI 요청 횟수가 많아요. 나중에 다시 시도해 주세요.'},429,allowOrigin);
+ const enabled=env.AI_VERIFY_ENABLED||(typeof process!=='undefined'?process.env.AI_VERIFY_ENABLED:'');
+ if(enabled!=='true')return json({error:'운영자가 AI 검토 기능을 아직 활성화하지 않았습니다.'},503,allowOrigin);
  const key=env.GEMINI_API_KEY||(typeof process!=='undefined'?process.env.GEMINI_API_KEY:'');
- if(!key)return json({error:'운영 서버의 AI 검토 기능이 아직 연결되지 않았습니다.'},503,allowOrigin);
+ if(!key)return json({error:'운영 서버의 AI 인증키가 아직 연결되지 않았습니다.'},503,allowOrigin);
  let input;
  try{
   const text=await request.text();

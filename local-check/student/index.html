@@ -144,8 +144,35 @@
     </fieldset>
     <label for="reason" class="short-reason-label">어떤 내용이 같거나 달랐나요? <span>(선택)</span></label>
     <textarea id="reason" maxlength="220" rows="3" placeholder="첫 기사에는 ___, 다른 기사나 자료에는 ___라고 나와요. 그래서 ___라고 생각해요."></textarea>
-    <p class="evidence-disclaimer">※ 자동 검색은 관련 자료를 추천할 뿐, 사실 여부를 AI가 판정하지 않아요.</p>
-    <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">✅ 탐정 카드 완성하기</button><span id="formMessage" role="status" aria-live="polite"></span></div>
+    <section id="aiReviewStage" class="ai-review-stage" aria-labelledby="aiReviewHeading">
+      <h2 id="aiReviewHeading">④ AI 근거 검토</h2>
+      <p class="verification-guide">먼저 위에서 직접 기사를 비교하고 나의 판단과 이유를 기록하세요. 그다음 AI가 관련 자료를 찾아 검토해요.</p>
+      <div class="bottom-actions">
+        <button id="askAi" type="button" class="btn btn-primary">🤖 내 판단을 기록하고 AI 근거 검토하기</button>
+        <button id="editFirst" type="button" class="btn btn-light" hidden>처음 판단 다시 작성하기</button>
+      </div>
+      <p id="aiReviewMessage" class="ai-review-status" role="status" aria-live="polite">아직 AI에게 검토를 요청하지 않았어요.</p>
+      <div id="aiReviewResult" class="ai-review-result" hidden aria-live="polite">
+        <strong id="aiReviewLabel"></strong>
+        <p id="aiReviewSummary"></p>
+        <p id="aiReviewComparison"></p>
+        <div id="aiReviewSources" class="ai-review-sources"></div>
+        <p id="aiReviewCaution" class="evidence-disclaimer"></p>
+      </div>
+      <div id="finalStage" class="final-stage" hidden>
+        <h2>⑤ 최종 판단</h2>
+        <p class="verification-guide">AI의 설명도 틀릴 수 있어요. 제시된 자료를 직접 확인하고 처음 생각을 유지하거나 바꿔 보세요.</p>
+        <fieldset class="choices final-choices"><legend>근거를 살펴본 뒤, 나는 어떻게 생각하나요?</legend>
+          <label><input type="radio" name="finalVerdict" value="같아요"><span>🟢 내용이 같아요</span></label>
+          <label><input type="radio" name="finalVerdict" value="달라요"><span>🟠 내용이 달라요</span></label>
+          <label><input type="radio" name="finalVerdict" value="아직 모르겠어요"><span>🔵 더 확인할래요</span></label>
+        </fieldset>
+        <label class="short-reason-label" for="finalReason">최종 판단의 이유를 적어 보세요.</label>
+        <textarea id="finalReason" rows="2" maxlength="220" placeholder="처음에는 ___라고 생각했지만, ___ 자료를 보고 ___라고 생각해요."></textarea>
+      </div>
+      <p class="evidence-disclaimer">※ AI는 검증을 돕는 참고 의견만 제공하며 정답을 채점하지 않습니다. 근거가 충분하지 않으면 '확인할 근거가 부족해요'라고 안내합니다. 학생의 이름이나 연락처를 입력하지 마세요.</p>
+    </section>
+    <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary" disabled>✅ 최종 판단으로 탐정 카드 완성하기</button><span id="formMessage" role="status" aria-live="polite"></span></div>
   </section>
 </section>
 <section id="result" class="view" hidden>

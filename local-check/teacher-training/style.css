@@ -652,3 +652,67 @@ a{color:inherit}
  .solution-card strong{font-size:17px}
  .solution-card span{font-size:11px}
 }
+
+
+/* 정정보도 사례 검증 표 */
+.slide-body:has(.news-correction-table){padding:.7% 0 .8%;min-height:0;overflow:hidden}
+.news-correction-table{
+ display:flex;flex-direction:column;justify-content:center;
+ width:100%;height:100%;min-height:0;gap:clamp(7px,.85cqw,12px);
+}
+.correction-head,.correction-row{
+ display:grid;grid-template-columns:.78fr 1fr 1.3fr;
+ align-items:center;gap:clamp(12px,1.4cqw,20px);
+ padding:clamp(8px,.85cqw,12px) clamp(12px,1.3cqw,18px);
+}
+.correction-head{
+ background:#1d4b38;color:#fff;border-radius:10px;
+ font-size:clamp(12px,1.18cqw,17px);
+ line-height:1.3;font-weight:800;
+}
+.correction-row{
+ background:#f3f8ef;border:1px solid #dce6d7;border-radius:10px;
+ min-height:clamp(49px,5.6cqw,78px);
+ line-height:1.3;
+}
+.correction-row>strong{
+ font-size:clamp(16px,1.7cqw,24px);font-weight:900;color:#234e38;
+}
+.correction-row>p{
+ margin:0;font-size:clamp(16px,1.65cqw,23px);font-weight:810;
+ color:#bd5545;
+}
+.correction-row>b{
+ font-size:clamp(16px,1.67cqw,24px);color:#1b6041;font-weight:900;
+}
+.correction-evidence,.correction-lesson{
+ display:grid;grid-template-columns:150px 1fr;gap:15px;
+ align-items:center;padding:clamp(8px,1cqw,14px) clamp(12px,1.3cqw,18px);
+ border-radius:10px;
+}
+.correction-evidence{background:#f7f4ed}
+.correction-lesson{background:#e7f1df;border-left:5px solid #659669}
+.correction-evidence>span,.correction-lesson>span{
+ font-size:clamp(13px,1.23cqw,17px);font-weight:900;color:#ad4d37;
+}
+.correction-evidence>strong,.correction-lesson>strong{
+ font-size:clamp(13px,1.35cqw,19px);
+ font-weight:800;line-height:1.35;word-break:keep-all;color:#2c4e3a;
+}
+@media(max-width:900px){
+ .news-correction-table{gap:5px}
+ .correction-head,.correction-row{padding:7px 10px;gap:9px}
+ .correction-row{min-height:45px}
+ .correction-evidence,.correction-lesson{grid-template-columns:110px 1fr;gap:8px;padding:7px 10px}
+ .correction-evidence>strong,.correction-lesson>strong{font-size:clamp(11px,1.5cqw,15px)}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .slide-body:has(.news-correction-table){overflow-y:auto;justify-content:flex-start}
+ .news-correction-table{height:auto;min-height:0;justify-content:flex-start}
+ .correction-head,.correction-row{grid-template-columns:.85fr 1fr 1.15fr;gap:5px}
+ .correction-head span{font-size:10px}
+ .correction-row>strong,.correction-row>p,.correction-row>b{font-size:11px}
+ .correction-evidence,.correction-lesson{grid-template-columns:1fr;gap:2px}
+ .correction-evidence>span,.correction-lesson>span{font-size:11px}
+ .correction-evidence>strong,.correction-lesson>strong{font-size:11px}
+}

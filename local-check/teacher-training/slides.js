@@ -353,25 +353,183 @@ const classes={
   note:"사회 [4사09-01]은 지역 문제 파악과 해결, [4사09-02]는 자연·역사·문화·생산물에 대한 지역사회의 노력을 다룹니다. 국어 [6국06-02]는 뉴스 및 정보매체 자료의 신뢰성 평가입니다. 사회 탐구의 자료 수집과 국어 신뢰성 평가를 연계한 수업 사례라는 점을 보여줍니다. 과도한 성취기준 해설 대신 학생이 무엇을 수행하는지와 실제 기능을 연결합니다."
  }
 };
+
+/* 교사 연수용 '이 웹앱을 만드는 과정' — 실제 파일 구조와 작동 방식에서 도출한
+ * 단계별 제작 안내. 요청문은 재사용할 수 있게 재작성한 예시이며, 최초 제작 원문이 아닙니다.
+ * 참가자는 직접 코딩하지 않고 PPT 화면과 화면 시연을 관찰합니다.
+ */
+const makePrompt=(lines,foot)=>'<div class="build-prompt-layout"><div class="build-prompt">'+
+ '<div class="build-prompt-top"><span>교사용 단계별 요청문 예시</span><b>복사해 응용 가능</b></div>'+
+ '<div class="build-prompt-lines">'+lines.map((x,i)=>'<p><span>'+String(i+1).padStart(2,"0")+'</span>'+x+'</p>').join("")+'</div></div>'+
+ '<div class="build-prompt-foot">'+foot+'</div></div>';
+const buildRow=(arr)=>'<div class="build-rows">'+arr.map((x,i)=>'<div class="build-row"><span>'+String(i+1).padStart(2,"0")+'</span><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join("")+'</div>';
+const systemFlow=(arr)=>'<div class="build-system">'+arr.map(x=>'<div class="build-system-card"><small>'+x[0]+'</small><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div>').join("")+'</div>';
+const spec=(items)=>'<div class="build-spec">'+items.map(x=>'<div><span>'+x[0]+'</span><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div>').join("")+'</div>';
+const twoStep=(left,right)=>'<div class="build-two"><section><span>'+left[0]+'</span><strong>'+left[1]+'</strong><p>'+left[2]+'</p></section><section><span>'+right[0]+'</span><strong>'+right[1]+'</strong><p>'+right[2]+'</p></section></div>';
+Object.assign(classes,{
+ "build-overview":{
+  id:"build-overview",section:"웹앱 제작 방법",kicker:"개발 과정 01 · 전체 구조",
+  title:"화면 하나가 아니라\n여섯 부분을 연결했습니다",
+  body:buildRow([
+   ["교육과정·수업 활동","뉴스 조사, 공공자료 비교, 판단 기록"],
+   ["학생 화면","지역 선택, 메뉴, 카드와 버튼"],
+   ["지역 데이터","11개 시·군, 6개 분야, 출처 링크"],
+   ["뉴스 검색","RSS 검색 서버와 기사 정보 처리"],
+   ["탐정 기록","학생이 비교하고 작성한 판단 저장"],
+   ["검증·배포","실제 작동 검사 후 GitHub Pages 공개"]
+  ]),
+  note:"가장 중요한 설명은 '한 줄 요청문으로 전부 생성'이 아니라 여섯 개 독립적인 과제를 순서대로 다뤘다는 점입니다. 실제 학생용 앱에는 index.html(화면), style.css(디자인), app.js(흐름), regional-basics.js 등(지역자료), live-news.js(뉴스 요청), board.js(기록), 별도 server/news.mjs(검색 서버)가 있습니다. 이 과정은 실제 파일 구조를 바탕으로 재구성한 교육용 제작 순서이며 모든 원래 개발 대화가 이 순서였다고 주장하지 않습니다."
+ },
+ "build-spec":{
+  id:"build-spec",section:"웹앱 제작 방법",kicker:"개발 과정 02 · 수업 목표를 기능으로 바꾸기",
+  title:"‘무엇을 만들까’보다\n‘학생이 무엇을 할까’",
+  body:spec([
+   ["학습 활동","지역 뉴스 읽기","사회 [4사09-01] · 지역 문제 조사"],
+   ["학생의 행동","지역 선택 → 기사 열기","언론사·날짜·출처 살펴보기"],
+   ["학습의 증거","비교·판단 기록","같아요 / 달라요 / 아직 모르겠어요"]
+  ]),
+  note:"수업 문제를 UI 요구사항으로 번역하는 단계입니다. '뉴스 검색 앱 만들어줘'는 목표가 분명하지 않습니다. 초등 4학년 학생이 지역을 선택하고 원문을 읽고 근거자료와 비교해 판단의 이유를 남기도록 명세를 만듭니다. 이 세 가지 행위가 다음 구현 단계의 테스트 기준이 됩니다."
+ },
+ "build-toolmap":{
+  id:"build-toolmap",section:"웹앱 제작 방법",kicker:"개발 과정 03 · 도구와 역할",
+  title:"AI가 도와주는 일과\n별도로 준비할 일을 구분",
+  body:systemFlow([
+   ["교사 + AI","화면·기능 코드 작성","요구 정의 / 코드 생성·수정"],
+   ["GitHub Pages","학생용 사이트 공개","HTML·CSS·JavaScript 파일 제공"],
+   ["뉴스 서버","실제 기사 가져오기","구글·빙 RSS 검색을 서버에서 중계"]
+  ]),
+  note:"실제 사용한 파일은 GitHub 저장소 pace33/vibe-coding-math-presentation 안의 local-check/student/ 경로에 저장돼 있습니다. 정적 웹페이지는 GitHub Pages로 공개됩니다. 하지만 구글·빙 뉴스를 가져오는 기능은 정적 사이트만으로 항상 해결되지 않아 별도 server/news.mjs(Cloudflare Worker 기반 서버)와 학생용 live-news.js가 연결되어 있습니다. 코드를 만드는 것, 출처 자료를 준비하는 것, 외부 서비스를 운영하는 것은 서로 다른 일이라고 설명합니다. 실제 초기 개발 도구의 상세 이력은 확인되지 않았으므로 도구 역할 중심으로 설명합니다."
+ },
+ "build-first-prompt":{
+  id:"build-first-prompt",section:"웹앱 제작 방법",kicker:"개발 과정 04 · 첫 화면 제작 요청 예시",
+  title:"첫 요청은 ‘완성’이 아닌\n작동하는 기본 화면까지",
+  body:makePrompt([
+   "초등 4학년 사회 수업용 지역 탐구 웹앱을 만들고 싶어요.",
+   "학생은 시·군을 선택하고 지역 뉴스와 기초자료를 살펴봅니다.",
+   "상단 메뉴는 뉴스 찾기 / 우리 지역 / 탐정 게시판 3개로 해주세요.",
+   "우리 지역에는 기초정보·자연·생활시설·산업·역사문화·지역문제 탭을 둡니다.",
+   "이번 단계는 메뉴·지역 선택이 실제로 바뀌는 화면만 구현하세요."
+  ],"확인할 결과: 메뉴가 전환되는가? 지역을 바꾸면 선택값이 유지되는가?"),
+  note:"이것은 실제 최초 요청 원문이 아니라, 본 앱의 구조를 기준으로 재사용할 수 있게 설계한 교육용 1단계 프롬프트입니다. 프롬프트를 한 번에 다 넣을수록 결과의 오류가 커질 수 있어 기본 화면과 기능 구현을 분리합니다. 원하는 산출물은 index.html, style.css, app.js 같은 파일과 실행 가능한 화면입니다. 참가자에게 직접 따라 하도록 요구하지 않고 화면과 문장만 제시합니다."
+ },
+ "build-first-result":{
+  id:"build-first-result",section:"웹앱 제작 방법",type:"image",kicker:"1차 결과 · 구조 먼저 확인",
+  title:"메뉴가 실제로 움직이는지\n먼저 확인합니다",
+  lead:"처음에는 기능보다 화면 구조와 이동 흐름부터",
+  image:"assets/02-menu.svg",
+  note:"슬라이드 이미지는 학생용 웹앱의 현재 메뉴 구성을 재구성한 시연 자료입니다. 최초 버전의 실제 캡처라고 주장하지 않습니다. 이 단계에서는 탭 이동, 지역 선택, 글자 길이와 화면 여백 등을 확인합니다. 학교 현장에서 화면이 읽히는지 판단하고 나서 다음 단계로 진행합니다."
+ },
+ "build-data-prompt":{
+  id:"build-data-prompt",section:"웹앱 제작 방법",kicker:"개발 과정 05 · 지역자료 연결 요청",
+  title:"두 번째 요청은\n실제 지역 데이터입니다",
+  body:makePrompt([
+   "충북 11개 시·군의 지역정보 카드를 구성해주세요.",
+   "기초정보·자연·생활시설·산업·역사문화·지역문제로 분류하세요.",
+   "카드에는 실제 명칭, 학생용 짧은 설명, 출처 기관, 원문 주소를 넣으세요.",
+   "인구 같은 통계는 값과 기준일을 함께 표시하세요.",
+   "확인되지 않은 수치·주소·견학 가능 여부는 만들어내지 마세요."
+  ],"확인할 결과: 실제 지명·공식자료 링크·기준일이 학생 화면에 보이는가?"),
+  note:"이 내용은 교사용 예시 요청문입니다. 실제 데이터는 지역별 안내문과 공식 누리집을 확인해 채웁니다. 저장소에서 지역카드를 만드는 파일은 regional-basics.js, regional-landmarks.js, regional-visits.js, businesses.js 및 관련 파일로 분리되어 있습니다. AI가 제시한 지명과 숫자는 자동으로 사실이 되는 것이 아닙니다. 특히 11개 시·군의 인구 수치는 기준일·집계 기준을 동일하게 확인해야 합니다."
+ },
+ "build-data-result":{
+  id:"build-data-result",section:"웹앱 제작 방법",type:"image",kicker:"2차 결과 · 기초자료 카드",
+  title:"숫자만 넣는 것이 아니라\n‘근거’를 붙입니다",
+  lead:"값 · 기준일 · 출처 · 공식 상세자료 링크",
+  image:"assets/03-basics.svg",
+  note:"이 예시 화면은 기초정보 카드를 시각적으로 재구성한 것입니다. 실제 웹앱에서는 기본정보 카드와 기초 지역자료가 여러 JS 데이터 파일에 저장됩니다. 교사가 인구나 면적 같은 값이 맞는지 원문을 열어 확인하고, 누락 항목이 있으면 출처를 재조사합니다. 외부 뉴스 검색과 달리 변동이 적은 기초 자료를 먼저 표시해 수업 시작 시간을 줄인 설계입니다."
+ },
+ "build-news-structure":{
+  id:"build-news-structure",section:"웹앱 제작 방법",kicker:"개발 과정 06 · 뉴스 연결 구조",
+  title:"뉴스가 실시간으로 나오려면\n‘검색 서버’가 따로 필요합니다",
+  body:systemFlow([
+   ["학생 화면","지역·검색어 선택","student/live-news.js"],
+   ["검색 서버","안전하게 RSS 요청","server/news.mjs  /api/news"],
+   ["뉴스 제공처","구글·빙 RSS","먼저 정상 응답한 결과 반환"]
+  ]),
+  note:"여기서 정확히 알려야 할 것은 'AI에게 뉴스 검색 해줘'로 완성되지 않는다는 점입니다. 실제 저장소 student/live-news.js는 NEWS_API를 통해 별도 서버에 요청합니다. server/news.mjs는 구글 뉴스 RSS와 빙 뉴스 RSS를 요청하고 먼저 기사가 포함된 정상 응답을 반환하며, X-News-Provider로 제공처를 표시합니다. 외부 뉴스 검색은 연결 실패, 시간 지연, 기사 없음, 이용조건 같은 제한이 있어 운영·보수가 필요한 기능입니다. 정적 GitHub Pages만으로 RSS가 자동 제공되는 것은 아닙니다."
+ },
+ "build-news-prompt":{
+  id:"build-news-prompt",section:"웹앱 제작 방법",kicker:"개발 과정 07 · 뉴스 연결 요청 예시",
+  title:"뉴스 검색 기능은\n이렇게 나누어 요청합니다",
+  body:makePrompt([
+   "학생이 시·군과 검색어를 고르면 /api/news로 검색하도록 하세요.",
+   "검색 서버에서 구글·빙 뉴스 RSS를 조회하게 해주세요.",
+   "결과에는 제목·언론사·날짜·원문 링크를 표시하세요.",
+   "실제 RSS 제공처를 표시하고, 기사 없음과 연결 실패를 구분하세요.",
+   "뉴스를 AI가 자동으로 참·거짓 판정하지 않게 해주세요."
+  ],"확인할 결과: 실제 기사 원문이 열리는가? 오류 때 잘못된 안내를 하지 않는가?"),
+  note:"연수용 3단계 요청 예시입니다. 서버 구현은 별도 파일·호스팅이 필요하므로 학생용 화면과 서버를 분리해 요청하도록 안내합니다. 실제 서비스는 8초 제한, 입력 길이 제한, 응답 크기 제한, 성공 캐시, 제공처 이름 노출 등을 포함합니다. 검색 결과가 RSS로 전달되더라도 학생은 기사 내용의 진위와 맥락을 별도로 확인해야 합니다."
+ },
+ "build-check-prompt":{
+  id:"build-check-prompt",section:"웹앱 제작 방법",kicker:"개발 과정 08 · 검증 학습 흐름 요청",
+  title:"기사를 보여준 다음\n‘비교 활동’을 연결합니다",
+  body:makePrompt([
+   "학생이 뉴스 기사를 선택하면 원문과 발행일을 확인하게 하세요.",
+   "관련 공공기관 자료와 다른 기사 링크를 함께 찾도록 돕고,",
+   "뉴스 주장·비교 자료·판단 이유를 직접 적게 해주세요.",
+   "선택지는 같아요 / 달라요 / 아직 모르겠어요로 제공하세요.",
+   "근거를 자동 판정하지 말고 학생의 판단 과정을 기록하세요."
+  ],"확인할 결과: 기사 선택 → 출처 비교 → 판단 이유 기록이 끊기지 않는가?"),
+  note:"4단계 프롬프트도 재구성한 교사용 요청문입니다. 실제 앱의 검증 방식은 원문·공공자료 링크를 추천하고 학생이 직접 '같아요 / 달라요 / 아직 모르겠어요'를 선택하며 이유를 적는 구조입니다. AI 모델이 기사의 참과 거짓을 자동 판정하지 않습니다. 자료와 학생의 판단을 구분하는 것이 수업 설계의 중심입니다."
+ },
+ "build-board":{
+  id:"build-board",section:"웹앱 제작 방법",type:"image",kicker:"개발 과정 09 · 저장 기능 구현",
+  title:"검증 결과는\n탐정 카드로 남깁니다",
+  lead:"기기별 저장(localStorage) · 링크로 공유 가능",
+  image:"assets/06-board.svg",
+  note:"실제 student/board.js는 브라우저 localStorage에 학생 카드를 저장합니다. 카드에는 기사의 제목·언론사·날짜·원문 URL, 뉴스에서 찾은 사실, 비교한 근거, 판단 이유가 포함됩니다. 친구에게 #card= 형태의 링크로 공유할 수 있지만, 모든 기기의 카드를 서버에 자동으로 모으는 학급 공동 게시판은 아닙니다. 이 기술적 한계를 연수에서 명확히 알려야 합니다."
+ },
+ "build-real-fix":{
+  id:"build-real-fix",section:"웹앱 제작 방법",kicker:"개발 과정 10 · 실제 사용한 수정 요청",
+  title:"짧은 프롬프트는\n‘처음 제작’이 아니라 ‘수정’에 사용",
+  body:twoStep(
+   ["실제 수정 요청 ①","“기본 정보는 바로 저 공간에서 ... 정보가 보이게 해줘”","검색 안내만 있던 화면 → 수치·기준일이 보이는 카드"],
+   ["실제 수정 요청 ②","“빙이면 빙 구글이면 구글링크인지 확인해서 정확히 문구 넣어줘”","제공처를 고정 표시하던 화면 → 실제 검색 제공자에 따라 링크 변경"]
+  ),
+  note:"이 두 문장은 실제 제작 대화에서 나온 수정 요청문을 발췌·축약한 것입니다. 원래의 완전한 1차 제작 요청문이 아닙니다. 이전 발표에서 이 문장들을 '이 앱의 제작 방법'처럼 다룬 것은 잘못이었습니다. 기본 화면과 뉴스 시스템이 만들어진 뒤 구체적인 문제를 고치는 요청이었다는 맥락을 정확히 밝힙니다. 첫 사례의 더 긴 원문은 '이런 기본 정보는 바로 저 공간에서 간단하게라도 정보가 보이게 해줘'이고, 두 번째 요청문은 본문의 원문 그대로입니다."
+ },
+ "build-test":{
+  id:"build-test",section:"웹앱 제작 방법",kicker:"개발 과정 11 · 검증은 별도 단계",
+  title:"실행 후 다시 검사해야\n수업에 사용할 수 있습니다",
+  body:buildRow([
+   ["기초 정보","11개 시·군이 빠지지 않았는지 확인"],
+   ["기사 검색","원문·날짜·제공처와 링크 확인"],
+   ["검증·저장","판단 이유 입력·기기별 기록 확인"],
+   ["수업 화면","글자 겹침·모바일·수업용 프로젝터 점검"]
+  ]),
+  note:"코드 구문 검사를 통과했다고 수업 운영 테스트가 끝난 것은 아닙니다. 실제 기사 검색과 공공기관 외부 링크는 통신 상태·운영 사이트 변경에 영향받습니다. 테스트에는 정상 검색, 기사 없음, 연결 실패, 원문 링크, 저장·새로고침, 지역 변경, 모바일 화면, 화면 글자 겹침 등을 포함해야 합니다. 본 발표에는 테스트 항목을 가르치는 것이며 모든 브라우저·외부 링크에 대해 지금 실시간 테스트를 완료했다는 주장은 하지 않습니다."
+ },
+ "build-deploy":{
+  id:"build-deploy",section:"웹앱 제작 방법",kicker:"개발 과정 12 · 배포와 운영",
+  title:"웹주소를 만드는 것과\n뉴스 서비스를 운영하는 것은 다릅니다",
+  body:twoStep(
+   ["학생용 화면 배포","GitHub Pages","/local-check/student/ 경로의 HTML·CSS·JS를 공개"],
+   ["뉴스 검색 서비스 운영","별도 RSS 검색 서버","/api/news 응답·오류·외부 검색 제공처를 확인"]
+  ),
+  note:"학생용 실제 주소는 https://pace33.github.io/vibe-coding-math-presentation/local-check/student/ 입니다. 학생용 화면은 GitHub Pages에 배포되는 정적 페이지입니다. 서버 파일은 local-check/server/news.mjs이며 실제 운영 주소는 https://localcheck-news-pace33.lejinku.chatgpt.site/api/news 입니다. 서버가 중단되면 학생용 UI는 보여도 새 기사 검색은 실패할 수 있습니다. 뉴스 데이터의 최신성과 출처, 운영 여부까지 점검해야 수업 준비가 끝납니다. 참가자의 직접 배포 실습은 없습니다."
+ }
+});
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need",
  "field-textbook-news","field-gap-news","app-issues",
  "app-article-traffic","app-article-environment","field-compare-gap","app-verify",
  "field-textbook-region","field-gap-region","app-menu","app-basics","field-standards",
- "section-build","prompt-basics","prompt-verify","prompt-provider","prompt-coverage",
- "revision-loop","verify-created",
+ "section-build",
+ "build-overview","build-spec","build-toolmap","build-first-prompt","build-first-result",
+ "build-data-prompt","build-data-result","build-news-structure","build-news-prompt",
+ "build-check-prompt","build-board","build-real-fix","build-test","build-deploy",
  "section-app","app-nature","app-public","app-industry","app-culture","app-news",
  "app-article-check","app-record","boundaries",
  "section-class","sample-question","lesson-40","assessment","closing","sources"
-];
+]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
  const slide=classes[id]||oldSlides.get(id);
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"교과서의 뉴스 탐구,\n우리 지역 수업으로",lead:"자료 찾기에서 막힌 수업을 어떻게 연결했을까?",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
  if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"교재 활동을\n우리 교실에서 해보면?",lead:"학생에게 어떤 자료를 주고, 무엇부터 찾게 해야 할까요?",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
- if(id==="section-build")return {...slide,title:"이 문제를 해결하려고\nAI에 이렇게 요청했습니다",lead:"작은 수정 하나하나가 수업에서 생긴 요구였습니다.",note:"다음 네 프롬프트는 실제 웹앱 수정 대화에서 사용한 문장입니다. 기존 재구성한 가상 초기 프롬프트는 화면에서 제거했습니다. 학생이 수행해야 할 활동과 화면의 역할을 먼저 정하고 기능을 수정했습니다."};
+ if(id==="section-build")return {...slide,section:"웹앱 제작 방법",title:"이 웹앱은\n어떤 순서로 만들었을까요?",lead:"수업 요구 → 화면 → 자료 → 뉴스 서버 → 검증 → 배포",note:"15쪽부터는 실무 제작 안내입니다. AI 한 줄 명령으로 모든 것이 자동 완성된 듯한 오해를 없앴습니다. 본 앱의 실제 파일 구조와 동작에 기반한 교사용 재구성 제작 단계이며, 프롬프트 예시는 그대로 복사해 참고할 수 있도록 작성했지만 최초 개발 대화 원문이라고 주장하지 않습니다. 참가자가 실습하지 않고 화면과 설명만 보는 연수입니다."};
  if(id==="section-app")return {...slide,title:"그 밖의 지역 조사 활동도\n웹앱에 연결했습니다",lead:"지역의 자연·생활시설·산업·문화와 관련 뉴스를 살펴봅니다.",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
  return slide;
 });

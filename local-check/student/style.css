@@ -33,7 +33,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .inquiry-card h3{font-size:15px;margin:0;line-height:1.4}
 .basic-card-title{display:flex;align-items:center;gap:8px}
 .basic-card-title span{font-size:23px}
-.basic-card-value{font-size:18px;color:var(--green-dark);line-height:1.5;overflow-wrap:anywhere}
+.basic-card-value{font-size:18px;color:#ad490d;line-height:1.5;overflow-wrap:anywhere}
 .basic-card-source{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
 .inquiry-news-footer{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:11px;padding:5px 0;color:var(--green-dark)}
 .explore-mode #keywordField,.explore-mode #newsSearch,.explore-mode #searchHelp{display:none!important}
@@ -70,6 +70,8 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-card .meta,.business-meta,.board-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .news-card .meta{font-size:11px;color:var(--muted)}
 .news-card .tag,.business-tag,.board-region,.board-verdict{font-size:11px;border-radius:7px;padding:4px 8px;background:var(--soft);color:#377457;font-weight:750}
+/* Orange news source labels; business/board labels keep their existing colors. */
+.news-card .tag{background:#fff1e6;color:#94410e;border:1px solid #ebc29f}
 .news-card h3,.business-card h3,.board-card h3{font-size:16px;line-height:1.45;overflow-wrap:anywhere;margin:0}
 .news-card p,.business-card p,.board-card p{font-size:12px;color:var(--muted);margin:0;flex:1;line-height:1.65}
 /* Keep RSS preview text readable on small screens; avoid clipped descenders and flex stretching. */
@@ -86,6 +88,12 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-actions,.business-buttons,.candidate-actions,.board-card-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .news-actions a,.news-actions button,.business-buttons a,.business-buttons button,.candidate-actions a,.candidate-actions button,.board-action{min-height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:850;border-radius:8px;border:1px solid #cfe1d1;padding:9px 12px;background:var(--soft);color:var(--green);cursor:pointer;text-align:center}
 .news-actions button,.business-buttons button:first-child,.candidate-actions button,.board-action.primary{background:var(--green);border-color:var(--green);color:white}
+/* Match verification source-card buttons to the orange news palette. */
+.candidate-actions a{background:#fff1e6;border-color:#ebc29f;color:#94410e}
+.candidate-actions a:hover{background:#ffe4d0;border-color:#dba26f}
+.candidate-actions button{background:#b65316;border-color:#b65316;color:#fff}
+.candidate-actions button:hover{background:#95400b;border-color:#95400b}
+.candidate-actions a:focus-visible,.candidate-actions button:focus-visible{outline:3px solid #eaa55b;outline-offset:2px}
 /* Warm orange actions for news cards only; keep the rest of the app green. */
 .news-card .news-actions a{background:#fff1e6;border-color:#ebc29f;color:#94410e}
 .news-card .news-actions a:hover{background:#ffe4d0;border-color:#dba26f}

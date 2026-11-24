@@ -138,7 +138,18 @@ function createCardRow(d){
  top.append(tag("span","board-region",d.region||"우리 지역"),tag("span","board-verdict",d.initialVerdict&&d.initialVerdict!==d.verdict?d.initialVerdict+" → "+d.verdict:d.verdict));
  section.appendChild(top);
  section.appendChild(tag("h3","",d.title));
- section.appendChild(tag("p","",d.aiStatus?"최종 이유: "+d.reason:"판단 이유: "+d.reason));
+ const preview=tag("div","board-preview");
+ const brief=(value,max=145)=>{const t=String(value||"").replace(/\s+/g," ").trim();return t.length>max?t.slice(0,max)+"…":t;};
+ const add=(label,value,cls="")=>{if(!value)return;const row=tag("div","board-preview-row "+cls);row.append(tag("strong","",label),tag("p","",brief(value)));preview.appendChild(row);};
+ const news=d.newsFact&&!/^(검증할 뉴스 제목:|확인할 기사 제목:)/.test(d.newsFact)?d.newsFact:"";
+ const evidence=d.govFact&&!/^(비교할 근거를 아직|비교 자료 없음)/.test(d.govFact)?d.govFact:"";
+ add("기사에서 확인한 내용",news);
+ add("비교 자료",evidence);
+ if(d.govUrl)preview.appendChild(elementLink("비교 자료 원문 읽기",d.govUrl));
+ if(d.aiStatus&&d.aiStatus!=="unavailable")add("AI로 더 알아본 내용",[d.aiSummary,d.aiComparison].filter(Boolean).join(" "),"board-ai-preview");
+ const reason=d.reason&&!/별도로 기록하지 않았어요/.test(d.reason)?d.reason:"";
+ add("나의 판단",d.verdict+(reason?" · "+reason:""),"board-judgement-preview");
+ section.appendChild(preview);
  const btns=tag("div","board-card-buttons");
  const view=tag("button","board-action primary","자세히 보기");view.type="button";view.dataset.cardAction="view";view.dataset.cardId=d.id;
  const share=tag("button","board-action","친구에게 공유");share.type="button";share.dataset.cardAction="share";share.dataset.cardId=d.id;
@@ -303,7 +314,7 @@ function buildComparison(){
    catch{status.textContent="저장하지 못했어요. 브라우저 저장 공간을 확인하세요.";}
   });
   actions.append(saveBtn,status);panel.append(same,diff,judgement,basis,actions);
-  host.insertBefore(panel,$("boardList"));
+  $("boardList").after(panel);
  }
  const cards=readCards();
  for(let i=0;i<2;i++){

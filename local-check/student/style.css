@@ -476,3 +476,18 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .basic-card-actions .regional-google-search[open]{flex:1 0 100%;padding-top:8px;border-top:1px solid var(--line)}
 .basic-card-actions .regional-google-search[open] summary::before{content:'▾'}
 @media(max-width:660px){.basic-card-actions,.overview-grid .basic-card-actions{gap:6px}.basic-card-actions .basic-primary-link,.basic-card-actions .regional-visit-link,.basic-card-actions .regional-card-news{min-height:44px;padding:8px 10px;font-size:13px;flex:0 1 auto}.basic-card-actions .regional-google-search summary{min-height:44px;padding:8px 10px;font-size:12px}}
+
+/* Detective cards are the primary content of the board. */
+#board .board-grid{grid-template-columns:1fr;gap:16px}
+#board .board-card{padding:24px;border:1px solid #cbded1;border-radius:16px}
+#board .board-card h3{font-size:23px;line-height:1.5;margin:5px 0 14px}
+#board .board-region,#board .board-verdict{font-size:14px;padding:6px 10px}
+.board-preview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.board-preview-row{min-width:0;background:#f5f9f5;border-radius:10px;padding:12px 14px}
+.board-preview-row strong{font-size:14px;color:var(--green-dark)}
+#board .board-preview-row p{font-size:15px;color:var(--ink);line-height:1.65;margin:5px 0 0;overflow-wrap:anywhere}
+.board-preview>a{grid-column:1/-1;font-size:14px;color:var(--green);text-decoration:underline}
+.board-ai-preview,.board-judgement-preview{grid-column:1/-1}
+.board-ai-preview{background:#eef5fa}.board-judgement-preview{background:#eaf5ed}
+#board .board-action{font-size:14px;min-height:44px;padding:10px 16px}
+@media(max-width:660px){#board .board-card{padding:17px}#board .board-card h3{font-size:20px}.board-preview{grid-template-columns:1fr}.board-preview-row{padding:11px 12px}#board .board-preview-row p{font-size:15px}}

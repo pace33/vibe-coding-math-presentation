@@ -137,10 +137,10 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .evidence-heading .btn{min-height:36px;padding:7px 11px;font-size:12px}
 .evidence-status{margin:12px 0}
 .evidence-candidates{margin:10px 0}
-.candidate-card{padding:14px}
-.candidate-kind{font-size:10px;color:var(--green);font-weight:850}
-.candidate-card strong{font-size:14px;line-height:1.45;overflow-wrap:anywhere}
-.candidate-card p{font-size:11px;color:var(--muted);margin:0;flex:1}
+.candidate-card{padding:22px;gap:13px;min-height:195px}
+.candidate-kind{font-size:13px;color:var(--green);font-weight:850}
+.candidate-card strong{font-size:22px;line-height:1.45;overflow-wrap:anywhere}
+.candidate-card p{font-size:14px;color:var(--muted);margin:0;flex:1}
 .candidate-selected{border-color:#71ba8a;background:#f1faf2}
 .candidate-selected .candidate-actions button{background:var(--green-dark)}
 .verify-extra,.secondary-tools{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fbfdfb;margin:13px 0}
@@ -426,3 +426,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
  .final-choices label{min-height:52px}
  .detective-ai-record,.detective-final-record{padding:14px}
 }
+
+/* Make comparison articles the focal point of the evidence activity. */
+.candidate-grid{gap:16px}
+.candidate-actions{gap:10px}
+.candidate-actions a,.candidate-actions button{min-height:46px;font-size:15px;padding:10px 16px}
+@media(max-width:600px){.candidate-card{padding:17px;min-height:0}.candidate-card strong{font-size:20px}.candidate-actions a,.candidate-actions button{font-size:14px;padding:10px 12px}}

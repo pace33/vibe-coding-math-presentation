@@ -86,6 +86,14 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-actions,.business-buttons,.candidate-actions,.board-card-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .news-actions a,.news-actions button,.business-buttons a,.business-buttons button,.candidate-actions a,.candidate-actions button,.board-action{min-height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:850;border-radius:8px;border:1px solid #cfe1d1;padding:9px 12px;background:var(--soft);color:var(--green);cursor:pointer;text-align:center}
 .news-actions button,.business-buttons button:first-child,.candidate-actions button,.board-action.primary{background:var(--green);border-color:var(--green);color:white}
+/* Warm orange actions for news cards only; keep the rest of the app green. */
+.news-card .news-actions a{background:#fff1e6;border-color:#ebc29f;color:#94410e}
+.news-card .news-actions a:hover{background:#ffe4d0;border-color:#dba26f}
+.news-card .news-actions button{background:#b65316;border-color:#b65316;color:#fff}
+.news-card .news-actions button:hover{background:#95400b;border-color:#95400b}
+.news-card .news-actions a:focus-visible,.news-card .news-actions button:focus-visible{outline:3px solid #eaa55b;outline-offset:2px}
+#showMoreNews{background:#fff8f0;border-color:#e4b994;color:#94410e}
+#showMoreNews:hover{background:#ffecda;border-color:#d99e6a}
 .news-empty,.candidates-empty,.board-empty{grid-column:1/-1;padding:24px;text-align:center;border:1px dashed #d2dfd3;border-radius:12px;background:#fff;color:var(--muted);font-size:13px}
 .recent-news-more{display:flex;justify-content:center;margin:18px 0 8px}
 .recent-news-more .google-more-button{min-width:230px}

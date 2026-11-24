@@ -124,6 +124,29 @@ document.addEventListener("DOMContentLoaded",()=>{
  $("printButton").addEventListener("click",printAll);
  $("closeOverview").addEventListener("click",()=>toggleOverview(false));
  $("closeNotes").addEventListener("click",()=>toggleNotes(false));
+ // Copy an entire prompt as one message for a ChatGPT conversation.
+ $("slide").addEventListener("click",async e=>{
+  const button=e.target.closest("[data-copy-prompt]");
+  if(!button)return;
+  const prompt=decodeURIComponent(button.dataset.copyPrompt||"");
+  if(!prompt)return;
+  try{
+   if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(prompt);
+   else{
+    const temp=document.createElement("textarea");
+    temp.value=prompt;temp.style.position="fixed";temp.style.opacity="0";
+    document.body.appendChild(temp);temp.select();
+    const copied=document.execCommand("copy");
+    temp.remove();
+    if(!copied)throw new Error("Clipboard not available");
+   }
+   button.textContent="복사 완료 ✓";
+   button.setAttribute("aria-label","명령문 복사 완료");
+  }catch(error){
+   button.textContent="복사 실패 · 내용을 선택해 주세요";
+   button.setAttribute("aria-label","명령문을 복사하지 못했습니다");
+  }
+ });
  $("overviewGrid").addEventListener("click",e=>{
   const b=e.target.closest("[data-jump]");if(!b)return;
   const next=Number(b.dataset.jump);toggleOverview(false);showSlide(next);
@@ -133,7 +156,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  window.addEventListener("hashchange",()=>{if(!location.hash.startsWith("#slide="))return;index=parseHash();render();});
  document.addEventListener("keydown",e=>{
   if(e.ctrlKey||e.metaKey||e.altKey)return;
-  if(e.target?.matches?.("input,textarea,select,[contenteditable=true]"))return;
+  if(e.target?.matches?.("input,textarea,select,button,[contenteditable=true]"))return;
   if(e.key==="Escape"){
    if(overviewOpen){toggleOverview(false);e.preventDefault();}
    else if(notesOpen){toggleNotes(false);e.preventDefault();}

@@ -387,12 +387,23 @@ const classes={
  */
 const escPrompt=s=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 /* All lines form one copyable chat message. These are executable prompts, not claimed historic verbatim originals. */
-const makePrompt=(lines,foot,heading="채팅창에 그대로 입력해 보세요")=>{
+const makePrompt=(lines,foot,heading="ChatGPT에 입력하는 명령어")=>{
  const prompt=lines.join("\n");
- return '<div class="chat-prompt">'+
-  '<div class="chat-prompt-head"><span>'+escPrompt(heading)+'</span><button type="button" class="chat-prompt-copy" data-copy-prompt="'+encodeURIComponent(prompt)+'" aria-label="이 명령문을 복사">명령문 복사</button></div>'+
-  '<div class="chat-prompt-simple">'+lines.map(line=>'<p>'+escPrompt(line)+'</p>').join("")+'</div>'+
-  '</div><p class="chat-prompt-foot">'+escPrompt(foot)+'</p>';
+ return '<div class="gpt-preview" role="group" aria-label="ChatGPT 화면 형식으로 구성한 명령어 예시">'+
+  '<div class="gpt-preview-header">'+
+   '<div class="gpt-preview-brand"><span class="gpt-preview-logo" aria-hidden="true">✳</span><strong>ChatGPT</strong><span class="gpt-preview-caret" aria-hidden="true">⌄</span></div>'+
+   '<span class="gpt-preview-kind">채팅 입력 화면 예시</span>'+
+   '<button type="button" class="chat-prompt-copy" data-copy-prompt="'+encodeURIComponent(prompt)+'" aria-label="채팅 명령어 전체 복사">명령어 복사</button>'+
+  '</div>'+
+  '<div class="gpt-preview-main">'+
+   '<h2 class="gpt-preview-greeting">무엇을 도와드릴까요?</h2>'+
+   '<div class="gpt-preview-composer">'+
+    '<div class="gpt-preview-input" aria-label="입력할 명령어">'+lines.map(line=>'<p>'+escPrompt(line)+'</p>').join("")+'</div>'+
+    '<div class="gpt-preview-toolbar"><span class="gpt-preview-add" aria-hidden="true">＋</span><span class="gpt-preview-tools" aria-hidden="true">도구</span><span class="gpt-preview-toolbar-space"></span><span class="gpt-preview-mic" aria-hidden="true">◉</span><span class="gpt-preview-send" aria-hidden="true">↑</span></div>'+
+   '</div>'+
+   '<p class="gpt-preview-disclaimer">ChatGPT 입력 화면을 재구성한 연수용 예시입니다.</p>'+
+  '</div>'+
+ '</div><p class="chat-prompt-foot">'+escPrompt(foot)+'</p>';
 };
 const buildRow=(arr)=>'<div class="build-rows">'+arr.map((x,i)=>'<div class="build-row"><span>'+String(i+1).padStart(2,"0")+'</span><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join("")+'</div>';
 const systemFlow=(arr)=>'<div class="build-system">'+arr.map(x=>'<div class="build-system-card"><small>'+x[0]+'</small><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div>').join("")+'</div>';

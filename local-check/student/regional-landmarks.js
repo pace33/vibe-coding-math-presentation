@@ -260,7 +260,7 @@ const NATURE_LEARNING=[
   "생태공원",
   "보강천 생태공원",
   "하천 주변의 나무와 녹지 공간을 살펴봐요.",
-  "https://www.jp.go.kr/tour/prog/tursmCn/sub01_04_01/view.do?progNo=p00000006345ew0wJ2td",
+  "https://www.jp.go.kr/tour/prog/tursmCn/sub01_07/view.do?progNo=p00000006345ew0wJ2td",
   "증평군 문화관광"
  ],
  [
@@ -299,5 +299,93 @@ const NATURE_LEARNING=[
 for(const [region,title,value,summary,href,source] of NATURE_LEARNING){
  const list=window.LOCALCHECK_REGIONAL_LANDMARKS[region]?.nature;
  if(list)list.push({...n(title,value,summary,href,source),icon:"🌿",primaryLabel:"시설·자연 안내 ↗",newsTerm:value,placeLearning:true});
+}
+
+/* 지역별 생태·식물 관찰 장소: 공식 시설 명칭을 유지하고 같은 장소는 중복 추가하지 않음. */
+const ECO_LEARNING_SITES=[
+ [
+  "청주시",
+  "문암생태공원",
+  "습지에 사는 식물과 나무를 관찰해요.",
+  "https://cjyu.cheongju.go.kr/home/sub.do?code1=apply1&menukey=7104&mode=view&sn=103",
+  "청주시 관광"
+ ],
+ [
+  "충주시",
+  "호암공원 생태전시관",
+  "연못과 습지의 식물, 물가 생태계를 알아봐요.",
+  "https://access.visitkorea.or.kr/ms/detail.do?cotId=bd3caa69-cbc5-47a4-8a14-0a6721e76fc9",
+  "한국관광공사"
+ ],
+ [
+  "제천시",
+  "덕동생태숲",
+  "숲의 식물과 연못을 관찰하며 생태환경을 알아봐요.",
+  "https://tour.jecheon.go.kr/tour/base/tour/contents/view?clturCntntsNo=279",
+  "제천시 문화관광"
+ ],
+ [
+  "보은군",
+  "솔향공원 식물원",
+  "식물원과 소나무 전시를 통해 여러 식물을 알아봐요.",
+  "https://access.visitkorea.or.kr/ms/detail.do?cotId=74669e49-e987-42ba-99b6-39c22d03d282",
+  "한국관광공사 솔향공원"
+ ],
+ [
+  "옥천군",
+  "청성 별빛수목원",
+  "여러 종류의 꽃과 나무를 비교해요. 방문 가능 여부는 미리 확인해요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=1322",
+  "충북나드리"
+ ],
+ [
+  "영동군",
+  "과일나라테마공원",
+  "과일나무의 종류와 자라는 모습을 알아봐요. 레인보우식물원도 이곳에 있어요.",
+  "https://www.yd21.go.kr/fruit/html/introduction/0103.html",
+  "영동군 과일나라테마공원"
+ ],
+ [
+  "증평군",
+  "삼기습지생태공원",
+  "삼기저수지 주변 습지와 물가의 자연환경을 알아봐요.",
+  "https://water.jp.go.kr/tour/sub01_09.do",
+  "증평군 문화관광 도보여행 안내"
+ ],
+ [
+  "진천군",
+  "만뢰산자연생태공원",
+  "자생수목원, 밀원식물원, 습생초지원과 생태연못에서 식물과 생물의 관계를 알아봐요.",
+  "https://www.jincheon.go.kr/site/tour/sub.do?menukey=1906",
+  "진천군 문화관광"
+ ],
+ [
+  "괴산군",
+  "성불산 생태숲학습관",
+  "숲과 자연에 관한 전시와 교육 프로그램을 알아봐요.",
+  "https://www.goesan.go.kr/www/selectBbsNttView.do?bbsNo=213&integrDeptCode=&key=136&nttNo=128500&pageIndex=76&pageUnit=9&searchCnd=all&searchCtgry=&searchKrwd=",
+  "괴산군청 운영 안내"
+ ],
+ [
+  "음성군",
+  "봉학골 정원",
+  "야생화정원과 습지원 등 여러 주제의 정원을 알아봐요. 실내 목조식물원은 조성 계획 단계예요.",
+  "https://www.yna.co.kr/view/AKR20260709082300064",
+  "연합뉴스 2026.7.9 음성군 발표"
+ ],
+ [
+  "단양군",
+  "가대 생태습지",
+  "습지의 식물과 물을 깨끗하게 하는 습지의 역할을 알아봐요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&pageIndex=7&pageUnit=12&searchAreaSe=11&searchCnd=all&searchMainSe=ATTR&tourNo=679",
+  "충북나드리"
+ ]
+];
+for(const [region,value,summary,href,source] of ECO_LEARNING_SITES){
+ const list=window.LOCALCHECK_REGIONAL_LANDMARKS[region]?.nature;
+ if(!list)continue;
+ const card={...n("생태·식물 관찰",value,summary,href,source),icon:"🌱",primaryLabel:"시설 안내 ↗",newsTerm:value,placeLearning:true};
+ const old=list.findIndex(x=>x.value===value);
+ if(old>=0)list[old]={...list[old],...card};else list.push(card);
 }
 })();

@@ -76,6 +76,12 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-card .news-publisher{flex:none}
 .news-card .news-excerpt{display:block;flex:none;overflow:visible;overflow-wrap:anywhere;line-height:1.7;margin:4px 0 8px;color:#425466}
 .news-card .news-excerpt-empty{color:#677887;font-size:12px}
+/* Make the news source and publication date explicit and readable. */
+.news-card .news-source-date{display:flex;flex-direction:column;gap:5px;margin:2px 0 7px}
+.news-card .news-meta-line{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;line-height:1.5}
+.news-card .news-meta-label{font-size:15px;font-weight:900;color:var(--green-dark);white-space:nowrap}
+.news-card .news-meta-value{font-size:15px;font-weight:700;color:#354e43;overflow-wrap:anywhere}
+@media(max-width:660px){.news-card .news-meta-label,.news-card .news-meta-value{font-size:16px}}
 .news-actions,.business-buttons,.candidate-actions,.board-card-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .news-actions a,.news-actions button,.business-buttons a,.business-buttons button,.candidate-actions a,.candidate-actions button,.board-action{min-height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:850;border-radius:8px;border:1px solid #cfe1d1;padding:9px 12px;background:var(--soft);color:var(--green);cursor:pointer;text-align:center}
 .news-actions button,.business-buttons button:first-child,.candidate-actions button,.board-action.primary{background:var(--green);border-color:var(--green);color:white}

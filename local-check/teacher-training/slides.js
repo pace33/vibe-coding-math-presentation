@@ -159,10 +159,10 @@ const SLIDES=[
  note:"완성된 웹앱을 소개하되 홍보처럼 화면 기능을 나열하지 않습니다. 각 기능이 교과서의 어떤 활동을 돕는지 확인하며 설명합니다."
 },
 {
- id:"app-menu",section:"완성된 수업 도구",type:"image",kicker:"지역 주제 탐색 · [4사09-02]",title:"자연·역사·문화·생산물을\n주제별로 찾습니다",
- lead:"충북 11개 시·군 / 지역 정보 6개 분야",
- image:"assets/02-menu.svg",
- note:"웹앱의 메뉴는 교육과정 공식 분류가 아니라 탐구를 돕기 위한 교사의 재구성입니다. '뉴스 찾기 / 우리 지역 / 탐정 게시판'의 큰 메뉴와 여섯 지역 분야로 설계했습니다."
+ id:"app-menu",section:"완성된 수업 도구",type:"image",kicker:"우리 지역 탐정 · 전체 화면",title:"우리 지역 탐정은\n어떤 화면으로 구성되었을까요?",
+ lead:"상단의 세 가지 메뉴: 뉴스 찾기 · 우리 지역 · 탐정 게시판",
+ image:"assets/00-overview.svg",
+ note:"학생용 웹앱의 전체 구성을 소개합니다. 이미지는 실제 메뉴와 뉴스 검색 화면을 바탕으로 재구성한 발표용 예시이며 실시간 화면 캡처는 아닙니다. 상단에 뉴스 찾기, 우리 지역, 탐정 게시판이 있습니다. 먼저 전체 화면을 보여준 뒤 각 기능을 순서대로 시연합니다. 실제 웹앱 주소는 https://pace33.github.io/vibe-coding-math-presentation/local-check/student/ 입니다."
 },
 {
  id:"app-basics",section:"완성된 수업 도구",type:"image",kicker:"지역 공공자료 확인 · [4사09-02]",title:"공식 통계를 읽을 때\n기준일을 확인합니다",
@@ -195,28 +195,27 @@ const SLIDES=[
  note:"[4사09-02]는 지역의 자연환경·역사·문화·생산물과 지역사회의 노력을 탐구하는 내용이므로, 문화유산 이름만 제공하는 것으로 부족합니다. 전시·체험이 가능한 박물관·미술관과 지역 축제·예술 행사 정보를 추가했습니다. 다만 축제 개최일과 운영 정보는 해마다 변경되므로 최신 공지로 확인하도록 안내합니다."
 },
 {
- id:"app-issues",section:"수업 활동 지원",type:"image",kicker:"지역 탐구 지원 · 사회 [4사09-01]",
+ id:"app-issues",section:"완성된 수업 도구",type:"image",kicker:"① 뉴스 찾기 · 지역별 기사 탐색",
  title:"우리 지역 뉴스를\n쉽게 찾을 수 있도록",
  lead:"우리 시·군 선택 → 관심 주제·검색어 입력 → 기사·언론사·날짜 확인",
  image:"assets/10-issues.svg",
- note:"바로 앞 페이지에서는 지역 뉴스를 찾으려고 하면 광역 기사·오래된 기사·관련 없는 검색 결과가 섞여 수업이 어려울 수 있음을 설명했습니다. 이 페이지는 그 문제를 해결하기 위한 실제 웹앱 화면입니다. 학생이 사는 충북 시·군을 선택하고 환경·교통안전·교육복지·지역 생활 문제 등 관심 분야나 검색어로 기사를 찾습니다. 검색 결과의 기사 제목·언론사·날짜를 먼저 보고 원문을 열도록 구성해, 시간을 기사 찾기에만 쓰지 않고 비교·검증 활동으로 연결하도록 했습니다. 화면에 보이는 기사는 수업용 예시이며 뉴스 검색은 외부 뉴스 서비스 연결 상태에 따라 달라질 수 있습니다."
+ note:"뉴스 찾기의 검색 예시를 보여줍니다. 충북 시·군과 검색어를 입력하고 기사 제목·언론사·날짜·원문 링크를 확인합니다. 지역문제 메뉴를 활용하면 환경·교통안전·교육복지·지역 생활 관련 검색도 가능합니다. 검색 결과 자체가 사실 확인 완료를 뜻하지 않으므로 원문과 비교 자료를 살펴보도록 안내합니다. 화면에 보이는 기사는 수업용 예시이며 뉴스 검색은 외부 뉴스 서비스 연결 상태에 따라 달라질 수 있습니다."
 },
 {
- id:"app-problem-features",section:"수업 활동 지원",kicker:"수업 활동 → 웹앱의 핵심 기능",
- title:"지역 조사에 필요한\n네 가지 핵심 기능",
- lead:"자료 검색 시간을 줄이고 기사 비교와 근거 확인에 집중합니다.",
- body:'<div class="solution-grid">'+
- '<article class="solution-card"><small>01 · 기사 찾기</small><p>“우리 고장 기사는 어떻게 찾을까요?”</p><strong>충북 11개 시·군 선택 · 뉴스 검색</strong><span>지역과 검색어로 필요한 기사부터 찾기</span></article>'+
- '<article class="solution-card"><small>02 · 출처 확인</small><p>“기사의 출처는 어떻게 확인할까요?”</p><strong>기사 제목 · 언론사 · 날짜 · 원문</strong><span>제목만 읽지 않고 누가 언제 썼는지 확인</span></article>'+
- '<article class="solution-card"><small>03 · 근거 비교</small><p>“두 기사는 어떤 점이 같고 다를까요?”</p><strong>다른 기사 · 공공기관 자료 비교</strong><span>같은 내용, 다른 내용과 근거 구별하기</span></article>'+
- '<article class="solution-card"><small>04 · 탐구 기록</small><p>“확인한 내용을 어떻게 기록해 볼까요?”</p><strong>판단 선택 · 이유 작성 · 탐정 카드</strong><span>확인한 사실과 더 알아볼 점 기록하기</span></article>'+
+ id:"app-problem-features",section:"완성된 수업 도구",kicker:"우리 지역 탐정 · 세 가지 주요 메뉴",
+ title:"세 가지 메뉴에서는\n어떤 활동을 할까요?",
+ lead:"뉴스를 찾고, 우리 지역을 살펴보고, 탐구 결과를 기록합니다.",
+ body:'<div class="solution-grid menu-feature-grid">'+
+ '<article class="solution-card"><small>01 · 📰 뉴스 찾기</small><p>“우리 지역 뉴스를 찾아볼까요?”</p><strong>기사 검색과 근거 비교</strong><span>시·군과 검색어 선택 → 기사·출처·날짜 확인 → 다른 자료와 비교</span></article>'+
+ '<article class="solution-card"><small>02 · 🗺️ 우리 지역</small><p>“우리 고장에는 어떤 특징이 있을까요?”</p><strong>6개 분야 지역 정보 조사</strong><span>기본 정보 · 자연환경 · 생활시설 · 산업과 경제 · 역사와 문화 · 지역문제</span></article>'+
+ '<article class="solution-card"><small>03 · 🗂️ 탐정 게시판</small><p>“내가 조사한 내용을 함께 볼까요?”</p><strong>탐정 카드 확인과 공유</strong><span>학생이 직접 작성한 판단·근거 확인 → 기기에 저장 → 링크로 공유</span></article>'+
  '</div>',
- note:"앞 슬라이드의 수업 문제를 학생용 웹앱의 실제 기능과 연결합니다. ① 충북 11개 시·군을 고르고 검색어로 관련 뉴스를 찾습니다. ② 기사 제목·언론사·발행 날짜와 원문을 살펴봅니다. ③ 다른 기사나 공식 자료를 비교하고 내용의 공통점과 차이점을 확인합니다. ④ 같아요·달라요·아직 모르겠어요 등을 선택하고 이유를 적어 탐정 카드로 남깁니다. 웹앱이 진위를 자동으로 판정하는 기능은 아닙니다. 탐정 카드 저장은 현재 사용 중인 브라우저 중심입니다. 이제 다음 페이지에서 실제 뉴스 2건을 가지고 이 과정을 적용해 보겠습니다."
+ note:"이 슬라이드는 네 단계의 검증 절차가 아니라 웹앱 화면 맨 위에 있는 세 가지 실제 메뉴를 설명합니다. 뉴스 찾기에서 원문과 근거를 살펴보고, 우리 지역에서 6개 분야의 정보를 조사하며, 탐정 게시판에서 완성한 카드를 확인할 수 있습니다. 탐정 카드는 기기에 저장되며 친구에게 링크를 보낼 수 있지만 학급 전체의 게시물이 자동으로 모이는 공용 서버는 아닙니다."
 },
 {
 
- id:"app-news",section:"완성된 수업 도구",type:"image",kicker:"지역 문제 발견 · [4사09-01]",title:"지역 뉴스에서 문제를 찾습니다",
- lead:"관심 있는 지역 문제의 관련 기사를 찾아 원문 확인하기",
+ id:"app-news",section:"완성된 수업 도구",type:"image",kicker:"① 뉴스 찾기 · 관련 기사 검색",title:"우리 지역의 뉴스는\n어떻게 찾아볼까요?",
+ lead:"시·군과 검색어를 선택해 기사 제목·출처·날짜·원문 확인하기",
  image:"assets/04-news.svg",
  note:"학생은 자신이 선택한 지역의 뉴스와 공공기관 자료를 찾아봅니다. 실시간 뉴스 검색은 외부 제공자의 응답에 의존하고, 검색 결과에는 검증 완료 표시가 붙지 않습니다. 제공처는 실제 구글/빙 RSS에 따라 달라집니다."
 },
@@ -265,10 +264,10 @@ const SLIDES=[
  note:"[6국06-02]는 국어과 매체 영역의 성취기준임을 명확히 언급합니다. 3단계 검증 절차는 웹앱을 위해 교사가 구현한 활동 단계입니다. AI가 사실 여부를 자동 채점하지 않습니다."
 },
 {
- id:"app-record",section:"완성된 수업 도구",type:"image",kicker:"탐구 결과 표현 · 교과 연계 활동",title:"판단의 이유를\n탐정 카드에 남깁니다",
- lead:"같아요 / 달라요 / 아직 모르겠어요 — 판단과 근거 기록",
+ id:"app-record",section:"완성된 수업 도구",type:"image",kicker:"③ 탐정 게시판 · 기록 확인과 공유",title:"탐정 게시판에서는\n무엇을 확인할까요?",
+ lead:"학생의 판단·근거를 탐정 카드로 확인하고, 링크로 공유하기",
  image:"assets/06-board.svg",
- note:"탐정 게시판은 현재 브라우저 기기에 기록을 저장합니다. 모든 학생 기록이 하나의 공용 서버에 자동 공유되는 것은 아닙니다. 탐정 카드에 개인정보를 쓰지 않도록 안내합니다."
+ note:"탐정 게시판의 모아 둔 카드에서 완성한 카드의 출처·날짜·비교 근거·판단 이유를 다시 확인합니다. 자세히 보기를 통해 카드 내용을 열고, 친구에게 공유 버튼으로 링크를 전달할 수 있습니다. 자료는 현재 브라우저 기기에 저장되며 공용 게시판 서버에 자동으로 모이지 않습니다. AI 검토를 하지 않은 카드도 완성할 수 있습니다. 이름·연락처 등 개인정보를 카드에 쓰지 않도록 안내합니다."
 },
 {
  id:"boundaries",section:"완성된 수업 도구",kicker:"수업자료의 한계도 함께 설명",title:"웹앱의 역할과\n학생의 판단 과정",
@@ -529,17 +528,15 @@ Object.assign(classes,{
 });
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
- "cover","section-need",
- "field-textbook-news","field-gap-news","app-issues","app-problem-features",
- "app-article-traffic","app-article-environment","field-compare-gap","app-verify",
- "field-textbook-region","field-gap-region","app-menu","app-basics","field-standards",
- "section-build",
- "build-overview","build-spec","build-toolmap","build-first-prompt","build-first-result",
- "build-data-prompt","build-data-result","build-news-structure","build-news-prompt",
- "build-check-prompt","build-board","build-test","build-deploy",
- "section-app","app-nature","app-public","app-industry","app-culture","app-news",
- "app-article-check","app-record","boundaries",
- "section-class","sample-question","lesson-40","assessment","closing","sources"
+ "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
+ "app-article-environment","field-compare-gap","field-textbook-region","field-gap-region","field-standards",
+ "section-build","build-overview","build-spec","build-toolmap","build-first-prompt",
+ "build-first-result","build-data-prompt","build-data-result","build-news-structure","build-news-prompt",
+ "build-check-prompt","build-board","build-test","build-deploy","section-app",
+ "app-menu","app-problem-features","app-news","app-issues","app-verify",
+ "app-article-check","app-basics","app-nature","app-public","app-industry",
+ "app-culture","app-record","boundaries","section-class","sample-question",
+ "lesson-40","assessment","closing","sources"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
@@ -558,16 +555,16 @@ const textbookTitles={
   "section-need": "우리 지역 조사하기,\n무엇이 어려울까요?",
   "field-textbook-news": "우리 지역의 문제를\n어떻게 조사해 볼까요?",
   "field-gap-news": "우리 지역의 뉴스를\n어떻게 찾으면 좋을까요?",
-  "app-issues": "우리 지역의 문제와 관련된\n뉴스는 어떻게 찾을까요?",
-  "app-problem-features": "지역 탐구를 돕는\n기능에는 무엇이 있을까요?",
+  "app-issues": "① 뉴스 찾기\n검색 결과는 어떻게 살펴볼까요?",
+  "app-problem-features": "세 가지 주요 메뉴에서\n무엇을 할 수 있을까요?",
   "app-article-traffic": "같은 사건을 다룬 기사들은\n어떤 점이 다를까요?",
   "app-article-environment": "정정보도를 살펴보면\n어떤 사실을 알 수 있을까요?",
   "field-compare-gap": "뉴스의 내용은\n어떻게 확인해 볼까요?",
-  "app-verify": "여러 자료를 비교하면\n무엇을 확인할 수 있을까요?",
+  "app-verify": "① 뉴스 찾기\n기사의 근거는 어떻게 비교할까요?",
   "field-textbook-region": "우리 지역의 자랑거리는\n어떻게 알아볼까요?",
   "field-gap-region": "우리 지역의 자료를\n어디에서 찾아볼까요?",
-  "app-menu": "우리 지역의 특징을\n어떤 주제로 살펴볼까요?",
-  "app-basics": "지역 통계는\n무엇을 확인하며 읽을까요?",
+  "app-menu": "우리 지역 탐정의 전체 화면을\n함께 살펴볼까요?",
+  "app-basics": "② 우리 지역\n어떤 기본 정보를 살펴볼까요?",
   "field-standards": "성취기준과 웹앱 기능은\n어떻게 연결할까요?",
   "section-build": "우리 수업에 필요한 웹앱,\n어떻게 만들어 볼까요?",
   "build-overview": "AI와 함께 수업 자료를\n어떻게 만들어 볼까요?",
@@ -583,14 +580,14 @@ const textbookTitles={
   "build-board": "탐구 결과는\n어떻게 기록해 볼까요?",
   "build-test": "수업 전에 어떤 기능을\n함께 확인해 볼까요?",
   "build-deploy": "완성한 웹앱을\n학생들과 어떻게 나눌까요?",
-  "section-app": "우리 지역 탐정으로\n어떤 활동을 해 볼까요?",
-  "app-nature": "우리 지역의 자연환경은\n어떻게 알아볼까요?",
-  "app-public": "우리 지역의 생활시설과\n공공기관은 어떻게 살펴볼까요?",
-  "app-industry": "우리 지역의 산업과 생산물은\n어떻게 알아볼까요?",
-  "app-culture": "우리 지역의 역사와 문화는\n어떻게 살펴볼까요?",
-  "app-news": "지역 뉴스를 통해\n어떤 문제를 살펴볼까요?",
-  "app-article-check": "뉴스의 출처와 근거는\n어떻게 살펴볼까요?",
-  "app-record": "탐구 과정에서 알게 된 점은\n어떻게 남겨 볼까요?",
+  "section-app": "우리 지역 탐정의 세 가지 메뉴를\n어떻게 활용할까요?",
+  "app-nature": "② 우리 지역\n자연환경은 어떻게 살펴볼까요?",
+  "app-public": "② 우리 지역\n생활시설과 공공기관은 무엇이 있을까요?",
+  "app-industry": "② 우리 지역\n산업과 생산물을 어떻게 알아볼까요?",
+  "app-culture": "② 우리 지역\n역사와 문화를 어떻게 살펴볼까요?",
+  "app-news": "① 뉴스 찾기\n우리 지역 기사를 어떻게 찾을까요?",
+  "app-article-check": "① 뉴스 찾기\n서로 다른 자료를 어떻게 비교할까요?",
+  "app-record": "③ 탐정 게시판\n탐구 결과는 어떻게 확인할까요?",
   "boundaries": "학생이 직접 탐구하려면\n어떤 도움이 필요할까요?",
   "section-class": "우리 지역 탐정,\n수업에서 어떻게 활용할까요?",
   "sample-question": "우리 지역의 교통안전은\n어떻게 살펴볼까요?",

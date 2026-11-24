@@ -546,7 +546,7 @@ const classroomSlides=order.map(id=>{
  const slide=classes[id]||oldSlides.get(id);
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"우리 지역 탐구 수업,\nAI로 만든 웹앱과 함께",lead:"지역 자료 조사와 뉴스 검증을 돕는 웹앱 제작 사례",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
- if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"우리 지역 조사하기,\n무엇이 어려웠을까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
+ if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"우리 지역 조사하기,\n무엇이 어려울까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
  if(id==="section-build")return {...slide,section:"웹앱 제작 방법",title:"AI를 활용한 웹앱 제작,\n어떻게 시작했을까요?",lead:"수업 목표 설정부터 제작 요청·점검·수정·공유까지",note:"16쪽부터는 교사 입장에서 AI로 웹앱을 만드는 과정을 소개합니다. 코드는 AI에게 맡기고, 교사는 수업 목적과 학생 활동을 설명하고 결과를 확인합니다."};
  if(id==="section-app")return {...slide,title:"우리 지역 탐정,\n어떤 기능을 담았을까요?",lead:"지역 정보 조사부터 기사 검색·검증·기록까지",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
  if(id==="section-class")return {...slide,section:"수업 적용",title:"우리 지역 탐정,\n수업에서 어떻게 활용할까요?",lead:"지역 문제 조사 활동과 뉴스 신뢰성 평가의 교과 연계"};
@@ -555,7 +555,7 @@ const classroomSlides=order.map(id=>{
 if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");
 const textbookTitles={
   "cover": "AI를 활용한 우리 지역 탐구 수업",
-  "section-need": "우리 지역 조사하기,\n무엇이 어려웠을까요?",
+  "section-need": "우리 지역 조사하기,\n무엇이 어려울까요?",
   "field-textbook-news": "우리 지역의 문제를\n어떻게 조사할까요?",
   "field-gap-news": "우리 지역의 뉴스를 찾기 어려운\n이유는 무엇일까요?",
   "app-issues": "우리 지역의 문제와 관련된\n뉴스 찾아보기",

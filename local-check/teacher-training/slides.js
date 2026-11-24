@@ -553,7 +553,59 @@ const classroomSlides=order.map(id=>{
  return slide;
 });
 if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");
-window.TRAINING_SLIDES=classroomSlides;
+const textbookTitles={
+  "cover": "AI를 활용한 우리 지역 탐구 수업",
+  "section-need": "우리 지역 조사하기,\n무엇이 어려웠을까요?",
+  "field-textbook-news": "우리 지역의 문제를\n어떻게 조사할까요?",
+  "field-gap-news": "우리 지역의 뉴스를 찾기 어려운\n이유는 무엇일까요?",
+  "app-issues": "우리 지역의 문제와 관련된\n뉴스 찾아보기",
+  "app-problem-features": "지역 탐구 활동을 지원하는\n네 가지 기능",
+  "app-article-traffic": "같은 사건을 다르게 보도한\n뉴스 살펴보기",
+  "app-article-environment": "정정보도를 통해\n사실 관계 확인하기",
+  "field-compare-gap": "뉴스의 내용을\n어떻게 확인할까요?",
+  "app-verify": "다양한 자료를 비교하여\n뉴스의 신뢰성 평가하기",
+  "field-textbook-region": "우리 지역의 자랑거리 조사하기",
+  "field-gap-region": "우리 지역의 정보를\n어디에서 찾을 수 있을까요?",
+  "app-menu": "우리 지역의 특징을\n주제별로 조사하기",
+  "app-basics": "지역 통계 자료의\n출처와 기준일 확인하기",
+  "field-standards": "교과 성취기준과 웹앱 기능의 연계",
+  "section-build": "지역 탐구 수업에 필요한 웹앱,\n어떻게 만들었을까요?",
+  "build-overview": "AI를 활용한\n교수·학습 자료 제작 과정",
+  "build-spec": "학습 목표에 따른\n웹앱 기능 구성하기",
+  "build-toolmap": "웹앱 제작 과정에서\n교사와 AI의 역할",
+  "build-first-prompt": "학습 활동에 필요한\n기본 화면 구성하기",
+  "build-first-result": "학생의 이용 편의성을 고려한\n화면 점검",
+  "build-data-prompt": "지역 탐구 활동에 필요한\n자료 구성하기",
+  "build-data-result": "지역 자료의 출처와\n기준일 제시하기",
+  "build-news-structure": "지역 뉴스 검색 기능의 작동 원리",
+  "build-news-prompt": "지역 뉴스 검색 기능 구현하기",
+  "build-check-prompt": "뉴스의 신뢰성 평가를 위한\n기능 구현하기",
+  "build-board": "탐정 카드를 활용하여\n탐구 결과 기록하기",
+  "build-test": "수업 활용을 위한 웹앱 기능 점검하기",
+  "build-deploy": "완성된 웹앱을 학생들과 공유하기",
+  "section-app": "우리 지역 탐정,\n어떤 학습 활동을 할 수 있을까요?",
+  "app-nature": "우리 지역의 자연환경 조사하기",
+  "app-public": "우리 지역의 생활시설과\n공공기관 조사하기",
+  "app-industry": "우리 지역의 산업과 생산물 조사하기",
+  "app-culture": "우리 지역의 역사와 문화 조사하기",
+  "app-news": "지역 뉴스를 통해\n우리 지역의 문제 파악하기",
+  "app-article-check": "뉴스의 신뢰성을 평가하는 방법 알아보기",
+  "app-record": "탐구 결과와 판단의 근거 기록하기",
+  "boundaries": "자료를 활용한 학생 주도적 탐구 활동",
+  "section-class": "우리 지역 탐구 수업에\n어떻게 활용할까요?",
+  "sample-question": "우리 지역의 교통안전 문제 조사하기",
+  "lesson-40": "지역 문제 탐구를 위한 교수·학습 과정",
+  "assessment": "학생의 탐구 과정 및 결과 평가하기",
+  "closing": "교과서 속 탐구 활동을\n실제 지역 탐구로 확장하기",
+  "sources": "참고 자료 및 출처"
+};
+const textbookLeads={
+  "section-need": "지역 자료 수집과 정보의 신뢰성 확인",
+  "section-build": "AI를 활용한 교수·학습 자료 제작 과정",
+  "section-app": "지역 정보 조사, 뉴스의 신뢰성 평가 및 탐구 결과 기록",
+  "section-class": "사회과와 국어과를 연계한 탐구 활동"
+};
+window.TRAINING_SLIDES=classroomSlides.map(slide=>({...slide,title:textbookTitles[slide.id],...(textbookLeads[slide.id]?{lead:textbookLeads[slide.id]}:{})}));
 
-window.TRAINING_META={title:"교과서 속 뉴스 탐구, 우리 지역 웹앱으로",date:"2026. 11. 25.(수)",time:"15:00–17:00",originalUrl:SITE};
+window.TRAINING_META={title:"AI를 활용한 우리 지역 탐구 수업",date:"2026. 11. 25.(수)",time:"15:00–17:00",originalUrl:SITE};
 })();

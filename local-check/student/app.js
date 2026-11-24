@@ -45,6 +45,7 @@ function chooseMenu(menu){
  $("newsSection").hidden=isExplore;
  $("businessSection").hidden=menu!=="business";
  $("exploreTabs").hidden=!isExplore;
+ $("exploreBack").hidden=!isExplore;
  document.querySelectorAll("[data-menu]").forEach(button=>{
   const selected=button.dataset.menu===(isExplore?"explore":"news");
   button.classList.toggle("active",selected);
@@ -140,7 +141,11 @@ function renderInquiries(){
  }
  if(!basics.length)root.textContent="준비된 자료가 없어요.";
 }
+let boardReturnScreen="home";
 function show(screen){
+ if(screen==="board"&&!$("result").hidden)boardReturnScreen="result";
+ else if(screen==="board"&&!$("home").hidden)boardReturnScreen="home";
+ if(screen==="home"&&!$("board").hidden&&boardReturnScreen==="result"){screen="result";boardReturnScreen="home";}
  for(const id of ["home","verify","result","board","shared"])$(id).hidden=id!==screen;
  window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -881,7 +886,9 @@ function init(){
  $("newsList").addEventListener("click",e=>{const b=e.target.closest("[data-news]");if(b)fromNews(Number(b.dataset.news));});
  $("evidenceCandidates").addEventListener("click",e=>{const b=e.target.closest("[data-choose-candidate]");if(b)selectCandidate(Number(b.dataset.chooseCandidate));});
  $("retryEvidence").addEventListener("click",searchEvidence);
- $("back").addEventListener("click",()=>show("home"));
+ $("back").addEventListener("click",()=>{show("home");if(! $("liveResults").hidden)$("liveResults").scrollIntoView({behavior:"smooth",block:"start"});});
+ $("liveBack").addEventListener("click",()=>{clearLiveResults();$("keyword").value="";const target=activeMenu==="news"?$("newsSection"):$("inquirySection");target.scrollIntoView({behavior:"smooth",block:"start"});});
+ $("exploreBack").addEventListener("click",()=>chooseMenu("news"));
  $("backVerify").addEventListener("click",()=>show("verify"));
  $("again").addEventListener("click",()=>show("home"));
  $("askAi").addEventListener("click",askAIEvidence);

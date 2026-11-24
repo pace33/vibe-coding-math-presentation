@@ -546,9 +546,10 @@ const classroomSlides=order.map(id=>{
  const slide=classes[id]||oldSlides.get(id);
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"교과서의 뉴스 탐구,\n우리 지역 수업으로",lead:"자료 찾기에서 막힌 수업을 어떻게 연결했을까?",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
- if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"교재 활동을\n우리 교실에서 해보면?",lead:"학생에게 어떤 자료를 주고, 무엇부터 찾게 해야 할까요?",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
- if(id==="section-build")return {...slide,section:"웹앱 제작 방법",title:"이 웹앱은\n어떤 순서로 만들었을까요?",lead:"수업 목표 → AI에게 요청 → 직접 확인 → 수정 → 학생과 공유",note:"15쪽부터는 교사 입장에서 AI로 웹앱을 만드는 과정을 소개합니다. 코드는 AI에게 맡기고, 교사는 수업 목적과 학생 활동을 설명하고 결과를 확인합니다."};
- if(id==="section-app")return {...slide,title:"그 밖의 지역 조사 활동도\n웹앱에 연결했습니다",lead:"지역의 자연·생활시설·산업·문화와 관련 뉴스를 살펴봅니다.",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
+ if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"수업에서 어떤 어려움이\n있었는가?",lead:"교재 활동과 실제 교실의 문제",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
+ if(id==="section-build")return {...slide,section:"웹앱 제작 방법",title:"AI로 어떻게\n해결했는가?",lead:"웹앱 제작 과정과 실제 프롬프트",note:"15쪽부터는 교사 입장에서 AI로 웹앱을 만드는 과정을 소개합니다. 코드는 AI에게 맡기고, 교사는 수업 목적과 학생 활동을 설명하고 결과를 확인합니다."};
+ if(id==="section-app")return {...slide,title:"어떤 결과물이\n만들어졌는가?",lead:"완성된 웹앱과 주요 기능",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
+ if(id==="section-class")return {...slide,section:"수업 적용",title:"실제 수업에 어떻게\n활용하는가?",lead:"학생 활동과 수업 적용"};
  return slide;
 });
 if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");

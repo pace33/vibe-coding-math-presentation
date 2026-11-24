@@ -777,3 +777,54 @@ a{color:inherit}
  .chat-prompt-simple{overflow:visible;justify-content:flex-start;gap:11px;padding:14px}
  .chat-prompt-simple p{font-size:16px}
 }
+
+/* ChatGPT-like training mock: an example of where to type, not a captured real conversation. */
+.slide-body:has(.gpt-preview){justify-content:flex-start;gap:clamp(7px,.9cqw,12px);padding:.6% 0 .5%;overflow:hidden}
+.gpt-preview{display:flex;flex-direction:column;flex:1;width:100%;min-height:0;background:#fff;border:1px solid #dedfdf;border-radius:17px;box-shadow:0 5px 20px #1a312512;overflow:hidden;color:#222;font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+.gpt-preview-header{min-height:clamp(48px,5.1cqw,71px);display:flex;align-items:center;gap:12px;padding:8px clamp(13px,1.75cqw,24px);border-bottom:1px solid #edeeee;background:#fff}
+.gpt-preview-brand{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.gpt-preview-logo{display:grid;place-items:center;width:clamp(29px,3cqw,40px);height:clamp(29px,3cqw,40px);border:1px solid #e6e8e6;border-radius:50%;font-size:clamp(21px,2.1cqw,29px);line-height:1;color:#1d1f1e}
+.gpt-preview-brand strong{font-size:clamp(15px,1.62cqw,23px);font-weight:730;color:#232523}
+.gpt-preview-caret{font-size:clamp(19px,2.3cqw,29px);color:#737573}
+.gpt-preview-kind{margin-left:auto;color:#818581;font-size:clamp(11px,1.05cqw,15px);font-weight:550}
+.gpt-preview-header .chat-prompt-copy{font-size:clamp(11px,1.18cqw,16px);background:#212121;border:1px solid #212121;padding:clamp(7px,.7cqw,10px) clamp(11px,1.2cqw,17px);border-radius:22px;margin-left:clamp(5px,.9cqw,13px)}
+.gpt-preview-header .chat-prompt-copy:hover{background:#434343}
+.gpt-preview-main{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(9px,1.3cqw,18px);padding:clamp(13px,1.75cqw,24px);flex:1;min-height:0;background:#fff}
+.gpt-preview-greeting{margin:0;text-align:center;font-size:clamp(24px,2.7cqw,38px);font-weight:680;letter-spacing:-.05em;line-height:1.25;color:#242424}
+.gpt-preview-composer{display:flex;flex-direction:column;gap:clamp(8px,.85cqw,12px);width:min(100%,950px);min-height:0;max-height:85%;padding:clamp(12px,1.25cqw,18px) clamp(15px,1.65cqw,23px) 10px;border:1px solid #e4e5e5;border-radius:26px;background:#f5f5f5;box-shadow:0 2px 9px #0000000b}
+.gpt-preview-input{min-height:clamp(88px,10cqw,140px);overflow-y:auto;scrollbar-width:thin;font-size:clamp(16px,1.9cqw,26px);font-weight:510;line-height:1.42;letter-spacing:-.035em;color:#262626;word-break:keep-all;overflow-wrap:anywhere}
+.gpt-preview-input p{margin:0 0 clamp(5px,.55cqw,8px)}
+.gpt-preview-input p:last-child{margin-bottom:0}
+.gpt-preview-toolbar{display:flex;align-items:center;gap:9px;min-height:clamp(30px,3.6cqw,45px);color:#515151;font-size:clamp(13px,1.2cqw,17px)}
+.gpt-preview-add{display:grid;place-items:center;border:1px solid #e0e0e0;width:clamp(28px,3cqw,40px);height:clamp(28px,3cqw,40px);border-radius:50%;font-size:clamp(19px,2.1cqw,29px);font-weight:400}
+.gpt-preview-tools{font-weight:580}
+.gpt-preview-toolbar-space{flex:1}
+.gpt-preview-mic{font-size:clamp(15px,1.45cqw,20px);color:#747474;margin-right:5px}
+.gpt-preview-send{display:grid;place-items:center;width:clamp(30px,3.2cqw,44px);height:clamp(30px,3.2cqw,44px);border-radius:50%;background:#1d1d1d;color:white;font-size:clamp(22px,2.2cqw,30px);font-weight:800;line-height:1}
+.gpt-preview-disclaimer{text-align:center;margin:0;font-size:clamp(10px,1cqw,14px);color:#8a8a8a}
+.slide-body:has(.gpt-preview)>.chat-prompt-foot{flex:none;font-size:clamp(11px,1.15cqw,16px)}
+@media(max-width:900px){
+ .gpt-preview-header{gap:7px;min-height:45px;padding:6px 12px}
+ .gpt-preview-main{gap:9px;padding:10px}
+ .gpt-preview-greeting{font-size:clamp(19px,2.65cqw,27px)}
+ .gpt-preview-composer{padding:11px 15px 7px;gap:5px;border-radius:18px}
+ .gpt-preview-input{font-size:clamp(13px,1.85cqw,18px);min-height:67px;line-height:1.37}
+ .gpt-preview-toolbar{min-height:28px}
+ .gpt-preview-kind{font-size:10px}
+ .gpt-preview-header .chat-prompt-copy{padding:6px 10px}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .slide-body:has(.gpt-preview){overflow-y:auto;justify-content:flex-start}
+ .gpt-preview{flex:none;min-height:255px;overflow:visible}
+ .gpt-preview-header{flex-wrap:wrap}
+ .gpt-preview-kind{display:none}
+ .gpt-preview-main{justify-content:flex-start;padding:11px}
+ .gpt-preview-greeting{font-size:19px}
+ .gpt-preview-composer{max-height:none;overflow:visible}
+ .gpt-preview-input{min-height:90px;overflow:visible;font-size:14px}
+ .gpt-preview-disclaimer{font-size:9px}
+}
+@media print{
+ .gpt-preview-header .chat-prompt-copy{display:none!important}
+ .gpt-preview-input{overflow:visible}
+}

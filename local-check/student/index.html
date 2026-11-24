@@ -19,7 +19,7 @@
 <script src="regional-visits.js" defer></script>
 <script src="regional-basics.js" defer></script>
 <script src="gemma-browser-client.js?v=direct20261124"></script>
-<script src="app.js?v=direct20261124" defer></script>
+<script src="app.js?v=finalsimple20261124" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">본문으로 이동</a>
@@ -138,8 +138,8 @@
     <h2>③ 기사 비교</h2>
     <p class="helper">같은 사건을 다룬 다른 기사나 공식 자료와 비교하세요. 여러 기사가 같은 보도자료를 인용했을 수도 있어요.</p>
     <fieldset class="choices verdict-choices"><legend>비교해 보니 어떤가요?</legend>
-      <label><input type="radio" name="verdict" value="같아요"><span>🟢 내용이 같아요<small>두 자료가 같은 이야기를 해요</small></span></label>
-      <label><input type="radio" name="verdict" value="달라요"><span>🟠 내용이 달라요<small>서로 다른 내용을 찾았어요</small></span></label>
+      <label><input type="radio" name="verdict" value="같아요"><span>🟢 같아요<small>두 자료가 같은 이야기를 해요</small></span></label>
+      <label><input type="radio" name="verdict" value="달라요"><span>🟠 달라요<small>서로 다른 내용을 찾았어요</small></span></label>
       <label><input type="radio" name="verdict" value="아직 모르겠어요" checked><span>🔵 더 알아볼래요<small>아직 판단하기 어려워요</small></span></label>
     </fieldset>
     <label for="reason" class="short-reason-label">어떤 내용이 같거나 달랐나요? <span>(필수)</span></label>
@@ -161,16 +161,16 @@
       </div>
       <div id="finalStage" class="final-stage" hidden>
         <h2>⑤ 최종 판단</h2>
-        <p class="verification-guide">AI의 설명도 틀릴 수 있어요. 제시된 자료를 직접 확인하고 처음 생각을 유지하거나 바꿔 보세요.</p>
-        <fieldset class="choices final-choices"><legend>근거를 살펴본 뒤, 나는 어떻게 생각하나요?</legend>
+        <p class="verification-guide">자료를 확인하고 마지막 판단을 골라 보세요.</p>
+        <fieldset class="choices final-choices"><legend>두 자료의 내용은 어떤가요?</legend>
           <label><input type="radio" name="finalVerdict" value="같아요"><span>🟢 내용이 같아요</span></label>
           <label><input type="radio" name="finalVerdict" value="달라요"><span>🟠 내용이 달라요</span></label>
-          <label><input type="radio" name="finalVerdict" value="아직 모르겠어요"><span>🔵 더 확인할래요</span></label>
+          <label><input type="radio" name="finalVerdict" value="아직 모르겠어요"><span>🔵 모르겠어요</span></label>
         </fieldset>
-        <label class="short-reason-label" for="finalReason">최종 판단의 이유를 적어 보세요.</label>
-        <textarea id="finalReason" rows="2" maxlength="220" placeholder="처음에는 ___라고 생각했지만, ___ 자료를 보고 ___라고 생각해요."></textarea>
+        <label class="short-reason-label" for="finalReason">이유 (선택)</label>
+        <textarea id="finalReason" rows="1" maxlength="220" placeholder="이유를 짧게 적어 보세요."></textarea>
       </div>
-      <p class="evidence-disclaimer">※ AI는 검증을 돕는 참고 의견만 제공하며 정답을 채점하지 않습니다. 근거가 충분하지 않으면 '확인할 근거가 부족해요'라고 안내합니다. 학생의 이름이나 연락처를 입력하지 마세요.</p>
+      <p class="evidence-disclaimer">※ AI의 의견도 직접 확인해요. 이름이나 연락처는 적지 않아요.</p>
     </section>
     <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">✅ 뉴스 탐정 카드 완성하기</button><span id="formMessage" role="status" aria-live="polite"></span></div>
   </section>

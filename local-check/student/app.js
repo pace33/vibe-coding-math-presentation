@@ -131,12 +131,14 @@ function renderInquiries(){
   const visitTag=visit?'<span class="regional-visit-tag">🏫 견학·체험 · '+esc(visitMode)+'</span>':"";
   const visitNote=visit?.notes?'<div class="regional-visit-note">'+esc(visit.notes)+'</div>':"";
   const visitLink=visit?.url&&url(visit.url)?'<a class="regional-visit-link" href="'+esc(url(visit.url))+'" target="_blank" rel="noopener noreferrer">'+esc(visitMode)+' ↗</a>':"";
+  const physicalPlace=(activeMenu==="nature"||activeMenu==="local")&&!item.event&&!/날씨|기후|기온|강수|생태정보|통계|문화 일반/.test(item.title||"")&&!/^(숲 · 생물 · 자연환경|지역의 강 · 하천 · 저수지)$/.test(item.value||"");
+  const regionalLocation=physicalPlace&&item.value?'<a class="basic-primary-link regional-map-link" href="'+esc(placeSearchLink(region,item.value))+'" target="_blank" rel="noopener noreferrer">📍 위치 찾기 ↗</a>':"";
   card.innerHTML='<div class="basic-card-title"><span aria-hidden="true">'+esc(item.icon||"📚")+'</span><h3>'+esc(item.title)+'</h3></div>'+
    '<strong class="basic-card-value">'+esc(item.value)+'</strong>'+(item.summary?'<p>'+esc(item.summary)+'</p>':"")+
    visitTag+visitNote+
    (item.note?'<span class="festival-note">'+esc(item.note)+'</span>':"")+
    '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
-   '<div class="basic-card-actions">'+(visitLink||mainLink)+checkNews+'</div>';
+   '<div class="basic-card-actions">'+(visitLink||mainLink)+regionalLocation+checkNews+'</div>';
   root.appendChild(card);
  }
  if(!basics.length)root.textContent="준비된 자료가 없어요.";
@@ -368,6 +370,9 @@ function renderNews(){
  }
 }
 
+function placeSearchLink(region,name){
+ return "https://map.naver.com/p/search/"+encodeURIComponent("충북 "+region+" "+name);
+}
 function renderBusinesses(){
  const area=$("region").value;
  $("businessTitle").textContent=(area==="전체"?"충북":area)+" 기업";
@@ -416,10 +421,14 @@ function renderBusinesses(){
   const link=tour&&url(tour.url)?
     '<a class="business-tour-link" href="'+esc(url(tour.url))+'" target="_blank" rel="noopener noreferrer">'+
      (tour.status==="online"?"견학 안내·신청 ↗":"견학·체험 안내 ↗")+'</a>':"";
+  const website=[c.source,c.secondary].find(s=>s&&url(s.url)&&/공식|회사 홈페이지|회사 소개|사업장 소개|제품 소개/.test(s.title||"")&&!/공시|공공자료|기업 정보|검색|군청|시청|사례집/.test(s.title||"")&&!/\.pdf(?:$|\?)/i.test(s.url));
+  const companySource=website||c.source;
+  const companyLink=companySource&&url(companySource.url)?'<a href="'+esc(url(companySource.url))+'" target="_blank" rel="noopener noreferrer">'+(website?"기업 공식 자료 ↗":"기업 정보 ↗")+'</a>':"";
+  const locationLink='<a href="'+esc(placeSearchLink(c.region,c.name))+'" target="_blank" rel="noopener noreferrer">📍 위치 찾기 ↗</a>';
   card.innerHTML='<div class="business-meta"><span class="business-emoji" aria-hidden="true">'+esc(c.emoji)+'</span><span class="business-tag">'+esc(c.type)+'</span></div>'+
    '<h3>'+esc(c.name)+'</h3><div class="business-product">'+esc(c.produces)+'</div>'+tag+info+
-   '<div class="business-buttons">'+link+'<button type="button" data-business="'+esc(c.id)+'">자료 검증 →</button>'+
-   '<button type="button" class="business-inline-news" data-business-news="'+esc(c.id)+'">관련 뉴스</button></div>';
+   '<div class="business-buttons">'+link+companyLink+locationLink+
+   '<button type="button" class="business-inline-news" data-business-news="'+esc(c.id)+'">관련 자료 찾기</button></div>';
   list.appendChild(card);
  }
 }

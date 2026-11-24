@@ -77,7 +77,7 @@ function detailReport(data,target){
  const newsSource=tag("div","");
  newsSource.append(tag("strong","detective-label","내가 읽은 뉴스"),tag("p","","발행한 곳: "+(data.publisher||"원문에서 확인해요")),tag("p","","발행 날짜: "+(data.date||"원문에서 확인해요")),elementLink("뉴스 출처 열기",data.url));
  const otherSource=tag("div","");
- otherSource.appendChild(tag("strong","detective-label","비교한 기사·자료"));
+ otherSource.appendChild(tag("strong","detective-label",/^자동으로 찾은 자료:/.test(data.govFact||"")?"찾은 기사·자료 (원문 확인 필요)":"비교한 기사·자료"));
  const comparisonUrl=safeUrl(data.govUrl);
  if(comparisonUrl)otherSource.append(tag("p","","사이트: "+new URL(comparisonUrl).hostname),tag("p","","글쓴이와 날짜는 원문에서 확인해요."),elementLink("비교 자료 출처 열기",comparisonUrl));
  else otherSource.appendChild(tag("p","detective-missing","비교할 기사나 자료의 주소를 아직 기록하지 않았어요."));
@@ -91,7 +91,7 @@ function detailReport(data,target){
  first.append(tag("strong","detective-label","뉴스에서 찾은 내용"),tag("p",titleOnly?"detective-missing":"detective-finding",titleOnly?"제목만 기록했어요. 기사에서 확인한 날짜나 숫자도 적어 보세요.":data.newsFact));
  first.appendChild(elementLink("뉴스 원문 읽기",data.url));
  const second=tag("section","detective-source detective-evidence");
- second.appendChild(tag("h4","detective-step","비교한 기사·자료"));
+ second.appendChild(tag("h4","detective-step",/^자동으로 찾은 자료:/.test(data.govFact||"")?"찾은 기사·자료 (원문 확인 필요)":"비교한 기사·자료"));
  const evidenceTitle=/^비교자료 제목:/.test(data.govFact||"");
  if(evidenceTitle)second.append(tag("p","detective-title",data.govFact.replace(/^비교자료 제목:\s*/,"")),tag("strong","detective-label","비교 자료에서 찾은 내용"),tag("p","detective-missing","제목만 기록했어요. 같은 내용이 있는지 원문을 읽어 보세요."));
  else second.append(tag("strong","detective-label","비교 자료에서 찾은 내용"),tag("p","detective-finding",data.govFact||"아직 비교 자료를 찾지 못했어요."));

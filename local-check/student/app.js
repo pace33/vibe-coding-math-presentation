@@ -723,7 +723,7 @@ async function askAIEvidence(){
    sources,
    checkedAt:new Date().toISOString()
   };
-  $("aiReviewMessage").textContent="AI의 검토 의견을 읽고 근거 링크를 확인한 뒤 최종 판단을 선택하세요.";
+  $("aiReviewMessage").textContent="자료를 확인하고 마지막 판단을 골라 보세요.";
  }catch(err){
   if(current!==aiSequence)return;
   state.aiReview={
@@ -792,12 +792,9 @@ function makeReport(){
   finalVerdict=document.querySelector('input[name="finalVerdict"]:checked')?.value;
   finalReason=safe($("finalReason").value,220);
   if(!finalVerdict){
-   $("formMessage").textContent="근거를 살펴본 뒤 최종 판단을 골라 주세요.";return;
+   $("formMessage").textContent="마지막 판단을 골라 주세요.";return;
   }
-  if(finalReason.length<3){
-   $("formMessage").textContent="처음 판단을 유지하거나 바꾼 이유를 한 문장으로 적어 주세요.";
-   $("finalReason").focus();return;
-  }
+  if(!finalReason)finalReason="최종 판단 이유는 별도로 기록하지 않았어요.";
  }
  if(aiController){aiSequence++;aiController.abort();aiController=null;}
  state.report={

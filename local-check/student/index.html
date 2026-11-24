@@ -19,7 +19,7 @@
 <script src="regional-visits.js" defer></script>
 <script src="regional-basics.js" defer></script>
 <script src="gemma-browser-client.js?v=direct20261124"></script>
-<script src="app.js?v=placelinks20261124" defer></script>
+<script src="app.js?v=singlearticle20261124" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">본문으로 이동</a>
@@ -119,6 +119,7 @@
     <p class="verification-guide">그렇게 말하는 까닭이 있나요? 기사 속 숫자·날짜·사진·인터뷰와 그 자료가 나온 곳을 찾아보세요.</p>
     <p id="evidenceStatus" class="evidence-status" role="status" aria-live="polite">관련 자료를 찾고 있어요.</p>
     <div id="evidenceCandidates" class="evidence-candidates" aria-live="polite"></div>
+    <button type="button" id="singleAi" class="btn btn-primary" hidden>🤖 비교 기사 없이 AI로 더 알아보기</button>
     <details class="verify-extra"><summary>자료를 더 찾아볼래요</summary>
       <div class="source-row">
         <a id="officialLink" class="btn btn-light" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">🏛️ 공식 자료 검색 ↗</a>
@@ -136,6 +137,7 @@
         <textarea id="officialFinding" maxlength="500" rows="2" placeholder="두 자료에서 서로 다른 내용을 적어 보세요. 차이점이 없다면 같다고 적어도 좋아요."></textarea>
       </div>
     </details>
+    <div id="manualCompare">
     <div class="divider"></div>
     <h2>③ 기사 비교</h2>
     <p class="helper">같은 사건을 다룬 다른 기사나 공식 자료와 비교하세요. 여러 기사가 같은 보도자료를 인용했을 수도 있어요.</p>
@@ -146,6 +148,7 @@
     </fieldset>
     <label for="reason" class="short-reason-label">어떤 내용이 같거나 달랐나요? <span>(필수)</span></label>
     <textarea id="reason" maxlength="220" rows="3" placeholder="첫 기사에는 ___, 다른 기사나 자료에는 ___라고 나와요. 그래서 ___라고 생각해요."></textarea>
+    </div>
     <section id="aiReviewStage" class="ai-review-stage" aria-labelledby="aiReviewHeading">
       <h2 id="aiReviewHeading">④ AI로 더 알아보기(선택)</h2>
       <p class="verification-guide">AI는 공개 자료를 찾아 근거를 비교해요. AI 검토 없이도 탐정 카드를 완성할 수 있어요.</p>

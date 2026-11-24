@@ -820,9 +820,21 @@ function makeReport(){
   if(!finalReason)finalReason="최종 판단 이유는 별도로 기록하지 않았어요.";
  }
  if(aiController){aiSequence++;aiController.abort();aiController=null;}
+ // Keep the actual selected source first; otherwise retain a distinct source found earlier.
+ const explicitUrl=url(first.govUrl)||url(state.selectedEvidence?.url);
+ const distinct=x=>url(x?.url)&&url(x.url)!==url(state.story.url);
+ const aiSource=(ai?.sources||[]).find(x=>distinct(x)&&x.fetched)|| (ai?.sources||[]).find(distinct);
+ const candidate=state.candidates.find(distinct);
+ const autoSource=explicitUrl?null:(aiSource||candidate);
+ const comparisonUrl=explicitUrl||url(autoSource?.url);
+ const recordedFinding=first.govFact;
+ const hasStudentFinding=!!safe($("officialFinding").value,500);
+ const comparisonFinding=autoSource
+  ? safe("자동으로 찾은 자료: "+safe(autoSource.title,190)+" (직접 원문 확인 필요)"+(hasStudentFinding?"\n학생 기록: "+safe($("officialFinding").value,260):""),500)
+  : recordedFinding;
  state.report={
   ...state.story,
-  newsFact:first.newsFact,govFact:first.govFact,govUrl:first.govUrl,
+  newsFact:first.newsFact,govFact:comparisonFinding,govUrl:comparisonUrl,
   verdict:finalVerdict,reason:finalReason,
   initialVerdict:first.verdict,initialReason:first.reason,
   finalVerdict,finalReason,

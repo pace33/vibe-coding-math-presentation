@@ -19,7 +19,7 @@
 <script src="regional-visits.js" defer></script>
 <script src="regional-basics.js" defer></script>
 <script src="gemma-browser-client.js?v=direct20261124"></script>
-<script src="app.js?v=twoactions20261124" defer></script>
+<script src="app.js?v=backnav20261124" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">본문으로 이동</a>
@@ -36,6 +36,7 @@
     <button type="button" class="category-button" data-menu="explore" aria-pressed="false">🗺️ 우리 지역</button>
     <button type="button" class="category-button" data-menu="board" aria-pressed="false">🗂️ 탐정 게시판</button>
   </nav>
+  <button type="button" id="exploreBack" class="back" hidden>← 뒤로가기</button>
   <nav id="exploreTabs" class="explore-tabs" aria-label="우리 지역의 세부 분야" hidden>
     <span class="explore-tabs-label" aria-hidden="true">세부 분야</span>
     <button type="button" class="explore-tab" data-explore="overview" aria-pressed="false">🧭 기본 정보</button>
@@ -80,6 +81,7 @@
     </div>
   </section>
   <section id="liveResults" class="live-results" aria-labelledby="liveHeading" hidden>
+    <button type="button" id="liveBack" class="back">← 뒤로가기</button>
     <div class="section-title"><h2 id="liveHeading">검색 결과</h2><span id="liveCount" class="timestamp"></span></div>
     <p id="liveStatus" class="live-status" role="status" aria-live="polite"></p>
     <div class="google-more-row">
@@ -100,7 +102,7 @@
   </section>
 </section>
 <section id="verify" class="view" hidden aria-labelledby="verifyHeading">
-  <button type="button" id="back" class="back">← 목록으로</button>
+  <button type="button" id="back" class="back">← 뒤로가기</button>
   <div class="intro small-intro"><h1 id="verifyHeading">사실일까?</h1><p>출처와 근거를 확인하고 비교해요.</p></div>
   <article class="selected-story">
     <h2>① 출처 확인</h2>
@@ -176,7 +178,7 @@
   </section>
 </section>
 <section id="result" class="view" hidden>
-  <button type="button" id="backVerify" class="back">← 내용 다시 살펴보기</button>
+  <button type="button" id="backVerify" class="back">← 뒤로가기</button>
   <div class="intro small-intro"><h1>✅ 탐정 카드 완성!</h1><p>내가 확인한 자료와 생각을 친구에게 보여주세요.</p></div>
   <div id="report" class="report"></div>
   <p class="board-privacy">카드는 이 기기에 저장됩니다. 공유할 때 이름·연락처를 적지 마세요.</p>
@@ -184,13 +186,13 @@
 </section>
 
 <section id="board" class="view" hidden aria-labelledby="boardTitle">
-  <button class="back" id="boardBack" type="button">← 목록으로</button>
+  <button class="back" id="boardBack" type="button">← 뒤로가기</button>
   <div class="intro small-intro"><h1 id="boardTitle">🗂️ 탐정 게시판</h1><p>이 기기에 저장한 카드와 친구에게 받은 카드</p></div>
   <div class="board-heading"><h2>모아 둔 카드 <span id="boardCount">0건</span></h2></div>
   <div id="boardList" class="board-grid" aria-live="polite"></div><details class="secondary-tools"><summary>게시판 자료 내보내기</summary><button class="btn btn-light" type="button" id="downloadBoard">파일 저장</button></details>
 </section>
 <section id="shared" class="view" hidden aria-labelledby="sharedTitle">
-  <button class="back" id="sharedBack" type="button">← 게시판으로</button>
+  <button class="back" id="sharedBack" type="button">← 뒤로가기</button>
   <div class="intro small-intro"><h1 id="sharedTitle">🔎 친구의 탐정 카드</h1></div>
   <div id="sharedReport" class="report" aria-live="polite"></div>
   <p class="board-privacy">친구의 생각과 내 생각을 비교해 보세요. 이름이나 연락처는 카드에 적지 않아요.</p>

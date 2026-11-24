@@ -616,7 +616,7 @@ function editFirstJudgement(){
  $("askAi").disabled=false;
  $("askAi").textContent="🤖 내 판단을 기록하고 AI 근거 검토하기";
  $("editFirst").hidden=true;
- $("aiReviewMessage").textContent="직접 검증한 뒤 AI에게 근거 검토를 요청해 보세요.";
+ $("aiReviewMessage").textContent="AI 검토는 선택 사항이에요. 직접 확인한 내용으로도 탐정 카드를 완성할 수 있어요.";
  $("aiReviewResult").hidden=true;
  $("aiReviewLabel").textContent="";
  $("aiReviewSummary").textContent="";
@@ -626,7 +626,7 @@ function editFirstJudgement(){
  $("finalStage").hidden=true;
  $("finalReason").value="";
  document.querySelectorAll('input[name="finalVerdict"]').forEach(x=>x.checked=false);
- $("finish").disabled=true;
+ $("finish").disabled=false;
  $("formMessage").textContent="";
 }
 function firstJudgement(){
@@ -635,7 +635,7 @@ function firstJudgement(){
  const reason=safe($("reason").value,220);
  const compareUrl=url($("officialUrl").value);
  if(reason.length<3){
-  $("formMessage").textContent="AI 검토 전에 내 판단의 이유를 먼저 적어 주세요.";
+  $("formMessage").textContent="탐정 카드를 완성하려면 내 판단의 이유를 적어 주세요.";
   $("reason").focus();return null;
  }
  if(verdict!=="아직 모르겠어요"&&!compareUrl){
@@ -693,7 +693,8 @@ async function askAIEvidence(){
  $("editFirst").hidden=false;
  $("aiReviewResult").hidden=true;
  $("finalStage").hidden=true;
- $("finish").disabled=true;
+ // AI 응답을 기다리지 않고도 학생 판단으로 카드를 완성할 수 있습니다.
+ $("finish").disabled=false;
  $("formMessage").textContent="";
  $("aiReviewMessage").textContent="AI가 공개된 근거 자료를 찾고 있어요. 원문 확인 결과가 없으면 '근거 부족'으로 안내합니다.";
  const wait=setTimeout(()=>controller.abort(),45000);
@@ -780,27 +781,35 @@ function fromNews(index){
  chooseStory({title:row.title,url:row.url,publisher:row.publisher,date:row.published,region:row.region,topic:row.title});
 }
 function makeReport(){
- if(!state.story||!state.firstReview||!state.aiReview){
-  $("formMessage").textContent="먼저 학생 판단과 AI 근거 검토 단계를 마쳐 주세요.";return;
+ if(!state.story)return;
+ // AI를 사용하지 않아도 학생의 직접 검증 기록만으로 완성할 수 있습니다.
+ const first=state.firstReview||firstJudgement();
+ if(!first)return;
+ const ai=state.aiReview;
+ const hasAI=Boolean(ai?.status);
+ let finalVerdict=first.verdict;
+ let finalReason=first.reason;
+ // AI 검토를 받았다면 그 내용을 참고해 최종 판단을 한 번 더 작성합니다.
+ if(hasAI&&!$("finalStage").hidden){
+  finalVerdict=document.querySelector('input[name="finalVerdict"]:checked')?.value;
+  finalReason=safe($("finalReason").value,220);
+  if(!finalVerdict){
+   $("formMessage").textContent="근거를 살펴본 뒤 최종 판단을 골라 주세요.";return;
+  }
+  if(finalReason.length<3){
+   $("formMessage").textContent="처음 판단을 유지하거나 바꾼 이유를 한 문장으로 적어 주세요.";
+   $("finalReason").focus();return;
+  }
  }
- const first=state.firstReview,ai=state.aiReview;
- const finalVerdict=document.querySelector('input[name="finalVerdict"]:checked')?.value;
- const finalReason=safe($("finalReason").value,220);
- if(!finalVerdict){
-  $("formMessage").textContent="근거를 살펴본 뒤 최종 판단을 골라 주세요.";return;
- }
- if(finalReason.length<3){
-  $("formMessage").textContent="처음 판단을 유지하거나 바꾼 이유를 한 문장으로 적어 주세요.";
-  $("finalReason").focus();return;
- }
+ if(aiController){aiSequence++;aiController.abort();aiController=null;}
  state.report={
   ...state.story,
   newsFact:first.newsFact,govFact:first.govFact,govUrl:first.govUrl,
   verdict:finalVerdict,reason:finalReason,
   initialVerdict:first.verdict,initialReason:first.reason,
   finalVerdict,finalReason,
-  aiStatus:ai.status,aiSummary:ai.summary,aiComparison:ai.comparison,
-  aiCaution:ai.caution,aiSources:ai.sources,aiCheckedAt:ai.checkedAt
+  aiStatus:ai?.status||"",aiSummary:ai?.summary||"",aiComparison:ai?.comparison||"",
+  aiCaution:ai?.caution||"",aiSources:ai?.sources||[],aiCheckedAt:ai?.checkedAt||""
  };
  if(window.LocalCheckBoard){
   const saved=window.LocalCheckBoard.save(state.report);
@@ -818,11 +827,13 @@ function reportText(){
   "우리 지역 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
   "① 출처 확인","발행한 곳: "+d.publisher,"발행 날짜: "+(d.date||"원문에서 확인해요"),"뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
   "② 근거 확인","뉴스에서 찾은 근거: "+d.newsFact,"비교 자료에서 찾은 근거: "+(d.govFact||"아직 못 찾음"),
-  "③ 학생 첫 판단","처음 판단: "+(d.initialVerdict||d.verdict),"처음 이유: "+(d.initialReason||d.reason),
-  "④ AI 근거 검토","AI 상태: "+(d.aiStatus||"사용 안 함"),"AI 요약: "+(d.aiSummary||"검토 기록 없음"),
-  ...(d.aiSources||[]).map(x=>"AI 참고 근거: "+x.title+" "+x.url),
-  "⑤ 최종 판단","비교 결과: "+d.verdict,"최종 이유: "+d.reason,
-  "※ 학생의 판단 기록이며 AI 의견은 정답이나 자동 판정이 아닙니다."
+  "③ 학생의 판단","판단: "+(d.initialVerdict||d.verdict),"이유: "+(d.initialReason||d.reason),
+  ...(d.aiStatus?[
+   "④ AI 근거 검토","AI 상태: "+d.aiStatus,"AI 요약: "+(d.aiSummary||"검토 기록 없음"),
+   ...(d.aiSources||[]).map(x=>"AI 참고 근거: "+x.title+" "+x.url),
+   "⑤ 최종 판단","비교 결과: "+d.verdict,"최종 이유: "+d.reason
+  ]:[]),
+  d.aiStatus?"※ 학생의 판단 기록이며 AI 의견은 정답이나 자동 판정이 아닙니다.":"※ 학생이 기사와 비교 자료를 살펴보고 직접 작성한 판단입니다. AI 검토는 사용하지 않았습니다."
  ].join("\n");
 }
 function download(){

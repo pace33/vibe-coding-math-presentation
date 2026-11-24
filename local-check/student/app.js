@@ -120,17 +120,7 @@ function renderInquiries(){
   const card=document.createElement("article");card.className="inquiry-card";
   if(item.event)card.classList.add("festival-card");
   const allLinks=[{label:item.primaryLabel||"자료 확인 ↗",href:item.href},...(item.more||[])].filter(x=>url(x.href));
-  const primary=allLinks[0],other=allLinks.slice(1);
-  const searchInputId="regional-google-"+activeMenu+"-"+index;
-  const extraLinks=other.length?'<div class="inquiry-actions">'+other.map(link=>
-    '<a href="'+esc(url(link.href))+'" target="_blank" rel="noopener noreferrer">'+esc(link.label)+'</a>').join("")+'</div>':"";
-  const searchForm=item.searchQuery?
-   '<form action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer">'+
-   '<label for="'+esc(searchInputId)+'">검색어</label>'+
-   '<div class="regional-search-line"><input id="'+esc(searchInputId)+'" name="q" type="search" maxlength="180" value="'+esc(item.searchQuery)+'" required>'+
-   '<button type="submit">검색 ↗</button></div></form>':"";
-  const extras=(extraLinks||searchForm)?
-   '<details class="regional-google-search"><summary>추가 자료·검색</summary>'+extraLinks+searchForm+'</details>':"";
+  const primary=allLinks[0];
   const mainLink=primary?
    '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
   const newsTerm=item.newsTerm||regionalNewsTerm(item,activeMenu);
@@ -145,7 +135,7 @@ function renderInquiries(){
    visitTag+visitNote+
    (item.note?'<span class="festival-note">'+esc(item.note)+'</span>':"")+
    '<div class="basic-card-source">'+esc(item.linkType==="search"?"검색 결과에서 공식 자료 확인":item.source||"원문 확인 필요")+'</div>'+
-   '<div class="basic-card-actions">'+(visit?visitLink:mainLink)+checkNews+extras+'</div>';
+   '<div class="basic-card-actions">'+(visitLink||mainLink)+checkNews+'</div>';
   root.appendChild(card);
  }
  if(!basics.length)root.textContent="준비된 자료가 없어요.";

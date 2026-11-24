@@ -388,4 +388,103 @@ for(const [region,value,summary,href,source] of ECO_LEARNING_SITES){
  const old=list.findIndex(x=>x.value===value);
  if(old>=0)list[old]={...list[old],...card};else list.push(card);
 }
+
+/* 지역 대표 공원: 자연을 관찰하고 주민의 여가 공간을 알아보는 조성 시설. */
+const REGIONAL_PARKS=[
+ [
+  "청주시",
+  "오창호수공원",
+  "호수 주변을 걸으며 물과 나무가 어우러진 모습을 살펴봐요.",
+  "https://cjyu.cheongju.go.kr/home/sub.do?code1=apply1&menukey=7104&mode=view&sn=773",
+  "청주시 문화관광"
+ ],
+ [
+  "청주시",
+  "오송호수공원",
+  "물가의 경관과 산책로를 살펴봐요.",
+  "https://access.visitkorea.or.kr/ms/detail.do?cotId=b1136625-007e-4c71-b9c0-5b8800c41e66",
+  "한국관광공사"
+ ],
+ [
+  "충주시",
+  "탄금공원",
+  "남한강 주변의 산책로와 주민들의 여가 공간을 알아봐요.",
+  "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a79606eb-a52c-4f7e-b2c3-b79df3ac982d",
+  "한국관광공사"
+ ],
+ [
+  "제천시",
+  "의림지 수리공원",
+  "저수지 주변의 농경문화와 물을 이용하는 모습을 살펴봐요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=2599",
+  "충북나드리"
+ ],
+ [
+  "보은군",
+  "뱃들공원",
+  "보청천 주변에 조성된 주민들의 휴식 공간을 살펴봐요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=306",
+  "충북나드리"
+ ],
+ [
+  "옥천군",
+  "옥천선사공원",
+  "향수호수길 입구의 공원에서 자연과 역사 자료를 함께 살펴봐요.",
+  "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=fecc9eba-3635-4be5-85a0-4b26247757d9",
+  "한국관광공사"
+ ],
+ [
+  "영동군",
+  "용두공원",
+  "야생화와 나무, 주민들의 여가 시설을 살펴봐요.",
+  "https://www.yd21.go.kr/tour/html/sub02/020604.html",
+  "영동군 문화관광"
+ ],
+ [
+  "증평군",
+  "한울공원",
+  "주민들이 쉬고 어린이들이 놀이하는 녹색 공간을 알아봐요.",
+  "https://new.jp.go.kr/kor/sub05_07_14_01.do",
+  "증평군 근린공원 현황"
+ ],
+ [
+  "진천군",
+  "화랑공원",
+  "주민들이 산책하고 운동하는 공원의 역할을 알아봐요.",
+  "https://www.jincheon.go.kr/site/tour/sub.do?menukey=1908",
+  "진천군 문화관광"
+ ],
+ [
+  "진천군",
+  "한반도지형 전망공원",
+  "초평호와 산이 이루는 한반도 모양의 경관을 관찰해요.",
+  "https://www.jincheon.go.kr/site/tour/sub.do?menukey=1613&mode=view&no=4510873",
+  "진천군 문화관광"
+ ],
+ [
+  "괴산군",
+  "청천수변공원",
+  "강 주변의 자연과 주민들의 여가 공간을 살펴봐요.",
+  "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=abca374d-adc9-4c8d-862b-c6c17573dd23",
+  "한국관광공사"
+ ],
+ [
+  "음성군",
+  "설성공원",
+  "연못과 정자, 주민들의 휴식 시설을 살펴봐요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=113",
+  "충북나드리"
+ ],
+ [
+  "단양군",
+  "소금정공원",
+  "남한강 주변 장미길과 공원의 경관을 살펴봐요.",
+  "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=9f90295b-eede-48b7-99b3-c0a6eb436277",
+  "한국관광공사"
+ ]
+];
+for(const [region,value,summary,href,source] of REGIONAL_PARKS){
+ const list=window.LOCALCHECK_REGIONAL_LANDMARKS[region]?.nature;
+ if(list&&!list.some(x=>x.value===value))list.push({...n("대표 공원",value,summary,href,source),icon:"🌳",primaryLabel:"공원 안내 ↗",newsTerm:value,placeLearning:true});
+}
 })();

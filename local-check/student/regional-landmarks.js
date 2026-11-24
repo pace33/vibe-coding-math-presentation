@@ -12,7 +12,7 @@ window.LOCALCHECK_REGIONAL_LANDMARKS={
   n("산과 지형","우암산 · 미동산","청주 도심의 우암산과 미원면 미동산의 산지 모습을 살펴보세요."),
   n("하천과 강","무심천 · 미호강","무심천은 청주 시가지를 흐르고, 미호강은 청주와 주변 지역을 지나는 강이에요."),
   n("호수와 저수지","대청호","대청댐으로 생긴 인공 호수로, 청주시 문의면 등과 맞닿아 있어요."),
-  n("숲과 계곡","미동산수목원 · 옥화구곡","미동산수목원은 다양한 나무를 가꾸는 곳이고, 옥화구곡에서는 계곡과 바위를 볼 수 있어요.")
+  n("숲과 계곡","옥화구곡","옥화구곡에서는 계곡과 바위를 볼 수 있어요.")
  ],
  local:[
   h("문화유산·유물","직지 · 상당산성","직지는 옛 금속활자 인쇄 문화를 알려 주는 기록유산이고, 상당산성은 옛 성곽이에요."),
@@ -97,7 +97,7 @@ window.LOCALCHECK_REGIONAL_LANDMARKS={
   n("산과 지형","두타산 · 만뢰산","진천에는 두타산과 만뢰산 등 산지가 있어요.","https://www.jincheon.go.kr/site/tour/sub.do?menukey=1613","진천군 관광 생태자연"),
   n("하천과 강","미호강 · 백곡천","진천에 있는 미호강과 백곡천의 흐름을 지도에서 찾아보세요."),
   n("호수와 저수지","초평호 · 백곡저수지","진천의 대표적인 인공 호수와 저수지예요.","https://www.jincheon.go.kr/site/tour/sub.do?menukey=1613","진천군 관광"),
-  n("숲과 계곡","만뢰산자연생태공원","만뢰산 주변에는 자연을 관찰할 수 있는 생태공원이 있어요.")
+  n("숲과 계곡","만뢰산 숲","만뢰산 주변 숲의 모습을 살펴보세요.")
  ],
  local:[
   h("문화유산·유물","진천 농다리 · 김유신 탄생지와 태실","오래된 돌다리와 신라 장군 김유신 관련 유적을 살펴봐요.","https://www.jincheon.go.kr/site/tour/sub.do?menukey=1617","진천군 관광"),
@@ -203,5 +203,101 @@ const FESTIVALS={
 for(const [region,events] of Object.entries(FESTIVALS)){
  const landmark=window.LOCALCHECK_REGIONAL_LANDMARKS[region];
  if(landmark?.local)landmark.local.push(...events);
+}
+
+/* 식물과 생태를 알아보는 장소: 2026-11-24 공개 기관 자료 기준. 조성 시설은 자연환경을 관찰하는 장소로 소개합니다. */
+const NATURE_LEARNING=[
+ [
+  "청주시",
+  "수목원",
+  "미동산수목원",
+  "다양한 나무와 야생화, 숲속 생물을 관찰할 수 있어요.",
+  "https://midongsan.chungbuk.go.kr/midongsan/contents.do?key=42",
+  "충청북도 미동산수목원"
+ ],
+ [
+  "충주시",
+  "자연휴양림",
+  "계명산자연휴양림",
+  "충주호 주변 산림과 숲의 모습을 알아봐요.",
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030042",
+  "산림청 숲나들e"
+ ],
+ [
+  "제천시",
+  "생태공원·숲길",
+  "의림지 솔밭공원",
+  "소나무가 모여 자라는 숲과 주변 자연을 관찰해요.",
+  "https://tour.jecheon.go.kr/tour/base/contents/view?contentsNo=95&menuLevel=3&menuNo=258",
+  "제천시 문화관광"
+ ],
+ [
+  "보은군",
+  "식물원",
+  "속리산 자생식물원",
+  "우리나라에서 자연적으로 자라는 식물을 살펴볼 수 있어요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=1487",
+  "충북나드리"
+ ],
+ [
+  "옥천군",
+  "식물원·정원",
+  "수생식물학습원",
+  "물에서 자라는 식물과 대청호 주변의 자연을 알아봐요.",
+  "https://www.chungbuk.go.kr/www/contents.do?key=5066",
+  "충청북도 정원 안내"
+ ],
+ [
+  "영동군",
+  "식물원",
+  "레인보우식물원",
+  "열대과일과 여러 종류의 식물을 비교해 볼 수 있어요.",
+  "https://www.yd21.go.kr/media/html/sub01/0101.html?mng_no=9328&mode=SV",
+  "영동군 공식 미디어"
+ ],
+ [
+  "증평군",
+  "생태공원",
+  "보강천 생태공원",
+  "하천 주변의 나무와 녹지 공간을 살펴봐요.",
+  "https://www.jp.go.kr/tour/prog/tursmCn/sub01_04_01/view.do?progNo=p00000006345ew0wJ2td",
+  "증평군 문화관광"
+ ],
+ [
+  "진천군",
+  "생태공원·수목원",
+  "만뢰산자연생태공원",
+  "생태연못, 자생수목원, 곤충관찰원에서 다양한 생물을 알아봐요.",
+  "https://www.jincheon.go.kr/site/tour/sub.do?menukey=1906",
+  "진천군 문화관광"
+ ],
+ [
+  "괴산군",
+  "식물 자생지",
+  "괴산 송덕리 미선나무 자생지",
+  "우리나라 특산식물인 미선나무와 자연 보호의 중요성을 알아봐요.",
+  "https://www.goesan.go.kr/tour/selectTourInfo.do?clgn=&key=887&tourNo=598",
+  "괴산군 문화관광"
+ ],
+ [
+  "음성군",
+  "자연휴양림",
+  "백야자연휴양림",
+  "숲과 산림휴양시설을 살펴보며 자연환경을 알아봐요.",
+  "https://baekya.foresttrip.go.kr/",
+  "산림청 숲나들e"
+ ],
+ [
+  "단양군",
+  "자연생태 탐방",
+  "다리안관광지",
+  "소백산 주변 계곡과 숲의 모습을 살펴봐요.",
+  "https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&searchMainSe=ATTR&tourNo=644",
+  "충북나드리"
+ ]
+];
+for(const [region,title,value,summary,href,source] of NATURE_LEARNING){
+ const list=window.LOCALCHECK_REGIONAL_LANDMARKS[region]?.nature;
+ if(list)list.push({...n(title,value,summary,href,source),icon:"🌿",primaryLabel:"시설·자연 안내 ↗",newsTerm:value,placeLearning:true});
 }
 })();

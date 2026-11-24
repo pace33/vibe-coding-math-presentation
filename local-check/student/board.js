@@ -103,11 +103,12 @@ function detailReport(data,target){
  target.appendChild(reminder);
  const verdicts={"같아요":["same","🟢 두 자료의 내용이 같다고 생각해요"],"달라요":["different","🟠 두 자료의 내용이 다르다고 생각해요"],"아직 모르겠어요":["unsure","🔵 아직 모르겠어요. 더 알아볼래요"]};
  const hasFirst=Boolean(data.initialVerdict);
+ const hasAI=Boolean(data.aiStatus);
  const [tone,label]=verdicts[hasFirst?data.initialVerdict:data.verdict]||verdicts["아직 모르겠어요"];
  const thought=tag("section","detective-thought "+tone);
- thought.append(tag("h3","",hasFirst?"③ 학생의 첫 판단":"③ 기사 비교"),tag("p","verification-guide","내용이 같더라도 사실 확인이 끝났다는 뜻은 아니에요."),tag("p","detective-verdict",label),tag("strong","detective-label","내가 처음 생각한 이유"),tag("p","detective-reason",hasFirst?(data.initialReason||"이유를 확인하지 못했어요."):data.reason));
+ thought.append(tag("h3","",hasFirst&&hasAI?"③ 학생의 첫 판단":"③ 기사 비교·학생의 판단"),tag("p","verification-guide","내용이 같더라도 사실 확인이 끝났다는 뜻은 아니에요."),tag("p","detective-verdict",label),tag("strong","detective-label","내가 처음 생각한 이유"),tag("p","detective-reason",hasFirst?(data.initialReason||"이유를 확인하지 못했어요."):data.reason));
  target.appendChild(thought);
- if(hasFirst){
+ if(hasFirst&&hasAI){
   const ai=tag("section","detective-ai-record");
   const statusText={match:"찾은 근거와 일부 내용이 일치해요",conflict:"찾은 근거와 다른 내용이 있어요",insufficient:"확인할 근거가 부족해요",unavailable:"AI 검토를 이용하지 못했어요"};
   ai.appendChild(tag("h3","","④ AI 근거 검토"));
@@ -129,7 +130,7 @@ function detailReport(data,target){
    tag("p","detective-reason",data.finalReason||data.reason));
   target.appendChild(final);
  }
- target.appendChild(tag("p","detective-note","💬 AI 의견은 정답이 아니에요. 학생의 첫 판단과 최종 판단을 원문 자료로 비교해 보세요."));
+ target.appendChild(tag("p","detective-note",hasAI?"💬 AI 의견은 정답이 아니에요. 학생의 첫 판단과 최종 판단을 원문 자료로 비교해 보세요.":"💬 학생이 기사와 근거 자료를 확인해 작성한 판단입니다. AI 검토 없이도 탐정 카드를 완성할 수 있어요."));
 }
 function createCardRow(d){
  const section=tag("article","board-card");
@@ -137,7 +138,7 @@ function createCardRow(d){
  top.append(tag("span","board-region",d.region||"우리 지역"),tag("span","board-verdict",d.initialVerdict&&d.initialVerdict!==d.verdict?d.initialVerdict+" → "+d.verdict:d.verdict));
  section.appendChild(top);
  section.appendChild(tag("h3","",d.title));
- section.appendChild(tag("p","",d.initialVerdict?"최종 이유: "+d.reason:d.reason));
+ section.appendChild(tag("p","",d.aiStatus?"최종 이유: "+d.reason:"판단 이유: "+d.reason));
  const btns=tag("div","board-card-buttons");
  const view=tag("button","board-action primary","자세히 보기");view.type="button";view.dataset.cardAction="view";view.dataset.cardId=d.id;
  const share=tag("button","board-action","친구에게 공유");share.type="button";share.dataset.cardAction="share";share.dataset.cardId=d.id;

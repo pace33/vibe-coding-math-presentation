@@ -659,7 +659,7 @@ function showAIReviewResult(review){
  $("aiReviewCaution").textContent=review.caution||"AI가 제시한 자료도 원문에서 직접 확인하세요.";
  const list=$("aiReviewSources");list.replaceChildren();
  if(review.sources?.length){
-  const heading=document.createElement("strong");heading.textContent="AI가 참고한 자료 (원문 확인 필요)";list.appendChild(heading);
+  const heading=document.createElement("strong");heading.textContent="AI가 참고한 자료 (본문 확인 여부는 링크 옆 표시)";list.appendChild(heading);
   for(const src of review.sources.slice(0,3)){
    const href=url(src.url);
    if(!href)continue;
@@ -696,27 +696,25 @@ async function askAIEvidence(){
  // AI 응답을 기다리지 않고도 학생 판단으로 카드를 완성할 수 있습니다.
  $("finish").disabled=false;
  $("formMessage").textContent="";
- $("aiReviewMessage").textContent="AI가 공개된 근거 자료를 찾고 있어요. 원문 확인 결과가 없으면 '근거 부족'으로 안내합니다.";
- const wait=setTimeout(()=>controller.abort(),45000);
+ $("aiReviewMessage").textContent="요청을 등록하고 있어요. 접수 순서대로 웹검색 후 Gemma4가 검토합니다.";
+
  try{
   const first=state.firstReview,article=state.story;
-  const response=await fetch(AI_VERIFY_API,{
-   method:"POST",mode:"cors",
-   headers:{"Content-Type":"application/json"},
-   signal:controller.signal,
-   body:JSON.stringify({
-    region:safe(article.region,50),
-    article:{title:safe(article.title,200),publisher:safe(article.publisher,100),date:safe(article.date,40),url:article.url},
-    initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:first.govFact,comparisonUrl:first.govUrl}
-   })
-  });
-  const raw=await response.json().catch(()=>({}));
-  if(!response.ok)throw Error(safe(raw.error||"AI 검토 서비스에 연결하지 못했어요.",130));
+  const raw=await window.localcheckGemmaReview(AI_VERIFY_API,{
+   region:safe(article.region,50),
+   article:{title:safe(article.title,200),publisher:safe(article.publisher,100),date:safe(article.date,40),url:article.url},
+   initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:first.govFact,comparisonUrl:first.govUrl}
+  },{signal:controller.signal,onProgress:job=>{
+   if(current!==aiSequence)return;
+   $("aiReviewMessage").textContent=job.status==="queued"
+    ? "순서대로 처리 중이에요. 내 순번: "+job.queuePosition+"번째"
+    : job.phase==="web-search"?"서버가 공개 자료를 검색하고 원문을 확인하고 있어요.":"Gemma4가 찾은 자료를 비교하고 있어요.";
+  }});
   if(current!==aiSequence)return;
   if(!["match","conflict","insufficient"].includes(raw.status))throw Error("AI 검토 결과를 해석할 수 없어요.");
-  const sources=(Array.isArray(raw.sources)?raw.sources:[]).slice(0,3).map(x=>({title:safe(x.title,110),url:url(x.url),date:safe(x.published,30)})).filter(x=>x.url);
+  const sources=(Array.isArray(raw.sources)?raw.sources:[]).slice(0,3).map(x=>({title:safe(x.title,110)+(x.fetched?" · 본문 발췌 확인":" · 원문 미확인"),url:url(x.url),date:safe(x.published||x.date||x.retrievedAt,30),fetched:x.fetched===true})).filter(x=>x.url);
   // AI 의견에 출처가 없다면 불일치/일치 판정을 화면에 보여주지 않습니다.
-  const status=sources.length?raw.status:"insufficient";
+  const status=sources.some(x=>x.fetched)&&raw.webSearched===true?raw.status:"insufficient";
   state.aiReview={
    status,
    summary:sources.length?safe(raw.summary,550):"검증에 사용할 수 있는 출처 링크가 없어 내용을 판단하지 않았어요.",
@@ -736,9 +734,9 @@ async function askAIEvidence(){
    sources:[],
    checkedAt:""
   };
-  $("aiReviewMessage").textContent=err.name==="AbortError"?"AI 응답이 지연되고 있어요. 직접 검증을 계속할 수 있어요.":"AI 검토가 불가능해요. 직접 검증 내용은 그대로 남길 수 있어요.";
+  $("aiReviewMessage").textContent=err.name==="AbortError"?"AI 응답이 지연되고 있어요. 직접 검증을 계속할 수 있어요.":(/^AI 생성에 실패했습니다\. 오류 코드: [A-Z0-9_]{1,64}$/.test(err.message)?err.message:"AI 생성에 실패했습니다. 오류 코드: GEMMA_CONNECTION");
  }finally{
-  clearTimeout(wait);
+
   if(current===aiSequence){
    aiController=null;
    $("askAi").disabled=false;

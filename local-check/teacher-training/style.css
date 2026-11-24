@@ -733,3 +733,33 @@ a{color:inherit}
  .correction-evidence>span,.correction-lesson>span{font-size:11px}
  .correction-evidence>strong,.correction-lesson>strong{font-size:11px}
 }
+
+/* Copy-ready Korean chat commands for the 4th section of teacher training. */
+.slide-body:has(.chat-prompt){justify-content:flex-start;gap:8px;padding:.65% 0 .6%;min-height:0}
+.chat-prompt{width:100%;min-height:0;max-height:100%;display:flex;flex-direction:column;overflow:hidden;background:#f6f8f3;border:1px solid #d5e5d8;border-top:4px solid #2c7052;border-radius:13px}
+.chat-prompt-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:clamp(9px,1.05cqw,15px) clamp(14px,1.5cqw,21px);background:#e9f2e7}
+.chat-prompt-head>span{font-size:clamp(13px,1.25cqw,18px);font-weight:900;color:#27593e}
+.chat-prompt-copy{border:1px solid #be6f29;border-radius:8px;padding:8px 15px;background:#b65316;color:white;font-size:clamp(12px,1.15cqw,16px);font-weight:900;cursor:pointer;white-space:nowrap}
+.chat-prompt-copy:hover{background:#95400b}
+.chat-prompt-copy:focus-visible{outline:3px solid #f0b86a;outline-offset:2px}
+.chat-prompt-lines{display:flex;flex-direction:column;gap:clamp(7px,.8cqw,12px);padding:clamp(12px,1.35cqw,19px) clamp(14px,1.5cqw,21px);min-height:0;overflow-y:auto;scrollbar-width:thin}
+.chat-prompt-lines p{display:grid;grid-template-columns:clamp(25px,2.65cqw,37px) minmax(0,1fr);align-items:start;gap:clamp(8px,1cqw,14px);margin:0}
+.chat-prompt-lines p>span{font-size:clamp(12px,1.2cqw,17px);font-weight:900;color:#b65316;line-height:1.55}
+.chat-prompt-lines strong{display:block;font-size:clamp(15px,1.64cqw,23px);line-height:1.44;font-weight:780;color:#234434;word-break:keep-all;overflow-wrap:anywhere}
+.chat-prompt-foot{margin:0;background:#fff5ea;border-left:4px solid #c57437;padding:8px 14px;border-radius:0 8px 8px 0;color:#87501e;font-size:clamp(12px,1.2cqw,17px);font-weight:750;line-height:1.35}
+@media(max-width:900px){
+ .chat-prompt-lines{gap:5px;padding:10px 12px}
+ .chat-prompt-lines strong{font-size:clamp(11px,1.6cqw,16px)}
+ .chat-prompt-head{padding:7px 11px}
+ .chat-prompt-copy{padding:6px 10px}
+ .chat-prompt-foot{font-size:11px;padding:6px 10px}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .slide-body:has(.chat-prompt){overflow-y:auto;justify-content:flex-start}
+ .chat-prompt{max-height:none;overflow:visible}
+ .chat-prompt-lines{overflow:visible;gap:8px}
+ .chat-prompt-lines strong{font-size:14px;line-height:1.4}
+ .chat-prompt-copy{font-size:11px}
+ .chat-prompt-head>span{font-size:11px}
+}
+@media print{.chat-prompt-copy{display:none!important}.chat-prompt-lines{overflow:visible}.chat-prompt{max-height:none}}

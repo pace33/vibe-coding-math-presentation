@@ -30,7 +30,7 @@ function query(kind,area=place(),topic=$("keyword").value){
 const EXPLORE_CATEGORIES=window.LOCALCHECK_CATEGORIES||{};
 const REGIONAL_BASICS=window.LocalCheckRegionalBasics;
 function updateLinks(){
- $("newsSearch").textContent=activeMenu==="news"?"🔎 뉴스 검색":"🔎 "+EXPLORE_CATEGORIES[activeMenu].title+" 뉴스 찾기";
+ $("newsSearch").textContent=activeMenu==="news"?"🔎 뉴스 검색":"🔎 "+EXPLORE_CATEGORIES[activeMenu].title+" 자료 찾기";
 }
 function chooseMenu(menu){
  if(menu==="board"){window.LocalCheckBoard?.renderBoard?.();show("board");return;}
@@ -89,7 +89,7 @@ function renderInquiries(){
  const root=$("inquiryList");root.replaceChildren();
  if(!category)return;
  const categoryName=activeMenu==="overview"?"기본 정보":category.title;
- $("inquiryNews").textContent="📰 "+categoryName+" 뉴스 찾기";
+ $("inquiryNews").textContent="📰 "+categoryName+" 자료 찾기";
  const region=$("region").value;
  const issues=activeMenu==="issues",crops=activeMenu==="business";
  root.classList.toggle("issue-topic-grid",issues);
@@ -134,7 +134,7 @@ function renderInquiries(){
   const mainLink=primary?
    '<a class="basic-primary-link" href="'+esc(url(primary.href))+'" target="_blank" rel="noopener noreferrer">'+esc(primary.label)+'</a>':"";
   const newsTerm=item.newsTerm||regionalNewsTerm(item,activeMenu);
-  const checkNews='<button class="regional-card-news" type="button" data-card-news="'+esc(newsTerm)+'">📰 관련 뉴스 찾기</button>';
+  const checkNews='<button class="regional-card-news" type="button" data-card-news="'+esc(newsTerm)+'">📰 관련 자료 찾기</button>';
   const visit=item.visit;
   const visitMode=visit?.status==="reserve"?"예약·신청 안내":visit?.status==="school"?"학교 단체 안내":visit?.status==="visit"?"방문·관람 안내":"사전 협의 필요";
   const visitTag=visit?'<span class="regional-visit-tag">🏫 견학·체험 · '+esc(visitMode)+'</span>':"";

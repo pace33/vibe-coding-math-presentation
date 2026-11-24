@@ -607,6 +607,23 @@ a{color:inherit}
 .solution-card:nth-child(2){background:#f8f5ee;border-top-color:#d66b51}
 .solution-card:nth-child(3){background:#f0f5ef;border-top-color:#568b79}
 .solution-card:nth-child(4){background:#f5f3e9;border-top-color:#8da74e}
+/* 웹앱 실제 상단 메뉴 3가지를 발표 화면에 같은 비중으로 소개 */
+.solution-grid.menu-feature-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr}
+.menu-feature-grid .solution-card{gap:clamp(8px,.9cqw,13px)}
+.menu-feature-grid .solution-card:nth-child(1){background:#fff6ef;border-top-color:#bf641e}
+.menu-feature-grid .solution-card:nth-child(2){background:#f1f8f0;border-top-color:#36795a}
+.menu-feature-grid .solution-card:nth-child(3){background:#f0f6fb;border-top-color:#557fa8}
+.menu-feature-grid .solution-card:nth-child(2) small{color:#326c4e}
+.menu-feature-grid .solution-card:nth-child(3) small{color:#416f9b}
+.menu-feature-grid .solution-card span{line-height:1.48}
+@media(max-width:900px){
+ .menu-feature-grid .solution-card{padding:10px;gap:6px}
+ .menu-feature-grid .solution-card strong{font-size:clamp(14px,1.9cqw,21px)}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .solution-grid.menu-feature-grid{grid-template-columns:1fr;grid-template-rows:none}
+ .menu-feature-grid .solution-card{padding:12px;min-height:135px}
+}
 .solution-card small{
  color:#b14d39;
  font-size:clamp(11px,1.14cqw,16px);

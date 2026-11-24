@@ -17,7 +17,7 @@ let liveController=null,liveSequence=0;
 let keywordTimer=null;
 let evidenceController=null,evidenceSequence=0;
 let aiController=null,aiSequence=0;
-const AI_VERIFY_API='https://localcheck-news-pace33.lejinku.chatgpt.site/api/verify';
+const AI_VERIFY_API='https://aiedue.ddns.net/localcheck-ai/browser/verify';
 const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=s=>{try{const u=new URL(String(s));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return ""}};

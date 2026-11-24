@@ -763,3 +763,17 @@ a{color:inherit}
  .chat-prompt-head>span{font-size:11px}
 }
 @media print{.chat-prompt-copy{display:none!important}.chat-prompt-lines{overflow:visible}.chat-prompt{max-height:none}}
+
+/* Short three-line chat commands; remove the visual weight of numbered long prompts. */
+.chat-prompt-simple{display:flex;flex-direction:column;justify-content:center;flex:1;min-height:0;gap:clamp(15px,1.9cqw,27px);padding:clamp(24px,3.1cqw,44px) clamp(24px,3.1cqw,44px);overflow-y:auto}
+.chat-prompt-simple p{font-size:clamp(19px,2.2cqw,30px);line-height:1.48;font-weight:780;color:#234434;margin:0;word-break:keep-all;overflow-wrap:anywhere;letter-spacing:-.025em}
+.chat-prompt-simple p+p{padding-top:clamp(12px,1.25cqw,19px);border-top:1px solid #dce7dc}
+@media(max-width:900px){
+ .chat-prompt-simple{padding:14px 18px;gap:11px}
+ .chat-prompt-simple p{font-size:clamp(14px,2.2cqw,20px);line-height:1.4}
+ .chat-prompt-simple p+p{padding-top:9px}
+}
+@media(max-width:520px) and (orientation:portrait){
+ .chat-prompt-simple{overflow:visible;justify-content:flex-start;gap:11px;padding:14px}
+ .chat-prompt-simple p{font-size:16px}
+}

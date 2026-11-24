@@ -226,8 +226,10 @@ function renderLiveResults(items,mode){
   card.className="news-card";
   const valid=url(x.url);if(!valid)continue;
   const excerpt=newsExcerpt(x,searchTerm);
-  card.innerHTML='<div class="meta"><span class="tag">'+esc(x.region)+" · "+esc(x.sourceType||"뉴스")+'</span><span>'+esc(x.published||"날짜 확인")+'</span></div>'+
-   '<h3>'+esc(x.title)+'</h3><p class="news-publisher">'+esc(x.publisher||"발행기관 확인")+'</p>'+
+  card.innerHTML='<div class="meta"><span class="tag">'+esc(x.region)+" · "+esc(x.sourceType||"뉴스")+'</span></div>'+
+   '<h3>'+esc(x.title)+'</h3>'+
+   '<div class="news-source-date"><div class="news-meta-line"><span class="news-meta-label">출처:</span><span class="news-meta-value">'+esc(x.publisher||"발행기관 확인")+'</span></div>'+
+   '<div class="news-meta-line"><span class="news-meta-label">날짜:</span><span class="news-meta-value">'+esc(x.published||"날짜 확인")+'</span></div></div>'+
    (excerpt?'<p class="news-excerpt">'+esc(excerpt)+'</p>':'<p class="news-excerpt news-excerpt-empty">기사 요약이 제공되지 않았어요. 원문에서 내용을 확인하세요.</p>')+
    '<div class="news-actions"><a href="'+esc(valid)+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a>'+
    '<button type="button" data-live-news="'+i+'">검증하기 →</button></div>';
@@ -360,8 +362,10 @@ function renderNews(){
  }
  for(const item of found){
   const card=document.createElement("article");card.className="news-card";
-  card.innerHTML='<div class="meta"><span class="tag">'+esc(item.region)+' · '+esc(item.sourceType||"자료")+'</span><span>'+esc(item.published||"날짜 확인 필요")+'</span></div>'+
-   '<h3>'+esc(item.title)+'</h3><p>'+esc(item.publisher||"발행기관 확인 필요")+'</p>'+
+  card.innerHTML='<div class="meta"><span class="tag">'+esc(item.region)+' · '+esc(item.sourceType||"자료")+'</span></div>'+
+   '<h3>'+esc(item.title)+'</h3>'+
+   '<div class="news-source-date"><div class="news-meta-line"><span class="news-meta-label">출처:</span><span class="news-meta-value">'+esc(item.publisher||"발행기관 확인 필요")+'</span></div>'+
+   '<div class="news-meta-line"><span class="news-meta-label">날짜:</span><span class="news-meta-value">'+esc(item.published||"날짜 확인 필요")+'</span></div></div>'+
    '<div class="news-actions"><a href="'+esc(url(item.url))+'" target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a><button type="button" data-news="'+state.news.indexOf(item)+'">검증하기 →</button></div>';
   root.appendChild(card);
  }

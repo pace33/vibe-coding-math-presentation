@@ -195,21 +195,21 @@ const SLIDES=[
  note:"[4사09-02]는 지역의 자연환경·역사·문화·생산물과 지역사회의 노력을 탐구하는 내용이므로, 문화유산 이름만 제공하는 것으로 부족합니다. 전시·체험이 가능한 박물관·미술관과 지역 축제·예술 행사 정보를 추가했습니다. 다만 축제 개최일과 운영 정보는 해마다 변경되므로 최신 공지로 확인하도록 안내합니다."
 },
 {
- id:"app-issues",section:"수업 문제 해결",type:"image",kicker:"수업 문제의 해결 방안 · 사회 [4사09-01]",
+ id:"app-issues",section:"수업 활동 지원",type:"image",kicker:"지역 탐구 지원 · 사회 [4사09-01]",
  title:"우리 지역 뉴스를\n쉽게 찾을 수 있도록",
  lead:"우리 시·군 선택 → 관심 주제·검색어 입력 → 기사·언론사·날짜 확인",
  image:"assets/10-issues.svg",
  note:"바로 앞 페이지에서는 지역 뉴스를 찾으려고 하면 광역 기사·오래된 기사·관련 없는 검색 결과가 섞여 수업이 어려울 수 있음을 설명했습니다. 이 페이지는 그 문제를 해결하기 위한 실제 웹앱 화면입니다. 학생이 사는 충북 시·군을 선택하고 환경·교통안전·교육복지·지역 생활 문제 등 관심 분야나 검색어로 기사를 찾습니다. 검색 결과의 기사 제목·언론사·날짜를 먼저 보고 원문을 열도록 구성해, 시간을 기사 찾기에만 쓰지 않고 비교·검증 활동으로 연결하도록 했습니다. 화면에 보이는 기사는 수업용 예시이며 뉴스 검색은 외부 뉴스 서비스 연결 상태에 따라 달라질 수 있습니다."
 },
 {
- id:"app-problem-features",section:"수업 문제 해결",kicker:"수업의 어려움 → 웹앱의 핵심 기능",
+ id:"app-problem-features",section:"수업 활동 지원",kicker:"수업 활동 → 웹앱의 핵심 기능",
  title:"지역 조사에 필요한\n네 가지 핵심 기능",
  lead:"자료 검색 시간을 줄이고 기사 비교와 근거 확인에 집중합니다.",
  body:'<div class="solution-grid">'+
- '<article class="solution-card"><small>01 · 기사 찾기</small><p>“우리 고장 기사를 찾기 어려워요”</p><strong>충북 11개 시·군 선택 · 뉴스 검색</strong><span>지역과 검색어로 필요한 기사부터 찾기</span></article>'+
- '<article class="solution-card"><small>02 · 출처 확인</small><p>“어떤 기사를 믿어야 할까요?”</p><strong>기사 제목 · 언론사 · 날짜 · 원문</strong><span>제목만 읽지 않고 누가 언제 썼는지 확인</span></article>'+
- '<article class="solution-card"><small>03 · 근거 비교</small><p>“기사가 두 개면 모두 사실일까요?”</p><strong>다른 기사 · 공공기관 자료 비교</strong><span>같은 내용, 다른 내용과 근거 구별하기</span></article>'+
- '<article class="solution-card"><small>04 · 탐구 기록</small><p>“확인한 생각을 어떻게 남길까요?”</p><strong>판단 선택 · 이유 작성 · 탐정 카드</strong><span>확인한 사실과 더 알아볼 점 기록하기</span></article>'+
+ '<article class="solution-card"><small>01 · 기사 찾기</small><p>“우리 고장 기사는 어떻게 찾을까요?”</p><strong>충북 11개 시·군 선택 · 뉴스 검색</strong><span>지역과 검색어로 필요한 기사부터 찾기</span></article>'+
+ '<article class="solution-card"><small>02 · 출처 확인</small><p>“기사의 출처는 어떻게 확인할까요?”</p><strong>기사 제목 · 언론사 · 날짜 · 원문</strong><span>제목만 읽지 않고 누가 언제 썼는지 확인</span></article>'+
+ '<article class="solution-card"><small>03 · 근거 비교</small><p>“두 기사는 어떤 점이 같고 다를까요?”</p><strong>다른 기사 · 공공기관 자료 비교</strong><span>같은 내용, 다른 내용과 근거 구별하기</span></article>'+
+ '<article class="solution-card"><small>04 · 탐구 기록</small><p>“확인한 내용을 어떻게 기록해 볼까요?”</p><strong>판단 선택 · 이유 작성 · 탐정 카드</strong><span>확인한 사실과 더 알아볼 점 기록하기</span></article>'+
  '</div>',
  note:"앞 슬라이드의 수업 문제를 학생용 웹앱의 실제 기능과 연결합니다. ① 충북 11개 시·군을 고르고 검색어로 관련 뉴스를 찾습니다. ② 기사 제목·언론사·발행 날짜와 원문을 살펴봅니다. ③ 다른 기사나 공식 자료를 비교하고 내용의 공통점과 차이점을 확인합니다. ④ 같아요·달라요·아직 모르겠어요 등을 선택하고 이유를 적어 탐정 카드로 남깁니다. 웹앱이 진위를 자동으로 판정하는 기능은 아닙니다. 탐정 카드 저장은 현재 사용 중인 브라우저 중심입니다. 이제 다음 페이지에서 실제 뉴스 2건을 가지고 이 과정을 적용해 보겠습니다."
 },
@@ -320,12 +320,12 @@ const PUBLISHER_FEST="https://e.m-teacher.co.kr/pages/ele/bbs/tabList.mrn/TBM-lt
 const refLink=(label,href)=>'<a class="field-source" href="'+href+'" target="_blank" rel="noopener noreferrer">'+label+' ↗</a>';
 const fieldGap=(task,block,solution)=>'<div class="field-reality">'+
  '<div class="field-cell"><span>교재에서 요구하는 활동</span><strong>'+task+'</strong></div>'+
- '<div class="field-cell"><span>교실에서 발생할 수 있는 어려움</span><strong>'+block+'</strong></div>'+
+ '<div class="field-cell"><span>수업에서 함께 살펴볼 점</span><strong>'+block+'</strong></div>'+
  '<div class="field-cell solved"><span>웹앱에 반영한 해결 방식</span><strong>'+solution+'</strong></div></div>';
 const lessonPreview=(line1,line2,prompt,source)=>'<div class="lesson-preview">'+
  '<div class="lesson-page"><div class="lesson-page-top">경기도 지역화 교재 예시 · 4학년 2학기</div>'+
  '<h3>'+line1+'</h3><p>'+line2+'</p><div class="lesson-page-task">'+prompt+'</div></div>'+
- '<div class="lesson-page-explain"><span>수업 준비에서 실제로 필요한 것은?</span>'+
+ '<div class="lesson-page-explain"><span>수업 준비에는 어떤 자료가 필요할까요?</span>'+
  '<strong>우리 시·군의 기사,<br>최신 날짜, 확인 가능한 근거</strong>'+
  '<p>교재의 조사 활동을 위해 우리 지역의 실제 자료가 필요합니다.</p></div></div>'+
  refLink("교육청 지역화 교재·활동 페이지 확인",source);
@@ -335,26 +335,26 @@ const regionalTask=(line1,line2,source)=>'<div class="regional-task">'+
  '</div>'+refLink("교육청 사회과 서·논술형 활동 예시 확인",source);
 const classes={
  "field-textbook-news":{
-  id:"field-textbook-news",section:"현장 수업의 문제",kicker:"사회 4학년 2학기 · 교재 활동에서 출발",
+  id:"field-textbook-news",section:"수업에서 살펴볼 점",kicker:"사회 4학년 2학기 · 교재 활동에서 출발",
   title:"우리 지역의 문제를\n어떻게 조사할까요?",
   lead:"신문기사·뉴스를 읽고, 지역 문제의 원인을 조사하는 활동",
   body:lessonPreview("지역문제를 확인하는 방법","지역 뉴스와 시·군청 누리집을 찾아보고, 신문기사를 읽어 문제 원인을 조사해 봅니다.","교재 속 예시: OO시의 출퇴근 문제를 기사로 읽고 원인 파악",LOCAL_TEXTBOOK),
   note:"출처는 2022 개정 교육과정에 맞춰 공개된 경기도교육청 지역화 교재 「경기도의 생활」 4학년 2학기 118~119쪽입니다. (교재 기준 표기이며 다른 시도 교과서의 쪽수와 동일하지 않습니다.) 교재가 지역 뉴스와 공공기관 사이트를 살펴보라고 요청한다는 사실과, 우리 충북 학생이 자기 지역의 기사를 직접 찾아야 한다는 수업 운영상의 부담을 구별해서 설명합니다. 교재의 'OO시' 기사는 학습용 예시이며 실제 음성군 기사와 구분합니다."
  },
  "field-gap-news":{
-  id:"field-gap-news",section:"현장 수업의 문제",kicker:"지역 뉴스 조사 활동의 어려움",
+  id:"field-gap-news",section:"수업에서 살펴볼 점",kicker:"지역 뉴스 조사에서 살펴볼 점",
   title:"우리 지역의 뉴스를\n찾기 어려운 이유는 무엇일까요?",
   body:fieldGap("지역 뉴스·신문기사 찾기","광역 기사·예전 기사·관련 없는 검색 결과가 함께 나옴","시·군 선택 → 지역 뉴스 검색 → 기사 제목·날짜·언론사 확인"),
   note:"교과서 자체의 결함을 주장하는 슬라이드가 아닙니다. 실제 수업에서 학생들이 인터넷 검색으로 지역과 시점을 구분하는 데 많은 안내를 필요로 할 수 있다는 예상 가능한 교수학습상의 문제입니다. 웹앱은 기사 검색의 출발점을 한 화면으로 묶습니다. 자동으로 뉴스의 진위를 확인해 주지는 않습니다."
  },
  "field-compare-gap":{
-  id:"field-compare-gap",section:"현장 수업의 문제",kicker:"실제 기사 비교에서 확인한 필요성",
+  id:"field-compare-gap",section:"수업에서 살펴볼 점",kicker:"실제 기사 비교에서 확인한 필요성",
   title:"기사 내용이 다를 때,\n무엇을 확인해야 할까요?",
   body:fieldGap("뉴스의 출처와 사실 관계 확인하기","같은 사건인데 행사 내용·참석 여부처럼 서로 다른 정보를 전달할 수 있음","엇갈린 내용 표시 → 정정보도 확인 → 공식 기록과 대조"),
   note:"앞의 2025년 음성군 삼성면 행사 사례에서 학생들은 행사 종류와 참석 여부를 두고 처음 보도된 주장과 정정보도에 차이가 있음을 확인했습니다. 서로 다른 문장을 발견한 다음 해당 언론의 정정보도문, 언론중재위원회 조정, 음성군 행정 자료와 같은 근거를 살펴보는 단계가 필요함을 안내합니다. 기사의 진위 여부는 웹앱이 자동으로 판정하지 않습니다."
  },
  "field-textbook-region":{
-  id:"field-textbook-region",section:"현장 수업의 문제",kicker:"사회 4학년 2학기 · 우리 지역 알리기",
+  id:"field-textbook-region",section:"수업에서 살펴볼 점",kicker:"사회 4학년 2학기 · 우리 지역 알리기",
   title:"우리 지역의 자랑거리,\n어떻게 조사할까요?",
   lead:"장소의 이름과 특징, 소개하고 싶은 이유를 조사하기",
   body:regionalTask("자랑할 만한 장소를 정해 소개하기","이름과 특징을 찾아보고 사람들이 좋아하는 이유를 자기 말로 표현합니다.",LOCAL_ASSESS)+
@@ -362,13 +362,13 @@ const classes={
   note:"인천광역시교육청 2026 초등 사회 서·논술형 평가도구의 4학년 2학기 2단원(137쪽)에서 장소 이름·특징·좋아하는 이유를 조사하여 소개하는 예시를 확인했습니다. 미래엔 사회 4-2 교사용 자료에서는 다양한 지역 축제 조사하기(81쪽)를 안내합니다. 이는 서로 다른 출판사·시도의 자료를 보여 주는 사례이지 충북 특정 교과서의 81쪽·137쪽이라는 뜻이 아닙니다. 웹앱은 실제 장소·축제 정보를 찾는 일을 돕지만 최종 발표문·그림을 자동으로 만들어 주지 않습니다."
  },
  "field-gap-region":{
-  id:"field-gap-region",section:"현장 수업의 문제",kicker:"지역 정보 조사 활동의 어려움",
+  id:"field-gap-region",section:"수업에서 살펴볼 점",kicker:"지역 정보 조사에서 살펴볼 점",
   title:"우리 고장의 자료는\n어디에서 찾을 수 있을까요?",
   body:fieldGap("우리 고장의 장소·축제 조사하기","교재의 예시만으로는 우리 고장의 정보를 알기 어렵고, 관련 자료도 여러 누리집에 흩어져 있음","충북 11개 시·군 선택 → 6개 분야에서 실제 명칭·출처 확인"),
   note:"교과서는 지역 탐구 절차를 안내합니다. 그런데 학생이 사는 충북 음성군·옥천군·진천군 등에서는 구체적 장소·행사·기업이 달라져 지역별 자료 수집이 필요합니다. 웹앱은 기본 정보·자연환경·생활시설·산업과 경제·역사와 문화·지역문제를 나눠 실제 명칭을 카드에서 먼저 제시합니다. 목록은 대표 사례로 한정되며 완전한 지역 백과사전은 아닙니다."
  },
  "field-standards":{
-  id:"field-standards",section:"현장 수업의 문제",kicker:"교과서 활동과 웹앱 설계의 실제 연결",
+  id:"field-standards",section:"수업에서 살펴볼 점",kicker:"교과서 활동과 웹앱 설계의 실제 연결",
   title:"교과 성취기준을\n웹앱 기능으로 연결하기",
   body:'<div class="field-matrix">'+
   '<div><span>사회 [4사09-01]</span><strong>지역의 문제 조사</strong><b>지역 뉴스 검색 · 공공자료 비교</b></div>'+
@@ -546,7 +546,7 @@ const classroomSlides=order.map(id=>{
  const slide=classes[id]||oldSlides.get(id);
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"우리 지역 탐구 수업,\nAI로 만든 웹앱과 함께",lead:"지역 자료 조사와 뉴스 검증을 돕는 웹앱 제작 사례",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
- if(id==="section-need")return {...slide,section:"현장 수업의 문제",title:"우리 지역 조사하기,\n무엇이 어려울까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
+ if(id==="section-need")return {...slide,section:"수업에서 살펴볼 점",title:"우리 지역 조사하기,\n무엇이 어려울까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
  if(id==="section-build")return {...slide,section:"웹앱 제작 방법",title:"AI를 활용한 웹앱 제작,\n어떻게 시작했을까요?",lead:"수업 목표 설정부터 제작 요청·점검·수정·공유까지",note:"16쪽부터는 교사 입장에서 AI로 웹앱을 만드는 과정을 소개합니다. 코드는 AI에게 맡기고, 교사는 수업 목적과 학생 활동을 설명하고 결과를 확인합니다."};
  if(id==="section-app")return {...slide,title:"우리 지역 탐정,\n어떤 기능을 담았을까요?",lead:"지역 정보 조사부터 기사 검색·검증·기록까지",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
  if(id==="section-class")return {...slide,section:"수업 적용",title:"우리 지역 탐정,\n수업에서 어떻게 활용할까요?",lead:"지역 문제 조사 활동과 뉴스 신뢰성 평가의 교과 연계"};
@@ -554,50 +554,50 @@ const classroomSlides=order.map(id=>{
 });
 if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");
 const textbookTitles={
-  "cover": "AI를 활용한 우리 지역 탐구 수업",
+  "cover": "우리 지역 탐구 수업,\nAI와 어떻게 함께할까요?",
   "section-need": "우리 지역 조사하기,\n무엇이 어려울까요?",
-  "field-textbook-news": "우리 지역의 문제를\n어떻게 조사할까요?",
-  "field-gap-news": "우리 지역의 뉴스를 찾기 어려운\n이유는 무엇일까요?",
-  "app-issues": "우리 지역의 문제와 관련된\n뉴스 찾아보기",
-  "app-problem-features": "지역 탐구 활동을 지원하는\n네 가지 기능",
-  "app-article-traffic": "같은 사건을 다르게 보도한\n뉴스 살펴보기",
-  "app-article-environment": "정정보도를 통해\n사실 관계 확인하기",
-  "field-compare-gap": "뉴스의 내용을\n어떻게 확인할까요?",
-  "app-verify": "다양한 자료를 비교하여\n뉴스의 신뢰성 평가하기",
-  "field-textbook-region": "우리 지역의 자랑거리 조사하기",
-  "field-gap-region": "우리 지역의 정보를\n어디에서 찾을 수 있을까요?",
-  "app-menu": "우리 지역의 특징을\n주제별로 조사하기",
-  "app-basics": "지역 통계 자료의\n출처와 기준일 확인하기",
-  "field-standards": "교과 성취기준과 웹앱 기능의 연계",
-  "section-build": "지역 탐구 수업에 필요한 웹앱,\n어떻게 만들었을까요?",
-  "build-overview": "AI를 활용한\n교수·학습 자료 제작 과정",
-  "build-spec": "학습 목표에 따른\n웹앱 기능 구성하기",
-  "build-toolmap": "웹앱 제작 과정에서\n교사와 AI의 역할",
-  "build-first-prompt": "학습 활동에 필요한\n기본 화면 구성하기",
-  "build-first-result": "학생의 이용 편의성을 고려한\n화면 점검",
-  "build-data-prompt": "지역 탐구 활동에 필요한\n자료 구성하기",
-  "build-data-result": "지역 자료의 출처와\n기준일 제시하기",
-  "build-news-structure": "지역 뉴스 검색 기능의 작동 원리",
-  "build-news-prompt": "지역 뉴스 검색 기능 구현하기",
-  "build-check-prompt": "뉴스의 신뢰성 평가를 위한\n기능 구현하기",
-  "build-board": "탐정 카드를 활용하여\n탐구 결과 기록하기",
-  "build-test": "수업 활용을 위한 웹앱 기능 점검하기",
-  "build-deploy": "완성된 웹앱을 학생들과 공유하기",
-  "section-app": "우리 지역 탐정,\n어떤 학습 활동을 할 수 있을까요?",
-  "app-nature": "우리 지역의 자연환경 조사하기",
-  "app-public": "우리 지역의 생활시설과\n공공기관 조사하기",
-  "app-industry": "우리 지역의 산업과 생산물 조사하기",
-  "app-culture": "우리 지역의 역사와 문화 조사하기",
-  "app-news": "지역 뉴스를 통해\n우리 지역의 문제 파악하기",
-  "app-article-check": "뉴스의 신뢰성을 평가하는 방법 알아보기",
-  "app-record": "탐구 결과와 판단의 근거 기록하기",
-  "boundaries": "자료를 활용한 학생 주도적 탐구 활동",
-  "section-class": "우리 지역 탐구 수업에\n어떻게 활용할까요?",
-  "sample-question": "우리 지역의 교통안전 문제 조사하기",
-  "lesson-40": "지역 문제 탐구를 위한 교수·학습 과정",
-  "assessment": "학생의 탐구 과정 및 결과 평가하기",
-  "closing": "교과서 속 탐구 활동을\n실제 지역 탐구로 확장하기",
-  "sources": "참고 자료 및 출처"
+  "field-textbook-news": "우리 지역의 문제를\n어떻게 조사해 볼까요?",
+  "field-gap-news": "우리 지역의 뉴스를\n어떻게 찾으면 좋을까요?",
+  "app-issues": "우리 지역의 문제와 관련된\n뉴스는 어떻게 찾을까요?",
+  "app-problem-features": "지역 탐구를 돕는\n기능에는 무엇이 있을까요?",
+  "app-article-traffic": "같은 사건을 다룬 기사들은\n어떤 점이 다를까요?",
+  "app-article-environment": "정정보도를 살펴보면\n어떤 사실을 알 수 있을까요?",
+  "field-compare-gap": "뉴스의 내용은\n어떻게 확인해 볼까요?",
+  "app-verify": "여러 자료를 비교하면\n무엇을 확인할 수 있을까요?",
+  "field-textbook-region": "우리 지역의 자랑거리는\n어떻게 알아볼까요?",
+  "field-gap-region": "우리 지역의 자료를\n어디에서 찾아볼까요?",
+  "app-menu": "우리 지역의 특징을\n어떤 주제로 살펴볼까요?",
+  "app-basics": "지역 통계는\n무엇을 확인하며 읽을까요?",
+  "field-standards": "성취기준과 웹앱 기능은\n어떻게 연결할까요?",
+  "section-build": "우리 수업에 필요한 웹앱,\n어떻게 만들어 볼까요?",
+  "build-overview": "AI와 함께 수업 자료를\n어떻게 만들어 볼까요?",
+  "build-spec": "학습 목표를\n어떤 기능으로 연결할까요?",
+  "build-toolmap": "웹앱을 만들 때\n교사와 AI는 무엇을 할까요?",
+  "build-first-prompt": "학습 활동에 맞는 첫 화면은\n어떻게 구성할까요?",
+  "build-first-result": "학생이 사용하기 편한 화면은\n어떻게 확인할까요?",
+  "build-data-prompt": "지역 탐구에 필요한 자료는\n어떻게 구성할까요?",
+  "build-data-result": "지역 자료의 출처와 기준일은\n어떻게 보여 줄까요?",
+  "build-news-structure": "지역 뉴스 검색은\n어떻게 이루어질까요?",
+  "build-news-prompt": "실제 뉴스를 찾는 기능은\n어떻게 요청할까요?",
+  "build-check-prompt": "뉴스를 비교하는 기능은\n어떻게 요청할까요?",
+  "build-board": "탐구 결과는\n어떻게 기록해 볼까요?",
+  "build-test": "수업 전에 어떤 기능을\n함께 확인해 볼까요?",
+  "build-deploy": "완성한 웹앱을\n학생들과 어떻게 나눌까요?",
+  "section-app": "우리 지역 탐정으로\n어떤 활동을 해 볼까요?",
+  "app-nature": "우리 지역의 자연환경은\n어떻게 알아볼까요?",
+  "app-public": "우리 지역의 생활시설과\n공공기관은 어떻게 살펴볼까요?",
+  "app-industry": "우리 지역의 산업과 생산물은\n어떻게 알아볼까요?",
+  "app-culture": "우리 지역의 역사와 문화는\n어떻게 살펴볼까요?",
+  "app-news": "지역 뉴스를 통해\n어떤 문제를 살펴볼까요?",
+  "app-article-check": "뉴스의 출처와 근거는\n어떻게 살펴볼까요?",
+  "app-record": "탐구 과정에서 알게 된 점은\n어떻게 남겨 볼까요?",
+  "boundaries": "학생이 직접 탐구하려면\n어떤 도움이 필요할까요?",
+  "section-class": "우리 지역 탐정,\n수업에서 어떻게 활용할까요?",
+  "sample-question": "우리 지역의 교통안전은\n어떻게 살펴볼까요?",
+  "lesson-40": "지역 문제 탐구 수업은\n어떻게 진행해 볼까요?",
+  "assessment": "학생의 탐구 과정은\n어떻게 살펴볼까요?",
+  "closing": "교과서 속 탐구를\n우리 지역과 어떻게 이을까요?",
+  "sources": "발표 자료의 출처는\n어디에서 확인할까요?"
 };
 const textbookLeads={
   "section-need": "지역 자료 수집과 정보의 신뢰성 확인",

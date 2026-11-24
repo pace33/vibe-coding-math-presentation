@@ -74,7 +74,8 @@ textarea{min-height:75px;line-height:1.65;resize:vertical}
 .news-card p,.business-card p,.board-card p{font-size:12px;color:var(--muted);margin:0;flex:1;line-height:1.65}
 /* Keep RSS preview text readable on small screens; avoid clipped descenders and flex stretching. */
 .news-card .news-publisher{flex:none}
-.news-card .news-excerpt{display:block;flex:none;overflow:visible;overflow-wrap:anywhere;line-height:1.7;margin:4px 0 8px;color:#425466}
+.news-card .news-excerpt{display:block;flex:none;overflow:visible;overflow-wrap:anywhere;line-height:1.7;margin:5px 0 9px;padding:10px 12px;border-left:3px solid #79afc8;border-radius:7px;background:#eef6fb;color:#244c63;font-size:13px}
+@media(max-width:660px){.news-card .news-excerpt{font-size:14px}}
 .news-card .news-excerpt-empty{color:#677887;font-size:12px}
 /* Make the news source and publication date explicit and readable. */
 .news-card .news-source-date{display:flex;flex-direction:column;gap:5px;margin:2px 0 7px}

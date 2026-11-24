@@ -126,12 +126,11 @@
       <summary>찾은 근거를 적어요 (선택)</summary>
       <div class="verify-extra-fields">
         <h3 id="findingHeading">기사에서 확인한 내용</h3>
-        <label id="findingLabel" for="articleFinding">기사에서 확인한 사실을 적어 보세요.</label>
-        <textarea id="articleFinding" maxlength="500" rows="2" placeholder="예: 기사에는 인구가 ___명이라고 나와요. 숫자는 ___의 통계에서 가져왔어요."></textarea>
-        <label for="officialUrl">비교한 자료 주소</label>
-        <input id="officialUrl" type="url" placeholder="https://...">
-        <label for="officialFinding">비교자료에서 확인한 내용</label>
-        <textarea id="officialFinding" maxlength="500" rows="2" placeholder="비교자료에서 확인한 숫자나 날짜"></textarea>
+        <label id="findingLabel" for="articleFinding">뉴스에서 확인한 중요한 사실</label>
+        <textarea id="articleFinding" maxlength="500" rows="2" placeholder="기사에서 확인한 중요한 사실을 적어 보세요."></textarea>
+        <input id="officialUrl" type="hidden">
+        <label for="officialFinding">두 자료에서 확인한 차이점</label>
+        <textarea id="officialFinding" maxlength="500" rows="2" placeholder="두 자료에서 서로 다른 내용을 적어 보세요. 차이점이 없다면 같다고 적어도 좋아요."></textarea>
       </div>
     </details>
     <div class="divider"></div>

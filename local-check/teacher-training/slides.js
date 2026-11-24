@@ -101,9 +101,9 @@ const SLIDES=[
  note:"뉴스를 검색하는 검색창을 만드는 것만으로는 교과서의 비판적 탐구가 구현되지 않습니다. 기사 원문과 날짜, 공식 근거 자료, 다른 기사 등을 찾을 수 있어야 하며, 학생의 생각이 기록으로 남아야 합니다."
 },
 {
- id:"section-build",section:"실제 프롬프트",type:"section",kicker:"PART 02",title:"AI에게 어떤 말을 했고,\n어떻게 고쳤을까요?",
+ id:"section-build",section:"웹앱 제작 과정",type:"section",kicker:"PART 04",title:"AI에게 어떤 말을 했고,\n어떻게 고쳤을까요?",
  lead:"실제 사용한 수정 요청을 중심으로 제작 과정을 보여줍니다.",
- body:'<div class="section-number">02 <span>PROMPT → REVISION</span></div>',
+ body:'<div class="section-number">04 <span>WEB APP → PROCESS</span></div>',
  note:"다음 슬라이드에서 초기 설계 프롬프트는 취지를 재구성해 제시하고, 이후 화면과 기능을 바꾸기 위한 일부 요청문은 과거 실제 대화에서 확인한 문장을 원문 그대로 제시합니다. 둘을 혼동하지 않습니다."
 },
 {
@@ -275,10 +275,10 @@ const SLIDES=[
  note:"자동 팩트체크 도구라고 설명하지 않습니다. 검색엔진에 뜬 순서나 공식기관 로고만으로 뉴스의 신뢰성을 확정하지 않습니다. 학생이 판단하고 교사가 근거의 질을 지도해야 합니다."
 },
 {
- id:"section-class",section:"수업 적용",type:"section",kicker:"PART 04",title:"실제 수업에서는\n어떻게 활용할까요?",
+ id:"section-class",section:"사회과 수업 적용",type:"section",kicker:"PART 02",title:"실제 수업에서는\n어떻게 활용할까요?",
  lead:"사회 교과서의 지역 탐구 활동과 국어 매체 평가를 연결합니다.",
- body:'<div class="section-number">04 <span>CLASSROOM</span></div>',
- note:"교육과정에서 시작해 제작과 기능 연결을 확인했으므로 마지막은 실제 수업 설계와 평가로 연결합니다."
+ body:'<div class="section-number">02 <span>CLASSROOM</span></div>',
+ note:"지역 뉴스·우리 고장 자료를 조사하는 활동을 실제 수업에 어떻게 적용할지, 교사의 수업 질문과 40분 학습 흐름, 탐구 과정 평가를 먼저 살펴봅니다. 이어서 웹앱의 세 가지 메뉴와 제작 과정을 소개합니다."
 },
 {
  id:"sample-question",section:"수업 적용",kicker:"초등 사회 수업 질문 · 예시 상황",title:"“우리 동네 길은\n정말 안전할까요?”",
@@ -532,13 +532,13 @@ const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
  "app-article-environment","field-compare-gap","field-textbook-region","field-gap-region","field-standards",
- "section-build","build-overview","build-spec","build-toolmap","build-first-prompt",
- "build-first-result","build-data-prompt","build-data-result","build-news-structure","build-news-prompt",
- "build-check-prompt","build-board","build-test","build-deploy","section-app",
+ "section-class","sample-question","lesson-40","assessment","section-app",
  "app-menu","app-problem-features","app-news","app-issues","app-verify",
  "app-article-check","app-basics","app-nature","app-public","app-industry",
- "app-culture","app-record","boundaries","section-class","sample-question",
- "lesson-40","assessment","closing","sources"
+ "app-culture","app-record","boundaries","section-build","build-overview",
+ "build-spec","build-toolmap","build-first-prompt","build-first-result","build-data-prompt",
+ "build-data-result","build-news-structure","build-news-prompt","build-check-prompt","build-board",
+ "build-test","build-deploy","closing","sources"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
@@ -546,9 +546,9 @@ const classroomSlides=order.map(id=>{
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"우리 지역 탐구 수업,\nAI로 만든 웹앱과 함께",lead:"지역 자료 조사와 뉴스 검증을 돕는 웹앱 제작 사례",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
  if(id==="section-need")return {...slide,section:"수업에서 살펴볼 점",title:"우리 지역 조사하기,\n무엇이 어려울까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
- if(id==="section-build")return {...slide,section:"웹앱 제작 방법",title:"AI를 활용한 웹앱 제작,\n어떻게 시작했을까요?",lead:"수업 목표 설정부터 제작 요청·점검·수정·공유까지",note:"16쪽부터는 교사 입장에서 AI로 웹앱을 만드는 과정을 소개합니다. 코드는 AI에게 맡기고, 교사는 수업 목적과 학생 활동을 설명하고 결과를 확인합니다."};
+ if(id==="section-build")return {...slide,section:"웹앱 제작 과정",title:"우리 지역 탐정 웹앱은\n어떻게 만들었을까요?",lead:"화면 구성과 뉴스 검색·근거 비교·카드 기록 기능을 만든 과정",note:"앞에서 살펴본 뉴스 찾기·우리 지역·탐정 게시판의 실제 기능을 바탕으로 제작 과정을 설명합니다. 교사가 수업에 필요한 활동을 정해 AI에게 요청하고 실제 화면에서 확인·수정한 순서입니다. 제시된 요청문 예시와 과거 대화 원문은 구분합니다."};
  if(id==="section-app")return {...slide,title:"우리 지역 탐정,\n어떤 기능을 담았을까요?",lead:"지역 정보 조사부터 기사 검색·검증·기록까지",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
- if(id==="section-class")return {...slide,section:"수업 적용",title:"우리 지역 탐정,\n수업에서 어떻게 활용할까요?",lead:"지역 문제 조사 활동과 뉴스 신뢰성 평가의 교과 연계"};
+ if(id==="section-class")return {...slide,section:"사회과 수업 적용",title:"우리 지역 탐구 활동을\n수업에 어떻게 연결할까요?",lead:"교과서 활동을 바탕으로 수업 질문과 탐구 흐름 살펴보기"};
  return slide;
 });
 if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");
@@ -568,7 +568,7 @@ const textbookTitles={
   "app-menu": "우리 지역 탐정의 전체 화면을\n함께 살펴볼까요?",
   "app-basics": "② 우리 지역\n어떤 기본 정보를 살펴볼까요?",
   "field-standards": "그래서 어떤 웹앱을\n만들었을까요?",
-  "section-build": "우리 수업에 필요한 웹앱,\n어떻게 만들어 볼까요?",
+  "section-build": "이러한 웹앱은\n어떻게 만들었을까요?",
   "build-overview": "AI와 함께 수업 자료를\n어떻게 만들어 볼까요?",
   "build-spec": "학습 목표를\n어떤 기능으로 연결할까요?",
   "build-toolmap": "웹앱을 만들 때\n교사와 AI는 무엇을 할까요?",
@@ -591,7 +591,7 @@ const textbookTitles={
   "app-article-check": "① 뉴스 찾기\n서로 다른 자료를 어떻게 비교할까요?",
   "app-record": "③ 탐정 게시판\n탐구 결과는 어떻게 확인할까요?",
   "boundaries": "학생이 직접 탐구하려면\n어떤 도움이 필요할까요?",
-  "section-class": "우리 지역 탐정,\n수업에서 어떻게 활용할까요?",
+  "section-class": "우리 지역 탐구 수업은\n어떻게 구성할까요?",
   "sample-question": "우리 지역의 교통안전은\n어떻게 살펴볼까요?",
   "lesson-40": "지역 문제 탐구 수업은\n어떻게 진행해 볼까요?",
   "assessment": "학생의 탐구 과정은\n어떻게 살펴볼까요?",
@@ -600,9 +600,9 @@ const textbookTitles={
 };
 const textbookLeads={
   "section-need": "지역 자료 수집과 정보의 신뢰성 확인",
-  "section-build": "AI를 활용한 교수·학습 자료 제작 과정",
+  "section-build": "우리 지역 탐정 웹앱의 실제 제작·확인·수정 과정",
   "section-app": "지역 정보 조사, 뉴스의 신뢰성 평가 및 탐구 결과 기록",
-  "section-class": "사회과와 국어과를 연계한 탐구 활동"
+  "section-class": "지역 문제 조사와 자료 비교를 활용한 수업 흐름"
 };
 window.TRAINING_SLIDES=classroomSlides.map(slide=>({...slide,title:textbookTitles[slide.id],...(textbookLeads[slide.id]?{lead:textbookLeads[slide.id]}:{})}));
 

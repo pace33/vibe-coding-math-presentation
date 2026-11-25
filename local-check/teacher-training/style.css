@@ -1030,3 +1030,22 @@ a{color:inherit}
 .access-qr-url{flex:none;max-width:100%;text-align:center;font-weight:750;font-size:clamp(11px,1.45cqw,22px);line-height:1.35;color:#276b4c;overflow-wrap:anywhere}
 button.brand{background:transparent;border:0;padding:4px 0;cursor:pointer;text-align:left;min-height:36px;font-family:inherit}
 button.brand:focus-visible{outline:2px solid #34785b;outline-offset:4px;border-radius:5px}
+
+/* Keep the regional investigation lead and the two cards in separate layout rows. */
+.slide:has(.regional-task) .slide-kicker,
+.slide:has(.regional-task) .slide-title,
+.slide:has(.regional-task) .slide-lead,
+.slide:has(.regional-task) .slide-footer{flex-shrink:0}
+.slide:has(.regional-task) .slide-lead{margin-bottom:clamp(8px,1.1cqw,16px)}
+.slide:has(.regional-task) .slide-body{justify-content:flex-start;padding:0 0 .7%;gap:clamp(6px,.8cqw,11px);min-height:0;overflow-y:auto}
+.slide:has(.regional-task) .regional-task{flex:1 1 auto;min-height:0;align-items:stretch}
+.slide:has(.regional-task) .regional-task>div{min-height:0;padding:clamp(12px,1.7cqw,24px);gap:clamp(7px,.9cqw,13px)}
+.slide:has(.regional-task) .regional-task strong{font-size:clamp(18px,2.2cqw,32px);line-height:1.35;word-break:keep-all}
+.slide:has(.regional-task) .regional-task p{font-size:clamp(12px,1.35cqw,19px);line-height:1.4;word-break:keep-all}
+.slide:has(.regional-task) .slide-body>.field-source,
+.slide:has(.regional-task) .slide-body>.fineprint{flex-shrink:0;margin:0}
+@media screen and (max-width:520px) and (orientation:portrait){
+ .slide:has(.regional-task) .regional-task{flex:none}
+ .slide:has(.regional-task) .regional-task strong{font-size:19px}
+ .slide:has(.regional-task) .regional-task p{font-size:12px}
+}

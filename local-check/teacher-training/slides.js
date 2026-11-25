@@ -493,9 +493,9 @@ Object.assign(classes,{
   title:"뉴스 배달부가\n필요했던 이유는?",
   lead:"우리 지역 탐정에서 ‘청주시 동물원’을 검색했다고 생각해 봅시다.",
   body:techFlow(
-   techNode("🖥️","우리 지역 탐정 웹앱","청주시 동물원 뉴스 찾아 줘!","green"),
+   techNode("🖥️","GitHub Pages","우리 지역 탐정 웹앱<br>청주시 동물원 뉴스 찾아 줘!","green"),
    techArrow("검색 요청","검색 결과"),
-   techNode("📦","RSS 중계 API","알겠어! 관련 뉴스 목록을 받아 올게.","orange"),
+   techNode("📦","Cloudflare Worker","실제 RSS 중계 서버<br>알겠어! 관련 뉴스 목록을 받아 올게.","orange"),
    techArrow("뉴스 요청","RSS 목록 전달"),
    '<div class="tech-pair">'+techNode("📰","Google 뉴스","RSS 뉴스 목록")+techNode("🔎","Bing 뉴스","RSS 뉴스 목록")+'</div>',
    techTerm("RSS = 뉴스 목록","기사 제목·언론사·날짜·원문 주소가 정리된 데이터.")+
@@ -510,8 +510,8 @@ Object.assign(classes,{
   title:"왜 웹앱에서 직접\n뉴스를 가져오지 않을까요?",
   lead:"검색 버튼은 만들었는데 뉴스가 나오지 않는다면?",
   body:'<div class="tech-flow"><div class="tech-stack">'+
-   '<div class="tech-route"><span class="tech-route-label">직접 요청</span><div class="tech-route-row">'+techNode("🖥️","웹앱","뉴스 찾아 줘!")+'<span class="tech-route-arrow blocked">→<br>✕</span>'+techNode("📰","외부 뉴스 사이트","직접 읽기 제한 가능")+'</div><p>브라우저의 교차 출처 보안 정책(CORS)에 막힐 수 있어요.</p></div>'+
-   '<div class="tech-route"><span class="tech-route-label">중계 서버 이용</span><div class="tech-route-row">'+techNode("🖥️","웹앱","검색 요청")+'<span class="tech-route-arrow">↔</span>'+techNode("📦","검색 서버","대신 받아 전달","orange")+'<span class="tech-route-arrow">↔</span>'+techNode("📰","뉴스 RSS","기사 목록")+'</div><p>서버가 대신 받아 오고 웹앱의 요청을 허용하도록 설정합니다.</p></div></div><div class="tech-aside">'+
+   '<div class="tech-route"><span class="tech-route-label">직접 요청</span><div class="tech-route-row">'+techNode("🖥️","GitHub Pages","웹앱에서 뉴스 요청")+'<span class="tech-route-arrow blocked">→<br>✕</span>'+techNode("📰","외부 뉴스 사이트","직접 읽기 제한 가능")+'</div><p>브라우저의 교차 출처 보안 정책(CORS)에 막힐 수 있어요.</p></div>'+
+   '<div class="tech-route"><span class="tech-route-label">중계 서버 이용</span><div class="tech-route-row">'+techNode("🖥️","GitHub Pages","우리 지역 탐정 웹앱")+'<span class="tech-route-arrow">↔</span>'+techNode("📦","Cloudflare Worker","실제 RSS 중계 서버","orange")+'<span class="tech-route-arrow">↔</span>'+techNode("📰","뉴스 RSS","기사 목록")+'</div><p>서버가 대신 받아 오고 웹앱의 요청을 허용하도록 설정합니다.</p></div></div><div class="tech-aside">'+
    techTerm("CORS = 출입 규칙","다른 사이트의 데이터를 브라우저에서 읽을 수 있는지 정하는 보안 규칙.")+
    techTerm("XML = 뉴스 목록의 양식","제목·날짜·링크 등이 일정한 구조로 담긴 데이터.")+
    techSummary("AI에게: 뉴스 RSS를 대신 받아 오는 서버를 만들고 웹앱과 연결해 줘!")+

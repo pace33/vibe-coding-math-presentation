@@ -731,12 +731,14 @@ async function askAIEvidence(){
    initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:first.govFact,comparisonUrl:first.govUrl}
   },{signal:controller.signal,onProgress:job=>{
    if(current!==aiSequence)return;
-   $("aiReviewMessage").textContent=job.status==="queued"
+   $("aiReviewMessage").textContent=job.status==="reconnecting"
+    ? "AI 서버 연결을 다시 시도하고 있어요. ("+job.attempt+"/2)"
+    : job.status==="queued"
     ? "순서대로 처리 중이에요. 내 순번: "+job.queuePosition+"번째"
     : job.phase==="web-search"?"서버가 공개 자료를 검색하고 원문을 확인하고 있어요.":"Gemma4가 찾은 자료를 비교하고 있어요.";
   }});
   if(current!==aiSequence)return;
-  if(!["match","conflict","insufficient"].includes(raw.status))throw Error("AI 검토 결과를 해석할 수 없어요.");
+  if(!["match","conflict","insufficient"].includes(raw.status))throw Error("AI 생성에 실패했습니다. 오류 코드: GEMMA_INVALID_RESPONSE");
   const sources=(Array.isArray(raw.sources)?raw.sources:[]).slice(0,3).map(x=>({title:safe(x.title,110)+(x.fetched?" · 본문 발췌 확인":" · 원문 미확인"),url:url(x.url),date:safe(x.published||x.date||x.retrievedAt,30),fetched:x.fetched===true})).filter(x=>x.url);
   // AI 의견에 출처가 없다면 불일치/일치 판정을 화면에 보여주지 않습니다.
   const status=sources.some(x=>x.fetched)&&raw.webSearched===true?raw.status:"insufficient";

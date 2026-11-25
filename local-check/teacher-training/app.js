@@ -55,85 +55,99 @@ function mountStudentPreview(frame){
  const badge=document.createElement("span");
  badge.className="feature-live-label";
  badge.textContent="실제 웹앱 화면 · 실시간";
- const fail=()=>{if(!host.isConnected)return;host.classList.remove("feature-live-ready");live.remove();badge.remove();};
- const fit=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
+ let completed=false,started=false,timeout=null;
+ const active=()=>host.isConnected&&!completed;
+ const fail=()=>{
+  if(!active())return;
+  completed=true;clearTimeout(timeout);
+  host.classList.remove("feature-live-ready");
+  host.classList.add("feature-live-error");
+  live.remove();badge.remove();
+ };
+ const fit=()=>{
+  const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
   const scale=Math.min(w/1100,h/720);
   live.style.transform="translate(-50%,-50%) scale("+scale+")";
  };
+ function reveal(doc,stage){
+  if(!active())return;
+  const view=doc.defaultView;
+  const position=()=>{
+   if(!active())return;
+   if(stage){
+    const target=doc.querySelector(stage.anchor);
+    if(target&&view)view.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+view.scrollY-18),behavior:"instant"});
+   }
+   fit();
+  };
+  // Set the final viewport before making the iframe visible.
+  position();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   if(!active())return;
+   position();completed=true;clearTimeout(timeout);
+   host.classList.add("feature-live-ready");
+  }));
+ }
+ function waitForEvidence(doc,stage,startedAt){
+  if(!active())return;
+  const retry=doc.getElementById("retryEvidence");
+  if(retry?.disabled&&Date.now()-startedAt<12000){
+   setTimeout(()=>waitForEvidence(doc,stage,startedAt),150);
+   return;
+  }
+  reveal(doc,stage);
+ }
  live.addEventListener("load",()=>{
+  if(started||!active())return;
   let attempts=0;
   const activate=()=>{
-   if(!host.isConnected)return;
+   if(!active())return;
    try{
     const doc=live.contentDocument;
     const home=doc?.getElementById("home");
-    if(!home){if(++attempts<18)setTimeout(activate,300);else fail();return;}
-    // Highlight the three menus on the presentation overview only.
-    // This style lives in the embedded document, not the student site.
+    if(!home){if(++attempts<30)setTimeout(activate,250);else fail();return;}
+    const isVerify=mode==="verify"||mode.startsWith("verify-")||mode==="ai";
+    const news=isVerify?doc.querySelector('#newsList [data-news], #liveNewsList [data-live-news]'):null;
+    if(isVerify&&!news){if(++attempts<30)setTimeout(activate,250);else fail();return;}
+    started=true;
+    const style=doc.createElement("style");
+    style.textContent="html,body{scroll-behavior:auto!important}";
     if(host.querySelector('img[src$="00-overview.svg"]')){
-     if(!doc.querySelector("#training-menu-highlight")){
-      const style=doc.createElement("style");
-      style.id="training-menu-highlight";
-      style.textContent='[data-menu="news"]{outline:6px solid #21b65a!important;outline-offset:1px!important}[data-menu="explore"]{outline:6px solid #2583dc!important;outline-offset:1px!important}[data-menu="board"]{outline:6px solid #f28b16!important;outline-offset:1px!important}';
-      doc.head.appendChild(style);
-     }
+     style.textContent+='[data-menu="news"]{outline:6px solid #21b65a!important;outline-offset:1px!important}[data-menu="explore"]{outline:6px solid #2583dc!important;outline-offset:1px!important}[data-menu="board"]{outline:6px solid #f28b16!important;outline-offset:1px!important}';
     }
+    doc.head.appendChild(style);
     if(mode==="overview"||mode==="nature"){
      doc.querySelector('[data-menu="explore"]')?.click();
      doc.querySelector('[data-explore="'+mode+'"]')?.click();
     }else if(mode==="board"){
      doc.querySelector('[data-menu="board"]')?.click();
-    }else if(mode==="verify"||mode.startsWith("verify-")||mode==="ai"){
-     const news=doc.querySelector('#newsList [data-news], #liveNewsList [data-live-news]');
-     if(!news){if(++attempts<24)setTimeout(activate,300);else fail();return;}
+    }else if(isVerify){
      news.click();
-     const stageConfig={
+     const stage={
       "verify":{anchor:".selected-story",highlights:"#articleLink, .evidence-heading"},
       "verify-evidence":{anchor:".evidence-heading",highlights:"#evidenceCandidates [data-choose-candidate], #singleAi:not([hidden])"},
       "verify-writing":{anchor:"#detailEvidence",highlights:"#articleFinding, #officialFinding"},
       "verify-judgement":{anchor:"#manualCompare",highlights:".verdict-choices, #reason"},
       "ai":{anchor:"#aiReviewStage",highlights:"#askAi, #finish"}
      }[mode];
-     const emphasis=doc.createElement("style");
-     emphasis.textContent=stageConfig.highlights.split(",").map(x=>x.trim()+"{outline:5px solid #f28b16!important;outline-offset:2px!important;border-radius:8px!important}").join("\n");
-     doc.head.appendChild(emphasis);
-     function focusStage(){
-      if(!host.isConnected)return;
-      const target=doc.querySelector(stageConfig.anchor);
-      if(!target)return;
-      const view=doc.defaultView;
-      if(!view)return;
-      view.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+view.scrollY-18),behavior:"instant"});
-     }
-     // Reposition after asynchronous evidence cards arrive; no AI request
-     // or invented result is submitted by the presentation.
-     setTimeout(focusStage,400);
-     setTimeout(focusStage,1200);
-     setTimeout(focusStage,3000);
-     setTimeout(focusStage,6000);
-     setTimeout(focusStage,11000);
-     if(mode==="verify-evidence"){
-      const candidateRoot=doc.getElementById("evidenceCandidates");
-      if(candidateRoot&&typeof MutationObserver!=="undefined"){
-       const observer=new MutationObserver(()=>{
-        if(host.isConnected)focusStage();else observer.disconnect();
-       });
-       observer.observe(candidateRoot,{childList:true,subtree:true});
-       setTimeout(()=>observer.disconnect(),14000);
-      }
-     }
+     style.textContent+="\n"+stage.highlights.split(",").map(x=>x.trim()+"{outline:5px solid #f28b16!important;outline-offset:2px!important;border-radius:8px!important}").join("\n");
+     if(mode==="verify"){reveal(doc,stage);return;}
+     // Evidence loading changes the vertical position of later fields.
+     // Wait while hidden so the visible viewport never jumps repeatedly.
+     waitForEvidence(doc,stage,Date.now());return;
     }
-    if(!host.isConnected)return;
-    host.classList.add("feature-live-ready");
-    fit();
+    reveal(doc,null);
    }catch(error){fail();}
   };
   activate();
  });
+ live.addEventListener("error",fail);
+ // Set the URL before inserting the iframe to avoid an initial blank navigation.
+ live.src=new URL("../student/",location.href).href;
+ timeout=setTimeout(fail,22000);
  host.append(live,badge);
  if(typeof ResizeObserver!=="undefined"){previewResize=new ResizeObserver(fit);previewResize.observe(host);}
  fit();
- live.src=new URL("../student/",location.href).href;
 }
 
 function render(){

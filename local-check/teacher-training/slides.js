@@ -430,7 +430,7 @@ Object.assign(classes,{
   id:"build-overview",section:"웹앱 제작 과정",type:"image",kicker:"제작 과정 · 우리 지역 탐정 구성도",
   title:"우리 지역 탐정은\n어떻게 연결되어 있을까요?",
   lead:"뉴스 찾기 · 우리 지역 · 탐정 게시판",
-  image:"assets/07-webapp-architecture.svg?v=architecture20261125",
+  image:"assets/07-webapp-architecture.svg?v=architecturefit20261125",
   note:"웹앱을 만들기 전에 전체 구성부터 확인합니다. 학생 화면은 3개 메뉴로 구성되며, 뉴스 찾기는 별도의 RSS 검색 서버를 통해 실제 기사를 받고, 지역 정보는 시·군별 데이터 카드에서 제시합니다. 학생이 출처와 근거를 확인해 비교 자료를 선택하고 판단과 이유를 작성합니다. 필요하면 자체 AI 서버의 웹 검색 및 Gemma 4 근거 검토를 거쳐 최종 판단을 기록합니다. AI 없이도 탐정 카드를 완성할 수 있으며 카드는 브라우저 LocalStorage에 저장하고 링크로 공유합니다. 실제 학생 앱 소스코드에서 확인한 기능으로 만든 설명용 구성도입니다."
  },
  "build-spec":{

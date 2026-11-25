@@ -388,7 +388,7 @@ const classes={
   title:"수업에 필요한 기능을\n어떻게 담았을까요?",
   lead:"검색 결과를 학생이 읽고 비교할 수 있도록 세 가지 메뉴로 구성했습니다.",
   body:'<div class="field-matrix">'+
-   '<div><span>① 뉴스 찾기</span><strong>시·군·검색어로 기사 찾기</strong><b>언론사·날짜·원문 확인 → 다른 기사와 비교</b></div>'+
+   '<div><span>① 뉴스 찾기</span><strong>시·군으로 검색 범위를 정하고<br>검색어로 기사 찾기</strong><b>언론사·날짜·원문 확인 → 다른 기사와 비교</b></div>'+
    '<div><span>② 우리 지역</span><strong>지역 정보 6개 분야 살펴보기</strong><b>기본 정보·자연환경·생활시설·산업·문화 등</b></div>'+
    '<div><span>③ 탐정 게시판</span><strong>내 판단을 탐정 카드로 기록</strong><b>근거와 이유 저장 · 자세히 보기 · 링크 공유</b></div>'+
    '</div>'+

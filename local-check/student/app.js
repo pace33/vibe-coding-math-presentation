@@ -879,9 +879,23 @@ function download(){
 }
 function init(){
  $("region").addEventListener("change",onRegionChange);
- $("keyword").addEventListener("input",onKeywordInput);
- $("keyword").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchNewsInside({scroll:true});}});
- $("newsSearch").addEventListener("click",()=>searchNewsInside({scroll:true}));
+ const keywordField=$("keyword");
+ let composingKeyword=false;
+ keywordField.addEventListener("compositionstart",()=>{
+  composingKeyword=true;
+  if(keywordTimer!==null){clearTimeout(keywordTimer);keywordTimer=null;}
+ });
+ keywordField.addEventListener("compositionend",()=>{composingKeyword=false;onKeywordInput();});
+ keywordField.addEventListener("input",e=>{if(!composingKeyword&&!e.isComposing)onKeywordInput();});
+ function submitKeyword(){
+  if(composingKeyword)return;
+  if(document.activeElement===keywordField)keywordField.blur();
+  searchNewsInside({scroll:true});
+ }
+ keywordField.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.isComposing&&!composingKeyword&&e.keyCode!==229){e.preventDefault();submitKeyword();}
+ });
+ $("newsSearch").addEventListener("click",submitKeyword);
  $("showMoreNews").addEventListener("click",()=>searchNewsInside({scroll:true}));
  $("retryNews").addEventListener("click",()=>searchNewsInside({scroll:true}));
  $("liveNewsList").addEventListener("click",e=>{const b=e.target.closest("[data-live-news]");if(b)fromLiveNews(Number(b.dataset.liveNews),state.liveNews.length===1);});

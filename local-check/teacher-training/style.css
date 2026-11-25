@@ -950,3 +950,10 @@ a{color:inherit}
  :fullscreen .deck-wrap>.slide{width:min(100vw,calc(100dvh * 16/9));max-width:none;aspect-ratio:16/9;border:0;border-radius:0;box-shadow:none}
  :fullscreen{background:var(--slide)}
 }
+
+/* Final thank-you slide */
+.slide[data-type="thanks"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.slide[data-type="thanks"] .slide-kicker{visibility:hidden}
+.slide[data-type="thanks"] .slide-title{flex:1;display:grid;place-items:center;text-align:center;max-width:none;margin:0;color:#fff;font-size:clamp(46px,8cqw,120px);line-height:1.2}
+.slide[data-type="thanks"] .slide-body{display:none}
+.slide[data-type="thanks"] .slide-footer{border-color:#ffffff33;color:#a4bdad}

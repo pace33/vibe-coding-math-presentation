@@ -5,7 +5,7 @@
  */
 (() => {
 "use strict";
-const KEY="localcheck-student-board-v1", LIMIT=40, MAX_LINK=16000;
+const KEY="localcheck-student-board-v1", MAX_LINK=16000;
 const $=id=>document.getElementById(id);
 const allowedVerdicts=new Set(["같아요","달라요","아직 모르겠어요"]);
 const trim=(x,n)=>String(x??"").trim().slice(0,n);
@@ -35,24 +35,49 @@ function personalDataPresent(d){
  return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/.test(content)||
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/.test(content);
 }
-function readCards(){
- try{
-  const parsed=JSON.parse(localStorage.getItem(KEY)||"[]");
-  if(!Array.isArray(parsed))return [];
-  return parsed.slice(0,LIMIT).map(sanitized).filter(Boolean);
- }catch{return [];}
+const BACKUP_KEY=KEY+"-backup";
+function rawCards(){
+ const raw=localStorage.getItem(KEY);
+ if(raw===null)return {raw,rows:[]};
+ const rows=JSON.parse(raw);
+ if(!Array.isArray(rows))throw Error("invalid board storage");
+ return {raw,rows};
 }
-function writeCards(rows){
- try{localStorage.setItem(KEY,JSON.stringify(rows.slice(0,LIMIT)));return true;}
- catch{alert("브라우저 저장 공간에 기록을 보관할 수 없어요. 탐정 카드 파일로 저장해 주세요.");return false;}
+function readableCard(item){
+ if(!item||typeof item!=="object"||!item.title||!safeUrl(item.url))return null;
+ // Older records without optional fields remain readable. Never invent a judgment.
+ return sanitized({...item,newsFact:item.newsFact||"기사에서 확인한 내용 미기록",reason:item.reason||item.finalReason||"판단 이유 미기록",verdict:allowedVerdicts.has(item.verdict)?item.verdict:allowedVerdicts.has(item.finalVerdict)?item.finalVerdict:"아직 모르겠어요"});
+}
+function readCards(){
+ try{return rawCards().rows.map(readableCard).filter(Boolean);}
+ catch{return [];}
+}
+function writeCards(rows,previous){
+ try{
+  const snapshot=previous||rawCards();
+  if(localStorage.getItem(KEY)!==snapshot.raw)throw Error("board changed");
+  // Preserve a previous snapshot before replacing the main record. Do not overwrite an intact backup with an empty board.
+  if(snapshot.raw&&snapshot.rows.length){
+   localStorage.setItem(BACKUP_KEY,snapshot.raw);
+  }
+  localStorage.setItem(KEY,JSON.stringify(rows));
+  return true;
+ }catch{alert("기존 탐정 카드 보호를 위해 저장을 중단했어요. 브라우저 저장 상태를 확인해 주세요.");return false;}
 }
 function save(record){
  const normalized=sanitized(record);
  if(!normalized)return null;
- const prev=readCards();
- const cards=[normalized,...prev.filter(x=>x.id!==normalized.id)].slice(0,LIMIT);
- writeCards(cards);
- return normalized;
+ try{
+  const prev=rawCards();
+  const cards=[normalized,...prev.rows.filter(x=>x?.id!==normalized.id)];
+  return writeCards(cards,prev)?normalized:null;
+ }catch{alert("기존 탐정 카드 목록을 읽지 못해 덮어쓰지 않았어요.");return null;}
+}
+function removeCard(id){
+ try{
+  const prev=rawCards();
+  return writeCards(prev.rows.filter(x=>x?.id!==id),prev);
+ }catch{alert("저장된 카드 목록을 읽지 못했어요.");return false;}
 }
 function tag(name,cls,content){
  const x=document.createElement(name);if(cls)x.className=cls;
@@ -378,9 +403,10 @@ function init({show,getReport}={}){
   if(action==="view")showCard(d);
   if(action==="share")copyShare(d);
   if(action==="remove"&&confirm("이 기기에 저장한 탐정 카드를 삭제할까요?")){
-   writeCards(readCards().filter(x=>x.id!==d.id));renderBoard();
+   if(removeCard(d.id))renderBoard();
   }
  });
+ window.addEventListener("storage",e=>{if(e.key===KEY&&!$("board").hidden)renderBoard();});
  window.addEventListener("hashchange",importHash);
  renderBoard();importHash();
 }

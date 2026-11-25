@@ -514,10 +514,10 @@ Object.assign(classes,{
    techNode("📦","Cloudflare Worker","실제 RSS 중계 서버<br>알겠어! 관련 뉴스 목록을 받아 올게.","orange"),
    techArrow("뉴스 요청","RSS 목록 전달"),
    '<div class="tech-pair">'+techNode("📰","Google 뉴스","RSS 뉴스 목록")+techNode("🔎","Bing 뉴스","RSS 뉴스 목록")+'</div>',
-   techTerm("RSS = 뉴스 목록","기사 제목·언론사·날짜·원문 주소가 정리된 데이터.")+
-   techTerm("중계 서버 = 뉴스 배달부","웹앱 대신 뉴스 목록을 받아 전달하는 역할.")+
-   techTerm("API = 주문 창구","웹앱이 서버에 요청하고 결과를 받는 약속.")+
-   techSummary("AI가 기사를 만드는 것이 아니라 실제 뉴스 목록을 가져옵니다.")
+   techTerm("RSS = 뉴스 정보를 전달하는 방식","뉴스 사이트가 기사 제목·날짜·주소 등을 일정한 형식으로 제공하는 방법입니다.")+
+   techTerm("중계 서버 = 뉴스 배달부","웹앱 대신 뉴스 사이트에 요청하여 뉴스 목록을 받아 옵니다.")+
+   techTerm("API = 요청하고 받는 통로","웹앱이 지역명과 검색어를 보내면 서버가 뉴스 목록을 돌려줍니다.")+
+   techSummary("검색어를 입력하면 중계 서버가 실제 뉴스 목록을 가져와 웹앱에 전달합니다.")
   ),
   note:"근거: local-check/server/news.mjs 및 student/live-news.js. Google News RSS 검색은 최근 30일 조건을 사용하며 Bing 검색 범위는 제공처에 따라 다릅니다. RSS는 Really Simple Syndication으로, XML 형식의 뉴스 목록을 전달합니다. 서버는 두 제공처 중 기사 목록이 담긴 정상 응답을 받아 전달하도록 구현되어 있습니다. 기사 본문 전체나 사실 확인을 보장하지 않습니다. 운영 서버 응답은 미확인입니다."
  },

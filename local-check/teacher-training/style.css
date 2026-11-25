@@ -994,3 +994,14 @@ a{color:inherit}
  .gpt-preview-input{font-size:1.65cqw!important;overflow:visible!important}
  .gpt-preview-composer{max-height:none!important}
 }
+
+/* Large, consistent prompt text for classroom projection. */
+@media screen and (min-width:521px){
+ .gpt-preview-input{font-size:clamp(16px,2.25cqw,34px);font-weight:600;line-height:1.42}
+ .gpt-preview-input p{margin-bottom:.55em}
+ .gpt-preview-input p:last-child{margin-bottom:0}
+ .gpt-preview-composer{width:96%;padding:clamp(10px,1.15cqw,17px) clamp(13px,1.6cqw,23px) 7px}
+}
+@media print{
+ .gpt-preview-input{font-size:2.1cqw!important;line-height:1.4;font-weight:600}
+}

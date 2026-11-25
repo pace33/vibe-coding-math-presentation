@@ -603,6 +603,7 @@ function featureBody(feature){
 }
 
 classes["thanks"]={id:"thanks",section:"마무리",type:"thanks",kicker:"",title:"감사합니다",body:"",note:"발표 마무리"};
+classes["student-access-qr"]={id:"student-access-qr",section:"웹앱 제작 과정",type:"qr",kicker:"우리 지역 탐정 · 직접 체험하기",title:"우리 지역 탐정 웹앱 바로가기",lead:"휴대폰 카메라로 QR코드를 찍어 접속하세요.",body:'<div class="access-qr"><a class="access-qr-image" href="'+SITE+'" target="_blank" rel="noopener noreferrer" aria-label="학생용 우리 지역 탐정 열기"><img src="assets/student-access-qr.svg" alt="학생용 우리 지역 탐정 접속 QR코드"></a><a class="access-qr-url" href="'+SITE+'" target="_blank" rel="noopener noreferrer">'+SITE+'</a></div>',note:"QR코드 또는 주소를 통해 학생용 웹앱을 직접 체험합니다."};
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
@@ -610,7 +611,7 @@ const order=[
  "section-app",
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
  "app-basics","app-nature","app-record","section-build","build-overview",
- "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
+ "build-spec","build-data-prompt","student-access-qr","build-news-prompt","build-check-prompt","build-board",
  "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-choice","build-tech-storage","thanks"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
@@ -647,6 +648,7 @@ const textbookTitles={
   "build-overview": "웹앱 전체 구성은\n어떻게 연결될까요?",
   "build-spec": "AI에게 처음 무슨 말을\n걸었을까요?",
   "build-data-prompt": "우리 지역 정보가\n틀리면 어떡하니?",
+  "student-access-qr": "우리 지역 탐정 웹앱 바로가기",
   "build-news-prompt": "뉴스 검색 버튼은 있는데,\n왜 뉴스가 안 나오니?",
   "build-check-prompt": "기사 하나 보고\n맞다고 하면 안 되잖아!",
   "build-board": "열심히 조사한 내용,\n그냥 사라지면 안 되지!",

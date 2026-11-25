@@ -603,15 +603,15 @@ function featureBody(feature){
 }
 
 classes["thanks"]={id:"thanks",section:"마무리",type:"thanks",kicker:"",title:"감사합니다",body:"",note:"발표 마무리"};
-classes["student-access-qr"]={id:"student-access-qr",section:"웹앱 제작 과정",type:"qr",kicker:"우리 지역 탐정 · 직접 체험하기",title:"우리 지역 탐정 웹앱 바로가기",lead:"휴대폰 카메라로 QR코드를 찍어 접속하세요.",body:'<div class="access-qr"><a class="access-qr-image" href="'+SITE+'" target="_blank" rel="noopener noreferrer" aria-label="학생용 우리 지역 탐정 열기"><img src="assets/student-access-qr.svg" alt="학생용 우리 지역 탐정 접속 QR코드"></a><a class="access-qr-url" href="'+SITE+'" target="_blank" rel="noopener noreferrer">'+SITE+'</a></div>',note:"QR코드 또는 주소를 통해 학생용 웹앱을 직접 체험합니다."};
+classes["student-access-qr"]={id:"student-access-qr",section:"완성된 수업 도구",type:"qr",kicker:"우리 지역 탐정 · 직접 체험하기",title:"우리 지역 탐정 웹앱 바로가기",lead:"휴대폰 카메라로 QR코드를 찍어 접속하세요.",body:'<div class="access-qr"><a class="access-qr-image" href="'+SITE+'" target="_blank" rel="noopener noreferrer" aria-label="학생용 우리 지역 탐정 열기"><img src="assets/student-access-qr.svg" alt="학생용 우리 지역 탐정 접속 QR코드"></a><a class="access-qr-url" href="'+SITE+'" target="_blank" rel="noopener noreferrer">'+SITE+'</a></div>',note:"QR코드 또는 주소를 통해 학생용 웹앱을 직접 체험합니다."};
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
  "app-article-environment","field-compare-gap","field-textbook-region","field-gap-region","field-standards",
  "section-app",
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
- "app-basics","app-nature","app-record","section-build","build-overview",
- "build-spec","build-data-prompt","student-access-qr","build-news-prompt","build-check-prompt","build-board",
+ "app-basics","app-nature","app-record","student-access-qr","section-build","build-overview",
+ "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
  "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-choice","build-tech-storage","thanks"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");

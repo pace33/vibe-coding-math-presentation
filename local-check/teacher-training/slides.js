@@ -481,6 +481,51 @@ Object.assign(classes,{
  }
 });
 
+/* Technical follow-up: current client and server source paths, not a deployment claim. */
+Object.assign(classes,{
+ "build-tech-rss":{
+  id:"build-tech-rss",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ① · RSS (Really Simple Syndication)",
+  title:"RSS는 어떻게 실제 뉴스를\n가져올까요?",
+  lead:"RSS는 뉴스 제목·발행일·링크 등의 정보를 일정한 형식(XML)으로 제공하는 방식입니다.",
+  body:systemFlow([
+   ["01 · 뉴스 제공처","Google · Bing","지역명과 검색어에 맞는 뉴스 목록을 RSS로 제공"],
+   ["02 · 검색 서버","RSS 중계 API","두 제공처에 요청하고 기사 목록이 담긴 정상 응답을 전달"],
+   ["03 · 학생용 웹앱","뉴스 카드","XML을 읽어 제목·언론사·날짜·내용 일부·원문 링크 표시"]
+  ])+'<div class="correction-lesson"><span>핵심</span><strong>AI가 기사를 만들어 내는 것이 아니라 실제 뉴스 검색 결과를 가져옵니다.</strong></div>',
+  note:"근거: local-check/server/news.mjs 및 student/live-news.js. Google News RSS 검색은 최근 30일 조건을 사용하며 Bing 검색 범위는 제공처에 따라 다릅니다. 내용 일부는 RSS 설명 필드에서 추출하며 기사 본문 전체나 사실 확인을 보장하지 않습니다. 운영 서버의 현재 응답은 이 슬라이드 제작 시점에 테스트하지 않았습니다."
+ },
+ "build-tech-news-api":{
+  id:"build-tech-news-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ② · RSS 검색 서버와 API",
+  title:"뉴스 검색 서버는\n어떻게 연결할까요?",
+  lead:"API는 웹앱과 서버가 정해진 형식으로 데이터를 주고받는 통로입니다.",
+  body:makePrompt([
+   "GitHub Pages에 있는 웹앱에서 실제 뉴스가 검색되도록 RSS 검색용 서버를 만들어 줘. Google·Bing 뉴스 RSS를 검색하고 브라우저 요청이 허용되도록 CORS를 설정해 줘.",
+   "지역·검색어를 /api/news로 보내고, 반환된 XML을 기사 카드로 변환해 줘. 중복을 제거하고 최신순으로 정렬해. 검색 실패와 결과 0건도 구분해 줘."
+  ],"현재 코드: 검색 서버 → RSS(XML) → 브라우저 파싱. 서버 배포와 실제 검색 테스트가 필요합니다."),
+  note:"근거: local-check/server/news.mjs, local-check/student/live-news.js. 서버는 검색 조건 검증, RSS 응답 검사, 8초 요청 제한, 성공 응답 캐시를 구현합니다. 브라우저는 RSS를 DOMParser로 파싱하고 URL을 검증하여 최대 10개를 최신순으로 표시합니다. CORS는 브라우저의 교차 출처 요청을 허용하는 정책이지 인증이 아닙니다. 현재 운영 주소의 실제 가용성은 미확인입니다. 이 프롬프트는 현행 기능을 바탕으로 재구성한 예시입니다."
+ },
+ "build-tech-ai":{
+  id:"build-tech-ai",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ③ · Gemma4와 웹 검색",
+  title:"AI 근거 검토는\n어떤 구조로 작동할까요?",
+  lead:"학생의 첫 판단을 기록한 뒤 별도의 AI 서버에 검토를 요청합니다.",
+  body:systemFlow([
+   ["01 · 학생용 웹앱","검토 요청","기사 URL, 첫 판단, 이유, 비교 근거를 JSON으로 전달"],
+   ["02 · AI 검토 서버","웹 검색 + Gemma4","공개 자료를 검색하고 확인한 근거를 바탕으로 비교하도록 구성"],
+   ["03 · 학생용 웹앱","검토 의견 + 출처","결과와 출처 링크 표시 → 학생이 최종 판단"]
+  ])+'<div class="correction-lesson"><span>연결 방식</span><strong>브라우저 → AI 서버 API → 작업 접수·상태 조회 → 검토 결과</strong></div>',
+  note:"근거: student/app.js와 student/gemma-browser-client.js. 현재 클라이언트는 자체 AI 서버의 /localcheck-ai/browser/verify 엔드포인트에 직접 POST하고, HTTP 202이면 작업 ID로 약 2초 간격 GET 조회를 수행합니다. 서버의 웹 검색·Gemma4 처리 흐름은 클라이언트의 진행 상태 표시 및 응답 계약을 근거로 설명합니다. 서버 내부 구현 및 실제 모델 응답은 이 작업에서 확인하지 않았습니다. 저장소의 과거 Gemini 설명이나 Worker 경유 방식과 현재 브라우저 직접 연결을 구분합니다."
+ },
+ "build-tech-ai-api":{
+  id:"build-tech-ai-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ④ · AI API 연결과 안전장치",
+  title:"AI 기능을 넣을 때\n무엇을 요청해야 할까요?",
+  body:makePrompt([
+   "AI 검토 버튼을 누르면 기사와 학생의 첫 판단을 자체 AI 서버 API에 보내 줘. 웹 검색 근거와 Gemma4의 비교 의견, 출처 링크를 받아 화면에 표시해 줘.",
+   "원문 확인 근거가 부족하면 ‘확인할 근거가 부족해요’라고 안내해 줘. AI 연결이 실패해도 학생이 직접 판단하고 카드를 완성하게 해 줘. 비밀 키는 브라우저에 넣지 마."
+  ],"학생 개인정보 입력 금지 · 출처 확인 · AI 결과 맹신 금지 · 실패 시에도 학습 활동 유지"),
+  note:"근거: student/app.js와 student/gemma-browser-client.js. 현재 요청은 기사와 학생 판단·근거 메모를 AI 서버로 전달합니다. 공개 자료 검색과 원문 발췌를 확인할 수 있는 출처가 없으면 클라이언트는 일치·불일치 대신 근거 부족으로 처리합니다. 오류 시 AI 검토를 완료했다고 표시하지 않으며 직접 판단으로 카드 완성이 가능합니다. 비밀 키를 프론트엔드에 포함하지 않는 원칙과 공개 서비스의 서버 측 인증·사용량 제한 및 개인정보 보호 필요성을 설명합니다. 실제 운영 서버 보안 설정과 AI 응답은 별도 확인이 필요합니다. 프롬프트는 재구성 예시입니다."
+ }
+});
+
 /* Focused feature walkthrough: source UI is embedded at presentation time.
    SVG artwork is only an explicitly labelled offline/print reference. */
 const featureWalkthrough={
@@ -508,7 +553,7 @@ const order=[
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
  "app-basics","app-nature","app-record","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
- "build-test","build-deploy","closing","sources"
+ "build-test","build-deploy","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-api","closing","sources"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
@@ -518,7 +563,7 @@ const classroomSlides=order.map(id=>{
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"우리 지역 탐구 수업,\nAI로 만든 웹앱과 함께",lead:"우리 지역 조사와 뉴스 활용 수업을 돕는 웹앱 제작 사례",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
  if(id==="section-need")return {...slide,section:"수업에서 살펴볼 점",title:"우리 지역 조사하기,\n무엇이 어려울까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
- if(id==="section-build")return {...slide,section:"웹앱 제작 과정",title:"이러한 웹앱은\n어떻게 만들었을까요?",lead:"세 가지 메뉴 → 실제 자료 연결 → 기사 비교 → 탐정 카드 → 배포",note:"제작 과정은 전체 구성도와 핵심 명령문 6가지, 실제 수정 사례만 소개합니다. 이미 사용 방법에서 보여준 카드 결과 화면은 반복하지 않습니다. 현재 작동하는 웹앱에 맞춘 재현용 명령문이며 최초 대화 원문과 구분합니다."};
+ if(id==="section-build")return {...slide,section:"웹앱 제작 과정",title:"이러한 웹앱은\n어떻게 만들었을까요?",lead:"세 가지 메뉴 → 실제 자료 연결 → 기사 비교 → 탐정 카드 → 배포",note:"제작 과정은 대화형 명령문 6가지와 실제 수정 사례를 소개한 후, RSS 뉴스 검색과 AI API 연결의 심화 기술을 설명합니다. 이미 사용 방법에서 보여준 카드 결과 화면은 반복하지 않습니다. 현재 작동하는 웹앱에 맞춘 재현용 명령문이며 최초 대화 원문과 구분합니다."};
  if(id==="section-app")return {...slide,title:"우리 지역 탐정,\n어떤 기능을 담았을까요?",lead:"지역 정보 조사부터 기사 검색·검증·기록까지",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
  if(id==="section-class")return {...slide,section:"사회과 수업 적용",title:"우리 지역 탐구 활동을\n수업에 어떻게 연결할까요?",lead:"교과서 활동을 바탕으로 수업 질문과 탐구 흐름 살펴보기"};
  return slide;
@@ -542,13 +587,13 @@ const textbookTitles={
   "field-standards": "그래서 어떤 웹앱을\n만들었을까요?",
   "section-build": "이러한 웹앱은\n어떻게 만들었을까요?",
   "build-overview": "웹앱 전체 구성은\n어떻게 연결될까요?",
-  "build-spec": "AI에게 처음 무슨 말을\\n걸었을까요?",
-  "build-data-prompt": "우리 지역 정보가\\n틀리면 어떡하니?",
-  "build-news-prompt": "뉴스 검색 버튼은 있는데,\\n왜 뉴스가 안 나오니?",
-  "build-check-prompt": "기사 하나 보고\\n맞다고 하면 안 되잖아!",
-  "build-board": "열심히 조사한 내용,\\n그냥 사라지면 안 되지!",
+  "build-spec": "AI에게 처음 무슨 말을\n걸었을까요?",
+  "build-data-prompt": "우리 지역 정보가\n틀리면 어떡하니?",
+  "build-news-prompt": "뉴스 검색 버튼은 있는데,\n왜 뉴스가 안 나오니?",
+  "build-check-prompt": "기사 하나 보고\n맞다고 하면 안 되잖아!",
+  "build-board": "열심히 조사한 내용,\n그냥 사라지면 안 되지!",
   "build-test": "AI에게 실제로\n이렇게 다시 요청했습니다",
-  "build-deploy": "다 만들었다고?\\n직접 눌러 볼게!",
+  "build-deploy": "다 만들었다고?\n직접 눌러 볼게!",
   "section-app": "우리 지역 탐정 웹앱의\n세 가지 메뉴를 어떻게 활용할까요?",
   "app-nature": "② 우리 지역\n자연환경은 어떻게 살펴볼까요?",
   "app-public": "② 우리 지역\n생활시설과 공공기관은 무엇이 있을까요?",
@@ -562,6 +607,10 @@ const textbookTitles={
   "sample-question": "우리 지역의 교통안전은\n어떻게 살펴볼까요?",
   "lesson-40": "지역 문제 탐구 수업은\n어떻게 진행해 볼까요?",
   "assessment": "학생의 탐구 과정은\n어떻게 살펴볼까요?",
+  "build-tech-rss": "RSS는 어떻게 실제 뉴스를\n가져올까요?",
+  "build-tech-news-api": "뉴스 검색 서버는\n어떻게 연결할까요?",
+  "build-tech-ai": "AI 근거 검토는\n어떤 구조로 작동할까요?",
+  "build-tech-ai-api": "AI 기능을 넣을 때\n무엇을 요청해야 할까요?",
   "closing": "교과서 속 탐구를\n우리 지역과 어떻게 이을까요?",
   "sources": "발표 자료의 출처는\n어디에서 확인할까요?"
 };

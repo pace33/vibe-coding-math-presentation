@@ -602,6 +602,7 @@ function featureBody(feature){
  return '<div class="feature-walkthrough"><div class="feature-media" data-preview="'+feature.preview+'">'+source+'</div><div class="feature-explain">'+feature.points.map((p,i)=>'<div class="feature-item"><span>'+String(i+1).padStart(2,"0")+' · '+p[0]+'</span><strong>'+p[1]+'</strong></div>').join("")+'<a class="feature-open" href="'+SITE+'" target="_blank" rel="noopener noreferrer">실제 학생용 웹앱 열기 ↗</a></div></div>';
 }
 
+classes["thanks"]={id:"thanks",section:"마무리",type:"thanks",kicker:"",title:"감사합니다",body:"",note:"발표 마무리"};
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
@@ -610,7 +611,7 @@ const order=[
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
  "app-basics","app-nature","app-record","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
- "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-choice","build-tech-storage","closing","sources"
+ "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-choice","build-tech-storage","closing","sources","thanks"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
@@ -671,7 +672,8 @@ const textbookTitles={
   "build-tech-ai-choice": "왜 Gemini API 대신\nGemma 4를 선택했을까요?",
   "build-tech-storage": "학생이 조사한 내용은\n어디에 저장될까요?",
   "closing": "교과서 속 탐구를\n우리 지역과 어떻게 이을까요?",
-  "sources": "발표 자료의 출처는\n어디에서 확인할까요?"
+  "sources": "발표 자료의 출처는\n어디에서 확인할까요?",
+  "thanks": "감사합니다"
 };
 const textbookLeads={
   "section-need": "지역 자료 수집과 정보의 신뢰성 확인",

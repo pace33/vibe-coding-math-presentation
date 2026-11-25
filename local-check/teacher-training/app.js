@@ -7,7 +7,7 @@ let index=0;
 let notesOpen=false,overviewOpen=false;
 const escaped=s=>String(s||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 const lineTitle=title=>escaped(title).replace(/\n/g,"<br>");
-const commonTop=s=>'<div class="slide-kicker"><span>'+escaped(s.kicker||"")+'</span><span class="section-mini">'+escaped(s.section||"")+'</span></div>';
+const commonTop=s=>'<div class="slide-kicker"><span>'+escaped(s.kicker||"")+'</span>'+(s.standards?.length?'<div class="related-standards" aria-label="관련 성취기준"><span class="related-standards-label">2022 개정 교육과정 · 관련 성취기준</span>'+s.standards.map(v=>'<a href="'+escaped(v.url)+'" target="_blank" rel="noopener noreferrer"><b>['+escaped(v.code)+']</b> '+escaped(v.text)+'</a>').join("")+'</div>':'<span class="section-mini">'+escaped(s.section||"")+'</span>')+'</div>';
 const commonFooter=(i,total)=>'<div class="slide-footer"><span>우리 지역 탐정 · 2026.11.25</span><span>'+String(i+1).padStart(2,"0")+' / '+String(total).padStart(2,"0")+'</span></div>';
 function slideMarkup(s,i){
  const header=commonTop(s);

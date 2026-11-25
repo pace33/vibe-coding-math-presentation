@@ -334,17 +334,29 @@ const regionalTask=(line1,line2,source)=>'<div class="regional-task">'+
  '</div>'+refLink("교육청 사회과 서·논술형 활동 예시 확인",source);
 const classes={
  "field-textbook-news":{
-  id:"field-textbook-news",section:"수업에서 살펴볼 점",kicker:"사회 4학년 2학기 · 교재 활동에서 출발",
-  title:"우리 지역의 문제를\n어떻게 조사할까요?",
-  lead:"신문기사·뉴스를 읽고, 지역 문제의 원인을 조사하는 활동",
-  body:lessonPreview("지역문제를 확인하는 방법","지역 뉴스와 시·군청 누리집을 찾아보고, 신문기사를 읽어 문제 원인을 조사해 봅니다.","교재 속 예시: OO시의 출퇴근 문제를 기사로 읽고 원인 파악",LOCAL_TEXTBOOK),
-  note:"출처는 2022 개정 교육과정에 맞춰 공개된 경기도교육청 지역화 교재 「경기도의 생활」 4학년 2학기 118~119쪽입니다. (교재 기준 표기이며 다른 시도 교과서의 쪽수와 동일하지 않습니다.) 교재가 지역 뉴스와 공공기관 사이트를 살펴보라고 요청한다는 사실과, 우리 충북 학생이 자기 지역의 기사를 직접 찾아야 한다는 수업 운영상의 부담을 구별해서 설명합니다. 교재의 'OO시' 기사는 학습용 예시이며 실제 음성군 기사와 구분합니다."
+  id:"field-textbook-news",section:"수업에서 살펴볼 점",kicker:"사회 4학년 2학기 · 실제 조사 수업에서 살펴볼 점",
+  title:"우리 지역의 문제를\n조사할 때 무엇이 어려울까요?",
+  lead:"교재 속 조사 활동을 학생이 사는 지역의 실제 자료로 연결하기",
+  body:'<div class="lesson-preview">'+
+   '<div class="lesson-page"><div class="lesson-page-top">경기도 지역화 교재 예시 · 4학년 2학기</div>'+
+   '<h3>우리 지역의 문제 조사하기</h3><p>지역 뉴스와 시·군청 누리집을 찾아보고 신문기사를 읽어 지역 문제의 원인을 조사합니다.</p>'+
+   '<div class="lesson-page-task">교재 속 예시: OO시의 출퇴근 문제를 기사로 읽고 원인 파악</div></div>'+
+   '<div class="lesson-page-explain"><span>학생이 실제로 조사할 때</span>'+
+   '<strong>무엇을 검색해야 할지<br>어디에서 찾아야 할지</strong>'+
+   '<p>지역 문제를 스스로 정하고 알맞은 검색어를 입력해 관련 기사나 공공기관 자료를 찾는 데 어려움이 있을 수 있습니다.</p></div></div>'+
+   refLink("교육청 지역화 교재·활동 페이지 확인",LOCAL_TEXTBOOK),
+  note:"경기도교육청 지역화 교재 「경기도의 생활」 4학년 2학기 118~119쪽에 제시된 지역 문제 조사 활동을 출발점으로 삼습니다. 우리 지역의 실제 자료를 조사하는 상황에서는 학생이 지역 문제를 정하고 적절한 검색어를 선택하며 관련 뉴스와 공공기관 자료를 찾아야 합니다. 이런 과정에서 어떤 지원이 필요한지 살펴봅니다. 우측의 어려움은 예상할 수 있는 교실 상황으로, 실제 학생 발언이나 수업 관찰 결과를 인용한 것이 아닙니다."
  },
  "field-gap-news":{
-  id:"field-gap-news",section:"수업에서 살펴볼 점",kicker:"지역 뉴스 조사에서 살펴볼 점",
-  title:"우리 지역의 뉴스를\n찾기 어려운 이유는 무엇일까요?",
-  body:fieldGap("지역 뉴스·신문기사 찾기","광역 기사·예전 기사·관련 없는 검색 결과가 함께 나옴","시·군 선택 → 지역 뉴스 검색 → 기사 제목·날짜·언론사 확인"),
-  note:"교과서 자체의 결함을 주장하는 슬라이드가 아닙니다. 실제 수업에서 학생들이 인터넷 검색으로 지역과 시점을 구분하는 데 많은 안내를 필요로 할 수 있다는 예상 가능한 교수학습상의 문제입니다. 웹앱은 기사 검색의 출발점을 한 화면으로 묶습니다. 자동으로 뉴스의 진위를 확인해 주지는 않습니다."
+  id:"field-gap-news",section:"수업에서 살펴볼 점",kicker:"지역 뉴스 조사 · 검색한 자료 살펴보기",
+  title:"뉴스를 찾은 뒤에는\n어떤 어려움이 있을까요?",
+  lead:"검색 결과가 나와도 수업에 필요한 자료인지 판단해야 합니다.",
+  body:'<div class="field-reality">'+
+   '<div class="field-cell"><span>01 · 관련 자료 고르기</span><strong>다른 지역의 뉴스와<br>관련 없는 기사 구분하기</strong></div>'+
+   '<div class="field-cell"><span>02 · 자료의 시점 확인하기</span><strong>오래된 기사와<br>최근 기사 구분하기</strong></div>'+
+   '<div class="field-cell"><span>03 · 기사 내용 이해하기</span><strong>기사 제목만으로는<br>사실을 판단하기 어려움</strong></div></div>'+
+   '<p class="fineprint">학생이 찾은 뉴스의 출처와 날짜, 기사 본문과 관련 근거를 함께 살펴볼 필요가 있습니다.</p>',
+  note:"초등학생이 검색 결과를 읽고 지역과 관련성이 있는 자료를 고르며 발행일을 확인하고 기사의 실제 내용을 이해하는 과정에서 어려움을 겪을 수 있습니다. 구체적인 수업 상황으로 설명하되 측정된 실태로 표현하지 않습니다. 다음 장의 늑구 기사 비교는 보도 제목과 신고 내용, 이후 확인된 사실을 구별해야 하는 이유를 보여줍니다. 웹앱의 해결 방식은 뒤의 소개 슬라이드에서 설명합니다."
  },
  "field-compare-gap":{
   id:"field-compare-gap",section:"수업에서 살펴볼 점",kicker:"기사 날짜와 확인 수준 살펴보기",
@@ -514,8 +526,8 @@ if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section
 const textbookTitles={
   "cover": "우리 지역 탐구 수업,\nAI와 어떻게 함께할까요?",
   "section-need": "우리 지역 조사하기,\n무엇이 어려울까요?",
-  "field-textbook-news": "우리 지역의 문제를\n어떻게 조사해 볼까요?",
-  "field-gap-news": "우리 지역의 뉴스를\n어떻게 찾으면 좋을까요?",
+  "field-textbook-news": "우리 지역의 문제를\n조사할 때 무엇이 어려울까요?",
+  "field-gap-news": "뉴스를 찾은 뒤에는\n어떤 어려움이 있을까요?",
   "app-issues": "① 뉴스 찾기\n검색 결과는 어떻게 살펴볼까요?",
   "app-problem-features": "세 가지 주요 메뉴에서\n무엇을 할 수 있을까요?",
   "app-article-traffic": "늑대 늑구는 정말\n청주에 나타났을까요?",

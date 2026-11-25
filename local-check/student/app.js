@@ -882,7 +882,8 @@ function makeReport(){
  };
  if(window.LocalCheckBoard){
   const saved=window.LocalCheckBoard.save(state.report);
-  if(saved)state.report=saved;
+  if(!saved){$("formMessage").textContent="카드를 저장하지 못했어요. 기존 기록은 그대로 보존했어요.";return;}
+  state.report=saved;
  }
  renderReport();show("result");
 }

@@ -1005,3 +1005,17 @@ a{color:inherit}
 @media print{
  .gpt-preview-input{font-size:2.1cqw!important;line-height:1.4;font-weight:600}
 }
+
+/* Compact curriculum links: readable but subordinate to the main slide content. */
+.slide-kicker:has(.related-standards){align-items:flex-start;gap:1.5%;flex-shrink:0}
+.slide-kicker:has(.related-standards)>span:first-child{min-width:0;flex:0 1 37%;overflow-wrap:anywhere}
+.related-standards{flex:0 1 62%;min-width:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right;letter-spacing:-.025em;color:#587165;font-size:clamp(8px,.93cqw,13px);font-weight:550;line-height:1.28}
+.related-standards-label{font-size:.85em;color:#8b998e;font-weight:650}
+.related-standards a{display:block;text-decoration:none;color:inherit;word-break:keep-all;overflow-wrap:anywhere}
+.related-standards a:hover{text-decoration:underline}
+.related-standards b{color:#37684d;font-weight:850}
+.slide:has(.related-standards) .slide-title{margin-top:1.6%}
+@media screen and (max-width:520px) and (orientation:portrait){
+ .related-standards{font-size:8px;gap:1px;flex-basis:64%}
+ .slide-kicker:has(.related-standards)>span:first-child{flex-basis:34%}
+}

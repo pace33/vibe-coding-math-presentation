@@ -36,6 +36,7 @@ function personalDataPresent(d){
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/.test(content);
 }
 const BACKUP_KEY=KEY+"-backup";
+let extraDb=null,extraLoad=null,extraRows=new Map(),saveError="";
 function rawCards(){
  const raw=localStorage.getItem(KEY);
  if(raw===null)return {raw,rows:[]};
@@ -45,39 +46,99 @@ function rawCards(){
 }
 function readableCard(item){
  if(!item||typeof item!=="object"||!item.title||!safeUrl(item.url))return null;
- // Older records without optional fields remain readable. Never invent a judgment.
  return sanitized({...item,newsFact:item.newsFact||"기사에서 확인한 내용 미기록",reason:item.reason||item.finalReason||"판단 이유 미기록",verdict:allowedVerdicts.has(item.verdict)?item.verdict:allowedVerdicts.has(item.finalVerdict)?item.finalVerdict:"아직 모르겠어요"});
 }
+// Secondary persistent storage for browsers which restrict localStorage.
+// Existing localStorage records and keys remain untouched when a fallback is needed.
+function prepareExtra(){
+ if(extraLoad)return extraLoad;
+ extraLoad=new Promise(resolve=>{
+  let settled=false;
+  const done=ok=>{if(settled)return;settled=true;clearTimeout(timer);resolve(ok);};
+  const timer=setTimeout(()=>done(false),3500);
+  try{
+   if(!window.indexedDB){done(false);return;}
+   const request=window.indexedDB.open("localcheck-student-board-extra-v1",1);
+   request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains("cards"))request.result.createObjectStore("cards",{keyPath:"id"});};
+   request.onerror=request.onblocked=()=>done(false);
+   request.onsuccess=()=>{
+    if(settled){request.result.close();return;}
+    const db=request.result;
+    try{
+     const tx=db.transaction("cards","readonly"),read=tx.objectStore("cards").getAll();
+     tx.oncomplete=()=>{
+      if(settled){db.close();return;}
+      extraRows=new Map((read.result||[]).filter(x=>x&&x.id).map(x=>[x.id,x]));
+      extraDb=db;
+      db.onversionchange=()=>{db.close();extraDb=null;extraLoad=null;};
+      done(true);
+     };
+     tx.onerror=tx.onabort=()=>{db.close();done(false);};
+    }catch{db.close();done(false);}
+   };
+  }catch{done(false);}
+ });
+ return extraLoad;
+}
+async function writeExtra(entry){
+ if(!await prepareExtra()||!extraDb)return false;
+ return new Promise(resolve=>{
+  try{
+   const tx=extraDb.transaction("cards","readwrite");
+   tx.objectStore("cards").put(entry);
+   tx.oncomplete=()=>{extraRows.set(entry.id,entry);resolve(true);};
+   tx.onerror=tx.onabort=()=>resolve(false);
+  }catch{resolve(false);}
+ });
+}
 function readCards(){
- try{return rawCards().rows.map(readableCard).filter(Boolean);}
- catch{return [];}
+ let rows=[];
+ try{rows=rawCards().rows;}catch{
+  // An unreadable primary list is never overwritten.
+  try{const backup=JSON.parse(localStorage.getItem(BACKUP_KEY)||"[]");if(Array.isArray(backup))rows=backup;}catch{}
+ }
+ const result=new Map();
+ for(const item of rows){const d=readableCard(item);if(d)result.set(d.id,d);}
+ for(const entry of extraRows.values()){
+  if(entry.deleted)result.delete(entry.id);
+  else{const d=readableCard(entry.record);if(d)result.set(d.id,d);}
+ }
+ return [...result.values()].sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
 }
 function writeCards(rows,previous){
  try{
   const snapshot=previous||rawCards();
-  if(localStorage.getItem(KEY)!==snapshot.raw)throw Error("board changed");
-  // Preserve a previous snapshot before replacing the main record. Do not overwrite an intact backup with an empty board.
-  if(snapshot.raw&&snapshot.rows.length){
-   localStorage.setItem(BACKUP_KEY,snapshot.raw);
-  }
-  localStorage.setItem(KEY,JSON.stringify(rows));
-  return true;
- }catch{alert("기존 탐정 카드 보호를 위해 저장을 중단했어요. 브라우저 저장 상태를 확인해 주세요.");return false;}
+  if(localStorage.getItem(KEY)!==snapshot.raw)return false;
+  // Backup is best-effort: quota on the backup must not block an atomic primary write.
+  if(snapshot.raw&&snapshot.rows.length){try{localStorage.setItem(BACKUP_KEY,snapshot.raw);}catch{}}
+  const next=JSON.stringify(rows);
+  localStorage.setItem(KEY,next);
+  return localStorage.getItem(KEY)===next;
+ }catch{return false;}
 }
-function save(record){
+async function save(record){
+ saveError="";
  const normalized=sanitized(record);
- if(!normalized)return null;
- try{
-  const prev=rawCards();
-  const cards=[normalized,...prev.rows.filter(x=>x?.id!==normalized.id)];
-  return writeCards(cards,prev)?normalized:null;
- }catch{alert("기존 탐정 카드 목록을 읽지 못해 덮어쓰지 않았어요.");return null;}
+ if(!normalized){saveError="카드 제목, 원문 주소 또는 판단 내용을 확인해 주세요.";return null;}
+ await prepareExtra();
+ if(!extraRows.has(normalized.id)){
+  try{
+   const prev=rawCards();
+   if(writeCards([normalized,...prev.rows.filter(x=>x?.id!==normalized.id)],prev))return normalized;
+  }catch{}
+ }
+ if(await writeExtra({id:normalized.id,record:normalized,deleted:false}))return normalized;
+ saveError="브라우저에서 카드 저장을 허용하지 않았어요. 삼성 인터넷이나 크롬에서 직접 열어 다시 저장해 주세요. 기존 기록은 지우지 않았어요.";
+ return null;
 }
-function removeCard(id){
- try{
-  const prev=rawCards();
-  return writeCards(prev.rows.filter(x=>x?.id!==id),prev);
- }catch{alert("저장된 카드 목록을 읽지 못했어요.");return false;}
+async function removeCard(id){
+ await prepareExtra();
+ let removed=false;
+ try{const prev=rawCards();removed=writeCards(prev.rows.filter(x=>x?.id!==id),prev);}catch{}
+ if(extraRows.has(id)||!removed){
+  if(!await writeExtra({id,deleted:true})){alert("카드를 지우지 못했어요. 브라우저 저장 상태를 확인하세요.");return false;}
+ }
+ return true;
 }
 function tag(name,cls,content){
  const x=document.createElement(name);if(cls)x.className=cls;
@@ -391,25 +452,27 @@ function init({show,getReport}={}){
  $("sharedHome").addEventListener("click",()=>navigation?.("home"));
  $("shareCard").addEventListener("click",()=>{const d=reportProvider?.();if(d)copyShare(d);});
  $("shareAgain").addEventListener("click",()=>{if(currentShared)copyShare(currentShared);});
- $("addShared").addEventListener("click",()=>{
+ $("addShared").addEventListener("click",async()=>{
   if(!currentShared)return;
-  const saved=save(currentShared);
-  $("shareStatus").textContent=saved?"내 게시판에 보관했어요. '← 게시판으로'를 눌러 확인할 수 있어요.":"카드 보관에 실패했어요.";
+  const button=$("addShared");button.disabled=true;
+  const saved=await save(currentShared);button.disabled=false;
+  $("shareStatus").textContent=saved?"내 게시판에 보관했어요. '← 게시판으로'를 눌러 확인할 수 있어요.":(saveError||"카드 보관에 실패했어요.");
  });
  $("downloadBoard").addEventListener("click",downloadBoard);
- $("boardList").addEventListener("click",e=>{
+ $("boardList").addEventListener("click",async e=>{
   const btn=e.target.closest("[data-card-action]");if(!btn)return;
   const d=readCards().find(x=>x.id===btn.dataset.cardId);if(!d)return;
   const action=btn.dataset.cardAction;
   if(action==="view")showCard(d);
   if(action==="share")copyShare(d);
   if(action==="remove"&&confirm("이 기기에 저장한 탐정 카드를 삭제할까요?")){
-   if(removeCard(d.id))renderBoard();
+   if(await removeCard(d.id))renderBoard();
   }
  });
  window.addEventListener("storage",e=>{if(e.key===KEY&&!$("board").hidden)renderBoard();});
  window.addEventListener("hashchange",importHash);
  renderBoard();importHash();
+ prepareExtra().then(()=>renderBoard());
 }
-window.LocalCheckBoard={init,save,share:copyShare,renderBoard,encodeCard,decodeCard,detailReport};
+window.LocalCheckBoard={init,save,share:copyShare,renderBoard,encodeCard,decodeCard,detailReport,getSaveError:()=>saveError};
 })();

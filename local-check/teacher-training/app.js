@@ -156,6 +156,29 @@ function mountStudentPreview(frame){
  fit();
 }
 
+
+/* Fit all example text into the available presentation space, including on resize. */
+let promptResize=null;
+function fitPromptPreview(frame){
+ promptResize?.disconnect();promptResize=null;
+ const main=frame.querySelector(".gpt-preview-main");
+ const input=main?.querySelector(".gpt-preview-input");
+ if(!main||!input)return;
+ const fit=()=>{
+  if(!main.isConnected)return;
+  input.style.fontSize="";
+  if(window.matchMedia("(max-width:520px) and (orientation:portrait)").matches)return;
+  if(!main.clientHeight)return;
+  let size=parseFloat(getComputedStyle(input).fontSize);
+  // Start with the stylesheet size and reduce only if the complete content does not fit.
+  while(main.scrollHeight>main.clientHeight+1&&size>10){
+   size=Math.max(10,size-.5);input.style.fontSize=size+"px";
+  }
+ };
+ requestAnimationFrame(fit);
+ if(typeof ResizeObserver!=="undefined"){promptResize=new ResizeObserver(fit);promptResize.observe(main);}
+}
+
 function render(){
  if(!slides.length){
   $("slide").innerHTML='<div class="slide-main"><h1>연수 자료를 불러오지 못했습니다.</h1></div>';return;
@@ -165,6 +188,7 @@ function render(){
  frame.dataset.type=s.type||"standard";
  frame.innerHTML=slideMarkup(s,index);
  mountStudentPreview(frame);
+ fitPromptPreview(frame);
  frame.setAttribute("aria-label",String(index+1)+"/"+slides.length+" "+s.title.replace(/\n/g," "));
  $("pageCounter").textContent=(index+1)+" / "+slides.length;
  $("progressValue").style.width=((index+1)/slides.length*100).toFixed(2)+"%";

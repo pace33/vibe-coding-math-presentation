@@ -933,3 +933,20 @@ a{color:inherit}
  .tech-flow{flex:none;grid-template-columns:1fr;gap:10px;align-items:start}
  .tech-node{padding:7px}.tech-aside{gap:8px}.tech-summary{font-size:12px}
 }
+
+/* Maximize the projection area, retaining the original 16:9 slide canvas. */
+@media screen and (min-width:901px){
+ .shell{height:100dvh;min-height:0}
+ .topbar{height:42px;width:100%;padding:0 18px}
+ .bottombar{height:46px;width:100%;padding:0 18px}
+ .toolbar-btn,.control{min-height:32px;padding:4px 12px}
+ .deck-wrap{padding:4px 8px;flex:1 1 0;min-height:0;min-width:0}
+ .deck-wrap>.slide{width:min(calc(100vw - 16px),calc((100dvh - 96px)*16/9));max-width:none;border-radius:12px}
+}
+@media screen{
+ :fullscreen .shell{height:100dvh;min-height:0}
+ :fullscreen .topbar,:fullscreen .bottombar{display:none}
+ :fullscreen .deck-wrap{width:100%;padding:0;flex:1 1 0;min-height:0}
+ :fullscreen .deck-wrap>.slide{width:min(100vw,calc(100dvh * 16/9));max-width:none;aspect-ratio:16/9;border:0;border-radius:0;box-shadow:none}
+ :fullscreen{background:var(--slide)}
+}

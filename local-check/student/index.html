@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
 <meta name="theme-color" content="#205f50">
 <meta name="description" content="초등학생이 직접 충북의 최신 지역 뉴스를 찾아 읽고, 시군청 공식 자료와 비교하는 탐구 수업">
 <title>우리 지역 탐정 | 로컬체크</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<link rel="stylesheet" href="style.css?v=largeboard20261124">
+<link rel="stylesheet" href="style.css?v=mobileinput20261125">
 <script src="data.js" defer></script>
 <script src="businesses.js" defer></script>
 <script src="small-businesses.js" defer></script>
@@ -19,12 +19,14 @@
 <script src="regional-visits.js" defer></script>
 <script src="regional-basics.js" defer></script>
 <script src="gemma-browser-client.js?v=direct20261124"></script>
-<script src="app.js?v=trainingwolf20261125" defer></script>
+<script src="app.js?v=mobileinput20261125" defer></script>
+<script src="mobile-ui.js?v=20261125" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">본문으로 이동</a>
 <header class="site-header"><div class="shell header-inner">
 <a href="./" class="brand"><span class="brand-icon">🔎</span><span>우리 지역 <b>탐정</b></span></a>
+<button id="soundToggle" class="sound-toggle" type="button" aria-pressed="true" aria-label="버튼 효과음 끄기">🔊 소리 켜짐</button>
 
 </div></header>
 <main id="main">
@@ -50,7 +52,7 @@
     <div class="form-grid">
       <div class="field"><label for="region">지역 선택</label>
         <select id="region"><option selected>청주시</option><option>충주시</option><option>제천시</option><option>보은군</option><option>옥천군</option><option>영동군</option><option>증평군</option><option>진천군</option><option>괴산군</option><option>음성군</option><option>단양군</option><option value="전체">충청북도 전체</option></select></div>
-      <div class="field" id="keywordField"><label for="keyword">검색어</label><input id="keyword" type="search" placeholder="예: 축제, 반도체, 중소기업" maxlength="85" autocomplete="off" aria-controls="liveResults" aria-describedby="searchHelp"></div>
+      <div class="field" id="keywordField"><label for="keyword">검색어</label><input id="keyword" type="search" inputmode="search" enterkeyhint="search" lang="ko" placeholder="예: 축제, 반도체, 중소기업" maxlength="85" autocomplete="off" aria-controls="liveResults" aria-describedby="searchHelp"></div>
     </div>
     <button id="newsSearch" class="btn btn-primary main-search" type="button">🔎 뉴스 검색</button>
     <p id="searchHelp" class="visually-hidden">두 글자 이상 입력하면 관련 뉴스가 아래에 자동으로 나옵니다.</p>
@@ -131,10 +133,10 @@
       <div class="verify-extra-fields">
         <h3 id="findingHeading">기사에서 확인한 내용</h3>
         <label id="findingLabel" for="articleFinding">뉴스에서 확인한 중요한 사실</label>
-        <textarea id="articleFinding" maxlength="500" rows="2" placeholder="기사에서 확인한 중요한 사실을 적어 보세요."></textarea>
+        <textarea inputmode="text" lang="ko" id="articleFinding" maxlength="500" rows="2" placeholder="기사에서 확인한 중요한 사실을 적어 보세요."></textarea>
         <input id="officialUrl" type="hidden">
         <label for="officialFinding">두 자료에서 확인한 차이점</label>
-        <textarea id="officialFinding" maxlength="500" rows="2" placeholder="두 자료에서 서로 다른 내용을 적어 보세요. 차이점이 없다면 같다고 적어도 좋아요."></textarea>
+        <textarea inputmode="text" lang="ko" id="officialFinding" maxlength="500" rows="2" placeholder="두 자료에서 서로 다른 내용을 적어 보세요. 차이점이 없다면 같다고 적어도 좋아요."></textarea>
       </div>
     </details>
     <div id="manualCompare">
@@ -147,7 +149,7 @@
       <label><input type="radio" name="verdict" value="아직 모르겠어요" checked><span>🔵 더 알아볼래요<small>아직 판단하기 어려워요</small></span></label>
     </fieldset>
     <label for="reason" class="short-reason-label">어떤 내용이 같거나 달랐나요? <span>(필수)</span></label>
-    <textarea id="reason" maxlength="220" rows="3" placeholder="첫 기사에는 ___, 다른 기사나 자료에는 ___라고 나와요. 그래서 ___라고 생각해요."></textarea>
+    <textarea inputmode="text" lang="ko" id="reason" maxlength="220" rows="3" placeholder="첫 기사에는 ___, 다른 기사나 자료에는 ___라고 나와요. 그래서 ___라고 생각해요."></textarea>
     </div>
     <section id="aiReviewStage" class="ai-review-stage" aria-labelledby="aiReviewHeading">
       <h2 id="aiReviewHeading">④ AI로 더 알아보기(선택)</h2>
@@ -173,7 +175,7 @@
           <label><input type="radio" name="finalVerdict" value="아직 모르겠어요"><span>🔵 모르겠어요</span></label>
         </fieldset>
         <label class="short-reason-label" for="finalReason">최종 판단의 이유를 적어 보세요.</label>
-        <textarea id="finalReason" rows="1" maxlength="220" placeholder="이유를 짧게 적어 보세요."></textarea>
+        <textarea inputmode="text" lang="ko" id="finalReason" rows="1" maxlength="220" placeholder="이유를 짧게 적어 보세요."></textarea>
       </div>
       <p class="evidence-disclaimer">※ AI의 의견도 직접 확인해요. 이름이나 연락처는 적지 않아요.</p>
     </section>

@@ -139,7 +139,8 @@ function detailReport(data,target){
   ai.appendChild(tag("h3","","④ AI 근거 검토"));
   ai.appendChild(tag("strong","detective-label",statusText[data.aiStatus]||"AI 검토 기록이 없어요"));
   ai.appendChild(tag("p","",data.aiSummary||"AI가 확인한 근거가 없어요."));
-  if(data.aiComparison)ai.appendChild(tag("p","",data.aiComparison));
+  if(data.aiComparison){ai.appendChild(tag("strong","detective-label",data.aiStatus==="insufficient"?"AI의 생각 (잠정 의견)":"AI의 생각"));ai.appendChild(tag("p","",data.aiComparison));}
+  if(data.aiStatus==="insufficient")ai.appendChild(tag("p","detective-ai-caution","원문 근거가 부족해 AI의 의견은 추정일 수 있어요."));
   if(data.aiSources?.length){
    const links=tag("div","detective-ai-links");
    links.appendChild(tag("strong","","AI가 제시한 참고 자료"));

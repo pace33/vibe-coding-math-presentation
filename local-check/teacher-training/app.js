@@ -38,6 +38,62 @@ function writeAddress(i){
  const hash="#slide="+String(i+1);
  if(location.hash!==hash)history.replaceState(null,"",hash);
 }
+
+/* Load the real, same-origin student interface for the active feature slide.
+   The printed slide keeps its labelled static reference, not a simulated capture. */
+let previewResize=null;
+function mountStudentPreview(frame){
+ previewResize?.disconnect();previewResize=null;
+ const host=frame.querySelector(".feature-media[data-preview]");
+ if(!host)return;
+ const mode=host.dataset.preview;
+ const live=document.createElement("iframe");
+ live.className="feature-live";
+ live.title="실제 학생용 웹앱 화면";
+ live.tabIndex=-1;
+ live.setAttribute("aria-hidden","true");
+ const badge=document.createElement("span");
+ badge.className="feature-live-label";
+ badge.textContent="실제 웹앱 화면 · 실시간";
+ const fail=()=>{if(!host.isConnected)return;host.classList.remove("feature-live-ready");live.remove();badge.remove();};
+ const fit=()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
+  const scale=Math.min(w/1100,h/720);
+  live.style.transform="translate(-50%,-50%) scale("+scale+")";
+ };
+ live.addEventListener("load",()=>{
+  let attempts=0;
+  const activate=()=>{
+   if(!host.isConnected)return;
+   try{
+    const doc=live.contentDocument;
+    const home=doc?.getElementById("home");
+    if(!home){if(++attempts<18)setTimeout(activate,300);else fail();return;}
+    if(mode==="overview"||mode==="nature"){
+     doc.querySelector('[data-menu="explore"]')?.click();
+     doc.querySelector('[data-explore="'+mode+'"]')?.click();
+    }else if(mode==="board"){
+     doc.querySelector('[data-menu="board"]')?.click();
+    }else if(mode==="verify"||mode==="ai"){
+     const news=doc.querySelector('#newsList [data-news], #liveNewsList [data-live-news]');
+     if(!news){if(++attempts<24)setTimeout(activate,300);else fail();return;}
+     news.click();
+     if(mode==="ai")setTimeout(()=>{
+      if(host.isConnected)doc.getElementById("aiReviewStage")?.scrollIntoView({block:"start",behavior:"instant"});
+     },450);
+    }
+    if(!host.isConnected)return;
+    host.classList.add("feature-live-ready");
+    fit();
+   }catch(error){fail();}
+  };
+  activate();
+ });
+ host.append(live,badge);
+ if(typeof ResizeObserver!=="undefined"){previewResize=new ResizeObserver(fit);previewResize.observe(host);}
+ fit();
+ live.src=new URL("../student/",location.href).href;
+}
+
 function render(){
  if(!slides.length){
   $("slide").innerHTML='<div class="slide-main"><h1>연수 자료를 불러오지 못했습니다.</h1></div>';return;
@@ -46,6 +102,7 @@ function render(){
  const frame=$("slide");
  frame.dataset.type=s.type||"standard";
  frame.innerHTML=slideMarkup(s,index);
+ mountStudentPreview(frame);
  frame.setAttribute("aria-label",String(index+1)+"/"+slides.length+" "+s.title.replace(/\n/g," "));
  $("pageCounter").textContent=(index+1)+" / "+slides.length;
  $("progressValue").style.width=((index+1)/slides.length*100).toFixed(2)+"%";

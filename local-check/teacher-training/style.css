@@ -881,3 +881,19 @@ a{color:inherit}
  .feature-live,.feature-live-label{display:none!important}
  .feature-fallback,.feature-fallback-label{visibility:visible!important}
 }
+
+/* Presentation previews must never flash the old reconstructed artwork.
+   Static reference images remain available only for printed/PDF slides. */
+@media screen{
+ .feature-media[data-preview] .feature-fallback,
+ .feature-media[data-preview] .feature-fallback-label{display:none!important}
+ .feature-media[data-preview]:not(.feature-live-ready)::before{
+  content:"실제 웹앱 화면 불러오는 중…";
+  color:#54715e;font-size:clamp(12px,1.3cqw,18px);font-weight:700;
+  padding:15px;text-align:center;
+ }
+ .feature-media[data-preview].feature-live-error::before{
+  content:"화면을 불러오지 못했습니다. 오른쪽의 실제 웹앱 열기 링크를 이용해 주세요.";
+ }
+ .feature-media[data-preview].feature-live-ready::before{content:none}
+}

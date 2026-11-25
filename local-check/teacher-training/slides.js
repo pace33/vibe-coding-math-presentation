@@ -8,7 +8,7 @@
 const SOCIAL_SRC="https://www.nise.go.kr/ebook/src/viewer/download.php?host=main&no=1&site=20240819_172144";
 const SCHOOL_SRC="https://www.ice.go.kr/upload/ice/na/bbs_1630/2026/02/99349a5278e3ed9b63bb236e6ca06d29.pdf";
 const KOREAN_SRC="https://www.goe.go.kr/resource/old/BBSMSTR_000000030222/BBS_202504210452515481.pdf";
-const SITE="https://pace33.github.io/vibe-coding-math-presentation/local-check/student/";
+const SITE="https://pace33.github.io/vibe-coding-math-presentation/local-check/student/index.html?v=20261125";
 const github="https://github.com/pace33/vibe-coding-math-presentation/tree/main/local-check";
 const code=(id,text,summary,ref)=>'<div class="standard-block"><div class="standard-head"><span class="standard-code">'+id+'</span><span>2022 개정 교육과정</span></div><strong class="standard-text">'+text+'</strong><p>'+summary+'</p><a href="'+ref+'" target="_blank" rel="noopener noreferrer">성취기준 원문·설명자료 확인 ↗</a></div>';
 const quote=(s,kind)=>'<div class="prompt-example"><span class="prompt-type">'+kind+'</span><blockquote>'+s+'</blockquote></div>';
@@ -603,7 +603,7 @@ function featureBody(feature){
 }
 
 classes["thanks"]={id:"thanks",section:"마무리",type:"thanks",kicker:"",title:"감사합니다",body:"",note:"발표 마무리"};
-classes["student-access-qr"]={id:"student-access-qr",section:"완성된 수업 도구",type:"qr",kicker:"우리 지역 탐정 · 직접 체험하기",title:"우리 지역 탐정 웹앱 바로가기",lead:"휴대폰 카메라로 QR코드를 찍어 접속하세요.",body:'<div class="access-qr"><a class="access-qr-image" href="'+SITE+'" target="_blank" rel="noopener noreferrer" aria-label="학생용 우리 지역 탐정 열기"><img src="assets/student-access-qr.svg" alt="학생용 우리 지역 탐정 접속 QR코드"></a><a class="access-qr-url" href="'+SITE+'" target="_blank" rel="noopener noreferrer">'+SITE+'</a></div>',note:"QR코드 또는 주소를 통해 학생용 웹앱을 직접 체험합니다."};
+classes["student-access-qr"]={id:"student-access-qr",section:"완성된 수업 도구",type:"qr",kicker:"우리 지역 탐정 · 직접 체험하기",title:"우리 지역 탐정 웹앱 바로가기",lead:"휴대폰 카메라로 QR코드를 찍어 접속하세요.",body:'<div class="access-qr"><a class="access-qr-image" href="'+SITE+'" target="_blank" rel="noopener noreferrer" aria-label="학생용 우리 지역 탐정 열기"><img src="assets/student-access-qr.svg?v=direct20261125" alt="학생용 우리 지역 탐정 접속 QR코드"></a><a class="access-qr-url" href="'+SITE+'" target="_blank" rel="noopener noreferrer">'+SITE+'</a></div>',note:"QR코드 또는 주소를 통해 학생용 웹앱을 직접 체험합니다."};
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",

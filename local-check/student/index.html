@@ -17,9 +17,9 @@
 <script src="regional-inquiries.js" defer></script>
 <script src="regional-landmarks.js?v=regionalparks20261124" defer></script>
 <script src="regional-visits.js" defer></script>
-<script src="regional-basics.js" defer></script>
+<script src="regional-basics.js?v=searchall20261125" defer></script>
 <script src="gemma-browser-client.js?v=reconnect20261125" defer></script>
-<script src="app.js?v=protectrecords20261125" defer></script>
+<script src="app.js?v=searchall20261125" defer></script>
 <script src="mobile-ui.js?v=distinctsound20261125" defer></script>
 </head>
 <body>
@@ -87,6 +87,7 @@
     <div class="section-title"><h2 id="liveHeading">검색 결과</h2><span id="liveCount" class="timestamp"></span></div>
     <p id="liveStatus" class="live-status" role="status" aria-live="polite"></p>
     <div class="google-more-row">
+      <a id="liveOfficialFallback" class="btn btn-light google-more-button" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">공식 자료 더 찾기 ↗</a>
       <a id="googleNewsFallback" class="btn btn-light google-more-button" href="https://news.google.com/search" target="_blank" rel="noopener noreferrer" title="구글 뉴스 검색으로 이동">구글 뉴스에서 더 찾기 ↗</a>
       <a id="bingNewsFallback" class="btn btn-light google-more-button" href="https://www.bing.com/news/search" target="_blank" rel="noopener noreferrer" title="빙 뉴스 검색으로 이동">빙 뉴스에서 더 찾기 ↗</a>
     </div>

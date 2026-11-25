@@ -692,6 +692,13 @@ function firstJudgement(){
  };
 }
 // Keep the model's actual opinion even when a source could not be opened.
+// Application-owned review guidance, not a student's statement or evidence.
+// Use the existing documented text field; no new API fields or endpoint changes.
+const AI_OPINION_GUIDANCE="\n[웹앱 분석 요청 — 근거 자료나 학생 기록이 아님]\n원문이 부족해도 기사 제목·검색 요약·학생 기록·일반 지식을 참고해 학생의 판단에 대한 잠정 의견과 이유를 comparison에 제시하세요. 확인된 사실과 추론을 구분하고, 모르는 사실은 단정하지 마세요. 초등학생이 이해하기 쉽게 설명하세요.";
+function buildAIComparisonContext(chosen,first){
+ const context=[chosen?.title?"비교 자료 제목: "+safe(chosen.title,180):"",safe(first.govFact,500)].filter(Boolean).join("\n");
+ return safe(context,500-AI_OPINION_GUIDANCE.length)+AI_OPINION_GUIDANCE;
+}
 function plainAIText(value,max){
  return safe(value,max).replace(/fetched\s*[:=]\s*false/gi,"원문 미확인").replace(/fetched\s*[:=]\s*true/gi,"원문 발췌 확인").replace(/\bfetched\b/gi,"원문 확인 여부");
 }
@@ -769,8 +776,7 @@ async function askAIEvidence(){
  try{
   const first=state.firstReview,article=state.story;
   const chosen=state.selectedEvidence;
-  // Send the selected title as context, not as a verified article body.
-  const comparisonContext=[chosen?.title?"비교 자료 제목: "+safe(chosen.title,180):"",first.govFact].filter(Boolean).join("\n");
+  const comparisonContext=buildAIComparisonContext(chosen,first);
   const raw=await window.localcheckGemmaReview(AI_VERIFY_API,{
    region:safe(article.region,50),
    article:{title:safe(article.title,200),publisher:safe(article.publisher,100),date:safe(article.date,40),url:article.url},

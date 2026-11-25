@@ -68,6 +68,16 @@ function mountStudentPreview(frame){
     const doc=live.contentDocument;
     const home=doc?.getElementById("home");
     if(!home){if(++attempts<18)setTimeout(activate,300);else fail();return;}
+    // Highlight the three menus on the presentation overview only.
+    // This style lives in the embedded document, not the student site.
+    if(host.querySelector('img[src$="00-overview.svg"]')){
+     if(!doc.querySelector("#training-menu-highlight")){
+      const style=doc.createElement("style");
+      style.id="training-menu-highlight";
+      style.textContent='[data-menu="news"]{outline:6px solid #21b65a!important;outline-offset:1px!important}[data-menu="explore"]{outline:6px solid #2583dc!important;outline-offset:1px!important}[data-menu="board"]{outline:6px solid #f28b16!important;outline-offset:1px!important}';
+      doc.head.appendChild(style);
+     }
+    }
     if(mode==="overview"||mode==="nature"){
      doc.querySelector('[data-menu="explore"]')?.click();
      doc.querySelector('[data-explore="'+mode+'"]')?.click();

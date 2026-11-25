@@ -8,7 +8,7 @@ let notesOpen=false,overviewOpen=false;
 const escaped=s=>String(s||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 const lineTitle=title=>escaped(title).replace(/\n/g,"<br>");
 const commonTop=s=>'<div class="slide-kicker"><span>'+escaped(s.kicker||"")+'</span><span class="section-mini">'+escaped(s.section||"")+'</span></div>';
-const commonFooter=(i,total)=>'<div class="slide-footer"><span>우리 지역 탐정 · 초등교원 연수 · 2026.11.25</span><span>'+String(i+1).padStart(2,"0")+' / '+String(total).padStart(2,"0")+'</span></div>';
+const commonFooter=(i,total)=>'<div class="slide-footer"><span>우리 지역 탐정 · 2026.11.25</span><span>'+String(i+1).padStart(2,"0")+' / '+String(total).padStart(2,"0")+'</span></div>';
 function slideMarkup(s,i){
  const header=commonTop(s);
  const footer=commonFooter(i,slides.length);

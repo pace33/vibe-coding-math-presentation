@@ -34,9 +34,12 @@ function comparisonSearchTerms(story){
  const words=[...new Set((title.match(/[가-힣a-zA-Z0-9]+/g)||[]).filter(w=>w.length>=2&&!noise.has(w)&&!/^[0-9]+$/.test(w)))];
  return words.slice(0,2).join(" ")||safe(title,65);
 }
+function searchArea(region){
+ return !region||["전체","충북","충청북도"].includes(region)?"충청북도":region;
+}
 function query(kind,area=place(),topic=$("keyword").value){
- const q=[area,safe(topic),kind==="official"?"(공식 OR 공지 OR 안내)":""
- ].filter(Boolean).join(" ");
+ const cleanTopic=safe(topic,100).replace(/\b(?:when|site):\S+/gi,"").replace(/\s+/g," ").trim();
+ const q=[area,cleanTopic,kind==="official"?"(공식 OR 공지 OR 안내)":""].filter(Boolean).join(" ");
  const x=new URL("https://www.google.com/search");
  x.searchParams.set("q",q);
  x.searchParams.set("hl","ko");
@@ -91,7 +94,7 @@ function regionalNewsTerm(item,category){
  if(category==="nature")return (name&&!/기온|강수량|날씨/.test(name))?name:"기후";
  if(category==="local")return name||"문화유산";
  if(category==="facilities")return title==="교통"?"버스 교통":title;
- if(category==="business")return "농산물 특산물";
+ if(category==="business")return name||"농산물 특산물";
  return EXPLORE_CATEGORIES[category]?.defaultTerm||title||"지역";
 }
 function searchRegionalNews(term){
@@ -263,18 +266,12 @@ function fromLiveNews(index,directAI=false){
  chooseStory({title:item.title,url:item.url,publisher:item.publisher,date:item.published,region:item.region,topic:item.title},directAI);
 }
 function googleNewsUrl(region,keyword,menu){
- const area=region==="전체"?"충청북도":"충북 "+region;
- const type=EXPLORE_CATEGORIES[menu]?.defaultTerm||"";
- const q=[area,keyword||type,"when:30d"].filter(Boolean).join(" ");
- const u=new URL("https://news.google.com/search");
- u.searchParams.set("q",q);u.searchParams.set("hl","ko");
- u.searchParams.set("gl","KR");u.searchParams.set("ceid","KR:ko");
- return u.href;
+ return query("news",searchArea(region),keyword||EXPLORE_CATEGORIES[menu]?.defaultTerm||"");
 }
 // 뉴스 서버는 구글·빙 RSS 중 먼저 완료된 제공처를 반환합니다.
 // 링크도 실제 응답의 제공처에 맞추고, 검색 전·연결 오류에는 둘 다 표시합니다.
 function bingNewsUrl(region,keyword){
- const area=region==="전체"?"충북":region;
+ const area=searchArea(region);
  const u=new URL("https://www.bing.com/news/search");
  u.searchParams.set("q",[area,keyword].filter(Boolean).join(" "));
  u.searchParams.set("setlang","ko");
@@ -287,8 +284,13 @@ function updateNewsSourceLinks(region,keyword,menu,service=""){
  bing.href=bingNewsUrl(region,keyword);
  google.textContent="구글 뉴스에서 더 찾기 ↗";
  bing.textContent="빙 뉴스에서 더 찾기 ↗";
- google.hidden=service==="Bing News RSS";
- bing.hidden=service==="Google News RSS";
+ google.hidden=false;
+ bing.hidden=false;
+ const official=$("liveOfficialFallback");
+ if(official){
+  official.href=query("official",searchArea(region),keyword||EXPLORE_CATEGORIES[menu]?.defaultTerm||"");
+  official.hidden=false;
+ }
 }
 async function searchNewsInside({scroll=true}={}){
  if(keywordTimer!==null){clearTimeout(keywordTimer);keywordTimer=null;}
@@ -609,7 +611,7 @@ function evidenceKeyword(story){
   const company=matchingBusinesses(story)[0];
   if(company)return company.name.replace(/\s+(?:본사·공장|청주사업장|진천공장|제천공장|보은공장|옥천공장|상우공장)$/,"").trim().slice(0,55);
  }
- return topicTerms(story.title,story.region).slice(0,2).join(" ").slice(0,55)||safe(story.title,45);
+ return comparisonSearchTerms(story).slice(0,85);
 }
 async function searchEvidence(){
  if(!state.story)return;
@@ -824,7 +826,7 @@ function chooseStory(story,directAI=false,trainingCandidates=null){
  $("detailEvidence").open=true;
  document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
  $("formMessage").textContent="";
- const location=["전체","충청북도","충북"].includes(state.story.region)?"충청북도":state.story.region;
+ const location=searchArea(state.story.region);
  const comparisonTerms=comparisonSearchTerms(state.story);
  $("officialLink").href=query("official",location,comparisonTerms);
  $("newsCompareLink").href=query("news",location,comparisonTerms);

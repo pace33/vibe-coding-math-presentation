@@ -691,15 +691,28 @@ function firstJudgement(){
   govFact:safe($("officialFinding").value,500)||(state.selectedEvidence?"비교자료 제목: "+safe(state.selectedEvidence.title,190):"비교할 근거를 아직 적지 않았어요.")
  };
 }
+// Keep the model's actual opinion even when a source could not be opened.
+function plainAIText(value,max){
+ return safe(value,max).replace(/fetched\s*[:=]\s*false/gi,"원문 미확인").replace(/fetched\s*[:=]\s*true/gi,"원문 발췌 확인").replace(/\bfetched\b/gi,"원문 확인 여부");
+}
+function normalizeAIReview(raw){
+ const sources=(Array.isArray(raw.sources)?raw.sources:[]).slice(0,3).map(x=>({title:safe(x.title,110)+(x.fetched===true?" · 본문 발췌 확인":" · 원문 미확인"),url:url(x.url),date:safe(x.published||x.date||x.retrievedAt,30),fetched:x.fetched===true})).filter(x=>x.url);
+ const status=sources.some(x=>x.fetched)&&raw.webSearched===true?raw.status:"insufficient";
+ const opinion=plainAIText(raw.opinion||raw.comparison,550);
+ return {status,summary:plainAIText(raw.summary,550)||"AI가 확인한 내용을 안내하지 못했어요.",comparison:opinion,caution:plainAIText(raw.caution,260)||"AI가 제시한 자료를 직접 확인하세요.",sources,checkedAt:new Date().toISOString()};
+}
 function showAIReviewResult(review){
- const names={match:"찾은 근거와 일부 내용이 일치해요",conflict:"찾은 근거와 다른 내용이 있어요",insufficient:"확인할 근거가 부족해요",unavailable:"AI 검토에 연결하지 못했어요"};
+ const names={match:"찾은 근거와 일부 내용이 일치해요",conflict:"찾은 근거와 다른 내용이 있어요",insufficient:"근거는 부족하지만 AI 의견을 참고해요",unavailable:"AI 검토에 연결하지 못했어요"};
  const el=$("aiReviewResult");
  el.hidden=false;
  el.dataset.status=review.status;
  $("aiReviewLabel").textContent=names[review.status]||names.insufficient;
  $("aiReviewSummary").textContent=review.summary||"AI가 확인한 내용을 안내하지 못했어요.";
- $("aiReviewComparison").textContent=review.comparison||"";
- $("aiReviewCaution").textContent=review.caution||"AI가 제시한 자료도 원문에서 직접 확인하세요.";
+ $("aiOpinionHeading").hidden=review.status==="unavailable";
+ $("aiReviewComparison").hidden=review.status==="unavailable";
+ $("aiOpinionHeading").textContent=review.status==="insufficient"?"AI의 생각 (잠정 의견)":"AI의 생각";
+ $("aiReviewComparison").textContent=review.status==="unavailable"?"":review.comparison||"AI가 별도의 비교 의견을 제시하지 않았어요.";
+ $("aiReviewCaution").textContent=(review.status==="insufficient"?"원문 근거가 부족하므로 AI의 의견은 추정일 수 있어요. ":"")+(review.caution||"AI가 제시한 자료도 원문에서 직접 확인하세요.");
  const list=$("aiReviewSources");list.replaceChildren();
  if(review.sources?.length){
   const heading=document.createElement("strong");heading.textContent="AI가 참고한 자료 (본문 확인 여부는 링크 옆 표시)";list.appendChild(heading);
@@ -755,10 +768,13 @@ async function askAIEvidence(){
 
  try{
   const first=state.firstReview,article=state.story;
+  const chosen=state.selectedEvidence;
+  // Send the selected title as context, not as a verified article body.
+  const comparisonContext=[chosen?.title?"비교 자료 제목: "+safe(chosen.title,180):"",first.govFact].filter(Boolean).join("\n");
   const raw=await window.localcheckGemmaReview(AI_VERIFY_API,{
    region:safe(article.region,50),
    article:{title:safe(article.title,200),publisher:safe(article.publisher,100),date:safe(article.date,40),url:article.url},
-   initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:first.govFact,comparisonUrl:first.govUrl}
+   initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:safe(comparisonContext,500),comparisonUrl:first.govUrl}
   },{signal:controller.signal,onProgress:job=>{
    if(current!==aiSequence)return;
    $("aiReviewMessage").textContent=job.status==="restarted"
@@ -771,17 +787,7 @@ async function askAIEvidence(){
   }});
   if(current!==aiSequence)return;
   if(!["match","conflict","insufficient"].includes(raw.status))throw Error("AI 생성에 실패했습니다. 오류 코드: GEMMA_INVALID_RESPONSE");
-  const sources=(Array.isArray(raw.sources)?raw.sources:[]).slice(0,3).map(x=>({title:safe(x.title,110)+(x.fetched?" · 본문 발췌 확인":" · 원문 미확인"),url:url(x.url),date:safe(x.published||x.date||x.retrievedAt,30),fetched:x.fetched===true})).filter(x=>x.url);
-  // AI 의견에 출처가 없다면 불일치/일치 판정을 화면에 보여주지 않습니다.
-  const status=sources.some(x=>x.fetched)&&raw.webSearched===true?raw.status:"insufficient";
-  state.aiReview={
-   status,
-   summary:sources.length?safe(raw.summary,550):"검증에 사용할 수 있는 출처 링크가 없어 내용을 판단하지 않았어요.",
-   comparison:sources.length?safe(raw.comparison,400):"",
-   caution:safe(raw.caution,260)||"AI가 제시한 자료를 직접 확인하세요.",
-   sources,
-   checkedAt:new Date().toISOString()
-  };
+  state.aiReview=normalizeAIReview(raw);
   $("aiReviewMessage").textContent="자료를 확인하고 마지막 판단을 골라 보세요.";
  }catch(err){
   if(current!==aiSequence)return;

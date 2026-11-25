@@ -74,7 +74,7 @@ function chooseMenu(menu){
  });
  $("keyword").value=menu==="issues"?"환경":"";
  $("keyword").placeholder=isExplore?"예: "+EXPLORE_CATEGORIES[menu].prompts[0][2]:"예: 축제, 인구, 학교";
- updateLinks();renderBusinesses();renderNews();renderInquiries();
+ updateLinks();if(activeMenu==="business")renderBusinesses();if(activeMenu==="news")renderNews();renderInquiries();
  if($("home").hidden)show("home");
  if(menu==="issues")searchNewsInside({scroll:false});
 }
@@ -194,17 +194,24 @@ function fallbackRows(region,keyword){
  });
  return found.sort((a,b)=>String(b.published||"").localeCompare(String(a.published||""))).slice(0,10);
 }
-async function loadSearchIndex(){
+let indexPromise=null;
+function loadSearchIndex(){
+ if(indexPromise)return indexPromise;
+ indexPromise=fetchSearchIndex().then(ok=>{if(!ok)indexPromise=null;return ok;});
+ return indexPromise;
+}
+async function fetchSearchIndex(){
  try{
   const u=new URL("search-index.json",location.href);
   u.searchParams.set("v",new Date().toISOString().slice(0,10));
-  const response=await fetch(u.href,{cache:"no-store"});
+  const response=await fetch(u.href,{cache:"default"});
   if(!response.ok)throw Error("index unavailable");
   const parsed=await response.json();
-  if(!Array.isArray(parsed.items))return;
+  if(!Array.isArray(parsed.items))return false;
   state.searchIndex=parsed.items.filter(x=>x&&url(x.url)&&x.title&&x.region).slice(0,450);
   state.indexUpdated=parsed.updatedAt||null;
- }catch{state.searchIndex=[];state.indexUpdated=null;}
+  return true;
+ }catch{return false;}
 }
 function newsDate(value){
  const v=String(value||"").trim();
@@ -291,6 +298,7 @@ async function searchNewsInside({scroll=true}={}){
  const searchTerm=keyword||(EXPLORE_CATEGORIES[category]?.defaultTerm||"");
  const rssCategory=category==="business"?"business":category==="local"?"local":"news";
  const seq=++liveSequence;
+ const indexReady=loadSearchIndex();
  if(liveController)liveController.abort();
  const controller=new AbortController();
  liveController=controller;
@@ -319,6 +327,8 @@ async function searchNewsInside({scroll=true}={}){
    const provider=result.service==="Google News RSS"?"구글 뉴스 RSS":result.service==="Bing News RSS"?"빙 뉴스 RSS":"제공처 미확인 뉴스 RSS";
    $("liveStatus").textContent=provider+"에서 찾은 기사입니다. 원문에서 날짜와 사실 여부를 확인하세요.";
   }else{
+   await Promise.race([indexReady,new Promise(resolve=>setTimeout(resolve,1500))]);
+   if(seq!==liveSequence)return;
    const stored=fallbackRows(region,searchTerm);
    if(stored.length){
     renderLiveResults(stored,"saved");
@@ -328,6 +338,8 @@ async function searchNewsInside({scroll=true}={}){
    }
   }
  }catch(err){
+  if(seq!==liveSequence)return;
+  await Promise.race([indexReady,new Promise(resolve=>setTimeout(resolve,1500))]);
   if(seq!==liveSequence)return;
   const fallback=fallbackRows(region,searchTerm);
   renderLiveResults(fallback,"saved");
@@ -350,7 +362,7 @@ async function searchNewsInside({scroll=true}={}){
 }
 function onKeywordInput(){
  clearLiveResults();
- renderBusinesses();
+ if(activeMenu==="business")renderBusinesses();
  const keyword=safe($("keyword").value,85);
  if(keyword.length<2)return;
  // Wait for a short typing pause to avoid unnecessary RSS requests while composing Korean.
@@ -456,14 +468,14 @@ function fromBusiness(id){
   topic:business.name,suggested:business.secondary?.url||"",
   kind:"business",inquiry:business.inquiry});
 }
-function refresh(){clearLiveResults();updateLinks();renderNews();renderBusinesses();renderInquiries();}
+function refresh(){clearLiveResults();updateLinks();if(activeMenu==="news")renderNews();if(activeMenu==="business")renderBusinesses();renderInquiries();}
 async function loadNews(){
  const root=$("newsList");
  root.innerHTML='<div class="news-empty">최근 지역 자료를 불러오고 있어요.</div>';
  try{
   const path=new URL("latest.json",location.href);
   path.searchParams.set("v",new Date().toISOString().slice(0,13));
-  const response=await fetch(path.href,{cache:"no-store"});
+  const response=await fetch(path.href,{cache:"default"});
   if(!response.ok)throw Error("자료 요청 실패");
   const j=await response.json();
   if(!Array.isArray(j.items))throw Error("자료 형식 오류");
@@ -977,7 +989,8 @@ function init(){
  $("print").addEventListener("click",()=>window.print());
  $("download").addEventListener("click",download);
  if(window.LocalCheckBoard)window.LocalCheckBoard.init({show,getReport:()=>state.report});
- chooseMenu("news");loadNews();loadSearchIndex();
+ chooseMenu("news");loadNews();
+ // The large fallback index loads on demand; no competing download at first paint.
  // A same-origin presentation-only example uses real archived article links.
  // It is isolated from ordinary student navigation and never sends an AI request.
  if(window.parent!==window&&new URLSearchParams(location.search).get("trainingPreview")==="wolf"){

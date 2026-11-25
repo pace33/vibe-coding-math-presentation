@@ -552,7 +552,7 @@ const textbookTitles={
   "build-board": "완성한 카드는\n어떻게 저장할까요?",
   "build-test": "직접 사용하며\n무엇을 고쳤을까요?",
   "build-deploy": "학생이 쓰도록\n어떻게 공개할까요?",
-  "section-app": "우리 지역 탐정의 세 가지 메뉴를\n어떻게 활용할까요?",
+  "section-app": "우리 지역 탐정 웹앱의\n세 가지 메뉴를 어떻게 활용할까요?",
   "app-nature": "② 우리 지역\n자연환경은 어떻게 살펴볼까요?",
   "app-public": "② 우리 지역\n생활시설과 공공기관은 무엇이 있을까요?",
   "app-industry": "② 우리 지역\n산업과 생산물을 어떻게 알아볼까요?",

@@ -488,8 +488,24 @@ const techFlow=(top,arrow1,middle,arrow2,bottom,summary)=>'<div class="tech-flow
 const techTerm=(title,desc)=>'<div class="tech-term"><strong>'+title+'</strong><p>'+desc+'</p></div>';
 const techSummary=(text)=>'<div class="tech-summary">'+text+'</div>';
 Object.assign(classes,{
+ "build-tech-publish":{
+  id:"build-tech-publish",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ① · GitHub와 GitHub Pages",
+  title:"내가 만든 웹앱을\n어떻게 인터넷에 공개할까요?",
+  lead:"내 컴퓨터에서만 보던 웹앱을 학생들이 주소로 접속할 수 있게 합니다.",
+  body:techFlow(
+   techNode("💻","AI와 함께 만든 웹앱","화면·디자인·기능을 담은 파일","green"),
+   '<div class="tech-arrow"><span>↓ 파일을 저장</span></div>',
+   techNode("📁","GitHub","웹앱 파일을 보관하고 수정 이력을 관리","orange"),
+   '<div class="tech-arrow"><span>↓ GitHub Pages로 공개</span></div>',
+   techNode("🌐","GitHub Pages","학생들이 주소를 눌러 웹앱에 접속","green"),
+   techTerm("GitHub = 파일 보관함","만든 웹앱의 파일을 보관하고 수정한 내용을 기록합니다.")+
+   techTerm("GitHub Pages = 인터넷 전시장","저장한 웹앱을 인터넷 주소로 공개하는 서비스입니다.")+
+   techSummary("학생들은 프로그램을 설치하지 않아도 웹앱 주소로 접속할 수 있습니다.")
+  )+'<p class="fineprint"><a href="'+SITE+'" target="_blank" rel="noopener noreferrer">우리 지역 탐정 웹앱 바로가기 ↗</a></p>',
+  note:"학생용 웹앱은 pace33/vibe-coding-math-presentation 저장소의 local-check/student/ 파일을 GitHub Pages에서 제공하도록 구성되어 있습니다. GitHub는 저장소, GitHub Pages는 정적 웹 파일을 공개하는 서비스입니다. 실시간 뉴스 검색과 AI 기능은 별도의 서버에 연결합니다. 저장소와 기존 공개 주소를 기준으로 설명하며 현재 배포 상태는 별도 확인이 필요합니다."
+ },
  "build-tech-rss":{
-  id:"build-tech-rss",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ① · RSS와 중계 API",
+  id:"build-tech-rss",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ② · RSS와 중계 API",
   title:"뉴스 배달부가\n필요했던 이유는?",
   lead:"우리 지역 탐정에서 ‘청주시 동물원’을 검색했다고 생각해 봅시다.",
   body:techFlow(
@@ -506,7 +522,7 @@ Object.assign(classes,{
   note:"근거: local-check/server/news.mjs 및 student/live-news.js. Google News RSS 검색은 최근 30일 조건을 사용하며 Bing 검색 범위는 제공처에 따라 다릅니다. RSS는 Really Simple Syndication으로, XML 형식의 뉴스 목록을 전달합니다. 서버는 두 제공처 중 기사 목록이 담긴 정상 응답을 받아 전달하도록 구현되어 있습니다. 기사 본문 전체나 사실 확인을 보장하지 않습니다. 운영 서버 응답은 미확인입니다."
  },
  "build-tech-news-api":{
-  id:"build-tech-news-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ② · CORS와 검색 서버",
+  id:"build-tech-news-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ③ · CORS와 검색 서버",
   title:"왜 웹앱에서 직접\n뉴스를 가져오지 않을까요?",
   lead:"검색 버튼은 만들었는데 뉴스가 나오지 않는다면?",
   body:'<div class="tech-flow"><div class="tech-stack">'+
@@ -519,38 +535,38 @@ Object.assign(classes,{
   note:"근거: local-check/server/news.mjs, local-check/student/live-news.js. 브라우저에서 외부 RSS를 직접 읽을 때 상대 서버가 적절한 CORS 헤더를 제공하지 않으면 접근이 제한될 수 있습니다. 검색 서버는 허용된 출처에 응답하고 RSS를 반환하며 웹앱은 XML을 읽어 카드를 생성합니다. CORS는 인증 수단이 아닙니다. 서버 배포와 실제 응답 테스트가 필요합니다."
  },
  "build-tech-ai":{
-  id:"build-tech-ai",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ③ · AI 서버와 API",
-  title:"AI에게 검토를 요청하면\n무슨 일이 일어날까요?",
-  lead:"학생이 먼저 판단한 내용을 바탕으로 AI에게 도움을 요청합니다.",
+  id:"build-tech-ai",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ④ · AI 서버와 API",
+  title:"웹앱에 AI를\n어떻게 연결할까요?",
+  lead:"웹앱에 AI가 들어 있는 것이 아니라, 별도의 AI 서버에 도움을 요청하는 방식입니다.",
   body:techFlow(
-   techNode("🖥️","우리 지역 탐정 웹앱","이 기사와 내가 쓴 판단을 검토해 줘!","green"),
-   techArrow("기사·판단·근거 전송","검토 의견·출처 전달"),
-   techNode("📦","AI 서버 API","요청을 접수하고 결과를 돌려주는 창구","orange"),
-   techArrow("자료 검색·비교 요청","검토 결과"),
-   '<div class="tech-pair">'+techNode("🔎","웹 검색","관련 공개 자료 찾기")+techNode("🤖","Gemma4","근거를 바탕으로 비교")+'</div>',
-   techTerm("API = AI에게 말을 거는 통로","웹앱에서 보낸 기사와 판단 내용을 서버가 받아 처리.")+
-   techTerm("AI 서버 = 검토를 맡는 곳","웹 검색과 AI 모델을 연결해 자료를 비교하도록 구성.")+
-   techTerm("작업 대기열 = 번호표","요청이 많으면 순서대로 처리하고 웹앱이 결과를 확인.")+
-   techSummary("AI가 제시한 근거를 학생이 확인하고 최종 판단합니다.")
+   techNode("🖥️","GitHub Pages","이 기사와 내가 쓴 판단을 검토해 줘!","green"),
+   techArrow("기사와 판단 보내기","검토 의견 받기"),
+   techNode("📦","자체 AI 서버 · API","알겠어! 관련 자료를 찾아 비교해 볼게.","orange"),
+   techArrow("자료 찾고 비교하기","검토 결과"),
+   '<div class="tech-pair">'+techNode("🔎","웹 검색","관련 자료를 더 찾아봄")+techNode("🤖","Gemma4","찾은 자료와 학생의 판단을 비교")+'</div>',
+   techTerm("API = AI에게 부탁하는 창구","웹앱이 기사와 학생의 판단을 보내고 검토 의견을 받아요.")+
+   techTerm("AI 서버 = 검토를 맡는 곳","웹에서 관련 자료를 찾고 AI가 비교할 수 있도록 연결해요.")+
+   techTerm("Gemma4 = 자료를 읽는 AI","찾은 근거와 학생이 작성한 내용을 비교해 의견을 제시해요.")+
+   techSummary("웹앱에서 AI 서버에 요청하면 관련 자료와 검토 의견을 받아 볼 수 있습니다.")
   ),
   note:"근거: student/app.js, student/gemma-browser-client.js. 현재 브라우저는 자체 AI 서버의 /localcheck-ai/browser/verify 엔드포인트에 POST하고 HTTP 202를 받으면 작업 ID로 약 2초마다 상태를 조회합니다. 웹 검색·Gemma4 처리 과정은 클라이언트 진행 표시와 응답 계약을 바탕으로 설명하며 서버 내부와 실제 응답은 미확인입니다. 실제 요청에는 기사 URL과 학생 판단 및 근거가 포함됩니다."
  },
- "build-tech-ai-api":{
-  id:"build-tech-ai-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ④ · AI 연결과 안전장치",
-  title:"AI가 답을 못 찾으면\n어떻게 해야 할까요?",
-  lead:"AI를 넣는 것보다 학생의 학습이 멈추지 않도록 설계하는 것이 중요합니다.",
+ "build-tech-storage":{
+  id:"build-tech-storage",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ⑤ · LocalStorage와 링크 공유",
+  title:"학생이 조사한 내용은\n어디에 저장될까요?",
+  lead:"로그인 없이 탐정 카드를 저장하고 친구와 공유하는 방법입니다.",
   body:'<div class="tech-flow"><div class="tech-stack">'+
-   techNode("👩‍🏫","학생이 먼저 판단","기사 비교 → 이유 작성","green")+
-   '<div class="tech-arrow"><span>↓ AI 검토는 선택</span></div>'+
-   '<div class="tech-pair">'+techNode("🔎","근거가 있는 경우","검토 의견·출처 확인","green")+techNode("⚠️","근거 부족·연결 실패","확인할 근거가 부족해요","orange")+'</div>'+
-   '<div class="tech-arrow"><span>↓ 두 경우 모두</span></div>'+
-   techNode("📝","학생의 최종 판단","근거와 이유를 기록하고 탐정 카드 완성","green")+
+   techNode("📝","탐정 카드 완성","기사·비교 근거·판단 이유","green")+
+   '<div class="tech-arrow"><span>↓ 카드 저장 또는 링크 공유</span></div>'+
+   '<div class="tech-pair">'+techNode("📁","LocalStorage","사용 중인 브라우저에 카드 저장","orange")+techNode("🔗","공유 링크","카드 내용을 담은 주소 만들기","green")+'</div>'+
+   '<div class="tech-arrow"><span>↓ 다시 열어 보기 · 친구에게 전달</span></div>'+
+   techNode("🖥️","탐정 게시판","저장한 카드 보기 · 받은 카드 담기","green")+
    '</div><div class="tech-aside">'+
-   techTerm("AI의 의견은 정답이 아니에요","AI가 제시한 자료도 원문에서 확인합니다.")+
-   techTerm("개인정보·비밀 키 보호","학생 이름·연락처는 입력하지 않고, 비밀 키는 웹앱 코드에 넣지 않습니다.")+
-   techSummary("AI에게: 근거가 없으면 모른다고 알려 줘. AI가 안 돼도 아이들이 활동을 마치게 해 줘!")+
+   techTerm("LocalStorage = 내 브라우저의 서랍","로그인 없이 사용한 브라우저에 카드가 남아요.")+
+   techTerm("공유 링크 = 내용을 담은 주소","친구가 주소를 열면 카드를 확인하고 자기 게시판에 담을 수 있어요.")+
+   techSummary("별도 저장 서버 없이도 카드를 보관하고 공유할 수 있지만 학급 전체 기록이 자동으로 모이지는 않습니다.")+
    '</div></div>',
-  note:"근거: student/app.js, student/gemma-browser-client.js. 웹 검색 여부와 본문 발췌 확인 근거가 없으면 클라이언트는 일치·불일치 대신 근거 부족으로 처리합니다. AI 실패는 완료로 표시하지 않으며 직접 판단으로 카드 완성이 가능합니다. 학생 판단과 근거 메모가 서버로 전송되므로 개인정보 입력 금지 안내와 운영 보안 확인이 필요합니다. 서버 내부 보안 및 실제 AI 응답은 미확인입니다."
+  note:"근거: local-check/student/board.js. 카드 배열을 JSON으로 변환해 localStorage에 저장하고 공유 대상 카드의 데이터를 인코딩하여 URL의 #card= 부분에 넣습니다. 받은 카드를 열고 해당 브라우저에 저장할 수 있습니다. 브라우저 저장 데이터 삭제 또는 다른 기기·브라우저 사용 시 기존 기록은 자동으로 이전되지 않습니다. 서버 기반 학급 게시판이 아닙니다. 공유 링크에 학생 이름이나 연락처 등 개인정보를 넣지 않도록 안내합니다."
  }
 });
 
@@ -581,7 +597,7 @@ const order=[
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
  "app-basics","app-nature","app-record","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
- "build-test","build-deploy","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-api","closing","sources"
+ "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-storage","closing","sources"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
@@ -635,10 +651,11 @@ const textbookTitles={
   "sample-question": "우리 지역의 교통안전은\n어떻게 살펴볼까요?",
   "lesson-40": "지역 문제 탐구 수업은\n어떻게 진행해 볼까요?",
   "assessment": "학생의 탐구 과정은\n어떻게 살펴볼까요?",
+  "build-tech-publish": "내가 만든 웹앱을\n어떻게 인터넷에 공개할까요?",
   "build-tech-rss": "뉴스 배달부가\n필요했던 이유는?",
   "build-tech-news-api": "왜 웹앱에서 직접\n뉴스를 가져오지 않을까요?",
-  "build-tech-ai": "AI에게 검토를 요청하면\n무슨 일이 일어날까요?",
-  "build-tech-ai-api": "AI가 답을 못 찾으면\n어떻게 해야 할까요?",
+  "build-tech-ai": "웹앱에 AI를\n어떻게 연결할까요?",
+  "build-tech-storage": "학생이 조사한 내용은\n어디에 저장될까요?",
   "closing": "교과서 속 탐구를\n우리 지역과 어떻게 이을까요?",
   "sources": "발표 자료의 출처는\n어디에서 확인할까요?"
 };

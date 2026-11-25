@@ -510,14 +510,17 @@ Object.assign(classes,{
 const featureWalkthrough={
  "app-menu":{title:"우리 지역 탐정 웹앱의\n전체 화면을 살펴볼까요?",lead:"뉴스 찾기 · 우리 지역 · 탐정 게시판",preview:"news",image:"assets/00-overview.svg",points:[["뉴스 찾기","지역과 검색어를 정해 관련 기사 조사"],["우리 지역","시·군별 6개 분야의 정보 탐구"],["탐정 게시판","판단과 근거를 탐정 카드로 저장·공유"]]},
  "app-news":{title:"① 뉴스 찾기\n우리 지역 기사를 어떻게 찾을까요?",lead:"지역 범위를 설정한 뒤 검색어를 입력합니다.",preview:"news",image:"assets/04-news.svg",points:[["검색 범위","충북 11개 시·군 중 조사할 지역 선택"],["기사 검색","주제에 맞는 검색어로 뉴스 찾기"],["기사 확인","제목·언론사·날짜·원문을 확인"]]},
- "app-verify":{title:"① 뉴스 찾기\n다른 기사와 어떻게 비교할까요?",lead:"한 기사만으로 단정하지 않고 관련 자료와 비교합니다.",preview:"verify",image:"assets/05-verify.svg",points:[["출처 확인","첫 기사와 관련 기사·공식 자료 확인"],["근거 비교","같은 내용과 다른 내용을 찾아 비교"],["직접 판단","같아요·달라요·더 알아볼래요 선택 후 이유 작성"]]},
+ "app-verify":{title:"뉴스 검증하기 ①\n기사의 출처와 근거를 확인해요",lead:"뉴스 카드에서 ‘검증하기’를 누르면 출처와 근거 확인 화면이 열립니다.",preview:"verify",image:"assets/05-verify.svg",points:[["출처 확인","선택한 기사의 언론사와 발행일 확인"],["기사 원문 읽기","원문을 열어 뉴스에서 주장하는 내용 확인"],["근거 확인","자동으로 찾은 관련 기사와 공식 자료 살펴보기"]]},
+ "app-verify-evidence":{title:"뉴스 검증하기 ②\n비교할 기사를 선택해요",lead:"같은 사건을 다룬 기사나 공식 자료를 찾아 비교합니다.",preview:"verify-evidence",image:null,points:[["② 근거 확인","자동 검색된 관련 자료의 제목·출처·날짜 확인"],["원문 읽기","첫 기사와 같은 사건인지, 어떤 근거가 있는지 확인"],["이 자료로 비교하기","버튼을 누르면 선택한 자료의 링크가 자동으로 기록됨"]]},
+ "app-verify-writing":{title:"뉴스 검증하기 ③\n기사에서 확인한 내용을 써요",lead:"두 자료를 읽고 중요한 사실과 차이점을 기록합니다. (선택)",preview:"verify-writing",image:null,points:[["뉴스에서 확인한 중요한 사실","첫 기사에서 확인한 핵심 내용을 간단히 작성"],["두 자료에서 확인한 차이점","다른 기사 또는 공식 자료와 비교한 내용 작성"],["내용이 같을 때","같은 내용을 기록해도 됨 · 근거 작성은 선택"]]},
+ "app-verify-judgement":{title:"뉴스 검증하기 ④\n직접 판단하고 이유를 써요",lead:"학생이 두 자료를 비교해 판단한 뒤 그 이유를 작성합니다.",preview:"verify-judgement",image:null,points:[["③ 기사 비교","같아요 · 달라요 · 더 알아볼래요 중 선택"],["판단 이유 쓰기 (필수)","어떤 내용이 같거나 달랐는지 근거와 함께 작성"],["비교 자료가 부족할 때","더 알아볼래요를 선택하고 이유를 작성"]]},
  "app-basics":{title:"② 우리 지역\n어떤 정보를 조사할 수 있을까요?",lead:"시·군을 선택하고 여섯 가지 분야를 살펴봅니다.",preview:"overview",image:"assets/03-basics.svg",points:[["기본 정보 · 자연환경","인구·면적·산·하천 등 지역의 특징"],["생활시설 · 산업과 경제","공공기관·기업·특산물·견학 정보"],["역사와 문화 · 지역문제","문화유산·축제·지역 현안"]]},
  "app-nature":{title:"② 우리 지역\n필요한 자료를 어떻게 확인할까요?",lead:"관심 분야의 정보 카드에서 공식 자료와 관련 뉴스를 찾아봅니다.",preview:"nature",image:"assets/16-nature.svg",points:[["지역 정보 카드","선택한 시·군의 구체적인 장소와 특징 확인"],["공식 자료 확인","카드에 제공되는 출처·기준일·원문 링크 확인"],["관련 뉴스 조사","지역 자료에서 관련 기사 검색으로 연결"]]},
  "app-record":{title:"③ 탐정 게시판\n조사 결과를 어떻게 기록하고 공유할까요?",lead:"학생이 직접 판단한 내용을 탐정 카드로 정리합니다.",preview:"board",image:"assets/06-board.svg",points:[["탐정 카드","기사·비교 근거·판단 이유 저장"],["자세히 보기","저장한 카드를 다시 확인"],["친구와 공유","카드 링크로 결과 공유·받은 카드 담기"]]},
- "app-ai-review":{title:"③ 탐정 게시판과 연결되는\nAI 검토는 어떻게 활용할까요?",lead:"학생의 첫 판단을 기록한 뒤 AI 근거 검토를 선택적으로 활용합니다.",preview:"ai",image:null,points:[["먼저 학생이 판단","관련 기사와 자료를 비교해 이유 작성"],["AI로 더 알아보기","AI 검토 의견과 제시된 근거를 확인"],["최종 판단·카드 완성","학생이 다시 판단하고 기록 · AI 없이도 완성 가능"]]}
+ "app-ai-review":{title:"뉴스 검증하기 ⑤\nAI로 더 알아보고 카드를 완성해요",lead:"학생의 판단을 먼저 기록하고 AI 근거 검토는 선택적으로 활용합니다.",preview:"ai",image:null,points:[["④ AI로 더 알아보기 (선택)","‘내 판단을 기록하고 AI 근거 검토하기’ 버튼 누르기"],["⑤ 최종 판단","AI가 제시한 근거를 직접 확인하고 마지막 판단과 이유 기록"],["뉴스 탐정 카드 완성하기","AI를 이용하지 않아도 자신의 판단으로 카드 완성 가능"]]}
 };
 function featureBody(feature){
- const source=feature.image?'<img class="feature-fallback" src="'+feature.image+'" alt="발표용 재구성 예시 이미지"><span class="feature-fallback-label">재구성 예시 · 실제 캡처 아님</span>':'<div class="feature-fallback feature-placeholder">실제 웹앱에서 AI 검토 화면을 열어 확인할 수 있습니다.</div>';
+ const source=feature.image?'<img class="feature-fallback" src="'+feature.image+'" alt="발표용 재구성 예시 이미지"><span class="feature-fallback-label">재구성 예시 · 실제 캡처 아님</span>':'<div class="feature-fallback feature-placeholder">실제 웹앱을 불러오면 해당 단계의 화면이 표시됩니다.</div>';
  return '<div class="feature-walkthrough"><div class="feature-media" data-preview="'+feature.preview+'">'+source+'</div><div class="feature-explain">'+feature.points.map((p,i)=>'<div class="feature-item"><span>'+String(i+1).padStart(2,"0")+' · '+p[0]+'</span><strong>'+p[1]+'</strong></div>').join("")+'<a class="feature-open" href="'+SITE+'" target="_blank" rel="noopener noreferrer">실제 학생용 웹앱 열기 ↗</a></div></div>';
 }
 
@@ -526,8 +529,8 @@ const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
  "app-article-environment","field-compare-gap","field-textbook-region","field-gap-region","field-standards",
  "section-class","sample-question","lesson-40","assessment","section-app",
- "app-menu","app-news","app-verify","app-basics","app-nature",
- "app-record","app-ai-review","section-build","build-overview",
+ "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
+ "app-basics","app-nature","app-record","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
  "build-test","build-deploy","closing","sources"
 ]

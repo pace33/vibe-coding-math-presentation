@@ -349,7 +349,7 @@ const classes={
   title:"뉴스를 찾은 뒤에는\n어떤 어려움이 있을까요?",
   lead:"검색 결과가 나와도 수업에 필요한 자료인지 판단해야 합니다.",
   body:'<div class="field-reality">'+
-   '<div class="field-cell"><span>01 · 관련 자료 고르기</span><strong>다른 지역의 뉴스와<br>관련 없는 기사 구분하기</strong></div>'+
+   '<div class="field-cell"><span>01 · 필요한 기사 찾기</span><strong>주제와 관련 없는<br>기사 구분하기</strong></div>'+
    '<div class="field-cell"><span>02 · 자료의 시점 확인하기</span><strong>오래된 기사와<br>최근 기사 구분하기</strong></div>'+
    '<div class="field-cell"><span>03 · 기사 내용 이해하기</span><strong>하나의 기사만으로<br>사실을 판단하기 어려움</strong></div></div>'+
    '<p class="fineprint">학생이 찾은 뉴스의 출처와 날짜, 기사 본문과 관련 근거를 함께 살펴볼 필요가 있습니다.</p>',

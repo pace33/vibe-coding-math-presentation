@@ -771,7 +771,16 @@ async function askAIEvidence(){
  // AI 응답을 기다리지 않고도 학생 판단으로 카드를 완성할 수 있습니다.
  $("finish").disabled=false;
  $("formMessage").textContent="";
- $("aiReviewMessage").textContent="요청을 등록하고 있어요. 접수 순서대로 웹검색 후 Gemma4가 검토합니다.";
+ const started=Date.now();
+ let progressText="AI 검토를 요청하고 있어요.";
+ const paintProgress=()=>{
+  if(current!==aiSequence)return;
+  const seconds=Math.floor((Date.now()-started)/1000);
+  const elapsed=seconds<60?seconds+"초":Math.floor(seconds/60)+"분 "+(seconds%60)+"초";
+  $("aiReviewMessage").textContent=progressText+" · 경과 "+elapsed+(seconds>=30?" · 기다리는 동안 작성자 이름을 적어도 좋아요.":"");
+ };
+ paintProgress();
+ const progressTimer=setInterval(()=>{if(current!==aiSequence)clearInterval(progressTimer);else paintProgress();},1000);
 
  try{
   const first=state.firstReview,article=state.story;
@@ -783,13 +792,16 @@ async function askAIEvidence(){
    initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:safe(comparisonContext,500),comparisonUrl:first.govUrl}
   },{signal:controller.signal,onProgress:job=>{
    if(current!==aiSequence)return;
-   $("aiReviewMessage").textContent=job.status==="restarted"
+   progressText=job.status==="restarted"
     ? "서버 업데이트로 이전 작업을 찾을 수 없어 새로 요청하고 있어요."
     : job.status==="reconnecting"
     ? "AI 서버 연결을 다시 시도하고 있어요. ("+job.attempt+"/2)"
     : job.status==="queued"
     ? "순서대로 처리 중이에요. 내 순번: "+job.queuePosition+"번째"
-    : job.phase==="web-search"?"서버가 공개 자료를 검색하고 원문을 확인하고 있어요.":"Gemma4가 찾은 자료를 비교하고 있어요.";
+    : job.phase==="web-search"?"관련 자료를 검색하고 있어요."
+    : job.phase==="starting"?"AI 검토를 준비하고 있어요."
+    : job.phase==="gemma-analysis"?"AI가 자료를 비교하고 의견을 작성하고 있어요.":"AI 서버에서 처리하고 있어요.";
+   paintProgress();
   }});
   if(current!==aiSequence)return;
   if(!["match","conflict","insufficient"].includes(raw.status))throw Error("AI 생성에 실패했습니다. 오류 코드: GEMMA_INVALID_RESPONSE");
@@ -807,7 +819,7 @@ async function askAIEvidence(){
   };
   $("aiReviewMessage").textContent=err.name==="AbortError"?"AI 응답이 지연되고 있어요. 직접 검증을 계속할 수 있어요.":(/^AI 생성에 실패했습니다\. 오류 코드: [A-Z0-9_]{1,64}$/.test(err.message)?err.message:"AI 생성에 실패했습니다. 오류 코드: GEMMA_CONNECTION");
  }finally{
-
+  clearInterval(progressTimer);
   if(current===aiSequence){
    aiController=null;
    $("askAi").disabled=false;

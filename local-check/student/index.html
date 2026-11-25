@@ -12,14 +12,14 @@
 <script src="small-businesses.js" defer></script>
 <script src="additional-businesses.js" defer></script>
 <script src="tour-businesses.js" defer></script>
-<script src="board.js?v=largeboard20261124" defer></script>
+<script src="board.js?v=author20261125" defer></script>
 <script src="live-news.js" defer></script>
 <script src="regional-inquiries.js" defer></script>
 <script src="regional-landmarks.js?v=regionalparks20261124" defer></script>
 <script src="regional-visits.js" defer></script>
 <script src="regional-basics.js" defer></script>
 <script src="gemma-browser-client.js?v=direct20261124"></script>
-<script src="app.js?v=mobileinput20261125" defer></script>
+<script src="app.js?v=author20261125" defer></script>
 <script src="mobile-ui.js?v=distinctsound20261125" defer></script>
 </head>
 <body>
@@ -177,8 +177,13 @@
         <label class="short-reason-label" for="finalReason">최종 판단의 이유를 적어 보세요.</label>
         <textarea inputmode="text" lang="ko" id="finalReason" rows="1" maxlength="220" placeholder="이유를 짧게 적어 보세요."></textarea>
       </div>
-      <p class="evidence-disclaimer">※ AI의 의견도 직접 확인해요. 이름이나 연락처는 적지 않아요.</p>
+      <p class="evidence-disclaimer">※ AI의 의견도 직접 확인해요. 기사 내용에 이름이나 연락처를 적지 않아요.</p>
     </section>
+    <div class="card-author-field" style="margin:18px 0 10px;padding:15px;border:1px solid #cbded1;border-radius:12px;background:#f5f9f5">
+      <label for="cardAuthor" style="display:block;font-weight:800;margin-bottom:7px">👤 작성자 이름 (필수)</label>
+      <input id="cardAuthor" type="text" inputmode="text" lang="ko" maxlength="20" autocomplete="off" placeholder="이름 또는 학급에서 사용하는 별명" required aria-describedby="authorHelp">
+      <p id="authorHelp" class="helper">친구들이 누가 작성했는지 알 수 있도록 이름이나 별명을 적어 주세요.</p>
+    </div>
     <div class="bottom-actions"><button id="finish" type="button" class="btn btn-primary">✅ 뉴스 탐정 카드 완성하기</button><span id="formMessage" role="status" aria-live="polite"></span></div>
   </section>
 </section>
@@ -186,7 +191,7 @@
   <button type="button" id="backVerify" class="back">← 뒤로가기</button>
   <div class="intro small-intro"><h1>✅ 탐정 카드 완성!</h1><p>내가 확인한 자료와 생각을 친구에게 보여주세요.</p></div>
   <div id="report" class="report"></div>
-  <p class="board-privacy">카드는 이 기기에 저장됩니다. 공유할 때 이름·연락처를 적지 마세요.</p>
+  <p class="board-privacy">카드는 이 기기에 저장됩니다. 작성자 이름도 공유 링크에 포함되므로 학급 안에서만 공유하고, 필요하면 별명을 사용하세요.</p>
   <div class="bottom-actions"><button type="button" class="btn btn-primary" id="shareCard">🔗 친구에게 공유</button><button type="button" class="btn btn-light" id="resultBoard">탐정 게시판</button><button type="button" class="btn btn-light" id="again">다른 자료 찾기</button></div><details class="secondary-tools"><summary>인쇄·파일 저장</summary><div class="bottom-actions"><button type="button" class="btn btn-light" id="print">🖨️ 인쇄 / PDF</button><button type="button" class="btn btn-light" id="download">📥 글 저장</button></div></details>
 </section>
 
@@ -200,10 +205,10 @@
   <button class="back" id="sharedBack" type="button">← 뒤로가기</button>
   <div class="intro small-intro"><h1 id="sharedTitle">🔎 친구의 탐정 카드</h1></div>
   <div id="sharedReport" class="report" aria-live="polite"></div>
-  <p class="board-privacy">친구의 생각과 내 생각을 비교해 보세요. 이름이나 연락처는 카드에 적지 않아요.</p>
+  <p class="board-privacy">친구의 생각과 내 생각을 비교해 보세요. 공유받은 카드에는 작성자 이름 또는 별명이 표시됩니다.</p>
   <div class="bottom-actions"><button class="btn btn-primary" id="addShared" type="button">📚 내 게시판에 담기</button><button class="btn btn-light" id="shareAgain" type="button">🔗 이 카드 링크 복사</button><button class="btn btn-light" id="sharedHome" type="button">🏠 첫 화면으로</button></div>
   <p id="shareStatus" class="board-feedback" role="status" aria-live="polite"></p>
 </section>
-<footer><span>우리 지역 탐정 · 로컬체크 EDU</span><span>카드 공유 시 개인정보를 적지 마세요.</span></footer>
+<footer><span>우리 지역 탐정 · 로컬체크 EDU</span><span>카드는 학급 안에서 공유하고 연락처 등 개인정보는 적지 마세요.</span></footer>
 </div></main>
 </body></html>

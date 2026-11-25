@@ -551,6 +551,19 @@ Object.assign(classes,{
   ),
   note:"근거: student/app.js, student/gemma-browser-client.js. 현재 브라우저는 자체 AI 서버의 /localcheck-ai/browser/verify 엔드포인트에 POST하고 HTTP 202를 받으면 작업 ID로 약 2초마다 상태를 조회합니다. 웹 검색·Gemma4 처리 과정은 클라이언트 진행 표시와 응답 계약을 바탕으로 설명하며 서버 내부와 실제 응답은 미확인입니다. 실제 요청에는 기사 URL과 학생 판단 및 근거가 포함됩니다."
  },
+ "build-tech-ai-choice":{
+  id:"build-tech-ai-choice",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ④ · 로컬 AI를 선택한 이유",
+  title:"왜 Gemini API 대신\nGemma 4를 선택했을까요?",
+  lead:"초등학생이 사용하는 웹앱이므로 AI 서비스의 이용 조건도 고려해야 합니다.",
+  body:'<div class="tech-flow"><div class="tech-stack">'+
+   '<div class="tech-route"><span class="tech-route-label">Gemini API · 외부 AI 서비스</span><div class="tech-route-row">'+techNode("🖥️","학생용 웹앱","AI에게 요청")+'<span class="tech-route-arrow blocked">→</span>'+techNode("☁️","Google AI 서버","Gemini API로 처리")+'</div><p>Gemini API 약관: 만 18세 미만을 대상으로 하거나 접근할 가능성이 있는 서비스에는 사용 제한.</p></div>'+
+   '<div class="tech-route"><span class="tech-route-label">Gemma 4 · 자체 서버에서 실행하는 로컬 AI</span><div class="tech-route-row">'+techNode("🖥️","학생용 웹앱","AI에게 요청")+'<span class="tech-route-arrow">↔</span>'+techNode("🤖","자체 AI 서버","Gemma 4 직접 실행","green")+'</div><p>Apache 2.0 라이선스의 공개 모델. 자체 서버에 설치하여 실행할 수 있습니다.</p></div></div><div class="tech-aside">'+
+   techTerm("Gemini API = 외부 AI 빌려 쓰기","Google 서버에 요청하는 서비스로, 학생 대상 웹앱에 적용할 때 연령 제한을 확인해야 합니다.")+
+   techTerm("Gemma 4 = 내 서버에 AI 설치하기","Gemini API와 다른 이용 조건으로, AI 추론을 자체 서버에서 처리할 수 있습니다.")+
+   techSummary("학생 대상 서비스의 이용약관을 고려하여 자체 서버에서 실행하는 로컬 AI를 선택했습니다.")+
+   '<p class="fineprint"><a href="https://ai.google.dev/gemini-api/terms?hl=ko" target="_blank" rel="noopener noreferrer">Gemini API 약관(2026.3.23. 시행) ↗</a><br><a href="https://developers.googleblog.com/bring-state-of-the-art-agentic-skills-to-the-edge-with-gemma-4/" target="_blank" rel="noopener noreferrer">Gemma 4 공식 발표(2026.4.2.) ↗</a></p></div></div>',
+  note:"Google Gemini API 추가 서비스 약관(2026년 3월 23일 시행)의 연령 요건은 만 18세 미만을 대상으로 하거나 접근할 가능성이 있는 API 클라이언트에 해당 서비스를 사용하지 않도록 규정합니다. Google의 별도 교육용 서비스 전체가 금지된다는 의미는 아닙니다. Gemma 4는 2026년 4월 2일 Apache 2.0 라이선스로 공개되었고 자체 장비에서 실행할 수 있습니다. 로컬 모델 선택 자체가 학생용 서비스의 법적 적합성이나 안전성을 보장하지는 않습니다. 학생 개인정보 보호와 안전관리, 외부 웹 검색 시 데이터 전송 범위 확인은 별도로 필요합니다. 이 웹앱의 실제 AI 서버 내부는 이번 수정에서 검증하지 않았습니다. 출처: https://ai.google.dev/gemini-api/terms?hl=ko 및 https://developers.googleblog.com/bring-state-of-the-art-agentic-skills-to-the-edge-with-gemma-4/"
+ },
  "build-tech-storage":{
   id:"build-tech-storage",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ⑤ · LocalStorage와 링크 공유",
   title:"학생이 조사한 내용은\n어디에 저장될까요?",
@@ -597,7 +610,7 @@ const order=[
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
  "app-basics","app-nature","app-record","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
- "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-storage","closing","sources"
+ "build-test","build-deploy","build-tech-publish","build-tech-rss","build-tech-news-api","build-tech-ai","build-tech-ai-choice","build-tech-storage","closing","sources"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
@@ -655,6 +668,7 @@ const textbookTitles={
   "build-tech-rss": "뉴스 배달부가\n필요했던 이유는?",
   "build-tech-news-api": "왜 웹앱에서 직접\n뉴스를 가져오지 않을까요?",
   "build-tech-ai": "웹앱에 AI를\n어떻게 연결할까요?",
+  "build-tech-ai-choice": "왜 Gemini API 대신\nGemma 4를 선택했을까요?",
   "build-tech-storage": "학생이 조사한 내용은\n어디에 저장될까요?",
   "closing": "교과서 속 탐구를\n우리 지역과 어떻게 이을까요?",
   "sources": "발표 자료의 출처는\n어디에서 확인할까요?"

@@ -679,7 +679,7 @@ function firstJudgement(){
  const compareUrl=url($("officialUrl").value);
  if(reason.length<3){
   $("formMessage").textContent="탐정 카드를 완성하려면 내 판단의 이유를 적어 주세요.";
-  $("reason").focus();return null;
+  $("reason").scrollIntoView({block:"center",behavior:"smooth"});$("reason").focus();return null;
  }
  if(verdict!=="아직 모르겠어요"&&!compareUrl){
   $("formMessage").textContent="내용이 같거나 다르다고 판단했다면 비교한 자료 링크를 먼저 골라 주세요. 찾지 못하면 '더 알아볼래요'를 선택해도 돼요.";
@@ -863,12 +863,13 @@ function fromNews(index){
  const row=state.news[index];if(!row)return;
  chooseStory({title:row.title,url:row.url,publisher:row.publisher,date:row.published,region:row.region,topic:row.title});
 }
-function makeReport(){
- if(!state.story)return;
+let savingCard=false;
+async function makeReport(){
+ if(!state.story||savingCard)return;
  const author=safe($("cardAuthor").value,20);
  if(!author||!/[\p{L}\p{N}]/u.test(author)||/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/.test(author)||/01[016789][-\s]?\d{3,4}[-\s]?\d{4}/.test(author)){
   $("formMessage").textContent="작성자 이름이나 별명을 적어 주세요. 연락처나 이메일은 적지 않아요.";
-  $("cardAuthor").focus();return;
+  $("cardAuthor").scrollIntoView({block:"center",behavior:"smooth"});$("cardAuthor").focus();return;
  }
  // AI를 사용하지 않아도 학생의 직접 검증 기록만으로 완성할 수 있습니다.
  const first=state.firstReview||firstJudgement();
@@ -882,11 +883,10 @@ function makeReport(){
   finalVerdict=document.querySelector('input[name="finalVerdict"]:checked')?.value;
   finalReason=safe($("finalReason").value,220);
   if(!finalVerdict){
-   $("formMessage").textContent="마지막 판단을 골라 주세요.";return;
+   $("formMessage").textContent="마지막 판단을 골라 주세요."; $("finalStage").scrollIntoView({block:"center",behavior:"smooth"});return;
   }
   if(!finalReason)finalReason="최종 판단 이유는 별도로 기록하지 않았어요.";
  }
- if(aiController){aiSequence++;aiController.abort();aiController=null;}
  // Keep the actual selected source first; otherwise retain a distinct source found earlier.
  const explicitUrl=url(first.govUrl)||url(state.selectedEvidence?.url);
  const distinct=x=>url(x?.url)&&url(x.url)!==url(state.story.url);
@@ -908,12 +908,23 @@ function makeReport(){
   aiStatus:ai?.status||"",aiSummary:ai?.summary||"",aiComparison:ai?.comparison||"",
   aiCaution:ai?.caution||"",aiSources:ai?.sources||[],aiCheckedAt:ai?.checkedAt||""
  };
- if(window.LocalCheckBoard){
-  const saved=window.LocalCheckBoard.save(state.report);
-  if(!saved){$("formMessage").textContent="카드를 저장하지 못했어요. 기존 기록은 그대로 보존했어요.";return;}
+ if(!window.LocalCheckBoard){$("formMessage").textContent="게시판을 불러오지 못했어요. 새로고침 후 다시 이용해 주세요.";return;}
+ savingCard=true;
+ const finish=$("finish");
+ finish.disabled=true;finish.textContent="저장하는 중…";
+ $("formMessage").textContent="이 기기에 탐정 카드를 저장하고 있어요.";
+ try{
+  const saved=await window.LocalCheckBoard.save(state.report);
+  if(!saved){$("formMessage").textContent=window.LocalCheckBoard.getSaveError?.()||"카드를 저장하지 못했어요. 기존 기록은 지우지 않았어요.";return;}
   state.report=saved;
+  if(aiController){aiSequence++;aiController.abort();aiController=null;}
+  $("formMessage").textContent="";
+  renderReport();show("result");
+ }catch{
+  $("formMessage").textContent="카드 저장 또는 화면 표시 중 문제가 생겼어요. 탐정 게시판을 먼저 확인해 주세요.";
+ }finally{
+  savingCard=false;finish.disabled=false;finish.textContent="✅ 뉴스 탐정 카드 완성하기";
  }
- renderReport();show("result");
 }
 function renderReport(){
  if(!state.report)return;

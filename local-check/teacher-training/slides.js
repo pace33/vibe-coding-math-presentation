@@ -235,14 +235,11 @@ const SLIDES=[
  id:"app-article-environment",section:"실제 뉴스 검증 사례",kicker:"🐺 늑구 뉴스 · 단계별로 확인하기",
  title:"늑구 기사에서\n무엇을 확인했을까요?",
  lead:"기사의 제목과 날짜를 살펴보고 새롭게 확인된 정보를 비교하기",
- body:'<div class="news-correction-table">'+
-  '<div class="correction-head"><span>궁금한 점</span><span>처음 알려진 소식</span><span>나중에 확인한 사실</span></div>'+
-  '<div class="correction-row"><strong>청주에 왔나요?</strong><p>4월 9일 목격 신고</p><b>현장 수색에서 발견하지 못함</b></div>'+
-  '<div class="correction-row"><strong>어떻게 알 수 있나요?</strong><p>늑대처럼 보였다는 제보</p><b>당국이 조사·수색한 결과 확인</b></div>'+
-  '<div class="correction-row"><strong>결국 어디서 찾았나요?</strong><p>처음에는 위치가 불확실</p><b>4월 17일 대전에서 포획</b></div>'+
-  '<div class="correction-evidence"><span>실제 기사</span><strong>4/9 연합뉴스(신고) → 4/10 노컷뉴스(청주 수색) → 4/17 연합뉴스(대전 포획)</strong></div>'+
-  '<div class="correction-lesson"><span>학생이 배울 점</span><strong>‘신고했다’와 ‘확인됐다’는 다릅니다. 기사 날짜와 후속 보도를 함께 살펴봐요.</strong></div>'+
-  '</div>',
+ body:'<div class="field-reality">'+
+  '<div class="field-cell"><span>4월 9일 · 연합뉴스</span><strong>청주 목격 신고</strong><p class="fineprint">늑구를 봤다는 신고가 접수됨</p><a class="field-source" href="https://www.yna.co.kr/amp/view/AKR20260409172900064" target="_blank" rel="noopener noreferrer">실제 기사 보기 ↗</a></div>'+
+  '<div class="field-cell"><span>4월 10일 · 노컷뉴스</span><strong>청주 현장 수색</strong><p class="fineprint">신고 지역을 수색했으나 늑대를 발견하지 못함</p><a class="field-source" href="https://v.daum.net/v/20260410090600934" target="_blank" rel="noopener noreferrer">실제 기사 보기 ↗</a></div>'+
+  '<div class="field-cell solved"><span>4월 17일 · 연합뉴스</span><strong>대전에서 포획</strong><p class="fineprint">대전에서 늑구를 포획함</p><a class="field-source" href="https://www.yna.co.kr/view/AKR20260417001851063" target="_blank" rel="noopener noreferrer">실제 기사 보기 ↗</a></div></div>'+
+  '<div class="correction-lesson"><span>학생이 배울 점</span><strong>하나의 기사만으로 사실을 단정하지 않고 후속 기사와 확인된 근거를 함께 살펴봅니다.</strong></div>',
  note:"확인 근거: 연합뉴스 2026.4.9. https://www.yna.co.kr/amp/view/AKR20260409172900064 ; 노컷뉴스 2026.4.10. https://v.daum.net/v/20260410090600934 ; 연합뉴스 2026.4.17. https://www.yna.co.kr/view/AKR20260417001851063 . 청주의 목격 신고는 사실로 접수됐지만 청주에서 늑대 실물을 발견하지 못했습니다. 4월 17일 포획 지점은 대전 안영 나들목 인근입니다. 이는 '신고가 거짓말이었다'고 단정하거나 '청주 방문이 절대 없었다'고 확정하는 사례가 아니며, 서로 다른 시점의 뉴스와 확인 수준을 구분하는 수업입니다. 기사들의 원제목을 제시하는 대신 아이들이 이해하기 쉬운 말로 재구성했음을 안내합니다."
 },
 {

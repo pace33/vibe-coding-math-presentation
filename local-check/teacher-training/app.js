@@ -83,13 +83,45 @@ function mountStudentPreview(frame){
      doc.querySelector('[data-explore="'+mode+'"]')?.click();
     }else if(mode==="board"){
      doc.querySelector('[data-menu="board"]')?.click();
-    }else if(mode==="verify"||mode==="ai"){
+    }else if(mode==="verify"||mode.startsWith("verify-")||mode==="ai"){
      const news=doc.querySelector('#newsList [data-news], #liveNewsList [data-live-news]');
      if(!news){if(++attempts<24)setTimeout(activate,300);else fail();return;}
      news.click();
-     if(mode==="ai")setTimeout(()=>{
-      if(host.isConnected)doc.getElementById("aiReviewStage")?.scrollIntoView({block:"start",behavior:"instant"});
-     },450);
+     const stageConfig={
+      "verify":{anchor:".selected-story",highlights:"#articleLink, .evidence-heading"},
+      "verify-evidence":{anchor:".evidence-heading",highlights:"#evidenceCandidates [data-choose-candidate], #singleAi:not([hidden])"},
+      "verify-writing":{anchor:"#detailEvidence",highlights:"#articleFinding, #officialFinding"},
+      "verify-judgement":{anchor:"#manualCompare",highlights:".verdict-choices, #reason"},
+      "ai":{anchor:"#aiReviewStage",highlights:"#askAi, #finish"}
+     }[mode];
+     const emphasis=doc.createElement("style");
+     emphasis.textContent=stageConfig.highlights.split(",").map(x=>x.trim()+"{outline:5px solid #f28b16!important;outline-offset:2px!important;border-radius:8px!important}").join("\n");
+     doc.head.appendChild(emphasis);
+     function focusStage(){
+      if(!host.isConnected)return;
+      const target=doc.querySelector(stageConfig.anchor);
+      if(!target)return;
+      const view=doc.defaultView;
+      if(!view)return;
+      view.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+view.scrollY-18),behavior:"instant"});
+     }
+     // Reposition after asynchronous evidence cards arrive; no AI request
+     // or invented result is submitted by the presentation.
+     setTimeout(focusStage,400);
+     setTimeout(focusStage,1200);
+     setTimeout(focusStage,3000);
+     setTimeout(focusStage,6000);
+     setTimeout(focusStage,11000);
+     if(mode==="verify-evidence"){
+      const candidateRoot=doc.getElementById("evidenceCandidates");
+      if(candidateRoot&&typeof MutationObserver!=="undefined"){
+       const observer=new MutationObserver(()=>{
+        if(host.isConnected)focusStage();else observer.disconnect();
+       });
+       observer.observe(candidateRoot,{childList:true,subtree:true});
+       setTimeout(()=>observer.disconnect(),14000);
+      }
+     }
     }
     if(!host.isConnected)return;
     host.classList.add("feature-live-ready");

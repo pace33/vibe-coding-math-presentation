@@ -503,6 +503,7 @@ function matchingBusinesses(story){
  }).slice(0,2);
 }
 function getCandidateList(story){
+ if(state.trainingCandidates)return state.trainingCandidates.slice();
  const sources=[];
  if(story.suggested)sources.push({title:"관련 공개자료",type:"공식·참고 자료",source:"대표 사례 자료집",url:story.suggested,date:"원문 확인 필요"});
  for(const t of matchingCurated(story)){
@@ -584,6 +585,7 @@ function evidenceKeyword(story){
 }
 async function searchEvidence(){
  if(!state.story)return;
+ if(state.trainingCandidates){state.evidenceSearching=false;state.evidenceError="";renderEvidenceCandidates();return;}
  const story=state.story,sequence=++evidenceSequence;
  if(evidenceController)evidenceController.abort();
  const controller=new AbortController();evidenceController=controller;
@@ -769,7 +771,7 @@ async function askAIEvidence(){
  }
 }
 
-function chooseStory(story,directAI=false){
+function chooseStory(story,directAI=false,trainingCandidates=null){
  if(!story||!url(story.url))return;
  state.story={title:safe(story.title),url:url(story.url),publisher:safe(story.publisher||"발행기관 확인"),date:safe(story.date||""),region:safe(story.region||$("region").value),topic:safe(story.topic||""),kind:story.kind==="business"?"business":"news",inquiry:safe(story.inquiry||""),suggested:url(story.suggested||"")};
  state.report=null;
@@ -786,6 +788,7 @@ function chooseStory(story,directAI=false){
  setLink($("articleLink"),state.story.url);
  if(evidenceController){evidenceController.abort();evidenceController=null;}
  evidenceSequence++;
+ state.trainingCandidates=trainingCandidates;
  state.selectedEvidence=null;state.evidenceNews=[];state.evidenceError="";state.evidenceSearching=false;state.singleAI=directAI;
  for(const id of ["articleFinding","officialFinding","officialUrl","reason"])$(id).value="";
  $("detailEvidence").open=true;
@@ -937,6 +940,30 @@ function init(){
  $("download").addEventListener("click",download);
  if(window.LocalCheckBoard)window.LocalCheckBoard.init({show,getReport:()=>state.report});
  chooseMenu("news");loadNews();loadSearchIndex();
+ // A same-origin presentation-only example uses real archived article links.
+ // It is isolated from ordinary student navigation and never sends an AI request.
+ if(window.parent!==window&&new URLSearchParams(location.search).get("trainingPreview")==="wolf"){
+  try{if(window.parent.location.origin===location.origin){
+   window.LocalCheckTrainingPreview=(stage)=>{
+    const first={title:"대전 오월드 탈출 늑대, 청주서 목격 신고…사실인지 확인 중",publisher:"연합뉴스",date:"2026-04-09",region:"청주시",topic:"늑구 청주 목격 신고",url:"https://www.yna.co.kr/amp/view/AKR20260409172900064"};
+    const second={title:"대전 탈출 늑대 청주서 목격?…못 찾고 결국 수색 종료",type:"다른 언론사 기사",source:"노컷뉴스",date:"2026-04-10",url:"https://v.daum.net/v/20260410090600934"};
+    $("region").value="청주시";
+    chooseStory(first,false,[second]);
+    $("evidenceStatus").textContent="연수용 고정 사례 · 실제 기사 2편 비교";
+    if(["verify-writing","verify-judgement","ai"].includes(stage)){
+     selectCandidate(0);
+     $("evidenceStatus").textContent="연수용 고정 사례 · 비교 기사 선택 완료";
+     $("articleFinding").value="청주에서 늑대를 봤다는 신고가 접수되었어요.";
+     $("officialFinding").value="후속 기사에서는 수색했지만 늑대를 발견하지 못했다고 해요.";
+    }
+    if(["verify-judgement","ai"].includes(stage)){
+     document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
+     $("reason").value="목격 신고와 실제 발견은 달라요. 두 기사만으로는 늑구가 청주에 왔는지 확정할 수 없어요.";
+    }
+    return true;
+   };
+  }}catch(error){}
+ }
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();

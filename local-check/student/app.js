@@ -790,7 +790,7 @@ function chooseStory(story,directAI=false,trainingCandidates=null){
  evidenceSequence++;
  state.trainingCandidates=trainingCandidates;
  state.selectedEvidence=null;state.evidenceNews=[];state.evidenceError="";state.evidenceSearching=false;state.singleAI=directAI;
- for(const id of ["articleFinding","officialFinding","officialUrl","reason"])$(id).value="";
+ for(const id of ["articleFinding","officialFinding","officialUrl","reason","cardAuthor"])$(id).value="";
  $("detailEvidence").open=true;
  document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
  $("formMessage").textContent="";
@@ -806,6 +806,11 @@ function fromNews(index){
 }
 function makeReport(){
  if(!state.story)return;
+ const author=safe($("cardAuthor").value,20);
+ if(!author||!/[\p{L}\p{N}]/u.test(author)||/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/.test(author)||/01[016789][-\s]?\d{3,4}[-\s]?\d{4}/.test(author)){
+  $("formMessage").textContent="작성자 이름이나 별명을 적어 주세요. 연락처나 이메일은 적지 않아요.";
+  $("cardAuthor").focus();return;
+ }
  // AI를 사용하지 않아도 학생의 직접 검증 기록만으로 완성할 수 있습니다.
  const first=state.firstReview||firstJudgement();
  if(!first)return;
@@ -836,7 +841,7 @@ function makeReport(){
   ? safe("자동으로 찾은 자료: "+safe(autoSource.title,190)+" (직접 원문 확인 필요)"+(hasStudentFinding?"\n학생 기록: "+safe($("officialFinding").value,260):""),500)
   : recordedFinding;
  state.report={
-  ...state.story,
+  ...state.story,author,
   newsFact:first.newsFact,govFact:comparisonFinding,govUrl:comparisonUrl,
   verdict:finalVerdict,reason:finalReason,
   initialVerdict:first.verdict,initialReason:first.reason,
@@ -857,7 +862,7 @@ function renderReport(){
 function reportText(){
  const d=state.report;
  return [
-  "우리 지역 뉴스 탐정 카드","지역: "+d.region,"제목: "+d.title,
+  "우리 지역 뉴스 탐정 카드","작성자: "+(d.author||"미기록"),"지역: "+d.region,"제목: "+d.title,
   "① 출처 확인","발행한 곳: "+d.publisher,"발행 날짜: "+(d.date||"원문에서 확인해요"),"뉴스 원문: "+d.url,"비교 자료: "+(d.govUrl||"추가 확인 필요"),
   "② 근거 확인","뉴스에서 찾은 근거: "+d.newsFact,"비교 자료에서 찾은 근거: "+(d.govFact||"아직 못 찾음"),
   "③ 학생의 판단","판단: "+(d.initialVerdict||d.verdict),"이유: "+(d.initialReason||d.reason),

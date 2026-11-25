@@ -47,6 +47,7 @@ function mountStudentPreview(frame){
  const host=frame.querySelector(".feature-media[data-preview]");
  if(!host)return;
  const mode=host.dataset.preview;
+ const isVerify=mode==="verify"||mode.startsWith("verify-")||mode==="ai";
  const live=document.createElement("iframe");
  live.className="feature-live";
  live.title="실제 학생용 웹앱 화면";
@@ -54,7 +55,7 @@ function mountStudentPreview(frame){
  live.setAttribute("aria-hidden","true");
  const badge=document.createElement("span");
  badge.className="feature-live-label";
- badge.textContent="실제 웹앱 화면 · 실시간";
+ badge.textContent=isVerify?"실제 웹앱 화면 · 실제 기사 고정 사례":"실제 웹앱 화면 · 실시간";
  let completed=false,started=false,timeout=null;
  const active=()=>host.isConnected&&!completed;
  const fail=()=>{
@@ -106,9 +107,8 @@ function mountStudentPreview(frame){
     const doc=live.contentDocument;
     const home=doc?.getElementById("home");
     if(!home){if(++attempts<30)setTimeout(activate,250);else fail();return;}
-    const isVerify=mode==="verify"||mode.startsWith("verify-")||mode==="ai";
-    const news=isVerify?doc.querySelector('#newsList [data-news], #liveNewsList [data-live-news]'):null;
-    if(isVerify&&!news){if(++attempts<30)setTimeout(activate,250);else fail();return;}
+    const preview=live.contentWindow?.LocalCheckTrainingPreview;
+    if(isVerify&&typeof preview!=="function"){if(++attempts<30)setTimeout(activate,250);else fail();return;}
     started=true;
     const style=doc.createElement("style");
     style.textContent="html,body{scroll-behavior:auto!important}";
@@ -126,19 +126,19 @@ function mountStudentPreview(frame){
     }else if(mode==="board"){
      doc.querySelector('[data-menu="board"]')?.click();
     }else if(isVerify){
-     news.click();
+     preview(mode);
      const stage={
       "verify":{anchor:".selected-story",highlights:"#articleLink, .evidence-heading"},
-      "verify-evidence":{anchor:".evidence-heading",highlights:"#evidenceCandidates [data-choose-candidate], #singleAi:not([hidden])"},
+      "verify-evidence":{anchor:".selected-story",highlights:".selected-story, #evidenceCandidates .candidate-card, #evidenceCandidates [data-choose-candidate]"},
       "verify-writing":{anchor:"#detailEvidence",highlights:"#articleFinding, #officialFinding"},
       "verify-judgement":{anchor:"#manualCompare",highlights:".verdict-choices, #reason"},
       "ai":{anchor:"#aiReviewStage",highlights:"#askAi, #finish"}
      }[mode];
      style.textContent+="\n"+stage.highlights.split(",").map(x=>x.trim()+"{outline:5px solid #f28b16!important;outline-offset:2px!important;border-radius:8px!important}").join("\n");
-     if(mode==="verify"){reveal(doc,stage);return;}
-     // Evidence loading changes the vertical position of later fields.
-     // Wait while hidden so the visible viewport never jumps repeatedly.
-     waitForEvidence(doc,stage,Date.now());return;
+     if(mode==="verify-evidence"){
+      style.textContent+='\n#verify .selected-story{margin-bottom:12px!important;padding:16px 20px!important}#verify .verify-panel{padding:16px 20px!important}#verify .selected-story .verification-guide,#verify .verify-panel>.verification-guide{margin:4px 0 8px!important}#verify .candidate-grid{grid-template-columns:1fr!important}#verify .candidate-card{padding:14px 18px!important}#verify #evidenceCandidates{margin:8px 0!important}';
+     }
+     reveal(doc,stage);return;
     }
     reveal(doc,null);
    }catch(error){fail();}
@@ -147,7 +147,9 @@ function mountStudentPreview(frame){
  });
  live.addEventListener("error",fail);
  // Set the URL before inserting the iframe to avoid an initial blank navigation.
- live.src=new URL("../student/",location.href).href;
+ const studentUrl=new URL("../student/",location.href);
+ if(isVerify)studentUrl.searchParams.set("trainingPreview","wolf");
+ live.src=studentUrl.href;
  timeout=setTimeout(fail,22000);
  host.append(live,badge);
  if(typeof ResizeObserver!=="undefined"){previewResize=new ResizeObserver(fit);previewResize.observe(host);}

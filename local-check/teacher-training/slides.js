@@ -481,48 +481,76 @@ Object.assign(classes,{
  }
 });
 
-/* Technical follow-up: current client and server source paths, not a deployment claim. */
+/* Technical follow-up: accessible visual explanations of the actual implementation. */
+const techNode=(icon,title,description,kind="")=>'<div class="tech-node '+kind+'"><span class="tech-icon" aria-hidden="true">'+icon+'</span><strong>'+title+'</strong><p>'+description+'</p></div>';
+const techArrow=(down,up)=>'<div class="tech-arrow"><span>↓ '+down+'</span><span>↑ '+up+'</span></div>';
+const techFlow=(top,arrow1,middle,arrow2,bottom,summary)=>'<div class="tech-flow"><div class="tech-stack">'+top+arrow1+middle+arrow2+bottom+'</div><div class="tech-aside">'+summary+'</div></div>';
+const techTerm=(title,desc)=>'<div class="tech-term"><strong>'+title+'</strong><p>'+desc+'</p></div>';
+const techSummary=(text)=>'<div class="tech-summary">'+text+'</div>';
 Object.assign(classes,{
  "build-tech-rss":{
-  id:"build-tech-rss",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ① · RSS (Really Simple Syndication)",
-  title:"RSS는 어떻게 실제 뉴스를\n가져올까요?",
-  lead:"RSS는 뉴스 제목·발행일·링크 등의 정보를 일정한 형식(XML)으로 제공하는 방식입니다.",
-  body:systemFlow([
-   ["01 · 뉴스 제공처","Google · Bing","지역명과 검색어에 맞는 뉴스 목록을 RSS로 제공"],
-   ["02 · 검색 서버","RSS 중계 API","두 제공처에 요청하고 기사 목록이 담긴 정상 응답을 전달"],
-   ["03 · 학생용 웹앱","뉴스 카드","XML을 읽어 제목·언론사·날짜·내용 일부·원문 링크 표시"]
-  ])+'<div class="correction-lesson"><span>핵심</span><strong>AI가 기사를 만들어 내는 것이 아니라 실제 뉴스 검색 결과를 가져옵니다.</strong></div>',
-  note:"근거: local-check/server/news.mjs 및 student/live-news.js. Google News RSS 검색은 최근 30일 조건을 사용하며 Bing 검색 범위는 제공처에 따라 다릅니다. 내용 일부는 RSS 설명 필드에서 추출하며 기사 본문 전체나 사실 확인을 보장하지 않습니다. 운영 서버의 현재 응답은 이 슬라이드 제작 시점에 테스트하지 않았습니다."
+  id:"build-tech-rss",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ① · RSS와 중계 API",
+  title:"뉴스 배달부가\n필요했던 이유는?",
+  lead:"우리 지역 탐정에서 ‘청주시 동물원’을 검색했다고 생각해 봅시다.",
+  body:techFlow(
+   techNode("🖥️","우리 지역 탐정 웹앱","청주시 동물원 뉴스 찾아 줘!","green"),
+   techArrow("검색 요청","검색 결과"),
+   techNode("📦","RSS 중계 API","알겠어! 관련 뉴스 목록을 받아 올게.","orange"),
+   techArrow("뉴스 요청","RSS 목록 전달"),
+   '<div class="tech-pair">'+techNode("📰","Google 뉴스","RSS 뉴스 목록")+techNode("🔎","Bing 뉴스","RSS 뉴스 목록")+'</div>',
+   techTerm("RSS = 뉴스 목록","기사 제목·언론사·날짜·원문 주소가 정리된 데이터.")+
+   techTerm("중계 서버 = 뉴스 배달부","웹앱 대신 뉴스 목록을 받아 전달하는 역할.")+
+   techTerm("API = 주문 창구","웹앱이 서버에 요청하고 결과를 받는 약속.")+
+   techSummary("AI가 기사를 만드는 것이 아니라 실제 뉴스 목록을 가져옵니다.")
+  ),
+  note:"근거: local-check/server/news.mjs 및 student/live-news.js. Google News RSS 검색은 최근 30일 조건을 사용하며 Bing 검색 범위는 제공처에 따라 다릅니다. RSS는 Really Simple Syndication으로, XML 형식의 뉴스 목록을 전달합니다. 서버는 두 제공처 중 기사 목록이 담긴 정상 응답을 받아 전달하도록 구현되어 있습니다. 기사 본문 전체나 사실 확인을 보장하지 않습니다. 운영 서버 응답은 미확인입니다."
  },
  "build-tech-news-api":{
-  id:"build-tech-news-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ② · RSS 검색 서버와 API",
-  title:"뉴스 검색 서버는\n어떻게 연결할까요?",
-  lead:"API는 웹앱과 서버가 정해진 형식으로 데이터를 주고받는 통로입니다.",
-  body:makePrompt([
-   "GitHub Pages에 있는 웹앱에서 실제 뉴스가 검색되도록 RSS 검색용 서버를 만들어 줘. Google·Bing 뉴스 RSS를 검색하고 브라우저 요청이 허용되도록 CORS를 설정해 줘.",
-   "지역·검색어를 /api/news로 보내고, 반환된 XML을 기사 카드로 변환해 줘. 중복을 제거하고 최신순으로 정렬해. 검색 실패와 결과 0건도 구분해 줘."
-  ],"현재 코드: 검색 서버 → RSS(XML) → 브라우저 파싱. 서버 배포와 실제 검색 테스트가 필요합니다."),
-  note:"근거: local-check/server/news.mjs, local-check/student/live-news.js. 서버는 검색 조건 검증, RSS 응답 검사, 8초 요청 제한, 성공 응답 캐시를 구현합니다. 브라우저는 RSS를 DOMParser로 파싱하고 URL을 검증하여 최대 10개를 최신순으로 표시합니다. CORS는 브라우저의 교차 출처 요청을 허용하는 정책이지 인증이 아닙니다. 현재 운영 주소의 실제 가용성은 미확인입니다. 이 프롬프트는 현행 기능을 바탕으로 재구성한 예시입니다."
+  id:"build-tech-news-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ② · CORS와 검색 서버",
+  title:"왜 웹앱에서 직접\n뉴스를 가져오지 않을까요?",
+  lead:"검색 버튼은 만들었는데 뉴스가 나오지 않는다면?",
+  body:'<div class="tech-flow"><div class="tech-stack">'+
+   '<div class="tech-route"><span class="tech-route-label">직접 요청</span><div class="tech-route-row">'+techNode("🖥️","웹앱","뉴스 찾아 줘!")+'<span class="tech-route-arrow blocked">→<br>✕</span>'+techNode("📰","외부 뉴스 사이트","직접 읽기 제한 가능")+'</div><p>브라우저의 교차 출처 보안 정책(CORS)에 막힐 수 있어요.</p></div>'+
+   '<div class="tech-route"><span class="tech-route-label">중계 서버 이용</span><div class="tech-route-row">'+techNode("🖥️","웹앱","검색 요청")+'<span class="tech-route-arrow">↔</span>'+techNode("📦","검색 서버","대신 받아 전달","orange")+'<span class="tech-route-arrow">↔</span>'+techNode("📰","뉴스 RSS","기사 목록")+'</div><p>서버가 대신 받아 오고 웹앱의 요청을 허용하도록 설정합니다.</p></div></div><div class="tech-aside">'+
+   techTerm("CORS = 출입 규칙","다른 사이트의 데이터를 브라우저에서 읽을 수 있는지 정하는 보안 규칙.")+
+   techTerm("XML = 뉴스 목록의 양식","제목·날짜·링크 등이 일정한 구조로 담긴 데이터.")+
+   techSummary("AI에게: 뉴스 RSS를 대신 받아 오는 서버를 만들고 웹앱과 연결해 줘!")+
+   '</div></div>',
+  note:"근거: local-check/server/news.mjs, local-check/student/live-news.js. 브라우저에서 외부 RSS를 직접 읽을 때 상대 서버가 적절한 CORS 헤더를 제공하지 않으면 접근이 제한될 수 있습니다. 검색 서버는 허용된 출처에 응답하고 RSS를 반환하며 웹앱은 XML을 읽어 카드를 생성합니다. CORS는 인증 수단이 아닙니다. 서버 배포와 실제 응답 테스트가 필요합니다."
  },
  "build-tech-ai":{
-  id:"build-tech-ai",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ③ · Gemma4와 웹 검색",
-  title:"AI 근거 검토는\n어떤 구조로 작동할까요?",
-  lead:"학생의 첫 판단을 기록한 뒤 별도의 AI 서버에 검토를 요청합니다.",
-  body:systemFlow([
-   ["01 · 학생용 웹앱","검토 요청","기사 URL, 첫 판단, 이유, 비교 근거를 JSON으로 전달"],
-   ["02 · AI 검토 서버","웹 검색 + Gemma4","공개 자료를 검색하고 확인한 근거를 바탕으로 비교하도록 구성"],
-   ["03 · 학생용 웹앱","검토 의견 + 출처","결과와 출처 링크 표시 → 학생이 최종 판단"]
-  ])+'<div class="correction-lesson"><span>연결 방식</span><strong>브라우저 → AI 서버 API → 작업 접수·상태 조회 → 검토 결과</strong></div>',
-  note:"근거: student/app.js와 student/gemma-browser-client.js. 현재 클라이언트는 자체 AI 서버의 /localcheck-ai/browser/verify 엔드포인트에 직접 POST하고, HTTP 202이면 작업 ID로 약 2초 간격 GET 조회를 수행합니다. 서버의 웹 검색·Gemma4 처리 흐름은 클라이언트의 진행 상태 표시 및 응답 계약을 근거로 설명합니다. 서버 내부 구현 및 실제 모델 응답은 이 작업에서 확인하지 않았습니다. 저장소의 과거 Gemini 설명이나 Worker 경유 방식과 현재 브라우저 직접 연결을 구분합니다."
+  id:"build-tech-ai",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ③ · AI 서버와 API",
+  title:"AI에게 검토를 요청하면\n무슨 일이 일어날까요?",
+  lead:"학생이 먼저 판단한 내용을 바탕으로 AI에게 도움을 요청합니다.",
+  body:techFlow(
+   techNode("🖥️","우리 지역 탐정 웹앱","이 기사와 내가 쓴 판단을 검토해 줘!","green"),
+   techArrow("기사·판단·근거 전송","검토 의견·출처 전달"),
+   techNode("📦","AI 서버 API","요청을 접수하고 결과를 돌려주는 창구","orange"),
+   techArrow("자료 검색·비교 요청","검토 결과"),
+   '<div class="tech-pair">'+techNode("🔎","웹 검색","관련 공개 자료 찾기")+techNode("🤖","Gemma4","근거를 바탕으로 비교")+'</div>',
+   techTerm("API = AI에게 말을 거는 통로","웹앱에서 보낸 기사와 판단 내용을 서버가 받아 처리.")+
+   techTerm("AI 서버 = 검토를 맡는 곳","웹 검색과 AI 모델을 연결해 자료를 비교하도록 구성.")+
+   techTerm("작업 대기열 = 번호표","요청이 많으면 순서대로 처리하고 웹앱이 결과를 확인.")+
+   techSummary("AI가 제시한 근거를 학생이 확인하고 최종 판단합니다.")
+  ),
+  note:"근거: student/app.js, student/gemma-browser-client.js. 현재 브라우저는 자체 AI 서버의 /localcheck-ai/browser/verify 엔드포인트에 POST하고 HTTP 202를 받으면 작업 ID로 약 2초마다 상태를 조회합니다. 웹 검색·Gemma4 처리 과정은 클라이언트 진행 표시와 응답 계약을 바탕으로 설명하며 서버 내부와 실제 응답은 미확인입니다. 실제 요청에는 기사 URL과 학생 판단 및 근거가 포함됩니다."
  },
  "build-tech-ai-api":{
-  id:"build-tech-ai-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ④ · AI API 연결과 안전장치",
-  title:"AI 기능을 넣을 때\n무엇을 요청해야 할까요?",
-  body:makePrompt([
-   "AI 검토 버튼을 누르면 기사와 학생의 첫 판단을 자체 AI 서버 API에 보내 줘. 웹 검색 근거와 Gemma4의 비교 의견, 출처 링크를 받아 화면에 표시해 줘.",
-   "원문 확인 근거가 부족하면 ‘확인할 근거가 부족해요’라고 안내해 줘. AI 연결이 실패해도 학생이 직접 판단하고 카드를 완성하게 해 줘. 비밀 키는 브라우저에 넣지 마."
-  ],"학생 개인정보 입력 금지 · 출처 확인 · AI 결과 맹신 금지 · 실패 시에도 학습 활동 유지"),
-  note:"근거: student/app.js와 student/gemma-browser-client.js. 현재 요청은 기사와 학생 판단·근거 메모를 AI 서버로 전달합니다. 공개 자료 검색과 원문 발췌를 확인할 수 있는 출처가 없으면 클라이언트는 일치·불일치 대신 근거 부족으로 처리합니다. 오류 시 AI 검토를 완료했다고 표시하지 않으며 직접 판단으로 카드 완성이 가능합니다. 비밀 키를 프론트엔드에 포함하지 않는 원칙과 공개 서비스의 서버 측 인증·사용량 제한 및 개인정보 보호 필요성을 설명합니다. 실제 운영 서버 보안 설정과 AI 응답은 별도 확인이 필요합니다. 프롬프트는 재구성 예시입니다."
+  id:"build-tech-ai-api",section:"웹앱 제작 과정",type:"standard",kicker:"심화 기술 ④ · AI 연결과 안전장치",
+  title:"AI가 답을 못 찾으면\n어떻게 해야 할까요?",
+  lead:"AI를 넣는 것보다 학생의 학습이 멈추지 않도록 설계하는 것이 중요합니다.",
+  body:'<div class="tech-flow"><div class="tech-stack">'+
+   techNode("👩‍🏫","학생이 먼저 판단","기사 비교 → 이유 작성","green")+
+   '<div class="tech-arrow"><span>↓ AI 검토는 선택</span></div>'+
+   '<div class="tech-pair">'+techNode("🔎","근거가 있는 경우","검토 의견·출처 확인","green")+techNode("⚠️","근거 부족·연결 실패","확인할 근거가 부족해요","orange")+'</div>'+
+   '<div class="tech-arrow"><span>↓ 두 경우 모두</span></div>'+
+   techNode("📝","학생의 최종 판단","근거와 이유를 기록하고 탐정 카드 완성","green")+
+   '</div><div class="tech-aside">'+
+   techTerm("AI의 의견은 정답이 아니에요","AI가 제시한 자료도 원문에서 확인합니다.")+
+   techTerm("개인정보·비밀 키 보호","학생 이름·연락처는 입력하지 않고, 비밀 키는 웹앱 코드에 넣지 않습니다.")+
+   techSummary("AI에게: 근거가 없으면 모른다고 알려 줘. AI가 안 돼도 아이들이 활동을 마치게 해 줘!")+
+   '</div></div>',
+  note:"근거: student/app.js, student/gemma-browser-client.js. 웹 검색 여부와 본문 발췌 확인 근거가 없으면 클라이언트는 일치·불일치 대신 근거 부족으로 처리합니다. AI 실패는 완료로 표시하지 않으며 직접 판단으로 카드 완성이 가능합니다. 학생 판단과 근거 메모가 서버로 전송되므로 개인정보 입력 금지 안내와 운영 보안 확인이 필요합니다. 서버 내부 보안 및 실제 AI 응답은 미확인입니다."
  }
 });
 
@@ -607,10 +635,10 @@ const textbookTitles={
   "sample-question": "우리 지역의 교통안전은\n어떻게 살펴볼까요?",
   "lesson-40": "지역 문제 탐구 수업은\n어떻게 진행해 볼까요?",
   "assessment": "학생의 탐구 과정은\n어떻게 살펴볼까요?",
-  "build-tech-rss": "RSS는 어떻게 실제 뉴스를\n가져올까요?",
-  "build-tech-news-api": "뉴스 검색 서버는\n어떻게 연결할까요?",
-  "build-tech-ai": "AI 근거 검토는\n어떤 구조로 작동할까요?",
-  "build-tech-ai-api": "AI 기능을 넣을 때\n무엇을 요청해야 할까요?",
+  "build-tech-rss": "뉴스 배달부가\n필요했던 이유는?",
+  "build-tech-news-api": "왜 웹앱에서 직접\n뉴스를 가져오지 않을까요?",
+  "build-tech-ai": "AI에게 검토를 요청하면\n무슨 일이 일어날까요?",
+  "build-tech-ai-api": "AI가 답을 못 찾으면\n어떻게 해야 할까요?",
   "closing": "교과서 속 탐구를\n우리 지역과 어떻게 이을까요?",
   "sources": "발표 자료의 출처는\n어디에서 확인할까요?"
 };

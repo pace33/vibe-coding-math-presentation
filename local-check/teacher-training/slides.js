@@ -514,7 +514,7 @@ Object.assign(classes,{
    '<div class="tech-route"><span class="tech-route-label">중계 서버 이용</span><div class="tech-route-row">'+techNode("🖥️","GitHub Pages","우리 지역 탐정 웹앱")+'<span class="tech-route-arrow">↔</span>'+techNode("📦","Cloudflare Worker","실제 RSS 중계 서버","orange")+'<span class="tech-route-arrow">↔</span>'+techNode("📰","뉴스 RSS","기사 목록")+'</div><p>서버가 대신 받아 오고 웹앱의 요청을 허용하도록 설정합니다.</p></div></div><div class="tech-aside">'+
    techTerm("CORS = 출입 규칙","다른 사이트의 데이터를 브라우저에서 읽을 수 있는지 정하는 보안 규칙.")+
    techTerm("XML = 뉴스 목록의 양식","제목·날짜·링크 등이 일정한 구조로 담긴 데이터.")+
-   techSummary("웹앱이 직접 뉴스를 가져오지 못할 수 있어 중계 서버가 대신 가져옵니다.")+
+   techSummary("브라우저의 보안 정책 때문에 다른 사이트의 뉴스 데이터를 직접 가져오기 어려워 중계 서버를 이용합니다.")+
    '</div></div>',
   note:"근거: local-check/server/news.mjs, local-check/student/live-news.js. 브라우저에서 외부 RSS를 직접 읽을 때 상대 서버가 적절한 CORS 헤더를 제공하지 않으면 접근이 제한될 수 있습니다. 검색 서버는 허용된 출처에 응답하고 RSS를 반환하며 웹앱은 XML을 읽어 카드를 생성합니다. CORS는 인증 수단이 아닙니다. 서버 배포와 실제 응답 테스트가 필요합니다."
  },

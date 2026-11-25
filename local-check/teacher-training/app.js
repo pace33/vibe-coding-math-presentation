@@ -115,6 +115,10 @@ function mountStudentPreview(frame){
     if(host.querySelector('img[src$="00-overview.svg"]')){
      style.textContent+='[data-menu="news"]{outline:6px solid #21b65a!important;outline-offset:1px!important}[data-menu="explore"]{outline:6px solid #2583dc!important;outline-offset:1px!important}[data-menu="board"]{outline:6px solid #f28b16!important;outline-offset:1px!important}';
     }
+    // Emphasize all six regional categories in the presentation preview only.
+    if(mode==="overview"||mode==="nature"){
+     style.textContent+='#exploreTabs{padding:7px!important;gap:10px!important;overflow:visible!important}#exploreTabs [data-explore]{outline:5px solid #f28b16!important;outline-offset:1px!important;border-radius:9px!important}';
+    }
     doc.head.appendChild(style);
     if(mode==="overview"||mode==="nature"){
      doc.querySelector('[data-menu="explore"]')?.click();

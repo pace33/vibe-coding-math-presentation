@@ -154,22 +154,30 @@ document.addEventListener("DOMContentLoaded",()=>{
  $("overviewSheet").addEventListener("click",e=>{if(e.target===$("overviewSheet"))toggleOverview(false);});
  $("notesSheet").addEventListener("click",e=>{if(e.target===$("notesSheet"))toggleNotes(false);});
  window.addEventListener("hashchange",()=>{if(!location.hash.startsWith("#slide="))return;index=parseHash();render();});
+ // Presentation remotes normally send PageUp/PageDown or arrow keys.
  document.addEventListener("keydown",e=>{
-  if(e.ctrlKey||e.metaKey||e.altKey)return;
-  if(e.target?.matches?.("input,textarea,select,button,[contenteditable=true]"))return;
-  if(e.key==="Escape"){
+  if(e.defaultPrevented||e.ctrlKey||e.metaKey||e.altKey||e.isComposing)return;
+  if(e.target?.closest?.("input,textarea,select,[contenteditable=true]"))return;
+  const legacy={13:"Enter",27:"Escape",32:" ",33:"PageUp",34:"PageDown",35:"End",36:"Home",37:"ArrowLeft",38:"ArrowUp",39:"ArrowRight",40:"ArrowDown"};
+  const key=(!e.key||e.key==="Unidentified")?(legacy[e.keyCode]||e.code||""):e.key;
+  if(key==="Escape"){
    if(overviewOpen){toggleOverview(false);e.preventDefault();}
    else if(notesOpen){toggleNotes(false);e.preventDefault();}
    return;
   }
   if(overviewOpen||notesOpen)return;
-  if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();showSlide(index+1);}
-  else if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();showSlide(index-1);}
-  else if(e.key==="Home"){e.preventDefault();showSlide(0);}
-  else if(e.key==="End"){e.preventDefault();showSlide(slides.length-1);}
-  else if(e.key.toLowerCase()==="f"){e.preventDefault();toggleFullscreen();}
-  else if(e.key.toLowerCase()==="n"){e.preventDefault();toggleNotes(true);}
-  else if(e.key.toLowerCase()==="o"){e.preventDefault();toggleOverview(true);}
- });
+  // Do not block remote keys when a toolbar button has focus after a click.
+  if(["ArrowRight","ArrowDown","PageDown","Enter","NumpadEnter"," ","Space","Spacebar"].includes(key)){
+   e.preventDefault();if(!e.repeat)showSlide(index+1);
+  }
+  else if(["ArrowLeft","ArrowUp","PageUp"].includes(key)){
+   e.preventDefault();if(!e.repeat)showSlide(index-1);
+  }
+  else if(key==="Home"){e.preventDefault();showSlide(0);}
+  else if(key==="End"){e.preventDefault();showSlide(slides.length-1);}
+  else if(key.toLowerCase()==="f"){e.preventDefault();toggleFullscreen();}
+  else if(key.toLowerCase()==="n"){e.preventDefault();toggleNotes(true);}
+  else if(key.toLowerCase()==="o"){e.preventDefault();toggleOverview(true);}
+ },true);
 });
 })();

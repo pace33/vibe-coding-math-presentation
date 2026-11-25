@@ -683,5 +683,81 @@ const textbookLeads={
 };
 window.TRAINING_SLIDES=classroomSlides.map(slide=>featureWalkthrough[slide.id]?slide:({...slide,title:textbookTitles[slide.id],...(textbookLeads[slide.id]?{lead:textbookLeads[slide.id]}:{})}));
 
+// 2022 revised common curriculum: standards related to the activity, not a claim of complete mastery.
+const relatedStandards={
+  "4사09-01": "생활 주변에서 찾을 수 있는 여러 가지 문제를 파악하고, 그 문제를 합리적으로 해결하는 능력을 기른다.",
+  "4사09-02": "지역의 자연환경, 역사, 문화, 생산물 등을 알리려는 지역사회의 노력을 알고 관심을 갖는다.",
+  "4국06-01": "인터넷에서 학습에 필요한 다양한 자료를 탐색하고 목적에 맞게 자료를 선택한다.",
+  "4국02-05": "글이나 자료의 출처가 믿을 만한지 판단한다.",
+  "6국06-02": "뉴스 및 각종 정보 매체 자료의 신뢰성을 평가한다."
+};
+const standardsBySlide={
+  "field-textbook-news": [
+    "4사09-01",
+    "4국06-01"
+  ],
+  "field-gap-news": [
+    "4국06-01",
+    "4국02-05"
+  ],
+  "app-article-traffic": [
+    "6국06-02"
+  ],
+  "app-article-environment": [
+    "6국06-02"
+  ],
+  "field-compare-gap": [
+    "4국02-05",
+    "6국06-02"
+  ],
+  "field-textbook-region": [
+    "4사09-02",
+    "4국06-01"
+  ],
+  "field-gap-region": [
+    "4국06-01",
+    "4국02-05"
+  ],
+  "field-standards": [
+    "4사09-01",
+    "4사09-02"
+  ],
+  "app-menu": [
+    "4국06-01",
+    "6국06-02"
+  ],
+  "app-news": [
+    "4사09-01",
+    "4국06-01"
+  ],
+  "app-verify": [
+    "4국02-05",
+    "6국06-02"
+  ],
+  "app-verify-evidence": [
+    "6국06-02"
+  ],
+  "app-verify-writing": [
+    "6국06-02"
+  ],
+  "app-verify-judgement": [
+    "6국06-02"
+  ],
+  "app-ai-review": [
+    "6국06-02"
+  ],
+  "app-basics": [
+    "4사09-02"
+  ],
+  "app-nature": [
+    "4국06-01",
+    "4국02-05"
+  ],
+  "app-record": [
+    "6국06-02"
+  ]
+};
+window.TRAINING_SLIDES=window.TRAINING_SLIDES.map(s=>standardsBySlide[s.id]?{...s,kicker:(s.kicker||"").replace(/ · 국어 \[6국06-02\]/g,""),standards:standardsBySlide[s.id].map(code=>({code,text:relatedStandards[code],url:code.includes("사")?SOCIAL_SRC:"https://www.nise.go.kr/ebook/src/viewer/download.php?host=main&no=1&site=20240819_170050"}))}:s);
+
 window.TRAINING_META={title:"AI를 활용한 우리 지역 탐구 수업",date:"2026. 11. 25.(수)",time:"15:00–17:00",originalUrl:SITE};
 })();

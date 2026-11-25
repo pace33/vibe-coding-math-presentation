@@ -259,6 +259,7 @@ async function printAll(){
 document.addEventListener("DOMContentLoaded",()=>{
  index=parseHash();
  render();
+ $("homeButton").addEventListener("click",()=>{if(overviewOpen)toggleOverview(false);if(notesOpen)toggleNotes(false);showSlide(0);});
  $("prev").addEventListener("click",()=>showSlide(index-1));
  $("next").addEventListener("click",()=>showSlide(index+1));
  $("contentsButton").addEventListener("click",()=>toggleOverview());

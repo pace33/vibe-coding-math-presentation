@@ -695,12 +695,7 @@ const relatedStandards={
 };
 const standardsBySlide={
   "field-textbook-news": [
-    "4사09-01",
-    "4국06-01"
-  ],
-  "field-gap-news": [
-    "4국06-01",
-    "4국02-05"
+    "4사09-01"
   ],
   "app-article-traffic": [
     "6국06-02"
@@ -708,38 +703,16 @@ const standardsBySlide={
   "app-article-environment": [
     "6국06-02"
   ],
-  "field-compare-gap": [
-    "4국02-05",
-    "6국06-02"
-  ],
   "field-textbook-region": [
-    "4사09-02",
-    "4국06-01"
-  ],
-  "field-gap-region": [
-    "4국06-01",
-    "4국02-05"
-  ],
-  "field-standards": [
-    "4사09-01",
     "4사09-02"
   ],
-  "app-menu": [
-    "4국06-01",
-    "6국06-02"
-  ],
   "app-news": [
-    "4사09-01",
     "4국06-01"
   ],
   "app-verify": [
-    "4국02-05",
-    "6국06-02"
+    "4국02-05"
   ],
   "app-verify-evidence": [
-    "6국06-02"
-  ],
-  "app-verify-writing": [
     "6국06-02"
   ],
   "app-verify-judgement": [
@@ -748,15 +721,8 @@ const standardsBySlide={
   "app-ai-review": [
     "6국06-02"
   ],
-  "app-basics": [
-    "4사09-02"
-  ],
   "app-nature": [
-    "4국06-01",
-    "4국02-05"
-  ],
-  "app-record": [
-    "6국06-02"
+    "4국06-01"
   ]
 };
 window.TRAINING_SLIDES=window.TRAINING_SLIDES.map(s=>standardsBySlide[s.id]?{...s,kicker:(s.kicker||"").replace(/ · 국어 \[6국06-02\]/g,""),standards:standardsBySlide[s.id].map(code=>({code,text:relatedStandards[code],url:code.includes("사")?SOCIAL_SRC:"https://www.nise.go.kr/ebook/src/viewer/download.php?host=main&no=1&site=20240819_170050"}))}:s);

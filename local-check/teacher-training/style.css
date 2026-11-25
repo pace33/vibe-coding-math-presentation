@@ -970,3 +970,27 @@ a{color:inherit}
  .slide:has(.tech-flow) .tech-term p{font-size:clamp(11px,1.23cqw,18px)}
  .slide:has(.tech-flow) .slide-body{overflow-y:auto}
 }
+
+/* Keep the complete example prompt visible without an inner scrollbar. */
+.slide:has(.gpt-preview) .slide-title{margin-top:1.5%;font-size:clamp(23px,3.75cqw,54px)}
+.slide:has(.gpt-preview) .slide-kicker,.slide:has(.gpt-preview) .slide-title,.slide:has(.gpt-preview) .slide-footer{flex-shrink:0}
+.gpt-preview-header{flex:none;min-height:clamp(34px,3.5cqw,48px);padding:5px clamp(10px,1.3cqw,18px)}
+.gpt-preview-main{justify-content:safe center;gap:clamp(4px,.65cqw,9px);padding:clamp(5px,.8cqw,11px);min-height:0}
+.gpt-preview-greeting{flex:none;font-size:clamp(18px,2.2cqw,30px)}
+.gpt-preview-composer{flex:none;width:96%;max-width:none;max-height:none;min-height:0;padding:clamp(7px,.85cqw,12px) clamp(11px,1.3cqw,18px) 5px;gap:4px;border-radius:18px}
+.gpt-preview-input{flex:none;min-height:0;height:auto;max-height:none;overflow:visible;font-size:clamp(13px,1.7cqw,24px);line-height:1.4}
+.gpt-preview-input p{margin:0 0 .35em}
+.gpt-preview-input p:last-child{margin-bottom:0}
+.gpt-preview-toolbar{flex:none;min-height:clamp(22px,2.4cqw,33px)}
+.gpt-preview-add,.gpt-preview-send{width:clamp(23px,2.4cqw,34px);height:clamp(23px,2.4cqw,34px);font-size:clamp(17px,1.8cqw,25px)}
+.gpt-preview-disclaimer{flex:none;font-size:clamp(9px,.85cqw,12px);line-height:1.25}
+.slide-body:has(.gpt-preview)>.chat-prompt-foot{padding:5px 10px}
+@media screen and (max-width:520px) and (orientation:portrait){
+ .slide:has(.gpt-preview) .slide-title{font-size:clamp(23px,6cqw,34px)}
+ .gpt-preview-main{justify-content:flex-start}
+ .gpt-preview-input{font-size:14px}
+}
+@media print{
+ .gpt-preview-input{font-size:1.65cqw!important;overflow:visible!important}
+ .gpt-preview-composer{max-height:none!important}
+}

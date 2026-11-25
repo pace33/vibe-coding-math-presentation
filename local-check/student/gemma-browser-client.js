@@ -35,12 +35,14 @@ window.localcheckGemmaReview=async function(endpoint,input,{signal,onProgress=()
  const bytes=new TextEncoder().encode(JSON.stringify(input));
  const hash=[...new Uint8Array(await crypto.subtle.digest("SHA-256",bytes))].map(x=>x.toString(16).padStart(2,"0")).join("");
  const slot="localcheck-gemma-browser-pending:"+hash;
- let pending=read(slot);
- if(!pending||Date.now()-pending.created>7*86400000||!/^[a-zA-Z0-9_-]{16,100}$/.test(pending.requestId||"")){
+ function freshRequest(){
   const requestId=[...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,"0")).join("");
-  pending={requestId,created:Date.now()};store(slot,pending);
+  const record={requestId,created:Date.now()};
+  store(slot,record);return record;
  }
- let retries=0;
+ let pending=read(slot);
+ if(!pending||Date.now()-pending.created>7*86400000||!/^[a-zA-Z0-9_-]{16,100}$/.test(pending.requestId||""))pending=freshRequest();
+ let retries=0,recovered=false;
  const until=Date.now()+15*60*1000;
  for(;;){
   if(signal?.aborted)throw new DOMException("Aborted","AbortError");
@@ -61,7 +63,14 @@ window.localcheckGemmaReview=async function(endpoint,input,{signal,onProgress=()
   const raw=await response.json().catch(()=>null);
   if(!response.ok){
    const code=/^[A-Z0-9_]{1,64}$/.test(raw?.code||"")?raw.code:"GEMMA_HTTP_"+response.status;
-   if(response.status===404&&polling||terminal.has(code))clear(slot);
+   // Re-register a job only when the server explicitly reports it is gone.
+   // Uncertain transport failures must keep the same idempotency key.
+   const lostJob=code==="SERVER_RESTARTED"||(polling&&[404,410].includes(response.status));
+   if(lostJob&&!recovered){
+    recovered=true;retries=0;pending=freshRequest();
+    onProgress({status:"restarted"});await pause(600,signal);continue;
+   }
+   if(lostJob||terminal.has(code))clear(slot);
    if([502,503,504].includes(response.status)&&!terminal.has(code)&&retries<2){
     retries++;onProgress({status:"reconnecting",attempt:retries});
     await pause(1500*retries,signal);continue;

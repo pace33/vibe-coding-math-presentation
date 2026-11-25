@@ -236,21 +236,19 @@ const KNOWN_NATURE={
  "단양군":"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=60&pageIndex=1&pageUnit=12&searchAreaSe=11&searchCnd=all&searchMainSe=ATTR&tourNo=2717"
 };
 function cardSearch(region,category,c,extra=""){
- let phrase=[region,c.title,c.value,extra].filter(Boolean).join(" ").replace(/·/g," ");
+ let phrase=[region,c.value||c.title].filter(Boolean).join(" ").replace(/·/g," ").slice(0,100);
  if(category==="overview"&&/인구/.test(c.title))phrase=region+" 주민등록 인구 기준월 통계";
  if(category==="overview"&&/면적/.test(c.title))phrase=region+" 행정구역 면적 통계";
  if(category==="overview"&&/행정구역/.test(c.title))phrase=region+" 읍면동 행정구역 현황";
  if(category==="nature"&&/기후|날씨/.test(c.title))phrase=region+" 기온 강수량 기후평년값";
- if(category==="nature"&&/생태/.test(c.title))phrase=region+" 산림 생태 숲";
+ if(category==="nature"&&/생태/.test(c.title))phrase=region+" "+(c.value||"산림 생태 숲");
  if(category==="business"&&/농산물|특산물/.test(c.title))phrase=region+" "+c.value+" 농산물 특산물 농업기술센터";
  if(category==="local"&&/문화유산/.test(c.title))phrase=region+" 문화유산 국가유산청";
  if(category==="issues"&&/쓰레기|생활환경/.test(c.title))phrase=region+" 생활쓰레기 재활용 분리배출";
  if(category==="issues"&&/지역 안전/.test(c.title))phrase=region+" 교통안전 재난안전";
  if(category==="issues"&&/주민 참여/.test(c.title))phrase=region+" 주민제안 주민참여예산";
  if(category==="issues"&&/물과 환경/.test(c.title))phrase=region+" 하천 수질 환경보전";
- const site=category==="overview"?"site:chungbuk.go.kr OR site:mois.go.kr":
- category==="local"?"site:go.kr OR site:heritage.go.kr":"site:go.kr OR site:or.kr";
- return phrase+" ("+site+")";
+ return phrase+" (공식 OR 공지 OR 안내)";
 }
 function googleSearch(q){
  const u=new URL("https://www.google.com/search");u.searchParams.set("q",q);return u.href;

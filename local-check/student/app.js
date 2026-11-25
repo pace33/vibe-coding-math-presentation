@@ -22,10 +22,26 @@ const safe=(s,n=1800)=>String(s??"").trim().slice(0,n);
 const esc=s=>safe(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=s=>{try{const u=new URL(String(s));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return ""}};
 function place(){return $("region").value==="전체"?"충청북도":"충청북도 "+$("region").value}
+// Search older coverage as well as recent coverage: title dates and headlines are not search constraints.
+function comparisonSearchTerms(story){
+ const region=String(story.region||"");
+ const shortRegion=region.replace(/[시군]$/,"");
+ const title=String(story.title||story.topic||"")
+  .replace(/\[[^\]]*\]/g," ")
+  .replace(/\d{1,4}[./-]\d{1,2}(?:[./-]\d{1,2})?/g," ")
+  .replace(/\d{1,4}년|\d{1,2}월|\d{1,2}일/g," ");
+ const noise=new Set(["충북","충청북도",region,shortRegion,"전체","관련","안내","개최","실시","모집","신청","지원","기자","뉴스","보도","단독","속보"]);
+ const words=[...new Set((title.match(/[가-힣a-zA-Z0-9]+/g)||[]).filter(w=>w.length>=2&&!noise.has(w)&&!/^[0-9]+$/.test(w)))];
+ return words.slice(0,2).join(" ")||safe(title,65);
+}
 function query(kind,area=place(),topic=$("keyword").value){
- const q=[area,safe(topic),kind==="official"?"공지사항 보도자료 site:go.kr":"when:7d"].filter(Boolean).join(" ");
- if(kind==="official"){const x=new URL("https://www.google.com/search");x.searchParams.set("q",q);x.searchParams.set("tbs","qdr:m");return x.href;}
- const x=new URL("https://news.google.com/search");x.searchParams.set("q",q);x.searchParams.set("hl","ko");x.searchParams.set("gl","KR");x.searchParams.set("ceid","KR:ko");return x.href;
+ const q=[area,safe(topic),kind==="official"?"(공식 OR 공지 OR 안내)":""
+ ].filter(Boolean).join(" ");
+ const x=new URL("https://www.google.com/search");
+ x.searchParams.set("q",q);
+ x.searchParams.set("hl","ko");
+ if(kind!=="official")x.searchParams.set("tbm","nws");
+ return x.href;
 }
 const EXPLORE_CATEGORIES=window.LOCALCHECK_CATEGORIES||{};
 const REGIONAL_BASICS=window.LocalCheckRegionalBasics;
@@ -796,9 +812,10 @@ function chooseStory(story,directAI=false,trainingCandidates=null){
  $("detailEvidence").open=true;
  document.querySelector('input[name="verdict"][value="아직 모르겠어요"]').checked=true;
  $("formMessage").textContent="";
- const location=state.story.region==="전체"?"충청북도":"충청북도 "+state.story.region;
- $("officialLink").href=query("official",location,story.topic||story.title);
- $("newsCompareLink").href=query("news",location,story.topic||story.title);
+ const location=["전체","충청북도","충북"].includes(state.story.region)?"충청북도":state.story.region;
+ const comparisonTerms=comparisonSearchTerms(state.story);
+ $("officialLink").href=query("official",location,comparisonTerms);
+ $("newsCompareLink").href=query("news",location,comparisonTerms);
  show("verify");
  if(directAI){renderEvidenceCandidates();startSingleAI();}else searchEvidence();
 }

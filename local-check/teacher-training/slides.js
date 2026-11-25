@@ -356,10 +356,14 @@ const classes={
   note:"초등학생이 검색 결과를 읽고 지역과 관련성이 있는 자료를 고르며 발행일을 확인하고 기사의 실제 내용을 이해하는 과정에서 어려움을 겪을 수 있습니다. 구체적인 수업 상황으로 설명하되 측정된 실태로 표현하지 않습니다. 다음 장의 늑구 기사 비교는 보도 제목과 신고 내용, 이후 확인된 사실을 구별해야 하는 이유를 보여줍니다. 웹앱의 해결 방식은 뒤의 소개 슬라이드에서 설명합니다."
  },
  "field-compare-gap":{
-  id:"field-compare-gap",section:"수업에서 살펴볼 점",kicker:"기사 날짜와 확인 수준 살펴보기",
-  title:"목격 신고와 확인된 사실은\n어떻게 구분할까요?",
-  body:fieldGap("뉴스에 나온 내용이 사실인지 살펴보기","같은 사건도 신고·현장 조사·후속 보도에서 확인되는 내용이 달라짐","신고 내용 구분 → 기사 날짜 확인 → 후속 기사·공식 자료 비교"),
-  note:"앞에서 본 2026년 늑대 '늑구' 사례로 연결합니다. 4월 9일 청주에서 목격 신고가 접수됐지만 청주 현장에서 늑대를 발견하지는 못했고, 4월 17일 대전에서 생포됐습니다. '목격 신고가 접수됐다'는 문장이 '청주에 늑대가 있었다'는 사실을 증명하지 않는다는 것을 학생과 함께 구분합니다. 실제 기사는 연합뉴스 2026.4.9. https://www.yna.co.kr/amp/view/AKR20260409172900064 , 노컷뉴스 2026.4.10. https://v.daum.net/v/20260410090600934 , 연합뉴스 2026.4.17. https://www.yna.co.kr/view/AKR20260417001851063 을 참고합니다."
+  id:"field-compare-gap",section:"수업에서 살펴볼 점",kicker:"실제 수업의 어려움 · 웹앱 개발의 필요성",
+  title:"학생들이 직접 뉴스를\n비교하고 검증할 수 있을까요?",
+  body:'<div class="field-reality">'+
+   '<div class="field-cell"><span>관련 기사 검색</span><strong>같은 사건을 다룬 다른 기사를 찾기 어려움</strong></div>'+
+   '<div class="field-cell"><span>기사 비교 및 검증</span><strong>여러 인터넷 창을 오가며 기사 내용을 비교하기 어려움</strong></div>'+
+   '<div class="field-cell solved"><span>탐구 결과 정리</span><strong>확인한 근거와 자신의 판단을 체계적으로 정리하기 어려움</strong></div></div>'+
+   '<div class="correction-lesson"><span>웹앱 개발의 필요성</span><strong>뉴스 검색부터 기사 비교, 검증, 결과 기록까지 하나의 화면에서 이루어지는 수업 도구가 필요했습니다.</strong></div>',
+  note:"앞에서 본 늑구 사례를 학생이 직접 조사한다고 가정합니다. 같은 사건의 관련 기사 검색, 여러 창을 오가며 근거 비교, 확인한 내용과 판단을 정리하는 과정에서 학생에게 지원이 필요할 수 있습니다. 이는 실제 수업에서 예상되는 어려움에 따른 개발 필요성입니다. 우리 지역 탐정은 뉴스 찾기, 기사 비교 및 검증, 탐정 카드 작성의 흐름을 연결하도록 설계했습니다. 사실 여부를 자동으로 확정하지는 않습니다."
  },
  "field-textbook-region":{
   id:"field-textbook-region",section:"수업에서 살펴볼 점",kicker:"사회 4학년 2학기 · 우리 지역 알리기",
@@ -529,7 +533,7 @@ const textbookTitles={
   "app-problem-features": "세 가지 주요 메뉴에서\n무엇을 할 수 있을까요?",
   "app-article-traffic": "늑대 늑구는 정말\n청주에 나타났을까요?",
   "app-article-environment": "늑구 기사에서\n무엇을 확인했을까요?",
-  "field-compare-gap": "목격 신고와 확인된 사실은\n어떻게 구분할까요?",
+  "field-compare-gap": "학생들이 직접 뉴스를\n비교하고 검증할 수 있을까요?",
   "app-verify": "① 뉴스 찾기\n기사의 근거는 어떻게 비교할까요?",
   "field-textbook-region": "우리 고장의 자랑거리는\n어떻게 찾아볼까요?",
   "field-gap-region": "인터넷 검색에서 어떤 자료가\n함께 나올까요?",

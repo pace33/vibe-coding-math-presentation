@@ -504,19 +504,37 @@ Object.assign(classes,{
   note:"현재 학생용 주소는 https://pace33.github.io/vibe-coding-math-presentation/local-check/student/ 입니다. GitHub Pages는 화면과 정적 파일을 공개하며 실시간 RSS 검색은 별도 뉴스 서버를 필요로 합니다. 실제 기사 응답을 확인하지 않았다면 배포 완료와 기능 동작 확인을 구분해야 합니다."
  }
 });
+
+/* Focused feature walkthrough: source UI is embedded at presentation time.
+   SVG artwork is only an explicitly labelled offline/print reference. */
+const featureWalkthrough={
+ "app-menu":{title:"우리 지역 탐정 웹앱의\n전체 화면을 살펴볼까요?",lead:"뉴스 찾기 · 우리 지역 · 탐정 게시판",preview:"news",image:"assets/00-overview.svg",points:[["뉴스 찾기","지역과 검색어를 정해 관련 기사 조사"],["우리 지역","시·군별 6개 분야의 정보 탐구"],["탐정 게시판","판단과 근거를 탐정 카드로 저장·공유"]]},
+ "app-news":{title:"① 뉴스 찾기\n우리 지역 기사를 어떻게 찾을까요?",lead:"지역 범위를 설정한 뒤 검색어를 입력합니다.",preview:"news",image:"assets/04-news.svg",points:[["검색 범위","충북 11개 시·군 중 조사할 지역 선택"],["기사 검색","주제에 맞는 검색어로 뉴스 찾기"],["기사 확인","제목·언론사·날짜·원문을 확인"]]},
+ "app-verify":{title:"① 뉴스 찾기\n다른 기사와 어떻게 비교할까요?",lead:"한 기사만으로 단정하지 않고 관련 자료와 비교합니다.",preview:"verify",image:"assets/05-verify.svg",points:[["출처 확인","첫 기사와 관련 기사·공식 자료 확인"],["근거 비교","같은 내용과 다른 내용을 찾아 비교"],["직접 판단","같아요·달라요·더 알아볼래요 선택 후 이유 작성"]]},
+ "app-basics":{title:"② 우리 지역\n어떤 정보를 조사할 수 있을까요?",lead:"시·군을 선택하고 여섯 가지 분야를 살펴봅니다.",preview:"overview",image:"assets/03-basics.svg",points:[["기본 정보 · 자연환경","인구·면적·산·하천 등 지역의 특징"],["생활시설 · 산업과 경제","공공기관·기업·특산물·견학 정보"],["역사와 문화 · 지역문제","문화유산·축제·지역 현안"]]},
+ "app-nature":{title:"② 우리 지역\n필요한 자료를 어떻게 확인할까요?",lead:"관심 분야의 정보 카드에서 공식 자료와 관련 뉴스를 찾아봅니다.",preview:"nature",image:"assets/16-nature.svg",points:[["지역 정보 카드","선택한 시·군의 구체적인 장소와 특징 확인"],["공식 자료 확인","카드에 제공되는 출처·기준일·원문 링크 확인"],["관련 뉴스 조사","지역 자료에서 관련 기사 검색으로 연결"]]},
+ "app-record":{title:"③ 탐정 게시판\n조사 결과를 어떻게 기록하고 공유할까요?",lead:"학생이 직접 판단한 내용을 탐정 카드로 정리합니다.",preview:"board",image:"assets/06-board.svg",points:[["탐정 카드","기사·비교 근거·판단 이유 저장"],["자세히 보기","저장한 카드를 다시 확인"],["친구와 공유","카드 링크로 결과 공유·받은 카드 담기"]]},
+ "app-ai-review":{title:"③ 탐정 게시판과 연결되는\nAI 검토는 어떻게 활용할까요?",lead:"학생의 첫 판단을 기록한 뒤 AI 근거 검토를 선택적으로 활용합니다.",preview:"ai",image:null,points:[["먼저 학생이 판단","관련 기사와 자료를 비교해 이유 작성"],["AI로 더 알아보기","AI 검토 의견과 제시된 근거를 확인"],["최종 판단·카드 완성","학생이 다시 판단하고 기록 · AI 없이도 완성 가능"]]}
+};
+function featureBody(feature){
+ const source=feature.image?'<img class="feature-fallback" src="'+feature.image+'" alt="발표용 재구성 예시 이미지"><span class="feature-fallback-label">재구성 예시 · 실제 캡처 아님</span>':'<div class="feature-fallback feature-placeholder">실제 웹앱에서 AI 검토 화면을 열어 확인할 수 있습니다.</div>';
+ return '<div class="feature-walkthrough"><div class="feature-media" data-preview="'+feature.preview+'">'+source+'</div><div class="feature-explain">'+feature.points.map((p,i)=>'<div class="feature-item"><span>'+String(i+1).padStart(2,"0")+' · '+p[0]+'</span><strong>'+p[1]+'</strong></div>').join("")+'<a class="feature-open" href="'+SITE+'" target="_blank" rel="noopener noreferrer">실제 학생용 웹앱 열기 ↗</a></div></div>';
+}
+
 const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
  "app-article-environment","field-compare-gap","field-textbook-region","field-gap-region","field-standards",
  "section-class","sample-question","lesson-40","assessment","section-app",
- "app-menu","app-problem-features","app-news","app-issues","app-verify",
- "app-article-check","app-basics","app-nature","app-public","app-industry",
- "app-culture","app-record","boundaries","section-build","build-overview",
+ "app-menu","app-news","app-verify","app-basics","app-nature",
+ "app-record","app-ai-review","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
  "build-test","build-deploy","closing","sources"
 ]
 if(new Set(order).size!==order.length)throw Error("Duplicate slide id in classroom deck");
 const classroomSlides=order.map(id=>{
+ const feature=featureWalkthrough[id];
+ if(feature)return {id,section:"완성된 수업 도구",type:"standard",kicker:"우리 지역 탐정 · 주요 기능",title:feature.title,lead:feature.lead,body:featureBody(feature),note:"실제 학생용 웹앱 화면을 발표 시 불러오며, 연결되지 않거나 PDF로 인쇄할 때는 재구성 예시를 사용합니다. AI 근거 검토는 선택 사항이며, 실제 응답과 뉴스 검색은 서버 연결 상태에 따라 달라질 수 있습니다. 탐정 게시판은 현재 기기에 저장됩니다."};
  const slide=classes[id]||oldSlides.get(id);
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"우리 지역 탐구 수업,\nAI로 만든 웹앱과 함께",lead:"우리 지역 조사와 뉴스 활용 수업을 돕는 웹앱 제작 사례",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
@@ -574,7 +592,7 @@ const textbookLeads={
   "section-app": "지역 정보 조사, 뉴스의 신뢰성 평가 및 탐구 결과 기록",
   "section-class": "지역 문제 조사와 자료 비교를 활용한 수업 흐름"
 };
-window.TRAINING_SLIDES=classroomSlides.map(slide=>({...slide,title:textbookTitles[slide.id],...(textbookLeads[slide.id]?{lead:textbookLeads[slide.id]}:{})}));
+window.TRAINING_SLIDES=classroomSlides.map(slide=>featureWalkthrough[slide.id]?slide:({...slide,title:textbookTitles[slide.id],...(textbookLeads[slide.id]?{lead:textbookLeads[slide.id]}:{})}));
 
 window.TRAINING_META={title:"AI를 활용한 우리 지역 탐구 수업",date:"2026. 11. 25.(수)",time:"15:00–17:00",originalUrl:SITE};
 })();

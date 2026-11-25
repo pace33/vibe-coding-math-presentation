@@ -957,3 +957,16 @@ a{color:inherit}
 .slide[data-type="thanks"] .slide-title{flex:1;display:grid;place-items:center;text-align:center;max-width:none;margin:0;color:#fff;font-size:clamp(46px,8cqw,120px);line-height:1.2}
 .slide[data-type="thanks"] .slide-body{display:none}
 .slide[data-type="thanks"] .slide-footer{border-color:#ffffff33;color:#a4bdad}
+
+/* Prevent long service names and explanations from being cut off in technical diagrams. */
+.tech-node strong,.tech-node p,.tech-term strong,.tech-term p,.tech-summary,.tech-route-label,.tech-route>p{max-width:100%;overflow-wrap:anywhere}
+.tech-node,.tech-route,.tech-aside{min-width:0}
+.tech-route-row>.tech-node strong{font-size:clamp(11px,1.3cqw,19px)}
+@media screen and (min-width:521px){
+ .slide:has(.tech-flow) .slide-title{font-size:clamp(25px,3.7cqw,54px);margin-top:1.7%}
+ .slide:has(.tech-flow) .slide-lead{margin-top:.8%;font-size:clamp(12px,1.55cqw,22px)}
+ .slide:has(.tech-flow) .tech-node{padding:clamp(4px,.6cqw,9px)}
+ .slide:has(.tech-flow) .tech-aside{gap:clamp(5px,.85cqw,12px)}
+ .slide:has(.tech-flow) .tech-term p{font-size:clamp(11px,1.23cqw,18px)}
+ .slide:has(.tech-flow) .slide-body{overflow-y:auto}
+}

@@ -491,3 +491,28 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0;margin
 .board-ai-preview{background:#eef5fa}.board-judgement-preview{background:#eaf5ed}
 #board .board-action{font-size:14px;min-height:44px;padding:10px 16px}
 @media(max-width:660px){#board .board-card{padding:17px}#board .board-card h3{font-size:20px}.board-preview{grid-template-columns:1fr}.board-preview-row{padding:11px 12px}#board .board-preview-row p{font-size:15px}}
+
+/* Touch targets and native mobile keyboard compatibility. */
+.sound-toggle{flex:0 0 auto;min-height:42px;padding:7px 11px;border:1px solid #cbded1;border-radius:10px;background:#fff;color:var(--green-dark);font-size:13px;font-weight:800;white-space:nowrap}
+.sound-toggle[aria-pressed=false]{color:var(--muted);background:#f4f6f4}
+.header-inner{gap:10px}
+.brand{min-width:0}
+button,a[href],summary,label:has(input[type=radio]),label:has(input[type=checkbox]){touch-action:manipulation}
+button:active:not(:disabled){filter:brightness(.94)}
+input:not([type=radio]):not([type=checkbox]):not([type=hidden]),textarea,select{scroll-margin:18px}
+@media(pointer:coarse),(max-width:1024px){
+ input:not([type=radio]):not([type=checkbox]):not([type=hidden]),textarea,select,.news-compare-panel textarea,.news-compare-panel select{font-size:16px!important;line-height:1.55}
+ textarea,.news-compare-panel textarea{min-height:92px}
+ button,.btn,.board-action,.sound-toggle{min-height:44px}
+ body{padding-bottom:calc(env(safe-area-inset-bottom,0px) + var(--keyboard-space,0px));}
+ .shell{max-width:980px}
+ .category-button,.explore-tab{white-space:normal;overflow-wrap:anywhere;word-break:keep-all}
+ .explore-tab{min-height:48px}
+ .board-card,.inquiry-card,.verify-panel,.report{min-width:0}
+}
+@media(min-width:661px) and (max-width:1024px){
+ .explore-tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .explore-tabs-label{grid-column:1/-1;justify-content:flex-start;padding:3px 6px}
+ .explore-tab{font-size:14px}
+}
+@media(max-width:380px){.sound-toggle{font-size:11px;padding:7px}.brand{font-size:17px}.header-inner{gap:5px}}

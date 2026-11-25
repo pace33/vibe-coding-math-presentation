@@ -607,7 +607,7 @@ const oldSlides=new Map(SLIDES.map(s=>[s.id,s]));
 const order=[
  "cover","section-need","field-textbook-news","field-gap-news","app-article-traffic",
  "app-article-environment","field-compare-gap","field-textbook-region","field-gap-region","field-standards",
- "section-class","sample-question","lesson-40","assessment","section-app",
+ "section-app",
  "app-menu","app-news","app-verify","app-verify-evidence","app-verify-writing","app-verify-judgement","app-ai-review",
  "app-basics","app-nature","app-record","section-build","build-overview",
  "build-spec","build-data-prompt","build-news-prompt","build-check-prompt","build-board",
@@ -621,12 +621,12 @@ const classroomSlides=order.map(id=>{
  if(!slide)throw Error("Missing slide "+id);
  if(id==="cover")return {...slide,title:"우리 지역 탐구 수업,\nAI로 만든 웹앱과 함께",lead:"우리 지역 조사와 뉴스 활용 수업을 돕는 웹앱 제작 사례",note:"이 사례는 교육과정의 일반적인 구호나 웹앱 홍보로 출발하지 않습니다. 초등 4학년 사회에서 지역 뉴스·공공기관 자료 찾기와 지역 자랑거리 알리기를 실제 수업에서 수행할 때, 해당 지역의 자료를 찾고 신뢰성을 비교하는 과정에 어떤 어려움이 있는지를 보여주고 그 해결을 위해 웹앱을 만든 기록입니다."};
  if(id==="section-need")return {...slide,section:"수업에서 살펴볼 점",title:"우리 지역 조사하기,\n무엇이 어려울까요?",lead:"지역 자료를 찾고 뉴스의 신뢰성을 확인하는 과정에서 겪는 어려움",note:"공식 사회과 지역화 교재의 탐구 활동을 그대로 출발점으로 삼습니다. 교재에 최신 충북 기사가 없어서 교재가 잘못됐다는 주장이 아니라, 교사는 학급과 지역 실정에 맞는 조사 자료를 매번 준비해야 한다는 뜻입니다."};
- if(id==="section-build")return {...slide,section:"웹앱 제작 과정",title:"이러한 웹앱은\n어떻게 만들었을까요?",lead:"세 가지 메뉴 → 실제 자료 연결 → 기사 비교 → 탐정 카드 → 배포",note:"제작 과정은 대화형 명령문 6가지와 실제 수정 사례를 소개한 후, RSS 뉴스 검색과 AI API 연결의 심화 기술을 설명합니다. 이미 사용 방법에서 보여준 카드 결과 화면은 반복하지 않습니다. 현재 작동하는 웹앱에 맞춘 재현용 명령문이며 최초 대화 원문과 구분합니다."};
- if(id==="section-app")return {...slide,title:"우리 지역 탐정,\n어떤 기능을 담았을까요?",lead:"지역 정보 조사부터 기사 검색·검증·기록까지",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
+ if(id==="section-build")return {...slide,kicker:"PART 03",body:'<div class="section-number">03 <span>WEB APP → PROCESS</span></div>',section:"웹앱 제작 과정",title:"이러한 웹앱은\n어떻게 만들었을까요?",lead:"세 가지 메뉴 → 실제 자료 연결 → 기사 비교 → 탐정 카드 → 배포",note:"제작 과정은 대화형 명령문 6가지와 실제 수정 사례를 소개한 후, RSS 뉴스 검색과 AI API 연결의 심화 기술을 설명합니다. 이미 사용 방법에서 보여준 카드 결과 화면은 반복하지 않습니다. 현재 작동하는 웹앱에 맞춘 재현용 명령문이며 최초 대화 원문과 구분합니다."};
+ if(id==="section-app")return {...slide,kicker:"PART 02",body:'<div class="section-number">02 <span>TASK → INTERFACE</span></div>',title:"우리 지역 탐정,\n어떤 기능을 담았을까요?",lead:"지역 정보 조사부터 기사 검색·검증·기록까지",note:"앞에서 주요 문제였던 뉴스 검색·검증·기본정보를 소개했습니다. 이 절은 지역의 다른 활동에 대응하기 위해 어떤 내용을 더 넣었는지 실제 메뉴 단위로 보여 줍니다."};
  if(id==="section-class")return {...slide,section:"사회과 수업 적용",title:"우리 지역 탐구 활동을\n수업에 어떻게 연결할까요?",lead:"교과서 활동을 바탕으로 수업 질문과 탐구 흐름 살펴보기"};
  return slide;
 });
-if(classroomSlides.filter(s=>s.type==="section").length!==4)throw Error("Section covers were changed");
+if(classroomSlides.filter(s=>s.type==="section").length!==3)throw Error("Section covers were changed");
 const textbookTitles={
   "cover": "우리 지역 탐구 수업,\nAI와 어떻게 함께할까요?",
   "section-need": "우리 지역 조사하기,\n무엇이 어려울까요?",

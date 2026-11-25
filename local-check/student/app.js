@@ -761,7 +761,9 @@ async function askAIEvidence(){
    initial:{verdict:first.verdict,reason:first.reason,claim:first.newsFact,comparison:first.govFact,comparisonUrl:first.govUrl}
   },{signal:controller.signal,onProgress:job=>{
    if(current!==aiSequence)return;
-   $("aiReviewMessage").textContent=job.status==="reconnecting"
+   $("aiReviewMessage").textContent=job.status==="restarted"
+    ? "서버 업데이트로 이전 작업을 찾을 수 없어 새로 요청하고 있어요."
+    : job.status==="reconnecting"
     ? "AI 서버 연결을 다시 시도하고 있어요. ("+job.attempt+"/2)"
     : job.status==="queued"
     ? "순서대로 처리 중이에요. 내 순번: "+job.queuePosition+"번째"

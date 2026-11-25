@@ -11,10 +11,37 @@ function syncSound(){
  toggle.setAttribute("aria-label",enabled?"버튼 효과음 끄기":"버튼 효과음 켜기");
  toggle.textContent=enabled?"🔊 소리 켜짐":"🔇 소리 꺼짐";
 }
-function playTone(){
+// Short, distinct feedback for action types. Peak gain stays below 0.2.
+const tones={
+ menu:[[480,620,.095,0]],
+ search:[[520,660,.085,0],[740,880,.11,.085]],
+ select:[[820,820,.075,0]],
+ back:[[650,390,.13,0]],
+ ai:[[440,550,.09,0],[660,830,.11,.095],[880,1040,.13,.19]],
+ complete:[[523,523,.11,0],[659,659,.12,.10],[784,1047,.20,.21]],
+ link:[[660,880,.12,0]],
+ share:[[580,740,.09,0],[740,990,.13,.09]],
+ remove:[[350,240,.13,0]],
+ detail:[[570,570,.085,0],[720,720,.075,.08]],
+ default:[[650,490,.095,0]]
+};
+function soundKind(control){
+ if(control.matches("#finish,#addShared,#compareSave,#saveComparison"))return "complete";
+ if(control.matches("#askAi,#singleAi")||/AI로 더 알아보기/.test(control.textContent||""))return "ai";
+ if(control.matches(".back,#editFirst,#again,#sharedHome"))return "back";
+ if(control.matches("[data-card-action=remove]"))return "remove";
+ if(control.matches("#shareCard,#shareAgain,[data-card-action=share],#download,#downloadBoard,#print"))return "share";
+ if(control.matches("[data-menu],[data-explore],#inquiryBoard,#resultBoard"))return "menu";
+ if(control.matches("#newsSearch,#inquiryNews,#showMoreNews,#retryNews,#retryEvidence,[data-card-news],[data-business-news],[data-issue-term],#moreBusinesses"))return "search";
+ if(control.matches("input[type=radio],input[type=checkbox],[data-choose-candidate],[data-business-filter]"))return "select";
+ if(control.matches("[data-live-news],[data-news],[data-card-action=view],summary"))return "detail";
+ if(control.matches("a[href]"))return "link";
+ return "default";
+}
+function playTone(kind="default"){
  if(!enabled)return;
  const now=performance.now();
- if(now-lastTone<65)return;
+ if(now-lastTone<90)return;
  lastTone=now;
  try{
   const Audio=window.AudioContext||window.webkitAudioContext;
@@ -22,13 +49,16 @@ function playTone(){
   if(!audio||audio.state==="closed")audio=new Audio();
   const play=()=>{
    if(!enabled||audio.state!=="running")return;
-   const t=audio.currentTime,osc=audio.createOscillator(),gain=audio.createGain();
-   osc.type="sine";osc.frequency.setValueAtTime(660,t);
-   osc.frequency.exponentialRampToValueAtTime(510,t+.075);
-   gain.gain.setValueAtTime(.0001,t);
-   gain.gain.exponentialRampToValueAtTime(.035,t+.008);
-   gain.gain.exponentialRampToValueAtTime(.0001,t+.085);
-   osc.connect(gain);gain.connect(audio.destination);osc.start(t);osc.stop(t+.09);
+   const t=audio.currentTime;
+   for(const [from,to,duration,offset] of tones[kind]||tones.default){
+    const at=t+offset,osc=audio.createOscillator(),gain=audio.createGain();
+    osc.type="sine";osc.frequency.setValueAtTime(from,at);
+    if(from!==to)osc.frequency.exponentialRampToValueAtTime(to,at+duration*.9);
+    gain.gain.setValueAtTime(.0001,at);
+    gain.gain.exponentialRampToValueAtTime(.14,at+.009);
+    gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
+    osc.connect(gain);gain.connect(audio.destination);osc.start(at);osc.stop(at+duration+.005);
+   }
   };
   if(audio.state==="running")play();else audio.resume().then(play).catch(()=>{});
  }catch{}
@@ -40,13 +70,13 @@ function init(){
   enabled=!enabled;
   try{localStorage.setItem(storageKey,enabled?"on":"off")}catch{}
   syncSound();
-  if(enabled)playTone();
+  if(enabled)playTone("menu");
  });
  document.addEventListener("click",event=>{
   if(!event.isTrusted||!enabled||!(event.target instanceof Element))return;
   const control=event.target.closest("button,a[href],summary,input[type=radio],input[type=checkbox]");
   if(!control||control===toggle||control.matches(":disabled,[aria-disabled=true]"))return;
-  playTone();
+  playTone(soundKind(control));
  },true);
  const viewport=window.visualViewport;
  let timer=0;

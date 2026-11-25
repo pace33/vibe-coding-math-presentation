@@ -10,13 +10,13 @@ const $=id=>document.getElementById(id);
 const allowedVerdicts=new Set(["같아요","달라요","아직 모르겠어요"]);
 const trim=(x,n)=>String(x??"").trim().slice(0,n);
 const safeUrl=v=>{try{const u=new URL(String(v));return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return"";}};
-const fields=["region","title","publisher","date","url","newsFact","govFact","govUrl","verdict","reason","initialVerdict","initialReason","finalVerdict","finalReason","aiStatus","aiSummary","aiComparison","aiCaution","aiCheckedAt"];
+const fields=["author","region","title","publisher","date","url","newsFact","govFact","govUrl","verdict","reason","initialVerdict","initialReason","finalVerdict","finalReason","aiStatus","aiSummary","aiComparison","aiCaution","aiCheckedAt"];
 let navigation=null,currentShared=null,reportProvider=null,selectedSaved=null;
 function sanitized(item){
  if(!item||typeof item!=="object"||Array.isArray(item))return null;
  const d={};
  for(const field of fields){
-  const maximum=["newsFact","govFact"].includes(field)?500:["reason","initialReason","finalReason"].includes(field)?220:["aiSummary","aiComparison"].includes(field)?550:field==="aiCaution"?260:field.endsWith("Url")||field==="url"?1350:220;
+  const maximum=field==="author"?20:["newsFact","govFact"].includes(field)?500:["reason","initialReason","finalReason"].includes(field)?220:["aiSummary","aiComparison"].includes(field)?550:field==="aiCaution"?260:field.endsWith("Url")||field==="url"?1350:220;
   d[field]=trim(item[field],maximum);
  }
  if(!d.title||!d.newsFact||!d.reason||!safeUrl(d.url)||!allowedVerdicts.has(d.verdict))return null;
@@ -31,7 +31,7 @@ function sanitized(item){
  return d;
 }
 function personalDataPresent(d){
- const content=[d.title,d.newsFact,d.govFact,d.reason,d.initialReason,d.finalReason,d.publisher].join(" ");
+ const content=[d.author,d.title,d.newsFact,d.govFact,d.reason,d.initialReason,d.finalReason,d.publisher].join(" ");
  return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/.test(content)||
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/.test(content);
 }
@@ -69,7 +69,7 @@ function elementLink(label,raw){
 function detailReport(data,target){
  target.replaceChildren();
  const header=tag("div","detective-header");
- header.append(tag("span","detective-region","📍 "+(data.region||"우리 지역")),tag("h2","","🔎 뉴스 탐정 카드"),tag("p","","출처 확인 · 근거 확인 · 기사 비교를 기록했어요."));
+ header.append(tag("span","detective-region","📍 "+(data.region||"우리 지역")),tag("h2","","🔎 뉴스 탐정 카드"),tag("p","board-author","👤 작성자: "+(data.author||"미기록")),tag("p","","출처 확인 · 근거 확인 · 기사 비교를 기록했어요."));
  target.appendChild(header);
  const source=tag("section","detective-origin");
  source.append(tag("h3","","① 출처 확인"),tag("p","verification-guide","누가, 언제 쓴 자료인가요? 원문에서 직접 확인해요."));
@@ -137,6 +137,7 @@ function createCardRow(d){
  const top=tag("div","board-card-top");
  top.append(tag("span","board-region",d.region||"우리 지역"),tag("span","board-verdict",d.initialVerdict&&d.initialVerdict!==d.verdict?d.initialVerdict+" → "+d.verdict:d.verdict));
  section.appendChild(top);
+ const author=tag("p","board-author","👤 작성자: "+(d.author||"미기록"));author.style.cssText="font-size:16px;font-weight:800;color:#285b45;margin:8px 0";section.appendChild(author);
  section.appendChild(tag("h3","",d.title));
  const preview=tag("div","board-preview");
  const brief=(value,max=145)=>{const t=String(value||"").replace(/\s+/g," ").trim();return t.length>max?t.slice(0,max)+"…":t;};
@@ -226,7 +227,7 @@ async function copyShare(item){
   const ok=document.execCommand?.("copy");field.remove();
   if(!ok){window.prompt("이 링크를 복사해서 친구에게 보내 주세요.",link);return false;}
  }
- alert("탐정 카드 링크를 복사했어요! 우리 반 친구에게 보내 주세요.\n이름·연락처 등 개인정보가 들어가지 않았는지 확인하세요.");
+ alert("탐정 카드 링크를 복사했어요! 우리 반 친구에게 보내 주세요.\n작성자 이름도 링크에 포함됩니다. 학급 밖에 공개하지 말고 연락처 등 개인정보가 없는지 확인하세요.");
  return true;
 }
 function downloadBoard(){

@@ -1,10 +1,30 @@
 {
   "version": 1,
   "origin": "Google 뉴스 RSS 공개 검색 결과",
-  "updatedAt": "2026-11-26",
+  "updatedAt": "2026-11-27",
   "note": "검색 결과 제목만 제공. 원문과 사실 여부는 학생이 확인.",
   "regionsChecked": 11,
   "items": [
+    {
+      "region": "증평군",
+      "title": "증평군, 겨울철 농업기계 내방교육 운영",
+      "publisher": "시민행정신문",
+      "published": "2026-11-27",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5zbXBZVGotRXp1Rzh4d0lMbjZDcGF6YzBZWDFqQkFRUzY4Q2FTd3BxN3ZYOHhKUTM0V0tJcld0RFY3cjRmRTlldzVtanU2VXNFLU5RSDlFQUZ4N2RlOFVIdWxLajZlRmRhbGNrVHBn?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "진천군",
+      "title": "진천군, 버스비 없는 일상 2년… 군민의 이동이 자유로워졌다 외 (11월27일 종합)",
+      "publisher": "충북데일리",
+      "published": "2026-11-27",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1iQUdJNjBjbkVUaFAwMWdhdHFuU3Qwa0dZRnM3NTBCMDJXOVQzUk1fZF9yOWh0VU1IMkt4Mzh3bkJYLS16QUhmdl9LU0NyeW9fdk9udEhiSDN0cTFuTF9QOVpB?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
+    },
     {
       "region": "충주시",
       "title": "동충주산단에 450억 원 규모 투자유치",
@@ -14,6 +34,16 @@
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
+    },
+    {
+      "region": "제천시",
+      "title": "제천시, 교통약자 대상 바우처택시·행복택시 이용료 1천원 인하",
+      "publisher": "연합뉴스",
+      "published": "2026-11-26",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE53YkN1alNSa2VaNmo5ZWU3eWlKR0NXZVBoSGY4c1FsQUZSRnJIeE5oTTFkZG5DaWJSMVBzejQ1M1dCTlhBUzlSNDNoeExrN0kzRXlmT0xZb0ZOY1XSAWBBVV95cUxQRENpWjBibWNzQlcyMF9TekhCdENCNElsUXlzejJwRHA4dE5MbHNxWXlfdzZMSzBhQThwT1ZDS1U5aU9lQk1BTkVZUmQxQ21WRlVaUmlRcGNXTi1nazFYeDA?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "제천시",
@@ -47,10 +77,30 @@
     },
     {
       "region": "영동군",
+      "title": "영동군, 영동군문화관광재단, 연말 맞아 다채로운 공연 선보인다 외 (11월27일 종합)",
+      "publisher": "충북데일리",
+      "published": "2026-11-26",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1lYkxIekRCcEJGWk5neUcxenNRcEt4cFk5VlVENENsSTBrSGlxX1RwYlpmSlI4bXZobTE4bnBlNGFSZHY4dmxLV2VQczRwRXNzRGJhQkczN1pkWUZHbFFUaHpn?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "지역생활"
+    },
+    {
+      "region": "영동군",
       "title": "정영철 영동군수, 2027년도 군민 체감 균형발전 실현",
       "publisher": "굿모닝충청",
       "published": "2026-11-26",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBNd2E0ZzBSR0c2QkRxNl9kMnkzMzhKZmNheGJ3TjEyLXdrTTlVTnNFLWZOOXBWcjk4ZTdVSmNLN2htdmtTNkZDMHVFblFKejVRUnNFUzBKekgyVnBidXlxZmdSci1OQS1yRE8xS1NPbmd2UQ?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "특화산업"
+    },
+    {
+      "region": "영동군",
+      "title": "영동군농업기술센터, 농업인교육 운영 우수상 수상",
+      "publisher": "충청일보",
+      "published": "2026-11-26",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5rcnBEZERNRjNXTjRrTk5DT1ZiNEp1R19FYXBLTWM1d2lkb2JWSzNLV3JkeHFiek9ZU2tnNTlrOUtlR0VSaG9ubkRGRzFWeFVOUFhDbm44Ml8wcFAzS3ZjSThXdkRwT1JtaXQ3X05QeTU?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
@@ -66,14 +116,24 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "영동군",
-      "title": "“체감형 군정 실현”…충북 영동군, 2027년 4886억 ‘선택과 집중’",
-      "publisher": "세계일보",
+      "region": "증평군",
+      "title": "증평군, 증평인삼골축제 성과와 개선 과제 짚었다",
+      "publisher": "메가충청뉴스",
       "published": "2026-11-26",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9ieDh4NXFvR3dDNktpbF84UGtMSEpkcTQxOFlFVHJ5cHhZSlI0U0xsYVhtQXBsVWNhRVN3bzd6RWVVMjdIQTBzQkIyZ1BNMVlzZWNxY0x5cTLSAVRBVV95cUxPeXdORldDSFBuQXBSX2N4LWlReXBScTEybE0wZkJ0eml4TjZCYTRTcmVuZFIxelRzZnRRNmNxR2lNRklqdEpQNktpWWg4SlpleUsxQm4?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE90UTBNUDVUNXRybC01RFRxRkhTZEMtQ2hjcm0xOHVRczBVdGJIRkRMcG9sb2IwcXVLaE5JRDFhWTZNeVJBQ0FZMjROcGN3OHNRNU9QM3FZa2F5MDBvaHBjYTZ4WXFKQ3hXaTZ1bw?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
+      "topicGroup": "지역생활"
+    },
+    {
+      "region": "진천군",
+      "title": "진천군, 내년 2월까지 농다리서 크리스마스트리 운영",
+      "publisher": "연합뉴스",
+      "published": "2026-11-26",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5Gd19hTUtKU082cHNOVERxZGVWbmljOFZqYXVmQnVjVUFuU3lWMXc4NHlPNDhXVk54YXVTbDc5QmFRSkpCcE51NnNFUVdBOFhOTWVjYzRfc2NXRVU?oc=5",
+      "verified": false,
+      "sourceType": "구글 뉴스 RSS 저장 결과",
+      "topicGroup": "관광환경"
     },
     {
       "region": "음성군",
@@ -166,16 +226,6 @@
       "topicGroup": "특화산업"
     },
     {
-      "region": "제천시",
-      "title": "제천시, 청년농업인 육성 전국 대상…충북 최초 수상",
-      "publisher": "뉴스핌",
-      "published": "2026-11-25",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBSM3MxaElFbFV4SGU3ZVFFdllIdUNrUjZwMDFDUTBiUzBvbTJMWDlfVzllbWVOWF81RGZrQnVJcWEtSmhDZ3R4REdtQWZ4STlCMWg5cVpIYXdJeVRB?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
       "region": "보은군",
       "title": "보은군지역사회보장협의체, 민·관 협력 워크숍 개최",
       "publisher": "연합뉴스",
@@ -190,10 +240,10 @@
       "title": "보은군, 교통불편 70개 마을에 이동식 매점 투입",
       "publisher": "연합뉴스",
       "published": "2026-11-25",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE50ZTR4dDQ0b3dtV1A1T0gxODA3amNvc19DYkczV0lhOUhhbzBDclhPV0VNTmg1UXBBOWlPN1htTHBNaXoxUFhPYXotSlZxaHBIZ1RnQmhaSm9PS0hCMmVEWNIBYEFVX3lxTE50ZTR4dDQ0b3dtV1A1T0gxODA3amNvc19DYkczV0lhOUhhbzBDclhPV0VNTmg1UXBBOWlPN1htTHBNaXoxUFhPYXotSlZxaHBIZ1RnQmhaSm9PS0hCMmVEWA?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBpZkN5QXdURTVpaDBmbm40d0ZNX1FCUHg4dkhJakJkSkNlTE5tdE1Ra3RSX01jR2MyTUZwSGg4czd0Y2ZhcnA4ZUM4VzV4RzhaLUJHQ2xuWWNXbGvSAWBBVV95cUxOdGU0eHQ0NG93bVdQNU9IMTgwN2pjb3NfQ2JHM1dJYTlIYW8wQ3JYT1dFTU5oNVFwQTlpTzdYbUxwTWl6MVBYT2F6LUpWcWhwSGdUZ0JoWkpvT0tIQjJlRFg?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
+      "topicGroup": "관광환경"
     },
     {
       "region": "증평군",
@@ -216,26 +266,6 @@
       "topicGroup": "기업산업"
     },
     {
-      "region": "증평군",
-      "title": "이재영 증평군수, ‘공공기관 충북이전 촉구’ 챌린지 동참",
-      "publisher": "엔디엔뉴스",
-      "published": "2026-11-25",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9rdTdETWV0UTJUZ3NORlRyamlXeWZHNlN1NnJRWDR3UVdiSzVoV0d1SUxuTFFITHpFWlh0OEJDbXhnM00yS3JYa0NoZmE5ZlIyN0RFU0xqRG5ieFdOdjRWcVY0OEhmQW1pXzRMVG44MTRtd9IBckFVX3lxTE9rdTdETWV0UTJUZ3NORlRyamlXeWZHNlN1NnJRWDR3UVdiSzVoV0d1SUxuTFFITHpFWlh0OEJDbXhnM00yS3JYa0NoZmE5ZlIyN0RFU0xqRG5ieFdOdjRWcVY0OEhmQW1pXzRMVG44MTRtdw?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
-    },
-    {
-      "region": "증평군",
-      "title": "증평군, 지역사회보장협의체 실무분과 역량 강화",
-      "publisher": "충청매일",
-      "published": "2026-11-25",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE85MElXNXZsdXlXaGpWdnotVHNldE5qTXlVd2lNa0Z6Y2RtQ3hhY3MwemVTQTBFNnFUclRNZkZpNU9sc0h2WGkyWVRVcFdENGFzTGxkMlBuM0pKa2UyMjZ3eWwyUTlkM0MxZ0E?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
       "region": "진천군",
       "title": "진천군의회, 산단 피해·농업재해·고령화 대응책 집중 질의",
       "publisher": "충청뉴스라인",
@@ -251,26 +281,6 @@
       "publisher": "충청일보",
       "published": "2026-11-25",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBXbFhac2M5bmFhNl84dWk3Z0hQdG5vaFg0cjhPZ1pUX3BDcGlrdlVGNUVJeHc1TVFlM0NybzBlTzA5SktRYkdTTHlueU5wRGNxcDN4WC10bjJoZWYyWFlkeHFOQ0tvMVUwN3JEZUViQWI?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "특화산업"
-    },
-    {
-      "region": "진천군",
-      "title": "진천군, 진천 예술의전당에서 만나는 프랑스 미술여행 외 (11월26일 종합)",
-      "publisher": "충북데일리",
-      "published": "2026-11-25",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1ySDdOczlIdXpxelNaX0s3RkVzcVNLcFFtdVMwSFFfeHFEX0ZoNFRhbEpmb1VxRGdOUzR3OGdOWnRDZHBrNmJad1pOVFhqUEpsdlVVM0ljejlXUkhZVzRRWGVn?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "관광환경"
-    },
-    {
-      "region": "진천군",
-      "title": "진천 청년 취업도 AI 시대…맞춤형 일자리 매칭 직무 추천",
-      "publisher": "충청뉴스라인",
-      "published": "2026-11-25",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE4yMjdoT0lBNERBRTB3TUR2SnZtaGJTWEJXcWFxS0hYZ0x2X1J1TTVLTkRXdWU5RFdINEFfMUVWTFZrU2poREtTSnFOLWUxbkdPUkRkLXhscWIzNjdXYW44cTVsNkFfS3lOZGtael9NRdIBc0FVX3lxTFB1YXdsQmNyM2JGWWJuQjdXSFJVNTk2THpja2JOMUw1d1J1Zzh4dWIwbU91NkZyUVlSQzF6aDdkdXRuenl6dWJVOVlBelhpcFJ4OHY2bXpkczhRS3IwbEh1WHMzVjYwUjlSN0lkVC0tajhJd1U?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
       "topicGroup": "특화산업"
@@ -386,24 +396,14 @@
       "topicGroup": "관광환경"
     },
     {
-      "region": "영동군",
-      "title": "영동군문화관광재단 상임이사 6명 응모…열기 후끈",
-      "publisher": "충청매일",
-      "published": "2026-11-24",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBfUWpwSXZiQXFnajJVc00xOWljaUlNOXNLckNHanFSMzN5Y1kzVGItSC1HT19ORWd2aDFybnd3VlBQTU5XTmdDZzh6Y0JhbWllT0ZEeGNfNVBSYWJma3RIaTNwSm1iS3QyUFE?oc=5",
-      "verified": false,
-      "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "지역생활"
-    },
-    {
       "region": "보은군",
-      "title": "보은군, 2027년 예산 4,825억 원 편성…민생 안정·미래 성장에 집중",
-      "publisher": "경충일보",
+      "title": "충북 보은군, 2027년도 예산안 4,825억 원 제출…군민 생활 안정과 미래 성장에 중점",
+      "publisher": "청주일보",
       "published": "2026-11-23",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9sdVhyUzRnRU9iQXJDaUd5VWNncUhWdjA2WFZ6N0xINUJRa0RrMzI5VFNzTWtUZU1IQ0Q4Vlh0cHpCT2w0amRHWUVwdGIzNFktTTlLa016Ri0?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE41UzRpN0xOU1UyVjZYTGFWTzlZSVBCZEozNVRxV19nUkVLVlRPazBnUExQNkFwMjh6RTlTQXN6ekZRVkFraWRVVFJ3N1V2RkszXzliaHp3enEyd3pXMEoyYjBRY0ZYQnBxVDNN?oc=5",
       "verified": false,
       "sourceType": "구글 뉴스 RSS 저장 결과",
-      "topicGroup": "기업산업"
+      "topicGroup": "관광환경"
     },
     {
       "region": "옥천군",
